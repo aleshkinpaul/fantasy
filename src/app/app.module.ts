@@ -3,16 +3,39 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { LeaguePageComponent } from './components/league-page/league-page.component';
+import { CupPageComponent } from './components/cup-page/cup-page.component';
+import { GraphQLModule } from './graphql.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './components/header/header.component';
+import { DefaultLoaderComponent } from './components/loader/default-loader.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    MainPageComponent,
+    LeaguePageComponent,
+    CupPageComponent,
+    DefaultLoaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GraphQLModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: LocationStrategy, useClass: PathLocationStrategy},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

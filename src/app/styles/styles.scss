@@ -1,0 +1,268 @@
+// consts
+$main-header-bg-color:      #ffffff;
+$main-logo-size:            60px;
+$main-logo-border-color:    #00000054;
+$main-bg-color:             #CE4843;
+
+$main-button-font-color:    #DBD6BB;
+$main-button-bg-color:      #5B764B;
+
+$header-bg-color:           #CE4843;
+$row-height:                40px;
+$row-color:                 #0a1d2ce3;
+$even-row-color:            #f5f5f5;
+$label-bg-color:            #0D4055;
+$label-font-color:          #62AFC1;
+$logo-size:                 32px;
+
+$first-place-font-color:    #d3c26c;
+$first-place-bg-color:      #AF9500;
+$second-place-font-color:   #D7D7D7;
+$second-place-bg-color:     #9b9b9b;
+$third-place-font-color:    #AD8A56;
+$third-place-bg-color:      #6A3805;
+$special-place-font-color:  #56ad9a;
+$special-place-bg-color:    #056a54;
+
+$positive-font-color:       #2c814e;
+$positive-bg-color:         #D1F1DA;
+$negative-font-color:       #420b08;
+$negative-bg-color:         #F4CCCC;
+
+// styles
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Prosto_One';
+  background-color: $main-bg-color;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  position: relative;
+}
+
+// mixins
+@mixin main-container() {
+  margin: 0 auto;
+  padding: 10px 50px;
+  width: 100%;
+  max-width: 1440px;  
+  box-sizing: border-box;
+
+  font-size: .9rem;
+
+  h1, h2 {
+    font-size: 40px;
+  }
+
+  thead {
+    height: 60px;
+    font-size: 1rem;
+
+    th {
+
+      &.sub-info {
+        padding: 0 2px;
+        font-size: .8rem;
+        width: 30px;
+      }
+
+      &.medals-info {
+        width: 15px;
+      }
+
+      &.tour-info {
+        width: 25px;
+      }
+    }
+  }
+
+  td{
+
+    &.sub-info {
+      font-size: .7rem;
+    }
+
+    .score {
+      border: 1px solid;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+  }
+
+  @media (max-width: 900px) {
+    padding: 5px 20px;
+    font-size: .7rem;
+
+    h1, h2 {
+      font-size: 28px;
+    }
+
+    thead {
+      height: 50px;
+      font-size: .9rem;
+  
+      th {
+  
+        &.sub-info {
+          font-size: .7rem;
+        }
+      }
+    }
+
+    td.sub-info {
+      font-size: .6rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 5px 10px;
+    font-size: .6rem;
+
+    h1, h2 {
+      font-size: 20px;
+    }
+
+    thead {
+      height: 40px;
+      font-size: .8rem;
+  
+      th {
+  
+        &.sub-info {
+          font-size: .6rem;
+        }
+      }
+    }
+
+    td.sub-info {
+      font-size: .5rem;
+    }
+  }
+
+  @media (max-width: 450px) {
+    padding: 5px;
+    font-size: .5rem;
+
+    h1, h2 {
+      font-size: 16px;
+    }
+  }
+}
+
+// fonts
+@mixin fontPoppins($folder-name, $font-name, $weight, $style, $format: "ttf", $another-style: $folder-name) {
+  @font-face {
+    font-family: '#{$another-style}';
+    src: url('/assets/fonts/#{$folder-name}/#{$font-name}.#{$format}') format("truetype");
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@include fontPoppins('AbrilFatface', 'AbrilFatface-Regular', normal, normal);
+
+@include fontPoppins('Bartina', 'BartinaRegular', normal, normal);
+
+@include fontPoppins('beryozki', 'Beryozki', normal, normal);
+
+@include fontPoppins('BimashPalaceScryptMT', 'bimash_palacescriptmt', normal, normal);
+
+@include fontPoppins('BoomBoom', 'BoomBoom', normal, normal, 'otf');
+
+@include fontPoppins('Celestina', 'Celestina', normal, normal, 'otf');
+
+@include fontPoppins('Comforter', 'Comforter-Regular', normal, normal);
+
+@include fontPoppins('CormorantGaramond', 'CormorantGaramond-Light', normal, normal);
+
+@include fontPoppins('CormorantSC', 'CormorantSC-Light', normal, normal);
+
+@include fontPoppins('Cormorant_Unicase', 'CormorantUnicase-Light', 300, normal);
+@include fontPoppins('Cormorant_Unicase', 'CormorantUnicase-Regular', normal, normal, 'Cormorant_Unicase_Regular');
+@include fontPoppins('Cormorant_Unicase', 'CormorantUnicase-Medium', 500, normal, 'Cormorant_Unicase_Medium');
+@include fontPoppins('Cormorant_Unicase', 'CormorantUnicase-SemiBold', 600, normal, 'Cormorant_Unicase_SemiBold');
+@include fontPoppins('Cormorant_Unicase', 'CormorantUnicase-Bold', 900, normal, 'Cormorant_Unicase_Bold');
+
+@include fontPoppins('Czizh', 'CzizhWing', normal, normal);
+
+@include fontPoppins('DancePartner', 'dance_partner', normal, normal);
+
+@include fontPoppins('DancingScript', 'DancingScript-VariableFont_wght', normal, normal);
+
+@include fontPoppins('Dela_Gothic_One', 'DelaGothicOne-Regular', normal, normal);
+
+@include fontPoppins('Departura', 'DeparturaExtraLight', normal, normal, 'otf');
+
+@include fontPoppins('DikoeDisko', 'DikoeDisko', normal, normal);
+
+@include fontPoppins('Exo2', 'Exo2-VariableFont_wght', normal, normal);
+
+@include fontPoppins('FreeMono', 'FreeMonospaced', normal, normal, 'otf');
+
+@include fontPoppins('GoodVibes', 'GoodVibesCyr', normal, normal);
+
+@include fontPoppins('Great_Vibes', 'GreatVibes-Regular', normal, normal);
+
+@include fontPoppins('GunnyRew', 'gnyrwn977', normal, normal, 'otf');
+
+@include fontPoppins('Jemima', 'Jemima-Light', normal, normal);
+
+@include fontPoppins('Klukva', 'Klukva_version_01', normal, normal, 'otf');
+
+@include fontPoppins('Kindentosca', 'Kindentosca', normal, normal, 'otf');
+
+@include fontPoppins('MagnoliaScript', 'MagnoliaScript', normal, normal, 'otf');
+
+@include fontPoppins('Marck_Script', 'MarckScript-Regular', normal, normal);
+
+@include fontPoppins('Merriweather', 'Merriweather-Light', normal, normal);
+
+@include fontPoppins('Moniqa', 'moniqaRegular', normal, normal, 'otf');
+
+@include fontPoppins('Mono', 'JetBrainsMono-VariableFont_wght', normal, normal);
+
+@include fontPoppins('NeverMind', 'NeverMindCompact-ExtraLight', normal, normal);
+
+@include fontPoppins('Nickainley', 'Nickainley-Normal', normal, normal, 'otf');
+
+@include fontPoppins('Pacifico', 'Pacifico-Regular', normal, normal);
+
+@include fontPoppins('Phlatt', 'PhlattGrotesk-Regular', normal, normal);
+
+@include fontPoppins('PlayfairDisplay', 'PlayfairDisplay-VariableFont_wght', normal, normal);
+
+@include fontPoppins('Poiret_One', 'PoiretOne-Regular', normal, normal);
+
+@include fontPoppins('Prosto_One', 'ProstoOne-Regular', normal, normal);
+
+@include fontPoppins('RisingSun', 'RisingSun-ExtraLight', normal, normal);
+
+@include fontPoppins('Rosarium', 'Rosarium', normal, normal);
+
+@include fontPoppins('Steppe', 'Steppe', normal, normal, 'otf');
+
+@include fontPoppins('TildaSans', 'tilda-sans_regular', normal, normal);
+
+@include fontPoppins('Vetrino', 'Vetrino', normal, normal, 'otf');
+

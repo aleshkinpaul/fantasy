@@ -1,0 +1,34 @@
+@import "styles.scss";
+
+.navigation-container {
+  width: 100%;
+  height: calc(100vh - 100px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  .button {
+    padding: 15px 10px;
+    width: 20%;
+    min-width: 260px;
+
+    box-sizing: border-box;
+
+    align-self: center;
+    text-align: center;
+
+    color: $main-button-font-color;
+    background-color: $main-button-bg-color;
+
+    transition: background-color .6s ease, color .6s ease;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $main-button-font-color;
+      color: $main-button-bg-color;
+    }
+  }
+}

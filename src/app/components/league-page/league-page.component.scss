@@ -1,0 +1,269 @@
+@import "styles.scss";
+
+.main-container {
+  @include main-container();
+  font-family: 'Exo2';
+  color: #fff;
+
+  .table {
+    width: 100%;
+    text-align: center;
+    border-collapse: ceparate;
+    border-spacing: 0 1px;
+
+    .table-header {
+      background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
+
+      th:last-child {
+        width: calc(2 * $row-height - 30px);
+
+        @media (max-width: 900px) {
+          width: calc(2 * $row-height - 40px);
+        }
+
+        @media (max-width: 600px) {
+          width: calc(2 * $row-height - 45px);
+        }
+
+        @media (max-width: 450px) {
+          width: calc(2 * $row-height - 50px) !important;
+        }
+      }
+    }
+
+    .table-body {
+
+      &:before {
+        content:"@";
+        display:block;
+        line-height:5px;
+        text-indent:-99999px;
+      }
+
+      .table-row{
+        position: relative;
+        height: $row-height;
+  
+        background-color: $row-color;
+  
+        // &:nth-child(2n) {
+        //   background-color: $even-row-color;
+        // }
+
+        &:hover::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #ffffff09;
+          cursor: pointer;
+          pointer-events: none;
+        }
+
+        td {
+          position: relative;
+
+          .score {
+            padding: 3px;
+            width: 30px;
+            box-sizing: border-box;
+          }
+
+          &:first-child,
+          &:last-child {
+    
+            span {
+              display: block;
+              margin: 5px;
+              width: calc($row-height - 10px);
+              line-height: calc($row-height - 10px);
+    
+              align-self: center;
+              text-align: center;
+              vertical-align: middle;
+    
+              color: $label-font-color;
+              background-color: $label-bg-color;
+              // box-sizing: border-box;
+            }
+          }
+
+          &:first-child{
+            width: $row-height;
+            height: $row-height;
+          }
+    
+          &:last-child {
+            width: calc(2 * $row-height - 20px);
+            height: $row-height;
+
+            box-sizing: border-box;
+
+            @media (max-width: 900px) {
+              width: calc(2 * $row-height - 40px);
+            }
+
+            @media (max-width: 600px) {
+              width: calc(2 * $row-height - 45px);
+            }
+
+            @media (max-width: 450px) {
+              width: calc(2 * $row-height - 50px);
+            }
+    
+            span {
+              width: calc(2 * $row-height - 20px);
+
+              @media (max-width: 900px) {
+                width: calc(2 * $row-height - 40px);
+              }
+  
+              @media (max-width: 600px) {
+                width: calc(2 * $row-height - 45px);
+              }
+  
+              @media (max-width: 450px) {
+                width: calc(2 * $row-height - 50px);
+              }
+            }
+          }
+    
+          & {
+            &.first {
+              span {
+                color: $first-place-font-color;
+                background-color: $first-place-bg-color;
+              }
+            }
+
+            &.second {
+              span {
+                color: $second-place-font-color;
+                background-color: $second-place-bg-color;
+              }
+            }
+
+            &.third {
+              span {
+                color: $third-place-font-color;
+                background-color: $third-place-bg-color;
+              }
+            }
+
+            &.special {
+              span {
+                color: $special-place-font-color;
+                background-color: $special-place-bg-color;
+              }
+            }
+          }
+
+          span.diff-elem {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            top: -2px;
+            right: -2px;
+            width: 17px;
+            line-height: 17px;
+            font-size: 10px;
+            font-weight: 700;
+
+            border-radius: 50%;
+
+            &.pos-diff {
+              color: $positive-font-color;
+              background-color: $positive-bg-color;
+            }
+
+            &.neg-diff {
+              color: $negative-font-color;
+              background-color: $negative-bg-color;
+            }
+          }
+        }
+      }
+  
+      .item-name-container {
+        padding-left: 5px;
+        height: $row-height;
+  
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+  
+        font-family: "Exo2";
+
+        .team-link {
+          width: 100%;
+          color: inherit;
+          text-decoration: none;
+
+          &:hover {
+            opacity: .8;
+            cursor: pointer;
+          }
+        }
+
+        .item-team-container {
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          align-items: center;
+  
+          .logo-container {
+            width: $logo-size;
+            // height: $logo-size;
+          
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            box-sizing: border-box;
+    
+            .logo-img {
+              width: $logo-size;
+              height: $logo-size;
+            }
+          }
+    
+          .team-container {
+            display: flex;
+            flex-direction: column;
+    
+            .team-name {
+              display: block;
+              width: 100%;
+      
+              align-self: left;
+              text-align: left;
+            }
+    
+            .person-name {
+              opacity: .7;
+      
+              align-self: left;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .loading-spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .align-left {
+    padding-left: 5px;
+    text-align: left;
+  }
+}

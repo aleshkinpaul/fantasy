@@ -1,0 +1,42 @@
+@import "styles.scss";
+
+.loading-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 20px;
+  // background-color: $subtitle-color;
+
+  .loading-title {
+    // @include font-size($header-title-font-sizes, 0, .5);
+    display: inline-block;
+    margin: 0;
+    padding: 0 20px;
+    text-align: center;
+    word-wrap: normal;
+    font-family: 'Mono';
+    font-weight: 500;
+    // color: $golden-color;
+
+    &.spinner-animation {
+      animation: spinnerHidden 1s linear;
+    }
+  }
+
+  .spinner {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@keyframes spinnerHidden {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
