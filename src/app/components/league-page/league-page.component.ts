@@ -32,6 +32,13 @@ export class LeaguePageComponent implements OnInit {
   public lastTour: number = 1;
 
   private playersArr = [];
+  private ratingMax: number = 0;
+  private ratingMed: number = 0;
+  private ratingKoefs = [19, 15, 12, 10, 9];
+  private lastToursDetails = [];
+  private maxResultValue = 1;
+  private minResultValue = 1;
+  public playersRatingArr = [];
 
   public isLoading$?: Observable<boolean>;
   public windowWidth: number = 1400;
@@ -150,6 +157,7 @@ export class LeaguePageComponent implements OnInit {
               .forEach((tour, ind) => {
                 const objMaxMin = this.getMinMaxInTour(tour.number);
                 tour.max = objMaxMin.max;
+                tour.med = objMaxMin.med;
                 tour.min = objMaxMin.min;
               });
 
@@ -163,10 +171,11 @@ export class LeaguePageComponent implements OnInit {
               console.log('lastTour', this.lastTour);
               console.log(this.playersArr);
 
-              console.log('getMinMaxInTour(tourNum): ', this.getMinMaxInTour(20));
-              
+              console.log('calcRating()');
 
-              
+              this.calcRating();
+              console.log('squads!!!', this.squads);
+
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
                 
@@ -189,7 +198,8 @@ export class LeaguePageComponent implements OnInit {
                     totalPlaces: squadInfo?.team.results_by_tour[this.lastTour].total_place,
                     profile: profile,
                     team_id: squadInfo?.team.id,
-                    info: squadInfo
+                    info: squadInfo,
+                    rating: this.squads.data.players[playerId].team.rating
                   }]);
                 }
               })
@@ -285,17 +295,74 @@ export class LeaguePageComponent implements OnInit {
     }});
   }
 
+  calcRating() {
+    this.lastToursDetails = [
+      this.getMinMaxInTour(this.lastTour),
+      this.getMinMaxInTour(this.lastTour-1),
+      this.getMinMaxInTour(this.lastTour-2),
+      this.getMinMaxInTour(this.lastTour-3),
+      this.getMinMaxInTour(this.lastTour-4),
+    ];
+
+    this.ratingMed = -this.ratingKoefs.reduce((acc, cur) => acc + cur, 0);
+
+    this.maxResultValue = this.lastToursDetails.reduce((acc, cur, ind) =>
+      acc + (cur.max - cur.med)/cur.med * this.ratingKoefs[ind]
+    , 0) - this.ratingMed;
+
+    this.minResultValue = this.lastToursDetails.reduce((acc, cur, ind) =>
+      acc + (cur.min - cur.med)/cur.med * this.ratingKoefs[ind]
+    , 0) - this.ratingMed;
+
+    Object.values(this.squads.data.players).forEach(player => {
+      const lastPlayerToursDetails = [
+        this.squads.data.players[player.id].team.results_by_tour[this.lastTour].tour_score,
+        this.squads.data.players[player.id].team.results_by_tour[this.lastTour-1].tour_score,
+        this.squads.data.players[player.id].team.results_by_tour[this.lastTour-2].tour_score,
+        this.squads.data.players[player.id].team.results_by_tour[this.lastTour-3].tour_score,
+        this.squads.data.players[player.id].team.results_by_tour[this.lastTour-4].tour_score,
+      ];
+  
+      const playersRating = this.lastToursDetails.reduce((acc, cur, ind) =>
+        acc + (lastPlayerToursDetails[ind] - cur.med)/cur.med * this.ratingKoefs[ind]
+      , 0);
+  
+      this.squads.data.players[player.id].team.rating = Math.round((playersRating - this.ratingMed)/this.maxResultValue*1000)/100;
+      this.playersRatingArr.push(this.squads.data.players[player.id].team.rating);
+    });
+
+    this.playersRatingArr.sort((a, b) => a - b);
+  }
+
+  calcPlayerRating(id) {
+    const lastPlayerToursDetails = [
+      this.squads.data.players[id].team.results_by_tour[this.lastTour].tour_score,
+      this.squads.data.players[id].team.results_by_tour[this.lastTour-1].tour_score,
+      this.squads.data.players[id].team.results_by_tour[this.lastTour-2].tour_score,
+      this.squads.data.players[id].team.results_by_tour[this.lastTour-3].tour_score,
+      this.squads.data.players[id].team.results_by_tour[this.lastTour-4].tour_score,
+    ];
+
+    const playersRating = this.lastToursDetails.reduce((acc, cur, ind) =>
+      acc + (lastPlayerToursDetails[ind] - cur.med)/cur.med * this.ratingKoefs[ind]
+    , 0);
+
+    
+
+    return Math.round((playersRating - this.ratingMed)/this.maxResultValue*1000)/100;
+  }
+
   getRgbForTour(score, max, min) {
     const value = (score - min)/(max - min);
 
     const colors = [
-      { r: 229, g: 124, b: 114 }, // 0
+      { r: 183, g: 51, b: 42 }, // 0
       { r: 243, g: 169, b: 109 }, // 0.25
       { r: 255, g: 214, b: 102 }, // 0.5
       { r: 171, g: 201, b: 120 }, // 0.75
-      { r: 87, g: 187, b: 138 }   // 1
+      { r: 55, g: 112, b: 82 }   // 1
     ];
-  
+    
     const lowerIndex = Math.floor(value * (colors.length - 1));
     const upperIndex = Math.min(lowerIndex + 1, colors.length - 1);
     const lowerColor = colors[lowerIndex];
@@ -312,20 +379,17 @@ export class LeaguePageComponent implements OnInit {
 
   getMinMaxInTour(tourNum) {
     const tourResults = Object.values(this.squads.data.players)
-      .map(player => {
-        return {
-          id: player.id,
-          tourNumber: tourNum,
-          score: player.team.results_by_tour[tourNum].tour_score 
-        }
-      });
+      .map(player => player.team.results_by_tour[tourNum].tour_score);
 
-    tourResults.sort(this.sortByScore)
+    tourResults.sort(this.sortCustom);
 
-    return {
-      max: tourResults[0].score,
-      min: tourResults[tourResults.length - 1].score
+    const resultObj = {
+      max: tourResults[0],
+      med: this.getMedian(tourResults),
+      min: tourResults[tourResults.length - 1]
     };
+
+    return resultObj; 
   }
 
   getMedalsInSeason(id) {
@@ -355,7 +419,6 @@ export class LeaguePageComponent implements OnInit {
     });
 
     standingsArr.sort(this.sortByScore);
-    // if (id === "1063076888") console.log('standingsArr:', standingsArr);
     standingsArr.forEach((player, ind) => {
       player.position =
         ind === 0 ? 
@@ -404,5 +467,25 @@ export class LeaguePageComponent implements OnInit {
 
   sortByScore(a,b) {
     return b.score - a.score;
+  }
+
+  sortCustom(a,b) {
+    return (b - a);
+  }
+  
+  getMedian(arr) {
+    if (arr.length === 0) return 0; // Обработка пустого массива
+  
+    // Сортируем массив
+    const sortedArr = arr.sort(this.sortCustom);
+    const mid = Math.floor(sortedArr.length / 2);
+  
+    // Если длина массива нечетная, возвращаем средний элемент
+    if (sortedArr.length % 2 !== 0) {
+      return sortedArr[mid];
+    }
+  
+    // Если длина массива четная, возвращаем среднее значение двух центральных элементов
+    return (+sortedArr[mid - 1] + +sortedArr[mid]) / 2;
   }
 }

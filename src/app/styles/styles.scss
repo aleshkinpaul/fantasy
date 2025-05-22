@@ -104,6 +104,11 @@ html, body {
     }
 
     .score {
+
+      display: block;
+      // padding: 3px;
+      width: 26px;
+      line-height: 26px;
       border: 1px solid;
       border-radius: 50%;
       box-sizing: border-box;

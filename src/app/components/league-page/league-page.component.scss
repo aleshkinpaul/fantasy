@@ -66,9 +66,25 @@
           position: relative;
 
           .score {
-            padding: 3px;
-            width: 30px;
-            box-sizing: border-box;
+            position: relative;
+
+            &.first-score::after,
+            &.second-score::after,
+            &.third-score::after {
+              content: '';
+              position: absolute;
+              left: 50%;
+              bottom: -5px;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+
+              transform: translateX(-50%);
+            }
+
+            &.first-score::after  { background-color: $first-place-bg-color; color: $first-place-font-color !important; border-color: $first-place-font-color !important; }
+            &.second-score::after { background-color: $second-place-bg-color; color: $second-place-font-color !important; border-color: $second-place-font-color !important; }
+            &.third-score::after  { background-color: $third-place-bg-color; color: $third-place-font-color !important; border-color: $third-place-font-color !important; }
           }
 
           &:first-child,
