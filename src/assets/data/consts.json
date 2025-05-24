@@ -1,0 +1,25 @@
+{
+  "league": [
+    {
+      "id": "25389",
+      "type": "spain",
+      "typeId": "50",
+      "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/la_liga_2024_league_friendly_2",
+      "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2024/",
+      "special_pos": 13,
+      "yearStart": 2024,
+      "yearEnd": 2025
+    },
+    {
+      "id": "25389",
+      "type": "champions-league",
+      "typeId": "50",
+      "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2024_po_league_friendly_2/stage/1/group/1",
+      "squad_link_2": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2024_league_friendly_2/stage/1/group/1",
+      "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2024_po/",
+      "special_pos": 15,
+      "yearStart": 2024,
+      "yearEnd": 2025
+    }
+  ]
+}

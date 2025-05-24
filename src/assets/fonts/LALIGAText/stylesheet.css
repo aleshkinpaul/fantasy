@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'LALIGA Text';
+    src: url('LALIGAText-Bold.eot');
+    src: local('LALIGA Text Bold'), local('LALIGAText-Bold'),
+        url('LALIGAText-Bold.eot?#iefix') format('embedded-opentype'),
+        url('LALIGAText-Bold.woff2') format('woff2'),
+        url('LALIGAText-Bold.woff') format('woff'),
+        url('LALIGAText-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LALIGA Text';
+    src: url('LALIGAText-Regular.eot');
+    src: local('LALIGA Text Regular'), local('LALIGAText-Regular'),
+        url('LALIGAText-Regular.eot?#iefix') format('embedded-opentype'),
+        url('LALIGAText-Regular.woff2') format('woff2'),
+        url('LALIGAText-Regular.woff') format('woff'),
+        url('LALIGAText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LALIGA Text';
+    src: url('LALIGAText-LightItalic.eot');
+    src: local('LALIGA Text Light Italic'), local('LALIGAText-LightItalic'),
+        url('LALIGAText-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('LALIGAText-LightItalic.woff2') format('woff2'),
+        url('LALIGAText-LightItalic.woff') format('woff'),
+        url('LALIGAText-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LALIGA Text';
+    src: url('LALIGAText-Light.eot');
+    src: local('LALIGA Text Light'), local('LALIGAText-Light'),
+        url('LALIGAText-Light.eot?#iefix') format('embedded-opentype'),
+        url('LALIGAText-Light.woff2') format('woff2'),
+        url('LALIGAText-Light.woff') format('woff'),
+        url('LALIGAText-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LALIGA Text';
+    src: url('LALIGAText-RegularItalic.eot');
+    src: local('LALIGA Text Regular Italic'), local('LALIGAText-RegularItalic'),
+        url('LALIGAText-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('LALIGAText-RegularItalic.woff2') format('woff2'),
+        url('LALIGAText-RegularItalic.woff') format('woff'),
+        url('LALIGAText-RegularItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LALIGA Text';
+    src: url('LALIGAText-BoldItalic.eot');
+    src: local('LALIGA Text Bold Italic'), local('LALIGAText-BoldItalic'),
+        url('LALIGAText-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('LALIGAText-BoldItalic.woff2') format('woff2'),
+        url('LALIGAText-BoldItalic.woff') format('woff'),
+        url('LALIGAText-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+

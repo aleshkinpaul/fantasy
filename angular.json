@@ -30,8 +30,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/app/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -40,15 +45,16 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "24kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true
             },
             "development": {
               "buildOptimizer": false,
@@ -93,7 +99,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/app/styles/styles.scss"
             ],
             "scripts": []
           }
