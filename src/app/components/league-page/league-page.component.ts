@@ -229,14 +229,28 @@ export class LeaguePageComponent implements OnInit {
                         .concat(element.team.rosters_by_tour[i.toString()].players.bench)
                     ).sort();
                     obj.squads.push(newSquad);
-                    if (i > 1) obj.transfers_count += (newSquad.filter(n => obj.squads[i-2].indexOf(n) === -1)).length;
+                    
+                    if (element.team.id === "340148") {
+                      console.log('ind:', i, 'newSquad', newSquad);
+
+                      if (i > 1)
+                        console.log('newPlayers', newSquad
+                          .filter(n => obj.squads[i-2].indexOf(n) === -1), newSquad
+                          .filter(n => obj.squads[i-2].indexOf(n) === -1).length);
+                    }
+
+                    if (i > 1) obj.transfers_count += (
+                      newSquad
+                        // .map(squad => squad.)
+                        .filter(n => obj.squads[i-2].indexOf(n) === -1)
+                    ).length;
                 }
                 
                 this.teamsArr.push(obj);
             });
 
-            console.log('Команды, сорт. по трансферам: ', this.teamsArr.sort(sortByTransfersCount));
-            console.log('Команды, сорт. по очкам: ', this.teamsArr.sort(sortByPointsCount));
+            console.log('Команды, сорт. по трансферам: ', this.teamsArr.sort(this.sortByTransfersCount));
+            console.log('Команды, сорт. по очкам: ', this.teamsArr.sort(this.sortByPointsCount));
 
             // Игроки
             Object.values(this.squads.data.players).forEach((element, ind) => {
@@ -272,21 +286,9 @@ export class LeaguePageComponent implements OnInit {
                     })
                   });
 
-                  console.log('Игроки, сорт. по кол-ву пиков: ', players.sort(sortByCount));
+                  console.log('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
                 }       
-              );
-
-            function sortByTransfersCount(obj1, obj2) {
-              return obj2.transfers_count - obj1.transfers_count;
-            }
-
-            function sortByPointsCount(obj1, obj2) {
-              return obj2.points - obj1.points;
-            }
-
-            function sortByCount(obj1, obj2) {
-              return obj2.count - obj1.count;
-            }        
+              ); 
           },
           error: err => {
             console.error('Ошибка при получении данных:', err);
@@ -294,6 +296,18 @@ export class LeaguePageComponent implements OnInit {
         });
     }});
   }
+
+  sortByTransfersCount(obj1, obj2) {
+    return obj2.transfers_count - obj1.transfers_count;
+  }
+
+  sortByPointsCount(obj1, obj2) {
+    return +obj2.points - +obj1.points;
+  }
+
+  sortByCount(obj1, obj2) {
+    return obj2.count - obj1.count;
+  }       
 
   calcRating() {
     this.lastToursDetails = [
