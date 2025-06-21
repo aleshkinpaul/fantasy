@@ -12,12 +12,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { DefaultLoaderComponent } from './components/loader/default-loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainPageComponent,
+    CWCPageComponent,
     LeaguePageComponent,
     CupPageComponent,
     DefaultLoaderComponent

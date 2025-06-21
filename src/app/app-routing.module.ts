@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LeaguePageComponent } from './components/league-page/league-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { CupPageComponent } from './components/cup-page/cup-page.component';
+import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full' },
   { path: 'spain', component: LeaguePageComponent },
   { path: 'champions-league', component: LeaguePageComponent },
   { path: 'spain-cup', component: CupPageComponent },
+  { path: 'club-world-cup', component: CWCPageComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

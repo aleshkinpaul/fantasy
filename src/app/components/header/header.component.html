@@ -1,4 +1,8 @@
-<div class="header-container">
+<div class="header-container"
+  [ngClass]="{
+      'ucl': name === 'champions-league',
+      'cwc': name === 'club-world-cup'
+  }">
   <div class="main-container">
     <div class="left-container">
       <div class="logo-container" (click)="goHome()">

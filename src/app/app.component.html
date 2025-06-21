@@ -1,2 +1,9 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div
+    class="app-container"
+    [ngClass]="{
+        'ucl': name === 'champions-league',
+        'cwc': name === 'club-world-cup'
+    }">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+</div>

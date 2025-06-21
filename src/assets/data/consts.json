@@ -20,6 +20,214 @@
       "special_pos": 15,
       "yearStart": 2024,
       "yearEnd": 2025
+    },
+    {
+      "id": "25389",
+      "type": "club-world-cup",
+      "typeId": "50",
+      "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/club_wc_2025_league_friendly_2/stage/1/group/1",
+      "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/club_wc_2025_league_friendly_2/",
+      "yearStart": 2024,
+      "yearEnd": 2025,
+      "teams": [
+        {
+          "id": 1,
+          "name": "Крякстражи",
+          "logo": "assets/logos/cwc-2025/крякстражи.png",
+          "profiles": ["1039593659", "73116796", "1068332740"]
+        },
+        {
+          "id": 2,
+          "name": "НаКиДи",
+          "logo": "assets/logos/cwc-2025/накиди.png",
+          "profiles": ["135066850", "1113227695", "1115416060"]
+        },
+        {
+          "id": 3,
+          "name": "Туз Вини ♠️",
+          "logo": "assets/logos/cwc-2025/туз вини.png",
+          "profiles": ["1116086751", "1111769718", "1116314918"]
+        },
+        {
+          "id": 4,
+          "name": "La Furia Blanca",
+          "logo": "assets/logos/cwc-2025/la furia blanca.png",
+          "profiles": ["1063076888", "1024867435", "1113412675"]
+        },
+        {
+          "id": 5,
+          "name": "Fondo Poker",
+          "logo": "assets/logos/cwc-2025/fondo poker.png",
+          "profiles": ["1116146089", "1096489838", "1116311079"]
+        },
+        {
+          "id": 6,
+          "name": "REAL’ные пацаны",
+          "logo": "assets/logos/cwc-2025/реальные пацаны.png",
+          "profiles": ["1115308799", "1111051849", "1115413541"]
+        },
+        {
+          "id": 7,
+          "name": "RMV-16",
+          "logo": "assets/logos/cwc-2025/rmv-16.png",
+          "profiles": ["152317185", "154819672", "1071227986"]
+        },
+        {
+          "id": 8,
+          "name": "Реквием по Кракену",
+          "logo": "assets/logos/cwc-2025/реквием по кракену.png",
+          "profiles": ["1116778891", "1116144526", "1071548719"]
+        },
+        {
+          "id": 9,
+          "name": "Феде-рация",
+          "logo": "assets/logos/cwc-2025/феде-рация.png",
+          "profiles": ["1116782572", "151923911", "1095496719"]
+        },
+        {
+          "id": 10,
+          "name": "FC Loading",
+          "logo": "assets/logos/cwc-2025/fcloading.png",
+          "profiles": ["1116139003", "1113442132", "1116314982"]
+        },
+        {
+          "id": 11,
+          "name": "Ремонтада космических мусликов",
+          "logo": "assets/logos/cwc-2025/ркм.png",
+          "profiles": ["1103401223", "1115355124", "1111685266"]
+        },
+        {
+          "id": 12,
+          "name": "Real Madrid: Nueva Era",
+          "logo": "assets/logos/cwc-2025/real madrid nueva era.png",
+          "profiles": ["144762187", "1116316056", "1113514956"]
+        }
+      ],
+      "tours": [
+        {
+          "tour": 1,
+          "type": "group",
+          "matches": [
+            {
+              "first_team": 0,
+              "second_team": 1
+            },
+            {
+              "first_team": 2,
+              "second_team": 3
+            }
+          ]
+        },
+        {
+          "tour": 2,
+          "type": "group",
+          "matches": [
+            {
+              "first_team": 3,
+              "second_team": 1
+            },
+            {
+              "first_team": 2,
+              "second_team": 0
+            }
+          ]
+        },
+        {
+          "tour": 3,
+          "type": "group",
+          "matches": [
+            {
+              "first_team": 1,
+              "second_team": 2
+            },
+            {
+              "first_team": 0,
+              "second_team": 3
+            }
+          ]
+        },
+        {
+          "tour": 4,
+          "type": "add",
+          "matches": [
+            {
+              "first_team": 0,
+              "second_team": 5
+            },
+            {
+              "first_team": 1,
+              "second_team": 4
+            },
+            {
+              "first_team": 2,
+              "second_team": 3
+            }
+          ]
+        },
+        {
+          "tour": 5,
+          "type": "po",
+          "matches": [
+            {
+              "first_team": 2,
+              "second_team": 5
+            },
+            {
+              "first_team": 7,
+              "second_team": 4
+            },
+            {
+              "first_team": 1,
+              "second_team": 3
+            },
+            {
+              "first_team": 0,
+              "second_team": 6
+            }
+          ]
+        },
+        {
+          "tour": 6,
+          "type": "po",
+          "matches": [
+            {
+              "first_team": 0,
+              "second_team": 1
+            },
+            {
+              "first_team": 2,
+              "second_team": 3
+            }
+          ]
+        },
+        {
+          "tour": 7,
+          "type": "po",
+          "matches": [
+            {
+              "first_team": 0,
+              "second_team": 1
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "id": 1,
+          "name": "A",
+          "teams": [11, 8, 6, 9]
+        },
+        {
+          "id": 2,
+          "name": "B",
+          "teams": [3, 4, 12, 7]
+        },
+        {
+          "id": 3,
+          "name": "C",
+          "teams": [1, 10, 5, 2]
+        }
+      ]
     }
   ]
 }

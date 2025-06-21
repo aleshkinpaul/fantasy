@@ -70,3 +70,9 @@ export interface IPlayers {
   total_place?: number,
   squads?: []
 }
+
+export interface IGroup {
+  id: number,
+  name: string,
+  teams: number[]
+}

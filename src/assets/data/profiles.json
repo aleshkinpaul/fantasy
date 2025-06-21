@@ -148,7 +148,7 @@
   },
   {
       "id": "1116311079",
-      "name": "Игорь Белоусов.",
+      "name": "Игорь Белоусов",
       "nick": "Igor.B.",
       "url": "https://www.sports.ru/profile/1116311079/",
       "logo": "assets/logos/volidol.png"
@@ -334,5 +334,19 @@
       "nick": "Максим Богомаз",
       "url": "https://www.sports.ru/profile/1039593659/",
       "logo": "assets/logos/chistopoprikolu.png"
+  },
+  {
+      "id": "1116778891",
+      "name": "Александр Корниенко",
+      "nick": "Саша Корниенко_1116778891",
+      "url": "https://www.sports.ru/profile/1116778891/",
+      "logo": ""
+  },
+  {
+      "id": "1116782572",
+      "name": "Константин Калинков",
+      "nick": "kmkalinkov@gmail.com",
+      "url": "https://www.sports.ru/profile/1116782572/",
+      "logo": ""
   }
 ]

@@ -17,6 +17,10 @@ export class DataService {
   setUrlName(url: string): void {
     this.urlName.next(url);
   }
+  
+  getUrlName(): string {
+    return this.urlName.value;
+  }
 
   getImage(url: string) {
     return this.http.get(url);

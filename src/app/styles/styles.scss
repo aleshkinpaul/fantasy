@@ -3,6 +3,7 @@ $main-header-bg-color:      #ffffff;
 $main-logo-size:            60px;
 $main-logo-border-color:    #00000054;
 $main-bg-color:             #CE4843;
+$main-bg-blue-color:        rgba(30, 41, 59);
 
 $main-button-font-color:    #DBD6BB;
 $main-button-bg-color:      #5B764B;
@@ -37,7 +38,6 @@ $negative-bg-color:         #F4CCCC;
 body {
   margin: 0;
   font-family: 'Prosto_One';
-  background-color: $main-bg-color;
 }
 
 h1,

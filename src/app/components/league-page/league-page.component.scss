@@ -12,7 +12,7 @@
     border-spacing: 0 1px;
 
     .table-header {
-      background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
+      // background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
 
       th:last-child {
         width: calc(2 * $row-height - 30px);

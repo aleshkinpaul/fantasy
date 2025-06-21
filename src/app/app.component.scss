@@ -1,0 +1,12 @@
+@import "styles.scss";
+
+.app-container {
+  min-height: 100vh;
+  background-color: $main-bg-color;
+
+  &.ucl,
+  &.cwc {
+    background-color: $main-bg-blue-color;
+    color: #fff;
+  }
+}
