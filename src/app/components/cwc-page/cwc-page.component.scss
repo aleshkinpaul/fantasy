@@ -74,6 +74,30 @@
         .group-title {
           text-align: center;
         }
+
+        .group-title-container {
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+
+          .group-title {
+            padding: 15px;
+            text-align: center;
+
+            background-color: #ffffff05;
+            border-radius: 5px;
+            user-select: none;
+            cursor: pointer;
+
+            &.active {
+              background-color: #ffffff42;
+            }
+
+            &:hover {
+              opacity: .6;
+            }
+          }
+        }
       }
     }
 
@@ -99,27 +123,27 @@
           .group-title {
             text-align: center;
           }
+        }
+      }
 
-          .matches-list {
+      .matches-list {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .match-item {
+
+          .score-item {
+            height: 64px;
+            width: 60px;
+            align-self: flex-start;
+
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            justify-content: center;
 
-            .match-item {
-
-              .score-item {
-                height: 64px;
-                width: 60px;
-                align-self: flex-start;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                span {
-                  text-align: center;
-                }
-              }
+            span {
+              text-align: center;
             }
           }
         }
@@ -163,7 +187,7 @@
 
         .table-row{
           position: relative;
-          height: $row-height;
+          min-height: $row-height;
     
           background-color: $row-color;
     
@@ -325,7 +349,7 @@
     
         .item-name-container {
           padding-left: 5px;
-          height: $row-height;
+          min-height: $row-height;
     
           display: flex;
           flex-direction: row;
@@ -427,7 +451,7 @@
 
         .table-row{
           position: relative;
-          height: $row-height;
+          min-height: $row-height;
     
           background-color: $row-color;
     
@@ -761,6 +785,58 @@
       }
     }
 
+    .profiles-list-container {
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .team-logo-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+
+      font-size: 1.6em;
+
+      .logo-container {
+        width: $logo-size;
+        // height: $logo-size;
+      
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        box-sizing: border-box;
+
+        .logo-img {
+          width: $logo-size;
+          height: $logo-size;
+        }
+      }
+
+      .team-container {
+        display: flex;
+        flex-direction: column;
+
+        .team-name {
+          display: block;
+          width: 100%;
+  
+          align-self: left;
+          text-align: left;
+        }
+
+        .person-name {
+          opacity: .7;
+  
+          align-self: left;
+          text-align: left;
+        }
+      }
+    }
+
     .loading-spinner-container {
       position: absolute;
       top: 0;
@@ -768,6 +844,20 @@
       width: 100%;
       height: 100vh;
       box-sizing: border-box;
+    }
+
+    .important-params {
+      display: block;
+      margin: 5px;
+      width: calc($row-height - 10px);
+      line-height: calc($row-height - 10px);
+
+      align-self: center;
+      text-align: center;
+      vertical-align: middle;
+
+      color: $label-font-color;
+      background-color: $label-bg-color;
     }
 
     .align-left {

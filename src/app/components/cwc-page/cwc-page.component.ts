@@ -16,12 +16,25 @@ import { LoaderService } from 'src/app/service/loader.service';
 })
 export class CWCPageComponent implements OnInit {
   public activeTab = 'groups';
+  public activeGroupTabs = [{id: 1, isTeams: true}, {id: 2, isTeams: true}, {id: 3, isTeams: true}, {id: 4, isTeams: true}]
   private data;
   public profiles;
   public consts;
   public squads;
   public teams;
   public results = [];
+  public additionalGroup = {
+    groupId: 4,
+    groupName: "Отборочный тур",
+    teams: [],
+    matches: []
+  };
+  public playOffGroup = {
+    groupId: 5,
+    groupName: "Плей-офф",
+    teams: [],
+    matches: []
+  };
   // public tours;
   // public squadsDetails = [];
 	public groups = new BehaviorSubject<IGroup[]>([])
@@ -100,7 +113,7 @@ export class CWCPageComponent implements OnInit {
               // console.log('CHECK: ', this.squads.data.tours, this.lastTour);
               
               // console.log('profiles', this.profiles);
-              // console.log('consts', this.consts);
+              console.log('consts', this.consts);
               // console.log('squads', this.squads);
               // console.log('teams', this.teams);
 
@@ -142,7 +155,7 @@ export class CWCPageComponent implements OnInit {
 
               this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)]);
 
-              // console.log('this.squadsDetails', this.squadsDetails.value);
+              console.log('this.squadsDetails', this.squadsDetails.value);
 
               // идем по группам
               this.consts.groups.forEach((group, groupInd) => {
@@ -177,13 +190,15 @@ export class CWCPageComponent implements OnInit {
                     teamObj.profiles[profileInd] = {};
                     Object.assign(teamObj.profiles[profileInd], this.profiles.find(profile => profile.id === profileId));
                     teamObj.profiles[profileInd].results = [];
+                    
+                    teamObj.profiles[profileInd].teamName = this.squadsDetails.value.find(squad => squad.id === profileId)?.name || '';
                   })
 
                   result.teams = [...result.teams, teamObj];
                 });
                 
                 // идем по турам группы
-                this.consts.tours.filter(tour => tour.type === 'group')
+                this.consts.tours.filter(tour => tour.type === 'group' || tour.type === 'add')
                 .forEach((tour, tourInd) => {
 
                   result.tours = [...result.tours, {
@@ -193,16 +208,20 @@ export class CWCPageComponent implements OnInit {
                     teams: Object.assign([], this.results[groupInd].teams)
                   }]
 
-                  result.tours[tourInd].matches = tour.matches.map((match, matchInd) => {
-                    const first_team = Object.assign({}, result.tours[tourInd].teams.find(team => group.teams[match.first_team] === team.id));
-                    const second_team = Object.assign({}, result.tours[tourInd].teams.find(team => group.teams[match.second_team] === team.id));
+                  if (tourInd < 3)
+                    result.tours[tourInd].matches = tour.matches.map((match, matchInd) => {
+                      const first_team = Object.assign({}, result.tours[tourInd].teams.find(team => group.teams[match.first_team] === team.id));
+                      const second_team = Object.assign({}, result.tours[tourInd].teams.find(team => group.teams[match.second_team] === team.id));
 
-                    return {
-                      first_team: first_team,
-                      second_team: second_team,
-                    }
-                  });
+                      return {
+                        first_team: first_team,
+                        second_team: second_team,
+                      }
+                    });
                 })
+
+                console.log('results', this.results);
+                
 
                 result.tours.filter(tour => tour.type === 'group')
                 .forEach((tour, tourInd) => {
@@ -212,8 +231,12 @@ export class CWCPageComponent implements OnInit {
                     if (tour.num <= this.lastTour) {
                       match.meets.forEach(meet => this.countProfileResult(meet, tourInd));
                       
-                      this.sortProfilesInTeam(match.first_team, tourInd, result);
-                      this.sortProfilesInTeam(match.second_team, tourInd, result);
+                      console.log('tour[tourInd+1]', tour[tourInd+1]);
+                      
+                      if (!!result.tours[tourInd+1]) {
+                        this.sortProfilesInTeam(match.first_team, tourInd, result);
+                        this.sortProfilesInTeam(match.second_team, tourInd, result);
+                      }
 
                       this.countMatchResult(match);
 
@@ -226,7 +249,65 @@ export class CWCPageComponent implements OnInit {
                 })
               });
 
-              console.log('results', this.results);              
+              // 4 tour
+
+              let lastTeams = [];
+              this.results.forEach((group, groupInd) => {
+                console.log(group.teams);
+                
+                lastTeams = lastTeams.concat([
+                  Object.assign({}, group.teams[2]),
+                  Object.assign({}, group.teams[3])
+                ]);
+              });
+
+              this.additionalGroup = {
+                groupId: 4,
+                groupName: 'Отборочный тур',
+                teams: lastTeams,
+                tours: []
+              };
+              
+              this.sortTeamsInGroup(this.additionalGroup.teams);
+
+              console.log(this.additionalGroup);
+
+              this.additionalGroup.matches = this.consts.tours[3].matches.map((match, matchInd) => {
+                const first_team = Object.assign({}, this.additionalGroup.teams.find(team => this.additionalGroup.teams[match.first_team].id === team.id));
+                const second_team = Object.assign({}, this.additionalGroup.teams.find(team => this.additionalGroup.teams[match.second_team].id === team.id));
+
+                return {
+                  first_team: first_team,
+                  second_team: second_team,
+                }
+              });
+
+              this.additionalGroup.matches.forEach(match => {
+                this.addMeets(match, 3);
+                
+                if (this.lastTour > 3) {
+                  this.countMatchResult(match);
+
+                  this.countTeamResult(match, match.first_team);
+                  this.countTeamResult(match, match.second_team);
+              
+                  this.sortTeamsInGroup(this.additionalGroup.teams);
+                }
+              });
+
+              // play-off (5,6,7)
+
+              let playOffTeams = [];
+              this.results.forEach((group, groupInd) => {
+                console.log(group.teams);
+                
+                playOffTeams = playOffTeams.concat([group.teams[0], group.teams[1]]);
+              });
+
+              this.playOffGroup.teams = playOffTeams;
+
+              console.log('this.playOffGroup', this.playOffGroup);
+              
               
               setTimeout(() => {
                 this.route.queryParams.subscribe(params => {
@@ -243,6 +324,10 @@ export class CWCPageComponent implements OnInit {
           }
         });
     }});
+  }
+
+  toggleGroupTab(event, ind, isTeams) {
+    this.activeGroupTabs[ind].isTeams = isTeams;
   }
 
   addMeets(match, tourInd) {
@@ -367,7 +452,7 @@ export class CWCPageComponent implements OnInit {
     
     // second team
     meet.second_profile.results[tourInd].fo += meet.second_profile_score;
-    meet.second_profile.results[tourInd].missed_fo += meet.second_profile_score;
+    meet.second_profile.results[tourInd].missed_fo += meet.first_profile_score;
     meet.second_profile.results[tourInd].gd = meet.second_profile.results[tourInd].goals - meet.second_profile.results[tourInd].missed_goals;
     meet.second_profile.results[tourInd].pd = meet.second_profile.results[tourInd].fo - meet.second_profile.results[tourInd].missed_fo;
     
@@ -392,15 +477,37 @@ export class CWCPageComponent implements OnInit {
       let profiles = Object.assign([], team.profiles);
 
       profiles = profiles.sort((a,b) => {
-        if (b.results[tourInd].goals !== a.results[tourInd].goals)
-          return b.results[tourInd].goals - a.results[tourInd].goals;
+        if (b.results[tourInd].total_goals !== a.results[tourInd].total_goals)
+          return b.results[tourInd].total_goals - a.results[tourInd].total_goals;
+        if (b.results[tourInd].total_fo - a.results[tourInd].total_fo)
+          return b.results[tourInd].total_fo - a.results[tourInd].total_fo;
         return b.results[tourInd].fo - a.results[tourInd].fo;
       });
 
-      result.tours[tourInd+1].matches.forEach(match => {
-        if (match.first_team.id === team.id) match.first_team.profiles = Object.assign([], profiles);
-        if (match.second_team.id === team.id) match.second_team.profiles = Object.assign([], profiles);
-      })
+      // if (tourInd < 2) {
+        result.tours[tourInd+1].matches.forEach(match => {
+          if (match.first_team.id === team.id) match.first_team.profiles = Object.assign([], profiles);
+          if (match.second_team.id === team.id) match.second_team.profiles = Object.assign([], profiles);
+        })
+
+        result.tours[tourInd+1].teams = Object.assign([], result.tours[tourInd+1].teams);
+        result.tours[tourInd+1].teams.find(tmpTeam => tmpTeam.id === team.id).profiles = Object.assign([], profiles);
+      // }
+
+      // if (tourInd === 2) {
+      //   this.results[3].tours[0].matches.forEach(match => {
+      //     if (match.first_team.id === team.id) match.first_team.profiles = Object.assign([], profiles);
+      //     if (match.second_team.id === team.id) match.second_team.profiles = Object.assign([], profiles);
+      //   })
+
+      //   console.log('teams', this.results[3].tours[0].teams);
+      //   console.log(profiles);
+        
+        
+      //   this.results[3].tours[0].teams = Object.assign([], this.results[3].teams);
+      //   if (!!this.results[3].tours[0].teams.find(tmpTeam => tmpTeam.id === team.id))
+      //     this.results[3].tours[0].teams.find(tmpTeam => tmpTeam.id === team.id).profiles = Object.assign([], profiles);
+      // }
     }
   }
 

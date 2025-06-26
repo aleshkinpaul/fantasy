@@ -23,7 +23,19 @@
     <div class="groups-list" *ngIf="activeTab==='groups'">
       <div class="group-container" *ngFor="let item of results; index as ind">
         <h2 class="group-title">Группа {{item.groupName}}</h2>
-        <table class="table group-table" *ngIf="!(isLoading$ | async)">
+        <div class="group-title-container">
+          <h3 class="group-title"
+            [ngClass]="{'active': !!activeGroupTabs[ind].isTeams}"
+            (click)="toggleGroupTab($event, ind, true)"
+          >Команды</h3>
+          <div></div>
+          <h3 class="group-title"
+            *ngIf="ind < 3"
+            [ngClass]="{'active': !activeGroupTabs[ind].isTeams}"
+            (click)="toggleGroupTab($event, ind, false)"
+          >Внутренний рейтинг</h3>
+        </div>
+        <table class="table group-table" *ngIf="!!activeGroupTabs[ind].isTeams">
           <thead class="table-header">
             <tr>
               <th>#</th>
@@ -114,6 +126,193 @@
             </tr>
           </tbody>
         </table>
+
+        <div class="profiles-list-container" *ngIf="!activeGroupTabs[ind].isTeams && ind < 3">
+          <div class="team-container" *ngFor="let team of item.tours[item.tours.length-1].teams; index as i">
+            <div class="team-logo-container">
+              <div class="logo-container">
+                <img [src]="!!team.logo ? team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+              </div>
+              <div class="team-container">
+                <span class="team-name">
+                  {{ team.name }}
+                </span>
+              </div>
+            </div>
+            <table class="table group-table">
+              <thead class="table-header">
+                <tr>
+                  <th>#</th>
+                  <th class="align-left">Команда</th>
+                  <th class="sub-info">ЗГ</th>
+                  <th class="sub-info">ПГ</th>
+                  <th class="sub-info">РГ</th>
+                  <th class="sub-info">ЗФО</th>
+                  <th class="sub-info">ПФО</th>
+                  <th class="sub-info">РФО</th>
+                  <th class="sub-info">ПТ</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr *ngFor="let profile of team.profiles; index as profileInd" class="table-row">
+                  <td [ngClass]="{
+                    'special': profileInd + 1 === 1 || profileInd + 1 === 2,
+                  }">
+                    <span>
+                      {{ profileInd + 1 }}
+                    </span>
+                  </td>
+                  <td class="item-name-container">
+                    <div class="item-team-container">
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ profile.name }}
+                        </span>
+                        <span class="person-name">
+                          {{ profile.teamName }}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="sub-info">
+                    <span class="important-params">
+                      {{ profile.results[profile.results.length-1].total_goals }}
+                    </span>
+                  </td>
+                  <td class="sub-info">
+                    <span>
+                      {{ profile.results[profile.results.length-1].total_missed_goals }}
+                    </span>
+                  </td>
+                  <td class="sub-info">
+                    <span>
+                      {{ profile.results[profile.results.length-1].total_gd }}
+                    </span>
+                  </td>
+                  <td class="sub-info">
+                    <span class="important-params">
+                      {{ profile.results[profile.results.length-1].total_fo }}
+                    </span>
+                  </td>
+                  <td class="sub-info">
+                    <span>
+                      {{ profile.results[profile.results.length-1].total_missed_fo }}
+                    </span>
+                  </td>
+                  <td class="sub-info">
+                    <span>
+                      {{ profile.results[profile.results.length-1].total_pd }}
+                    </span>
+                  </td>
+                  <td class="sub-info">
+                    <span>
+                      {{ profile.results[profile.results.length-1].fo }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Отборочный -->
+      <div class="group-container" *ngIf="activeTab==='groups'">
+        <h2 class="group-title">{{additionalGroup.groupName}}</h2>
+        <div class="group-title-container">
+          <h3 class="group-title">Команды</h3>
+        </div>
+        <table class="table group-table">
+          <thead class="table-header">
+            <tr>
+              <th>#</th>
+              <th class="align-left">Команда</th>
+              <th class="sub-info">В</th>
+              <th class="sub-info">Н</th>
+              <th class="sub-info">П</th>
+              <th class="sub-info">ЗГ</th>
+              <th class="sub-info">ПГ</th>
+              <th class="sub-info">РГ</th>
+              <th class="sub-info">ЗФО</th>
+              <th class="sub-info">ПФО</th>
+              <th class="sub-info">РФО</th>
+              <th class="sub-info">О</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <tr *ngFor="let team of additionalGroup.teams; index as i" class="table-row">
+              <td [ngClass]="{
+                'special': i + 1 === 1 || i + 1 === 2,
+              }">
+                <span>
+                  {{ i + 1 }}
+                </span>
+              </td>
+              <td class="item-name-container">
+                <div class="item-team-container">
+                  <div class="logo-container">
+                    <img [src]="!!team.logo ? team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                  </div>
+                  <div class="team-container">
+                    <span class="team-name">
+                      {{ team.name }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.win }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.draw }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.lose }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.goals }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.missed_goals }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.gd }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.fo }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.missed_fo }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.pd }}
+                </span>
+              </td>
+              <td class="sub-info">
+                <span>
+                  {{ team.results.points }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -121,7 +320,7 @@
       <ul class="tours-list" *ngFor="let tour of consts.tours; index as tourInd">
         <li class="tour-item" *ngIf="tour.tour === +activeTab">
           <div class="matches-container" *ngIf="!!results[0].tours[tour.tour-1]; else noDataElem">
-            <ul class="groups-list">
+            <ul class="groups-list" *ngIf="tourInd < 3">
               <li class="group-item" *ngFor="let group of results; index as ind">
                 <h2 class="group-title">Группа {{ group.groupName }}</h2>
                 <ul class="matches-list" *ngIf="tour.type === 'group'">
@@ -195,6 +394,79 @@
                 </ul>
               </li>
             </ul>
+
+            <div class="matches-container" *ngIf="tourInd === 3">
+              <h2 class="group-title">{{ additionalGroup.groupName }}</h2>
+              <ul class="matches-list">
+                <li class="match-item" *ngFor="let match of additionalGroup.matches; index as i">
+                  <div class="item-team-container">
+                    <div class="title-container left">
+                      <div class="logo-container">
+                        <img [src]="!!match.first_team.logo ? match.first_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ match.first_team.name }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="participants-container left">
+                      <table>
+                        <tbody>
+                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <td>{{ meet.first_profile.name }}</td>
+                            <td
+                              [ngStyle]="{
+                                'color': meet.first_profile.results[tourInd]?.gd === 1 ?
+                                  'green' :
+                                  meet.first_profile.results[tourInd]?.gd === 0 ?
+                                    'grey' :
+                                    'red' 
+                              }"
+                              >{{ meet.first_profile.results[tourInd]?.fo }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="score-item">
+                    <span>
+                      {{ match.first_team_score }} vs {{ match.second_team_score }}
+                    </span>
+                  </div>
+                  <div class="item-team-container">
+                    <div class="title-container">
+                      <div class="logo-container">
+                        <img [src]="!!match.second_team.logo ? match.second_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ match.second_team.name }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="participants-container right">
+                      <table>
+                        <tbody>
+                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <td>{{ meet.second_profile.name }}</td>
+                            <td
+                              [ngStyle]="{
+                                'color': meet.second_profile.results[tourInd]?.gd === 1 ?
+                                  'green' :
+                                  meet.second_profile.results[tourInd]?.gd === 0 ?
+                                    'grey' :
+                                    'red'
+                              }"
+                              >{{ meet.second_profile.results[tourInd]?.fo }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </li>
       </ul>
