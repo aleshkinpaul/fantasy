@@ -21,7 +21,7 @@
 
   <div class="data-container">
     <div class="groups-list" *ngIf="activeTab==='groups'">
-      <div class="group-container" *ngFor="let item of results; index as ind">
+      <div class="group-container" *ngFor="let item of groupResults; index as ind">
         <h2 class="group-title">Группа {{item.groupName}}</h2>
         <div class="group-title-container">
           <h3 class="group-title"
@@ -417,13 +417,13 @@
                             <td>{{ meet.first_profile.name }}</td>
                             <td
                               [ngStyle]="{
-                                'color': meet.first_profile.results[tourInd]?.gd === 1 ?
+                                'color': meet.result === 1 ?
                                   'green' :
-                                  meet.first_profile.results[tourInd]?.gd === 0 ?
+                                  meet.result === 0 ?
                                     'grey' :
                                     'red' 
                               }"
-                              >{{ meet.first_profile.results[tourInd]?.fo }}</td>
+                              >{{ meet.first_profile_score }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -452,13 +452,13 @@
                             <td>{{ meet.second_profile.name }}</td>
                             <td
                               [ngStyle]="{
-                                'color': meet.second_profile.results[tourInd]?.gd === 1 ?
+                                'color': meet.result === 2 ?
                                   'green' :
-                                  meet.second_profile.results[tourInd]?.gd === 0 ?
+                                  meet.result === 0 ?
                                     'grey' :
                                     'red'
                               }"
-                              >{{ meet.second_profile.results[tourInd]?.fo }}</td>
+                              >{{ meet.second_profile_score }}</td>
                           </tr>
                         </tbody>
                       </table>

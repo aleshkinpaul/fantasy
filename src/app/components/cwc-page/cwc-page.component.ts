@@ -23,6 +23,7 @@ export class CWCPageComponent implements OnInit {
   public squads;
   public teams;
   public results = [];
+  public groupResults = [];
   public additionalGroup = {
     groupId: 4,
     groupName: "Отборочный тур",
@@ -246,7 +247,10 @@ export class CWCPageComponent implements OnInit {
                   });
 
                   this.sortTeamsInGroup(result.teams);
-                })
+                });
+
+                console.log('result', result);                
+                this.groupResults.push(JSON.parse(JSON.stringify(result)));
               });
 
               // 4 tour
@@ -285,14 +289,14 @@ export class CWCPageComponent implements OnInit {
               this.additionalGroup.matches.forEach(match => {
                 this.addMeets(match, 3);
                 
-                if (this.lastTour > 3) {
+                // if (this.lastTour > 3) {
                   this.countMatchResult(match);
 
                   this.countTeamResult(match, match.first_team);
                   this.countTeamResult(match, match.second_team);
               
                   this.sortTeamsInGroup(this.additionalGroup.teams);
-                }
+                // }
               });
 
               // play-off (5,6,7)
