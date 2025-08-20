@@ -36,6 +36,25 @@ export class CWCPageComponent implements OnInit {
     teams: [],
     matches: []
   };
+  public semifinalGroup = {
+    groupId: 6,
+    groupName: "Плей-офф",
+    teams: [],
+    matches: []
+  };
+  public finalGroup = {
+    groupId: 7,
+    groupName: "Плей-офф",
+    teams: [],
+    matches: []
+  };
+  public thirdplaceGroup = {
+    groupId: 7,
+    groupName: "Плей-офф",
+    teams: [],
+    matches: []
+  };
+  public resultTeams = [];
   // public tours;
   // public squadsDetails = [];
 	public groups = new BehaviorSubject<IGroup[]>([])
@@ -289,28 +308,161 @@ export class CWCPageComponent implements OnInit {
               this.additionalGroup.matches.forEach(match => {
                 this.addMeets(match, 3);
                 
-                // if (this.lastTour > 3) {
+                if (this.lastTour > 3) {
                   this.countMatchResult(match);
 
                   this.countTeamResult(match, match.first_team);
                   this.countTeamResult(match, match.second_team);
               
                   this.sortTeamsInGroup(this.additionalGroup.teams);
-                // }
+                }
               });
 
               // play-off (5,6,7)
 
               let playOffTeams = [];
+              let semiFinalTeams = [];
+              let finalTeams = [];
+              let thirdplaceTeams = [];
+              let resultTeams = [];
+
               this.results.forEach((group, groupInd) => {
                 console.log(group.teams);
                 
-                playOffTeams = playOffTeams.concat([group.teams[0], group.teams[1]]);
+                playOffTeams = this.getNewObj(playOffTeams.concat([group.teams[0], group.teams[1]]));
               });
 
-              this.playOffGroup.teams = playOffTeams;
+              console.log('groupResults.teams', this.groupResults.reduce((a,b) => a.concat(b.teams), []));
+              
+              this.playOffGroup.teams = this.getNewObj(playOffTeams.concat([
+                this.groupResults.reduce((a,b) => a.concat(b.teams), []).find(team => team.id === this.additionalGroup.teams[0].id),
+                this.groupResults.reduce((a,b) => a.concat(b.teams), []).find(team => team.id === this.additionalGroup.teams[1].id)
+              ]));
+
+              console.log('this.additionalGroup', this.additionalGroup);
 
               console.log('this.playOffGroup', this.playOffGroup);
+              
+              this.playOffGroup.matches = this.consts.tours[4].matches.map((match, matchInd) => {
+                const first_team = Object.assign({}, this.playOffGroup.teams.find(team => this.playOffGroup.teams[match.first_team].id === team.id));
+                const second_team = Object.assign({}, this.playOffGroup.teams.find(team => this.playOffGroup.teams[match.second_team].id === team.id));
+
+                return {
+                  first_team: first_team,
+                  second_team: second_team,
+                }
+              });
+
+              this.playOffGroup.matches.forEach(match => {
+                this.addMeets(match, 4);
+                
+                if (this.lastTour > 4) {
+                  this.countMatchResult(match);
+
+                  this.countTeamResult(match, match.first_team);
+                  this.countTeamResult(match, match.second_team);
+                }
+                
+                match.meets.forEach(meet => this.countProfileResult(meet, 3));
+              });
+                
+              this.updateInnerRating(this.groupResults, this.playOffGroup, 4);
+
+              this.playOffGroup.matches.forEach(match => {
+                semiFinalTeams.push(
+                  this.getPlayoffResult(match) === 2 ? this.getNewObj(match.second_team) : 
+                    this.getPlayoffResult(match) === 1 ? this.getNewObj(match.first_team) : {}
+                );
+              });
+
+              // semifinal 
+              this.semifinalGroup.teams = this.getNewObj(semiFinalTeams);             
+              this.semifinalGroup.matches = this.consts.tours[5].matches.map((match, matchInd) => {
+                const first_team = Object.assign({}, this.semifinalGroup.teams.find(team => this.semifinalGroup.teams[match.first_team].id === team.id));
+                const second_team = Object.assign({}, this.semifinalGroup.teams.find(team => this.semifinalGroup.teams[match.second_team].id === team.id));
+
+                return {
+                  first_team: first_team,
+                  second_team: second_team,
+                }
+              });
+
+              this.semifinalGroup.matches.forEach(match => {
+                this.addMeets(match, 5);
+                
+                if (this.lastTour > 4) {
+                  this.countMatchResult(match);
+
+                  this.countTeamResult(match, match.first_team);
+                  this.countTeamResult(match, match.second_team);
+                }
+                
+                match.meets.forEach(meet => this.countProfileResult(meet, 4));
+              });
+
+              this.updateInnerRating(this.groupResults, this.semifinalGroup, 5);
+
+              this.semifinalGroup.matches.forEach(match => {
+                finalTeams.push(
+                  this.getPlayoffResult(match) === 2 ? this.getNewObj(match.second_team) : 
+                    this.getPlayoffResult(match) === 1 ? this.getNewObj(match.first_team) : {}
+                );
+              });
+
+              this.semifinalGroup.matches.forEach(match => {
+                finalTeams.push(
+                  this.getPlayoffResult(match) === 2 ? this.getNewObj(match.first_team) : 
+                    this.getPlayoffResult(match) === 1 ? this.getNewObj(match.second_team) : {}
+                );
+              });
+
+              // final 
+              this.finalGroup.teams = this.getNewObj(finalTeams);      
+              console.log('this.finalGroup', this.finalGroup);
+                     
+              this.finalGroup.matches = this.consts.tours[6].matches.map((match, matchInd) => {
+                const first_team = Object.assign({}, this.finalGroup.teams.find(team => this.finalGroup.teams[match.first_team].id === team.id));
+                const second_team = Object.assign({}, this.finalGroup.teams.find(team => this.finalGroup.teams[match.second_team].id === team.id));
+
+                return {
+                  first_team: first_team,
+                  second_team: second_team,
+                }
+              });
+
+              this.finalGroup.matches.forEach(match => {
+                this.addMeets(match, 6);
+                
+                if (this.lastTour > 6) {
+                  this.countMatchResult(match);
+
+                  this.countTeamResult(match, match.first_team);
+                  this.countTeamResult(match, match.second_team);
+                }
+                
+                match.meets.forEach(meet => this.countProfileResult(meet, 5));
+              });
+              
+              if (this.lastTour > 6) {
+                this.updateInnerRating(this.groupResults, this.finalGroup, 6);
+
+                this.finalGroup.matches.forEach((match, matchInd) => {
+                  resultTeams.push(
+                    this.getPlayoffResult(match) === 2 ? this.getNewObj(match.second_team) : 
+                      this.getPlayoffResult(match) === 1 ? this.getNewObj(match.first_team) : {}
+                  );
+
+                  if (matchInd === 0)
+                    resultTeams.push(
+                      this.getPlayoffResult(match) === 2 ? this.getNewObj(match.first_team) : 
+                        this.getPlayoffResult(match) === 1 ? this.getNewObj(match.second_team) : {}
+                    );
+                });
+              }
+
+              this.resultTeams = resultTeams;
+
+              console.log('this.playOffGroup', this.playOffGroup, this.semifinalGroup, this.finalGroup, this.resultTeams);
               
               
               setTimeout(() => {
@@ -328,6 +480,70 @@ export class CWCPageComponent implements OnInit {
           }
         });
     }});
+  }
+
+  getShortName(name: string) {
+    const maxLength = 50;
+    return name.length > maxLength ? name.substr(0, maxLength)+"..." : name;
+  }
+
+  getPlayoffResult(match) {
+    if (match.match_result !== 0) return match.match_result;
+
+    if (match.first_team_fo_score - match.second_team_fo_score > 0) return 1;
+    if (match.second_team_fo_score - match.first_team_fo_score > 0) return 2;
+
+    if (match.first_team.results.gd - match.second_team.results.gd > 0) return 1;
+    if (match.second_team.results.gd - match.first_team.results.gd > 0) return 2;
+
+    if (match.first_team.results.pd - match.second_team.results.pd > 0) return 1;
+    if (match.second_team.results.pd - match.first_team.results.pd > 0) return 2;
+
+    return;
+  }
+  
+  updateInnerRating(basicGroup, tmpGroup, tourNum) {
+    basicGroup.forEach(group => {
+      group.tours.push({
+        num: tourNum+1,
+        matches: [],
+        teams: [],
+        type: "po"
+      });
+      
+
+      group.teams.forEach(team => {
+        let check = false;
+
+        tmpGroup.teams.forEach(tmpTeam => {
+          if (tmpTeam.id === team.id) {
+            check = true;
+
+            tmpTeam.profiles = tmpTeam.profiles.sort((a,b) => {
+              if (b.results[tourNum-1].total_goals !== a.results[tourNum-1].total_goals)
+                return b.results[tourNum-1].total_goals - a.results[tourNum-1].total_goals;
+              if (b.results[tourNum-1].total_fo - a.results[tourNum-1].total_fo)
+                return b.results[tourNum-1].total_fo - a.results[tourNum-1].total_fo;
+              return b.results[tourNum-1].fo - a.results[tourNum-1].fo;
+            });
+
+            let newTeam = JSON.parse(JSON.stringify(tmpTeam));
+
+            group.tours[tourNum].teams.push(newTeam);
+            // team.profiles = JSON.parse(JSON.stringify(tmpTeam.profiles));
+            console.log(group.groupName, tmpTeam);
+          };
+        });
+
+        if (!check) group.tours[tourNum].teams.push(team);
+      })
+
+      console.log('basicGroup', basicGroup);
+    })
+  }
+
+  getNewObj(obj) {
+    return JSON.parse(JSON.stringify(obj));
   }
 
   toggleGroupTab(event, ind, isTeams) {
@@ -488,7 +704,7 @@ export class CWCPageComponent implements OnInit {
         return b.results[tourInd].fo - a.results[tourInd].fo;
       });
 
-      // if (tourInd < 2) {
+      if (tourInd < 3) {
         result.tours[tourInd+1].matches.forEach(match => {
           if (match.first_team.id === team.id) match.first_team.profiles = Object.assign([], profiles);
           if (match.second_team.id === team.id) match.second_team.profiles = Object.assign([], profiles);
@@ -496,7 +712,7 @@ export class CWCPageComponent implements OnInit {
 
         result.tours[tourInd+1].teams = Object.assign([], result.tours[tourInd+1].teams);
         result.tours[tourInd+1].teams.find(tmpTeam => tmpTeam.id === team.id).profiles = Object.assign([], profiles);
-      // }
+      }
 
       // if (tourInd === 2) {
       //   this.results[3].tours[0].matches.forEach(match => {

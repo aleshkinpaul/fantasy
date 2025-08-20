@@ -13,6 +13,7 @@ import { DefaultLoaderComponent } from './components/loader/default-loader.compo
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
+import { LeagueH2HPageComponent } from './components/league-h2h-page/league-h2h-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
     MainPageComponent,
     CWCPageComponent,
     LeaguePageComponent,
+    LeagueH2HPageComponent,
     CupPageComponent,
     DefaultLoaderComponent
   ],

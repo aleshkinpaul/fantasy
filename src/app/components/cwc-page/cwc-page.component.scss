@@ -54,6 +54,16 @@
     }
   }
 
+  .matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &.results {
+      gap: 30px;
+    }
+  }
+
   .data-container {
     @include main-container();
 
@@ -108,6 +118,13 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        .matches-container {
+          .group-title {
+            margin-bottom: 20px;
+            text-align: center;
+          }
+        }
       }
 
       .groups-list {
@@ -690,6 +707,42 @@
 
         .item-team-container {
           width: 45%; 
+        }
+
+        &.final {
+          flex-direction: column;
+
+          .match-details {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+
+            &.results {
+
+              .item-team-container {
+                min-width: 300px;
+                flex-direction: row;
+
+                .title-container,
+                .participants-container {
+                  width: 50%;
+                }
+
+                .title-container {
+                  justify-content: end;
+                }
+
+                .participants-container {
+                  // min-width: 300px;
+
+                  td {
+                    width: 100%;
+                    text-align: start;
+                  }
+                }
+              }
+            }
+          }
         }
 
         .item-team-container {

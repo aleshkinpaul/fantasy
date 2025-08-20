@@ -16,6 +16,10 @@
         id="all"
         (click)="selectTab($event)"
       >Общий зачет</li>
+      <li class="nav-item"
+        id="results"
+        (click)="selectTab($event)"
+      >Итоги</li>
     </ul>
   </div>
 
@@ -319,7 +323,7 @@
     <div class="tours-list-container" *ngIf="!!(+activeTab)">
       <ul class="tours-list" *ngFor="let tour of consts.tours; index as tourInd">
         <li class="tour-item" *ngIf="tour.tour === +activeTab">
-          <div class="matches-container" *ngIf="!!results[0].tours[tour.tour-1]; else noDataElem">
+          <div class="matches-container" *ngIf="+activeTab <= lastTour+1; else noDataElem">
             <ul class="groups-list" *ngIf="tourInd < 3">
               <li class="group-item" *ngFor="let group of results; index as ind">
                 <h2 class="group-title">Группа {{ group.groupName }}</h2>
@@ -467,9 +471,258 @@
                 </li>
               </ul>
             </div>
+
+            <div class="matches-container" *ngIf="tourInd === 4">
+              <h2 class="group-title">{{ playOffGroup.groupName }}</h2>
+              <ul class="matches-list">
+                <li class="match-item" *ngFor="let match of playOffGroup.matches; index as i">
+                  <div class="item-team-container">
+                    <div class="title-container left">
+                      <div class="logo-container">
+                        <img [src]="!!match.first_team.logo ? match.first_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ match.first_team.name }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="participants-container left">
+                      <table>
+                        <tbody>
+                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <td>{{ meet.first_profile.name }}</td>
+                            <td
+                              [ngStyle]="{
+                                'color': meet.result === 1 ?
+                                  'green' :
+                                  meet.result === 0 ?
+                                    'grey' :
+                                    'red' 
+                              }"
+                              >{{ meet.first_profile_score }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="score-item">
+                    <span>
+                      {{ match.first_team_score }} vs {{ match.second_team_score }}
+                    </span>
+                  </div>
+                  <div class="item-team-container">
+                    <div class="title-container">
+                      <div class="logo-container">
+                        <img [src]="!!match.second_team.logo ? match.second_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ match.second_team.name }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="participants-container right">
+                      <table>
+                        <tbody>
+                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <td>{{ meet.second_profile.name }}</td>
+                            <td
+                              [ngStyle]="{
+                                'color': meet.result === 2 ?
+                                  'green' :
+                                  meet.result === 0 ?
+                                    'grey' :
+                                    'red'
+                              }"
+                              >{{ meet.second_profile_score }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="matches-container" *ngIf="tourInd === 5">
+              <h2 class="group-title">{{ semifinalGroup.groupName }}</h2>
+              <ul class="matches-list">
+                <li class="match-item" *ngFor="let match of semifinalGroup.matches; index as i">
+                  <div class="item-team-container">
+                    <div class="title-container left">
+                      <div class="logo-container">
+                        <img [src]="!!match.first_team.logo ? match.first_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ match.first_team.name }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="participants-container left">
+                      <table>
+                        <tbody>
+                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <td>{{ meet.first_profile.name }}</td>
+                            <td
+                              [ngStyle]="{
+                                'color': meet.result === 1 ?
+                                  'green' :
+                                  meet.result === 0 ?
+                                    'grey' :
+                                    'red' 
+                              }"
+                              >{{ meet.first_profile_score }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="score-item">
+                    <span>
+                      {{ match.first_team_score }} vs {{ match.second_team_score }}
+                    </span>
+                  </div>
+                  <div class="item-team-container">
+                    <div class="title-container">
+                      <div class="logo-container">
+                        <img [src]="!!match.second_team.logo ? match.second_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ match.second_team.name }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="participants-container right">
+                      <table>
+                        <tbody>
+                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <td>{{ meet.second_profile.name }}</td>
+                            <td
+                              [ngStyle]="{
+                                'color': meet.result === 2 ?
+                                  'green' :
+                                  meet.result === 0 ?
+                                    'grey' :
+                                    'red'
+                              }"
+                              >{{ meet.second_profile_score }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="matches-container" *ngIf="tourInd === 6">
+              <ul class="matches-list">
+                <li class="match-item final" *ngFor="let match of finalGroup.matches; index as i">
+                  <h2 class="match-title">{{ i === 0 ? 'Финал' : '3 место' }}</h2>
+                  <div class="match-details">
+                    <div class="item-team-container">
+                      <div class="title-container left">
+                        <div class="logo-container">
+                          <img [src]="!!match.first_team.logo ? match.first_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                        </div>
+                        <div class="team-container">
+                          <span class="team-name">
+                            {{ match.first_team.name }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="participants-container left">
+                        <table>
+                          <tbody>
+                            <tr *ngFor="let meet of match.meets; index as pr_ind">
+                              <td>{{ meet.first_profile.name }}</td>
+                              <td
+                                [ngStyle]="{
+                                  'color': meet.result === 1 ?
+                                    'green' :
+                                    meet.result === 0 ?
+                                      'grey' :
+                                      'red' 
+                                }"
+                                >{{ meet.first_profile_score }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="score-item">
+                      <span>
+                        {{ match.first_team_score }} vs {{ match.second_team_score }}
+                      </span>
+                    </div>
+                    <div class="item-team-container">
+                      <div class="title-container">
+                        <div class="logo-container">
+                          <img [src]="!!match.second_team.logo ? match.second_team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                        </div>
+                        <div class="team-container">
+                          <span class="team-name">
+                            {{ match.second_team.name }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="participants-container right">
+                        <table>
+                          <tbody>
+                            <tr *ngFor="let meet of match.meets; index as pr_ind">
+                              <td>{{ meet.second_profile.name }}</td>
+                              <td
+                                [ngStyle]="{
+                                  'color': meet.result === 2 ?
+                                    'green' :
+                                    meet.result === 0 ?
+                                      'grey' :
+                                      'red'
+                                }"
+                                >{{ meet.second_profile_score }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </li>
       </ul>
+    </div>
+
+    <div class="tours-list-container" *ngIf="activeTab === 'results'">
+      <div class="matches-container" *ngIf="!!resultTeams">
+        <ul class="matches-list results">
+          <li class="match-item final" *ngFor="let team of resultTeams; index as i">
+            <h2 class="match-title">{{i+1}} место: {{ team.name }}</h2>
+            <div class="match-details results">
+              <div class="item-team-container">
+                <div class="title-container">
+                  <div class="logo-container">
+                    <img [src]="!!team.logo ? team.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                  </div>
+                </div>
+                <div class="participants-container right">
+                  <table>
+                    <tbody>
+                      <tr *ngFor="let profile of team.profiles; index as pr_ind">
+                        <td>{{ profile.name }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- <div class="groups-list">
@@ -620,7 +873,7 @@
                 </div> -->
                 <div class="team-container">
                   <span class="team-name">
-                    {{ item.name }}
+                    {{ getShortName(item.name) }}
                   </span>
                   <span class="person-name">{{ item.profile.name }}</span>
                 </div>

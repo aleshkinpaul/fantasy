@@ -6,15 +6,15 @@ import { DataService } from '../../service/data.service';
 import { Observable } from '@apollo/client';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
-  selector: 'app-league-page',
-  templateUrl: './league-page.component.html',
-  styleUrls: ['./league-page.component.scss']
+  selector: 'app-league-h2h-page',
+  templateUrl: './league-h2h-page.component.html',
+  styleUrls: ['./league-h2h-page.component.scss']
 })
-export class LeaguePageComponent implements OnInit {
+export class LeagueH2HPageComponent implements OnInit {
   private data;
   public profiles;
   public consts;
@@ -26,6 +26,12 @@ export class LeaguePageComponent implements OnInit {
   public squadsDetails$ = this.squadsDetails.asObservable();
 	public tours = new BehaviorSubject<any[]>([])
   public tours$ = this.tours.asObservable();
+  public activeTabs = {
+    tabId: 1,
+    confId: 0,
+    confTabId: 1,
+    tourId: 1
+  }
 
   public teamsArr = [];
   public allSquads = [];
@@ -39,6 +45,7 @@ export class LeaguePageComponent implements OnInit {
   private maxResultValue = 1;
   private minResultValue = 1;
   public playersRatingArr = [];
+  private drawGap = 0;
 
   public isLoading$?: Observable<boolean>;
   public windowWidth: number = 1400;
@@ -48,6 +55,7 @@ export class LeaguePageComponent implements OnInit {
     public service: DataService, 
     private http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router,
     public loader: LoaderService
   ) {}
 
@@ -73,6 +81,7 @@ export class LeaguePageComponent implements OnInit {
           x.type === this.route.snapshot.url[0].path
           && ( x.yearStart === yearParam || !yearParam )
         );
+        this.drawGap = this.consts.drawGap || 0; 
         this.teams = teams;
 
         const sources = [];
@@ -86,77 +95,12 @@ export class LeaguePageComponent implements OnInit {
         .subscribe({
           next: ([squads, squads_2]) => {
               this.squads = squads;
-              if (!!squads_2) console.log('squads_2: ', squads_2);
 
               this.lastTour = Object.keys(this.squads.data.tours).length;
+              
+              this.updateTabs();
 
               this.playersArr = Object.values(this.squads.data.players).map(player => player.id);
-
-              if (!!squads_2) {
-                Object.values(this.squads.data.players)
-                .forEach(player => {
-                  // results
-                  Object.values(player.team.results_by_tour)
-                  .forEach((result, ind) => {
-                    const tourCount = Object.keys(squads_2.data.players[player.id].team.results_by_tour).length;
-                    result.total_score = (+result.total_score + +squads_2.data.players[player.id].team.results_by_tour[tourCount.toString()].total_score).toString();
-                    player.team.results_by_tour[this.lastTour+ind+1] = result;
-                  });
-                  
-                  Object.values(squads_2.data.players[player.id].team.results_by_tour)
-                  .forEach((result, ind) => {
-                    player.team.results_by_tour[ind+1] = result;
-                  });
-                  
-                  // rosters
-                  Object.values(player.team.rosters_by_tour)
-                  .forEach((roster, ind) => {
-                    const tourCount = Object.keys(squads_2.data.players[player.id].team.rosters_by_tour).length;
-                    roster.total_score = (+roster.total_score + +squads_2.data.players[player.id].team.rosters_by_tour[tourCount.toString()].total_score).toString();
-                    player.team.rosters_by_tour[this.lastTour+ind+1] = roster;
-                  });
-                  
-                  Object.values(squads_2.data.players[player.id].team.rosters_by_tour)
-                  .forEach((roster, ind) => {
-                    player.team.rosters_by_tour[ind+1] = roster;
-                  });
-                });
-
-                // tours
-                Object.values(this.squads.data.tours)
-                .forEach((tour, ind) => {
-                  this.squads.data.tours[this.lastTour+ind+1] = {
-                    ...tour,
-                    number: (this.lastTour+ind+1).toString(),
-                  }
-                  
-                  Object.values(squads_2.data.tours)
-                  .forEach((tour, ind) => {
-                    this.squads.data.tours[ind+1] = tour;
-                  });
-                });
-
-                Object.values(squads_2.data.players)
-                  .filter(player => !this.playersArr.includes(player.id))
-                  .map(player => {
-                    console.log('=== OLD:', player);
-                    const resultsObj = {};
-
-                    Object.values(player.team.results_by_tour).forEach((result, ind) => {
-                      resultsObj[this.lastTour+ind+1] = result;
-                    })                    
-
-                    console.log('resultsObj', resultsObj);
-                    
-                    
-                    this.squads.data.players.push(resultsObj);
-                  });
-                  
-                this.playersArr = Object.values(this.squads.data.players).map(player => player.id);
-                console.log('this.playersArr: ', this.playersArr);
-              }
-
-              this.lastTour = Object.keys(this.squads.data.tours).length;
               
               console.log('this.squads.data.tours', this.squads.data.tours, this.lastTour);
 
@@ -182,6 +126,85 @@ export class LeaguePageComponent implements OnInit {
 
               this.calcRating();
               console.log('squads!!!', this.squads);
+
+              const squadDetailsValue = [];
+
+              this.consts.stages.forEach((stage, stageInd) => {
+                const stageSquadsObj = [];
+
+                if (this.lastTour >= stage.firstTour)
+                  stage.leagues.forEach((league, leagueInd) => {
+                    const profiles = league.profiles;
+                    league.profilesDetails = profiles.map(x => {
+                      const profileInfo = this.profiles.find(profile => profile.id === x);
+                      profileInfo.team = this.squads.data.players[x].team;
+                      profileInfo.results = {
+                        wins: 0,
+                        draws: 0,
+                        loses: 0,
+                        points: 0,
+                        fo: 0,
+                        missed_fo: 0
+                      };
+                      return profileInfo;
+                    });
+
+                    const matches = league.matches;
+                    league.matchesByTours = [];
+                    for (let i = 0; i < Object.keys(matches).length; i++) {
+                      league.matchesByTours.push(matches[i + 1])
+                    }
+
+                    console.log('league.profilesDetails', league.profilesDetails);
+                    for (let i = 0; i < this.lastTour; i++) {  
+                      matches[i + 1].forEach(match => {
+                        match.home_score = +this.squads.data.players[match.home].team.results_by_tour[i + 1].tour_score;
+                        match.away_score = +this.squads.data.players[match.away].team.results_by_tour[i + 1].tour_score;
+                        match.result = Math.abs(match.home_score - match.away_score) <= this.drawGap ? 0 :
+                          match.home_score > match.away_score ? 1 : 2
+
+                        const homeProfile = league.profilesDetails.find(x => x.id === match.home);
+                        const awayProfile = league.profilesDetails.find(x => x.id === match.away);
+                        
+                        homeProfile.results.fo += match.home_score;
+                        homeProfile.results.missed_fo += match.away_score;
+                        homeProfile.results.diff_fo = homeProfile.results.fo - homeProfile.results.missed_fo;
+                        
+                        awayProfile.results.fo += match.away_score;
+                        awayProfile.results.missed_fo += match.home_score;
+                        awayProfile.results.diff_fo = awayProfile.results.fo - awayProfile.results.missed_fo;
+
+                        if (match.result === 0) {
+                          homeProfile.results.draws += 1
+                          awayProfile.results.draws += 1
+
+                          homeProfile.results.points += 1
+                          awayProfile.results.points += 1
+                        }
+
+                        if (match.result === 1) {
+                          homeProfile.results.wins += 1
+                          awayProfile.results.loses += 1
+
+                          homeProfile.results.points += 3
+                        }
+
+                        if (match.result === 2) {
+                          awayProfile.results.wins += 1
+                          homeProfile.results.loses += 1
+
+                          awayProfile.results.points += 3
+                        }
+                      })
+
+                      console.log('sorted', league.profilesDetails.sort(this.sortStandings));
+                      
+                      league.profilesDetails = Object.assign([], league.profilesDetails.sort(this.sortStandings))
+                    }
+
+                    console.log(leagueInd, league)
+                  });
+              });
 
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
@@ -304,6 +327,98 @@ export class LeaguePageComponent implements OnInit {
     }});
   }
 
+  setTabId(ind) {
+    this.activeTabs.tabId = ind;
+    this.setQueryParam({ tabId: ind })
+  }
+
+  setConfId(ind) {
+    this.activeTabs.confId = ind;
+    this.setQueryParam({ confId: ind })
+  }
+
+  setConfTabId(ind) {
+    this.activeTabs.confTabId = ind;
+    this.setQueryParam({ confTabId: ind })
+  }
+
+  setTourId(ind) {
+    this.activeTabs.tourId = ind;
+    this.setQueryParam({ tourId: ind })
+  }
+
+  updateTabs() {    
+    const tabIdParam = +this.route.snapshot.queryParams?.tabId || '';
+    const confIdParam = +this.route.snapshot.queryParams?.confId || '';
+    const confTabIdParam = +this.route.snapshot.queryParams?.confTabId || '';
+    const activeTourIdParam = +this.route.snapshot.queryParams?.tourId || '';
+
+    if (!!confIdParam) this.activeTabs.confId = confIdParam;
+    if (!!confTabIdParam) this.activeTabs.confTabId = confTabIdParam;
+    if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
+    this.activeTabs.tourId = !!activeTourIdParam ? activeTourIdParam : this.lastTour;
+  }
+
+  sortStandings(a, b) {
+    if (a.results.points > b.results.points) return -1;
+    if (a.results.points < b.results.points) return 1;
+    
+    if (a.results.diff_fo > b.results.diff_fo) return -1;
+    if (a.results.diff_fo < b.results.diff_fo) return 1;
+    
+    if (a.results.fo > b.results.fo) return -1;
+    if (a.results.fo < b.results.fo) return 1;
+
+    return 0;
+  }
+
+  getProfileRating(profileId) {
+    const profile = this.squadsDetails.value.find(x => x.id === profileId);
+    return profile.rating;
+  }
+
+  setQueryParam(newParam) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: newParam,
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
+  }
+
+  getTeamLogo(profileId) {
+    return this.profiles.find(profile => profile.id === profileId).logo;
+  }
+
+  getTeamTitle(profileId) {
+    return this.profiles.find(profile => profile.id === profileId).team.title;
+  }
+
+  getProfileInfo(profileId) {
+    return this.profiles.find(profile => profile.id === profileId);
+  }
+
+  getOpponentTeamLogo(matchesArr, profileId) {
+    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
+    const opponentId = match.home === profileId ? match.away : match.home;
+    return this.profiles.find(profile => profile.id === opponentId).logo;
+  }
+
+  getOpponentTeamTitle(matchesArr, profileId) {
+    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
+    const opponentId = match.home === profileId ? match.away : match.home;
+    return this.profiles.find(profile => profile.id === opponentId).team.title;
+  }
+
+  getMatchResult(matchesArr, profileId) {
+    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
+    const opponentId = match.home === profileId ? match.away : match.home;
+    return match.result === 0 ? 0 :
+      match.home === profileId ?
+        (match.result === 1 ? 1 : 2) :
+        (match.result === 2 ? 1 : 2)
+  }
+
   sortByTransfersCount(obj1, obj2) {
     return obj2.transfers_count - obj1.transfers_count;
   }
@@ -397,10 +512,7 @@ export class LeaguePageComponent implements OnInit {
 
   getMinMaxInTour(tourNum) {
     const tourResults = Object.values(this.squads.data.players)
-      .map(player => {
-        console.log('player', player, tourNum, player.team, player.team.results_by_tour, player.team.results_by_tour[tourNum.toString()]);
-        return player.team.results_by_tour[tourNum.toString()].tour_score
-      });
+      .map(player => player.team.results_by_tour[tourNum.toString()].tour_score);
 
     tourResults.sort(this.sortCustom);
 

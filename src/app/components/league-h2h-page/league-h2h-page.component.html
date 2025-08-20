@@ -1,0 +1,375 @@
+<div class="main-container">
+  <ul class="nav-list">
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 1}" (click)="setTabId(1)" id="stage_0">Apertura</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" id="stage_1">Clausura</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 3}" (click)="setTabId(3)" id="prizes">Призы</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 100}" (click)="setTabId(100)" id="all">Общий зачет</li>
+  </ul>
+  <ul class="nav-list" *ngIf="activeTabs.tabId === 1">
+    <li
+      *ngFor="let item of this.consts.stages[0].leagues; index as leagueInd"
+      class="nav-item"
+      [ngClass]="{'active': activeTabs.confId === leagueInd}"
+      [id]="'conf_' + leagueInd"
+      (click)="setConfId(leagueInd)"
+    >{{ item.name }}</li>
+  </ul>
+  <ul class="nav-list" *ngIf="activeTabs.tabId === 1">
+    <li class="nav-item" [ngClass]="{'active': activeTabs.confTabId === 1}" (click)="setConfTabId(1)" id="table">Таблица</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.confTabId === 2}" (click)="setConfTabId(2)" id="schedule">Расписание</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.confTabId === 3}" (click)="setConfTabId(3)" id="matches">Матчи</li>
+  </ul>
+  <div *ngIf="activeTabs.tabId > 1 && activeTabs.tabId < 100">Coming soon...</div>
+  <div *ngIf="activeTabs.tabId === 1">
+    <div
+      class="leagues-container"
+      *ngFor="let item of this.consts.stages[0].leagues; index as leagueInd"
+    >
+      <div *ngIf="activeTabs.confId === leagueInd">
+        <h2 class="h2-title">{{ item.name }}</h2>
+
+        <div *ngIf="activeTabs.confTabId === 1">
+          <table class="table standings" *ngIf="!(isLoading$ | async)">
+            <thead class="table-header">
+              <tr>
+                <th>#</th>
+                <th class="align-left">Команда</th>
+                <th class="sub-info">St</th>
+                <th class="sub-info" *ngIf="windowWidth > 600">T</th>
+                <th class="sub-info tour-info">W</th>
+                <th class="sub-info tour-info">D</th>
+                <th class="sub-info tour-info">L</th>
+                <th class="sub-info tour-info">+/-</th>
+                <th class="sub-info tour-info">GD</th>
+                <th class="sub-info tour-info">P</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr *ngFor="let profile of item.profilesDetails; index as i" class="table-row">
+                <td [ngClass]="{
+                  'first':    i + 1 === 1,
+                  'second':   i + 1 === 2,
+                  'third':    i + 1 === 3,
+                  'special':  i + 1 > 3 && i + 1 <= 8
+                }">
+                  <span>
+                    {{ i + 1 }}
+                  </span>
+                </td>
+                <td class="item-name-container">
+                  <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+profile.team.id" class="team-link" target="_blank">
+                    <div class="item-team-container">
+                      <div class="logo-container">
+                        <img [src]="!!profile.logo ? profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ profile.team.title }}
+                        </span>
+                        <span class="person-name">{{ profile.name }}</span>
+                      </div>
+                    </div>
+                  </a>
+                </td>
+                <td class="sub-info"
+                  [ngStyle]="{
+                    'border-color': getRgbForTour(getProfileRating(profile.id), playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0]),
+                    'color': getRgbForTour(getProfileRating(profile.id), playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0])
+                  }"
+                >{{ getProfileRating(profile.id) }}</td>
+                <td class="sub-info">{{ lastTour }}</td>
+                <td class="sub-info">{{ profile.results.wins }}</td>
+                <td class="sub-info">{{ profile.results.draws }}</td>
+                <td class="sub-info">{{ profile.results.loses }}</td>
+                <td class="sub-info">{{ profile.results.fo }}-{{ profile.results.missed_fo }}</td>
+                <td class="sub-info">{{ profile.results.diff_fo }}</td>
+                <td class="sub-info">{{ profile.results.points }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="activeTabs.confTabId === 2">
+          <table class="table schedule" *ngIf="!(isLoading$ | async)">
+            <thead class="table-header">
+              <tr>
+                <th class="align-left">Команда</th>
+                <th class="sub-info" *ngFor="let matches of item.matchesByTours; index as i">{{ i + 1 }}</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr *ngFor="let profile of item.profilesDetails; index as i" class="table-row">
+                <td class="item-name-container">
+                  <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+profile.team.id" class="team-link" target="_blank">
+                    <div class="item-team-container">
+                      <div class="logo-container">
+                        <img [src]="!!profile.logo ? profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                      </div>
+                      <div class="team-container">
+                        <span class="team-name">
+                          {{ profile.team.title }}
+                        </span>
+                        <span class="person-name">{{ profile.name }}</span>
+                      </div>
+                    </div>
+                  </a>
+                </td>
+                <td class="sub-info" *ngFor="let tourMatches of item.matchesByTours; index as tourInd">
+                  <div class="item-team-container">
+                    <div
+                      class="logo-container"
+                      [ngClass]="{
+                        'green-bg':  getMatchResult(tourMatches, profile.id) === 1 && tourInd < lastTour,
+                        'red-bg':    getMatchResult(tourMatches, profile.id) === 2 && tourInd < lastTour,
+                        'grey-bg':   getMatchResult(tourMatches, profile.id) === 0 && tourInd < lastTour
+                      }">
+                      <img
+                        class="logo-img opponent"
+                        [src]="!!getOpponentTeamLogo(tourMatches, profile.id) ?
+                          getOpponentTeamLogo(tourMatches, profile.id) : 'assets/logos/default.png'"
+                        [alt]="!!getOpponentTeamTitle(tourMatches, profile.id) ?
+                          getOpponentTeamTitle(tourMatches, profile.id) : ''"
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="matches-container" *ngIf="activeTabs.confTabId === 3">
+          <ul class="tours-list">
+            <li
+              *ngFor="let tourMatches of item.matchesByTours; index as i"
+              class="tour-item"
+              [ngClass]="{'active': activeTabs.tourId === i+1}"
+              (click)="setTourId(i+1)"
+            >{{ i + 1 }}</li>
+          </ul>
+          <div *ngFor="let tourMatches of item.matchesByTours; index as i">
+            <ul class="matches-list" *ngIf="activeTabs.tourId === i+1">
+              <li class="match-item" *ngFor="let match of tourMatches">
+                <div class="team home-team">
+                  <div class="name-container">
+                    <p class="team-name">{{ getTeamTitle(match.home) }}</p>
+                    <p class="player-name">{{ getProfileInfo(match.home).name }}</p>
+                  </div>
+                  <div class="logo-container">
+                    <img
+                      class="logo-img opponent"
+                      [src]="!!getTeamLogo(match.home) ?
+                        getTeamLogo(match.home) : 'assets/logos/default.png'"
+                      [alt]="!!getTeamTitle(match.home) ?
+                        getTeamTitle(match.home) : ''"
+                    >
+                  </div>
+                  <span
+                    class="result"
+                    [ngClass]="{
+                      'green-text':  getMatchResult(tourMatches, match.home) === 1 && i < lastTour,
+                      'red-text':    getMatchResult(tourMatches, match.home) === 2 && i < lastTour,
+                      'grey-text':   getMatchResult(tourMatches, match.home) === 0 && i < lastTour
+                    }">
+                    {{ match.home_score }}
+                  </span>
+                </div>
+                <span>-</span>
+                <div class="team away-team">
+                  <div class="name-container">
+                    <p class="team-name">{{ getTeamTitle(match.away) }}</p>
+                    <p class="player-name">{{ getProfileInfo(match.away).name }}</p>
+                  </div>
+                  <div class="logo-container">
+                    <img
+                      class="logo-img opponent"
+                      [src]="!!getTeamLogo(match.away) ?
+                        getTeamLogo(match.away) : 'assets/logos/default.png'"
+                      [alt]="!!getTeamTitle(match.away) ?
+                        getTeamTitle(match.away) : ''"
+                    >
+                  </div>
+                  <span 
+                    class="result"
+                    [ngClass]="{
+                      'green-text':  getMatchResult(tourMatches, match.home) === 2 && i < lastTour,
+                      'red-text':    getMatchResult(tourMatches, match.home) === 1 && i < lastTour,
+                      'grey-text':   getMatchResult(tourMatches, match.home) === 0 && i < lastTour
+                    }">
+                    {{ match.away_score }}
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTabs.tabId === 100">
+    <table class="table standings" *ngIf="!(isLoading$ | async)">
+      <thead class="table-header">
+        <tr>
+          <th>#</th>
+          <th class="align-left">Команда</th>
+          <th class="sub-info">St</th>
+          <th class="sub-info" *ngIf="windowWidth > 600">Тур</th>
+          <th class="sub-info">РПМ</th>
+          <th class="sub-info medals-info">🥇</th>
+          <th class="sub-info medals-info">🥈</th>
+          <th class="sub-info medals-info">🥉</th>
+          <th class="sub-info" *ngIf="windowWidth > 600">🏅</th>
+          <th class="sub-info tour-info" *ngIf="lastTour > 4">{{ squads.data.tours[lastTour - 4].number }}</th>
+          <th class="sub-info tour-info" *ngIf="lastTour > 3">{{ squads.data.tours[lastTour - 3].number }}</th>
+          <th class="sub-info tour-info" *ngIf="lastTour > 2">{{ squads.data.tours[lastTour - 2].number }}</th>
+          <th class="sub-info tour-info" *ngIf="lastTour > 1">{{ squads.data.tours[lastTour - 1].number }}</th>
+          <th class="sub-info tour-info">{{ squads.data.tours[lastTour].number }}</th>
+          <th class="sub-info">Очки</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <tr *ngFor="let item of squadsDetails.value; index as i" class="table-row">
+          <td [ngClass]="{
+            'first':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 1,
+            'second':   (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 2,
+            'third':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 3,
+            'special':  (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === consts.special_pos
+          }">
+            <span>
+              {{ getPlaceAfterTour(item.id, lastTour) }}
+            </span>
+            <span class="diff-elem"
+              [ngClass]="{
+                'pos-diff': item.diff > 0,
+                'neg-diff': item.diff < 0
+              }"
+            >{{
+              item.diff > 0 ?
+                '+'+item.diff : 
+                item.diff === 0 ? 
+                  '' : 
+                  item.diff
+            }}</span>
+          </td>
+          <td class="item-name-container">
+            <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+item.team_id" class="team-link" target="_blank">
+              <div class="item-team-container">
+                <div class="logo-container">
+                  <img [src]="!!item.profile.logo ? item.profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
+                </div>
+                <div class="team-container">
+                  <span class="team-name">
+                    {{ item.name }}
+                  </span>
+                  <span class="person-name">{{ item.profile.name }}</span>
+                </div>
+              </div>
+            </a>
+          </td>
+          <td class="sub-info"
+            [ngStyle]="{
+              'border-color': getRgbForTour(item.rating, playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0]),
+              'color': getRgbForTour(item.rating, playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0])
+            }"
+          >{{ item.rating }}</td>
+          <td class="sub-info" *ngIf="windowWidth > 600">{{ lastTour }}</td>
+          <td class="sub-info">{{ item.rating_of_prize_positions }}</td>
+          <td class="sub-info">{{ item.gold_medals }}</td>
+          <td class="sub-info">{{ item.silver_medals }}</td>
+          <td class="sub-info">{{ item.bronze_medals }}</td>
+          <td class="sub-info" *ngIf="windowWidth > 600">{{ item.medals_count }}</td>
+          <td class="sub-info tour-info" *ngIf="lastTour > 4">
+            <span class="score"
+              [ngClass]="{
+                'first-score': getPlaceInTour(item.id, lastTour - 4) === 1,
+                'second-score': getPlaceInTour(item.id, lastTour - 4) === 2,
+                'third-score': getPlaceInTour(item.id, lastTour - 4) === 3,
+              }"
+              [ngStyle]="{
+                'border-color': getRgbForTour(item.info.team.results_by_tour[lastTour - 4].tour_score, squads.data.tours[lastTour - 4].max, squads.data.tours[lastTour - 4].min),
+                'color': getRgbForTour(item.info.team.results_by_tour[lastTour - 4].tour_score, squads.data.tours[lastTour - 4].max, squads.data.tours[lastTour - 4].min)
+              }"
+            >
+              {{ item.info.team.results_by_tour[lastTour - 4].tour_score || 0 }}
+            </span>
+          </td>
+          <td class="sub-info tour-info" *ngIf="lastTour > 3">
+            <span class="score"
+              [ngClass]="{
+                'first-score': getPlaceInTour(item.id, lastTour - 3) === 1,
+                'second-score': getPlaceInTour(item.id, lastTour - 3) === 2,
+                'third-score': getPlaceInTour(item.id, lastTour - 3) === 3,
+              }"
+              [ngStyle]="{
+                'border-color': getRgbForTour(item.info.team.results_by_tour[lastTour - 3].tour_score, squads.data.tours[lastTour - 3].max, squads.data.tours[lastTour - 3].min),
+                'color': getRgbForTour(item.info.team.results_by_tour[lastTour - 3].tour_score, squads.data.tours[lastTour - 3].max, squads.data.tours[lastTour - 3].min)
+              }"
+            >
+              {{ item.info.team.results_by_tour[lastTour - 3].tour_score || 0 }}
+            </span>
+          </td>
+          <td class="sub-info tour-info" *ngIf="lastTour > 2">
+            <span class="score"
+              [ngClass]="{
+                'first-score': getPlaceInTour(item.id, lastTour - 2) === 1,
+                'second-score': getPlaceInTour(item.id, lastTour - 2) === 2,
+                'third-score': getPlaceInTour(item.id, lastTour - 2) === 3,
+              }"
+              [ngStyle]="{
+                'border-color': getRgbForTour(item.info.team.results_by_tour[lastTour - 2].tour_score, squads.data.tours[lastTour - 2].max, squads.data.tours[lastTour - 2].min),
+                'color': getRgbForTour(item.info.team.results_by_tour[lastTour - 2].tour_score, squads.data.tours[lastTour - 2].max, squads.data.tours[lastTour - 2].min)
+              }"
+            >
+              {{ item.info.team.results_by_tour[lastTour - 2].tour_score || 0 }}
+            </span>
+          </td>
+          <td class="sub-info tour-info" *ngIf="lastTour > 1">
+            <span class="score"
+              [ngClass]="{
+                'first-score': getPlaceInTour(item.id, lastTour - 1) === 1,
+                'second-score': getPlaceInTour(item.id, lastTour - 1) === 2,
+                'third-score': getPlaceInTour(item.id, lastTour - 1) === 3,
+              }"
+              [ngStyle]="{
+                'border-color': getRgbForTour(item.info.team.results_by_tour[lastTour - 1].tour_score, squads.data.tours[lastTour - 1].max, squads.data.tours[lastTour - 1].min),
+                'color': getRgbForTour(item.info.team.results_by_tour[lastTour - 1].tour_score, squads.data.tours[lastTour - 1].max, squads.data.tours[lastTour - 1].min)
+              }"
+            >
+              {{ item.info.team.results_by_tour[lastTour - 1].tour_score || 0 }}
+            </span>
+          </td>
+          <td class="sub-info tour-info">
+            <span class="score"
+              [ngClass]="{
+                'first-score': getPlaceInTour(item.id, lastTour) === 1,
+                'second-score': getPlaceInTour(item.id, lastTour) === 2,
+                'third-score': getPlaceInTour(item.id, lastTour) === 3,
+              }"
+              [ngStyle]="{
+                'border-color': getRgbForTour(item.info.team.results_by_tour[lastTour].tour_score, squads.data.tours[lastTour].max, squads.data.tours[lastTour].min),
+                'color': getRgbForTour(item.info.team.results_by_tour[lastTour].tour_score, squads.data.tours[lastTour].max, squads.data.tours[lastTour].min)
+              }"
+            >
+              {{ item.info.team.results_by_tour[lastTour].tour_score || 0 }}
+            </span>
+          </td>
+          <td class="sub-info" [ngClass]="{
+            'first':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 1,
+            'second':   (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 2,
+            'third':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 3,
+            'special':  (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === consts.special_pos
+          }">
+            <span>
+              {{ item.score }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-default-loader *ngIf="(isLoading$ | async)" class="loading-spinner-container"></app-default-loader>
+  <!-- <app-default-loader class="loading-spinner-container" [@inOutAnimation]></app-default-loader> -->
+</div>
+
