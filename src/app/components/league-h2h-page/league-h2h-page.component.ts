@@ -33,6 +33,8 @@ export class LeagueH2HPageComponent implements OnInit {
     tourId: 1
   }
 
+  public testInd: number = 0;
+
   public teamsArr = [];
   public allSquads = [];
   public lastTour: number = 1;
@@ -197,9 +199,9 @@ export class LeagueH2HPageComponent implements OnInit {
                         }
                       })
 
-                      console.log('sorted', league.profilesDetails.sort(this.sortStandings));
+                      console.log('sorted', league.profilesDetails.sort(this.sortStandings.bind(this)));
                       
-                      league.profilesDetails = Object.assign([], league.profilesDetails.sort(this.sortStandings))
+                      league.profilesDetails = Object.assign([], league.profilesDetails.sort(this.sortStandings.bind(this)))
                     }
 
                     console.log(leagueInd, league)
@@ -360,8 +362,35 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   sortStandings(a, b) {
+
     if (a.results.points > b.results.points) return -1;
     if (a.results.points < b.results.points) return 1;
+
+    const matchLeague = this.consts.stages[0].leagues.find((league, leagueInd) => {
+      const schId = Object.keys(league.schedule).find(id => id === a.id);
+      return !!schId;
+    })
+
+    let abMatch = undefined;
+    for (let i = 0; i < matchLeague.matchesByTours.length; i++) {
+      const arr = matchLeague.matchesByTours;
+      const match = arr[i].find(match =>
+        (match.home === a.id && match.away === b.id)
+        || (match.home === b.id && match.away === a.id)
+      )
+
+      if (!!match) {
+        abMatch = match;
+        break;
+      }
+    }
+
+    if (!!abMatch.result) {
+      if (abMatch.home === a.id && abMatch.result === 1) return -1;
+      if (abMatch.home === a.id && abMatch.result === 2) return 1;
+      if (abMatch.away === a.id && abMatch.result === 1) return 1;
+      if (abMatch.away === a.id && abMatch.result === 2) return -1;
+    }
     
     if (a.results.diff_fo > b.results.diff_fo) return -1;
     if (a.results.diff_fo < b.results.diff_fo) return 1;
@@ -579,7 +608,7 @@ export class LeagueH2HPageComponent implements OnInit {
           1 :
           standingsArr[ind-1].score === player.score ? 
             standingsArr[ind-1].position : 
-            ind + 1;
+            standingsArr[ind-1].position + 1;
     });
 
     return standingsArr.find(player => player.id === id).position;

@@ -28,14 +28,14 @@
       <div *ngIf="activeTabs.confId === leagueInd">
         <h2 class="h2-title">{{ item.name }}</h2>
 
-        <div *ngIf="activeTabs.confTabId === 1">
+        <div class="standings-container" *ngIf="activeTabs.confTabId === 1">
           <table class="table standings" *ngIf="!(isLoading$ | async)">
             <thead class="table-header">
               <tr>
                 <th>#</th>
                 <th class="align-left">Команда</th>
+                <th class="sub-info">T</th>
                 <th class="sub-info">St</th>
-                <th class="sub-info" *ngIf="windowWidth > 600">T</th>
                 <th class="sub-info tour-info">W</th>
                 <th class="sub-info tour-info">D</th>
                 <th class="sub-info tour-info">L</th>
@@ -71,13 +71,13 @@
                     </div>
                   </a>
                 </td>
+                <td class="sub-info">{{ lastTour }}</td>
                 <td class="sub-info"
                   [ngStyle]="{
                     'border-color': getRgbForTour(getProfileRating(profile.id), playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0]),
                     'color': getRgbForTour(getProfileRating(profile.id), playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0])
                   }"
                 >{{ getProfileRating(profile.id) }}</td>
-                <td class="sub-info">{{ lastTour }}</td>
                 <td class="sub-info">{{ profile.results.wins }}</td>
                 <td class="sub-info">{{ profile.results.draws }}</td>
                 <td class="sub-info">{{ profile.results.loses }}</td>
@@ -207,6 +207,21 @@
     </div>
   </div>
 
+  <div *ngIf="activeTabs.tabId === 5">
+    <ul class="prizes-list">
+      <li class="prize-item" *ngFor="let item of this.consts.prizes">
+        <div class="prize-item-container">
+          <div class="prize-id">{{ item.id }}</div>
+          <div class="prize-name">{{ item.name }}</div>
+          <div class="prize-author">{{ item.author }}</div>
+          <div class="prize-condition">{{ item.condition }}</div>
+          <div class="prize-reward">{{ item.reward }}</div>
+          <ul class="nominees-list">Список главных претендентов будет позднее</ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
   <div *ngIf="activeTabs.tabId === 100">
     <table class="table standings" *ngIf="!(isLoading$ | async)">
       <thead class="table-header">
@@ -231,10 +246,10 @@
       <tbody class="table-body">
         <tr *ngFor="let item of squadsDetails.value; index as i" class="table-row">
           <td [ngClass]="{
-            'first':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 1,
-            'second':   (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 2,
-            'third':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 3,
-            'special':  (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === consts.special_pos
+            'first':    getPlaceAfterTour(item.id, lastTour) === 1,
+            'second':   getPlaceAfterTour(item.id, lastTour) === 2,
+            'third':    getPlaceAfterTour(item.id, lastTour) === 3,
+            'special':  getPlaceAfterTour(item.id, lastTour) === consts.special_pos
           }">
             <span>
               {{ getPlaceAfterTour(item.id, lastTour) }}

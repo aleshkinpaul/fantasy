@@ -90,6 +90,7 @@ export class CWCPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const yearParam = +this.route.snapshot.queryParams?.year || '';
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
 
@@ -103,7 +104,7 @@ export class CWCPageComponent implements OnInit {
     ])
     .subscribe({
       next: ([profiles, consts, teams]) => {
-        this.profiles = Object.values(profiles);
+        this.profiles = Object.values(profiles[yearParam]);
         this.consts = consts;
         this.consts = this.consts.league.find(x => x.type === this.route.snapshot.url[0].path);
         this.teams = teams;
@@ -246,6 +247,8 @@ export class CWCPageComponent implements OnInit {
                 result.tours.filter(tour => tour.type === 'group')
                 .forEach((tour, tourInd) => {
                   result.tours[tourInd].matches.forEach(match => {
+                    console.log('addmeet:', match, tourInd);
+                    
                     this.addMeets(match, tourInd);
 
                     if (tour.num <= this.lastTour) {
@@ -555,6 +558,8 @@ export class CWCPageComponent implements OnInit {
       const first_profile = match.first_team.profiles[meetInd];
       const second_profile = match.second_team.profiles[meetInd];
 
+      console.log('meet profiles', first_profile, second_profile);
+      
       const first_profile_score = +this.squads.data.players[first_profile.id].team.results_by_tour[tourInd+1]?.tour_score || 0;
       const second_profile_score = +this.squads.data.players[second_profile.id].team.results_by_tour[tourInd+1]?.tour_score || 0;
 

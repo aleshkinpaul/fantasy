@@ -5,6 +5,10 @@
   font-family: 'Exo2';
   color: #fff;
 
+  .standings-container {
+    overflow-x: scroll;
+  }
+
   .table {
     width: 100%;
     text-align: center;
@@ -167,6 +171,10 @@
           @media (max-width: 450px) {
             width: calc(2 * $row-height - 50px) !important;
           }
+        }
+
+        .sub-info {
+          min-width: 30px;
         }
       }
 
@@ -387,6 +395,7 @@
             .team-container {
               display: flex;
               flex-direction: column;
+              min-width: 125px;
       
               .team-name {
                 display: block;
