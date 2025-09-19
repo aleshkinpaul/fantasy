@@ -9,6 +9,11 @@
   justify-content: center;
   gap: 10px;
 
+  h2 {
+    margin-top: 20px;
+    text-align: center;
+  }
+
   .button {
     padding: 15px 10px;
     width: 20%;
@@ -29,6 +34,10 @@
     &:hover {
       background-color: $main-button-font-color;
       color: $main-button-bg-color;
+    }
+
+    &.archive {
+      filter: grayscale(80%);
     }
   }
 }

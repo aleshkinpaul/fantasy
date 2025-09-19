@@ -83,7 +83,7 @@ export class LeagueH2HPageComponent implements OnInit {
     ])
     .subscribe({
       next: ([profiles, consts, teams]) => {
-        this.profiles = Object.values(profiles[yearParam]);
+        this.profiles = Object.values(profiles[yearParam][this.route.snapshot.url[0].path]);
         this.consts = consts;
         this.consts = this.consts.league.find(x =>
           x.type === this.route.snapshot.url[0].path
@@ -177,7 +177,7 @@ export class LeagueH2HPageComponent implements OnInit {
                       league.matchesByTours.push(matches[i + 1])
                     }
 
-                    // console.log('league.profilesDetails', league.profilesDetails);
+                    console.log('league.profilesDetails', league.profilesDetails, matches);
                     for (let i = 0; i < this.lastTour; i++) {  
                       matches[i + 1].forEach(match => {
                         match.home_score = +this.squads.data.players[match.home].team.results_by_tour[i + 1].tour_score;
@@ -189,6 +189,7 @@ export class LeagueH2HPageComponent implements OnInit {
                         const awayProfile = league.profilesDetails.find(x => x.id === match.away);
                         const matchDiffFo = Math.abs(match.home_score - match.away_score);
 
+                        console.log(i, ': match :', match, homeProfile, awayProfile);
                         homeProfile.results.fo += match.home_score;
                         homeProfile.results.missed_fo += match.away_score;
                         homeProfile.results.diff_fo = homeProfile.results.fo - homeProfile.results.missed_fo;
@@ -325,7 +326,7 @@ export class LeagueH2HPageComponent implements OnInit {
               // общий зачет в баллах
               this.consts.stages.forEach((stage, stageInd) => {
 
-                if (this.lastTour > stage.firstTour)
+                if (this.lastTour >= stage.firstTour)
                   stage.leagues.forEach((league, leagueInd) => {
                     league.profilesDetails.forEach((profile, profileInd) => {
                       const existProfile = this.unitedProfiles.find(unitedProfile => unitedProfile === profile.id);
@@ -338,17 +339,17 @@ export class LeagueH2HPageComponent implements OnInit {
                         existProfile.results.missed_fo += profile.results.missed_fo;
                         existProfile.results.points += profile.results.points;
                         existProfile.results.wins += profile.results.wins;
-                        existProfile.leagues.push(leagueInd);
+                        existProfile.leagues.push(league.name);
                       }
                       else this.unitedProfiles.push(Object.assign({}, {
                         ...profile,
-                        leagues: [leagueInd]
+                        leagues: [league.name]
                       }))
                     })
                   })
               });
 
-              console.log('unitedProfiles', this.unitedProfiles.sort(this.sortStandings.bind(this)));
+              console.log('unitedProfiles', this.route.snapshot.url[0].path, this.unitedProfiles.sort(this.sortStandings.bind(this)));
               
 
               this.playersArr.map(playerId => {
@@ -436,7 +437,7 @@ export class LeagueH2HPageComponent implements OnInit {
             this.service.getData(`${this.consts.tour_link + this.lastTour}`)
               .subscribe(
                 objPlayers => {
-                  // console.log('Игроки: ', Object.values(objPlayers.data.players).filter(player => player.team_id === "7664"));
+                  console.log('Игроки: ', objPlayers);
                   const players = [];
                   this.allSquads.forEach(pl => {
                     const currentObj = players.find(elem => elem.id === pl);
@@ -456,7 +457,7 @@ export class LeagueH2HPageComponent implements OnInit {
                 }       
               );
               
-            this.updatePrizes();
+            if (this.route.snapshot.url[0].path === 'spain') this.updatePrizes();
           },
           error: err => {
             console.error('Ошибка при получении данных:', err);
@@ -490,7 +491,9 @@ export class LeagueH2HPageComponent implements OnInit {
     profiles.forEach(profile => {
       const profileResult = prizesObj.nomineesArr.find(nominee => nominee.profileId === profile.id);
       
-      if (prizeInd === 6 && ["1028890564", "1113514956"].includes(profile.id))
+      console.log('494: ', profile.id);
+
+      if (prizeInd === 6 && ["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id))
         {
           profile.prizes = {};
           profile.team = {};
@@ -499,6 +502,8 @@ export class LeagueH2HPageComponent implements OnInit {
           profile.results.subsCoef = 100;
           profile.results.points = 0;
         }
+
+      console.log('506: ', prizeInd, profile.results);
 
       profile.prizes[prizeInd] = {
         value: 
@@ -538,8 +543,8 @@ export class LeagueH2HPageComponent implements OnInit {
     prizesObj.nomineesArr = this.profiles
       .filter(profile => 
         prizeInd === 6 && profile.id === "1028890564"
-        || prizeInd === 7 && !["1028890564", "1113514956"].includes(profile.id)
-        || !["1028890564", "1113514956"].includes(profile.id) && profile.prizes[prizeInd]?.value > 0
+        || prizeInd === 7 && !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id)
+        || !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id) && profile.prizes[prizeInd]?.value > 0
       )
       .sort(
         (a, b) =>
@@ -566,7 +571,7 @@ export class LeagueH2HPageComponent implements OnInit {
       this.countPrizeNominees(
         prize.id === 6 ?
           this.profiles
-          : this.profiles.filter(profile => !["1028890564", "1113514956"].includes(profile.id)), prize.id
+          : this.profiles.filter(profile => !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id)), prize.id
         , prize.id === 7 ? 
           "213955"
           : prize.id === 10 ?

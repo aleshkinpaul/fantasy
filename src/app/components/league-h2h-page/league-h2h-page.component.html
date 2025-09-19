@@ -1,7 +1,7 @@
 <div class="main-container" *ngIf="!(isLoading$ | async)">
   <ul class="nav-list">
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 1}" (click)="setTabId(1)" id="stage_0">Apertura</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" id="stage_1">Clausura</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 1}" (click)="setTabId(1)" id="stage_0" *ngIf="this.consts.stages.length > 0">{{ this.consts.stages[0].name }}</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" id="stage_1" *ngIf="this.consts.stages.length > 1">{{ this.consts.stages[1].name }}</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 3}" (click)="setTabId(3)" id="prizes">Призы</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 4}" (click)="setTabId(4)" id="prizes">Формат</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 100}" (click)="setTabId(100)" id="all">Общий зачет</li>
@@ -29,6 +29,7 @@
       <div *ngIf="activeTabs.confId === leagueInd">
         <h2 class="h2-title">{{ item.name }}</h2>
 
+        <!-- Таблица конференции -->
         <div class="table-container" *ngIf="activeTabs.confTabId === 1">
           <table class="table standings" *ngIf="!(isLoading$ | async)">
             <thead class="table-header">
@@ -51,7 +52,7 @@
                   'first':    i + 1 === 1,
                   'second':   i + 1 === 2,
                   'third':    i + 1 === 3,
-                  'special':  i + 1 > 3 && i + 1 <= 8
+                  'special':  i + 1 > 3 && i + 1 <= this.consts.stages[0].qualifiedPlaces
                 }">
                   <span>
                     {{ i + 1 }}
@@ -90,6 +91,7 @@
           </table>
         </div>
 
+        <!-- Расписание конференции -->
         <div class="table-container" *ngIf="activeTabs.confTabId === 2">
           <table class="table schedule" *ngIf="!(isLoading$ | async)">
             <thead class="table-header">
@@ -141,6 +143,7 @@
           </table>
         </div>
 
+        <!-- Матчи конференции по турам -->
         <div class="matches-container" *ngIf="activeTabs.confTabId === 3">
           <ul class="tours-list">
             <li
@@ -264,11 +267,12 @@
                 >
                   <div class="nominee-main-container">
                     <div class="team-container">
-                      <div class="icon-container place" [ngSwitch]="nomInd">
-                        <img src="assets/logos/2025/icons/gold-medal.png" *ngSwitchCase="0" [alt]="'logo '+nominee.team.title">
-                        <img src="assets/logos/2025/icons/silver-medal.png" *ngSwitchCase="1" [alt]="'logo '+nominee.team.title">
-                        <img src="assets/logos/2025/icons/bronze-medal.png" *ngSwitchCase="2" [alt]="'logo '+nominee.team.title">
+                      <div class="icon-container place" [ngSwitch]="true">
+                        <img src="assets/logos/2025/icons/gold-medal.png" *ngSwitchCase="nomInd === 0" [alt]="'logo '+nominee.team.title">
+                        <img src="assets/logos/2025/icons/silver-medal.png" *ngSwitchCase="nomInd === 1" [alt]="'logo '+nominee.team.title">
+                        <img src="assets/logos/2025/icons/bronze-medal.png" *ngSwitchCase="nomInd === 2" [alt]="'logo '+nominee.team.title">
                         <img src="assets/logos/2025/icons/medal.png" *ngSwitchDefault [alt]="'logo '+nominee.team.title">
+                        <div class="place-number" *ngSwitchCase="nomInd > 4">{{ nomInd + 1 }}</div>
                       </div>
                       <div class="icon-container">
                         <img [src]="nominee.logo" [alt]="'logo '+nominee.team.title">
@@ -362,9 +366,9 @@
                 <div class="logo-container">
                   <img [src]="!!profile.logo ? profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
                   <div class="conference-label-container" [ngSwitch]="profile.leagues[0]">
-                    <span class="label blue-label" *ngSwitchCase="0">КА</span>
-                    <span class="label yellow-label" *ngSwitchCase="1">КМ</span>
-                    <span class="label red-label" *ngSwitchCase="2">КЗ</span>
+                    <span class="label blue-label" *ngSwitchCase="'Конференция Анчелотти'">КА</span>
+                    <span class="label yellow-label" *ngSwitchCase="'Конференция Муньоса'">КМ</span>
+                    <span class="label red-label" *ngSwitchCase="'Конференция Зидана'">КЗ</span>
                     <span class="label" *ngSwitchDefault></span>
                   </div>
                 </div>
@@ -416,7 +420,7 @@
           <th class="sub-info tour-info" *ngIf="lastTour > 2">{{ squads.data.tours[lastTour - 2].number }}</th>
           <th class="sub-info tour-info" *ngIf="lastTour > 1">{{ squads.data.tours[lastTour - 1].number }}</th>
           <th class="sub-info tour-info">{{ squads.data.tours[lastTour].number }}</th>
-          <th class="sub-info">Очки</th>
+          <th class="sub-info">ФО</th>
         </tr>
       </thead>
       <tbody class="table-body">

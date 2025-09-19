@@ -350,407 +350,840 @@
             "url": "https://www.sports.ru/profile/1116782572/",
             "logo": ""
         }
-    ],
-    "2025": [
-        {
-            "id": "73116796",
-            "name": "Павел Алешкин",
-            "nick": "*Santiago*",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/73116796/",
-            "logo": "assets/logos/2025/scaled/ducks.png"
-        },
-        {
-            "id": "1063076888",
-            "name": "Дмитрий Щетинин",
-            "nick": "DMSN",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1063076888/",
-            "logo": "assets/logos/2025/scaled/andar con rodeos.png"
-        },
-        {
-            "id": "135066850",
-            "name": "Кирилл Кожухов",
-            "nick": "Кирилл Кожухов",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/135066850/",
-            "logo": "assets/logos/2025/scaled/пас хуанито.png"
-        },
-        {
-            "id": "1095496719",
-            "name": "Дмитрий Булавко",
-            "nick": "Дмитрий Булавко",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1095496719/",
-            "logo": "assets/logos/2025/scaled/losblancos.png"
-        },
-        {
-            "id": "1111685266",
-            "name": "Денис Федотов",
-            "nick": "Денис Федотов",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1111685266/",
-            "logo": "assets/logos/2025/scaled/муслики.png"
-        },
-        {
-            "id": "1115308799",
-            "name": "Сарыал Федотов",
-            "nick": "Saryal",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1115308799/",
-            "logo": "assets/logos/2025/scaled/sareal fc.png"
-        },
-        {
-            "id": "1111769718",
-            "name": "Рамиз Алиев",
-            "nick": "Ramzzes Slardarov",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1111769718/",
-            "logo": "assets/logos/2025/scaled/big turtles.png"
-        },
-        {
-            "id": "1113227695",
-            "name": "Диана Еприкян",
-            "nick": "DiMadridistas",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1113227695/",
-            "logo": "assets/logos/2025/scaled/Черные Мамбы.png"
-        },
-        {
-            "id": "151923911",
-            "name": "Кирилл Яковченко",
-            "nick": "Кирилл Яковченко",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/151923911/",
-            "logo": "assets/logos/2025/scaled/sevastopol.png"
-        },
-        {
-            "id": "1111051849",
-            "name": "Виктория Рочева",
-            "nick": "Виктория Витория",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1111051849/",
-            "logo": "assets/logos/2025/scaled/испанский эчпочмак.png"
-        },
-        {
-            "id": "1111024349",
-            "name": "Тимур Магомедов",
-            "nick": "ispanec14",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1111024349/",
-            "logo": "assets/logos/2025/scaled/timsteam.png"
-        },
-        {
-            "id": "1116309020",
-            "name": "Эдуард Папенко",
-            "nick": "Эдуард Папенко_1116309020",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116309020/",
-            "logo": "assets/logos/2025/scaled/real madrid ep.png"
-        },
-        {
-            "id": "1116848369",
-            "name": "Иван Шураев",
-            "nick": "i.shuraev86@gmail.com",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116848369/",
-            "logo": "assets/logos/2025/scaled/shmelek.png"
-        },
-        {
-            "id": "1116144526",
-            "name": "Владимир Баннов",
-            "nick": "Владимир Баннов_1116144526",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116144526/",
-            "logo": "assets/logos/2025/scaled/hmynm.png"
-        },
-        {
-            "id": "1024867435",
-            "name": "Вероника Вуйченко",
-            "nick": "Вероника Вуйченко",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1024867435/",
-            "logo": "assets/logos/2025/scaled/иско-диско.png"
-        },
-        {
-            "id": "1071227986",
-            "name": "Вадим Евтеев",
-            "nick": "Kopf Kaputt",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1071227986/",
-            "logo": "assets/logos/2025/scaled/kopf89.png"
-        },
-        {
-            "id": "1068332740",
-            "name": "Дарья Кузнецкая",
-            "nick": "Cherrykami",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1068332740/",
-            "logo": "assets/logos/2025/scaled/lumos solem.png"
-        },
-        {
-            "id": "1116139003",
-            "name": "Ани Меликян",
-            "nick": "Ani.ans",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1116139003/",
-            "logo": "assets/logos/2025/scaled/se come una paella.png"
-        },
-        {
-            "id": "1033596919",
-            "name": "Андрей Орлов",
-            "nick": "AndreyOrlov",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1033596919/",
-            "logo": "assets/logos/2025/scaled/madrid skaters.png"
-        },
-        {
-            "id": "1116311079",
-            "name": "Игорь Белоусов",
-            "nick": "Igor.B.",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116311079/",
-            "logo": "assets/logos/2025/scaled/validol.png"
-        },
-        {
-            "id": "1096489838",
-            "name": "Даниил Шалковский",
-            "nick": "Даниил Шалковский",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1096489838/",
-            "logo": "assets/logos/2025/scaled/lion force.png"
-        },
-        {
-            "id": "1113412675",
-            "name": "Евгений Прокопенко",
-            "nick": "WhyNot",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1113412675/",
-            "logo": "assets/logos/2025/scaled/мопед.png"
-        },
-        {
-            "id": "1115416060",
-            "name": "Натиа Карчава",
-            "nick": "Natia",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1115416060/",
-            "logo": "assets/logos/2025/scaled/cherry pie.png"
-        },
-        {
-            "id": "1116532842",
-            "name": "Александр Скварко",
-            "nick": "skvarko21101995@mail.ru",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116532842/",
-            "logo": "assets/logos/2025/scaled/ремонтада.png"
-        },
-        {
-            "id": "5275903",
-            "name": "Мартин Бабаян",
-            "nick": "babayan",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/5275903/",
-            "logo": "assets/logos/2025/scaled/Los Viejitos de Chamartin.png"
-        },
-        {
-            "id": "1058102914",
-            "name": "Александр Лаптев",
-            "nick": "mj23cr7aal4",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1058102914/",
-            "logo": "assets/logos/2025/scaled/коготь вальверде.png"
-        },
-        {
-            "id": "1115413541",
-            "name": "Елена Соколинская",
-            "nick": "sokolinskaya_el",
-            "sex": 2,
-            "url": "https://www.sports.ru/profile/1115413541/",
-            "logo": "assets/logos/2025/scaled/rmote xabi.png"
-        },
-        {
-            "id": "1116086751",
-            "name": "Артём Сафин",
-            "nick": "temkamoskvich",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116086751/",
-            "logo": "assets/logos/2025/scaled/90 минут в пробке в Москве длятся очень долго.png"
-        },
-        {
-            "id": "1116314918",
-            "name": "Александр Ларин",
-            "nick": "Alex_Larin",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116314918/",
-            "logo": "assets/logos/2025/scaled/хеттрик тун тун тун сагура.png"
-        },
-        {
-            "id": "1116314982",
-            "name": "Арсен Эристаев",
-            "nick": "Yoska",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116314982/",
-            "logo": "assets/logos/2025/scaled/zhulduz.png"
-        },
-        {
-            "id": "1115355124",
-            "name": "Николай Надоян",
-            "nick": "Николай Надоян",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1115355124/",
-            "logo": "assets/logos/2025/scaled/дыхание космоса.png"
-        },
-        {
-            "id": "1071548719",
-            "name": "Андрей Курнаков",
-            "nick": "Андрей Курнаков",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1071548719/",
-            "logo": "assets/logos/2025/scaled/бичи из печи.png"
-        },
-        {
-            "id": "1113442132",
-            "name": "Александр Акименко",
-            "nick": "AkiAlex",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1113442132/",
-            "logo": "assets/logos/2025/scaled/pepelats.png"
-        },
-        {
-            "id": "152317185",
-            "name": "Равил Магеррамов",
-            "nick": "RAvIL",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/152317185/",
-            "logo": "assets/logos/2025/scaled/ravil real madrid.png"
-        },
-        {
-            "id": "144762187",
-            "name": "Тимофей Онорин",
-            "nick": "Тимофей Онорин",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/144762187/",
-            "logo": "assets/logos/2025/scaled/посикунчик из акеларре.png"
-        },
-        {
-            "id": "1039593659",
-            "name": "Максим Богомаз",
-            "nick": "Максим Богомаз",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1039593659/",
-            "logo": "assets/logos/2025/scaled/bailar conmigo.png"
-        },
-        {
-            "id": "1116778891",
-            "name": "Александр Корниенко",
-            "nick": "Саша Корниенко_1116778891",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116778891/",
-            "logo": "assets/logos/2025/scaled/baby madrid.png"
-        },
-        {
-            "id": "1116782572",
-            "name": "Константин Калинков",
-            "nick": "kmkalinkov@gmail.com",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116782572/",
-            "logo": "assets/logos/2025/scaled/carvalhalla.png"
-        },
-        {
-            "id": "1116843193",
-            "name": "Андрей Орешин",
-            "nick": "Андрей Орешин",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116843193/",
-            "logo": "assets/logos/2025/scaled/a.reshin.png"
-        },
-        {
-            "id": "1113104848",
-            "name": "Кирилл Корляков",
-            "nick": "Kirill Korlyakov",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1113104848/",
-            "logo": "assets/logos/2025/scaled/el camino.png"
-        },
-        {
-            "id": "1116843142",
-            "name": "Кирилл Коломоец",
-            "nick": "kolomoets.kirill",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116843142/",
-            "logo": "assets/logos/2025/scaled/fakel.png"
-        },
-        {
-            "id": "1116848321",
-            "name": "Артём Чанышев",
-            "nick": "Артём Чанышев",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116848321/",
-            "logo": "assets/logos/2025/scaled/charternteam.png"
-        },
-        {
-            "id": "1116851933",
-            "name": "Роман Аксиненко",
-            "nick": "Roman Aksinenko",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116851933/",
-            "logo": "assets/logos/2025/scaled/los galacticos.png"
-        },
-        {
-            "id": "1115479394",
-            "name": "Ваграм Манасян",
-            "nick": "Ваграм Манасян",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1115479394/",
-            "logo": "assets/logos/2025/scaled/rma.png"
-        },
-        {
-            "id": "1061493572",
-            "name": "Александр Цурков",
-            "nick": "Александр Цурков",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1061493572/",
-            "logo": "assets/logos/2025/scaled/абельинья.png"
-        },
-        {
-            "id": "1116847210",
-            "name": "Дилик Ибрагимов",
-            "nick": "8y85gzdw4b",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1116847210/",
-            "logo": "assets/logos/2025/scaled/дриблеры судного дня.png"
-        },
-        {
-            "id": "1113269933",
-            "name": "Убуш Сарангов",
-            "nick": "Убуш Сарангов",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1113269933/",
-            "logo": "assets/logos/2025/scaled/лотос.png"
-        },
-        {
-            "id": "1076901343",
-            "name": "Данир Эрендженов",
-            "nick": "Danir Erendzhenov",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1076901343/",
-            "logo": "assets/logos/2025/scaled/Марсельская рулетка.png"
-        },
-        {
-            "id": "1028890564",
-            "name": "Дмитрий Блинников",
-            "nick": "Дмитрий Блинников",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1028890564/",
-            "logo": "assets/logos/2025/scaled/ballboy17.png"
-        },
-        {
-            "id": "1113514956",
-            "name": "Артём Молдавский",
-            "nick": "Арт",
-            "sex": 1,
-            "url": "https://www.sports.ru/profile/1113514956/",
-            "logo": "assets/logos/skyters.png"
-        }
     ]
+    ,
+    "2025": {
+        "spain": [
+            {
+                "id": "73116796",
+                "name": "Павел Алешкин",
+                "nick": "*Santiago*",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/73116796/",
+                "logo": "assets/logos/2025/scaled/ducks.png"
+            },
+            {
+                "id": "1063076888",
+                "name": "Дмитрий Щетинин",
+                "nick": "DMSN",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1063076888/",
+                "logo": "assets/logos/2025/scaled/andar con rodeos.png"
+            },
+            {
+                "id": "135066850",
+                "name": "Кирилл Кожухов",
+                "nick": "Кирилл Кожухов",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/135066850/",
+                "logo": "assets/logos/2025/scaled/пас хуанито.png"
+            },
+            {
+                "id": "1095496719",
+                "name": "Дмитрий Булавко",
+                "nick": "Дмитрий Булавко",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1095496719/",
+                "logo": "assets/logos/2025/scaled/losblancos.png"
+            },
+            {
+                "id": "1111685266",
+                "name": "Денис Федотов",
+                "nick": "Денис Федотов",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1111685266/",
+                "logo": "assets/logos/2025/scaled/муслики.png"
+            },
+            {
+                "id": "1115308799",
+                "name": "Сарыал Федотов",
+                "nick": "Saryal",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1115308799/",
+                "logo": "assets/logos/2025/scaled/sareal fc.png"
+            },
+            {
+                "id": "1111769718",
+                "name": "Рамиз Алиев",
+                "nick": "Ramzzes Slardarov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1111769718/",
+                "logo": "assets/logos/2025/scaled/big turtles.png"
+            },
+            {
+                "id": "1113227695",
+                "name": "Диана Еприкян",
+                "nick": "DiMadridistas",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1113227695/",
+                "logo": "assets/logos/2025/scaled/Черные Мамбы.png"
+            },
+            {
+                "id": "151923911",
+                "name": "Кирилл Яковченко",
+                "nick": "Кирилл Яковченко",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/151923911/",
+                "logo": "assets/logos/2025/scaled/sevastopol.png"
+            },
+            {
+                "id": "1111051849",
+                "name": "Виктория Рочева",
+                "nick": "Виктория Витория",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1111051849/",
+                "logo": "assets/logos/2025/scaled/испанский эчпочмак.png"
+            },
+            {
+                "id": "1111024349",
+                "name": "Тимур Магомедов",
+                "nick": "ispanec14",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1111024349/",
+                "logo": "assets/logos/2025/scaled/timsteam.png"
+            },
+            {
+                "id": "1116309020",
+                "name": "Эдуард Папенко",
+                "nick": "Эдуард Папенко_1116309020",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116309020/",
+                "logo": "assets/logos/2025/scaled/real madrid ep.png"
+            },
+            {
+                "id": "1116848369",
+                "name": "Иван Шураев",
+                "nick": "i.shuraev86@gmail.com",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116848369/",
+                "logo": "assets/logos/2025/scaled/shmelek.png"
+            },
+            {
+                "id": "1116144526",
+                "name": "Владимир Баннов",
+                "nick": "Владимир Баннов_1116144526",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116144526/",
+                "logo": "assets/logos/2025/scaled/hmynm.png"
+            },
+            {
+                "id": "1024867435",
+                "name": "Вероника Вуйченко",
+                "nick": "Вероника Вуйченко",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1024867435/",
+                "logo": "assets/logos/2025/scaled/иско-диско.png"
+            },
+            {
+                "id": "1071227986",
+                "name": "Вадим Евтеев",
+                "nick": "Kopf Kaputt",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1071227986/",
+                "logo": "assets/logos/2025/scaled/kopf89.png"
+            },
+            {
+                "id": "1068332740",
+                "name": "Дарья Кузнецкая",
+                "nick": "Cherrykami",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1068332740/",
+                "logo": "assets/logos/2025/scaled/lumos solem.png"
+            },
+            {
+                "id": "1116139003",
+                "name": "Ани Меликян",
+                "nick": "Ani.ans",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1116139003/",
+                "logo": "assets/logos/2025/scaled/se come una paella.png"
+            },
+            {
+                "id": "1033596919",
+                "name": "Андрей Орлов",
+                "nick": "AndreyOrlov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1033596919/",
+                "logo": "assets/logos/2025/scaled/madrid skaters.png"
+            },
+            {
+                "id": "1116311079",
+                "name": "Игорь Белоусов",
+                "nick": "Igor.B.",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116311079/",
+                "logo": "assets/logos/2025/scaled/validol.png"
+            },
+            {
+                "id": "1096489838",
+                "name": "Даниил Шалковский",
+                "nick": "Даниил Шалковский",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1096489838/",
+                "logo": "assets/logos/2025/scaled/lion force.png"
+            },
+            {
+                "id": "1113412675",
+                "name": "Евгений Прокопенко",
+                "nick": "WhyNot",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113412675/",
+                "logo": "assets/logos/2025/scaled/мопед.png"
+            },
+            {
+                "id": "1115416060",
+                "name": "Натиа Карчава",
+                "nick": "Natia",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1115416060/",
+                "logo": "assets/logos/2025/scaled/cherry pie.png"
+            },
+            {
+                "id": "1116532842",
+                "name": "Александр Скварко",
+                "nick": "skvarko21101995@mail.ru",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116532842/",
+                "logo": "assets/logos/2025/scaled/ремонтада.png"
+            },
+            {
+                "id": "5275903",
+                "name": "Мартин Бабаян",
+                "nick": "babayan",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/5275903/",
+                "logo": "assets/logos/2025/scaled/Los Viejitos de Chamartin.png"
+            },
+            {
+                "id": "1058102914",
+                "name": "Александр Лаптев",
+                "nick": "mj23cr7aal4",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1058102914/",
+                "logo": "assets/logos/2025/scaled/коготь вальверде.png"
+            },
+            {
+                "id": "1115413541",
+                "name": "Елена Соколинская",
+                "nick": "sokolinskaya_el",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1115413541/",
+                "logo": "assets/logos/2025/scaled/rmote xabi.png"
+            },
+            {
+                "id": "1116086751",
+                "name": "Артём Сафин",
+                "nick": "temkamoskvich",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116086751/",
+                "logo": "assets/logos/2025/scaled/90 минут в пробке в Москве длятся очень долго.png"
+            },
+            {
+                "id": "1116314918",
+                "name": "Александр Ларин",
+                "nick": "Alex_Larin",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116314918/",
+                "logo": "assets/logos/2025/scaled/хеттрик тун тун тун сагура.png"
+            },
+            {
+                "id": "1116314982",
+                "name": "Арсен Эристаев",
+                "nick": "Yoska",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116314982/",
+                "logo": "assets/logos/2025/scaled/zhulduz.png"
+            },
+            {
+                "id": "1115355124",
+                "name": "Николай Надоян",
+                "nick": "Николай Надоян",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1115355124/",
+                "logo": "assets/logos/2025/scaled/дыхание космоса.png"
+            },
+            {
+                "id": "1071548719",
+                "name": "Андрей Курнаков",
+                "nick": "Андрей Курнаков",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1071548719/",
+                "logo": "assets/logos/2025/scaled/бичи из печи.png"
+            },
+            {
+                "id": "1113442132",
+                "name": "Александр Акименко",
+                "nick": "AkiAlex",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113442132/",
+                "logo": "assets/logos/2025/scaled/pepelats.png"
+            },
+            {
+                "id": "152317185",
+                "name": "Равил Магеррамов",
+                "nick": "RAvIL",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/152317185/",
+                "logo": "assets/logos/2025/scaled/ravil real madrid.png"
+            },
+            {
+                "id": "144762187",
+                "name": "Тимофей Онорин",
+                "nick": "Тимофей Онорин",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/144762187/",
+                "logo": "assets/logos/2025/scaled/посикунчик из акеларре.png"
+            },
+            {
+                "id": "1039593659",
+                "name": "Максим Богомаз",
+                "nick": "Максим Богомаз",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1039593659/",
+                "logo": "assets/logos/2025/scaled/bailar conmigo.png"
+            },
+            {
+                "id": "1116778891",
+                "name": "Александр Корниенко",
+                "nick": "Саша Корниенко_1116778891",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116778891/",
+                "logo": "assets/logos/2025/scaled/baby madrid.png"
+            },
+            {
+                "id": "1116782572",
+                "name": "Константин Калинков",
+                "nick": "kmkalinkov@gmail.com",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116782572/",
+                "logo": "assets/logos/2025/scaled/carvalhalla.png"
+            },
+            {
+                "id": "1116843193",
+                "name": "Андрей Орешин",
+                "nick": "Андрей Орешин",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116843193/",
+                "logo": "assets/logos/2025/scaled/a.reshin.png"
+            },
+            {
+                "id": "1113104848",
+                "name": "Кирилл Корляков",
+                "nick": "Kirill Korlyakov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113104848/",
+                "logo": "assets/logos/2025/scaled/el camino.png"
+            },
+            {
+                "id": "1116843142",
+                "name": "Кирилл Коломоец",
+                "nick": "kolomoets.kirill",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116843142/",
+                "logo": "assets/logos/2025/scaled/fakel.png"
+            },
+            {
+                "id": "1116848321",
+                "name": "Артём Чанышев",
+                "nick": "Артём Чанышев",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116848321/",
+                "logo": "assets/logos/2025/scaled/charternteam.png"
+            },
+            {
+                "id": "1116851933",
+                "name": "Роман Аксиненко",
+                "nick": "Roman Aksinenko",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116851933/",
+                "logo": "assets/logos/2025/scaled/los galacticos.png"
+            },
+            {
+                "id": "1115479394",
+                "name": "Ваграм Манасян",
+                "nick": "Ваграм Манасян",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1115479394/",
+                "logo": "assets/logos/2025/scaled/rma.png"
+            },
+            {
+                "id": "1061493572",
+                "name": "Александр Цурков",
+                "nick": "Александр Цурков",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1061493572/",
+                "logo": "assets/logos/2025/scaled/абельинья.png"
+            },
+            {
+                "id": "1116847210",
+                "name": "Дилик Ибрагимов",
+                "nick": "8y85gzdw4b",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116847210/",
+                "logo": "assets/logos/2025/scaled/дриблеры судного дня.png"
+            },
+            {
+                "id": "1113269933",
+                "name": "Убуш Сарангов",
+                "nick": "Убуш Сарангов",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113269933/",
+                "logo": "assets/logos/2025/scaled/лотос.png"
+            },
+            {
+                "id": "1076901343",
+                "name": "Данир Эрендженов",
+                "nick": "Danir Erendzhenov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1076901343/",
+                "logo": "assets/logos/2025/scaled/Марсельская рулетка.png"
+            },
+            {
+                "id": "1028890564",
+                "name": "Дмитрий Блинников",
+                "nick": "Дмитрий Блинников",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1028890564/",
+                "logo": "assets/logos/2025/scaled/ballboy17.png"
+            },
+            {
+                "id": "1113514956",
+                "name": "Артём Молдавский",
+                "nick": "Арт",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113514956/",
+                "logo": "assets/logos/skyters.png"
+            },
+            {
+                "id": "1116311743",
+                "name": "Евгений Старокожев",
+                "nick": "Evgeniy1987",
+                "url": "https://www.sports.ru/profile/1116311743/",
+                "logo": "assets/logos/starokozhev.png"
+            },
+            {
+                "id": "154819672",
+                "name": "Марк Кубыш",
+                "nick": "Mark Kubysh",
+                "url": "https://www.sports.ru/profile/154819672/",
+                "logo": "assets/logos/слоны.png"
+            }
+        ],
+        "champions-league": [
+            {
+                "id": "73116796",
+                "name": "Павел Алешкин",
+                "nick": "*Santiago*",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/73116796/",
+                "logo": "assets/logos/2025/scaled/ducks.png"
+            },
+            {
+                "id": "1063076888",
+                "name": "Дмитрий Щетинин",
+                "nick": "DMSN",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1063076888/",
+                "logo": "assets/logos/2025/scaled/andar con rodeos.png"
+            },
+            {
+                "id": "135066850",
+                "name": "Кирилл Кожухов",
+                "nick": "Кирилл Кожухов",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/135066850/",
+                "logo": "assets/logos/2025/scaled/пас хуанито.png"
+            },
+            {
+                "id": "1095496719",
+                "name": "Дмитрий Булавко",
+                "nick": "Дмитрий Булавко",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1095496719/",
+                "logo": "assets/logos/2025/scaled/losblancos.png"
+            },
+            {
+                "id": "1111685266",
+                "name": "Денис Федотов",
+                "nick": "Денис Федотов",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1111685266/",
+                "logo": "assets/logos/2025/scaled/муслики.png"
+            },
+            {
+                "id": "1115308799",
+                "name": "Сарыал Федотов",
+                "nick": "Saryal",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1115308799/",
+                "logo": "assets/logos/2025/scaled/sareal fc.png"
+            },
+            {
+                "id": "1111769718",
+                "name": "Рамиз Алиев",
+                "nick": "Ramzzes Slardarov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1111769718/",
+                "logo": "assets/logos/2025/scaled/big turtles.png"
+            },
+            {
+                "id": "1113227695",
+                "name": "Диана Еприкян",
+                "nick": "DiMadridistas",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1113227695/",
+                "logo": "assets/logos/2025/scaled/Черные Мамбы.png"
+            },
+            {
+                "id": "151923911",
+                "name": "Кирилл Яковченко",
+                "nick": "Кирилл Яковченко",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/151923911/",
+                "logo": "assets/logos/2025/scaled/sevastopol.png"
+            },
+            {
+                "id": "1111051849",
+                "name": "Виктория Рочева",
+                "nick": "Виктория Витория",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1111051849/",
+                "logo": "assets/logos/2025/scaled/испанский эчпочмак.png"
+            },
+            {
+                "id": "1111024349",
+                "name": "Тимур Магомедов",
+                "nick": "ispanec14",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1111024349/",
+                "logo": "assets/logos/2025/scaled/timsteam.png"
+            },
+            {
+                "id": "1116309020",
+                "name": "Эдуард Папенко",
+                "nick": "Эдуард Папенко_1116309020",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116309020/",
+                "logo": "assets/logos/2025/scaled/real madrid ep.png"
+            },
+            {
+                "id": "1116848369",
+                "name": "Иван Шураев",
+                "nick": "i.shuraev86@gmail.com",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116848369/",
+                "logo": "assets/logos/2025/scaled/shmelek.png"
+            },
+            {
+                "id": "1116144526",
+                "name": "Владимир Баннов",
+                "nick": "Владимир Баннов_1116144526",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116144526/",
+                "logo": "assets/logos/2025/scaled/hmynm.png"
+            },
+            {
+                "id": "1024867435",
+                "name": "Вероника Вуйченко",
+                "nick": "Вероника Вуйченко",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1024867435/",
+                "logo": "assets/logos/2025/scaled/ucl_fifteen cups.png"
+            },
+            {
+                "id": "1071227986",
+                "name": "Вадим Евтеев",
+                "nick": "Kopf Kaputt",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1071227986/",
+                "logo": "assets/logos/2025/scaled/kopf89.png"
+            },
+            {
+                "id": "1068332740",
+                "name": "Дарья Кузнецкая",
+                "nick": "Cherrykami",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1068332740/",
+                "logo": "assets/logos/2025/scaled/ucl_dreamfyre.png"
+            },
+            {
+                "id": "1116139003",
+                "name": "Ани Меликян",
+                "nick": "Ani.ans",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1116139003/",
+                "logo": "assets/logos/2025/scaled/ucl_cr7 league.png"
+            },
+            {
+                "id": "1033596919",
+                "name": "Андрей Орлов",
+                "nick": "AndreyOrlov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1033596919/",
+                "logo": "assets/logos/2025/scaled/madrid skaters.png"
+            },
+            {
+                "id": "1116311079",
+                "name": "Игорь Белоусов",
+                "nick": "Igor.B.",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116311079/",
+                "logo": "assets/logos/2025/scaled/validol.png"
+            },
+            {
+                "id": "1096489838",
+                "name": "Даниил Шалковский",
+                "nick": "Даниил Шалковский",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1096489838/",
+                "logo": "assets/logos/2025/scaled/lion force.png"
+            },
+            {
+                "id": "1113412675",
+                "name": "Евгений Прокопенко",
+                "nick": "WhyNot",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113412675/",
+                "logo": "assets/logos/2025/scaled/мопед.png"
+            },
+            {
+                "id": "1115416060",
+                "name": "Натиа Карчава",
+                "nick": "Natia",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1115416060/",
+                "logo": "assets/logos/2025/scaled/cherry pie.png"
+            },
+            {
+                "id": "1116532842",
+                "name": "Александр Скварко",
+                "nick": "skvarko21101995@mail.ru",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116532842/",
+                "logo": "assets/logos/2025/scaled/ремонтада.png"
+            },
+            {
+                "id": "5275903",
+                "name": "Мартин Бабаян",
+                "nick": "babayan",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/5275903/",
+                "logo": "assets/logos/2025/scaled/Los Viejitos de Chamartin.png"
+            },
+            {
+                "id": "1058102914",
+                "name": "Александр Лаптев",
+                "nick": "mj23cr7aal4",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1058102914/",
+                "logo": "assets/logos/2025/scaled/коготь вальверде.png"
+            },
+            {
+                "id": "1115413541",
+                "name": "Елена Соколинская",
+                "nick": "sokolinskaya_el",
+                "sex": 2,
+                "url": "https://www.sports.ru/profile/1115413541/",
+                "logo": "assets/logos/2025/scaled/rmote xabi.png"
+            },
+            {
+                "id": "1116086751",
+                "name": "Артём Сафин",
+                "nick": "temkamoskvich",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116086751/",
+                "logo": "assets/logos/2025/scaled/ucl_марионетка роналду.png"
+            },
+            {
+                "id": "1116314918",
+                "name": "Александр Ларин",
+                "nick": "Alex_Larin",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116314918/",
+                "logo": "assets/logos/2025/scaled/хеттрик тун тун тун сагура.png"
+            },
+            {
+                "id": "1116314982",
+                "name": "Арсен Эристаев",
+                "nick": "Yoska",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116314982/",
+                "logo": "assets/logos/2025/scaled/zhulduz.png"
+            },
+            {
+                "id": "1115355124",
+                "name": "Николай Надоян",
+                "nick": "Николай Надоян",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1115355124/",
+                "logo": "assets/logos/2025/scaled/дыхание космоса.png"
+            },
+            {
+                "id": "1071548719",
+                "name": "Андрей Курнаков",
+                "nick": "Андрей Курнаков",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1071548719/",
+                "logo": "assets/logos/2025/scaled/ucl_фэнтези без фантазии.png"
+            },
+            {
+                "id": "1113442132",
+                "name": "Александр Акименко",
+                "nick": "AkiAlex",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113442132/",
+                "logo": "assets/logos/2025/scaled/ucl_свидетели золотого мяча.png"
+            },
+            {
+                "id": "152317185",
+                "name": "Равил Магеррамов",
+                "nick": "RAvIL",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/152317185/",
+                "logo": "assets/logos/2025/scaled/ravil real madrid.png"
+            },
+            {
+                "id": "144762187",
+                "name": "Тимофей Онорин",
+                "nick": "Тимофей Онорин",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/144762187/",
+                "logo": "assets/logos/2025/scaled/посикунчик из акеларре.png"
+            },
+            {
+                "id": "1039593659",
+                "name": "Максим Богомаз",
+                "nick": "Максим Богомаз",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1039593659/",
+                "logo": "assets/logos/2025/scaled/bailar conmigo.png"
+            },
+            {
+                "id": "1116778891",
+                "name": "Александр Корниенко",
+                "nick": "Саша Корниенко_1116778891",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116778891/",
+                "logo": "assets/logos/2025/scaled/baby madrid.png"
+            },
+            {
+                "id": "1116782572",
+                "name": "Константин Калинков",
+                "nick": "kmkalinkov@gmail.com",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116782572/",
+                "logo": "assets/logos/2025/scaled/carvalhalla.png"
+            },
+            {
+                "id": "1116843193",
+                "name": "Андрей Орешин",
+                "nick": "Андрей Орешин",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116843193/",
+                "logo": "assets/logos/2025/scaled/a.reshin.png"
+            },
+            {
+                "id": "1113104848",
+                "name": "Кирилл Корляков",
+                "nick": "Kirill Korlyakov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113104848/",
+                "logo": "assets/logos/2025/scaled/el camino.png"
+            },
+            {
+                "id": "1116843142",
+                "name": "Кирилл Коломоец",
+                "nick": "kolomoets.kirill",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116843142/",
+                "logo": "assets/logos/2025/scaled/fakel.png"
+            },
+            {
+                "id": "1116848321",
+                "name": "Артём Чанышев",
+                "nick": "Артём Чанышев",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116848321/",
+                "logo": "assets/logos/2025/scaled/charternteam.png"
+            },
+            {
+                "id": "1116851933",
+                "name": "Роман Аксиненко",
+                "nick": "Roman Aksinenko",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116851933/",
+                "logo": "assets/logos/2025/scaled/los galacticos.png"
+            },
+            {
+                "id": "1115479394",
+                "name": "Ваграм Манасян",
+                "nick": "Ваграм Манасян",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1115479394/",
+                "logo": "assets/logos/2025/scaled/rma.png"
+            },
+            {
+                "id": "1061493572",
+                "name": "Александр Цурков",
+                "nick": "Александр Цурков",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1061493572/",
+                "logo": "assets/logos/2025/scaled/абельинья.png"
+            },
+            {
+                "id": "1116847210",
+                "name": "Дилик Ибрагимов",
+                "nick": "8y85gzdw4b",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1116847210/",
+                "logo": "assets/logos/2025/scaled/ucl_волшебный балаган.png"
+            },
+            {
+                "id": "1113269933",
+                "name": "Убуш Сарангов",
+                "nick": "Убуш Сарангов",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113269933/",
+                "logo": "assets/logos/2025/scaled/лотос.png"
+            },
+            {
+                "id": "1076901343",
+                "name": "Данир Эрендженов",
+                "nick": "Danir Erendzhenov",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1076901343/",
+                "logo": "assets/logos/2025/scaled/Марсельская рулетка.png"
+            },
+            {
+                "id": "1028890564",
+                "name": "Дмитрий Блинников",
+                "nick": "Дмитрий Блинников",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1028890564/",
+                "logo": "assets/logos/2025/scaled/ballboy17.png"
+            },
+            {
+                "id": "1113514956",
+                "name": "Артём Молдавский",
+                "nick": "Арт",
+                "sex": 1,
+                "url": "https://www.sports.ru/profile/1113514956/",
+                "logo": "assets/logos/skyters.png"
+            },
+            {
+                "id": "1116311743",
+                "name": "Евгений Старокожев",
+                "nick": "Evgeniy1987",
+                "url": "https://www.sports.ru/profile/1116311743/",
+                "logo": "assets/logos/2025/scaled/ucl_starokozhev.png"
+            },
+            {
+                "id": "154819672",
+                "name": "Марк Кубыш",
+                "nick": "Mark Kubysh",
+                "url": "https://www.sports.ru/profile/154819672/",
+                "logo": "assets/logos/2025/scaled/ucl_marqinhoz.png"
+            }
+        ]
+    }
 }

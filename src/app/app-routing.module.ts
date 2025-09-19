@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full' },
   { path: 'spain/new', component: LeagueH2HPageComponent, pathMatch: 'full' },
   { path: 'spain', component: LeaguePageComponent },
+  { path: 'champions-league/new', component: LeagueH2HPageComponent, pathMatch: 'full' },
   { path: 'champions-league', component: LeaguePageComponent },
   { path: 'spain-cup', component: CupPageComponent },
   { path: 'club-world-cup', component: CWCPageComponent },
