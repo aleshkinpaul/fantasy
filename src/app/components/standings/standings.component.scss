@@ -1,0 +1,432 @@
+@import "styles.scss";
+
+  .table {
+    @include main-container();
+    max-width: 1200px;
+    min-height: 500px;
+    font-family: 'Exo2';
+    background-color: $row-color;
+    color: #fff;
+    
+    width: 100%;
+    text-align: center;
+    border-collapse: ceparate;
+    border-spacing: 0 1px;
+
+    &.standings {
+      .sub-info {
+        min-width: 40px;
+
+        &.wide-sub-info {
+          min-width: 80px;
+        }
+
+        &.points {
+
+          .points-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            height: 30px;
+            
+            color: $label-font-color;
+            background-color: $label-bg-color;
+          }
+        }
+      }
+
+      .table-header {
+        // background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
+
+        th:last-child {
+          width: calc(2 * $row-height - 30px);
+
+          @media (max-width: 900px) {
+            width: calc(2 * $row-height - 40px);
+          }
+
+          @media (max-width: 600px) {
+            width: calc(2 * $row-height - 45px);
+          }
+
+          @media (max-width: 450px) {
+            width: calc(2 * $row-height - 50px) !important;
+          }
+        }
+      }
+
+      .table-body {
+
+        &:before {
+          content:"@";
+          display:block;
+          line-height:5px;
+          text-indent:-99999px;
+        }
+
+        .table-row{
+          position: relative;
+          height: $row-height;
+    
+          background-color: $row-color;
+    
+          // &:nth-child(2n) {
+          //   background-color: $even-row-color;
+          // }
+
+          &:hover::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff09;
+            cursor: pointer;
+            pointer-events: none;
+          }
+
+          td {
+            position: relative;
+
+            .score {
+              position: relative;
+
+              &.first-score::after,
+              &.second-score::after,
+              &.third-score::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -5px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+
+                transform: translateX(-50%);
+              }
+
+              &.first-score::after  { background-color: $first-place-bg-color; color: $first-place-font-color !important; border-color: $first-place-font-color !important; }
+              &.second-score::after { background-color: $second-place-bg-color; color: $second-place-font-color !important; border-color: $second-place-font-color !important; }
+              &.third-score::after  { background-color: $third-place-bg-color; color: $third-place-font-color !important; border-color: $third-place-font-color !important; }
+            }
+
+            &:first-child,
+            &:last-child {
+      
+              span {
+                display: block;
+                margin: 5px;
+                width: calc($row-height - 10px);
+                line-height: calc($row-height - 10px);
+      
+                align-self: center;
+                text-align: center;
+                vertical-align: middle;
+      
+                color: $label-font-color;
+                background-color: $label-bg-color;
+                // box-sizing: border-box;
+              }
+            }
+
+            &:first-child{
+              width: $row-height;
+              height: $row-height;
+            }
+      
+            &:last-child {
+              width: calc(2 * $row-height - 20px);
+              height: $row-height;
+
+              box-sizing: border-box;
+
+              @media (max-width: 900px) {
+                width: calc(2 * $row-height - 40px);
+              }
+
+              @media (max-width: 600px) {
+                width: calc(2 * $row-height - 45px);
+              }
+
+              @media (max-width: 450px) {
+                width: calc(2 * $row-height - 50px);
+              }
+      
+              span {
+                width: calc(2 * $row-height - 20px);
+
+                @media (max-width: 900px) {
+                  width: calc(2 * $row-height - 40px);
+                }
+    
+                @media (max-width: 600px) {
+                  width: calc(2 * $row-height - 45px);
+                }
+    
+                @media (max-width: 450px) {
+                  width: calc(2 * $row-height - 50px);
+                }
+              }
+            }
+      
+            & {
+              &.first {
+                span {
+                  color: $first-place-font-color;
+                  background-color: $first-place-bg-color;
+                }
+              }
+
+              &.second {
+                span {
+                  color: $second-place-font-color;
+                  background-color: $second-place-bg-color;
+                }
+              }
+
+              &.third {
+                span {
+                  color: $third-place-font-color;
+                  background-color: $third-place-bg-color;
+                }
+              }
+
+              &.special {
+                span {
+                  color: $special-place-font-color;
+                  background-color: $special-place-bg-color;
+                }
+              }
+            }
+
+            span.diff-elem {
+              position: absolute;
+              margin: 0;
+              padding: 0;
+              top: -2px;
+              right: -2px;
+              width: 17px;
+              line-height: 17px;
+              font-size: 10px;
+              font-weight: 700;
+
+              border-radius: 50%;
+
+              &.pos-diff {
+                color: $positive-font-color;
+                background-color: $positive-bg-color;
+              }
+
+              &.neg-diff {
+                color: $negative-font-color;
+                background-color: $negative-bg-color;
+              }
+            }
+          }
+        }
+    
+        .item-name-container {
+          padding-left: 5px;
+          height: $row-height;
+    
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          align-items: center;
+    
+          font-family: "Exo2";
+
+          .team-link {
+            width: 100%;
+            color: inherit;
+            text-decoration: none;
+
+            &:hover {
+              opacity: .8;
+              cursor: pointer;
+            }
+          }
+
+          .item-team-container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+    
+            .logo-container {
+              position: relative;
+              width: $logo-size;
+              // height: $logo-size;
+            
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              box-sizing: border-box;
+      
+              .logo-img {
+                width: $logo-size;
+                height: $logo-size;
+              }
+
+              .conference-label-container {
+                position: absolute;
+                right: -5px;
+                bottom: -5px;
+
+                .label {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  width: 15px;
+                  height: 15px;
+
+                  font-size: 8px;
+
+                  font-weight: 600;
+                  border-radius: 50%;
+
+                  &.blue-label {
+                    color: #094d81;
+                    background-color: #55ACEE;
+                  }
+
+                  &.yellow-label {
+                    color: #7c5900;
+                    background-color: #FCCB4D;
+                  }
+
+                  &.red-label {
+                    color: #910700;
+                    background-color: #FF4E44;
+                  }
+                }
+              }
+            }
+      
+            .team-container {
+              display: flex;
+              flex-direction: column;
+              min-width: 125px;
+      
+              .team-name {
+                display: block;
+                width: 100%;
+        
+                align-self: left;
+                text-align: left;
+              }
+      
+              .person-name {
+                opacity: .7;
+        
+                align-self: left;
+                text-align: left;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .button-container {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    .prizes-button {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 10px;
+      background-color: #fff;
+      color: $row-color;
+
+      &:hover {
+        opacity: .8;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .format-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .img-container {
+      width: 100%;
+
+      img {
+        width: 100%;
+      }
+
+      &:hover {
+        opacity: .6;
+      }
+    }
+  }
+
+  .h2-title {
+    text-align: center;
+  }
+
+  .green-bg   { background-color: rgba(0, 255, 0, 0.3) }
+  .red-bg     { background-color: rgba(255, 0, 0, 0.3) }
+  .grey-bg    { background-color: rgba(255, 255, 255, 0.3) }
+  .green-text { color: green }
+  .red-text   { color: red }
+  .grey-text  { color: grey }
+
+  .first {
+    span {
+      color: $first-place-font-color;
+      background-color: $first-place-bg-color;
+    }
+  }
+
+  .second {
+    span {
+      color: $second-place-font-color;
+      background-color: $second-place-bg-color;
+    }
+  }
+
+  .third {
+    span {
+      color: $third-place-font-color;
+      background-color: $third-place-bg-color;
+    }
+  }
+
+  .special {
+    span {
+      color: $special-place-font-color;
+      background-color: $special-place-bg-color;
+    }
+  }
+
+  .align-left {
+    padding-left: 5px;
+    text-align: left;
+  }
+
+.loading-spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

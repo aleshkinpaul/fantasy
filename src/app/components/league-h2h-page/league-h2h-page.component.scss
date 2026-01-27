@@ -2,7 +2,7 @@
 
 .main-container {
   @include main-container();
-  max-width: 900px;
+  max-width: 1200px;
   min-height: 500px;
   font-family: 'Exo2';
   background-color: $row-color;
@@ -192,6 +192,10 @@
     &.standings {
       .sub-info {
         min-width: 40px;
+
+        &.wide-sub-info {
+          min-width: 80px;
+        }
 
         &.points {
 

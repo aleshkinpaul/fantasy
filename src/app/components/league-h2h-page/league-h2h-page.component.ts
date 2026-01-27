@@ -8,6 +8,7 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
+import { StandingsComponent } from '../standings/standings.component';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -38,6 +39,8 @@ export class LeagueH2HPageComponent implements OnInit {
   public isShowUnitedTableByPoints = true;
   public prizesToShow = [];
   public unitedProfiles = [];
+  public profilesDetails = [];
+  public chosenStage = 'common';
 
   public testInd: number = 0;
 
@@ -201,6 +204,7 @@ export class LeagueH2HPageComponent implements OnInit {
               for (let i = 0; i < this.lastTour; i++) {  
                 matches[i + 1].forEach(match => {
                   const currentStage = this.getCurrentStage(i + 1);
+
                   match.home_score = +this.squads.data.players[match.home].team.results_by_tour[i + 1].tour_score;
                   match.away_score = +this.squads.data.players[match.away].team.results_by_tour[i + 1].tour_score;
                   match.result = Math.abs(match.home_score - match.away_score) <= this.drawGap ? 0 :
@@ -214,6 +218,7 @@ export class LeagueH2HPageComponent implements OnInit {
                   homeProfile.results.fo[currentStage] += match.home_score;
                   homeProfile.results.missed_fo[currentStage] += match.away_score;
                   homeProfile.results.diff_fo[currentStage] = homeProfile.results.fo[currentStage] - homeProfile.results.missed_fo[currentStage];
+                  if (match.home === '1113514956' || match.away === '1113514956') console.log('AAAA', homeProfile, homeProfile.results, matchDiffFo, match);
 
                   awayProfile.results.fo[currentStage] += match.away_score;
                   awayProfile.results.missed_fo[currentStage] += match.home_score;
@@ -339,40 +344,26 @@ export class LeagueH2HPageComponent implements OnInit {
                   this.updateProfileCommonResults(awayProfile);
                 })
 
-                profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
+                this.profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
               }
 
-              console.log('profilesDetails', profilesDetails, matches);
-
               // общий зачет в баллах
-              this.consts.stages.forEach((stage, stageInd) => {
+              this.profilesDetails.forEach(profile => {
+                this.consts.stages.forEach(stage => {
+                  stage.leagues.forEach(league => {
+                    if (!profile.leagues) profile.leagues = [];
 
-                if (this.lastTour >= stage.firstTour)
-                  stage.leagues.forEach((league, leagueInd) => {
-                    league.profilesDetails.forEach((profile, profileInd) => {
-                      const existProfile = this.unitedProfiles.find(unitedProfile => unitedProfile === profile.id);
-
-                      if (!!existProfile) {
-                        existProfile.results.diff_fo += profile.results.diff_fo;
-                        existProfile.results.draws += profile.results.draws;
-                        existProfile.results.fo += profile.results.fo;
-                        existProfile.results.loses += profile.results.loses;
-                        existProfile.results.missed_fo += profile.results.missed_fo;
-                        existProfile.results.points += profile.results.points;
-                        existProfile.results.wins += profile.results.wins;
-                        existProfile.leagues.push(league.name);
-                      }
-                      else this.unitedProfiles.push(Object.assign({}, {
-                        ...profile,
-                        leagues: [league.name]
-                      }))
-                    })
+                    if (league.profiles.includes(profile.id))
+                      profile.leagues[stage.name.toLowerCase()] = league.name;
                   })
+                })
               });
 
-              // console.log('unitedProfiles', this.route.snapshot.url[0].path, this.unitedProfiles.sort(this.sortStandings.bind(this)));
-              
+              console.log('profilesDetails', this.profilesDetails, matches);
 
+              this.unitedProfiles = this.profilesDetails;
+              console.log('unitedProfiles', this.route.snapshot.url[0].path, this.unitedProfiles.sort(this.sortStandings.bind(this)));
+              
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
                 
@@ -401,7 +392,8 @@ export class LeagueH2HPageComponent implements OnInit {
                 }
               })
 
-              this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)]);
+              this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)])
+              console.log('bbbbb: ', this.squadsDetails.value, this.playersRatingArr)
               
               // Замены
               Object.values(this.squads.data.players).forEach((element, ind) => {
@@ -478,7 +470,7 @@ export class LeagueH2HPageComponent implements OnInit {
                 }       
               );
               
-            if (this.route.snapshot.url[0].path === 'spain') this.updatePrizes();
+            // if (this.route.snapshot.url[0].path === 'spain') this.updatePrizes();
           },
           error: err => {
             console.error('Ошибка при получении данных:', err);
@@ -496,6 +488,15 @@ export class LeagueH2HPageComponent implements OnInit {
     profile.results.missed_fo['common'] = profile.results.missed_fo['apertura'] + profile.results.missed_fo['clausura'];
     profile.results.diff_fo['common'] = profile.results.diff_fo['apertura'] + profile.results.diff_fo['clausura'];
   }
+
+  updateProfilesByStage(stageType, leagueType = '') {
+    this.chosenStage = stageType;
+    this.unitedProfiles = stageType === 'common' ? this.profilesDetails
+      : this.profilesDetails.filter(x => x.leagues[stageType] === leagueType);
+    this.unitedProfiles.sort(this.sortStandings.bind(this));
+  }
+
+  filterProfilesByStage(stageType)
 
   toggleUnitedRating() {
     this.isShowUnitedTableByPoints = !this.isShowUnitedTableByPoints;
@@ -522,7 +523,7 @@ export class LeagueH2HPageComponent implements OnInit {
     profiles.forEach(profile => {
       const profileResult = prizesObj.nomineesArr.find(nominee => nominee.profileId === profile.id);
       
-      console.log('494: ', profile.id);
+      // console.log('494: ', profile.id);
 
       if (prizeInd === 6 && ["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id))
         {
@@ -534,7 +535,7 @@ export class LeagueH2HPageComponent implements OnInit {
           profile.results.points = 0;
         }
 
-      console.log('506: ', prizeInd, profile.results);
+      // console.log('506: ', prizeInd, profile.results);
 
       profile.prizes[prizeInd] = {
         value: 
@@ -660,40 +661,14 @@ export class LeagueH2HPageComponent implements OnInit {
 
   sortStandings(a, b) {
 
-    if (a.results.points > b.results.points) return -1;
-    if (a.results.points < b.results.points) return 1;
-
-    // const matchLeague = this.consts.stages[0].leagues.find((league, leagueInd) => {
-    //   const schId = Object.keys(league.schedule).find(id => id === a.id);
-    //   return !!schId;
-    // })
-
-    // let abMatch = undefined;
-    // for (let i = 0; i < matchLeague.matchesByTours.length; i++) {
-    //   const arr = matchLeague.matchesByTours;
-    //   const match = arr[i].find(match =>
-    //     (match.home === a.id && match.away === b.id)
-    //     || (match.home === b.id && match.away === a.id)
-    //   )
-
-    //   if (!!match) {
-    //     abMatch = match;
-    //     break;
-    //   }
-    // }
-
-    // if (!!abMatch.result) {
-    //   if (abMatch.home === a.id && abMatch.result === 1) return -1;
-    //   if (abMatch.home === a.id && abMatch.result === 2) return 1;
-    //   if (abMatch.away === a.id && abMatch.result === 1) return 1;
-    //   if (abMatch.away === a.id && abMatch.result === 2) return -1;
-    // }
+    if (a.results.points[this.chosenStage] > b.results.points[this.chosenStage]) return -1;
+    if (a.results.points[this.chosenStage] < b.results.points[this.chosenStage]) return 1;
     
-    if (a.results.diff_fo > b.results.diff_fo) return -1;
-    if (a.results.diff_fo < b.results.diff_fo) return 1;
+    if (a.results.diff_fo[this.chosenStage] > b.results.diff_fo[this.chosenStage]) return -1;
+    if (a.results.diff_fo[this.chosenStage] < b.results.diff_fo[this.chosenStage]) return 1;
     
-    if (a.results.fo > b.results.fo) return -1;
-    if (a.results.fo < b.results.fo) return 1;
+    if (a.results.fo[this.chosenStage] > b.results.fo[this.chosenStage]) return -1;
+    if (a.results.fo[this.chosenStage] < b.results.fo[this.chosenStage]) return 1;
 
     return 0;
   }

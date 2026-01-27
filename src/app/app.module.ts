@@ -14,6 +14,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
 import { LeagueH2HPageComponent } from './components/league-h2h-page/league-h2h-page.component';
+import { StandingsComponent } from './components/standings/standings.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LeagueH2HPageComponent } from './components/league-h2h-page/league-h2h-
     CWCPageComponent,
     LeaguePageComponent,
     LeagueH2HPageComponent,
+    StandingsComponent,
     CupPageComponent,
     DefaultLoaderComponent
   ],
