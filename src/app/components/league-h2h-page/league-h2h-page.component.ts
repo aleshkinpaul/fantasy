@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { StandingsComponent } from '../standings/standings.component';
+import { logMissingFieldErrors } from '@apollo/client/core/ObservableQuery';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -40,6 +41,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public prizesToShow = [];
   public unitedProfiles = [];
   public profilesDetails = [];
+  public currentLeagueMatches = [];
   public chosenStage = 'common';
   public chosenLeague = '';
   public tabId;
@@ -75,6 +77,8 @@ export class LeagueH2HPageComponent implements OnInit {
 
   ngOnInit() {
     const yearParam = +this.route.snapshot.queryParams?.year || '';
+    console.log('snapshot', this.route.snapshot.queryParams);
+    
 
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
@@ -491,6 +495,24 @@ export class LeagueH2HPageComponent implements OnInit {
     }});
   }
 
+  getMatchesForLeague() {
+    this.currentLeagueMatches = [];
+
+    if (!!this.consts.stages[this.activeTabs.tabId-1]) {
+      const stageInfo = this.consts.stages[this.activeTabs.tabId-1];
+      const leagueProfiles = stageInfo.leagues[this.activeTabs.confId].profiles;
+      const matches = this.consts.matches;
+
+      for (let i = stageInfo.firstTour - 1; i < stageInfo.lastTour; i++) {
+        this.currentLeagueMatches.push(Object.values(matches[i+1].filter(match => {
+          return leagueProfiles.includes(match.home) || leagueProfiles.includes(match.away);
+        })));
+      }
+
+      console.log('leagueProfiles', stageInfo, this.currentLeagueMatches, this.chosenStage, this.chosenLeague, this.consts.stages[this.activeTabs.tabId-1].leagues, this.activeTabs.tabId, this.activeTabs.confId, this.consts.stages[this.activeTabs.tabId-1].leagues[this.activeTabs.confId].name, leagueProfiles);
+    }
+  }
+
   updateProfileCommonResults(profile) {
     profile.results.wins['common'] = profile.results.wins['apertura'] + profile.results.wins['clausura'];
     profile.results.draws['common'] = profile.results.draws['apertura'] + profile.results.draws['clausura'];
@@ -686,18 +708,26 @@ export class LeagueH2HPageComponent implements OnInit {
 
   setTabId(ind) {
     this.activeTabs.tabId = ind;
-    this.setQueryParam({ tabId: ind });
-    this.updateStageTypeByTabId(ind);
-    this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
+    this.activeTabs.confId = 0;
+    this.setQueryParam({ tabId: ind, confId: 0 });
+    console.log('snapshot', this.route.snapshot.queryParams);
 
-    console.log('params+tab:', ind)
+    this.isShowUnitedTableByPoints = false;
+    this.updateStageTypeByTabId(ind);
+    this.updateLeagueTypeByConfId(0);
+    
+    this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
+    this.getMatchesForLeague();
+
+    console.log('params+tab:', ind, this.activeTabs)
   }
 
   setConfId(ind) {
     this.activeTabs.confId = ind;
-    this.setQueryParam({ confId: ind })
-    this.updateLeagueTypeByConfId();
+    this.setQueryParam({ confId: ind });
+    this.updateLeagueTypeByConfId(ind);
     this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
+    this.getMatchesForLeague();
   }
 
   setConfTabId(ind) {
@@ -716,15 +746,13 @@ export class LeagueH2HPageComponent implements OnInit {
     const confTabIdParam = +this.route.snapshot.queryParams?.confTabId || '';
     const activeTourIdParam = +this.route.snapshot.queryParams?.tourId || '';
 
-    console.log('params: ', this.activeTabs, tabIdParam, confIdParam, confTabIdParam, activeTourIdParam);
-    
+    console.log('params: ', this.route.snapshot.queryParams, this.activeTabs, tabIdParam, confIdParam, confTabIdParam, activeTourIdParam);
 
+    if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
     if (!!confIdParam) this.activeTabs.confId = confIdParam;
     if (!!confTabIdParam) this.activeTabs.confTabId = confTabIdParam;
-    if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
-    this.activeTabs.tourId = !!activeTourIdParam ? activeTourIdParam : this.lastTour;
 
-    
+    this.activeTabs.tourId = !!activeTourIdParam ? activeTourIdParam : this.lastTour;
 
     console.log('params+post: ', this.activeTabs);
   }
