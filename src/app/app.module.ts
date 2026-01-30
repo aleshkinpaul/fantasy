@@ -15,6 +15,8 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
 import { LeagueH2HPageComponent } from './components/league-h2h-page/league-h2h-page.component';
 import { StandingsComponent } from './components/standings/standings.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { MatchesComponent } from './components/matches/matches.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { StandingsComponent } from './components/standings/standings.component';
     LeaguePageComponent,
     LeagueH2HPageComponent,
     StandingsComponent,
+    ScheduleComponent,
+    MatchesComponent,
     CupPageComponent,
     DefaultLoaderComponent
   ],

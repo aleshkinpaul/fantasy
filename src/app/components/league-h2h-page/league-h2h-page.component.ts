@@ -46,6 +46,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public chosenLeague = '';
   public tabId;
   public confId;
+  public competitionType;
 
   public testInd: number = 0;
 
@@ -79,7 +80,6 @@ export class LeagueH2HPageComponent implements OnInit {
     const yearParam = +this.route.snapshot.queryParams?.year || '';
     console.log('snapshot', this.route.snapshot.queryParams);
     
-
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
 
@@ -99,6 +99,7 @@ export class LeagueH2HPageComponent implements OnInit {
           x.type === this.route.snapshot.url[0].path
           && ( x.yearStart === yearParam || !yearParam )
         );
+        this.competitionType = this.consts.type;
         this.drawGap = this.consts.drawGap || 0; 
         this.teams = teams;
 
@@ -360,12 +361,12 @@ export class LeagueH2HPageComponent implements OnInit {
 
               // общий зачет в баллах
               this.profilesDetails.forEach(profile => {
-                this.consts.stages.forEach(stage => {
+                this.consts.stages.forEach((stage, stageInd) => {
                   stage.leagues.forEach(league => {
                     if (!profile.leagues) profile.leagues = [];
 
                     if (league.profiles.includes(profile.id))
-                      profile.leagues[stage.name.toLowerCase()] = league.name;
+                      profile.leagues[stageInd === 0 ? 'apertura' : 'clausura'] = league.name;
                   })
                 })
               });
@@ -533,6 +534,8 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   updateStageTypeByTabId() {
+    console.log('competitionType', this.competitionType);
+    
     if (this.activeTabs.tabId === 1) {
       this.chosenStage = 'apertura';
       return;
@@ -551,7 +554,7 @@ export class LeagueH2HPageComponent implements OnInit {
   updateLeagueTypeByConfId() {
     if (this.chosenStage === 'apertura') {
       if (this.activeTabs.confId === 0) {
-        this.chosenLeague = 'Конференция Анчелотти';
+        this.chosenLeague = this.competitionType === 'spain' ? 'Конференция Анчелотти' : 'Общий этап';
         return;
       }
       if (this.activeTabs.confId === 1) {
@@ -795,40 +798,6 @@ export class LeagueH2HPageComponent implements OnInit {
       queryParamsHandling: 'merge',
       replaceUrl: true
     });
-  }
-
-  getTeamId(profileId) {
-    return this.profiles.find(profile => profile.id === profileId).team.id;
-  }
-
-  getTeamLogo(profileId) {
-    return this.profiles.find(profile => profile.id === profileId).logo;
-  }
-
-  getTeamTitle(profileId) {
-    return this.profiles.find(profile => profile.id === profileId).team.title;
-  }
-
-  getProfileInfo(profileId) {
-    return this.profiles.find(profile => profile.id === profileId);
-  }
-
-  getOpponentTeamId(matchesArr, profileId) {
-    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
-    const opponentId = match.home === profileId ? match.away : match.home;
-    return this.profiles.find(profile => profile.id === opponentId).team.id;
-  }
-
-  getOpponentTeamLogo(matchesArr, profileId) {
-    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
-    const opponentId = match.home === profileId ? match.away : match.home;
-    return this.profiles.find(profile => profile.id === opponentId).logo;
-  }
-
-  getOpponentTeamTitle(matchesArr, profileId) {
-    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
-    const opponentId = match.home === profileId ? match.away : match.home;
-    return this.profiles.find(profile => profile.id === opponentId).team.title;
   }
 
   getMatchResult(matchesArr, profileId) {

@@ -176,54 +176,12 @@
 
   <!-- Расписание конференции -->
   <div class="table-container" *ngIf="activeTabs.confTabId === 2">
-    <table class="table schedule" *ngIf="!(isLoading$ | async)">
-      <thead class="table-header">
-        <tr>
-          <th class="align-left">Команда</th>
-          <th class="sub-info" *ngFor="let matches of currentLeagueMatches; index as i">{{ i + 1 }}</th>
-        </tr>
-      </thead>
-      <tbody class="table-body">
-        <tr *ngFor="let profile of unitedProfiles; index as i" class="table-row">
-          <td class="item-name-container">
-            <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+profile.team.id" class="team-link" target="_blank">
-              <div class="item-team-container">
-                <div class="logo-container">
-                  <img [src]="!!profile.logo ? profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
-                </div>
-                <div class="team-container">
-                  <span class="team-name">
-                    {{ profile.team.title }}
-                  </span>
-                  <span class="person-name">{{ profile.name }}</span>
-                </div>
-              </div>
-            </a>
-          </td>
-          <td class="sub-info" *ngFor="let tourMatches of currentLeagueMatches; index as tourInd">
-            <div class="item-team-container">
-              <div
-                class="logo-container"
-                [ngClass]="{
-                  'green-bg':  getMatchResult(tourMatches, profile.id) === 1 && tourInd + this.consts.stages[activeTabs.tabId - 1].firstTour - 1 < lastTour,
-                  'red-bg':    getMatchResult(tourMatches, profile.id) === 2 && tourInd + this.consts.stages[activeTabs.tabId - 1].firstTour - 1 < lastTour,
-                  'grey-bg':   getMatchResult(tourMatches, profile.id) === 0 && tourInd + this.consts.stages[activeTabs.tabId - 1].firstTour - 1 < lastTour
-                }">
-                <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getOpponentTeamId(tourMatches, profile.id)" target="_blank">
-                  <img
-                    class="logo-img opponent"
-                    [src]="!!getOpponentTeamLogo(tourMatches, profile.id) ?
-                      getOpponentTeamLogo(tourMatches, profile.id) : 'assets/logos/default.png'"
-                    [alt]="!!getOpponentTeamTitle(tourMatches, profile.id) ?
-                      getOpponentTeamTitle(tourMatches, profile.id) : ''"
-                  >
-                </a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-schedule
+      [profilesArr]="unitedProfiles"
+      [currentLeagueMatches]="currentLeagueMatches"
+      [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
+      [lastTour]="lastTour"
+    ></app-schedule>
   </div>
   
   <!-- Матчи конференции по турам -->
@@ -236,7 +194,15 @@
         (click)="setTourId(i+1)"
       >{{ i + 1 }}</li>
     </ul>
-    <div *ngFor="let tourMatches of currentLeagueMatches; index as i">
+    <app-matches
+      [profilesArr]="unitedProfiles"
+      [currentLeagueMatches]="currentLeagueMatches"
+      [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
+      [lastTour]="lastTour"
+      [activeTabs]="activeTabs"
+    ></app-matches>
+  </div>
+    <!-- <div *ngFor="let tourMatches of currentLeagueMatches; index as i">
       <ul class="matches-list" *ngIf="activeTabs.tourId === i+1">
         <li class="match-item" *ngFor="let match of tourMatches">
           <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.home)" target="_blank">
@@ -294,8 +260,7 @@
           </a>
         </li>
       </ul>
-    </div>
-  </div>
+    </div> -->
 </div>
 <app-default-loader *ngIf="(isLoading$ | async)" class="loading-spinner-container"></app-default-loader>
 
