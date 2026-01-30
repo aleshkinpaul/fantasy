@@ -709,7 +709,8 @@ export class LeagueH2HPageComponent implements OnInit {
   setTabId(ind) {
     this.activeTabs.tabId = ind;
     this.activeTabs.confId = 0;
-    this.setQueryParam({ tabId: ind, confId: 0 });
+    if (!!this.consts.stages[ind-1]) this.activeTabs.tourId = Math.min(this.lastTour - this.consts.stages[ind-1].firstTour + 1, this.consts.stages[ind-1].lastTour);
+    this.setQueryParam(this.activeTabs);
     console.log('snapshot', this.route.snapshot.queryParams);
 
     this.isShowUnitedTableByPoints = false;
@@ -724,7 +725,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
   setConfId(ind) {
     this.activeTabs.confId = ind;
-    this.setQueryParam({ confId: ind });
+    this.setQueryParam(this.activeTabs);
     this.updateLeagueTypeByConfId(ind);
     this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
     this.getMatchesForLeague();
@@ -732,12 +733,12 @@ export class LeagueH2HPageComponent implements OnInit {
 
   setConfTabId(ind) {
     this.activeTabs.confTabId = ind;
-    this.setQueryParam({ confTabId: ind })
+    this.setQueryParam(this.activeTabs)
   }
 
   setTourId(ind) {
     this.activeTabs.tourId = ind;
-    this.setQueryParam({ tourId: ind })
+    this.setQueryParam(this.activeTabs)
   }
 
   updateTabs() {    
