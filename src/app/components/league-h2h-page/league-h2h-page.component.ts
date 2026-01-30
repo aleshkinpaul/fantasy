@@ -36,11 +36,14 @@ export class LeagueH2HPageComponent implements OnInit {
 
   public isOnlyActivePrizes = true;
   public isShowAllPrizes = true;
-  public isShowUnitedTableByPoints = true;
+  public isShowUnitedTableByPoints = false;
   public prizesToShow = [];
   public unitedProfiles = [];
   public profilesDetails = [];
   public chosenStage = 'common';
+  public chosenLeague = '';
+  public tabId;
+  public confId;
 
   public testInd: number = 0;
 
@@ -138,6 +141,7 @@ export class LeagueH2HPageComponent implements OnInit {
               let profilesDetails = this.consts.profiles.map(x => {
                 const profileInfo = this.profiles.find(profile => profile.id === x);
                 profileInfo.team = this.squads.data.players[x].team;
+                profileInfo.score = +this.squads.data.players[x].team.results_by_tour[this.lastTour].total_score;
                 profileInfo.prizes = {};
                 profileInfo.results = {
                   wins: {
@@ -347,6 +351,9 @@ export class LeagueH2HPageComponent implements OnInit {
                 this.profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
               }
 
+              console.log('matches:', matches);
+              
+
               // общий зачет в баллах
               this.profilesDetails.forEach(profile => {
                 this.consts.stages.forEach(stage => {
@@ -392,9 +399,10 @@ export class LeagueH2HPageComponent implements OnInit {
                 }
               })
 
-              this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)])
-              console.log('bbbbb: ', this.squadsDetails.value, this.playersRatingArr)
-              
+              this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)]);
+              console.log('bbbbb: ', this.squadsDetails.value, this.playersRatingArr);
+
+              console.log('tabId:', this.tabId);
               // Замены
               Object.values(this.squads.data.players).forEach((element, ind) => {
                 const obj: IPlayers = {
@@ -428,6 +436,10 @@ export class LeagueH2HPageComponent implements OnInit {
                 
                 this.teamsArr.push(obj);
             });
+
+            this.setTabId(this.activeTabs.tabId);
+            this.setConfId(this.activeTabs.confId);
+            this.setConfTabId(this.activeTabs.confTabId);
 
             // console.log('Команды, сорт. по трансферам: ', this.teamsArr.sort(this.sortByTransfersCount));
             // console.log('Команды, сорт. по очкам: ', this.teamsArr.sort(this.sortByPointsCount));
@@ -489,17 +501,62 @@ export class LeagueH2HPageComponent implements OnInit {
     profile.results.diff_fo['common'] = profile.results.diff_fo['apertura'] + profile.results.diff_fo['clausura'];
   }
 
-  updateProfilesByStage(stageType, leagueType = '') {
-    this.chosenStage = stageType;
-    this.unitedProfiles = stageType === 'common' ? this.profilesDetails
-      : this.profilesDetails.filter(x => x.leagues[stageType] === leagueType);
-    this.unitedProfiles.sort(this.sortStandings.bind(this));
+  updateProfilesByStage(stageType = '', leagueType = '') {
+    console.log(1111111, stageType, this.chosenStage, this.chosenLeague, this.profilesDetails);
+    
+    if (!!stageType) this.chosenStage = stageType;
+    this.unitedProfiles = this.chosenStage === 'common' ? this.profilesDetails
+      : this.profilesDetails.filter(x => x.leagues[this.chosenStage] === leagueType);
+    this.unitedProfiles.sort(!!this.isShowUnitedTableByPoints && this.chosenStage === 'common' ? this.sortStandingsByFO.bind(this) : this.sortStandings.bind(this));
   }
 
-  filterProfilesByStage(stageType)
+  updateStageTypeByTabId() {
+    if (this.activeTabs.tabId === 1) {
+      this.chosenStage = 'apertura';
+      return;
+    }
+    if (this.activeTabs.tabId === 2) {
+      this.chosenStage = 'clausura';
+      return;
+    }
+    if (this.activeTabs.tabId === 100) {
+      this.chosenStage = 'common';
+      return;
+    }
+    this.chosenStage = '';
+  };
+
+  updateLeagueTypeByConfId() {
+    if (this.chosenStage === 'apertura') {
+      if (this.activeTabs.confId === 0) {
+        this.chosenLeague = 'Конференция Анчелотти';
+        return;
+      }
+      if (this.activeTabs.confId === 1) {
+        this.chosenLeague = 'Конференция Муньоса';
+        return;
+      }
+      if (this.activeTabs.confId === 2) {
+        this.chosenLeague = 'Конференция Зидана';
+        return;
+      }
+    }
+    if (this.chosenStage === 'clausura') {
+      if (this.activeTabs.confId === 0) {
+        this.chosenLeague = 'Primera';
+        return;
+      }
+      if (this.activeTabs.confId === 1) {
+        this.chosenLeague = 'Segunda';
+        return;
+      }
+    }
+    this.chosenLeague = '';
+  }
 
   toggleUnitedRating() {
     this.isShowUnitedTableByPoints = !this.isShowUnitedTableByPoints;
+    this.updateProfilesByStage();
   }
 
   toggleShowingAllPrizes() {
@@ -629,12 +686,18 @@ export class LeagueH2HPageComponent implements OnInit {
 
   setTabId(ind) {
     this.activeTabs.tabId = ind;
-    this.setQueryParam({ tabId: ind })
+    this.setQueryParam({ tabId: ind });
+    this.updateStageTypeByTabId(ind);
+    this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
+
+    console.log('params+tab:', ind)
   }
 
   setConfId(ind) {
     this.activeTabs.confId = ind;
     this.setQueryParam({ confId: ind })
+    this.updateLeagueTypeByConfId();
+    this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
   }
 
   setConfTabId(ind) {
@@ -653,10 +716,17 @@ export class LeagueH2HPageComponent implements OnInit {
     const confTabIdParam = +this.route.snapshot.queryParams?.confTabId || '';
     const activeTourIdParam = +this.route.snapshot.queryParams?.tourId || '';
 
+    console.log('params: ', this.activeTabs, tabIdParam, confIdParam, confTabIdParam, activeTourIdParam);
+    
+
     if (!!confIdParam) this.activeTabs.confId = confIdParam;
     if (!!confTabIdParam) this.activeTabs.confTabId = confTabIdParam;
     if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
     this.activeTabs.tourId = !!activeTourIdParam ? activeTourIdParam : this.lastTour;
+
+    
+
+    console.log('params+post: ', this.activeTabs);
   }
 
   sortStandings(a, b) {
@@ -669,6 +739,17 @@ export class LeagueH2HPageComponent implements OnInit {
     
     if (a.results.fo[this.chosenStage] > b.results.fo[this.chosenStage]) return -1;
     if (a.results.fo[this.chosenStage] < b.results.fo[this.chosenStage]) return 1;
+
+    return 0;
+  }
+
+  sortStandingsByFO(a, b) {
+
+    console.log(a);
+    
+
+    if (a.score > b.score) return -1;
+    if (a.score < b.score) return 1;
 
     return 0;
   }

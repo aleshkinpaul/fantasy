@@ -13,6 +13,8 @@ export class StandingsComponent implements OnInit {
   @Input() lastTour = 1;
   @Input() squadsDetails = [];
   @Input() squads;
+  @Input() chosenStage = '';
+  @Input() chosenLeague = '';
   @Input() isShowUnitedTableByPoints = false;
 
   public windowWidth = 1400;

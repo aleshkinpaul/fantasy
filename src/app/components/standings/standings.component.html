@@ -63,14 +63,14 @@
           'color': service.getRgbForTour(profile.team.rating, playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0])
         }"
       >{{ profile.team.rating }}</td>
-      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.wins['common'] }}</td>
-      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.draws['common'] }}</td>
-      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.loses['common'] }}</td>
-      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info wide-sub-info">{{ profile.results.fo['common'] }}-{{ profile.results.missed_fo['common'] }}</td>
-      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.diff_fo['common'] }}</td>
+      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.wins[chosenStage] }}</td>
+      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.draws[chosenStage] }}</td>
+      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.loses[chosenStage] }}</td>
+      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info wide-sub-info">{{ profile.results.fo[chosenStage] }}-{{ profile.results.missed_fo[chosenStage] }}</td>
+      <td *ngIf="!isShowUnitedTableByPoints" class="sub-info">{{ profile.results.diff_fo[chosenStage] }}</td>
       <td *ngIf="!isShowUnitedTableByPoints" class="sub-info points">
         <div class="points-info">
-          {{ profile.results.points['common'] }}
+          {{ profile.results.points[chosenStage] }}
         </div>
       </td>
 
@@ -160,7 +160,7 @@
         'third':    (i === 0 ? i + 1 : squadsDetails[i - 1].score === getSquadDetails(profile.id).score ? i : i + 1) === 3
       }">
         <span>
-          {{ getSquadDetails(profile.id).score }}
+          {{ profile.score }}
         </span>
       </td>
     </tr>
