@@ -26,8 +26,6 @@ export class StandingsComponent implements OnInit {
   ngOnInit(): void {
     this.windowWidth = window.innerWidth;
     window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
-
-    console.log('profilesArr:', this.profilesArr);
   }
 
   getSquadDetails(profileId) {

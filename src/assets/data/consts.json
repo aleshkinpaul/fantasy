@@ -5138,7 +5138,7 @@
           "name": "им. \"Ларисы\"",
           "icon": "assets/logos/2025/icons/larisa.png",
           "author": "Женя Прокопенко",
-          "condition": "13 место в Primera (если это место займет автор приза, то победит 13 место в Segunda ",
+          "condition": "13 место в Primera (если это место займет автор приза, то победит 13 место в Segunda)",
           "reward": "Литр настоек из \"Ларисы\"",
           "isFinalStage": true,
           "isActivity": false,
@@ -5147,10 +5147,10 @@
         },
         {
           "id": 4,
-          "name": "\"Girl Power\"",
+          "name": "\"Girl Power\" (Primera)",
           "icon": "assets/logos/2025/icons/girl.png",
           "author": "Даша Кузнецкая",
-          "condition": "Лучшая женская команда в Primera и в Segunda (2 приза)",
+          "condition": "Лучшая женская команда в Primera",
           "reward": "Баночка Nutella",
           "isFinalStage": true,
           "isActivity": false,
@@ -5159,6 +5159,18 @@
         },
         {
           "id": 5,
+          "name": "\"Girl Power\" (Segunda)",
+          "icon": "assets/logos/2025/icons/girl.png",
+          "author": "Даша Кузнецкая",
+          "condition": "Лучшая женская команда в Segunda",
+          "reward": "Баночка Nutella",
+          "isFinalStage": true,
+          "isActivity": false,
+          "excluded": ["1068332740"],
+          "nomineesArr": []
+        },
+        {
+          "id": 6,
           "name": "\"Лига Мартина\"",
           "icon": "assets/logos/2025/icons/real-madrid.png",
           "author": "Мартин Бабаян",
@@ -5170,7 +5182,7 @@
           "nomineesArr": []
         },
         {
-          "id": 6,
+          "id": 7,
           "name": "\"Лига Мадридистов\"",
           "icon": "assets/logos/2025/icons/house.png",
           "author": "Дима Щетинин",
@@ -5268,7 +5280,7 @@
           ]
         },
         {
-          "id": 7,
+          "id": 8,
           "name": "Секретный",
           "icon": "assets/logos/2025/icons/ninja.png",
           "author": "Саша Цурков",
@@ -5281,7 +5293,7 @@
           "nomineesArr": []
         },
         {
-          "id": 8,
+          "id": 9,
           "name": "\"Цент рубль бережет\"",
           "icon": "assets/logos/2025/icons/piggy-bank.png",
           "author": "Андрей Курнаков",
@@ -5293,7 +5305,7 @@
           "nomineesArr": []
         },
         {
-          "id": 9,
+          "id": 10,
           "name": "\"Соседский подгон\"",
           "icon": "assets/logos/2025/icons/buddy.png",
           "author": "Игорь Белоусов",
@@ -5304,7 +5316,7 @@
           "nomineesArr": []
         },
         {
-          "id": 10,
+          "id": 11,
           "name": "\"Леопардовый Камавинга\"",
           "icon": "assets/logos/2025/icons/leopard.png",
           "author": "Лена Соколинская",
@@ -5316,7 +5328,7 @@
           "nomineesArr": []
         },
         {
-          "id": 11,
+          "id": 12,
           "name": "\"Тунг Тунг Тунг Сахур\"",
           "icon": "assets/logos/2025/icons/wood.png",
           "author": "Артём Сафин",
@@ -5328,7 +5340,7 @@
           "nomineesArr": []
         },
         {
-          "id": 12,
+          "id": 13,
           "name": "\"Бритвенная передача\"",
           "icon": "assets/logos/2025/icons/barber-shop.png",
           "author": "Дилик Ибрагимов",
@@ -5340,7 +5352,7 @@
           "nomineesArr": []
         },
         {
-          "id": 13,
+          "id": 14,
           "name": "\"Отскок года\"",
           "icon": "assets/logos/2025/icons/luck.png",
           "author": "НаКиДи",
@@ -5352,7 +5364,7 @@
           "nomineesArr": []
         },
         {
-          "id": 14,
+          "id": 15,
           "name": "\"Максимальный Гюлер\"",
           "icon": "assets/logos/2025/icons/tea.png",
           "author": "Рамиз Алиев",
@@ -5363,7 +5375,7 @@
           "nomineesArr": []
         },
         {
-          "id": 15,
+          "id": 16,
           "name": "\"Беспощадное доминирование\"",
           "icon": "assets/logos/2025/icons/motivation.png",
           "author": "Андрей Орешин",
@@ -5374,7 +5386,7 @@
           "nomineesArr": []
         },
         {
-          "id": 16,
+          "id": 17,
           "name": "\"Проиграли достойно!\"",
           "icon": "assets/logos/2025/icons/prestige.png",
           "author": "Александр Акименко",
@@ -5386,7 +5398,7 @@
           "nomineesArr": []
         },
         {
-          "id": 17,
+          "id": 18,
           "name": "\"А разговоров-то было\"",
           "icon": "assets/logos/2025/icons/lol.png",
           "author": "Равил Магеррамов",
@@ -5398,7 +5410,7 @@
           "nomineesArr": []
         },
         {
-          "id": 18,
+          "id": 19,
           "name": "\"Soft Kitty\"",
           "icon": "assets/logos/2025/icons/paw.png",
           "author": "Мартин Бабаян",

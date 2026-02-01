@@ -50,6 +50,7 @@ export class DataService {
       { r: 55, g: 112, b: 82 }   // 1
     ];
     
+    
     const lowerIndex = Math.floor(value * (colors.length - 1));
     const upperIndex = Math.min(lowerIndex + 1, colors.length - 1);
     const lowerColor = colors[lowerIndex];

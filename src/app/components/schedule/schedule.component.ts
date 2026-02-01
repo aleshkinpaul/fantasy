@@ -27,7 +27,6 @@ export class ScheduleComponent implements OnInit {
     window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
 
     this.isLoading$ = this.loader.isLoading$;
-    console.log('profilesArr:', this.profilesArr);
   }
 
   getMatchResult(matchesArr, profileId) {
