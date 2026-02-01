@@ -408,15 +408,19 @@ export class LeagueH2HPageComponent implements OnInit {
 
               console.log('leaguesRatings', this.leaguesRatings);
 
-              this.leaguesRatings['Common'].forEach((profile, ind) => {
-                if (!profile.place_in_league) profile.place_in_league = {};
-                this.profilesDetails.find(p => p.id === profile.id).place_in_league['Common'] = ind + 1;
-              })
+              if (!!this.leaguesRatings['Common'])
+                this.leaguesRatings['Common'].forEach((profile, ind) => {
+                  const pr = this.profilesDetails.find(p => p.id === profile.id);
+                  if (!pr.place_in_league) pr.place_in_league = {};
+                  pr.place_in_league['Common'] = ind + 1;
+                })
 
-              this.leaguesRatings['Apertura'].forEach((profile, ind) => {
-                if (!profile.place_in_league) profile.place_in_league = {};
-                this.profilesDetails.find(p => p.id === profile.id).place_in_league['Apertura'] = ind + 1;
-              })
+              if (!!this.leaguesRatings['Apertura'])
+                this.leaguesRatings['Apertura'].forEach((profile, ind) => {
+                  const pr = this.profilesDetails.find(p => p.id === profile.id); 
+                  if (!pr.place_in_league) pr.place_in_league = {};
+                  pr.place_in_league['Apertura'] = ind + 1;
+                })
               
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
