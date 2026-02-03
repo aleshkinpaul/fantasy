@@ -82,7 +82,6 @@ export class LeagueH2HPageComponent implements OnInit {
 
   ngOnInit() {
     const yearParam = +this.route.snapshot.queryParams?.year || '';
-    console.log('snapshot', this.route.snapshot.queryParams);
     
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
@@ -133,8 +132,6 @@ export class LeagueH2HPageComponent implements OnInit {
                 tour.min = objMaxMin.min;
               });
 
-              console.log('prizes', this.consts.prizes);
-              
               this.calcRating();
               const squadDetailsValue = [];
 
@@ -205,9 +202,6 @@ export class LeagueH2HPageComponent implements OnInit {
                 return profileInfo;
               });
 
-              console.log('profilesDetails', profilesDetails);
-              
-              
               for (let i = 0; i < this.lastTour; i++) {  
                 matches[i + 1].forEach(match => {
                   const currentStage = this.getCurrentStage(i + 1);
@@ -392,6 +386,11 @@ export class LeagueH2HPageComponent implements OnInit {
               profilesForLeague.sort(this.sortStandings.bind(this));
               this.leaguesRatings['Apertura'] = profilesForLeague;
 
+              profilesForLeague = this.profilesDetails.map(profile => Object.assign({}, profile));
+              this.chosenStage = 'common';
+              profilesForLeague.sort(this.sortStandingsByFO.bind(this));
+              this.leaguesRatings['CommonFO'] = profilesForLeague;
+
               this.chosenStage = tempChosenStage;
 
               // фиксация мест в каждой лиге у команд
@@ -406,8 +405,6 @@ export class LeagueH2HPageComponent implements OnInit {
                 })
               });
 
-              console.log('leaguesRatings', this.leaguesRatings);
-
               if (!!this.leaguesRatings['Common'])
                 this.leaguesRatings['Common'].forEach((profile, ind) => {
                   const pr = this.profilesDetails.find(p => p.id === profile.id);
@@ -421,6 +418,13 @@ export class LeagueH2HPageComponent implements OnInit {
                   if (!pr.place_in_league) pr.place_in_league = {};
                   pr.place_in_league['Apertura'] = ind + 1;
                 })
+
+              if (!!this.leaguesRatings['CommonFO'])
+                this.leaguesRatings['CommonFO'].forEach((profile, ind) => {
+                  const pr = this.profilesDetails.find(p => p.id === profile.id); 
+                  if (!pr.place_in_league) pr.place_in_league = {};
+                  pr.place_in_league['CommonFO'] = ind + 1;
+                })
               
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
@@ -429,7 +433,7 @@ export class LeagueH2HPageComponent implements OnInit {
                   const squadInfo = this.squads.data.players[profile.id];
                   const objMedals = this.getMedalsInSeason(profile.id);
 
-                  this.squadsDetails.next([...this.squadsDetails.value, {
+                  profile.squadDetails = {
                     id: squadInfo?.id,
                     name: squadInfo?.team.title || squads_2?.data.players[profile.id].team.title,
                     score: squadInfo?.team.results_by_tour[this.lastTour].total_score,
@@ -441,12 +445,17 @@ export class LeagueH2HPageComponent implements OnInit {
                     silver_medals: objMedals.silver,
                     bronze_medals: objMedals.bronze,
                     medals_count: objMedals.gold + objMedals.silver + objMedals.bronze,
+                    medals_arr: objMedals.medalsArr,
+                    max_medals_in_a_row: objMedals.maxMedalsInARow,
+                    cur_medals_in_a_row: objMedals.curMedalsInARow,
                     totalPlaces: squadInfo?.team.results_by_tour[this.lastTour].total_place,
                     profile: profile,
                     team_id: squadInfo?.team.id,
                     info: squadInfo,
                     rating: this.squads.data.players[playerId].team.rating
-                  }]);
+                  };
+
+                  this.squadsDetails.next([...this.squadsDetails.value, profile.squadDetails]);
                 }
               })
 
@@ -544,6 +553,7 @@ export class LeagueH2HPageComponent implements OnInit {
                   console.log('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
 
                   if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
+                  if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
                 }       
               );
               
@@ -554,7 +564,6 @@ export class LeagueH2HPageComponent implements OnInit {
             this.setConfTabId(this.activeTabs.confTabId);
 
             this.getMatchesForLeague();
-            console.log('profilesArr', this.unitedProfiles);
           },
           error: err => {
             console.error('Ошибка при получении данных:', err);
@@ -594,7 +603,6 @@ export class LeagueH2HPageComponent implements OnInit {
     this.unitedProfiles = this.chosenStage === 'common' ? this.profilesDetails
       : this.profilesDetails.filter(x => x.leagues[this.chosenStage] === leagueType);
     this.unitedProfiles.sort(!!this.isShowUnitedTableByPoints && this.chosenStage === 'common' ? this.sortStandingsByFO.bind(this) : this.sortStandings.bind(this));
-    console.log('this.unitedProfiles',this.unitedProfiles);
   }
 
   updateStageTypeByTabId() {
@@ -763,7 +771,8 @@ export class LeagueH2HPageComponent implements OnInit {
       this.countPrizeNominees(
         prize.id === 7 ?
           this.profiles
-          : this.profiles.filter(profile => !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id)), prize.id
+          : this.profiles.filter(profile => !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id))
+        , prize.id
         , prize.id === 8 ? 
           "213955"
           : prize.id === 11 ?
@@ -786,8 +795,59 @@ export class LeagueH2HPageComponent implements OnInit {
     this.consts.prizes[13].state = 1;
 
     this.prizesToShow = this.consts.prizes;
+  }
 
-    console.log('this.consts.prizes', this.consts.prizes, prizeWinners, profilesExceptWinners);
+  updatePrizesCL() {
+    this.consts.prizes.forEach((prize, prizeInd) => {
+      const valueSortCoef = +[].includes(prizeInd);
+      const paramSortCoef = +[].includes(prizeInd);
+
+      this.profilesDetails.forEach(profile => {
+        profile.prizes[prize.id] = {
+          value: 
+            prize.id === 1 ?
+              (profile.place_in_league['CommonFO'] < 7 ? 0 : profile.results.fo['common'])
+            : prize.id === 2 ?
+              (profile.squadDetails.max_medals_in_a_row < 2 ? 0 : profile.squadDetails.max_medals_in_a_row)
+            : prize.id === 3 ?
+              0
+            : prize.id === 4 ?
+              0
+            : 0,
+
+          sortParam: profile.results.points
+        }
+      })
+
+      prize.nomineesArr = this.profilesDetails
+        .filter(profile => profile.prizes[prize.id].value > 0)
+        .sort(
+          (a, b) =>
+            a.prizes[prize.id].value === b.prizes[prize.id].value ? 
+              (1 - 2 * paramSortCoef) * (b.prizes[prize.id].sortParam - a.prizes[prize.id].sortParam) : 
+              (1 - 2 * valueSortCoef) * (b.prizes[prize.id].value - a.prizes[prize.id].value)
+        )
+    
+      prize.activeLeaders = prize.nomineesArr.filter(nominee => {
+        return ( !prize.excluded
+            || !!prize.excluded && !prize.excluded.includes(nominee.id)
+          ) &&
+          ( !prize.isActivity
+            || !!prize.isActivity && nominee.results.subsCoef > 50
+          ) &&
+          ( prizeInd !== 11 
+            || prizeInd === 11 && nominee.prizes[prizeInd].value >= 3
+          )
+      });
+    });
+
+    this.consts.prizes.forEach((prize) => {
+      if (!!prize.isFinalStage) prize.state = 2;
+      if (!!prize.nomineesArr.length) prize.state = 1;
+      if (!prize.state && !prize.nomineesArr.length) prize.state = 3;
+    });
+    
+    this.prizesToShow = this.consts.prizes;
   }
 
   getCurrentStage(tourInd) {
@@ -964,15 +1024,28 @@ export class LeagueH2HPageComponent implements OnInit {
     const obj = {
       gold: 0,
       silver: 0,
-      bronze: 0
+      bronze: 0,
+      medalsArr: [],
+      curMedalsInARow: 0,
+      maxMedalsInARow: 0
     }
 
-    for (let i = 1; i < this.lastTour + 1; i++) {
+    for (let i = 1; i <= this.lastTour; i++) {
+      
       const placeInTour = this.getPlaceInTour(id, i);
 
       obj.gold += +(placeInTour === 1);
       obj.silver += +(placeInTour === 2);
       obj.bronze += +(placeInTour === 3);
+
+      obj.medalsArr.push(placeInTour <= 3 ? placeInTour : 0);
+
+      if (placeInTour <= 3) {
+        obj.curMedalsInARow += 1;
+        obj.maxMedalsInARow = Math.max(obj.maxMedalsInARow, obj.curMedalsInARow);
+      } else {
+        obj.curMedalsInARow = 0;
+      }
     }
 
     return obj;
