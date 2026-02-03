@@ -702,7 +702,7 @@ export class LeagueH2HPageComponent implements OnInit {
           : prizeInd === 5 ?
             (!profile.place_in_league['Segunda'] || +profile.sex === 1 ? 0 : profile.results.points['clausura'])
           : prizeInd === 6 ?
-            (profile.isMartin === 1 && profile.leagues['clausura'] === 'Primera' ? profile.results.points['clausura'] : 0)
+            (profile.isMartin === 1 ? profile.results.fo['common'] : 0)
           : prizeInd === 7 ?
             (!!profileResult ? profileResult.points : 0)
           : prizeInd === 8 ?
