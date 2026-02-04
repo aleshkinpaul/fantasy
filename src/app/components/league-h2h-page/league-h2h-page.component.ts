@@ -823,8 +823,11 @@ export class LeagueH2HPageComponent implements OnInit {
 
     prizesObj.nomineesArr = this.profiles
       .filter(profile => 
-        prizeInd === 7 && profile.id === "1028890564"
-        || !["1028890564", "1116311743", "154819672"].includes(profile.id) && profile.prizes[prizeInd]?.value !== 0
+        prizeInd !== 14
+        && (
+          prizeInd === 7 && profile.id === "1028890564"
+          || !["1028890564", "1116311743", "154819672"].includes(profile.id) && profile.prizes[prizeInd]?.value !== 0
+        )
       )
       .sort(
         (a, b) =>
@@ -873,7 +876,7 @@ export class LeagueH2HPageComponent implements OnInit {
     const profilesExceptWinners = this.profilesDetails.filter(profile => !prizeWinners.includes(profile.id));
     const activeProfilesExceptWinners = profilesExceptWinners.filter(profile => profile.results.subsCoef > 50 && !this.consts.prizes[13].excluded.includes(profile.id));
 
-    this.consts.prizes[13].nomineesArr = profilesExceptWinners;
+    this.consts.prizes[13].nomineesArr = activeProfilesExceptWinners;
     this.consts.prizes[13].activeLeaders.push(activeProfilesExceptWinners[Math.floor(Math.random() * activeProfilesExceptWinners.length)]);
     this.consts.prizes[13].state = 1;
 
