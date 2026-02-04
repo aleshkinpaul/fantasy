@@ -14,6 +14,7 @@ export class MatchesComponent implements OnInit {
   @Input() lastTour = 1;
   @Input() firstTour = 1;
   @Input() activeTabs;
+  @Input() matchesTours = [];
 
   public windowWidth = 1400;
   public isLoading$?: Observable<boolean>;
@@ -28,7 +29,7 @@ export class MatchesComponent implements OnInit {
     window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
 
     this.isLoading$ = this.loader.isLoading$;
-    console.log('profilesArr:', this.profilesArr);
+    console.log('profilesArr:', this.profilesArr, this.currentLeagueMatches);
   }
 
   getMatchResult(matchesArr, profileId) {

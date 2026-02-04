@@ -5,7 +5,8 @@
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 1}" (click)="setTabId(1)" id="stage_0" *ngIf="this.consts.stages.length > 0">{{ this.consts.stages[0].name }}</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" id="stage_1" *ngIf="this.consts.stages.length > 1">{{ this.consts.stages[1].name }}</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 3}" (click)="setTabId(3)" id="prizes">Призы</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 4}" (click)="setTabId(4)" id="prizes">Формат</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 4}" (click)="setTabId(4)" id="format">Формат</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 5}" (click)="setTabId(5)" *ngIf="!!consts.cup" id="cup">Кубок</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 100}" (click)="setTabId(100)" id="all">Общий зачет</li>
   </ul>
 
@@ -95,7 +96,7 @@
                         <img src="assets/logos/2025/icons/gold-medal.png" *ngSwitchCase="nomInd === 0" [alt]="'logo '+nominee.team.title">
                         <img src="assets/logos/2025/icons/silver-medal.png" *ngSwitchCase="nomInd === 1" [alt]="'logo '+nominee.team.title">
                         <img src="assets/logos/2025/icons/bronze-medal.png" *ngSwitchCase="nomInd === 2" [alt]="'logo '+nominee.team.title">
-                        <img src="assets/logos/2025/icons/medal.png" *ngSwitchDefault [alt]="'logo '+nominee.team.title">
+                        <img src="assets/logos/2025/icons/medal.png" *ngSwitchDefault [alt]="'logo '+nominee.team.title" class="half-hidden">
                         <div class="place-number" *ngSwitchCase="nomInd > 4">{{ nomInd + 1 }}</div>
                       </div>
                       <div class="icon-container">
@@ -195,6 +196,26 @@
       [profilesArr]="unitedProfiles"
       [currentLeagueMatches]="currentLeagueMatches"
       [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
+      [lastTour]="lastTour"
+      [activeTabs]="activeTabs"
+    ></app-matches>
+  </div>
+
+  <!-- Матчи кубка по турам -->
+  <div class="matches-container" *ngIf="[5].includes(activeTabs.tabId)">
+    <ul class="tours-list">
+      <li
+        *ngFor="let tourMatches of consts.cup.matches; index as i"
+        class="tour-item"
+        [ngClass]="{'active': activeTabs.cupTourId === i + 1}"
+        (click)="setCupTourId(i+1)"
+        (click)="setTourId(i+1)"
+      >{{ consts.cup.matchesToursNames[i] }}</li>
+    </ul>
+    <app-matches
+      [profilesArr]="this.profilesDetails"
+      [currentLeagueMatches]="consts.cup.matches"
+      [matchesTours]="consts.cup.matchesTours"
       [lastTour]="lastTour"
       [activeTabs]="activeTabs"
     ></app-matches>

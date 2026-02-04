@@ -32,7 +32,8 @@ export class LeagueH2HPageComponent implements OnInit {
     tabId: 1,
     confId: 0,
     confTabId: 1,
-    tourId: 1
+    tourId: 1,
+    cupTourId: 1
   }
 
   public isOnlyActivePrizes = true;
@@ -177,6 +178,8 @@ export class LeagueH2HPageComponent implements OnInit {
                     'clausura': 0,
                     'common': 0
                   },
+
+                  matchesPlayed: 0,
                   
                   teamCostTotal: 0,
                   teamCostAvg: 0,
@@ -223,6 +226,9 @@ export class LeagueH2HPageComponent implements OnInit {
                   awayProfile.results.missed_fo[currentStage] += match.home_score;
                   awayProfile.results.diff_fo[currentStage] = awayProfile.results.fo[currentStage] - awayProfile.results.missed_fo[currentStage];
                   
+                  homeProfile.results.matchesPlayed += 1;
+                  awayProfile.results.matchesPlayed += 1;
+
                   if (match.result === 0) {
                     homeProfile.results.draws[currentStage] += 1
                     awayProfile.results.draws[currentStage] += 1
@@ -311,10 +317,10 @@ export class LeagueH2HPageComponent implements OnInit {
 
                   // teamCost
                   homeProfile.results.teamCostTotal += homeProfile.team.rosters_by_tour[i+1].team_cost;
-                  homeProfile.results.teamCostAvg = Math.round(homeProfile.results.teamCostTotal / (i + 1) * 100) / 100;
+                  homeProfile.results.teamCostAvg = Math.round(homeProfile.results.teamCostTotal / homeProfile.results.matchesPlayed * 100) / 100;
                   
                   awayProfile.results.teamCostTotal += awayProfile.team.rosters_by_tour[i+1].team_cost;
-                  awayProfile.results.teamCostAvg = Math.round(awayProfile.results.teamCostTotal / (i + 1) * 100) / 100;
+                  awayProfile.results.teamCostAvg = Math.round(awayProfile.results.teamCostTotal / awayProfile.results.matchesPlayed * 100) / 100;
 
                   // subs
                   homeProfile.results.subsTotalCount += i > 0 ? 3 : 0;
@@ -349,6 +355,10 @@ export class LeagueH2HPageComponent implements OnInit {
 
                 this.profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
               }
+
+              if (!!this.consts.cup)
+                this.updateCupMatches();
+
               // общий зачет в баллах
               this.profilesDetails.forEach(profile => {
                 this.consts.stages.forEach((stage, stageInd) => {
@@ -559,6 +569,8 @@ export class LeagueH2HPageComponent implements OnInit {
               
             this.unitedProfiles = this.profilesDetails;
 
+            console.log('this.unitedProfiles', this.unitedProfiles);
+
             this.setTabId(this.activeTabs.tabId);
             this.setConfId(this.activeTabs.confId);
             this.setConfTabId(this.activeTabs.confTabId);
@@ -649,6 +661,71 @@ export class LeagueH2HPageComponent implements OnInit {
     this.chosenLeague = '';
   }
 
+  updateCupMatches() {
+    const actualCupTour = Math.max(
+      ...this.consts.cup.matchesTours.filter(val => val <= this.lastTour)
+    );
+    const indOfActualCupTour = this.consts.cup.matchesTours.indexOf(actualCupTour) + 1;
+
+    this.profilesDetails.forEach(profile => {
+      profile.results.cup = {
+        fo: 0,
+        missed_fo: 0,
+        diff_fo: 0,
+        matchesPlayed: 0,
+        avg_diff_fo: 0,
+        diff_fo_arr: [],
+        standings: [],
+        lowest_winning_pos_diff: null
+      };
+    });
+
+    for (let i = 0; i < indOfActualCupTour; i++) {  
+      this.consts.cup.matches[i].forEach(match => {
+        const tour = this.consts.cup.matchesTours[i];
+
+        match.home_score = +this.squads.data.players[match.home].team.results_by_tour[tour].tour_score;
+        match.away_score = +this.squads.data.players[match.away].team.results_by_tour[tour].tour_score;
+        match.result = Math.abs(match.home_score - match.away_score) === 0 ? 0 :
+          match.home_score > match.away_score ? 1 : 2;
+
+        const homeProfile = this.profilesDetails.find(x => x.id === match.home);
+        const awayProfile = this.profilesDetails.find(x => x.id === match.away);
+
+        homeProfile.results.cup.fo += match.home_score;
+        homeProfile.results.cup.missed_fo += match.away_score;
+        homeProfile.results.cup.diff_fo = homeProfile.results.cup.fo - homeProfile.results.cup.missed_fo;
+        homeProfile.results.cup.diff_fo_arr.push(match.home_score - match.away_score);
+        homeProfile.results.cup.matchesPlayed += 1;
+        homeProfile.results.cup.standings.push(this.getPlaceAfterTour(homeProfile.id, tour));
+        if (homeProfile.results.cup.matchesPlayed > 3) homeProfile.results.cup.avg_diff_fo = Math.round(homeProfile.results.cup.diff_fo / homeProfile.results.cup.matchesPlayed * 100) / 100;
+
+        awayProfile.results.cup.fo += match.away_score;
+        awayProfile.results.cup.missed_fo += match.home_score;
+        awayProfile.results.cup.diff_fo = awayProfile.results.cup.fo - awayProfile.results.cup.missed_fo;
+        awayProfile.results.cup.diff_fo_arr.push(match.away_score - match.home_score);
+        awayProfile.results.cup.matchesPlayed += 1;
+        awayProfile.results.cup.standings.push(this.getPlaceAfterTour(awayProfile.id, tour));
+        if (awayProfile.results.cup.matchesPlayed > 3) awayProfile.results.cup.avg_diff_fo = Math.round(awayProfile.results.cup.diff_fo / awayProfile.results.cup.matchesPlayed * 100) / 100;
+      
+        if (match.result === 1) {
+          const curDiff = this.getPlaceAfterTour(homeProfile.id, tour) - this.getPlaceAfterTour(awayProfile.id, tour);
+
+          if (homeProfile.results.cup.lowest_winning_pos_diff === null) homeProfile.results.cup.lowest_winning_pos_diff = curDiff;
+          homeProfile.results.cup.lowest_winning_pos_diff = Math.max(homeProfile.results.cup.lowest_winning_pos_diff, curDiff);
+        }
+
+        if (match.result === 2) {
+          const curDiff = this.getPlaceAfterTour(awayProfile.id, tour) - this.getPlaceAfterTour(homeProfile.id, tour);
+
+
+          if (awayProfile.results.cup.lowest_winning_pos_diff === null) awayProfile.results.cup.lowest_winning_pos_diff = curDiff;
+          awayProfile.results.cup.lowest_winning_pos_diff = Math.max(awayProfile.results.cup.lowest_winning_pos_diff, curDiff);
+        }
+      })
+    }
+  }
+
   toggleUnitedRating() {
     this.isShowUnitedTableByPoints = !this.isShowUnitedTableByPoints;
     this.updateProfilesByStage();
@@ -731,7 +808,11 @@ export class LeagueH2HPageComponent implements OnInit {
             profile.results.prizeMaxStoppedNoLoseStrike
           : prizeInd === 19 ?
             profile.results.prizeMaxLosedDiff
-          : 0,
+          : prizeInd === 20 ?
+            profile.results.cup.lowest_winning_pos_diff || 0
+          : prizeInd === 21 ?
+            profile.results.cup.avg_diff_fo
+          : '-',
 
         sortParam: 
           prizeInd === 7 ?
@@ -743,8 +824,7 @@ export class LeagueH2HPageComponent implements OnInit {
     prizesObj.nomineesArr = this.profiles
       .filter(profile => 
         prizeInd === 7 && profile.id === "1028890564"
-        || prizeInd === 8 && !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id)
-        || !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id) && profile.prizes[prizeInd]?.value > 0
+        || !["1028890564", "1116311743", "154819672"].includes(profile.id) && profile.prizes[prizeInd]?.value !== 0
       )
       .sort(
         (a, b) =>
@@ -771,7 +851,7 @@ export class LeagueH2HPageComponent implements OnInit {
       this.countPrizeNominees(
         prize.id === 7 ?
           this.profiles
-          : this.profiles.filter(profile => !["1028890564", "1113514956", "1116311743", "154819672"].includes(profile.id))
+          : this.profiles.filter(profile => !["1028890564", "1116311743", "154819672"].includes(profile.id))
         , prize.id
         , prize.id === 8 ? 
           "213955"
@@ -788,13 +868,18 @@ export class LeagueH2HPageComponent implements OnInit {
     });
 
     const prizeWinners = this.consts.prizes.map(prize => !!prize.activeLeaders[0] ? prize.activeLeaders[0].id : '');
-    const profilesExceptWinners = this.profilesDetails.filter(profile => !prizeWinners.includes(profile.id));
+    ["1063076888", "1116843193"].forEach(id => prizeWinners.push(id));
 
-    this.consts.prizes[13].nomineesArr.push(profilesExceptWinners[Math.floor(Math.random() * profilesExceptWinners.length)]);
-    this.consts.prizes[13].activeLeaders = this.consts.prizes[13].nomineesArr;
+    const profilesExceptWinners = this.profilesDetails.filter(profile => !prizeWinners.includes(profile.id));
+    const activeProfilesExceptWinners = profilesExceptWinners.filter(profile => profile.results.subsCoef > 50 && !this.consts.prizes[13].excluded.includes(profile.id));
+
+    this.consts.prizes[13].nomineesArr = profilesExceptWinners;
+    this.consts.prizes[13].activeLeaders.push(activeProfilesExceptWinners[Math.floor(Math.random() * activeProfilesExceptWinners.length)]);
     this.consts.prizes[13].state = 1;
 
     this.prizesToShow = this.consts.prizes;
+
+    console.log('this.prizesToShow', this.prizesToShow);
   }
 
   updatePrizesCL() {
@@ -857,7 +942,23 @@ export class LeagueH2HPageComponent implements OnInit {
   setTabId(ind) {
     this.activeTabs.tabId = ind;
     this.activeTabs.confId = 0;
-    if (!!this.consts.stages[ind-1]) this.activeTabs.tourId = Math.min(this.lastTour - this.consts.stages[ind-1].firstTour + 1, this.consts.stages[ind-1].lastTour);
+    
+    if (!!this.consts.stages[ind-1])
+      this.activeTabs.tourId = Math.min(
+        this.lastTour - this.consts.stages[ind-1].firstTour + 1
+        , this.consts.stages[ind-1].lastTour
+      );
+
+    if (ind === 5) {
+      const actualCupTour = Math.max(
+        ...this.consts.cup.matchesTours.filter(val => val <= this.lastTour)
+      );
+      const indOfActualCupTour = this.consts.cup.matchesTours.indexOf(actualCupTour) + 1;
+
+      this.activeTabs.tourId = indOfActualCupTour;
+      this.activeTabs.cupTourId = indOfActualCupTour;
+    }
+
     this.setQueryParam(this.activeTabs);
     this.isShowUnitedTableByPoints = false;
     this.updateStageTypeByTabId(ind);
@@ -882,6 +983,11 @@ export class LeagueH2HPageComponent implements OnInit {
 
   setTourId(ind) {
     this.activeTabs.tourId = ind;
+    this.setQueryParam(this.activeTabs)
+  }
+
+  setCupTourId(ind) {
+    this.activeTabs.cupTourId = ind;
     this.setQueryParam(this.activeTabs)
   }
 

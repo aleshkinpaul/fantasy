@@ -522,8 +522,8 @@
 
       .tour-item {
         display: block;
-        padding: 10px 0;
-        width: 40px;
+        padding: 10px 5px;
+        min-width: 40px;
         background-color: gray;
         text-align: center;
         cursor: pointer;
@@ -617,7 +617,7 @@
     gap: 20px;
 
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
 
     .nav-item {
       padding: 10px 20px;
@@ -810,6 +810,10 @@
                 justify-content: space-between;
                 
                 width: 100%;
+
+                .half-hidden {
+                  opacity: .35;
+                }
               }
 
               .nominee-bage-container {

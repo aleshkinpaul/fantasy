@@ -1,7 +1,15 @@
 
+<h2 *ngIf="!!matchesTours.length" class="match-title">{{ matchesTours[activeTabs.cupTourId - 1] }} тур</h2>
+
 <div *ngFor="let tourMatches of currentLeagueMatches; index as i">
   <ul class="matches-list" *ngIf="activeTabs.tourId === i+1">
-    <li class="match-item" *ngFor="let match of tourMatches">
+    <li 
+      class="match-item"
+      [ngClass]="{
+        'up-half': match.type === 'up',
+        'down-half': match.type === 'down'
+      }"
+      *ngFor="let match of tourMatches">
       <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.home)" target="_blank">
         <div class="team home-team">
           <div class="name-container">
