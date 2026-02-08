@@ -10,7 +10,7 @@
     
     width: 100%;
     text-align: center;
-    border-collapse: ceparate;
+    border-collapse: separate;
     border-spacing: 0 1px;
 
     &.standings {
@@ -24,8 +24,7 @@
         &.points {
 
           .points-info {
-            display: flex;
-            flex-direction: row;
+            @include flex-row(0);
             justify-content: center;
             align-items: center;
 
@@ -232,9 +231,7 @@
           padding-left: 5px;
           height: $row-height;
     
-          display: flex;
-          flex-direction: row;
-          gap: 10px;
+          @include flex-row($space-10px);
           align-items: center;
     
           font-family: "Exo2";
@@ -251,9 +248,7 @@
           }
 
           .item-team-container {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
+            @include flex-row($space-10px);
             align-items: center;
     
             .logo-container {
@@ -261,8 +256,7 @@
               width: $logo-size;
               // height: $logo-size;
             
-              display: flex;
-              flex-direction: row;
+              @include flex-row(0);
               align-items: center;
               box-sizing: border-box;
       
@@ -277,7 +271,7 @@
                 bottom: -5px;
 
                 .label {
-                  display: flex;
+                  @include flex-row(0);
                   justify-content: center;
                   align-items: center;
 
@@ -308,8 +302,7 @@
             }
       
             .team-container {
-              display: flex;
-              flex-direction: column;
+              @include flex-column(0);
               min-width: 125px;
       
               .team-name {
@@ -335,8 +328,7 @@
 
   .button-container {
     margin: 10px auto;
-    display: flex;
-    flex-direction: row;
+    @include flex-row(0);
     justify-content: center;
     align-items: center;
     
@@ -355,9 +347,7 @@
   }
 
   .format-tab {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    @include flex-column($space-20px);
 
     .img-container {
       width: 100%;
