@@ -6,17 +6,13 @@
   }
 
   .matches-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    @include flex-column($space-10px);
 
     margin-bottom: 20px;
 
     .match-item {
-      display: flex;
-      flex-direction: row;
+      @include flex-row($space-10px);
       justify-content: center;
-      gap: 10px;
 
       padding: 10px;
 
@@ -35,13 +31,10 @@
       }
 
       .team {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+        @include flex-row($space-10px);
 
         .name-container {
-          display: flex;
-          flex-direction: column;
+          @include flex-column(0);
           justify-content: center;
 
           width: 200px;
@@ -77,8 +70,7 @@
         width: calc($logo-size * 2);
         // height: $logo-size;
       
-        display: flex;
-        flex-direction: row;
+        @include flex-row(0);
         align-items: center;
         box-sizing: border-box;
 
@@ -96,8 +88,7 @@
 
   .button-container {
     margin: 10px auto;
-    display: flex;
-    flex-direction: row;
+    @include flex-row(0);
     justify-content: center;
     align-items: center;
     
@@ -116,9 +107,7 @@
   }
 
   .format-tab {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    @include flex-column($space-20px);
 
     .img-container {
       width: 100%;
