@@ -1,19 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LeaguePageComponent } from './components/league-page/league-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { CupPageComponent } from './components/cup-page/cup-page.component';
-import { CWCPageComponent } from './components/cwc-page/cwc-page.component';
-import { LeagueH2HPageComponent } from './components/league-h2h-page/league-h2h-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full' },
-  { path: 'spain/new', component: LeagueH2HPageComponent, pathMatch: 'full' },
-  { path: 'spain', component: LeaguePageComponent },
-  { path: 'champions-league/new', component: LeagueH2HPageComponent, pathMatch: 'full' },
-  { path: 'champions-league', component: LeaguePageComponent },
-  { path: 'spain-cup', component: CupPageComponent },
-  { path: 'club-world-cup', component: CWCPageComponent },
+  { 
+    path: 'spain/new', 
+    loadComponent: () => import('./components/league-h2h-page/league-h2h-page.component').then(m => m.LeagueH2HPageComponent),
+    pathMatch: 'full' 
+  },
+  { 
+    path: 'spain', 
+    loadComponent: () => import('./components/league-page/league-page.component').then(m => m.LeaguePageComponent)
+  },
+  { 
+    path: 'champions-league/new', 
+    loadComponent: () => import('./components/league-h2h-page/league-h2h-page.component').then(m => m.LeagueH2HPageComponent),
+    pathMatch: 'full' 
+  },
+  { 
+    path: 'champions-league', 
+    loadComponent: () => import('./components/league-page/league-page.component').then(m => m.LeaguePageComponent)
+  },
+  { 
+    path: 'spain-cup', 
+    loadComponent: () => import('./components/cup-page/cup-page.component').then(m => m.CupPageComponent)
+  },
+  { 
+    path: 'club-world-cup', 
+    loadComponent: () => import('./components/cwc-page/cwc-page.component').then(m => m.CWCPageComponent)
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

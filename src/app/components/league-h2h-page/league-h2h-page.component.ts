@@ -1,20 +1,29 @@
 // @ts-nocheck
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Apollo } from 'apollo-angular';
 import { IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
 import { Observable } from '@apollo/client';
 import { BehaviorSubject, forkJoin } from 'rxjs';
+import { ISquadDetails, IProfileDetails, IContsConfig } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
+import { logger } from '../../utils/logger';
 import { StandingsComponent } from '../standings/standings.component';
+import { ScheduleComponent } from '../schedule/schedule.component';
+import { MatchesComponent } from '../matches/matches.component';
+import { HeaderComponent } from '../header/header.component';
+import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { logMissingFieldErrors } from '@apollo/client/core/ObservableQuery';
 
 @Component({
   selector: 'app-league-h2h-page',
   templateUrl: './league-h2h-page.component.html',
-  styleUrls: ['./league-h2h-page.component.scss']
+  styleUrls: ['./league-h2h-page.component.scss'],
+  standalone: true,
+  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent]
 })
 export class LeagueH2HPageComponent implements OnInit {
   private data;
@@ -24,7 +33,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public teams;
   // public tours;
   // public squadsDetails = [];
-	public squadsDetails = new BehaviorSubject<any[]>([])
+	public squadsDetails = new BehaviorSubject<ISquadDetails[]>([])
   public squadsDetails$ = this.squadsDetails.asObservable();
 	public tours = new BehaviorSubject<any[]>([])
   public tours$ = this.tours.asObservable();
@@ -41,9 +50,9 @@ export class LeagueH2HPageComponent implements OnInit {
   public isShowUnitedTableByPoints = false;
   public prizesToShow = [];
   public unitedProfiles = [];
-  public profilesDetails = [];
-  public currentLeagueMatches = [];
-  public leaguesRatings = {};
+  public profilesDetails: IProfileDetails[] = [];
+  public currentLeagueMatches: any[] = [];
+  public leaguesRatings: Record<string, IProfileDetails[]> = {};
   public chosenStage = 'common';
   public chosenLeague = '';
   public tabId;
@@ -52,22 +61,22 @@ export class LeagueH2HPageComponent implements OnInit {
 
   public testInd: number = 0;
 
-  public teamsArr = [];
-  public allSquads = [];
+  public teamsArr: IPlayers[] = [];
+  public allSquads: string[] = [];
   public lastTour: number = 1;
 
-  private playersArr = [];
+  private playersArr: string[] = [];
   private ratingMax: number = 0;
   private ratingMed: number = 0;
   private ratingKoefs = [19, 15, 12, 10, 9];
   private lastToursDetails = [];
   private maxResultValue = 1;
   private minResultValue = 1;
-  public playersRatingArr = [];
+  public playersRatingArr: number[] = [];
   private drawGap = 0;
 
-  public tabooTeams = ["7655", "7654"];
-  public tabooPlayers = ["213875"];
+  public tabooTeams: string[] = ["7655", "7654"];
+  public tabooPlayers: string[] = ["213875"];
 
   public isLoading$?: Observable<boolean>;
   public windowWidth: number = 1400;
@@ -509,7 +518,7 @@ export class LeagueH2HPageComponent implements OnInit {
             this.service.getData(`${this.consts.tour_link + this.lastTour}`)
               .subscribe(
                 objPlayers => {
-                  console.log('Игроки: ', objPlayers);
+                  logger.debug('Игроки: ', objPlayers);
                   const players = [];
 
                   this.profilesDetails.forEach((profile, ind) => {
@@ -560,7 +569,7 @@ export class LeagueH2HPageComponent implements OnInit {
                     }
                   });
 
-                  console.log('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
+                  logger.debug('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
 
                   if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
                   if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
@@ -569,7 +578,7 @@ export class LeagueH2HPageComponent implements OnInit {
               
             this.unitedProfiles = this.profilesDetails;
 
-            console.log('this.unitedProfiles', this.unitedProfiles);
+            logger.debug('this.unitedProfiles', this.unitedProfiles);
 
             this.setTabId(this.activeTabs.tabId);
             this.setConfId(this.activeTabs.confId);
@@ -578,7 +587,7 @@ export class LeagueH2HPageComponent implements OnInit {
             this.getMatchesForLeague();
           },
           error: err => {
-            console.error('Ошибка при получении данных:', err);
+            logger.error('Ошибка при получении данных:', err);
           }
         });
     }});
@@ -882,7 +891,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
     this.prizesToShow = this.consts.prizes;
 
-    console.log('this.prizesToShow', this.prizesToShow);
+    logger.debug('this.prizesToShow', this.prizesToShow);
   }
 
   updatePrizesCL() {

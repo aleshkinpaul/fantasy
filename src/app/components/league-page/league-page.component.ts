@@ -1,18 +1,28 @@
 // @ts-nocheck
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Apollo } from 'apollo-angular';
 import { IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
 import { Observable } from '@apollo/client';
 import { BehaviorSubject, forkJoin } from 'rxjs';
+import { ISquadDetails, IProfileDetails } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
+import { logger } from 'src/app/utils/logger';
+import { HeaderComponent } from '../header/header.component';
+import { StandingsComponent } from '../standings/standings.component';
+import { ScheduleComponent } from '../schedule/schedule.component';
+import { MatchesComponent } from '../matches/matches.component';
+import { DefaultLoaderComponent } from '../loader/default-loader.component';
 
 @Component({
   selector: 'app-league-page',
   templateUrl: './league-page.component.html',
-  styleUrls: ['./league-page.component.scss']
+  styleUrls: ['./league-page.component.scss'],
+  standalone: true,
+  imports: [CommonModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent]
 })
 export class LeaguePageComponent implements OnInit {
   private data;
@@ -22,7 +32,7 @@ export class LeaguePageComponent implements OnInit {
   public teams;
   // public tours;
   // public squadsDetails = [];
-	public squadsDetails = new BehaviorSubject<any[]>([])
+	public squadsDetails = new BehaviorSubject<ISquadDetails[]>([])
   public squadsDetails$ = this.squadsDetails.asObservable();
 	public tours = new BehaviorSubject<any[]>([])
   public tours$ = this.tours.asObservable();
@@ -86,7 +96,7 @@ export class LeaguePageComponent implements OnInit {
         .subscribe({
           next: ([squads, squads_2]) => {
               this.squads = squads;
-              if (!!squads_2) console.log('squads_2: ', squads_2);
+              if (!!squads_2) logger.debug('squads_2: ', squads_2);
 
               this.lastTour = Object.keys(this.squads.data.tours).length;
 
@@ -139,26 +149,26 @@ export class LeaguePageComponent implements OnInit {
                 Object.values(squads_2.data.players)
                   .filter(player => !this.playersArr.includes(player.id))
                   .map(player => {
-                    console.log('=== OLD:', player);
+                    logger.debug('=== OLD:', player);
                     const resultsObj = {};
 
                     Object.values(player.team.results_by_tour).forEach((result, ind) => {
                       resultsObj[this.lastTour+ind+1] = result;
                     })                    
 
-                    console.log('resultsObj', resultsObj);
+                    logger.debug('resultsObj', resultsObj);
                     
                     
                     this.squads.data.players.push(resultsObj);
                   });
                   
                 this.playersArr = Object.values(this.squads.data.players).map(player => player.id);
-                console.log('this.playersArr: ', this.playersArr);
+                logger.debug('this.playersArr: ', this.playersArr);
               }
 
               this.lastTour = Object.keys(this.squads.data.tours).length;
               
-              console.log('this.squads.data.tours', this.squads.data.tours, this.lastTour);
+              logger.debug('this.squads.data.tours', this.squads.data.tours, this.lastTour);
 
               Object.values(this.squads.data.tours)
               .forEach((tour, ind) => {
@@ -168,20 +178,20 @@ export class LeaguePageComponent implements OnInit {
                 tour.min = objMaxMin.min;
               });
 
-              console.log('CHECK: ', this.squads.data.tours, this.lastTour);
+              logger.debug('CHECK: ', this.squads.data.tours, this.lastTour);
               
-              console.log('profiles', this.profiles);
-              console.log('consts', this.consts);
-              console.log('squads', this.squads);
-              console.log('teams', this.teams);
+              logger.debug('profiles', this.profiles);
+              logger.debug('consts', this.consts);
+              logger.debug('squads', this.squads);
+              logger.debug('teams', this.teams);
 
-              console.log('lastTour', this.lastTour);
-              console.log(this.playersArr);
+              logger.debug('lastTour', this.lastTour);
+              logger.debug(this.playersArr);
 
-              console.log('calcRating()');
+              logger.debug('calcRating()');
 
               this.calcRating();
-              console.log('squads!!!', this.squads);
+              logger.debug('squads!!!', this.squads);
 
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
@@ -238,10 +248,10 @@ export class LeaguePageComponent implements OnInit {
                     obj.squads.push(newSquad);
                     
                     if (element.team.id === "340148") {
-                      console.log('ind:', i, 'newSquad', newSquad);
+                      logger.debug('ind:', i, 'newSquad', newSquad);
 
                       if (i > 1)
-                        console.log('newPlayers', newSquad
+                        logger.debug('newPlayers', newSquad
                           .filter(n => obj.squads[i-2].indexOf(n) === -1), newSquad
                           .filter(n => obj.squads[i-2].indexOf(n) === -1).length);
                     }
@@ -256,8 +266,8 @@ export class LeaguePageComponent implements OnInit {
                 this.teamsArr.push(obj);
             });
 
-            console.log('Команды, сорт. по трансферам: ', this.teamsArr.sort(this.sortByTransfersCount));
-            console.log('Команды, сорт. по очкам: ', this.teamsArr.sort(this.sortByPointsCount));
+            logger.debug('Команды, сорт. по трансферам: ', this.teamsArr.sort(this.sortByTransfersCount));
+            logger.debug('Команды, сорт. по очкам: ', this.teamsArr.sort(this.sortByPointsCount));
 
             // Игроки
             Object.values(this.squads.data.players).forEach((element, ind) => {
@@ -277,7 +287,7 @@ export class LeaguePageComponent implements OnInit {
             this.service.getData(`${this.consts.tour_link + this.lastTour}`)
               .subscribe(
                 objPlayers => {
-                  console.log('Игроки: ', objPlayers);
+                  logger.debug('Игроки: ', objPlayers);
                   const players = [];
                   this.allSquads.forEach(pl => {
                     const currentObj = players.find(elem => elem.id === pl);
@@ -293,12 +303,12 @@ export class LeaguePageComponent implements OnInit {
                     })
                   });
 
-                  console.log('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
+                  logger.debug('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
                 }       
               ); 
           },
           error: err => {
-            console.error('Ошибка при получении данных:', err);
+            logger.error('Ошибка при получении данных:', err);
           }
         });
     }});
@@ -398,7 +408,7 @@ export class LeaguePageComponent implements OnInit {
   getMinMaxInTour(tourNum) {
     const tourResults = Object.values(this.squads.data.players)
       .map(player => {
-        console.log('player', player, tourNum, player.team, player.team.results_by_tour, player.team.results_by_tour[tourNum.toString()]);
+        logger.debug('player', player, tourNum, player.team, player.team.results_by_tour, player.team.results_by_tour[tourNum.toString()]);
         return player.team.results_by_tour[tourNum.toString()].tour_score
       });
 

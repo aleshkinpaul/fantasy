@@ -1,0 +1,117 @@
+// ============================================
+// Design Tokens & CSS Variables
+// ============================================
+
+// Color Palette
+$colors: (
+  primary: #CE4843,
+  primary-dark: #A83936,
+  secondary: #5B764B,
+  secondary-light: #7a9963,
+  accent: rgba(30, 41, 59),
+  
+  // Neutrals
+  white: #ffffff,
+  gray-50: #f9fafb,
+  gray-100: #f3f4f6,
+  gray-200: #e5e7eb,
+  gray-300: #d1d5db,
+  gray-400: #9ca3af,
+  gray-500: #6b7280,
+  gray-600: #4b5563,
+  gray-700: #374151,
+  gray-800: #1f2937,
+  gray-900: #111827,
+  black: #000000,
+  
+  // Medals
+  gold: #AF9500,
+  silver: #9b9b9b,
+  bronze: #6A3805,
+  
+  // Status
+  success: #2c814e,
+  success-bg: #D1F1DA,
+  error: #420b08,
+  error-bg: #F4CCCC,
+  warning: #d97706,
+  warning-bg: #fef3c7,
+  info: #1f2937,
+  info-bg: #e0e7ff,
+);
+
+// Typography
+$font-family-base: 'Prosto_One', sans-serif;
+$font-family-code: 'Courier New', monospace;
+
+$font-size-xs: 0.75rem;      // 12px
+$font-size-sm: 0.875rem;     // 14px
+$font-size-base: 1rem;       // 16px
+$font-size-lg: 1.125rem;     // 18px
+$font-size-xl: 1.25rem;      // 20px
+$font-size-2xl: 1.5rem;      // 24px
+$font-size-3xl: 1.875rem;    // 30px
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing
+$space-xs: 0.25rem;    // 4px
+$space-sm: 0.5rem;     // 8px
+$space-md: 1rem;       // 16px
+$space-lg: 1.5rem;     // 24px
+$space-xl: 2rem;       // 32px
+$space-2xl: 3rem;      // 48px
+
+// Border Radius
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+$border-radius-xl: 12px;
+$border-radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+// Breakpoints
+$breakpoint-xs: 320px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Layout
+$header-height: 60px;
+$sidebar-width: 250px;
+$row-height: 40px;
+
+// Z-index scale
+$z-index: (
+  'dropdown': 1000,
+  'sticky': 1020,
+  'fixed': 1030,
+  'modal-backdrop': 1040,
+  'modal': 1050,
+  'popover': 1060,
+  'tooltip': 1070,
+);
+
+// Color functions
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function z-index($name) {
+  @return map-get($z-index, $name);
+}
+
+// Transition & Animation
+$transition-fast: 150ms ease-out;
+$transition-base: 300ms ease-out;
+$transition-slow: 500ms ease-out;

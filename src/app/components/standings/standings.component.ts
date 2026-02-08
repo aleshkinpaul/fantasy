@@ -1,11 +1,14 @@
 // @ts-nocheck
 import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-standings',
   templateUrl: './standings.component.html',
-  styleUrls: ['./standings.component.scss']
+  styleUrls: ['./standings.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class StandingsComponent implements OnInit {
   @Input() profilesArr = [];

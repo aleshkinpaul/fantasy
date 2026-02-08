@@ -1,12 +1,15 @@
 // @ts-nocheck
 import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
 import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss']
+  styleUrls: ['./schedule.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class ScheduleComponent implements OnInit {
   @Input() profilesArr = [];

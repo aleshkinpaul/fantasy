@@ -1,3 +1,7 @@
+// Import design tokens and mixins first
+@import 'variables.scss';
+@import 'mixins.scss';
+
 // consts
 $main-header-bg-color:      #ffffff;
 $main-logo-size:            60px;

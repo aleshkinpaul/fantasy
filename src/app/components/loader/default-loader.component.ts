@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { DotLottie } from '@lottiefiles/dotlottie-web';
 
 @Component({
   selector: 'app-default-loader',
   templateUrl: './default-loader.component.html',
-  styleUrls: ['./default-loader.component.scss']
+  styleUrls: ['./default-loader.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class DefaultLoaderComponent implements OnInit {
 

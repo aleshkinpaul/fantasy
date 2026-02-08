@@ -1,18 +1,25 @@
 // @ts-nocheck
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Apollo } from 'apollo-angular';
 import { IGroup, IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
 import { Observable } from '@apollo/client';
 import { BehaviorSubject, forkJoin } from 'rxjs';
+import { ISquadDetails, IProfileDetails } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
+import { logger } from 'src/app/utils/logger';
+import { HeaderComponent } from '../header/header.component';
+import { DefaultLoaderComponent } from '../loader/default-loader.component';
 
 @Component({
   selector: 'app-cwc-page',
   templateUrl: './cwc-page.component.html',
-  styleUrls: ['./cwc-page.component.scss']
+  styleUrls: ['./cwc-page.component.scss'],
+  standalone: true,
+  imports: [CommonModule, HeaderComponent, DefaultLoaderComponent]
 })
 export class CWCPageComponent implements OnInit {
   public activeTab = 'groups';
@@ -59,7 +66,7 @@ export class CWCPageComponent implements OnInit {
   // public squadsDetails = [];
 	public groups = new BehaviorSubject<IGroup[]>([])
   public groups$ = this.groups.asObservable();
-	public squadsDetails = new BehaviorSubject<any[]>([])
+	public squadsDetails = new BehaviorSubject<ISquadDetails[]>([])
   public squadsDetails$ = this.squadsDetails.asObservable();
 	public tours = new BehaviorSubject<any[]>([])
   public tours$ = this.tours.asObservable();
@@ -134,7 +141,7 @@ export class CWCPageComponent implements OnInit {
               // console.log('CHECK: ', this.squads.data.tours, this.lastTour);
               
               // console.log('profiles', this.profiles);
-              console.log('consts', this.consts);
+              logger.debug('consts', this.consts);
               // console.log('squads', this.squads);
               // console.log('teams', this.teams);
 
@@ -176,7 +183,7 @@ export class CWCPageComponent implements OnInit {
 
               this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)]);
 
-              console.log('this.squadsDetails', this.squadsDetails.value);
+              logger.debug('this.squadsDetails', this.squadsDetails.value);
 
               // идем по группам
               this.consts.groups.forEach((group, groupInd) => {
@@ -241,20 +248,20 @@ export class CWCPageComponent implements OnInit {
                     });
                 })
 
-                console.log('results', this.results);
+                logger.debug('results', this.results);
                 
 
                 result.tours.filter(tour => tour.type === 'group')
                 .forEach((tour, tourInd) => {
                   result.tours[tourInd].matches.forEach(match => {
-                    console.log('addmeet:', match, tourInd);
+                    logger.debug('addmeet:', match, tourInd);
                     
                     this.addMeets(match, tourInd);
 
                     if (tour.num <= this.lastTour) {
                       match.meets.forEach(meet => this.countProfileResult(meet, tourInd));
                       
-                      console.log('tour[tourInd+1]', tour[tourInd+1]);
+                      logger.debug('tour[tourInd+1]', tour[tourInd+1]);
                       
                       if (!!result.tours[tourInd+1]) {
                         this.sortProfilesInTeam(match.first_team, tourInd, result);
@@ -271,7 +278,7 @@ export class CWCPageComponent implements OnInit {
                   this.sortTeamsInGroup(result.teams);
                 });
 
-                console.log('result', result);                
+                logger.debug('result', result);                
                 this.groupResults.push(JSON.parse(JSON.stringify(result)));
               });
 
@@ -279,7 +286,7 @@ export class CWCPageComponent implements OnInit {
 
               let lastTeams = [];
               this.results.forEach((group, groupInd) => {
-                console.log(group.teams);
+                logger.debug(group.teams);
                 
                 lastTeams = lastTeams.concat([
                   Object.assign({}, group.teams[2]),
@@ -296,7 +303,7 @@ export class CWCPageComponent implements OnInit {
               
               this.sortTeamsInGroup(this.additionalGroup.teams);
 
-              console.log(this.additionalGroup);
+              logger.debug(this.additionalGroup);
 
               this.additionalGroup.matches = this.consts.tours[3].matches.map((match, matchInd) => {
                 const first_team = Object.assign({}, this.additionalGroup.teams.find(team => this.additionalGroup.teams[match.first_team].id === team.id));
@@ -330,21 +337,21 @@ export class CWCPageComponent implements OnInit {
               let resultTeams = [];
 
               this.results.forEach((group, groupInd) => {
-                console.log(group.teams);
+                logger.debug(group.teams);
                 
                 playOffTeams = this.getNewObj(playOffTeams.concat([group.teams[0], group.teams[1]]));
               });
 
-              console.log('groupResults.teams', this.groupResults.reduce((a,b) => a.concat(b.teams), []));
+              logger.debug('groupResults.teams', this.groupResults.reduce((a,b) => a.concat(b.teams), []));
               
               this.playOffGroup.teams = this.getNewObj(playOffTeams.concat([
                 this.groupResults.reduce((a,b) => a.concat(b.teams), []).find(team => team.id === this.additionalGroup.teams[0].id),
                 this.groupResults.reduce((a,b) => a.concat(b.teams), []).find(team => team.id === this.additionalGroup.teams[1].id)
               ]));
 
-              console.log('this.additionalGroup', this.additionalGroup);
+              logger.debug('this.additionalGroup', this.additionalGroup);
 
-              console.log('this.playOffGroup', this.playOffGroup);
+              logger.debug('this.playOffGroup', this.playOffGroup);
               
               this.playOffGroup.matches = this.consts.tours[4].matches.map((match, matchInd) => {
                 const first_team = Object.assign({}, this.playOffGroup.teams.find(team => this.playOffGroup.teams[match.first_team].id === team.id));
@@ -421,7 +428,7 @@ export class CWCPageComponent implements OnInit {
 
               // final 
               this.finalGroup.teams = this.getNewObj(finalTeams);      
-              console.log('this.finalGroup', this.finalGroup);
+              logger.debug('this.finalGroup', this.finalGroup);
                      
               this.finalGroup.matches = this.consts.tours[6].matches.map((match, matchInd) => {
                 const first_team = Object.assign({}, this.finalGroup.teams.find(team => this.finalGroup.teams[match.first_team].id === team.id));
@@ -465,7 +472,7 @@ export class CWCPageComponent implements OnInit {
 
               this.resultTeams = resultTeams;
 
-              console.log('this.playOffGroup', this.playOffGroup, this.semifinalGroup, this.finalGroup, this.resultTeams);
+              logger.debug('this.playOffGroup', this.playOffGroup, this.semifinalGroup, this.finalGroup, this.resultTeams);
               
               
               setTimeout(() => {
@@ -479,7 +486,7 @@ export class CWCPageComponent implements OnInit {
               
           },
           error: err => {
-            console.error('Ошибка при получении данных:', err);
+            logger.error('Ошибка при получении данных:', err);
           }
         });
     }});
@@ -534,14 +541,14 @@ export class CWCPageComponent implements OnInit {
 
             group.tours[tourNum].teams.push(newTeam);
             // team.profiles = JSON.parse(JSON.stringify(tmpTeam.profiles));
-            console.log(group.groupName, tmpTeam);
+            logger.debug(group.groupName, tmpTeam);
           };
         });
 
         if (!check) group.tours[tourNum].teams.push(team);
       })
 
-      console.log('basicGroup', basicGroup);
+      logger.debug('basicGroup', basicGroup);
     })
   }
 
@@ -558,7 +565,7 @@ export class CWCPageComponent implements OnInit {
       const first_profile = match.first_team.profiles[meetInd];
       const second_profile = match.second_team.profiles[meetInd];
 
-      console.log('meet profiles', first_profile, second_profile);
+      logger.debug('meet profiles', first_profile, second_profile);
       
       const first_profile_score = +this.squads.data.players[first_profile.id].team.results_by_tour[tourInd+1]?.tour_score || 0;
       const second_profile_score = +this.squads.data.players[second_profile.id].team.results_by_tour[tourInd+1]?.tour_score || 0;
