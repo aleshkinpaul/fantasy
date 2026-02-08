@@ -11,9 +11,8 @@
     .nav-list {
       @include flex-row(0);
       align-items: stretch;
-      
       height: 100%;
-      margin:0;
+      margin: 0;
       padding: 0;
 
       .nav-item {
@@ -21,33 +20,16 @@
         @include flex-column(0);
         justify-content: center;
         text-align: center;
-
         width: 100%;
-
         user-select: none;
         cursor: pointer;
-
         box-sizing: border-box;
 
-        span {
-          text-align: center;
-          pointer-events: none;
-        }
+        &.acitve-tab { background-color: #fff; color: rgba(30, 41, 59); }
+        &.acitve-tab:hover,
+        &:hover { opacity: .2; background-color: #fff; color: rgba(30, 41, 59); }
 
-        &.acitve-tab {
-          background-color: #fff;
-          color: rgba(30, 41, 59);
-
-          &:hover {
-            opacity: 1;
-          }
-        }
-        
-        &:hover {
-          opacity: .2;
-          background-color: #fff;
-          color: rgba(30, 41, 59);
-        }
+        span { text-align: center; pointer-events: none; }
       }
     }
   }
@@ -159,22 +141,11 @@
       border-spacing: 0 1px;
 
       .table-header {
-        // background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
-
         th:last-child {
           width: calc(2 * $row-height - 30px);
-
-          @media (max-width: 900px) {
-            width: calc(2 * $row-height - 40px);
-          }
-
-          @media (max-width: 600px) {
-            width: calc(2 * $row-height - 45px);
-          }
-
-          @media (max-width: 450px) {
-            width: calc(2 * $row-height - 50px) !important;
-          }
+          @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
+          @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
+          @media (max-width: 450px) { width: calc(2 * $row-height - 50px) !important; }
         }
       }
 
@@ -225,13 +196,12 @@
                 width: 10px;
                 height: 10px;
                 border-radius: 50%;
-
                 transform: translateX(-50%);
               }
 
-              &.first-score::after  { background-color: $first-place-bg-color; color: $first-place-font-color !important; border-color: $first-place-font-color !important; }
-              &.second-score::after { background-color: $second-place-bg-color; color: $second-place-font-color !important; border-color: $second-place-font-color !important; }
-              &.third-score::after  { background-color: $third-place-bg-color; color: $third-place-font-color !important; border-color: $third-place-font-color !important; }
+              &.first-score::after  { background-color: $first-place-bg-color; }
+              &.second-score::after { background-color: $second-place-bg-color; }
+              &.third-score::after  { background-color: $third-place-bg-color; }
             }
 
             &:first-child,
@@ -261,66 +231,24 @@
             &:last-child {
               width: calc(2 * $row-height - 20px);
               height: $row-height;
-
               box-sizing: border-box;
-
-              @media (max-width: 900px) {
-                width: calc(2 * $row-height - 40px);
-              }
-
-              @media (max-width: 600px) {
-                width: calc(2 * $row-height - 45px);
-              }
-
-              @media (max-width: 450px) {
-                width: calc(2 * $row-height - 50px);
-              }
+              @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
+              @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
+              @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
       
               span {
                 width: calc(2 * $row-height - 20px);
-
-                @media (max-width: 900px) {
-                  width: calc(2 * $row-height - 40px);
-                }
-    
-                @media (max-width: 600px) {
-                  width: calc(2 * $row-height - 45px);
-                }
-    
-                @media (max-width: 450px) {
-                  width: calc(2 * $row-height - 50px);
-                }
+                @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
+                @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
+                @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
               }
             }
       
             & {
-              &.first {
-                span {
-                  color: $first-place-font-color;
-                  background-color: $first-place-bg-color;
-                }
-              }
-
-              &.second {
-                span {
-                  color: $second-place-font-color;
-                  background-color: $second-place-bg-color;
-                }
-              }
-
-              &.third {
-                span {
-                  color: $third-place-font-color;
-                  background-color: $third-place-bg-color;
-                }
-              }
-
-              &.special {
-                span {
-                  color: $special-place-font-color;
-                  background-color: $special-place-bg-color;
-                }
-              }
+              &.first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
+              &.second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
+              &.third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
+              &.special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
             }
 
             span.diff-elem {
