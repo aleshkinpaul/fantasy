@@ -1,17 +1,6 @@
 @import "styles.scss";
 
-  .table {
-    @include main-container();
-    max-width: 1200px;
-    min-height: 500px;
-    font-family: 'Exo2';
-    background-color: $row-color;
-    color: #fff;
-    
-    width: 100%;
-    text-align: center;
-    border-collapse: separate;
-    border-spacing: 0 1px;
+  .table { @include main-container(); max-width: 1200px; min-height: 500px; font-family: 'Exo2'; background-color: $row-color; color: #fff; width: 100%; text-align: center; border-collapse: separate; border-spacing: 0 1px; }
 
     &.standings {
       .sub-info {
@@ -23,16 +12,7 @@
 
         &.points {
 
-          .points-info {
-            @include flex-row(0);
-            justify-content: center;
-            align-items: center;
-
-            height: 30px;
-            
-            color: $label-font-color;
-            background-color: $label-bg-color;
-          }
+  .points-info { @include flex-row(0); justify-content: center; align-items: center; height: 30px; color: $label-font-color; background-color: $label-bg-color; }
         }
       }
 
@@ -284,25 +264,9 @@
     .prizes-button {
       display: inline-block;
       padding: 5px 10px;
-      border-radius: 10px;
-      background-color: #fff;
-      color: $row-color;
-
-      &:hover {
-        opacity: .8;
-        cursor: pointer;
-      }
-    }
-  }
-
-  .format-tab {
-    @include flex-column($space-20px);
-
-    .img-container {
-      width: 100%;
-
-      img {
-        width: 100%;
+      border-radius:  margin: $space-10px auto; @include flex-row(0); justify-content: center; align-items: center; }
+  .prizes-button { display: inline-block; padding: $space-5px $space-10px; border-radius: 10px; background-color: #fff; color: $row-color; }
+  .prizes-button:hover { opacity: .8; cursor: pointer;       width: 100%;
       }
 
       &:hover {
@@ -315,12 +279,12 @@
     text-align: center;
   }
 
-  .green-bg   { background-color: rgba(0, 255, 0, 0.3) }
-  .red-bg     { background-color: rgba(255, 0, 0, 0.3) }
-  .grey-bg    { background-color: rgba(255, 255, 255, 0.3) }
-  .green-text { color: green }
-  .red-text   { color: red }
-  .grey-text  { color: grey }
+  .green-bg { background-color: rgba(0, 255, 0, 0.3); }
+  .red-bg { background-color: rgba(255, 0, 0, 0.3); }
+  .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
+  .green-text { color: green; }
+  .red-text { color: red; }
+  .grey-text { color: grey; }
 
   .first {
     span {
