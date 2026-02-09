@@ -16,6 +16,8 @@ import { ScheduleComponent } from '../schedule/schedule.component';
 import { MatchesComponent } from '../matches/matches.component';
 import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
+import { PrizesListComponent } from './prizes-list.component';
+import { LeagueH2HDataService } from './league-h2h-data.service';
 import { logMissingFieldErrors } from '@apollo/client/core/ObservableQuery';
 
 @Component({
@@ -23,7 +25,7 @@ import { logMissingFieldErrors } from '@apollo/client/core/ObservableQuery';
   templateUrl: './league-h2h-page.component.html',
   styleUrls: ['./league-h2h-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent]
+  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent]
 })
 export class LeagueH2HPageComponent implements OnInit {
   private data;
@@ -87,7 +89,8 @@ export class LeagueH2HPageComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    public loader: LoaderService
+    public loader: LoaderService,
+    private dataService: LeagueH2HDataService
   ) {}
 
   ngOnInit() {
@@ -610,13 +613,7 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   updateProfileCommonResults(profile) {
-    profile.results.wins['common'] = profile.results.wins['apertura'] + profile.results.wins['clausura'];
-    profile.results.draws['common'] = profile.results.draws['apertura'] + profile.results.draws['clausura'];
-    profile.results.loses['common'] = profile.results.loses['apertura'] + profile.results.loses['clausura'];
-    profile.results.points['common'] = profile.results.points['apertura'] + profile.results.points['clausura'];
-    profile.results.fo['common'] = profile.results.fo['apertura'] + profile.results.fo['clausura'];
-    profile.results.missed_fo['common'] = profile.results.missed_fo['apertura'] + profile.results.missed_fo['clausura'];
-    profile.results.diff_fo['common'] = profile.results.diff_fo['apertura'] + profile.results.diff_fo['clausura'];
+    this.dataService.updateCommonResults(profile);
   }
 
   updateProfilesByStage(stageType = '', leagueType = '') {
@@ -738,10 +735,6 @@ export class LeagueH2HPageComponent implements OnInit {
   toggleUnitedRating() {
     this.isShowUnitedTableByPoints = !this.isShowUnitedTableByPoints;
     this.updateProfilesByStage();
-  }
-
-  showAllNominees(prize) {
-    prize.isShowAll = !prize.isShowAll;
   }
 
   countPrizeNominees(profiles, prizeInd, keyId = "") {
@@ -947,8 +940,8 @@ export class LeagueH2HPageComponent implements OnInit {
     this.prizesToShow = this.consts.prizes;
   }
 
-  getCurrentStage(tourInd) {
-    return tourInd <= this.consts.stages[0].lastTour ? 'apertura' : 'clausura';
+  getCurrentStage(tourInd): string {
+    return this.dataService.getCurrentStage(tourInd, this.consts.stages[0].lastTour);
   }
 
   setTabId(ind) {
@@ -1235,18 +1228,6 @@ export class LeagueH2HPageComponent implements OnInit {
   }
   
   getMedian(arr) {
-    if (arr.length === 0) return 0; // Обработка пустого массива
-  
-    // Сортируем массив
-    const sortedArr = arr.sort(this.sortCustom);
-    const mid = Math.floor(sortedArr.length / 2);
-  
-    // Если длина массива нечетная, возвращаем средний элемент
-    if (sortedArr.length % 2 !== 0) {
-      return sortedArr[mid];
-    }
-  
-    // Если длина массива четная, возвращаем среднее значение двух центральных элементов
-    return (+sortedArr[mid - 1] + +sortedArr[mid]) / 2;
+    return this.dataService.getMedian(arr);
   }
 }

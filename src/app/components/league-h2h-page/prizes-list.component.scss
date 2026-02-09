@@ -1,0 +1,255 @@
+// Prizes list styling extracted from main component
+.prizes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prize-item {
+  list-style: none;
+}
+
+.prize-item-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.info-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-header-container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.prize-icon {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.card-title-container {
+  flex: 1;
+}
+
+.prize-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.prize-id {
+  font-size: 12px;
+  color: #999;
+  
+  p {
+    margin: 0;
+  }
+}
+
+.prize-author,
+.prize-condition,
+.prize-reward {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.prize-title {
+  font-weight: 600;
+  color: #555;
+  min-width: 60px;
+}
+
+.prize-description {
+  color: #333;
+  flex: 1;
+}
+
+.nominees-container {
+  flex: 1;
+  border-left: 2px solid #e0e0e0;
+  padding-left: 20px;
+}
+
+.nominees-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.show-all-button {
+  padding: 4px 8px;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  
+  &:hover {
+    background: #0056b3;
+  }
+}
+
+.nominees-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nominee-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  
+  &.unsuitable-item {
+    opacity: 0.6;
+    background: #f5f5f5;
+  }
+}
+
+.nominee-main-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.team-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.place {
+    position: relative;
+    background: #fff;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    
+    &.half-hidden {
+      opacity: 0.5;
+    }
+  }
+}
+
+.place-number {
+  position: absolute;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.title-container {
+  flex: 1;
+  min-width: 0;
+  
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    &.team-name {
+      font-weight: 600;
+      color: #333;
+    }
+    
+    &.player-name {
+      color: #999;
+      font-size: 12px;
+    }
+  }
+}
+
+.param-container {
+  font-size: 14px;
+  font-weight: 600;
+  color: #007bff;
+  min-width: 50px;
+  text-align: right;
+}
+
+.nominee-bage-container {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.bage {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  
+  &.notactive-bage {
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  &.green-bg {
+    background: rgba(0, 255, 0, 0.6);
+    color: #333;
+  }
+  
+  &.red-bg {
+    background: rgba(255, 0, 0, 0.6);
+    color: white;
+  }
+}
+
+.nomimees-default {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  border-radius: 4px;
+  border: 1px dashed #ddd;
+  color: #999;
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}

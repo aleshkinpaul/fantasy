@@ -1,0 +1,90 @@
+<ul class="prizes-list">
+  <li class="prize-item" *ngFor="let item of prizes; index as prizeInd">
+    <div class="prize-item-container">
+      <div class="info-container">
+        <div class="card-header-container">
+          <div class="prize-icon">
+            <img [src]="item.icon" [alt]="'приз '+item.name">
+          </div>
+          <div class="card-title-container">
+            <div class="prize-name">{{ item.name }}</div>
+          </div>
+          <div class="prize-id">
+            <p>{{ item.id }}</p>
+          </div>
+        </div>
+        <div class="prize-author">
+          <span class="prize-title">Автор:</span>
+          <span class="prize-description">{{ item.author }}</span>
+        </div>
+        <div class="prize-condition">
+          <span class="prize-title">Описание:</span>
+          <span class="prize-description">{{ item.condition }}</span>
+        </div>
+        <div class="prize-reward">
+          <span class="prize-title">Приз:</span>
+          <span class="prize-description">{{ item.reward }}</span>
+        </div>
+      </div>
+      
+      <div class="nominees-container" [ngSwitch]="item.state">
+        <div class="nominees-header-container">
+          <div class="prize-title">Лидеры:</div>
+          <div class="show-all-button" *ngSwitchCase="1" (click)="toggleShowAllNominees(item)">
+            {{ !!item.isShowAll ? "Показать лидеров" : "Показать всех" }}
+          </div>
+        </div>
+        <span *ngIf="!!item.infoOnTour">Данные на {{ item.infoOnTour }} тур</span>
+        <ul class="nominees-list" *ngSwitchCase="1">
+          <ng-container *ngFor="let nominee of (!item.isShowAll ? item.activeLeaders : item.nomineesArr); index as nomInd">
+            <li
+              class="nominee-item"
+              [ngClass]="{ 'unsuitable-item': isUnusuitableItem(nominee, item.activeLeaders, item.isShowAll) }"
+              *ngIf="shouldDisplay(nominee, item.nomineesArr, item.activeLeaders, item.isShowAll, nomInd)"
+            >
+              <div class="nominee-main-container">
+                <div class="team-container">
+                  <div class="icon-container place" [ngSwitch]="true">
+                    <img [src]="getMedalImage(nomInd)" *ngSwitchDefault [alt]="'logo '+nominee.team.title"
+                      [ngClass]="{ 'half-hidden': nomInd > 2 }">
+                    <div class="place-number" *ngSwitchCase="nomInd > 4">{{ nomInd + 1 }}</div>
+                  </div>
+                  <div class="icon-container">
+                    <img [src]="nominee.logo" [alt]="'logo '+nominee.team.title">
+                  </div>
+                  <div class="title-container">
+                    <p class="team-name">{{ nominee.team.title }}</p>
+                    <p class="player-name">{{ nominee.name }}</p>
+                  </div>
+                </div>
+                <div class="param-container" *ngIf="!item.isSecret">
+                  {{ item.id !== 8 ? nominee.prizes[item.id]?.value : nominee.prizes[item.id]?.value.toFixed(2) }}
+                </div>
+              </div>
+              <div class="nominee-bage-container">
+                <div
+                  class="bage notactive-bage"
+                  [ngClass]="getActivityBadgeClass(nominee.results.subsCoef)"
+                  *ngIf="!!item.isShowAll"
+                >акт {{ nominee.results.subsCoef }}%</div>
+                <div
+                  class="bage red-bg"
+                  *ngIf="!!item.excluded && item.excluded.length > 0 && item.excluded.includes(nominee.id)"
+                >не участ.</div>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+        <div class="nomimees-default" *ngSwitchCase="2">
+          <p>Данные появятся на этапе Clausura</p>
+        </div>
+        <div class="nomimees-default" *ngSwitchCase="3">
+          <p>Нет подходящих команд</p>
+        </div>
+        <div class="nomimees-default" *ngSwitchDefault>
+          <p>Список главных претендентов будет позднее</p>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
