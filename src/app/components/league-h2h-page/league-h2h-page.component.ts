@@ -218,153 +218,8 @@ export class LeagueH2HPageComponent implements OnInit {
               });
 
               for (let i = 0; i < this.lastTour; i++) {  
-                matches[i + 1].forEach(match => {
-                  const currentStage = this.getCurrentStage(i + 1);
-
-                  match.home_score = +this.squads.data.players[match.home].team.results_by_tour[i + 1].tour_score;
-                  match.away_score = +this.squads.data.players[match.away].team.results_by_tour[i + 1].tour_score;
-                  match.result = Math.abs(match.home_score - match.away_score) <= this.drawGap ? 0 :
-                    match.home_score > match.away_score ? 1 : 2
-
-                  const homeProfile = profilesDetails.find(x => x.id === match.home);
-                  const awayProfile = profilesDetails.find(x => x.id === match.away);
-                  const matchDiffFo = Math.abs(match.home_score - match.away_score);
-
-                  homeProfile.results.fo[currentStage] += match.home_score;
-                  homeProfile.results.missed_fo[currentStage] += match.away_score;
-                  homeProfile.results.diff_fo[currentStage] = homeProfile.results.fo[currentStage] - homeProfile.results.missed_fo[currentStage];
-                  
-                  awayProfile.results.fo[currentStage] += match.away_score;
-                  awayProfile.results.missed_fo[currentStage] += match.home_score;
-                  awayProfile.results.diff_fo[currentStage] = awayProfile.results.fo[currentStage] - awayProfile.results.missed_fo[currentStage];
-                  
-                  homeProfile.results.matchesPlayed += 1;
-                  awayProfile.results.matchesPlayed += 1;
-
-                  if (match.result === 0) {
-                    homeProfile.results.draws[currentStage] += 1
-                    awayProfile.results.draws[currentStage] += 1
-
-                    homeProfile.results.points[currentStage] += 1
-                    awayProfile.results.points[currentStage] += 1
-
-                    if (homeProfile.results.prizeCurrentWinStrike > homeProfile.results.prizeMaxWinStrike) homeProfile.results.prizeMaxWinStrike = homeProfile.results.prizeCurrentWinStrike;
-                    if (awayProfile.results.prizeCurrentWinStrike > awayProfile.results.prizeMaxWinStrike) awayProfile.results.prizeMaxWinStrike = awayProfile.results.prizeCurrentWinStrike;
-                    homeProfile.results.prizeCurrentWinStrike = 0;
-                    awayProfile.results.prizeCurrentWinStrike = 0;
-
-                    homeProfile.results.prizeCurrentNoLoseStrike += 1
-                    awayProfile.results.prizeCurrentNoLoseStrike += 1
-
-                    if (homeProfile.results.prizeCurrentNoLoseStrike > homeProfile.results.prizeMaxNoLoseStrike)
-                      homeProfile.results.prizeMaxNoLoseStrike = homeProfile.results.prizeCurrentNoLoseStrike;
-
-                    if (awayProfile.results.prizeCurrentNoLoseStrike > awayProfile.results.prizeMaxNoLoseStrike)
-                      awayProfile.results.prizeMaxNoLoseStrike = awayProfile.results.prizeCurrentNoLoseStrike;
-                  }
-
-                  if (match.result === 1) {
-                    homeProfile.results.wins[currentStage] += 1
-                    awayProfile.results.loses[currentStage] += 1
-
-                    homeProfile.results.points[currentStage] += 3
-
-                    if (matchDiffFo <= 5) homeProfile.results.prizeMinWins += 1;
-                    if (matchDiffFo > awayProfile.results.prizeMaxLosedDiff && i > 1) awayProfile.results.prizeMaxLosedDiff = matchDiffFo;
-
-                    // strike
-                    homeProfile.results.prizeCurrentWinStrike += 1;
-                    if (homeProfile.results.prizeCurrentWinStrike > homeProfile.results.prizeMaxWinStrike) homeProfile.results.prizeMaxWinStrike = homeProfile.results.prizeCurrentWinStrike;
-                    if (awayProfile.results.prizeCurrentWinStrike > awayProfile.results.prizeMaxWinStrike) awayProfile.results.prizeMaxWinStrike = awayProfile.results.prizeCurrentWinStrike;
-                    
-                    // nolose strike
-                    homeProfile.results.prizeCurrentNoLoseStrike += 1;
-                    if (homeProfile.results.prizeCurrentNoLoseStrike > homeProfile.results.prizeMaxNoLoseStrike)
-                      homeProfile.results.prizeMaxNoLoseStrike = homeProfile.results.prizeCurrentNoLoseStrike;
-
-                    if (awayProfile.results.prizeCurrentNoLoseStrike > homeProfile.results.prizeMaxStoppedNoLoseStrike) homeProfile.results.prizeMaxStoppedNoLoseStrike = awayProfile.results.prizeCurrentNoLoseStrike;
-                    
-                    awayProfile.results.prizeCurrentWinStrike = 0;
-                    awayProfile.results.prizeCurrentNoLoseStrike = 0;
-                  }
-
-                  if (match.result === 2) {
-                    awayProfile.results.wins[currentStage] += 1
-                    homeProfile.results.loses[currentStage] += 1
-
-                    awayProfile.results.points[currentStage] += 3
-
-                    if (matchDiffFo <= 5) awayProfile.results.prizeMinWins += 1;
-                    if (matchDiffFo > homeProfile.results.prizeMaxLosedDiff && i > 1) homeProfile.results.prizeMaxLosedDiff = matchDiffFo;
-                    
-                    // win strike
-                    awayProfile.results.prizeCurrentWinStrike += 1;
-                    if (homeProfile.results.prizeCurrentWinStrike > homeProfile.results.prizeMaxWinStrike) homeProfile.results.prizeMaxWinStrike = homeProfile.results.prizeCurrentWinStrike;
-                    if (awayProfile.results.prizeCurrentWinStrike > awayProfile.results.prizeMaxWinStrike) awayProfile.results.prizeMaxWinStrike = awayProfile.results.prizeCurrentWinStrike;
-
-                    // nolose strike
-                    awayProfile.results.prizeCurrentNoLoseStrike += 1;
-                    if (awayProfile.results.prizeCurrentNoLoseStrike > awayProfile.results.prizeMaxNoLoseStrike)
-                      awayProfile.results.prizeMaxNoLoseStrike = awayProfile.results.prizeCurrentNoLoseStrike;
-
-                    if (homeProfile.results.prizeCurrentNoLoseStrike > awayProfile.results.prizeMaxStoppedNoLoseStrike) awayProfile.results.prizeMaxStoppedNoLoseStrike = homeProfile.results.prizeCurrentNoLoseStrike;
-                    
-                    homeProfile.results.prizeCurrentWinStrike = 0;
-                    homeProfile.results.prizeCurrentNoLoseStrike = 0;
-                  }
-
-                  // max fo
-                  if (match.home_score > homeProfile.results.prizeMaxFoInTour)
-                    homeProfile.results.prizeMaxFoInTour = match.home_score;
-
-                  if (match.away_score > awayProfile.results.prizeMaxFoInTour)
-                    awayProfile.results.prizeMaxFoInTour = match.away_score;
-
-                  // max fo losed
-                  if (match.home_score > homeProfile.results.prizeMaxFoInLosedTour && match.result === 2)
-                    homeProfile.results.prizeMaxFoInLosedTour = match.home_score;
-
-                  if (match.away_score > awayProfile.results.prizeMaxFoInLosedTour && match.result === 1)
-                    awayProfile.results.prizeMaxFoInLosedTour = match.away_score;
-
-                  // teamCost
-                  homeProfile.results.teamCostTotal += homeProfile.team.rosters_by_tour[i+1].team_cost;
-                  homeProfile.results.teamCostAvg = Math.round(homeProfile.results.teamCostTotal / homeProfile.results.matchesPlayed * 100) / 100;
-                  
-                  awayProfile.results.teamCostTotal += awayProfile.team.rosters_by_tour[i+1].team_cost;
-                  awayProfile.results.teamCostAvg = Math.round(awayProfile.results.teamCostTotal / awayProfile.results.matchesPlayed * 100) / 100;
-
-                  // subs
-                  homeProfile.results.subsTotalCount += i > 0 ? 3 : 0;
-                  awayProfile.results.subsTotalCount += i > 0 ? 3 : 0;
-
-                  if ([19,20,21].includes(+i)) {
-                    homeProfile.results.subsTotalCount += 1;
-                    awayProfile.results.subsTotalCount += 1;
-                  }
-                  
-                  if (i > 0) {
-                    const actHomeSquad = homeProfile.team.rosters_by_tour[i+1].players.base.concat(homeProfile.team.rosters_by_tour[i+1].players.bench);
-                    const prevHomeSquad = homeProfile.team.rosters_by_tour[i].players.base.concat(homeProfile.team.rosters_by_tour[i].players.bench);
-
-                    const crossHomeSquadLength = actHomeSquad.filter(playerId => prevHomeSquad.includes(playerId)).length || 0;
-                    
-                    homeProfile.results.subsUsedCount += i > 0 ? (15 - crossHomeSquadLength) : 0;
-                    homeProfile.results.subsCoef = Math.round(homeProfile.results.subsUsedCount / homeProfile.results.subsTotalCount * 10000) / 100;
-
-                    const actAwaySquad = awayProfile.team.rosters_by_tour[i+1].players.base.concat(awayProfile.team.rosters_by_tour[i+1].players.bench);
-                    const prevAwaySquad = awayProfile.team.rosters_by_tour[i].players.base.concat(awayProfile.team.rosters_by_tour[i].players.bench);
-
-                    const crossAwaySquadLength = actAwaySquad.filter(playerId => prevAwaySquad.includes(playerId)).length || 0;
-
-                    awayProfile.results.subsUsedCount += i > 0 ? (15 - crossAwaySquadLength) : 0;
-                    awayProfile.results.subsCoef = Math.round(awayProfile.results.subsUsedCount / awayProfile.results.subsTotalCount * 10000) / 100;
-                  }
-
-                  this.updateProfileCommonResults(homeProfile);
-                  this.updateProfileCommonResults(awayProfile);
-                })
-
+                const currentStage = this.dataService.getCurrentStage(i + 1, this.consts.stages[0].lastTour);
+                this.processMatchesForTour(i, profilesDetails, matches, currentStage);
                 this.profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
               }
 
@@ -612,8 +467,75 @@ export class LeagueH2HPageComponent implements OnInit {
     }
   }
 
-  updateProfileCommonResults(profile) {
-    this.dataService.updateCommonResults(profile);
+  /**
+   * Process all matches for a given tour
+   * Delegates to service for all calculations
+   */
+  private processMatchesForTour(
+    tourIndex: number,
+    profilesDetails: any[],
+    matches: any,
+    currentStage: string
+  ): void {
+    matches[tourIndex + 1].forEach(match => {
+      // Calculate match result
+      const matchResult = this.dataService.calculateMatchResult(
+        +this.squads.data.players[match.home].team.results_by_tour[tourIndex + 1].tour_score,
+        +this.squads.data.players[match.away].team.results_by_tour[tourIndex + 1].tour_score,
+        this.drawGap
+      );
+
+      match.homeScore = matchResult.homeScore;
+      match.awayScore = matchResult.awayScore;
+      match.result = matchResult.result;
+
+      const homeProfile = profilesDetails.find(x => x.id === match.home);
+      const awayProfile = profilesDetails.find(x => x.id === match.away);
+      const matchDiffFo = Math.abs(matchResult.homeScore - matchResult.awayScore);
+
+      // Update FO (fantasy objectives)
+      this.dataService.updateFO(homeProfile, awayProfile, matchResult, currentStage);
+      
+      // Update match counts (wins/draws/losses)
+      homeProfile.results.matchesPlayed += 1;
+      awayProfile.results.matchesPlayed += 1;
+      this.dataService.updateMatchCounts(homeProfile, awayProfile, matchResult.result, currentStage);
+
+      // Update strikes
+      this.dataService.updateStrikes(
+        homeProfile,
+        awayProfile,
+        matchResult.result,
+        matchResult.homeScore,
+        matchResult.awayScore,
+        matchDiffFo,
+        tourIndex
+      );
+
+      // Update FO records
+      this.dataService.updateMaxFoInTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore);
+      this.dataService.updateMaxFoInLosedTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore, matchResult.result);
+
+      // Update team cost
+      this.dataService.updateTeamCostAvg(
+        homeProfile,
+        awayProfile,
+        homeProfile.team.rosters_by_tour[tourIndex + 1].team_cost,
+        awayProfile.team.rosters_by_tour[tourIndex + 1].team_cost
+      );
+
+      // Update substitutions
+      const homeActSquad = this.dataService.getActiveSquad(homeProfile.team.rosters_by_tour, tourIndex + 1);
+      const homePrevSquad = tourIndex > 0 ? this.dataService.getActiveSquad(homeProfile.team.rosters_by_tour, tourIndex) : [];
+      const awayActSquad = this.dataService.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex + 1);
+      const awayPrevSquad = tourIndex > 0 ? this.dataService.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex) : [];
+
+      this.dataService.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+
+      // Update common results
+      this.dataService.updateCommonResults(homeProfile);
+      this.dataService.updateCommonResults(awayProfile);
+    });
   }
 
   updateProfilesByStage(stageType = '', leagueType = '') {
@@ -940,8 +862,14 @@ export class LeagueH2HPageComponent implements OnInit {
     this.prizesToShow = this.consts.prizes;
   }
 
-  getCurrentStage(tourInd): string {
-    return this.dataService.getCurrentStage(tourInd, this.consts.stages[0].lastTour);
+  getMedian(arr: number[]): number {
+    // Delegate to service
+    return this.dataService.getMedian(arr);
+  }
+
+  getCurrentStage(tourNumber: number): string {
+    // Delegate to service
+    return this.dataService.getCurrentStage(tourNumber, this.consts.stages[0].lastTour);
   }
 
   setTabId(ind) {
@@ -1116,19 +1044,17 @@ export class LeagueH2HPageComponent implements OnInit {
     return Math.round((playersRating - this.ratingMed)/this.maxResultValue*1000)/100;
   }
 
-  getMinMaxInTour(tourNum) {
+  getMinMaxInTour(tourNum): any {
     const tourResults = Object.values(this.squads.data.players)
       .map(player => player.team.results_by_tour[tourNum.toString()].tour_score);
 
     tourResults.sort(this.sortCustom);
 
-    const resultObj = {
+    return {
       max: tourResults[0],
       med: this.getMedian(tourResults),
       min: tourResults[tourResults.length - 1]
     };
-
-    return resultObj; 
   }
 
   getMedalsInSeason(id) {
@@ -1219,15 +1145,11 @@ export class LeagueH2HPageComponent implements OnInit {
     return clubInfo?.name;
   }
 
-  sortByScore(a,b) {
+  sortByScore(a, b): number {
     return b.score - a.score;
   }
 
-  sortCustom(a,b) {
+  sortCustom(a, b): number {
     return (b - a);
-  }
-  
-  getMedian(arr) {
-    return this.dataService.getMedian(arr);
   }
 }
