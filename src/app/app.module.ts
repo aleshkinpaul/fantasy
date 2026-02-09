@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { GraphQLModule } from './graphql.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DefaultLoaderComponent } from './components/loader/default-loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 

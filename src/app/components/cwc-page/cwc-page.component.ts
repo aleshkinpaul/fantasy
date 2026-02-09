@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Apollo } from 'apollo-angular';
 import { IGroup, IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
+import { CwcDataService } from '../../service/cwc-data.service';
 import { Observable } from '@apollo/client';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { ISquadDetails, IProfileDetails } from '../../models/domain';
@@ -89,7 +90,8 @@ export class CWCPageComponent implements OnInit {
 
   constructor(
     private readonly apollo: Apollo, 
-    public service: DataService, 
+    public service: DataService,
+    private cwcDataService: CwcDataService,
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
@@ -127,6 +129,7 @@ export class CWCPageComponent implements OnInit {
         .subscribe({
           next: ([squads, squads_2]) => {
               this.squads = squads;
+              this.cwcDataService.setSquads(this.squads);
               this.playersArr = Object.values(this.squads.data.players).map(player => player.id);
               this.lastTour = Object.keys(this.squads.data.tours).length;
               
@@ -256,26 +259,26 @@ export class CWCPageComponent implements OnInit {
                   result.tours[tourInd].matches.forEach(match => {
                     logger.debug('addmeet:', match, tourInd);
                     
-                    this.addMeets(match, tourInd);
+                    this.cwcDataService.addMeets(match, tourInd);
 
                     if (tour.num <= this.lastTour) {
-                      match.meets.forEach(meet => this.countProfileResult(meet, tourInd));
+                      match.meets.forEach(meet => this.cwcDataService.countProfileResult(meet, tourInd));
                       
                       logger.debug('tour[tourInd+1]', tour[tourInd+1]);
                       
                       if (!!result.tours[tourInd+1]) {
-                        this.sortProfilesInTeam(match.first_team, tourInd, result);
-                        this.sortProfilesInTeam(match.second_team, tourInd, result);
+                        this.cwcDataService.sortProfilesInTeam(match.first_team, tourInd, result, this.lastTour, this.consts);
+                        this.cwcDataService.sortProfilesInTeam(match.second_team, tourInd, result, this.lastTour, this.consts);
                       }
 
-                      this.countMatchResult(match);
+                      this.cwcDataService.countMatchResult(match);
 
-                      this.countTeamResult(match, match.first_team);
-                      this.countTeamResult(match, match.second_team);
+                      this.cwcDataService.countTeamResult(match, match.first_team);
+                      this.cwcDataService.countTeamResult(match, match.second_team);
                     }
                   });
 
-                  this.sortTeamsInGroup(result.teams);
+                  this.cwcDataService.sortTeamsInGroup(result.teams);
                 });
 
                 logger.debug('result', result);                
@@ -301,7 +304,7 @@ export class CWCPageComponent implements OnInit {
                 tours: []
               };
               
-              this.sortTeamsInGroup(this.additionalGroup.teams);
+              this.cwcDataService.sortTeamsInGroup(this.additionalGroup.teams);
 
               logger.debug(this.additionalGroup);
 
@@ -316,15 +319,15 @@ export class CWCPageComponent implements OnInit {
               });
 
               this.additionalGroup.matches.forEach(match => {
-                this.addMeets(match, 3);
+                this.cwcDataService.addMeets(match, 3);
                 
                 if (this.lastTour > 3) {
-                  this.countMatchResult(match);
+                  this.cwcDataService.countMatchResult(match);
 
-                  this.countTeamResult(match, match.first_team);
-                  this.countTeamResult(match, match.second_team);
+                  this.cwcDataService.countTeamResult(match, match.first_team);
+                  this.cwcDataService.countTeamResult(match, match.second_team);
               
-                  this.sortTeamsInGroup(this.additionalGroup.teams);
+                  this.cwcDataService.sortTeamsInGroup(this.additionalGroup.teams);
                 }
               });
 
@@ -339,12 +342,12 @@ export class CWCPageComponent implements OnInit {
               this.results.forEach((group, groupInd) => {
                 logger.debug(group.teams);
                 
-                playOffTeams = this.getNewObj(playOffTeams.concat([group.teams[0], group.teams[1]]));
+                playOffTeams = this.cwcDataService.getNewObj(playOffTeams.concat([group.teams[0], group.teams[1]]));
               });
 
               logger.debug('groupResults.teams', this.groupResults.reduce((a,b) => a.concat(b.teams), []));
               
-              this.playOffGroup.teams = this.getNewObj(playOffTeams.concat([
+              this.playOffGroup.teams = this.cwcDataService.getNewObj(playOffTeams.concat([
                 this.groupResults.reduce((a,b) => a.concat(b.teams), []).find(team => team.id === this.additionalGroup.teams[0].id),
                 this.groupResults.reduce((a,b) => a.concat(b.teams), []).find(team => team.id === this.additionalGroup.teams[1].id)
               ]));
@@ -364,29 +367,29 @@ export class CWCPageComponent implements OnInit {
               });
 
               this.playOffGroup.matches.forEach(match => {
-                this.addMeets(match, 4);
+                this.cwcDataService.addMeets(match, 4);
                 
                 if (this.lastTour > 4) {
-                  this.countMatchResult(match);
+                  this.cwcDataService.countMatchResult(match);
 
-                  this.countTeamResult(match, match.first_team);
-                  this.countTeamResult(match, match.second_team);
+                  this.cwcDataService.countTeamResult(match, match.first_team);
+                  this.cwcDataService.countTeamResult(match, match.second_team);
                 }
                 
-                match.meets.forEach(meet => this.countProfileResult(meet, 3));
+                match.meets.forEach(meet => this.cwcDataService.countProfileResult(meet, 3));
               });
                 
-              this.updateInnerRating(this.groupResults, this.playOffGroup, 4);
+              this.cwcDataService.updateInnerRating(this.groupResults, this.playOffGroup, 4);
 
               this.playOffGroup.matches.forEach(match => {
                 semiFinalTeams.push(
-                  this.getPlayoffResult(match) === 2 ? this.getNewObj(match.second_team) : 
-                    this.getPlayoffResult(match) === 1 ? this.getNewObj(match.first_team) : {}
+                  this.cwcDataService.getPlayoffResult(match) === 2 ? this.cwcDataService.getNewObj(match.second_team) : 
+                    this.cwcDataService.getPlayoffResult(match) === 1 ? this.cwcDataService.getNewObj(match.first_team) : {}
                 );
               });
 
               // semifinal 
-              this.semifinalGroup.teams = this.getNewObj(semiFinalTeams);             
+              this.semifinalGroup.teams = this.cwcDataService.getNewObj(semiFinalTeams);             
               this.semifinalGroup.matches = this.consts.tours[5].matches.map((match, matchInd) => {
                 const first_team = Object.assign({}, this.semifinalGroup.teams.find(team => this.semifinalGroup.teams[match.first_team].id === team.id));
                 const second_team = Object.assign({}, this.semifinalGroup.teams.find(team => this.semifinalGroup.teams[match.second_team].id === team.id));
@@ -398,36 +401,36 @@ export class CWCPageComponent implements OnInit {
               });
 
               this.semifinalGroup.matches.forEach(match => {
-                this.addMeets(match, 5);
+                this.cwcDataService.addMeets(match, 5);
                 
                 if (this.lastTour > 4) {
-                  this.countMatchResult(match);
+                  this.cwcDataService.countMatchResult(match);
 
-                  this.countTeamResult(match, match.first_team);
-                  this.countTeamResult(match, match.second_team);
+                  this.cwcDataService.countTeamResult(match, match.first_team);
+                  this.cwcDataService.countTeamResult(match, match.second_team);
                 }
                 
-                match.meets.forEach(meet => this.countProfileResult(meet, 4));
+                match.meets.forEach(meet => this.cwcDataService.countProfileResult(meet, 4));
               });
 
-              this.updateInnerRating(this.groupResults, this.semifinalGroup, 5);
+              this.cwcDataService.updateInnerRating(this.groupResults, this.semifinalGroup, 5);
 
               this.semifinalGroup.matches.forEach(match => {
                 finalTeams.push(
-                  this.getPlayoffResult(match) === 2 ? this.getNewObj(match.second_team) : 
-                    this.getPlayoffResult(match) === 1 ? this.getNewObj(match.first_team) : {}
+                  this.cwcDataService.getPlayoffResult(match) === 2 ? this.cwcDataService.getNewObj(match.second_team) : 
+                    this.cwcDataService.getPlayoffResult(match) === 1 ? this.cwcDataService.getNewObj(match.first_team) : {}
                 );
               });
 
               this.semifinalGroup.matches.forEach(match => {
                 finalTeams.push(
-                  this.getPlayoffResult(match) === 2 ? this.getNewObj(match.first_team) : 
-                    this.getPlayoffResult(match) === 1 ? this.getNewObj(match.second_team) : {}
+                  this.cwcDataService.getPlayoffResult(match) === 2 ? this.cwcDataService.getNewObj(match.first_team) : 
+                    this.cwcDataService.getPlayoffResult(match) === 1 ? this.cwcDataService.getNewObj(match.second_team) : {}
                 );
               });
 
               // final 
-              this.finalGroup.teams = this.getNewObj(finalTeams);      
+              this.finalGroup.teams = this.cwcDataService.getNewObj(finalTeams);      
               logger.debug('this.finalGroup', this.finalGroup);
                      
               this.finalGroup.matches = this.consts.tours[6].matches.map((match, matchInd) => {
@@ -441,16 +444,16 @@ export class CWCPageComponent implements OnInit {
               });
 
               this.finalGroup.matches.forEach(match => {
-                this.addMeets(match, 6);
+                this.cwcDataService.addMeets(match, 6);
                 
                 if (this.lastTour > 6) {
-                  this.countMatchResult(match);
+                  this.cwcDataService.countMatchResult(match);
 
-                  this.countTeamResult(match, match.first_team);
-                  this.countTeamResult(match, match.second_team);
+                  this.cwcDataService.countTeamResult(match, match.first_team);
+                  this.cwcDataService.countTeamResult(match, match.second_team);
                 }
                 
-                match.meets.forEach(meet => this.countProfileResult(meet, 5));
+                match.meets.forEach(meet => this.cwcDataService.countProfileResult(meet, 5));
               });
               
               if (this.lastTour > 6) {
@@ -458,14 +461,14 @@ export class CWCPageComponent implements OnInit {
 
                 this.finalGroup.matches.forEach((match, matchInd) => {
                   resultTeams.push(
-                    this.getPlayoffResult(match) === 2 ? this.getNewObj(match.second_team) : 
-                      this.getPlayoffResult(match) === 1 ? this.getNewObj(match.first_team) : {}
+                    this.cwcDataService.getPlayoffResult(match) === 2 ? this.cwcDataService.getNewObj(match.second_team) : 
+                      this.cwcDataService.getPlayoffResult(match) === 1 ? this.cwcDataService.getNewObj(match.first_team) : {}
                   );
 
                   if (matchInd === 0)
                     resultTeams.push(
-                      this.getPlayoffResult(match) === 2 ? this.getNewObj(match.first_team) : 
-                        this.getPlayoffResult(match) === 1 ? this.getNewObj(match.second_team) : {}
+                      this.cwcDataService.getPlayoffResult(match) === 2 ? this.cwcDataService.getNewObj(match.first_team) : 
+                        this.cwcDataService.getPlayoffResult(match) === 1 ? this.cwcDataService.getNewObj(match.second_team) : {}
                     );
                 });
               }
@@ -497,93 +500,8 @@ export class CWCPageComponent implements OnInit {
     return name.length > maxLength ? name.substr(0, maxLength)+"..." : name;
   }
 
-  getPlayoffResult(match) {
-    if (match.match_result !== 0) return match.match_result;
-
-    if (match.first_team_fo_score - match.second_team_fo_score > 0) return 1;
-    if (match.second_team_fo_score - match.first_team_fo_score > 0) return 2;
-
-    if (match.first_team.results.gd - match.second_team.results.gd > 0) return 1;
-    if (match.second_team.results.gd - match.first_team.results.gd > 0) return 2;
-
-    if (match.first_team.results.pd - match.second_team.results.pd > 0) return 1;
-    if (match.second_team.results.pd - match.first_team.results.pd > 0) return 2;
-
-    return;
-  }
-  
-  updateInnerRating(basicGroup, tmpGroup, tourNum) {
-    basicGroup.forEach(group => {
-      group.tours.push({
-        num: tourNum+1,
-        matches: [],
-        teams: [],
-        type: "po"
-      });
-      
-
-      group.teams.forEach(team => {
-        let check = false;
-
-        tmpGroup.teams.forEach(tmpTeam => {
-          if (tmpTeam.id === team.id) {
-            check = true;
-
-            tmpTeam.profiles = tmpTeam.profiles.sort((a,b) => {
-              if (b.results[tourNum-1].total_goals !== a.results[tourNum-1].total_goals)
-                return b.results[tourNum-1].total_goals - a.results[tourNum-1].total_goals;
-              if (b.results[tourNum-1].total_fo - a.results[tourNum-1].total_fo)
-                return b.results[tourNum-1].total_fo - a.results[tourNum-1].total_fo;
-              return b.results[tourNum-1].fo - a.results[tourNum-1].fo;
-            });
-
-            let newTeam = JSON.parse(JSON.stringify(tmpTeam));
-
-            group.tours[tourNum].teams.push(newTeam);
-            // team.profiles = JSON.parse(JSON.stringify(tmpTeam.profiles));
-            logger.debug(group.groupName, tmpTeam);
-          };
-        });
-
-        if (!check) group.tours[tourNum].teams.push(team);
-      })
-
-      logger.debug('basicGroup', basicGroup);
-    })
-  }
-
-  getNewObj(obj) {
-    return JSON.parse(JSON.stringify(obj));
-  }
-
   toggleGroupTab(event, ind, isTeams) {
     this.activeGroupTabs[ind].isTeams = isTeams;
-  }
-
-  addMeets(match, tourInd) {
-    const meets = match.first_team.profiles.map((profile, meetInd) => {
-      const first_profile = match.first_team.profiles[meetInd];
-      const second_profile = match.second_team.profiles[meetInd];
-
-      logger.debug('meet profiles', first_profile, second_profile);
-      
-      const first_profile_score = +this.squads.data.players[first_profile.id].team.results_by_tour[tourInd+1]?.tour_score || 0;
-      const second_profile_score = +this.squads.data.players[second_profile.id].team.results_by_tour[tourInd+1]?.tour_score || 0;
-
-      return {
-        order: meetInd,
-        first_profile: first_profile,
-        second_profile: second_profile,
-        first_profile_score: first_profile_score,
-        second_profile_score: second_profile_score,
-        result:
-          Math.abs(first_profile_score - second_profile_score) <= 3 ?
-            0 :
-            first_profile_score > second_profile_score ? 1 : 2
-      }
-    });
-
-    match.meets = meets;
   }
 
   countTeamResult(match, team) {
@@ -627,120 +545,12 @@ export class CWCPageComponent implements OnInit {
     team.results.pd = team.results.fo - team.results.missed_fo;
   }
 
-  countMatchResult(match) {
-    const first_team_score = match.meets.reduce((a,b) => a + [0, 1].includes(b.result), 0);
-    const second_team_score = match.meets.reduce((a,b) => a + [0, 2].includes(b.result), 0);
-    const match_result =
-      first_team_score === second_team_score ?
-        0 :
-        first_team_score > second_team_score ? 1 : 2;
-
-    const first_team_fo_score = match.meets.reduce((a,b) => a + b.first_profile_score, 0);
-    const second_team_fo_score = match.meets.reduce((a,b) => a + b.second_profile_score, 0);
-
-    match.first_team_score = first_team_score,
-    match.second_team_score = second_team_score,
-    match.first_team_fo_score = first_team_fo_score,
-    match.second_team_fo_score = second_team_fo_score,
-    match.match_result = match_result;
-  }
-
-  countProfileResult(meet, tourInd) {
-    const defaultObj = {
-      tourInd: tourInd,
-      goals: 0,
-      missed_goals: 0,
-      fo: 0,
-      missed_fo: 0,
-      gd: 0,
-      pd: 0,
-    };
-
-    meet.first_profile.results.push(Object.assign({}, defaultObj));
-    meet.second_profile.results.push(Object.assign({}, defaultObj));
-
-    if ([0,1].includes(meet.result)) {
-      meet.first_profile.results[tourInd].goals += 1;
-      meet.second_profile.results[tourInd].missed_goals += 1;
-    }
-
-    if ([0,2].includes(meet.result)) {
-      meet.second_profile.results[tourInd].goals += 1;
-      meet.first_profile.results[tourInd].missed_goals += 1;
-    }
-
-    // first team    
-    meet.first_profile.results[tourInd].fo += meet.first_profile_score;
-    meet.first_profile.results[tourInd].missed_fo += meet.second_profile_score;
-    meet.first_profile.results[tourInd].gd = meet.first_profile.results[tourInd].goals - meet.first_profile.results[tourInd].missed_goals;
-    meet.first_profile.results[tourInd].pd = meet.first_profile.results[tourInd].fo - meet.first_profile.results[tourInd].missed_fo;
-    
-    meet.first_profile.results[tourInd].total_fo = meet.first_profile.results.reduce((a,b) => a + b.fo, 0);
-    meet.first_profile.results[tourInd].total_missed_fo = meet.first_profile.results.reduce((a,b) => a + b.missed_fo, 0);
-    meet.first_profile.results[tourInd].total_pd = meet.first_profile.results[tourInd].total_fo - meet.first_profile.results[tourInd].total_missed_fo;
-    meet.first_profile.results[tourInd].total_goals = meet.first_profile.results.reduce((a,b) => a + b.goals, 0);
-    meet.first_profile.results[tourInd].total_missed_goals = meet.first_profile.results.reduce((a,b) => a + b.missed_goals, 0);
-    meet.first_profile.results[tourInd].total_gd = meet.first_profile.results[tourInd].total_goals - meet.first_profile.results[tourInd].total_missed_goals;
-    
-    // second team
-    meet.second_profile.results[tourInd].fo += meet.second_profile_score;
-    meet.second_profile.results[tourInd].missed_fo += meet.first_profile_score;
-    meet.second_profile.results[tourInd].gd = meet.second_profile.results[tourInd].goals - meet.second_profile.results[tourInd].missed_goals;
-    meet.second_profile.results[tourInd].pd = meet.second_profile.results[tourInd].fo - meet.second_profile.results[tourInd].missed_fo;
-    
-    meet.second_profile.results[tourInd].total_fo = meet.second_profile.results.reduce((a,b) => a + b.fo, 0);
-    meet.second_profile.results[tourInd].total_missed_fo = meet.second_profile.results.reduce((a,b) => a + b.missed_fo, 0);
-    meet.second_profile.results[tourInd].total_pd = meet.second_profile.results[tourInd].total_fo - meet.second_profile.results[tourInd].total_missed_fo;
-    meet.second_profile.results[tourInd].total_goals = meet.second_profile.results.reduce((a,b) => a + b.goals, 0);
-    meet.second_profile.results[tourInd].total_missed_goals = meet.second_profile.results.reduce((a,b) => a + b.missed_goals, 0);
-    meet.second_profile.results[tourInd].total_gd = meet.second_profile.results[tourInd].total_goals - meet.second_profile.results[tourInd].total_missed_goals;
-  }
-
   sortTeamsInGroup(teams) {
     teams = teams.sort((a,b) => {
       if (b.results.points !== a.results.points) return b.results.points - a.results.points;
       if (b.results.gd !== a.results.gd) return b.results.gd - a.results.gd;
       return b.results.pd - a.results.pd;
     });
-  }
-
-  sortProfilesInTeam(team, tourInd, result) {
-    if (tourInd + 1 < this.consts.tours.length && tourInd < this.lastTour) { 
-      let profiles = Object.assign([], team.profiles);
-
-      profiles = profiles.sort((a,b) => {
-        if (b.results[tourInd].total_goals !== a.results[tourInd].total_goals)
-          return b.results[tourInd].total_goals - a.results[tourInd].total_goals;
-        if (b.results[tourInd].total_fo - a.results[tourInd].total_fo)
-          return b.results[tourInd].total_fo - a.results[tourInd].total_fo;
-        return b.results[tourInd].fo - a.results[tourInd].fo;
-      });
-
-      if (tourInd < 3) {
-        result.tours[tourInd+1].matches.forEach(match => {
-          if (match.first_team.id === team.id) match.first_team.profiles = Object.assign([], profiles);
-          if (match.second_team.id === team.id) match.second_team.profiles = Object.assign([], profiles);
-        })
-
-        result.tours[tourInd+1].teams = Object.assign([], result.tours[tourInd+1].teams);
-        result.tours[tourInd+1].teams.find(tmpTeam => tmpTeam.id === team.id).profiles = Object.assign([], profiles);
-      }
-
-      // if (tourInd === 2) {
-      //   this.results[3].tours[0].matches.forEach(match => {
-      //     if (match.first_team.id === team.id) match.first_team.profiles = Object.assign([], profiles);
-      //     if (match.second_team.id === team.id) match.second_team.profiles = Object.assign([], profiles);
-      //   })
-
-      //   console.log('teams', this.results[3].tours[0].teams);
-      //   console.log(profiles);
-        
-        
-      //   this.results[3].tours[0].teams = Object.assign([], this.results[3].teams);
-      //   if (!!this.results[3].tours[0].teams.find(tmpTeam => tmpTeam.id === team.id))
-      //     this.results[3].tours[0].teams.find(tmpTeam => tmpTeam.id === team.id).profiles = Object.assign([], profiles);
-      // }
-    }
   }
 
   selectTab(event: Event): void {
