@@ -8,7 +8,7 @@
   .table {
     width: 100%;
     text-align: center;
-    border-collapse: ceparate;
+    border-collapse: separate;
     border-spacing: 0 1px;
 
     .table-header {
@@ -16,18 +16,9 @@
 
       th:last-child {
         width: calc(2 * $row-height - 30px);
-
-        @media (max-width: 900px) {
-          width: calc(2 * $row-height - 40px);
-        }
-
-        @media (max-width: 600px) {
-          width: calc(2 * $row-height - 45px);
-        }
-
-        @media (max-width: 450px) {
-          width: calc(2 * $row-height - 50px) !important;
-        }
+        @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
+        @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
+        @media (max-width: 450px) { width: calc(2 * $row-height - 50px) !important; }
       }
     }
 
@@ -91,9 +82,9 @@
           &:last-child {
     
             span {
-              display: block;
-              margin: 5px;
-              width: calc($row-height - 10px);
+              display: block;}
+            &.second-score::after { background-color: $second-place-bg-color; }
+            &.third-score::after  { background-color: $third-place-bg-color
               line-height: calc($row-height - 10px);
     
               align-self: center;
@@ -123,35 +114,16 @@
 
             @media (max-width: 600px) {
               width: calc(2 * $row-height - 45px);
-            }
-
-            @media (max-width: 450px) {
-              width: calc(2 * $row-height - 50px);
-            }
+            box-sizing: border-box;
+            @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
+            @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
+            @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
     
             span {
               width: calc(2 * $row-height - 20px);
-
-              @media (max-width: 900px) {
-                width: calc(2 * $row-height - 40px);
-              }
-  
-              @media (max-width: 600px) {
-                width: calc(2 * $row-height - 45px);
-              }
-  
-              @media (max-width: 450px) {
-                width: calc(2 * $row-height - 50px);
-              }
-            }
-          }
-    
-          & {
-            &.first {
-              span {
-                color: $first-place-font-color;
-                background-color: $first-place-bg-color;
-              }
+              @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
+              @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
+              @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
             }
 
             &.second {
@@ -166,33 +138,10 @@
                 color: $third-place-font-color;
                 background-color: $third-place-bg-color;
               }
-            }
-
-            &.special {
-              span {
-                color: $special-place-font-color;
-                background-color: $special-place-bg-color;
-              }
-            }
-          }
-
-          span.diff-elem {
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            top: -2px;
-            right: -2px;
-            width: 17px;
-            line-height: 17px;
-            font-size: 10px;
-            font-weight: 700;
-
-            border-radius: 50%;
-
-            &.pos-diff {
-              color: $positive-font-color;
-              background-color: $positive-bg-color;
-            }
+            }span { color: $first-place-font-color; background-color: $first-place-bg-color; }
+            &.second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
+            &.third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
+            &.special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
 
             &.neg-diff {
               color: $negative-font-color;
