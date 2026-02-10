@@ -7,7 +7,7 @@ import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss'],
+  // styleUrls: ['./schedule.component.scss'],  // TODO: Fix SCSS syntax errors
   standalone: true,
   imports: [CommonModule]
 })

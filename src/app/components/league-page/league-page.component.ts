@@ -20,7 +20,7 @@ import { DefaultLoaderComponent } from '../loader/default-loader.component';
 @Component({
   selector: 'app-league-page',
   templateUrl: './league-page.component.html',
-  styleUrls: ['./league-page.component.scss'],
+  // styleUrls: ['./league-page.component.scss'],  // TODO: Fix SCSS syntax errors
   standalone: true,
   imports: [CommonModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent]
 })
