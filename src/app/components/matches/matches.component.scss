@@ -12,12 +12,15 @@
       padding: 10px;
 
       &.up-half {
-        border: 1px solid;
+        border: 1px solid rgb(0, 255, 0);
         border-radius: 15px;
-        border-color: rgb(0, 255, 0);
-        background-color: rgba(255, 255, 255, 0.05)
-      } border: 1px solid rgb(0, 255, 0); border-radius: 15px; background-color: rgba(255, 255, 255, 0.05); }
-      &.down-half { border: 1px solid rgb(255, 0, 0); border-radius: 15px; background-color: rgba(255, 255, 255, 0.05);   .name-container {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      &.down-half {
+        border: 1px solid rgb(255, 0, 0);
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, 0.05);   .name-container {
           @include flex-column(0);
           justify-content: center;
 

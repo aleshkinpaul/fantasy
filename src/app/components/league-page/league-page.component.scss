@@ -84,7 +84,8 @@
             span {
               display: block;}
             &.second-score::after { background-color: $second-place-bg-color; }
-            &.third-score::after  { background-color: $third-place-bg-color
+            &.third-score::after {
+              background-color: $third-place-bg-color;
               line-height: calc($row-height - 10px);
     
               align-self: center;

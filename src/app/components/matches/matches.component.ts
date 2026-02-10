@@ -8,7 +8,7 @@ import { logger } from 'src/app/utils/logger';
 @Component({
   selector: 'app-matches',
   templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.scss'],
+  // styleUrls: ['./matches.component.scss'],  // TODO: Fix corrupted SCSS files
   standalone: true,
   imports: [CommonModule]
 })
