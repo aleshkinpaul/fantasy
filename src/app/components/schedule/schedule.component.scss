@@ -185,17 +185,22 @@
 
   .second {
     span {
-      color:{ background-color: rgba(0, 255, 0, 0.3); }
-  .red-bg { background-color: rgba(255, 0, 0, 0.3); }
-  .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
-  .green-text { color: green; }
-  .red-text { color: red; }
-  .grey-text { color: grey; }
-  .first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
-  .second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
-  .third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
-  .special span { color: $special-place-font-color; background-color: $special-place-bg-color;
-a {
-  text-decoration: none;
-  color: inherit;
-}
+      color: $second-place-font-color;
+      background-color: $second-place-bg-color;
+    }
+  }
+
+  .third {
+    span {
+      color: $third-place-font-color;
+      background-color: $third-place-bg-color;
+    }
+  }
+
+  .special {
+    span {
+      color: $special-place-font-color;
+      background-color: $special-place-bg-color;
+    }
+  }
+

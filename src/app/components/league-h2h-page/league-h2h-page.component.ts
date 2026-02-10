@@ -25,7 +25,8 @@ import { logMissingFieldErrors } from '@apollo/client/core/ObservableQuery';
   templateUrl: './league-h2h-page.component.html',
   styleUrls: ['./league-h2h-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent]
+  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent],
+  providers: [LeagueH2HDataService]
 })
 export class LeagueH2HPageComponent implements OnInit {
   private data;

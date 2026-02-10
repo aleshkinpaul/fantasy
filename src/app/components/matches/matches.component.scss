@@ -15,34 +15,40 @@
         border: 1px solid;
         border-radius: 15px;
         border-color: rgb(0, 255, 0);
-        background-color: rgba(255, 255, 255, 0.05)
-      } border: 1px solid rgb(0, 255, 0); border-radius: 15px; background-color: rgba(255, 255, 255, 0.05); }
-      &.down-half { border: 1px solid rgb(255, 0, 0); border-radius: 15px; background-color: rgba(255, 255, 255, 0.05);   .name-container {
-          @include flex-column(0);
-          justify-content: center;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
 
-          width: 200px;
+      &.down-half {
+        border: 1px solid rgb(255, 0, 0);
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
 
-          .player-name {
-            opacity: .6;
-          }
+      .name-container {
+        @include flex-column(0);
+        justify-content: center;
 
-          & > * {
-            text-align: end;
-          }
+        width: 200px;
+
+        .player-name {
+          opacity: .6;
         }
 
-        &.away-team {
-          flex-direction: row-reverse;
-
-          .name-container > * {
-            text-align: start;
-          }
+        & > * {
+          text-align: end;
         }
+      }
 
-        .result {
-          align-self: center;
+      &.away-team {
+        flex-direction: row-reverse;
+
+        .name-container > * {
+          text-align: start;
         }
+      }
+
+      .result {
+        align-self: center;
       }
 
       span {
@@ -52,8 +58,7 @@
 
       .logo-container {
         width: calc($logo-size * 2);
-        // height: $logo-size;
-      
+
         @include flex-row(0);
         align-items: center;
         box-sizing: border-box;
@@ -75,18 +80,18 @@
     @include flex-row(0);
     justify-content: center;
     align-items: center;
-    
-    .prizes-button {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 10px;
-      background-color: #fff;
-      color: $row-col margin: $space-10px auto; @include flex-row(0); justify-content: center; align-items: center; }
-  .prizes-button { display: inline-block; padding: $space-5px $space-10px; border-radius: 10px; background-color: #fff; color: $row-color; }
-  .prizes-button:hover { opacity: .8; cursor: pointer;
-      &:hover {
-        opacity: .6;
-      }
+  }
+
+  .prizes-button {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: $row-color;
+
+    &:hover {
+      opacity: .6;
+      cursor: pointer;
     }
   }
 
@@ -94,12 +99,12 @@
     text-align: center;
   }
 
-  .green-bg   { background-color: rgba(0, 255, 0, 0.3) }
-  .red-bg     { background-color: rgba(255, 0, 0, 0.3) }
-  .grey-bg    { background-color: rgba(255, 255, 255, 0.3) }
-  .green-text { color: green }
-  .red-text   { color: red }
-  .grey-text  { color: grey }
+  .green-bg { background-color: rgba(0, 255, 0, 0.3); }
+  .red-bg { background-color: rgba(255, 0, 0, 0.3); }
+  .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
+  .green-text { color: green; }
+  .red-text { color: red; }
+  .grey-text { color: grey; }
 
   .first {
     span {
@@ -121,13 +126,10 @@
       background-color: $third-place-bg-color;
     }
   }
-{ background-color: rgba(0, 255, 0, 0.3); }
-  .red-bg { background-color: rgba(255, 0, 0, 0.3); }
-  .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
-  .green-text { color: green; }
-  .red-text { color: red; }
-  .grey-text { color: grey; }
-  .first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
-  .second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
-  .third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
-  .special span { color: $special-place-font-color; background-color: $special-place-bg-color;
+
+  .special {
+    span {
+      color: $special-place-font-color;
+      background-color: $special-place-bg-color;
+    }
+  }

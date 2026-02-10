@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 export interface IMatchResult {
   homeScore: number;
   awayScore: number;
@@ -12,6 +14,9 @@ export interface IStrikeState {
   maxStoppedNoLoseStrike: number;
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 export class LeagueH2HDataService {
   /**
    * Calculates match result based on scores and draw gap

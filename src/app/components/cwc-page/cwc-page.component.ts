@@ -20,7 +20,8 @@ import { DefaultLoaderComponent } from '../loader/default-loader.component';
   templateUrl: './cwc-page.component.html',
   styleUrls: ['./cwc-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, DefaultLoaderComponent]
+  imports: [CommonModule, HeaderComponent, DefaultLoaderComponent],
+  providers: [CwcDataService]
 })
 export class CWCPageComponent implements OnInit {
   public activeTab = 'groups';

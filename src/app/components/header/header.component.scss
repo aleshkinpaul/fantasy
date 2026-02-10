@@ -53,17 +53,13 @@
       padding-left: 40px;
       border-left: 5px solid $main-logo-border-color;
       
-      @media (max-width: 900px) { padding-left: 30px; border-left-width: 4px }
-      @media (max-width: 600px) { padding-left: 20px; border-left-width: 3px }
-      @media (max-width: 450px) { padding-left: 15px; border-left-width: 2px }
+      @media (max-width: 900px) { padding-left: 30px; border-left-width: 4px; }
+      @media (max-width: 600px) { padding-left: 20px; border-left-width: 3px; }
+      @media (max-width: 450px) { padding-left: 15px; border-left-width: 2px; }
 
       & > * {
         align-self: center;
       }
     }
   }
-}padding-left: 40px;
-      border-left: 5px solid $main-logo-border-color;
-      @media (max-width: 900px) { padding-left: 30px; border-left-width: 4px; }
-      @media (max-width: 600px) { padding-left: 20px; border-left-width: 3px; }
-      @media (max-width: 450px) { padding-left: 15px; border-left-width: 2px;
+}
