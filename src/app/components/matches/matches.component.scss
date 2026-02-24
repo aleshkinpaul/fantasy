@@ -8,8 +8,9 @@
     .match-item {
       @include flex-row($space-10px);
       justify-content: center;
-
+      align-items: center;
       padding: 10px;
+      gap: 20px;
 
       &.up-half {
         border: 1px solid rgb(0, 255, 0);
@@ -20,43 +21,44 @@
       &.down-half {
         border: 1px solid rgb(255, 0, 0);
         border-radius: 15px;
-        background-color: rgba(255, 255, 255, 0.05);   .name-container {
-          @include flex-column(0);
-          justify-content: center;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
 
-          width: 200px;
+      a {
+        text-decoration: none;
+        color: inherit;
 
-          .player-name {
-            opacity: .6;
-          }
-
-          & > * {
-            text-align: end;
-          }
-        }
-
-        &.away-team {
+        &.away-name-link {
           flex-direction: row-reverse;
 
           .name-container > * {
             text-align: start;
           }
         }
-
-        .result {
-          align-self: center;
-        }
       }
 
-      span {
-        align-self: center;
-        font-size: 14px;
+      .name-container {
+        @include flex-column(0);
+        justify-content: center;
+        width: 200px;
+        min-width: 0;
+        flex: 1 1 200px;
+
+        .player-name {
+          opacity: .6;
+          font-size: 12px;
+        }
+
+        & > * {
+          text-align: end;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .logo-container {
         width: calc($logo-size * 2);
-        // height: $logo-size;
-      
         @include flex-row(0);
         align-items: center;
         box-sizing: border-box;
@@ -69,6 +71,69 @@
             cursor: pointer;
           }
         }
+      }
+
+      .result {
+        align-self: center;
+        font-size: 14px;
+        min-width: 30px;
+        text-align: center;
+      }
+
+      > span {
+        align-self: center;
+        font-size: 14px;
+      }
+
+      // New flattened children when reordering for responsive layouts
+      .home-name-link,
+      .home-logo-link,
+      .away-logo-link,
+      .away-name-link,
+      .score-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .home-logo-link,
+      .away-logo-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc($logo-size * 2);
+        height: calc($logo-size * 2);
+        flex: 0 0 calc($logo-size * 2);
+        box-sizing: border-box;
+        margin: 0;
+
+        .logo-container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+
+          .logo-img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+
+      .home-name-link .name-container,
+      .away-name-link .name-container {
+        text-align: center;
+        flex: 0 0 220px;
+        max-width: 220px;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -84,14 +149,96 @@
       padding: 5px 10px;
       border-radius: 10px;
       background-color: #fff;
-      color: $row-col margin: $space-10px auto; @include flex-row(0); justify-content: center; align-items: center; }
-  .prizes-button { display: inline-block; padding: $space-5px $space-10px; border-radius: 10px; background-color: #fff; color: $row-color; }
-  .prizes-button:hover { opacity: .8; cursor: pointer;
+      color: $row-color;
+
       &:hover {
-        opacity: .6;
+        opacity: .8;
+        cursor: pointer;
       }
     }
   }
+
+// Matches responsive
+@include respond-max($bp-md) {
+  .matches-list .match-item {
+    padding: 8px;
+  }
+
+  .matches-list .team .name-container { width: 140px; }
+  .matches-list .team .logo-img { width: calc($logo-size * 1.6); height: calc($logo-size * 1.6); }
+
+  .matches-list .home-logo-link,
+  .matches-list .away-logo-link {
+    width: calc($logo-size * 1.6);
+    height: calc($logo-size * 1.6);
+  }
+}
+
+@include respond-max($bp-sm) {
+  .matches-list .match-item { flex-direction: column; gap: 8px; align-items: stretch; }
+
+  .matches-list .match-item > a,
+  .matches-list .match-item > span,
+  .matches-list .match-item > .score-row,
+  .matches-list .match-item > a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .matches-list .team {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 0;
+  }
+
+  .matches-list .team .name-container {
+    width: auto;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .matches-list .team .logo-container {
+    margin: 0 auto;
+  }
+
+  .matches-list .team .logo-img { width: calc($logo-size * 1.4); height: calc($logo-size * 1.4); }
+
+  .matches-list .home-logo-link,
+  .matches-list .away-logo-link {
+    width: calc($logo-size * 1.4);
+    height: calc($logo-size * 1.4);
+  }
+
+  .matches-list .team .result {
+    margin-top: 4px;
+    font-size: 16px;
+  }
+
+  .matches-list .score-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #fff;
+    padding: 6px 0;
+  }
+
+  // Mobile ordering for flattened structure: logo1, name1, score, name2, logo2
+  .matches-list .home-logo-link { order: 1 }
+  .matches-list .home-name-link { order: 2 }
+  .matches-list .score-row { order: 3 }
+  .matches-list .away-name-link { order: 4 }
+  .matches-list .away-logo-link { order: 5 }
+}
+
+@include respond-max($bp-xs) {
+  .matches-list .team .name-container > * { font-size: 12px }
+}
 
   .h2-title {
     text-align: center;
@@ -124,13 +271,4 @@
       background-color: $third-place-bg-color;
     }
   }
-{ background-color: rgba(0, 255, 0, 0.3); }
-  .red-bg { background-color: rgba(255, 0, 0, 0.3); }
-  .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
-  .green-text { color: green; }
-  .red-text { color: red; }
-  .grey-text { color: grey; }
-  .first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
-  .second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
-  .third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
-  .special span { color: $special-place-font-color; background-color: $special-place-bg-color;
+

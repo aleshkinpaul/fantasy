@@ -46,7 +46,7 @@
                 <div class="team-container">
                   <div class="icon-container place" [ngSwitch]="true">
                     <img [src]="getMedalImage(nomInd)" *ngSwitchDefault [alt]="'logo '+nominee.team.title"
-                      [ngClass]="{ 'half-hidden': nomInd > 2 }">
+                      [ngClass]="{ 'half-hidden': nomInd > 2 && nomInd < 5 }">
                     <div class="place-number" *ngSwitchCase="nomInd > 4">{{ nomInd + 1 }}</div>
                   </div>
                   <div class="icon-container">
@@ -76,7 +76,7 @@
           </ng-container>
         </ul>
         <div class="nomimees-default" *ngSwitchCase="2">
-          <p>Данные появятся на этапе Clausura</p>
+          <p>Данные появятся позднее</p>
         </div>
         <div class="nomimees-default" *ngSwitchCase="3">
           <p>Нет подходящих команд</p>

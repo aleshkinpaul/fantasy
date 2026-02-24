@@ -7,7 +7,7 @@ import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  // styleUrls: ['./schedule.component.scss'],  // TODO: Fix corrupted SCSS files
+  styleUrls: ['./schedule.component.scss'],
   standalone: true,
   imports: [CommonModule]
 })
@@ -59,3 +59,4 @@ export class ScheduleComponent implements OnInit {
     return this.profilesArr.find(profile => profile.id === opponentId).team.title;
   }
 }
+

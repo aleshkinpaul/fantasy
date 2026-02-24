@@ -84,17 +84,16 @@
             span {
               display: block;}
             &.second-score::after { background-color: $second-place-bg-color; }
-            &.third-score::after {
+            &.third-score::after  {
               background-color: $third-place-bg-color;
               line-height: calc($row-height - 10px);
-    
+
               align-self: center;
               text-align: center;
               vertical-align: middle;
-    
+
               color: $label-font-color;
               background-color: $label-bg-color;
-              // box-sizing: border-box;
             }
           }
 
@@ -113,33 +112,20 @@
               width: calc(2 * $row-height - 40px);
             }
 
-            @media (max-width: 600px) {
-              width: calc(2 * $row-height - 45px);
-            box-sizing: border-box;
+
             @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
             @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
             @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
-    
+
             span {
               width: calc(2 * $row-height - 20px);
               @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
               @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
               @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
+              color: $first-place-font-color;
+              background-color: $first-place-bg-color;
             }
 
-            &.second {
-              span {
-                color: $second-place-font-color;
-                background-color: $second-place-bg-color;
-              }
-            }
-
-            &.third {
-              span {
-                color: $third-place-font-color;
-                background-color: $third-place-bg-color;
-              }
-            }span { color: $first-place-font-color; background-color: $first-place-bg-color; }
             &.second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
             &.third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
             &.special span { color: $special-place-font-color; background-color: $special-place-bg-color; }

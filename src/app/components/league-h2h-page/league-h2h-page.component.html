@@ -6,7 +6,7 @@
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" id="stage_1" *ngIf="this.consts.stages.length > 1">{{ this.consts.stages[1].name }}</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 3}" (click)="setTabId(3)" id="prizes">Призы</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 4}" (click)="setTabId(4)" id="format">Формат</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 5}" (click)="setTabId(5)" *ngIf="!!consts.cup" id="cup">Кубок</li>
+    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 5}" (click)="setTabId(5)" *ngIf="!!consts.cup" id="cup">{{ consts.cup.name }}</li>
     <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 100}" (click)="setTabId(100)" id="all">Общий зачет</li>
   </ul>
 

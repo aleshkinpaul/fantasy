@@ -54,34 +54,28 @@
             position: relative;
 
             &:first-child {
-      
               & > span {
                 display: block;
-                margin: 5px;
-                width: calc($row-height - 10px);
-                line-height: calc($row-height - 10px);
-      
-                align-self: center;
-                text-align: center;
-                vertical-align: middle;
-      
-                color: $label-font-color;
-                background-color: $label-bg-color;
-                // box-sizing: border-box;
               }
             }
 
-            // &:first-child{
-            //   width: $row-height;
-            //   height: $row-height;
-            // }
+            .red-bg { background-color: rgba(255, 0, 0, 0.3); }
+            .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
+            .green-text { color: green; }
+            .red-text { color: red; }
+            .grey-text { color: grey; }
+            .first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
+            .second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
+            .third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
+            .special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
+
             &.item-name-container {
               padding-left: 5px;
               height: $row-height;
-        
+
               @include flex-row($space-10px);
               align-items: center;
-        
+
               font-family: "Exo2";
 
               .team-link {
@@ -97,17 +91,15 @@
             }
 
             .item-team-container {
-              @include flex-row($space-10px);
+              @include flex-row($space-10px, 'start');
               align-items: center;
-      
+
               .logo-container {
                 width: $logo-size;
-                // height: $logo-size;
-              
                 @include flex-row(0);
                 align-items: center;
                 box-sizing: border-box;
-        
+
                 .logo-img {
                   width: $logo-size;
                   height: $logo-size;
@@ -117,23 +109,23 @@
                   }
                 }
               }
-        
+
               .team-container {
                 min-width: 80px;
                 @include flex-column(0);
                 align-items: start;
-        
+
                 .team-name {
                   display: block;
                   width: 100%;
-          
+
                   align-self: left;
                   text-align: left;
                 }
-        
+
                 .person-name {
                   opacity: .7;
-          
+
                   align-self: left;
                   text-align: left;
                 }
@@ -185,19 +177,18 @@
 
   .second {
     span {
-      color:{ background-color: rgba(0, 255, 0, 0.3); }
-  .red-bg { background-color: rgba(255, 0, 0, 0.3); }
-  .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
-  .green-text { color: green; }
-  .red-text { color: red; }
-  .grey-text { color: grey; }
-  .first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
-  .second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
-  .third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
-  .special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
-}
+      color: $second-place-font-color;
+      background-color: $second-place-bg-color;
+    }
+  }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+  .third {
+    span {
+      color: $third-place-font-color;
+      background-color: $third-place-bg-color;
+    }
+  }
+
+  .special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
+
+  a { text-decoration: none; color: inherit; }

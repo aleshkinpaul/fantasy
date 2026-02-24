@@ -93,11 +93,12 @@ export class LeagueH2HDataService {
       this.updateMaxNoloseStrike(awayProfile);
     } else if (result === 1) { // home win
       homeProfile.results.prizeCurrentWinStrike += 1;
+      homeProfile.results.prizeCurrentNoLoseStrike += 1;
       this.updateMaxWinStrike(homeProfile);
       this.updateMaxNoloseStrike(homeProfile);
+      this.updateMaxStoppedNolose(homeProfile, awayProfile.results.prizeCurrentNoLoseStrike);
       awayProfile.results.prizeCurrentWinStrike = 0;
       awayProfile.results.prizeCurrentNoLoseStrike = 0;
-      this.updateMaxStoppedNolose(homeProfile, awayProfile.results.prizeCurrentNoLoseStrike);
 
       if (matchDiffFo <= 5) homeProfile.results.prizeMinWins += 1;
       if (matchDiffFo > awayProfile.results.prizeMaxLosedDiff && tourIndex > 1) {
@@ -105,11 +106,12 @@ export class LeagueH2HDataService {
       }
     } else { // away win
       awayProfile.results.prizeCurrentWinStrike += 1;
+      awayProfile.results.prizeCurrentNoLoseStrike += 1;
       this.updateMaxWinStrike(awayProfile);
       this.updateMaxNoloseStrike(awayProfile);
+      this.updateMaxStoppedNolose(awayProfile, homeProfile.results.prizeCurrentNoLoseStrike);
       homeProfile.results.prizeCurrentWinStrike = 0;
       homeProfile.results.prizeCurrentNoLoseStrike = 0;
-      this.updateMaxStoppedNolose(awayProfile, homeProfile.results.prizeCurrentNoLoseStrike);
 
       if (matchDiffFo <= 5) awayProfile.results.prizeMinWins += 1;
       if (matchDiffFo > homeProfile.results.prizeMaxLosedDiff && tourIndex > 1) {

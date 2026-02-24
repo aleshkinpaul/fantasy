@@ -1,154 +1,288 @@
+@import "../../styles/styles.scss";
+
 // Prizes list styling extracted from main component
 .prizes-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  @include flex-row($space-10px);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .prize-item {
-  list-style: none;
-}
+  padding: $space-10px;
+  min-width: 280px;
+  width: 20vw;
 
-.prize-item-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #f9f9f9;
-}
+  background-color: #ffffff31;
+  border-radius: 10px;
 
-.info-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-.card-header-container {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
+// Responsive tweaks for prizes
+@include respond-max($bp-md) {
+  .prize-item {
+    width: 45vw;
+    min-width: 220px;
+    padding: 8px;
+  }
 
-.prize-icon {
-  width: 60px;
-  height: 60px;
-  flex-shrink: 0;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .info-container {
+    min-height: 220px;
+  }
+
+  .param-container {
+    min-width: 40px;
+    font-size: 13px;
   }
 }
 
-.card-title-container {
-  flex: 1;
+@include respond-max($bp-sm) {
+  .prize-item {
+    width: 100%;
+    min-width: 0;
+    padding: 8px 6px;
+  }
+
+  .card-header-container {
+    .prize-id, .prize-icon { width: 26px; height: 26px; }
+    .card-title-container { width: auto; }
+  }
+
+  .team-container {
+    gap: 8px;
+  }
+
+  .title-container p { font-size: 12px }
 }
 
-.prize-name {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
+@include respond-max($bp-xs) {
+  .prize-item { padding: 6px; }
+  .param-container { min-width: 36px; font-size: 12px; }
+  .title-container p { font-size: 11px }
 }
 
-.prize-id {
-  font-size: 12px;
-  color: #999;
-  
-  p {
-    margin: 0;
+.prize-item-container {
+  @include flex-column($space-10px);
+  width: 100%;
+  height: 100%;
+}
+
+.info-container {
+  @include flex-column($space-10px);
+
+  min-height: 300px;
+}
+
+.card-header-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+  background-color: $row-color;
+  border-radius: 5px;
+
+  .prize-id,
+  .prize-icon {
+    width: 30px !important;
+    height: 30px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .prize-id {
+    @include flex-row(0);
+    justify-content: center;
+    align-items: center;
+
+    border: 1px dashed white;
+    border-radius: 50%;
+  }
+
+  .card-title-container {
+    @include flex-column(0);
+    justify-content: center;
+
+    width: 50%;
+
+    .prize-name {
+      text-align: center;
+    }
   }
 }
 
 .prize-author,
 .prize-condition,
-.prize-reward {
-  display: flex;
-  gap: 10px;
-  font-size: 12px;
+.prize-reward,
+.nominees-container {
+  @include flex-column(0);
+
+  .nominees-header-container {
+    margin-top: 10px;
+    @include flex-row(0);
+    align-items: center;
+    justify-content: space-between;
+
+    .show-all-button {
+      padding: 5px 10px;
+      text-align: center;
+      background-color: $row-color;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ffffff69;
+      }
+    }
+  }
+
+  .prize-title {
+    font-weight: bold;
+    color: $row-color;
+  }
 }
 
 .prize-title {
-  font-weight: 600;
-  color: #555;
-  min-width: 60px;
+  font-weight: bold;
+  color: $row-color;
 }
 
 .prize-description {
-  color: #333;
+  color: #fff;
   flex: 1;
 }
 
 .nominees-container {
-  flex: 1;
-  border-left: 2px solid #e0e0e0;
-  padding-left: 20px;
-}
+  // margin-top: auto;
 
-.nominees-header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
+  .nominees-list {
+    margin-top: $space-5px;
+    @include flex-column($space-5px);
 
-.show-all-button {
-  padding: 4px 8px;
-  background: #007bff;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  
-  &:hover {
-    background: #0056b3;
+    width: 100%;
+
+    .nominee-item {
+      @include flex-column($space-5px);
+      align-items: center;
+      justify-content: space-between;
+
+      width: 100%;
+
+      &.unsuitable-item {
+        color: rgb(252, 160, 175);
+      }
+
+      .nominee-main-container {
+        @include flex-row(0);
+        align-items: center;
+        justify-content: space-between;
+        
+        width: 100%;
+
+        .half-hidden {
+          opacity: .35;
+        }
+      }
+
+      .nominee-bage-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        gap: 10px;
+        color: white;
+
+        width: 100%;
+
+        font-size: 10px;
+
+        .bage {
+          padding: 5px 10px;
+          border-radius: 5px;
+        }
+      }
+
+      .team-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+
+        /* Allow the title to shrink properly and avoid overflow */
+        flex: 1;
+        min-width: 0;
+
+        .icon-container {
+          flex-shrink: 0;
+
+          width: 30px;
+          height: 30px;
+
+          &.place {
+            width: 25px;
+            height: 25px;
+
+            .place-number {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              width: 100%;
+              height: 100%;
+
+              background-color: $row-color;
+              border-radius: 50%;
+            }
+          }
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .title-container {
+          display: flex;
+          flex-direction: column;
+
+          // width: 100%;
+          
+          min-width: 0;
+
+          p {
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .team-name {
+            font-weight: 600;
+            color: #fff;
+          }
+
+          .player-name {
+            opacity: .6;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+          }
+        }
+      }
+
+      .param-container {
+        width: 40px;
+        text-align: center;
+      }
+    }
   }
-}
-
-.nominees-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.nominee-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background: white;
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
-  
-  &.unsuitable-item {
-    opacity: 0.6;
-    background: #f5f5f5;
-  }
-}
-
-.nominee-main-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex: 1;
-}
-
-.team-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-}
-
-.icon-container {
+}.icon-container {
   width: 40px;
   height: 40px;
   flex-shrink: 0;
@@ -158,17 +292,13 @@
   
   &.place {
     position: relative;
-    background: #fff;
+    background: transparent;
   }
   
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    
-    &.half-hidden {
-      opacity: 0.5;
-    }
   }
 }
 
@@ -176,7 +306,6 @@
   position: absolute;
   font-size: 14px;
   font-weight: bold;
-  color: #333;
 }
 
 .title-container {
@@ -193,11 +322,11 @@
     
     &.team-name {
       font-weight: 600;
-      color: #333;
+      color: #fff;
     }
     
     &.player-name {
-      color: #999;
+      color: rgba(255, 255, 255, 0.6);
       font-size: 12px;
     }
   }
@@ -206,7 +335,7 @@
 .param-container {
   font-size: 14px;
   font-weight: 600;
-  color: #007bff;
+  color: #ffffff;
   min-width: 50px;
   text-align: right;
 }
@@ -230,12 +359,12 @@
   }
   
   &.green-bg {
-    background: rgba(0, 255, 0, 0.6);
-    color: #333;
+    background: rgba(0, 255, 0, 0.3);
+    color: #fff;
   }
   
   &.red-bg {
-    background: rgba(255, 0, 0, 0.6);
+    background: rgba(255, 0, 0, 0.3);
     color: white;
   }
 }
@@ -243,10 +372,10 @@
 .nomimees-default {
   padding: 20px;
   text-align: center;
-  background: white;
+  background: #ffffff0a;
   border-radius: 4px;
-  border: 1px dashed #ddd;
-  color: #999;
+  border: 1px dashed #ffffff4d;
+  color: rgba(255, 255, 255, 0.6);
   
   p {
     margin: 0;

@@ -131,8 +131,38 @@ export class LeagueH2HPageComponent implements OnInit {
         .subscribe({
           next: ([squads, squads_2]) => {
               this.squads = squads;
-
+              this.squads_2 = squads_2;
+              console.log('sources',squads,squads_2);
+              
               this.lastTour = Object.keys(this.squads.data.tours).length;
+
+              if (!!this.squads_2) {
+                let firstToursCount = 0;
+                Object.values(this.squads.data.players).forEach(player => {
+                  const player2 = Object.values(this.squads_2.data.players).find(player2 => player2.id === player.id);
+                  
+                  firstToursCount = Object.keys(player.team.results_by_tour).length;
+                  
+                  const firstToursPoints = player.team.results_by_tour[firstToursCount].total_score;
+
+                  Object.values(player2.team.results_by_tour).forEach((match2,ind2) => {
+                    match2.total_score = (+match2.total_score + +firstToursPoints).toString();
+                    player.team.results_by_tour[firstToursCount + ind2 + 1] = match2;
+                  })
+                  
+                  Object.values(player2.team.rosters_by_tour).forEach((match2,ind2) => {
+                    player.team.rosters_by_tour[firstToursCount + ind2 + 1] = match2;
+                  })
+                })
+
+                Object.values(this.squads_2.data.tours).forEach(tour => {
+                  tour.number = (+tour.number + firstToursCount).toString();
+                  this.squads.data.tours[tour.number] = tour;
+                });
+
+                this.lastTour += Object.keys(this.squads_2.data.tours).length
+                console.log('squads', this.squads, this.lastTour);
+              }
               
               this.updateTabs();
 
@@ -313,7 +343,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
                   profile.squadDetails = {
                     id: squadInfo?.id,
-                    name: squadInfo?.team.title || squads_2?.data.players[profile.id].team.title,
+                    name: squadInfo?.team.title || this.squads_2?.data.players[profile.id].team.title,
                     score: squadInfo?.team.results_by_tour[this.lastTour].total_score,
                     diff: this.lastTour > 1 ?
                       this.getPlaceAfterTour(profile.id, this.lastTour - 1) - this.getPlaceAfterTour(profile.id, this.lastTour)
@@ -374,66 +404,89 @@ export class LeagueH2HPageComponent implements OnInit {
             });
 
             // Игроки
-            this.service.getData(`${this.consts.tour_link + this.lastTour}`)
-              .subscribe(
-                objPlayers => {
-                  logger.debug('Игроки: ', objPlayers);
-                  const players = [];
+            const playersLinksArr = [];
+            const firstStageMaxTours = Math.max(...Object.keys(squads.data.matches));
+            const firstLastTour = !!this.consts.tour_link_2 && this.lastTour > firstStageMaxTours ? firstStageMaxTours : this.lastTour;
+            const secondLastTour = !!this.consts.tour_link_2 && this.lastTour > firstStageMaxTours ? this.lastTour - firstStageMaxTours : 0;
 
-                  this.profilesDetails.forEach((profile, ind) => {
-                    for (let i = 1; i <= this.lastTour; i++) {
-                      const newSquad = (
-                        profile.team.rosters_by_tour[i.toString()].players.base
-                        .concat(profile.team.rosters_by_tour[i.toString()].players.bench)
-                      );
+            playersLinksArr.push(this.http.get(`${this.consts.tour_link + firstLastTour}`));
 
-                      this.allSquads = this.allSquads.concat(newSquad);
-                    }
+            if (!!secondLastTour) playersLinksArr.push(this.http.get(`${this.consts.tour_link_2 + secondLastTour}`));
+
+            forkJoin([
+              ...playersLinksArr
+            ])
+            .subscribe({
+              next: ([objPlayers, objPlayers_2]) => {
+                logger.debug('Игроки: ', objPlayers, objPlayers_2);
+
+                if (!!objPlayers_2) {
+                  Object.values(objPlayers_2.data.players).forEach(player => {
+                    if (Object.keys(objPlayers.data.players).indexOf(player.id) < 0)
+                      objPlayers.data.players[player.id] = player;
+                  });
+                }
+
+                // objPlayers.data.players = [...new Set([...objPlayers.data.players, ...objPlayers_2.data.players])];
+                const players = [];
+
+                this.profilesDetails.forEach((profile, ind) => {
+                  for (let i = 1; i <= this.lastTour; i++) {
+                    const newSquad = (
+                      profile.team.rosters_by_tour[i.toString()].players.base
+                      .concat(profile.team.rosters_by_tour[i.toString()].players.bench)
+                    );
+
+                    this.allSquads = this.allSquads.concat(newSquad);
+                  }
+                })
+
+                this.allSquads.forEach(pl => {
+                  const currentObj = players.find(elem => elem.id === pl);
+                  
+                  if (!!currentObj) currentObj.count += 1
+                  else players.push({
+                    count: 1,
+                    amplua: this.getPosition(objPlayers.data.players[pl].amplua_id),
+                    name: objPlayers.data.players[pl].name,
+                    team_name: this.getClubName(objPlayers.data.players[pl].team_id),
+                    id: pl,
+                    team_id: objPlayers.data.players[pl].team_id,
                   })
 
-                  this.allSquads.forEach(pl => {
-                    const currentObj = players.find(elem => elem.id === pl);
-                    
-                    if (!!currentObj) currentObj.count += 1
-                    else players.push({
-                      count: 1,
-                      amplua: this.getPosition(objPlayers.data.players[pl].amplua_id),
-                      name: objPlayers.data.players[pl].name,
-                      team_name: this.getClubName(objPlayers.data.players[pl].team_id),
-                      id: pl,
-                      team_id: objPlayers.data.players[pl].team_id,
-                    })
+                  if (!!this.tabooTeams.includes(objPlayers.data.players[pl].team_id)) {
+                    this.tabooPlayers.push(pl);
+                  }
+                });
 
-                    if (!!this.tabooTeams.includes(objPlayers.data.players[pl].team_id)) {
-                      this.tabooPlayers.push(pl);
-                    }
-                  });
+                this.tabooPlayers = [...new Set(this.tabooPlayers)];
 
-                  this.tabooPlayers = [...new Set(this.tabooPlayers)];
+                this.profilesDetails.forEach((profile, ind) => {
+                  profile.isMartin = 1;
 
-                  this.profilesDetails.forEach((profile, ind) => {
-                    profile.isMartin = 1;
+                  for (let i = 1; i <= this.lastTour; i++) {
+                    const newSquad = (
+                      profile.team.rosters_by_tour[i.toString()].players.base
+                      .concat(profile.team.rosters_by_tour[i.toString()].players.bench)
+                    );
 
-                    for (let i = 1; i <= this.lastTour; i++) {
-                      const newSquad = (
-                        profile.team.rosters_by_tour[i.toString()].players.base
-                        .concat(profile.team.rosters_by_tour[i.toString()].players.bench)
-                      );
-
-                      if (profile.isMartin === 1) {
-                        if (newSquad.filter(playerId => this.tabooPlayers.includes(playerId)).length > 0) {
-                          profile.isMartin = 0;
-                        }
+                    if (profile.isMartin === 1) {
+                      if (newSquad.filter(playerId => this.tabooPlayers.includes(playerId)).length > 0) {
+                        profile.isMartin = 0;
                       }
                     }
-                  });
+                  }
+                });
 
-                  logger.debug('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
+                logger.debug('Игроки, сорт. по кол-ву пиков: ', players.sort(this.sortByCount));
 
-                  if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
-                  if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
-                }       
-              );
+                if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
+                if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
+              },
+              error: err => {
+
+              }  
+            });
               
             this.unitedProfiles = this.profilesDetails;
 
@@ -461,9 +514,10 @@ export class LeagueH2HPageComponent implements OnInit {
       const matches = this.consts.matches;
 
       for (let i = stageInfo.firstTour - 1; i < stageInfo.lastTour; i++) {
-        this.currentLeagueMatches.push(Object.values(matches[i+1].filter(match => {
-          return leagueProfiles.includes(match.home) || leagueProfiles.includes(match.away);
-        })));
+        if (!!matches[i+1])
+          this.currentLeagueMatches.push(Object.values(matches[i+1].filter(match => {
+            return leagueProfiles.includes(match.home) || leagueProfiles.includes(match.away);
+          })));
       }
     }
   }
@@ -486,8 +540,8 @@ export class LeagueH2HPageComponent implements OnInit {
         this.drawGap
       );
 
-      match.homeScore = matchResult.homeScore;
-      match.awayScore = matchResult.awayScore;
+      match.home_score = matchResult.homeScore;
+      match.away_score = matchResult.awayScore;
       match.result = matchResult.result;
 
       const homeProfile = profilesDetails.find(x => x.id === match.home);
@@ -884,9 +938,11 @@ export class LeagueH2HPageComponent implements OnInit {
       );
 
     if (ind === 5) {
-      const actualCupTour = Math.max(
-        ...this.consts.cup.matchesTours.filter(val => val <= this.lastTour)
-      );
+      const actualCupTour =
+        this.consts.cup.matchesTours[0] <= this.lastTour ? 
+          Math.max(
+            ...this.consts.cup.matchesTours.filter(val => val <= this.lastTour)
+          ) : this.consts.cup.matchesTours[0];
       const indOfActualCupTour = this.consts.cup.matchesTours.indexOf(actualCupTour) + 1;
 
       this.activeTabs.tourId = indOfActualCupTour;

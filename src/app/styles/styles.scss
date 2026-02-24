@@ -39,6 +39,18 @@ $negative-bg-color:         #F4CCCC;
   scroll-behavior: smooth;
 }
 
+// Responsive breakpoints
+$bp-lg: 1200px;
+$bp-md: 900px;
+$bp-sm: 600px;
+$bp-xs: 450px;
+
+@mixin respond-max($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
 body {
   margin: 0;
   font-family: 'Prosto_One';

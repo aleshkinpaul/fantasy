@@ -20,7 +20,7 @@ import { DefaultLoaderComponent } from '../loader/default-loader.component';
 @Component({
   selector: 'app-league-page',
   templateUrl: './league-page.component.html',
-  // styleUrls: ['./league-page.component.scss'],  // TODO: Fix corrupted SCSS files
+  styleUrls: ['./league-page.component.scss'],
   standalone: true,
   imports: [CommonModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent]
 })
@@ -520,3 +520,4 @@ export class LeaguePageComponent implements OnInit {
     return (+sortedArr[mid - 1] + +sortedArr[mid]) / 2;
   }
 }
+

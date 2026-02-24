@@ -8,7 +8,7 @@ import { logger } from 'src/app/utils/logger';
 @Component({
   selector: 'app-matches',
   templateUrl: './matches.component.html',
-  // styleUrls: ['./matches.component.scss'],  // TODO: Fix corrupted SCSS files
+  styleUrls: ['./matches.component.scss'],
   standalone: true,
   imports: [CommonModule]
 })
@@ -61,3 +61,4 @@ export class MatchesComponent implements OnInit {
     return this.profilesArr.find(profile => profile.id === profileId).team.title;
   }
 }
+
