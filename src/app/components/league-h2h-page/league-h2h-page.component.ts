@@ -868,6 +868,7 @@ export class LeagueH2HPageComponent implements OnInit {
     this.consts.prizes.forEach((prize, prizeInd) => {
       const valueSortCoef = +[].includes(prizeInd);
       const paramSortCoef = +[].includes(prizeInd);
+console.log('prize', prize);
 
       this.profilesDetails.forEach(profile => {
         profile.prizes[prize.id] = {
@@ -877,9 +878,9 @@ export class LeagueH2HPageComponent implements OnInit {
             : prize.id === 2 ?
               (profile.squadDetails.max_medals_in_a_row < 2 ? 0 : profile.squadDetails.max_medals_in_a_row)
             : prize.id === 3 ?
-              0
+              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
             : prize.id === 4 ?
-              0
+              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
             : 0,
 
           sortParam: profile.results.points

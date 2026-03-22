@@ -175,7 +175,7 @@
 }
 
 @include respond-max($bp-sm) {
-  .matches-list .match-item { flex-direction: column; gap: 8px; align-items: stretch; }
+  .matches-list .match-item { flex-direction: column; gap: 8px; align-items: center; }
 
   .matches-list .match-item > a,
   .matches-list .match-item > span,
