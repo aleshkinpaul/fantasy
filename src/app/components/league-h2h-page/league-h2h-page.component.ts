@@ -132,7 +132,6 @@ export class LeagueH2HPageComponent implements OnInit {
           next: ([squads, squads_2]) => {
               this.squads = squads;
               this.squads_2 = squads_2;
-              console.log('sources',squads,squads_2);
               
               this.lastTour = Object.keys(this.squads.data.tours).length;
 
@@ -161,7 +160,6 @@ export class LeagueH2HPageComponent implements OnInit {
                 });
 
                 this.lastTour += Object.keys(this.squads_2.data.tours).length
-                console.log('squads', this.squads, this.lastTour);
               }
               
               this.updateTabs();
@@ -487,6 +485,14 @@ export class LeagueH2HPageComponent implements OnInit {
 
               }  
             });
+
+            const profilesByScore = Object.assign([], this.profilesDetails.map(profile => ({ id: profile.squadDetails.id, score: +profile.squadDetails.score })).sort(this.sortByScore));
+            
+            this.profilesDetails.forEach((profile, ind) => {
+              const prInd = profilesByScore.findIndex(p => p.id === profile.id); 
+              if (!profile.place_in_league) profile.place_in_league = {};
+              profile.place_in_league['ByScore'] = prInd + 1;
+            })
               
             this.unitedProfiles = this.profilesDetails;
 
@@ -868,13 +874,12 @@ export class LeagueH2HPageComponent implements OnInit {
     this.consts.prizes.forEach((prize, prizeInd) => {
       const valueSortCoef = +[].includes(prizeInd);
       const paramSortCoef = +[].includes(prizeInd);
-console.log('prize', prize);
 
       this.profilesDetails.forEach(profile => {
         profile.prizes[prize.id] = {
           value: 
             prize.id === 1 ?
-              (profile.place_in_league['CommonFO'] < 7 ? 0 : profile.results.fo['common'])
+              (profile.place_in_league['ByScore'] < 7 ? 0 : profile.score)
             : prize.id === 2 ?
               (profile.squadDetails.max_medals_in_a_row < 2 ? 0 : profile.squadDetails.max_medals_in_a_row)
             : prize.id === 3 ?
@@ -883,7 +888,10 @@ console.log('prize', prize);
               !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
             : 0,
 
-          sortParam: profile.results.points
+          sortParam: 
+            prize.id === 2 ?
+              profile.score
+              : profile.results.points
         }
       })
 
