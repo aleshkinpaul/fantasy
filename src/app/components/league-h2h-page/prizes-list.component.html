@@ -58,7 +58,7 @@
                   </div>
                 </div>
                 <div class="param-container" *ngIf="!item.isSecret">
-                  {{ item.id !== 8 ? nominee.prizes[item.id]?.value : nominee.prizes[item.id]?.value.toFixed(2) }}
+                  {{ nominee.prizes[item.id]?.value }}
                 </div>
               </div>
               <div class="nominee-bage-container">

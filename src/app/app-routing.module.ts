@@ -23,6 +23,11 @@ const routes: Routes = [
     loadComponent: () => import('./components/league-page/league-page.component').then(m => m.LeaguePageComponent)
   },
   { 
+    path: 'world-cup/new', 
+    loadComponent: () => import('./components/league-h2h-page/league-h2h-page.component').then(m => m.LeagueH2HPageComponent),
+    pathMatch: 'full' 
+  },
+  { 
     path: 'spain-cup', 
     loadComponent: () => import('./components/cup-page/cup-page.component').then(m => m.CupPageComponent)
   },

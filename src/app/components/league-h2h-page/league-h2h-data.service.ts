@@ -206,6 +206,57 @@ export class LeagueH2HDataService {
         Math.round(awayProfile.results.subsUsedCount / awayProfile.results.subsTotalCount * 10000) / 100;
     }
   }
+  /**
+   * Updates substitution metrics wc
+   */
+  updateSubsWC(
+    homeProfile: any,
+    awayProfile: any,
+    tourIndex: number,
+    homeActSquad: string[],
+    homePrevSquad: string[],
+    awayActSquad: string[],
+    awayPrevSquad: string[]
+  ): void {
+    console.log(tourIndex);
+
+    if (tourIndex === 1) {
+      homeProfile.results.uniqueUsedPlayers = homePrevSquad;
+      awayProfile.results.uniqueUsedPlayers = awayPrevSquad;
+    }
+
+    homeProfile.results.uniqueUsedPlayers = [...homeProfile.results.uniqueUsedPlayers, ...homeActSquad.filter(sq => !homeProfile.results.uniqueUsedPlayers.includes(sq))];
+    awayProfile.results.uniqueUsedPlayers = [...awayProfile.results.uniqueUsedPlayers, ...awayActSquad.filter(sq => !awayProfile.results.uniqueUsedPlayers.includes(sq))];
+    
+
+    if ([1, 2, 4, 5].includes(tourIndex)) {
+      homeProfile.results.subsTotalCount += 4;
+      awayProfile.results.subsTotalCount += 4;
+    }
+
+    if ([3].includes(tourIndex)) {
+      homeProfile.results.subsTotalCount += 15;
+      awayProfile.results.subsTotalCount += 15;
+    }
+
+    if ([6, 7].includes(tourIndex)) {
+      homeProfile.results.subsTotalCount += 6;
+      awayProfile.results.subsTotalCount += 6;
+    }
+
+    if (tourIndex > 0) {
+      const homeSubsUsed = 15 - homeActSquad.filter(pId => homePrevSquad.includes(pId)).length;
+      const awaySubsUsed = 15 - awayActSquad.filter(pId => awayPrevSquad.includes(pId)).length;
+
+      homeProfile.results.subsUsedCount += homeSubsUsed;
+      homeProfile.results.subsCoef = 
+        Math.round(homeProfile.results.subsUsedCount / homeProfile.results.subsTotalCount * 10000) / 100;
+
+      awayProfile.results.subsUsedCount += awaySubsUsed;
+      awayProfile.results.subsCoef = 
+        Math.round(awayProfile.results.subsUsedCount / awayProfile.results.subsTotalCount * 10000) / 100;
+    }
+  }
 
   /**
    * Helper: Update max win strike

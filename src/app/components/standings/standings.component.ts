@@ -2,6 +2,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
+import { logger } from '../../utils/logger';
 
 @Component({
   selector: 'app-standings',

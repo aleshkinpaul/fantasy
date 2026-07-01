@@ -80,6 +80,61 @@ export class LeagueH2HPageComponent implements OnInit {
 
   public tabooTeams: string[] = ["7655", "7654"];
   public tabooPlayers: string[] = ["213875"];
+  public tabooPlayersForWC: string[] = [
+    "230526", "230534", "230542", "230546", "230544"
+    , "230553", "230633", "230860", "230861", "230862"
+    , "230868", "230874", "230875", "230879", "230880"
+    , "230882", "230884", "231768", "231111", "231139"
+    , "231194", "231274", "231473", "231480", "231500"
+  ];
+  public larinId: string = "230935";
+
+    // {
+    // "8155" - Англия
+    // "230526" рэшфорд
+    // 
+    // "8156" - Аргентина
+    // "230534" - Муссо
+    // "230542" - Молина
+    // "230546" - Альмада
+    // "230544" - Симеоне
+    // "230553" - Альварес
+    // 
+    // "8159" - Бразилия
+    // "230633" - Рафинья
+    // 
+    // "8168" - Испания
+    // "230860" - Пубиль
+    // "230861" - Жоан Гарсия
+    // "230862" - Кубарси
+    // "230868" - Льоренте
+    // "230874" - Баэна
+    // "230875" - Гави
+    // "230879" - Ольмо
+    // "230880" - Педри
+    // "230882" - Ферран
+    // "230884" - Ямаль
+    // "231768" - Эрик Гарсия
+    // 
+    // "8176" - Мексика
+    // "231111" - Варгас
+    // 
+    // "8177" - Нидерланды
+    // "231139" - де Йонг
+    // 
+    // "8179" - Норвегия
+    // "231194" - Серлот
+    // 
+    // "8182" - Португалия
+    // "231274" - Жоау Конселу
+    // 
+    // "8189" - Уругвай
+    // "231473" - Араухо
+    // "231480" - Хименес
+    // 
+    // "8190" - Франция
+    // "231500" - Кунде
+    // }
 
   public isLoading$?: Observable<boolean>;
   public windowWidth: number = 1400;
@@ -228,6 +283,10 @@ export class LeagueH2HPageComponent implements OnInit {
                   subsUsedCount: 0,
                   subsTotalCount: 0,
                   subsCoef: 0,
+                  uniqueUsedPlayers: [],
+
+                  portugezePoints: 0,
+                  larinPoints: 0,
                   
                   prizeMinWins: 0,
                   
@@ -417,7 +476,7 @@ export class LeagueH2HPageComponent implements OnInit {
             .subscribe({
               next: ([objPlayers, objPlayers_2]) => {
                 logger.debug('Игроки: ', objPlayers, objPlayers_2);
-
+                
                 if (!!objPlayers_2) {
                   Object.values(objPlayers_2.data.players).forEach(player => {
                     if (Object.keys(objPlayers.data.players).indexOf(player.id) < 0)
@@ -442,6 +501,8 @@ export class LeagueH2HPageComponent implements OnInit {
                 this.allSquads.forEach(pl => {
                   const currentObj = players.find(elem => elem.id === pl);
                   
+                  // console.log(pl);
+                  
                   if (!!currentObj) currentObj.count += 1
                   else players.push({
                     count: 1,
@@ -461,6 +522,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
                 this.profilesDetails.forEach((profile, ind) => {
                   profile.isMartin = 1;
+                  profile.isMartinWC = 1;
 
                   for (let i = 1; i <= this.lastTour; i++) {
                     const newSquad = (
@@ -473,6 +535,12 @@ export class LeagueH2HPageComponent implements OnInit {
                         profile.isMartin = 0;
                       }
                     }
+
+                    if (profile.isMartinWC === 1) {
+                      if (newSquad.filter(playerId => this.tabooPlayersForWC.includes(playerId)).length > 0) {
+                        profile.isMartinWC = 0;
+                      }
+                    }
                   }
                 });
 
@@ -480,11 +548,83 @@ export class LeagueH2HPageComponent implements OnInit {
 
                 if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
                 if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
+                if (this.route.snapshot.url[0].path ===  'world-cup') this.updatePrizesWC();
               },
               error: err => {
 
               }  
             });
+
+            const sourcesPlayersStats = [];
+            for (let i = 0; i < this.lastTour; i++) {
+              sourcesPlayersStats.push(this.http.get(`${this.consts.tour_link + (i+1)}`));
+            }
+
+            console.log(sourcesPlayersStats);
+
+            forkJoin([
+              ...sourcesPlayersStats
+            ])
+            .subscribe({
+              next: (dataPlayersStats) => {
+                console.log('dataPlayersStats', dataPlayersStats);
+
+                const playersPointsByTour = [];
+                
+                Object.values(dataPlayersStats[0].data.players).forEach(pl => playersPointsByTour.push(JSON.parse(JSON.stringify(pl))));
+                console.log(
+                  dataPlayersStats[0].data.players[this.larinId]
+                  , dataPlayersStats[1].data.players[this.larinId]
+                  , dataPlayersStats[2].data.players[this.larinId]
+                  , dataPlayersStats[3].data.players[this.larinId]
+                );
+                
+                for (let i = 1; i < dataPlayersStats.length; i++) {
+                  playersPointsByTour.forEach(pl => {
+                    const statByTour = Object.values(dataPlayersStats[i].data.players)
+                        .find(dt => dt.id === pl.id)
+                        .stat_by_tours[i+1];
+
+                    pl.stat_by_tours[(i+1).toString()] = statByTour;
+                    }
+                  );
+                }
+
+                console.log('playersPointsByTour', playersPointsByTour, playersPointsByTour.filter(pl => pl.team_id === "8170"));
+
+                this.profilesDetails.forEach((profile, ind) => {
+                  for (let i = 1; i <= this.lastTour; i++) {
+                    const newSquad = (
+                      profile.team.rosters_by_tour[i.toString()].players.base
+                      .concat(profile.team.rosters_by_tour[i.toString()].players.bench)
+                    );
+
+                    // console.log('profile', profile.results.portugezePoints, playersPointsByTour
+                    //   .filter(pl => pl.team_id === "8182" && profile.team.rosters_by_tour[i.toString()].players.base.includes(pl.id)));
+
+                    profile.results.portugezePoints += playersPointsByTour
+                      .filter(pl => pl.team_id === "8182" && profile.team.rosters_by_tour[i.toString()].players.base.includes(pl.id))
+                      .reduce((a, b) => a + b.stat_by_tours[i].score, 0);
+
+                    const larinObj = playersPointsByTour
+                      .find(pl => pl.id === this.larinId
+                        && (
+                          profile.team.rosters_by_tour[i.toString()].players.base
+                          .concat(profile.team.rosters_by_tour[i.toString()].players.bench)
+                        ).includes(pl.id));
+                    const isLarinCap = profile.team.rosters_by_tour[i.toString()].captain_id === this.larinId;
+                    profile.results.larinPoints += !larinObj ? 0 : larinObj.stat_by_tours[i].score * (1 + +isLarinCap);
+                  }
+                })
+
+
+                if (this.route.snapshot.url[0].path ===  'world-cup') this.updatePrizesWC();
+              },
+              error: err => {
+
+              }  
+            });
+            
 
             const profilesByScore = Object.assign([], this.profilesDetails.map(profile => ({ id: profile.squadDetails.id, score: +profile.squadDetails.score })).sort(this.sortByScore));
             
@@ -591,7 +731,10 @@ export class LeagueH2HPageComponent implements OnInit {
       const awayActSquad = this.dataService.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex + 1);
       const awayPrevSquad = tourIndex > 0 ? this.dataService.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex) : [];
 
-      this.dataService.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+      if (this.route.snapshot.url[0].path ===  'spain') 
+        this.dataService.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+      if (this.route.snapshot.url[0].path ===  'world-cup')
+        this.dataService.updateSubsWC(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
 
       // Update common results
       this.dataService.updateCommonResults(homeProfile);
@@ -892,6 +1035,72 @@ export class LeagueH2HPageComponent implements OnInit {
             prize.id === 2 ?
               profile.score
               : profile.results.points
+        }
+      })
+
+      prize.nomineesArr = this.profilesDetails
+        .filter(profile => profile.prizes[prize.id].value > 0)
+        .sort(
+          (a, b) =>
+            a.prizes[prize.id].value === b.prizes[prize.id].value ? 
+              (1 - 2 * paramSortCoef) * (b.prizes[prize.id].sortParam - a.prizes[prize.id].sortParam) : 
+              (1 - 2 * valueSortCoef) * (b.prizes[prize.id].value - a.prizes[prize.id].value)
+        )
+    
+      prize.activeLeaders = prize.nomineesArr.filter(nominee => {
+        return ( !prize.excluded
+            || !!prize.excluded && !prize.excluded.includes(nominee.id)
+          ) &&
+          ( !prize.isActivity
+            || !!prize.isActivity && nominee.results.subsCoef > 50
+          ) &&
+          ( prizeInd !== 11 
+            || prizeInd === 11 && nominee.prizes[prizeInd].value >= 3
+          )
+      });
+    });
+
+    this.consts.prizes.forEach((prize) => {
+      if (!!prize.isFinalStage) prize.state = 2;
+      if (!!prize.nomineesArr.length) prize.state = 1;
+      if (!prize.state && !prize.nomineesArr.length) prize.state = 3;
+    });
+    
+    this.prizesToShow = this.consts.prizes;
+  }
+
+  updatePrizesWC() {
+    this.consts.prizes.forEach((prize, prizeInd) => {
+      const valueSortCoef = +[2].includes(prizeInd);
+      const paramSortCoef = +[].includes(prizeInd);
+
+      this.profilesDetails.forEach(profile => {
+        profile.prizes[prize.id] = {
+          value: 
+            prize.id === 1 ?
+              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
+            : prize.id === 2 ?
+            (profile.isMartinWC === 1 ? profile.results.fo['common'] : 0)
+            : prize.id === 3 ?
+              profile.score
+            : prize.id === 4 ?
+              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
+            : prize.id === 5 ?
+              profile.results.uniqueUsedPlayers.length
+            : prize.id === 6 ?
+              profile.results.portugezePoints
+            : prize.id === 7 ?
+              profile.results.prizeMaxFoInLosedTour
+            : prize.id === 8 ?
+              +profile.results.larinPoints
+            : prize.id === 9 ?
+              profile.score
+            : 0,
+
+          sortParam: 
+            prize.id === 2 ?
+              profile.score
+            : profile.results.points
         }
       })
 
