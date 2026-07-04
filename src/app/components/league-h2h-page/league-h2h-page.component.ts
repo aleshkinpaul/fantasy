@@ -77,6 +77,7 @@ export class LeagueH2HPageComponent implements OnInit {
   private minResultValue = 1;
   public playersRatingArr: number[] = [];
   private drawGap = 0;
+  private playOffToursArr: number[] = [];
 
   public tabooTeams: string[] = ["7655", "7654"];
   public tabooPlayers: string[] = ["213875"];
@@ -173,6 +174,7 @@ export class LeagueH2HPageComponent implements OnInit {
         );
         this.competitionType = this.consts.type;
         this.drawGap = this.consts.drawGap || 0; 
+        this.playOffToursArr = this.consts?.cup?.matchesTours || [];
         this.teams = teams;
 
         const sources = [];
@@ -683,7 +685,7 @@ export class LeagueH2HPageComponent implements OnInit {
       const matchResult = this.dataService.calculateMatchResult(
         +this.squads.data.players[match.home].team.results_by_tour[tourIndex + 1].tour_score,
         +this.squads.data.players[match.away].team.results_by_tour[tourIndex + 1].tour_score,
-        this.drawGap
+        this.route.snapshot.url[0].path ===  'spain' || !this.playOffToursArr.includes(tourIndex + 1) ? this.drawGap : 0
       );
 
       match.home_score = matchResult.homeScore;
