@@ -1082,7 +1082,7 @@ export class LeagueH2HPageComponent implements OnInit {
             prize.id === 1 ?
               !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
             : prize.id === 2 ?
-            (profile.isMartinWC === 1 ? profile.results.fo['common'] : 0)
+            (profile.isMartinWC === 1 ? profile.score : 0)
             : prize.id === 3 ?
               profile.score
             : prize.id === 4 ?
