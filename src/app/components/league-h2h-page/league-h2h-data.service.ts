@@ -218,17 +218,6 @@ export class LeagueH2HDataService {
     awayActSquad: string[],
     awayPrevSquad: string[]
   ): void {
-    console.log(tourIndex);
-
-    if (tourIndex === 1) {
-      homeProfile.results.uniqueUsedPlayers = homePrevSquad;
-      awayProfile.results.uniqueUsedPlayers = awayPrevSquad;
-    }
-
-    homeProfile.results.uniqueUsedPlayers = [...homeProfile.results.uniqueUsedPlayers, ...homeActSquad.filter(sq => !homeProfile.results.uniqueUsedPlayers.includes(sq))];
-    awayProfile.results.uniqueUsedPlayers = [...awayProfile.results.uniqueUsedPlayers, ...awayActSquad.filter(sq => !awayProfile.results.uniqueUsedPlayers.includes(sq))];
-    
-
     if ([1, 2, 4, 5].includes(tourIndex)) {
       homeProfile.results.subsTotalCount += 4;
       awayProfile.results.subsTotalCount += 4;

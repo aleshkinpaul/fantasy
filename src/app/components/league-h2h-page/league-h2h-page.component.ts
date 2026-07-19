@@ -307,6 +307,8 @@ export class LeagueH2HPageComponent implements OnInit {
                 return profileInfo;
               });
 
+              console.log('this.lastTour', this.lastTour);
+              
               for (let i = 0; i < this.lastTour; i++) {  
                 const currentStage = this.dataService.getCurrentStage(i + 1, this.consts.stages[0].lastTour);
                 this.processMatchesForTour(i, profilesDetails, matches, currentStage);
@@ -616,6 +618,8 @@ export class LeagueH2HPageComponent implements OnInit {
                         ).includes(pl.id));
                     const isLarinCap = profile.team.rosters_by_tour[i.toString()].captain_id === this.larinId;
                     profile.results.larinPoints += !larinObj ? 0 : larinObj.stat_by_tours[i].score * (1 + +isLarinCap);
+                    
+                    profile.results.uniqueUsedPlayers = [...profile.results.uniqueUsedPlayers, ...newSquad.filter(sq => !profile.results.uniqueUsedPlayers.includes(sq))];
                   }
                 })
 
@@ -735,6 +739,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
       if (this.route.snapshot.url[0].path ===  'spain') 
         this.dataService.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+      
       if (this.route.snapshot.url[0].path ===  'world-cup')
         this.dataService.updateSubsWC(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
 
@@ -1075,18 +1080,19 @@ export class LeagueH2HPageComponent implements OnInit {
     this.consts.prizes.forEach((prize, prizeInd) => {
       const valueSortCoef = +[2].includes(prizeInd);
       const paramSortCoef = +[].includes(prizeInd);
+      const isManual = !!prize.isManual;
 
       this.profilesDetails.forEach(profile => {
         profile.prizes[prize.id] = {
           value: 
             prize.id === 1 ?
-              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
+              prize.defaultNomineesArr.includes(profile.id) ? 1 : 0
             : prize.id === 2 ?
             (profile.isMartinWC === 1 ? profile.score : 0)
             : prize.id === 3 ?
               profile.score
             : prize.id === 4 ?
-              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
+              prize.defaultNomineesArr.includes(profile.id) ? 1 : 0
             : prize.id === 5 ?
               profile.results.uniqueUsedPlayers.length
             : prize.id === 6 ?
@@ -1121,9 +1127,6 @@ export class LeagueH2HPageComponent implements OnInit {
           ) &&
           ( !prize.isActivity
             || !!prize.isActivity && nominee.results.subsCoef > 50
-          ) &&
-          ( prizeInd !== 11 
-            || prizeInd === 11 && nominee.prizes[prizeInd].value >= 3
           )
       });
     });
