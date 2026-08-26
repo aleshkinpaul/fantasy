@@ -1,12 +1,11 @@
 // @ts-nocheck
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Apollo } from 'apollo-angular';
 import { IGroup, IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
 import { CwcDataService } from '../../service/cwc-data.service';
-import { Observable } from '@apollo/client';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, forkJoin, map, Observable } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ISquadDetails, IProfileDetails } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -87,16 +86,14 @@ export class CWCPageComponent implements OnInit {
   public playersRatingArr = [];
 
   public isLoading$?: Observable<boolean>;
-  public windowWidth: number = 1400;
-
   constructor(
-    private readonly apollo: Apollo, 
     public service: DataService,
     private cwcDataService: CwcDataService,
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    public loader: LoaderService
+    public loader: LoaderService,
+    private readonly destroyRef: DestroyRef
   ) {}
 
   ngOnInit() {
@@ -104,8 +101,11 @@ export class CWCPageComponent implements OnInit {
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
 
-    this.windowWidth = window.innerWidth;
-    window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
+    this.route.queryParamMap.pipe(
+      map(params => params.get('tab') ?? 'groups'),
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(tab => this.activeTab = tab);
 
     forkJoin([
       this.service.getData('/assets/data/profiles.json'),
@@ -479,15 +479,6 @@ export class CWCPageComponent implements OnInit {
               logger.debug('this.playOffGroup', this.playOffGroup, this.semifinalGroup, this.finalGroup, this.resultTeams);
               
               
-              setTimeout(() => {
-                this.route.queryParams.subscribe(params => {
-                  if (!!params['tab'])
-                    this.updateActiveTab(params['tab']);
-                  else
-                    this.updateActiveTab(this.activeTab);
-                });
-              }, 1250);
-              
           },
           error: err => {
             logger.error('Ошибка при получении данных:', err);
@@ -554,20 +545,9 @@ export class CWCPageComponent implements OnInit {
     });
   }
 
-  selectTab(event: Event): void {
-    const elem = event.srcElement;
-    this.updateActiveTab(elem.id);
-  }
-
-  updateActiveTab(newActiveTab) {
+  updateActiveTab(newActiveTab: string): void {
     this.activeTab = newActiveTab;
-    
-    const navElems = Array.from(document.getElementsByClassName('nav-item'));
-    const activeElem = navElems.find(elem => elem.id === newActiveTab);
-    
-    navElems.forEach(elem => elem.classList.remove('acitve-tab'));
-    activeElem.classList.add('acitve-tab');
-    
+
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { tab: this.activeTab },

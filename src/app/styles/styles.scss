@@ -287,3 +287,8 @@ html, body {
 
 @include fontPoppins('Vetrino', 'Vetrino', normal, normal, 'otf');
 
+@media (max-width: 600px) {
+  .mobile-hidden {
+    display: none;
+  }
+}

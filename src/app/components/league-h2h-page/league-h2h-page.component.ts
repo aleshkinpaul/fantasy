@@ -1,11 +1,9 @@
 // @ts-nocheck
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Apollo } from 'apollo-angular';
 import { IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
-import { Observable } from '@apollo/client';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { ISquadDetails, IProfileDetails, IContsConfig } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +16,6 @@ import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { PrizesListComponent } from './prizes-list.component';
 import { LeagueH2HDataService } from './league-h2h-data.service';
-import { logMissingFieldErrors } from '@apollo/client/core/ObservableQuery';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -138,10 +135,7 @@ export class LeagueH2HPageComponent implements OnInit {
     // }
 
   public isLoading$?: Observable<boolean>;
-  public windowWidth: number = 1400;
-
   constructor(
-    private readonly apollo: Apollo, 
     public service: DataService, 
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -155,9 +149,6 @@ export class LeagueH2HPageComponent implements OnInit {
     
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
-
-    this.windowWidth = window.innerWidth;
-    window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
 
     forkJoin([
       this.service.getData('/assets/data/profiles.json'),

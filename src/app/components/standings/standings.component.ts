@@ -1,8 +1,19 @@
-// @ts-nocheck
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
-import { logger } from '../../utils/logger';
+
+interface StandingPlayer {
+  id: string;
+  score: number;
+  position: number;
+}
+
+interface SquadPlayer {
+  id: string;
+  team: {
+    results_by_tour: Record<string | number, { tour_score: number }>;
+  };
+}
 
 @Component({
   selector: 'app-standings',
@@ -11,7 +22,7 @@ import { logger } from '../../utils/logger';
   standalone: true,
   imports: [CommonModule]
 })
-export class StandingsComponent implements OnInit {
+export class StandingsComponent {
   @Input() profilesArr = [];
   @Input() playersRatingArr = [];
   @Input() lastTour = 1;
@@ -21,26 +32,21 @@ export class StandingsComponent implements OnInit {
   @Input() chosenLeague = '';
   @Input() isShowUnitedTableByPoints = false;
 
-  public windowWidth = 1400;
-
   constructor(
     public service: DataService
   ) {}
-
-  ngOnInit(): void {
-    this.windowWidth = window.innerWidth;
-    window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
-  }
 
   getSquadDetails(profileId) {
     return this.squadsDetails.find(squad => squad.id === profileId);
   }
 
-  getPlaceInTour(id, tour) {
-    const standingsArr = Object.values(this.squads.data.players).map(player => {
+  getPlaceInTour(id: string, tour: string | number): number | undefined {
+    const players = Object.values(this.squads.data.players) as SquadPlayer[];
+    const standingsArr: StandingPlayer[] = players.map(player => {
       return {
         id: player.id,
-        score: player.team.results_by_tour[tour].tour_score
+        score: player.team.results_by_tour[tour].tour_score,
+        position: 0
       }
     });
 
@@ -54,6 +60,6 @@ export class StandingsComponent implements OnInit {
             standingsArr[ind-1].position + 1;
     });
 
-    return standingsArr.find(player => player.id === id).position;
+    return standingsArr.find(player => player.id === id)?.position;
   }
 }

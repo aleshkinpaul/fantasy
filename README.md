@@ -1,27 +1,42 @@
-# FrFantasy
+# FR Fantasy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+Клиентское Angular-приложение для проведения H2H-соревнований по фэнтези-футболу сообщества FR Fantasy. Сайт объединяет локально заданные правила соревнований с данными о фэнтези-командах и футболистах из `fantasy-h2h.ru`, после чего в браузере рассчитывает матчи, таблицы, серии, кубковые показатели и призовые номинации.
 
-## Development server
+Последний полностью описанный сезон — **2025–26**. Следующая крупная задача — подготовка лиг сезона **2026–27** в том же формате.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Быстрый старт
 
-## Code scaffolding
+Требования: Node.js с npm. Проект создан на Angular 16.2 и TypeScript 5.1.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install
+npm start
+```
 
-## Build
+Приложение будет доступно по адресу `http://localhost:4200/`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Основные команды:
 
-## Running unit tests
+```bash
+npm start          # development server
+npm run build      # production build в dist/fr-fantasy
+npm test           # unit-тесты Karma/Jasmine
+npm run mypage     # build с base-href https://fr-fantasy.ru/
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Документация
 
-## Running end-to-end tests
+- [Обзор проекта](docs/PROJECT_OVERVIEW.md) — назначение, страницы, соревнования и структура репозитория.
+- [Архитектура](docs/ARCHITECTURE.md) — запуск приложения, маршруты, компоненты, сервисы и поток вычислений.
+- [Данные и внешний API](docs/DATA_AND_API.md) — локальные JSON, контракт `fantasy-h2h.ru`, связи идентификаторов и правила объединения этапов.
+- [Добавление сезона 2026–27](docs/SEASON_2026_27.md) — пошаговый план, обязательные проверки и сезонно-зависимые места.
+- [Рефакторинг и технический долг](docs/REFACTORING.md) — риски текущей реализации и рекомендуемая последовательность изменений.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Исторические файлы `REFACTORING_*.md`, `IMPLEMENTATION_SUMMARY.md`, `REVIEW_REPORT.md` и похожие документы в корне описывают отдельные уже выполненные или планировавшиеся работы. Актуальной отправной точкой для дальнейших изменений является комплект в `docs/`.
 
-## Further help
+## Важные особенности
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Сайт не имеет собственного backend в этом репозитории: все вычисления выполняются в браузере.
+- Для рабочих страниц обязателен query-параметр сезона, например `/spain/new?year=2025`.
+- Конфигурация соревнований находится в `src/assets/data/consts.json` и пока тесно связана с кодом компонентов.
+- В рабочем дереве на момент подготовки документации уже находились незакоммиченные изменения рефакторинга; документация описывает именно текущее состояние файлов, не только последний commit.

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
@@ -15,10 +16,14 @@ export class HeaderComponent implements OnInit {
   public subTitle: string = '';
   public name: string = '';
 
-  constructor(private service: DataService, private router: Router) {}
+  constructor(
+    private readonly service: DataService,
+    private readonly router: Router,
+    private readonly destroyRef: DestroyRef
+  ) {}
 
   ngOnInit(): void {
-    this.service.urlName$.subscribe(name => {
+    this.service.urlName$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(name => {
       this.isMain = !name;
       this.name = name;
       this.subTitle = '';

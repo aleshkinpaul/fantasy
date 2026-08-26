@@ -1,11 +1,9 @@
 // @ts-nocheck
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Apollo } from 'apollo-angular';
 import { IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
-import { Observable } from '@apollo/client';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { ISquadDetails, IProfileDetails } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -51,10 +49,7 @@ export class LeaguePageComponent implements OnInit {
   public playersRatingArr = [];
 
   public isLoading$?: Observable<boolean>;
-  public windowWidth: number = 1400;
-
   constructor(
-    private readonly apollo: Apollo, 
     public service: DataService, 
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -66,9 +61,6 @@ export class LeaguePageComponent implements OnInit {
     // console.log('snapshot: ', this.route.snapshot);
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
-
-    this.windowWidth = window.innerWidth;
-    window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
 
     forkJoin([
       this.service.getData('/assets/data/profiles.json'),

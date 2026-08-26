@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { print } from 'graphql/language/printer';
-import { BehaviorSubject } from 'rxjs';
-import { IProfile } from '../models/model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
-	public urlName = new BehaviorSubject<string>('')
-  public urlName$ = this.urlName.asObservable();
+  private readonly urlName = new BehaviorSubject<string>('');
+  public readonly urlName$ = this.urlName.asObservable();
   
   setUrlName(url: string): void {
     this.urlName.next(url);
@@ -22,25 +20,14 @@ export class DataService {
     return this.urlName.value;
   }
 
-  getImage(url: string) {
-    return this.http.get(url);
-  }
-
-  getData(url: string) {
-    return this.http.get(url);
-  }
-
-  comparePlaces(a, b) {
-    if (a.place < b.place) {
-      return -1;
-    } else if (a.place > b.place) {
-      return 1;
-    }
-    return 0;
+  getData<T = unknown>(url: string): Observable<T> {
+    return this.http.get<T>(url);
   }
   
-  getRgbForTour(score, max, min) {
-    const value = (score - min)/(max - min);
+  getRgbForTour(score: number, max: number, min: number): string {
+    const range = max - min;
+    const normalizedScore = range === 0 ? 0.5 : (score - min) / range;
+    const value = Math.max(0, Math.min(1, normalizedScore));
 
     const colors = [
       { r: 183, g: 51, b: 42 }, // 0
@@ -64,7 +51,7 @@ export class DataService {
     return `rgb(${r}, ${g}, ${b})`;
   }
 
-  sortByScore(a,b) {
+  sortByScore(a: { score: number }, b: { score: number }): number {
     return b.score - a.score;
   }
 }

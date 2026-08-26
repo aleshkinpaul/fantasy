@@ -5,12 +5,12 @@
         <th>#</th>
         <th class="align-left">Команда</th>
         <th class="sub-info">St</th>
-        <th class="sub-info" *ngIf="windowWidth > 600">Тур</th>
+        <th class="sub-info mobile-hidden">Тур</th>
         <th class="sub-info">РПМ</th>
         <th class="sub-info medals-info">🥇</th>
         <th class="sub-info medals-info">🥈</th>
         <th class="sub-info medals-info">🥉</th>
-        <th class="sub-info" *ngIf="windowWidth > 600">🏅</th>
+        <th class="sub-info mobile-hidden">🏅</th>
         <th class="sub-info tour-info" *ngIf="lastTour > 4">{{ squads.data.tours[lastTour - 4].number }}</th>
         <th class="sub-info tour-info" *ngIf="lastTour > 3">{{ squads.data.tours[lastTour - 3].number }}</th>
         <th class="sub-info tour-info" *ngIf="lastTour > 2">{{ squads.data.tours[lastTour - 2].number }}</th>
@@ -64,12 +64,12 @@
             'color': getRgbForTour(item.rating, playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0])
           }"
         >{{ item.rating }}</td>
-        <td class="sub-info" *ngIf="windowWidth > 600">{{ lastTour }}</td>
+        <td class="sub-info mobile-hidden">{{ lastTour }}</td>
         <td class="sub-info">{{ item.rating_of_prize_positions }}</td>
         <td class="sub-info">{{ item.gold_medals }}</td>
         <td class="sub-info">{{ item.silver_medals }}</td>
         <td class="sub-info">{{ item.bronze_medals }}</td>
-        <td class="sub-info" *ngIf="windowWidth > 600">{{ item.medals_count }}</td>
+        <td class="sub-info mobile-hidden">{{ item.medals_count }}</td>
         <td class="sub-info tour-info" *ngIf="lastTour > 4">
           <span class="score"
             [ngClass]="{

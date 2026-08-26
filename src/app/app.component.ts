@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DataService } from './service/data.service';
 import { HeaderComponent } from './components/header/header.component';
 import { DefaultLoaderComponent } from './components/loader/default-loader.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,13 @@ export class AppComponent implements OnInit {
   name: string = '';
 
   constructor(
-    public service: DataService, 
+    public service: DataService,
+    private readonly destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
-    this.service.urlName$.subscribe(name => this.name = name);
+    this.service.urlName$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(name => this.name = name);
   }
 }

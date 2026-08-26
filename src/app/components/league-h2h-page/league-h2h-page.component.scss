@@ -166,7 +166,7 @@
               .team-container {
                 min-width: 80px;
                 @include flex-column(0);
-                align-items: start;
+                align-items: flex-start;
         
                 .team-name {
                   display: block;
@@ -790,7 +790,7 @@
               .nominee-bage-container {
                 display: flex;
                 flex-direction: row;
-                justify-content: start;
+                justify-content: flex-start;
                 gap: 10px;
                 color: white;
 

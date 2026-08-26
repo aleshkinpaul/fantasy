@@ -1,9 +1,8 @@
-// @ts-nocheck
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
 import { LoaderService } from 'src/app/service/loader.service';
-import { logger } from 'src/app/utils/logger';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-matches',
@@ -12,7 +11,7 @@ import { logger } from 'src/app/utils/logger';
   standalone: true,
   imports: [CommonModule]
 })
-export class MatchesComponent implements OnInit {
+export class MatchesComponent {
   @Input() profilesArr = [];
   @Input() currentLeagueMatches = [];
   @Input() lastTour = 1;
@@ -20,25 +19,17 @@ export class MatchesComponent implements OnInit {
   @Input() activeTabs;
   @Input() matchesTours = [];
 
-  public windowWidth = 1400;
-  public isLoading$?: Observable<boolean>;
+  public readonly isLoading$: Observable<boolean>;
 
   constructor(
-    public service: DataService,
-    public loader: LoaderService
-  ) {}
-
-  ngOnInit(): void {
-    this.windowWidth = window.innerWidth;
-    window.addEventListener('resize', (e) => this.windowWidth = e.target.innerWidth);
-
+    public readonly service: DataService,
+    private readonly loader: LoaderService
+  ) {
     this.isLoading$ = this.loader.isLoading$;
-    logger.debug('profilesArr:', this.profilesArr, this.currentLeagueMatches);
   }
 
   getMatchResult(matchesArr, profileId) {
     const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
-    const opponentId = match.home === profileId ? match.away : match.home;
     return match.result === 0 ? 0 :
       match.home === profileId ?
         (match.result === 1 ? 1 : 2) :

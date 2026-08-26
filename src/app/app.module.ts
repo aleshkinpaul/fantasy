@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { GraphQLModule } from './graphql.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -16,7 +15,6 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    GraphQLModule,
     HttpClientModule,
     MainPageComponent,
     AppComponent

@@ -25,8 +25,8 @@
         cursor: pointer;
         box-sizing: border-box;
 
-        &.acitve-tab { background-color: #fff; color: rgba(30, 41, 59); }
-        &.acitve-tab:hover,
+        &.active-tab { background-color: #fff; color: rgba(30, 41, 59); }
+        &.active-tab:hover,
         &:hover { opacity: .2; background-color: #fff; color: rgba(30, 41, 59); }
 
         span { text-align: center; pointer-events: none; }
@@ -368,7 +368,7 @@
                 }
 
                 .title-container {
-                  justify-content: end;
+                  justify-content: flex-end;
                 }
 
                 .participants-container {
@@ -392,11 +392,11 @@
             width: 100%;
             @include flex-row($space-10px);
             align-items: center;
-            justify-content: start;
+            justify-content: flex-start;
 
             &.left {
               flex-direction: row-reverse;
-              justify-content: end;
+              justify-content: flex-end;
 
               .team-container .team-name {
                 text-align: end;
@@ -441,12 +441,12 @@
             width: 100%;
 
             @include flex-column(0);
-            align-items: end;
+            align-items: flex-end;
 
             tr {
               width: 100%;
               @include flex-row($space-10px);
-              justify-content: end;
+              justify-content: flex-end;
 
               td:last-child {
                 width: 20px;
@@ -455,11 +455,11 @@
             }
 
             &.right {
-              align-items: start;
+            align-items: flex-start;
 
               tr {
                 flex-direction: row-reverse;
-                justify-content: start;
+                justify-content: flex-start;
               }
             }
           }

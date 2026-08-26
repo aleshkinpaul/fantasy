@@ -3,7 +3,7 @@
     <tr>
       <th>#</th>
       <th class="align-left">Команда</th>
-      <th class="sub-info" *ngIf="windowWidth > 600">T</th>
+      <th class="sub-info mobile-hidden">T</th>
       <th class="sub-info">St</th>
       <th *ngIf="!isShowUnitedTableByPoints" class="sub-info tour-info">W</th>
       <th *ngIf="!isShowUnitedTableByPoints" class="sub-info tour-info">D</th>
@@ -16,7 +16,7 @@
       <th *ngIf="!!isShowUnitedTableByPoints" class="sub-info medals-info">🥇</th>
       <th *ngIf="!!isShowUnitedTableByPoints" class="sub-info medals-info">🥈</th>
       <th *ngIf="!!isShowUnitedTableByPoints" class="sub-info medals-info">🥉</th>
-      <th *ngIf="!!isShowUnitedTableByPoints && windowWidth > 600" class="sub-info">🏅</th>
+      <th *ngIf="!!isShowUnitedTableByPoints" class="sub-info mobile-hidden">🏅</th>
       <th *ngIf="!!isShowUnitedTableByPoints && lastTour > 4" class="sub-info tour-info">{{ lastTour - 4 }}</th>
       <th *ngIf="!!isShowUnitedTableByPoints && lastTour > 3" class="sub-info tour-info">{{ lastTour - 3 }}</th>
       <th *ngIf="!!isShowUnitedTableByPoints && lastTour > 2" class="sub-info tour-info">{{ lastTour - 2 }}</th>
@@ -57,7 +57,7 @@
           </div>
         </a>
       </td>
-      <td class="sub-info" *ngIf="windowWidth > 600">{{ lastTour }}</td>
+      <td class="sub-info mobile-hidden">{{ lastTour }}</td>
       <td class="sub-info"
         [ngStyle]="{
           'border-color': service.getRgbForTour(profile.team.rating, playersRatingArr[playersRatingArr.length - 1], playersRatingArr[0]),
@@ -79,7 +79,7 @@
       <td *ngIf="!!isShowUnitedTableByPoints" class="sub-info">{{ getSquadDetails(profile.id).gold_medals }}</td>
       <td *ngIf="!!isShowUnitedTableByPoints" class="sub-info">{{ getSquadDetails(profile.id).silver_medals }}</td>
       <td *ngIf="!!isShowUnitedTableByPoints" class="sub-info">{{ getSquadDetails(profile.id).bronze_medals }}</td>
-      <td *ngIf="!!isShowUnitedTableByPoints && windowWidth > 600" class="sub-info">{{ getSquadDetails(profile.id).medals_count }}</td>
+      <td *ngIf="!!isShowUnitedTableByPoints" class="sub-info mobile-hidden">{{ getSquadDetails(profile.id).medals_count }}</td>
       <td *ngIf="!!isShowUnitedTableByPoints && lastTour > 4" class="sub-info tour-info">
         <span class="score"
           [ngClass]="{
