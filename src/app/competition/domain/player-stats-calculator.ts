@@ -1,12 +1,16 @@
 import {
-  FantasyRoster,
   FantasyTourStatsResponse,
   SportPlayer,
 } from '../models/competition.models';
 
+interface PlayerRoster {
+  captain_id: string;
+  players: { base: string[]; bench: string[] };
+}
+
 interface PlayerStatsProfile {
   team: {
-    rosters_by_tour: Record<string, FantasyRoster>;
+    rosters_by_tour: Record<string | number, PlayerRoster>;
   };
   results: {
     portugezePoints: number;

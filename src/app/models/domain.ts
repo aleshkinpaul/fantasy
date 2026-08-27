@@ -15,6 +15,7 @@ export interface IProfileDetails {
   leagues?: Record<string, string>;
   place_in_league?: Record<string, number>;
   isMartin?: number;
+  isMartinWC?: number;
   sex?: string;
 }
 
@@ -27,9 +28,9 @@ export interface ITeamData {
 }
 
 export interface ITourResult {
-  tour_score: number;
-  total_score: number;
-  total_place: number;
+  tour_score: string | number;
+  total_score: string | number;
+  total_place: string | number;
 }
 
 export interface IRoster {
@@ -45,7 +46,7 @@ export interface IRoster {
 export interface ISquadDetails {
   id: string;
   name: string;
-  score: number;
+  score: string | number;
   diff: number;
   rating_of_prize_positions: number;
   gold_medals: number;
@@ -55,7 +56,7 @@ export interface ISquadDetails {
   medals_arr?: number[];
   max_medals_in_a_row?: number;
   cur_medals_in_a_row?: number;
-  totalPlaces: number;
+  totalPlaces: string | number;
   profile?: IProfileDetails;
   team_id: string;
   info?: ITeamData & { team: ITeamData }; // Nested for template access
@@ -76,6 +77,9 @@ export interface IProfileResults {
   subsUsedCount: number;
   subsTotalCount: number;
   subsCoef: number;
+  uniqueUsedPlayers: string[];
+  portugezePoints: number;
+  larinPoints: number;
   prizeMinWins: number;
   prizeMaxFoInTour: number;
   prizeMaxFoInLosedTour: number;

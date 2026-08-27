@@ -13,27 +13,12 @@ import { MatchesComponent } from '../matches/matches.component';
 import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { PrizesListComponent } from './prizes-list.component';
-import { LeagueH2HDataService } from './league-h2h-data.service';
-import { CompetitionDataLoaderService } from '../../competition/data/competition-data-loader.service';
 import { CompetitionType } from '../../competition/models/competition.models';
-import { calculateCup } from '../../competition/domain/cup-calculator';
 import {
-  calculateChampionsLeaguePrizes,
-  calculateSpainPrizes,
-  calculateWorldCupPrizes,
-} from '../../competition/domain/prize-calculator';
-import {
-  buildLeagueRatings,
   compareByFantasyScore,
   compareStandings,
-  getPlaceAfterTour as calculatePlaceAfterTour,
-  getSeasonMedals,
 } from '../../competition/domain/standings-calculator';
-import { calculateSquadRatings } from '../../competition/domain/rating-calculator';
-import {
-  applySquadEligibility,
-  applyTourPlayerStats,
-} from '../../competition/domain/player-stats-calculator';
+import { CompetitionFacade } from '../../competition/data/competition.facade';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -41,11 +26,8 @@ import {
   styleUrls: ['./league-h2h-page.component.scss'],
   standalone: true,
   imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent],
-  providers: [LeagueH2HDataService]
 })
 export class LeagueH2HPageComponent implements OnInit {
-  private data;
-  public profiles;
   public consts;
   public squads;
   // public tours;
@@ -80,10 +62,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
   public lastTour: number = 1;
 
-  private playersArr: string[] = [];
   public playersRatingArr: number[] = [];
-  private drawGap = 0;
-  private playOffToursArr: number[] = [];
 
   public isLoading$?: Observable<boolean>;
   constructor(
@@ -91,8 +70,7 @@ export class LeagueH2HPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public loader: LoaderService,
-    private dataService: LeagueH2HDataService,
-    private competitionLoader: CompetitionDataLoaderService
+    private competitionFacade: CompetitionFacade
   ) {}
 
   ngOnInit() {
@@ -102,179 +80,20 @@ export class LeagueH2HPageComponent implements OnInit {
     this.isLoading$ = this.loader.isLoading$;
 
     const competitionType = this.route.snapshot.url[0].path as CompetitionType;
-    this.competitionLoader.load(competitionType, yearParam).subscribe({
-      next: ({ profiles, config, squads, latestPlayerStats, playerStatsByTour }) => {
-              this.profiles = profiles;
-              this.consts = config;
-              this.competitionType = config.type;
-              this.drawGap = config.drawGap || 0;
-              this.playOffToursArr = config.cup?.matchesTours || [];
-              this.squads = squads;
-              
-              this.lastTour = Object.keys(this.squads.data.tours).length;
-              
+    this.competitionFacade.load(competitionType, yearParam).subscribe({
+      next: viewModel => {
+              this.consts = viewModel.config;
+              this.competitionType = viewModel.config.type;
+              this.squads = viewModel.squads;
+              this.lastTour = viewModel.lastTour;
+              this.playersRatingArr = viewModel.playersRating;
+              this.profilesDetails = viewModel.profilesDetails;
+              this.leaguesRatings = viewModel.leaguesRatings;
+              this.prizesToShow = viewModel.prizes;
+              this.squadsDetails.next(viewModel.squadsDetails);
+              this.unitedProfiles = this.profilesDetails;
+
               this.updateTabs();
-
-              this.playersArr = Object.values(this.squads.data.players).map(player => player.id);
-              
-              this.playersRatingArr = calculateSquadRatings(this.squads, this.lastTour);
-              const matches = this.consts.matches;
-              let profilesDetails = this.consts.profiles.map(x => {
-                const profileInfo = this.profiles.find(profile => profile.id === x);
-                profileInfo.team = JSON.parse(JSON.stringify(this.squads.data.players[x].team));
-                profileInfo.score = +this.squads.data.players[x].team.results_by_tour[this.lastTour].total_score;
-                profileInfo.prizes = {};
-                profileInfo.results = {
-                  wins: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-                  draws: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-                  loses: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-                  points: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-                  fo: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-                  missed_fo: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-                  diff_fo: {
-                    'apertura': 0,
-                    'clausura': 0,
-                    'common': 0
-                  },
-
-                  matchesPlayed: 0,
-                  
-                  teamCostTotal: 0,
-                  teamCostAvg: 0,
-                  
-                  subsUsedCount: 0,
-                  subsTotalCount: 0,
-                  subsCoef: 0,
-                  uniqueUsedPlayers: [],
-
-                  portugezePoints: 0,
-                  larinPoints: 0,
-                  
-                  prizeMinWins: 0,
-                  
-                  prizeMaxFoInTour: 0,
-                  prizeMaxFoInLosedTour: 0,
-                  
-                  prizeCurrentWinStrike: 0,
-                  prizeMaxWinStrike: 0,
-                  
-                  prizeCurrentNoLoseStrike: 0,
-                  prizeMaxNoLoseStrike: 0,
-                  prizeMaxStoppedNoLoseStrike: 0,
-
-                  prizeMaxLosedDiff: 0
-                };
-                return profileInfo;
-              });
-
-              for (let i = 0; i < this.lastTour; i++) {  
-                const currentStage = this.dataService.getCurrentStage(i + 1, this.consts.stages[0].lastTour);
-                this.dataService.processTour({
-                  tourIndex: i,
-                  currentStage,
-                  profiles: profilesDetails,
-                  matches: matches[i + 1],
-                  squads: this.squads,
-                  drawGap: this.drawGap,
-                  competitionType: this.competitionType,
-                  playOffTours: this.playOffToursArr,
-                });
-                this.profilesDetails = Object.assign(
-                  [],
-                  profilesDetails.sort((left, right) => compareStandings(left, right, this.chosenStage)),
-                );
-              }
-
-              if (!!this.consts.cup)
-                this.updateCupMatches();
-
-              this.leaguesRatings = buildLeagueRatings(this.profilesDetails, this.consts.stages);
-              
-              this.playersArr.map(playerId => {
-                const profile = this.profiles.find(profile => profile.id === playerId);
-                
-                if (!!profile) {
-                  const squadInfo = this.squads.data.players[profile.id];
-                  const objMedals = getSeasonMedals(this.squads, profile.id, this.lastTour);
-
-                  profile.squadDetails = {
-                    id: squadInfo?.id,
-                    name: squadInfo.team.title,
-                    score: squadInfo?.team.results_by_tour[this.lastTour].total_score,
-                    diff: this.lastTour > 1 ?
-                      calculatePlaceAfterTour(this.squads, profile.id, this.lastTour - 1)
-                      - calculatePlaceAfterTour(this.squads, profile.id, this.lastTour)
-                      : 0,
-                    rating_of_prize_positions: objMedals.gold * 3 + objMedals.silver * 2 + objMedals.bronze,
-                    gold_medals: objMedals.gold,
-                    silver_medals: objMedals.silver,
-                    bronze_medals: objMedals.bronze,
-                    medals_count: objMedals.gold + objMedals.silver + objMedals.bronze,
-                    medals_arr: objMedals.medalsArr,
-                    max_medals_in_a_row: objMedals.maxMedalsInARow,
-                    cur_medals_in_a_row: objMedals.curMedalsInARow,
-                    totalPlaces: squadInfo?.team.results_by_tour[this.lastTour].total_place,
-                    profile: profile,
-                    team_id: squadInfo?.team.id,
-                    info: squadInfo,
-                    rating: this.squads.data.players[playerId].team.rating
-                  };
-
-                  this.squadsDetails.next([...this.squadsDetails.value, profile.squadDetails]);
-                }
-              })
-
-              this.squadsDetails.next([...this.squadsDetails.value.sort(this.sortByScore)]);
-
-            const profilesByScore = Object.assign(
-              [],
-              this.profilesDetails
-                .map(profile => ({ id: profile.squadDetails.id, score: +profile.squadDetails.score }))
-                .sort(this.sortByScore),
-            );
-            this.profilesDetails.forEach(profile => {
-              const profileIndex = profilesByScore.findIndex(item => item.id === profile.id);
-              if (!profile.place_in_league) profile.place_in_league = {};
-              profile.place_in_league['ByScore'] = profileIndex + 1;
-            });
-
-            applySquadEligibility(this.profilesDetails, latestPlayerStats, this.lastTour);
-
-            if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
-            if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
-            if (this.route.snapshot.url[0].path ===  'world-cup') this.updatePrizesWC();
-
-            applyTourPlayerStats(this.profilesDetails, playerStatsByTour, this.lastTour);
-            if (this.route.snapshot.url[0].path ===  'world-cup') this.updatePrizesWC();
-            
-
-            this.unitedProfiles = this.profilesDetails;
-
-            logger.debug('this.unitedProfiles', this.unitedProfiles);
 
             this.setTabId(this.activeTabs.tabId);
             this.setConfId(this.activeTabs.confId);
@@ -356,44 +175,9 @@ export class LeagueH2HPageComponent implements OnInit {
     this.chosenLeague = '';
   }
 
-  updateCupMatches() {
-    calculateCup({
-      cup: this.consts.cup,
-      profiles: this.profilesDetails,
-      squads: this.squads,
-      lastTour: this.lastTour,
-    });
-  }
-
   toggleUnitedRating() {
     this.isShowUnitedTableByPoints = !this.isShowUnitedTableByPoints;
     this.updateProfilesByStage();
-  }
-
-  updatePrizes() {
-    this.prizesToShow = calculateSpainPrizes({
-      prizes: this.consts.prizes,
-      profiles: this.profiles,
-      profilesDetails: this.profilesDetails,
-    });
-
-    logger.debug('this.prizesToShow', this.prizesToShow);
-  }
-
-  updatePrizesCL() {
-    this.prizesToShow = calculateChampionsLeaguePrizes({
-      prizes: this.consts.prizes,
-      profiles: this.profiles,
-      profilesDetails: this.profilesDetails,
-    });
-  }
-
-  updatePrizesWC() {
-    this.prizesToShow = calculateWorldCupPrizes({
-      prizes: this.consts.prizes,
-      profiles: this.profiles,
-      profilesDetails: this.profilesDetails,
-    });
   }
 
   setTabId(ind) {
@@ -500,10 +284,6 @@ export class LeagueH2HPageComponent implements OnInit {
 
   sortByPointsCount(obj1, obj2) {
     return +obj2.points - +obj1.points;
-  }
-
-  sortByScore(a, b): number {
-    return b.score - a.score;
   }
 
 }
