@@ -133,6 +133,33 @@ export interface CompetitionPrizeConfig {
   [key: string]: unknown;
 }
 
+export interface SpecialPlayerRules {
+  forbiddenTeamIds: string[];
+  forbiddenPlayerIds: string[];
+  worldCupForbiddenPlayerIds: string[];
+  portugueseTeamId: string;
+  larinPlayerId: string;
+}
+
+export interface SpainPrizeRules {
+  guestProfileIds: string[];
+  extraWinnerIds: string[];
+  specialGuestId: string;
+  frequentPlayerId: string;
+  frequentCaptainId: string;
+  randomPrizeIndex: number;
+  placeReferenceProfileIds: {
+    prize2: string;
+    prize3: string;
+    prize10: string;
+  };
+}
+
+export interface CompetitionRuntimeRules {
+  playerStats: SpecialPlayerRules;
+  spainPrizes?: SpainPrizeRules;
+}
+
 export interface SeasonCompetitionConfig {
   id: string;
   type: CompetitionType;
@@ -145,6 +172,7 @@ export interface SeasonCompetitionConfig {
   tour_link_2?: string;
   special_pos?: number | null;
   drawGap?: number;
+  rulesId?: string;
   format_img_link?: string;
   profiles: string[];
   matches: Record<string, CompetitionMatch[]>;

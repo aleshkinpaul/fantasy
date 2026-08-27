@@ -30,8 +30,10 @@ import {
   LoadedCompetitionData,
   LocalProfile,
   SeasonCompetitionConfig,
+  SpainPrizeRules,
 } from '../models/competition.models';
 import { CompetitionDataLoaderService } from './competition-data-loader.service';
+import { getCompetitionRules } from '../config/competition-rules.registry';
 
 type RuntimeProfile = LocalProfile & Partial<IProfileDetails>;
 
@@ -61,6 +63,7 @@ export class CompetitionFacade {
 
   private buildViewModel(data: LoadedCompetitionData): CompetitionViewModel {
     const { config, squads } = data;
+    const rules = getCompetitionRules(config.rulesId || `season-${config.yearStart}`);
     const profiles = data.profiles as RuntimeProfile[];
     const lastTour = Object.keys(squads.data.tours).length;
     const playersRating = calculateSquadRatings(squads, lastTour);
@@ -85,10 +88,10 @@ export class CompetitionFacade {
 
     const squadsDetails = this.buildSquadDetails(profiles, squads, lastTour);
     this.assignScorePlaces(profilesDetails);
-    applySquadEligibility(profilesDetails, data.latestPlayerStats, lastTour);
+    applySquadEligibility(profilesDetails, data.latestPlayerStats, lastTour, rules.playerStats);
 
-    let prizes = this.calculatePrizes(config.type, config.prizes, profiles, profilesDetails);
-    applyTourPlayerStats(profilesDetails, data.playerStatsByTour, lastTour);
+    let prizes = this.calculatePrizes(config.type, config.prizes, profiles, profilesDetails, rules.spainPrizes);
+    applyTourPlayerStats(profilesDetails, data.playerStatsByTour, lastTour, rules.playerStats);
     if (config.type === 'world-cup') {
       prizes = calculateWorldCupPrizes({ prizes: config.prizes, profiles, profilesDetails });
     }
@@ -178,8 +181,12 @@ export class CompetitionFacade {
     prizes: CompetitionPrizeConfig[],
     profiles: RuntimeProfile[],
     profilesDetails: IProfileDetails[],
+    spainRules?: SpainPrizeRules,
   ): CompetitionPrizeConfig[] {
-    if (type === 'spain') return calculateSpainPrizes({ prizes, profiles, profilesDetails });
+    if (type === 'spain') {
+      if (!spainRules) throw new Error('Для турнира Испании не настроены правила призов');
+      return calculateSpainPrizes({ prizes, profiles, profilesDetails, rules: spainRules });
+    }
     if (type === 'champions-league') {
       return calculateChampionsLeaguePrizes({ prizes, profiles, profilesDetails });
     }

@@ -243,6 +243,7 @@
       "yearStart": 2025,
       "yearEnd": 2026,
       "drawGap": 3,
+      "rulesId": "season-2025",
       "format_img_link": "assets/images/Формат Ла Лиги 25_26.png",
       "matches": {
         "1": [
@@ -5971,6 +5972,7 @@
       "yearStart": 2025,
       "yearEnd": 2026,
       "drawGap": 3,
+      "rulesId": "season-2025",
       "format_img_link": "assets/images/Формат ЛЧ 25_26.png",
       "matches": {
         "1": [
@@ -7866,6 +7868,7 @@
       "yearStart": 2025,
       "yearEnd": 2026,
       "drawGap": 3,
+      "rulesId": "season-2025",
       "format_img_link": "",
       "matches": {
         "1": [

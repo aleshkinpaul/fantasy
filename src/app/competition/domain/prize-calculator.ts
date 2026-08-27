@@ -1,3 +1,5 @@
+import { SpainPrizeRules } from '../models/competition.models';
+
 export interface PrizeCalculationInput {
   prizes: any[];
   profiles: any[];
@@ -5,12 +7,9 @@ export interface PrizeCalculationInput {
   random?: () => number;
 }
 
-const SPAIN_GUEST_PROFILE_IDS = ['1028890564', '1116311743', '154819672'];
-const SPAIN_EXTRA_WINNER_IDS = ['1063076888', '1116843193'];
-const SPAIN_SPECIAL_GUEST_ID = '1028890564';
-const SPAIN_FREQUENT_PLAYER_ID = '213955';
-const SPAIN_FREQUENT_CAPTAIN_ID = '213946';
-const SPAIN_RANDOM_PRIZE_INDEX = 13;
+export interface SpainPrizeCalculationInput extends PrizeCalculationInput {
+  rules: SpainPrizeRules;
+}
 
 function updatePrizeStates(prizes: any[]): void {
   prizes.forEach(prize => {
@@ -26,20 +25,24 @@ function countSpainPrizeNominees(
   profilesDetails: any[],
   eligibleProfiles: any[],
   prizeId: number,
+  rules: SpainPrizeRules,
   keyId = '',
 ): void {
   const prize = prizes.find(item => item.id === prizeId);
   const sortValueAscending = [1, 2, 3, 9, 10].includes(prizeId);
   const sortParamAscending = prizeId === 18;
 
-  const placeVal2Prize = profilesDetails.find(profile => profile.id === '1115308799').place_in_league.Primera;
-  const placeVal3Prize = profilesDetails.find(profile => profile.id === '1113412675').place_in_league.Primera;
-  const placeVal10Prize = profilesDetails.find(profile => profile.id === '1116311079').place_in_league.Primera;
+  const placeVal2Prize = profilesDetails.find(profile =>
+    profile.id === rules.placeReferenceProfileIds.prize2).place_in_league.Primera;
+  const placeVal3Prize = profilesDetails.find(profile =>
+    profile.id === rules.placeReferenceProfileIds.prize3).place_in_league.Primera;
+  const placeVal10Prize = profilesDetails.find(profile =>
+    profile.id === rules.placeReferenceProfileIds.prize10).place_in_league.Primera;
 
   eligibleProfiles.forEach(profile => {
     const manualNominee = prize.nomineesArr.find(nominee => nominee.profileId === profile.id);
 
-    if (prizeId === 7 && SPAIN_GUEST_PROFILE_IDS.includes(profile.id)) {
+    if (prizeId === 7 && rules.guestProfileIds.includes(profile.id)) {
       profile.prizes = {};
       profile.team = { title: 'BallBoy17' };
       profile.results = {
@@ -107,8 +110,8 @@ function countSpainPrizeNominees(
     .filter(profile =>
       prizeId !== 14
       && (
-        prizeId === 7 && profile.id === SPAIN_SPECIAL_GUEST_ID
-        || !SPAIN_GUEST_PROFILE_IDS.includes(profile.id) && profile.prizes[prizeId]?.value !== 0
+        prizeId === 7 && profile.id === rules.specialGuestId
+        || !rules.guestProfileIds.includes(profile.id) && profile.prizes[prizeId]?.value !== 0
       ))
     .sort((a, b) =>
       a.prizes[prizeId].value === b.prizes[prizeId].value
@@ -121,8 +124,8 @@ function countSpainPrizeNominees(
     && (prizeId !== 11 || nominee.prizes[prizeId].value >= 3));
 }
 
-export function calculateSpainPrizes(input: PrizeCalculationInput): any[] {
-  const { prizes, profiles, profilesDetails, random = Math.random } = input;
+export function calculateSpainPrizes(input: SpainPrizeCalculationInput): any[] {
+  const { prizes, profiles, profilesDetails, rules, random = Math.random } = input;
 
   prizes.forEach(prize => countSpainPrizeNominees(
     prizes,
@@ -130,21 +133,22 @@ export function calculateSpainPrizes(input: PrizeCalculationInput): any[] {
     profilesDetails,
     prize.id === 7
       ? profiles
-      : profiles.filter(profile => !SPAIN_GUEST_PROFILE_IDS.includes(profile.id)),
+      : profiles.filter(profile => !rules.guestProfileIds.includes(profile.id)),
     prize.id,
+    rules,
     prize.id === 8
-      ? SPAIN_FREQUENT_PLAYER_ID
+      ? rules.frequentPlayerId
       : prize.id === 11
-        ? SPAIN_FREQUENT_CAPTAIN_ID
+        ? rules.frequentCaptainId
         : '',
   ));
 
   updatePrizeStates(prizes);
 
   const winnerIds = prizes.map(prize => prize.activeLeaders[0]?.id || '');
-  winnerIds.push(...SPAIN_EXTRA_WINNER_IDS);
+  winnerIds.push(...rules.extraWinnerIds);
 
-  const randomPrize = prizes[SPAIN_RANDOM_PRIZE_INDEX];
+  const randomPrize = prizes[rules.randomPrizeIndex];
   const randomPrizeNominees = profilesDetails.filter(profile =>
     !winnerIds.includes(profile.id)
     && profile.results.subsCoef > 50

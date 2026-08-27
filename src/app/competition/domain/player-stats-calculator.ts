@@ -1,5 +1,6 @@
 import {
   FantasyTourStatsResponse,
+  SpecialPlayerRules,
   SportPlayer,
 } from '../models/competition.models';
 
@@ -21,33 +22,11 @@ interface PlayerStatsProfile {
   isMartinWC?: number;
 }
 
-export interface SpecialPlayerRules {
-  forbiddenTeamIds: string[];
-  forbiddenPlayerIds: string[];
-  worldCupForbiddenPlayerIds: string[];
-  portugueseTeamId: string;
-  larinPlayerId: string;
-}
-
-export const SEASON_2025_SPECIAL_PLAYER_RULES: SpecialPlayerRules = {
-  forbiddenTeamIds: ['7655', '7654'],
-  forbiddenPlayerIds: ['213875'],
-  worldCupForbiddenPlayerIds: [
-    '230526', '230534', '230542', '230546', '230544',
-    '230553', '230633', '230860', '230861', '230862',
-    '230868', '230874', '230875', '230879', '230880',
-    '230882', '230884', '231768', '231111', '231139',
-    '231194', '231274', '231473', '231480', '231500',
-  ],
-  portugueseTeamId: '8182',
-  larinPlayerId: '230935',
-};
-
 export function applySquadEligibility(
   profiles: PlayerStatsProfile[],
   latestStats: FantasyTourStatsResponse[],
   lastTour: number,
-  rules: SpecialPlayerRules = SEASON_2025_SPECIAL_PLAYER_RULES,
+  rules: SpecialPlayerRules,
 ): void {
   const sportPlayers = mergeLatestPlayers(latestStats);
   const forbiddenPlayers = new Set(rules.forbiddenPlayerIds);
@@ -82,7 +61,7 @@ export function applyTourPlayerStats(
   profiles: PlayerStatsProfile[],
   statsByTour: FantasyTourStatsResponse[],
   lastTour: number,
-  rules: SpecialPlayerRules = SEASON_2025_SPECIAL_PLAYER_RULES,
+  rules: SpecialPlayerRules,
 ): void {
   const players = mergePlayerStatsByTour(statsByTour);
 
