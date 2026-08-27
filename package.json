@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "capture:season-2025": "node scripts/season-regression.mjs capture",
+    "verify:season-2025": "node scripts/season-regression.mjs verify",
     "mypage": "ng build --base-href=https://fr-fantasy.ru/"
   },
   "private": true,

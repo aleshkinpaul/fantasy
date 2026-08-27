@@ -1,0 +1,3945 @@
+{
+  "Apertura": [
+    {
+      "id": "73116796",
+      "score": 505,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 210,
+        "clausura": 59,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 155,
+        "clausura": 61,
+        "common": 216
+      },
+      "diff_fo": {
+        "apertura": 55,
+        "clausura": -2,
+        "common": 53
+      }
+    },
+    {
+      "id": "152317185",
+      "score": 506,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 234,
+        "clausura": 81,
+        "common": 315
+      },
+      "missed_fo": {
+        "apertura": 190,
+        "clausura": 85,
+        "common": 275
+      },
+      "diff_fo": {
+        "apertura": 44,
+        "clausura": -4,
+        "common": 40
+      }
+    },
+    {
+      "id": "144762187",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 209,
+        "clausura": 79,
+        "common": 288
+      },
+      "missed_fo": {
+        "apertura": 182,
+        "clausura": 80,
+        "common": 262
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": -1,
+        "common": 26
+      }
+    },
+    {
+      "id": "1076901343",
+      "score": 494,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 126,
+        "common": 345
+      },
+      "missed_fo": {
+        "apertura": 193,
+        "clausura": 122,
+        "common": 315
+      },
+      "diff_fo": {
+        "apertura": 26,
+        "clausura": 4,
+        "common": 30
+      }
+    },
+    {
+      "id": "1113442132",
+      "score": 525,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 135,
+        "common": 354
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 126,
+        "common": 324
+      },
+      "diff_fo": {
+        "apertura": 21,
+        "clausura": 9,
+        "common": 30
+      }
+    },
+    {
+      "id": "1111685266",
+      "score": 496,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 7,
+        "clausura": 0,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 68,
+        "common": 298
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 70,
+        "common": 267
+      },
+      "diff_fo": {
+        "apertura": 33,
+        "clausura": -2,
+        "common": 31
+      }
+    },
+    {
+      "id": "1115308799",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 237,
+        "clausura": 69,
+        "common": 306
+      },
+      "missed_fo": {
+        "apertura": 195,
+        "clausura": 75,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": 42,
+        "clausura": -6,
+        "common": 36
+      }
+    },
+    {
+      "id": "1113269933",
+      "score": 520,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 226,
+        "clausura": 60,
+        "common": 286
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 81,
+        "common": 278
+      },
+      "diff_fo": {
+        "apertura": 29,
+        "clausura": -21,
+        "common": 8
+      }
+    },
+    {
+      "id": "1111769718",
+      "score": 485,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 218,
+        "clausura": 135,
+        "common": 353
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 135,
+        "common": 326
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": 0,
+        "common": 27
+      }
+    },
+    {
+      "id": "1116848369",
+      "score": 491,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 225,
+        "clausura": 111,
+        "common": 336
+      },
+      "missed_fo": {
+        "apertura": 211,
+        "clausura": 131,
+        "common": 342
+      },
+      "diff_fo": {
+        "apertura": 14,
+        "clausura": -20,
+        "common": -6
+      }
+    },
+    {
+      "id": "1095496719",
+      "score": 515,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 6,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 208,
+        "clausura": 207,
+        "common": 415
+      },
+      "missed_fo": {
+        "apertura": 199,
+        "clausura": 188,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": 9,
+        "clausura": 19,
+        "common": 28
+      }
+    },
+    {
+      "id": "1061493572",
+      "score": 460,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 207,
+        "clausura": 53,
+        "common": 260
+      },
+      "missed_fo": {
+        "apertura": 210,
+        "clausura": 60,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -3,
+        "clausura": -7,
+        "common": -10
+      }
+    },
+    {
+      "id": "1028890564",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 5,
+        "clausura": 3,
+        "common": 8
+      },
+      "fo": {
+        "apertura": 227,
+        "clausura": 138,
+        "common": 365
+      },
+      "missed_fo": {
+        "apertura": 225,
+        "clausura": 145,
+        "common": 370
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": -7,
+        "common": -5
+      }
+    },
+    {
+      "id": "1096489838",
+      "score": 508,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 1,
+        "common": 5
+      },
+      "fo": {
+        "apertura": 213,
+        "clausura": 67,
+        "common": 280
+      },
+      "missed_fo": {
+        "apertura": 181,
+        "clausura": 67,
+        "common": 248
+      },
+      "diff_fo": {
+        "apertura": 32,
+        "clausura": 0,
+        "common": 32
+      }
+    },
+    {
+      "id": "1058102914",
+      "score": 442,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 0,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 83,
+        "common": 283
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": -20,
+        "common": -21
+      }
+    },
+    {
+      "id": "5275903",
+      "score": 471,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 10,
+        "common": 14
+      },
+      "fo": {
+        "apertura": 191,
+        "clausura": 280,
+        "common": 471
+      },
+      "missed_fo": {
+        "apertura": 192,
+        "clausura": 278,
+        "common": 470
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": 2,
+        "common": 1
+      }
+    },
+    {
+      "id": "1115479394",
+      "score": 528,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 143,
+        "common": 373
+      },
+      "missed_fo": {
+        "apertura": 220,
+        "clausura": 145,
+        "common": 365
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -2,
+        "common": 8
+      }
+    },
+    {
+      "id": "1115416060",
+      "score": 430,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 70,
+        "common": 257
+      },
+      "missed_fo": {
+        "apertura": 177,
+        "clausura": 73,
+        "common": 250
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -3,
+        "common": 7
+      }
+    },
+    {
+      "id": "1116778891",
+      "score": 525,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 3,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 190,
+        "clausura": 145,
+        "common": 335
+      },
+      "missed_fo": {
+        "apertura": 188,
+        "clausura": 129,
+        "common": 317
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": 16,
+        "common": 18
+      }
+    },
+    {
+      "id": "135066850",
+      "score": 442,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 201,
+        "clausura": 72,
+        "common": 273
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 77,
+        "common": 277
+      },
+      "diff_fo": {
+        "apertura": 1,
+        "clausura": -5,
+        "common": -4
+      }
+    },
+    {
+      "id": "1116144526",
+      "score": 499,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 198,
+        "clausura": 194,
+        "common": 392
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 187,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": -2,
+        "clausura": 7,
+        "common": 5
+      }
+    },
+    {
+      "id": "1111051849",
+      "score": 547,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 215,
+        "clausura": 221,
+        "common": 436
+      },
+      "missed_fo": {
+        "apertura": 219,
+        "clausura": 213,
+        "common": 432
+      },
+      "diff_fo": {
+        "apertura": -4,
+        "clausura": 8,
+        "common": 4
+      }
+    },
+    {
+      "id": "1116086751",
+      "score": 514,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 197,
+        "clausura": 72,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 206,
+        "clausura": 87,
+        "common": 293
+      },
+      "diff_fo": {
+        "apertura": -9,
+        "clausura": -15,
+        "common": -24
+      }
+    },
+    {
+      "id": "1068332740",
+      "score": 473,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 174,
+        "clausura": 66,
+        "common": 240
+      },
+      "missed_fo": {
+        "apertura": 196,
+        "clausura": 70,
+        "common": 266
+      },
+      "diff_fo": {
+        "apertura": -22,
+        "clausura": -4,
+        "common": -26
+      }
+    },
+    {
+      "id": "1116125876",
+      "score": 323,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 168,
+        "clausura": 75,
+        "common": 243
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 79,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -23,
+        "clausura": -4,
+        "common": -27
+      }
+    },
+    {
+      "id": "1115355124",
+      "score": 390,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 171,
+        "clausura": 55,
+        "common": 226
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 67,
+        "common": 265
+      },
+      "diff_fo": {
+        "apertura": -27,
+        "clausura": -12,
+        "common": -39
+      }
+    },
+    {
+      "id": "1033596919",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 236,
+        "clausura": 75,
+        "common": 311
+      },
+      "diff_fo": {
+        "apertura": -37,
+        "clausura": -12,
+        "common": -49
+      }
+    },
+    {
+      "id": "1113104848",
+      "score": 485,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 9,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 217,
+        "clausura": 268,
+        "common": 485
+      },
+      "missed_fo": {
+        "apertura": 266,
+        "clausura": 283,
+        "common": 549
+      },
+      "diff_fo": {
+        "apertura": -49,
+        "clausura": -15,
+        "common": -64
+      }
+    },
+    {
+      "id": "1113412675",
+      "score": 492,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 2,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 7,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 177,
+        "clausura": 192,
+        "common": 369
+      },
+      "missed_fo": {
+        "apertura": 207,
+        "clausura": 171,
+        "common": 378
+      },
+      "diff_fo": {
+        "apertura": -30,
+        "clausura": 21,
+        "common": -9
+      }
+    },
+    {
+      "id": "1116848321",
+      "score": 520,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 4,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 12,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 333,
+        "common": 520
+      },
+      "missed_fo": {
+        "apertura": 221,
+        "clausura": 303,
+        "common": 524
+      },
+      "diff_fo": {
+        "apertura": -34,
+        "clausura": 30,
+        "common": -4
+      }
+    },
+    {
+      "id": "151923911",
+      "score": 450,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 3,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 170,
+        "clausura": 120,
+        "common": 290
+      },
+      "missed_fo": {
+        "apertura": 226,
+        "clausura": 138,
+        "common": 364
+      },
+      "diff_fo": {
+        "apertura": -56,
+        "clausura": -18,
+        "common": -74
+      }
+    },
+    {
+      "id": "1024867435",
+      "score": 481,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 5,
+        "common": 5
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 15,
+        "common": 15
+      },
+      "fo": {
+        "apertura": 148,
+        "clausura": 333,
+        "common": 481
+      },
+      "missed_fo": {
+        "apertura": 234,
+        "clausura": 269,
+        "common": 503
+      },
+      "diff_fo": {
+        "apertura": -86,
+        "clausura": 64,
+        "common": -22
+      }
+    }
+  ],
+  "Common": [
+    {
+      "id": "1024867435",
+      "score": 481,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 5,
+        "common": 5
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 15,
+        "common": 15
+      },
+      "fo": {
+        "apertura": 148,
+        "clausura": 333,
+        "common": 481
+      },
+      "missed_fo": {
+        "apertura": 234,
+        "clausura": 269,
+        "common": 503
+      },
+      "diff_fo": {
+        "apertura": -86,
+        "clausura": 64,
+        "common": -22
+      }
+    },
+    {
+      "id": "5275903",
+      "score": 471,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 10,
+        "common": 14
+      },
+      "fo": {
+        "apertura": 191,
+        "clausura": 280,
+        "common": 471
+      },
+      "missed_fo": {
+        "apertura": 192,
+        "clausura": 278,
+        "common": 470
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": 2,
+        "common": 1
+      }
+    },
+    {
+      "id": "1113442132",
+      "score": 525,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 135,
+        "common": 354
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 126,
+        "common": 324
+      },
+      "diff_fo": {
+        "apertura": 21,
+        "clausura": 9,
+        "common": 30
+      }
+    },
+    {
+      "id": "1076901343",
+      "score": 494,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 126,
+        "common": 345
+      },
+      "missed_fo": {
+        "apertura": 193,
+        "clausura": 122,
+        "common": 315
+      },
+      "diff_fo": {
+        "apertura": 26,
+        "clausura": 4,
+        "common": 30
+      }
+    },
+    {
+      "id": "1095496719",
+      "score": 515,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 6,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 208,
+        "clausura": 207,
+        "common": 415
+      },
+      "missed_fo": {
+        "apertura": 199,
+        "clausura": 188,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": 9,
+        "clausura": 19,
+        "common": 28
+      }
+    },
+    {
+      "id": "1116848321",
+      "score": 520,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 4,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 12,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 333,
+        "common": 520
+      },
+      "missed_fo": {
+        "apertura": 221,
+        "clausura": 303,
+        "common": 524
+      },
+      "diff_fo": {
+        "apertura": -34,
+        "clausura": 30,
+        "common": -4
+      }
+    },
+    {
+      "id": "1113104848",
+      "score": 485,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 9,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 217,
+        "clausura": 268,
+        "common": 485
+      },
+      "missed_fo": {
+        "apertura": 266,
+        "clausura": 283,
+        "common": 549
+      },
+      "diff_fo": {
+        "apertura": -49,
+        "clausura": -15,
+        "common": -64
+      }
+    },
+    {
+      "id": "73116796",
+      "score": 505,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 210,
+        "clausura": 59,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 155,
+        "clausura": 61,
+        "common": 216
+      },
+      "diff_fo": {
+        "apertura": 55,
+        "clausura": -2,
+        "common": 53
+      }
+    },
+    {
+      "id": "152317185",
+      "score": 506,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 234,
+        "clausura": 81,
+        "common": 315
+      },
+      "missed_fo": {
+        "apertura": 190,
+        "clausura": 85,
+        "common": 275
+      },
+      "diff_fo": {
+        "apertura": 44,
+        "clausura": -4,
+        "common": 40
+      }
+    },
+    {
+      "id": "1111769718",
+      "score": 485,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 218,
+        "clausura": 135,
+        "common": 353
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 135,
+        "common": 326
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": 0,
+        "common": 27
+      }
+    },
+    {
+      "id": "144762187",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 209,
+        "clausura": 79,
+        "common": 288
+      },
+      "missed_fo": {
+        "apertura": 182,
+        "clausura": 80,
+        "common": 262
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": -1,
+        "common": 26
+      }
+    },
+    {
+      "id": "1116144526",
+      "score": 499,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 198,
+        "clausura": 194,
+        "common": 392
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 187,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": -2,
+        "clausura": 7,
+        "common": 5
+      }
+    },
+    {
+      "id": "1111051849",
+      "score": 547,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 215,
+        "clausura": 221,
+        "common": 436
+      },
+      "missed_fo": {
+        "apertura": 219,
+        "clausura": 213,
+        "common": 432
+      },
+      "diff_fo": {
+        "apertura": -4,
+        "clausura": 8,
+        "common": 4
+      }
+    },
+    {
+      "id": "1116848369",
+      "score": 491,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 225,
+        "clausura": 111,
+        "common": 336
+      },
+      "missed_fo": {
+        "apertura": 211,
+        "clausura": 131,
+        "common": 342
+      },
+      "diff_fo": {
+        "apertura": 14,
+        "clausura": -20,
+        "common": -6
+      }
+    },
+    {
+      "id": "1028890564",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 5,
+        "clausura": 3,
+        "common": 8
+      },
+      "fo": {
+        "apertura": 227,
+        "clausura": 138,
+        "common": 365
+      },
+      "missed_fo": {
+        "apertura": 225,
+        "clausura": 145,
+        "common": 370
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": -7,
+        "common": -5
+      }
+    },
+    {
+      "id": "1111685266",
+      "score": 496,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 7,
+        "clausura": 0,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 68,
+        "common": 298
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 70,
+        "common": 267
+      },
+      "diff_fo": {
+        "apertura": 33,
+        "clausura": -2,
+        "common": 31
+      }
+    },
+    {
+      "id": "1113412675",
+      "score": 492,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 2,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 7,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 177,
+        "clausura": 192,
+        "common": 369
+      },
+      "missed_fo": {
+        "apertura": 207,
+        "clausura": 171,
+        "common": 378
+      },
+      "diff_fo": {
+        "apertura": -30,
+        "clausura": 21,
+        "common": -9
+      }
+    },
+    {
+      "id": "1115308799",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 237,
+        "clausura": 69,
+        "common": 306
+      },
+      "missed_fo": {
+        "apertura": 195,
+        "clausura": 75,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": 42,
+        "clausura": -6,
+        "common": 36
+      }
+    },
+    {
+      "id": "1116778891",
+      "score": 525,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 3,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 190,
+        "clausura": 145,
+        "common": 335
+      },
+      "missed_fo": {
+        "apertura": 188,
+        "clausura": 129,
+        "common": 317
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": 16,
+        "common": 18
+      }
+    },
+    {
+      "id": "1113269933",
+      "score": 520,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 226,
+        "clausura": 60,
+        "common": 286
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 81,
+        "common": 278
+      },
+      "diff_fo": {
+        "apertura": 29,
+        "clausura": -21,
+        "common": 8
+      }
+    },
+    {
+      "id": "1061493572",
+      "score": 460,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 207,
+        "clausura": 53,
+        "common": 260
+      },
+      "missed_fo": {
+        "apertura": 210,
+        "clausura": 60,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -3,
+        "clausura": -7,
+        "common": -10
+      }
+    },
+    {
+      "id": "1096489838",
+      "score": 508,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 1,
+        "common": 5
+      },
+      "fo": {
+        "apertura": 213,
+        "clausura": 67,
+        "common": 280
+      },
+      "missed_fo": {
+        "apertura": 181,
+        "clausura": 67,
+        "common": 248
+      },
+      "diff_fo": {
+        "apertura": 32,
+        "clausura": 0,
+        "common": 32
+      }
+    },
+    {
+      "id": "1115479394",
+      "score": 528,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 143,
+        "common": 373
+      },
+      "missed_fo": {
+        "apertura": 220,
+        "clausura": 145,
+        "common": 365
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -2,
+        "common": 8
+      }
+    },
+    {
+      "id": "1058102914",
+      "score": 442,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 0,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 83,
+        "common": 283
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": -20,
+        "common": -21
+      }
+    },
+    {
+      "id": "1115416060",
+      "score": 430,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 70,
+        "common": 257
+      },
+      "missed_fo": {
+        "apertura": 177,
+        "clausura": 73,
+        "common": 250
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -3,
+        "common": 7
+      }
+    },
+    {
+      "id": "135066850",
+      "score": 442,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 201,
+        "clausura": 72,
+        "common": 273
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 77,
+        "common": 277
+      },
+      "diff_fo": {
+        "apertura": 1,
+        "clausura": -5,
+        "common": -4
+      }
+    },
+    {
+      "id": "1116086751",
+      "score": 514,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 197,
+        "clausura": 72,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 206,
+        "clausura": 87,
+        "common": 293
+      },
+      "diff_fo": {
+        "apertura": -9,
+        "clausura": -15,
+        "common": -24
+      }
+    },
+    {
+      "id": "1068332740",
+      "score": 473,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 174,
+        "clausura": 66,
+        "common": 240
+      },
+      "missed_fo": {
+        "apertura": 196,
+        "clausura": 70,
+        "common": 266
+      },
+      "diff_fo": {
+        "apertura": -22,
+        "clausura": -4,
+        "common": -26
+      }
+    },
+    {
+      "id": "1116125876",
+      "score": 323,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 168,
+        "clausura": 75,
+        "common": 243
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 79,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -23,
+        "clausura": -4,
+        "common": -27
+      }
+    },
+    {
+      "id": "1115355124",
+      "score": 390,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 171,
+        "clausura": 55,
+        "common": 226
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 67,
+        "common": 265
+      },
+      "diff_fo": {
+        "apertura": -27,
+        "clausura": -12,
+        "common": -39
+      }
+    },
+    {
+      "id": "1033596919",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 236,
+        "clausura": 75,
+        "common": 311
+      },
+      "diff_fo": {
+        "apertura": -37,
+        "clausura": -12,
+        "common": -49
+      }
+    },
+    {
+      "id": "151923911",
+      "score": 450,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 3,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 170,
+        "clausura": 120,
+        "common": 290
+      },
+      "missed_fo": {
+        "apertura": 226,
+        "clausura": 138,
+        "common": 364
+      },
+      "diff_fo": {
+        "apertura": -56,
+        "clausura": -18,
+        "common": -74
+      }
+    }
+  ],
+  "CommonFO": [
+    {
+      "id": "1111051849",
+      "score": 547,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 215,
+        "clausura": 221,
+        "common": 436
+      },
+      "missed_fo": {
+        "apertura": 219,
+        "clausura": 213,
+        "common": 432
+      },
+      "diff_fo": {
+        "apertura": -4,
+        "clausura": 8,
+        "common": 4
+      }
+    },
+    {
+      "id": "1115479394",
+      "score": 528,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 143,
+        "common": 373
+      },
+      "missed_fo": {
+        "apertura": 220,
+        "clausura": 145,
+        "common": 365
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -2,
+        "common": 8
+      }
+    },
+    {
+      "id": "1113442132",
+      "score": 525,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 135,
+        "common": 354
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 126,
+        "common": 324
+      },
+      "diff_fo": {
+        "apertura": 21,
+        "clausura": 9,
+        "common": 30
+      }
+    },
+    {
+      "id": "1116778891",
+      "score": 525,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 3,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 190,
+        "clausura": 145,
+        "common": 335
+      },
+      "missed_fo": {
+        "apertura": 188,
+        "clausura": 129,
+        "common": 317
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": 16,
+        "common": 18
+      }
+    },
+    {
+      "id": "1116848321",
+      "score": 520,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 4,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 12,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 333,
+        "common": 520
+      },
+      "missed_fo": {
+        "apertura": 221,
+        "clausura": 303,
+        "common": 524
+      },
+      "diff_fo": {
+        "apertura": -34,
+        "clausura": 30,
+        "common": -4
+      }
+    },
+    {
+      "id": "1113269933",
+      "score": 520,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 226,
+        "clausura": 60,
+        "common": 286
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 81,
+        "common": 278
+      },
+      "diff_fo": {
+        "apertura": 29,
+        "clausura": -21,
+        "common": 8
+      }
+    },
+    {
+      "id": "1095496719",
+      "score": 515,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 6,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 208,
+        "clausura": 207,
+        "common": 415
+      },
+      "missed_fo": {
+        "apertura": 199,
+        "clausura": 188,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": 9,
+        "clausura": 19,
+        "common": 28
+      }
+    },
+    {
+      "id": "1116086751",
+      "score": 514,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 197,
+        "clausura": 72,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 206,
+        "clausura": 87,
+        "common": 293
+      },
+      "diff_fo": {
+        "apertura": -9,
+        "clausura": -15,
+        "common": -24
+      }
+    },
+    {
+      "id": "144762187",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 209,
+        "clausura": 79,
+        "common": 288
+      },
+      "missed_fo": {
+        "apertura": 182,
+        "clausura": 80,
+        "common": 262
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": -1,
+        "common": 26
+      }
+    },
+    {
+      "id": "1028890564",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 5,
+        "clausura": 3,
+        "common": 8
+      },
+      "fo": {
+        "apertura": 227,
+        "clausura": 138,
+        "common": 365
+      },
+      "missed_fo": {
+        "apertura": 225,
+        "clausura": 145,
+        "common": 370
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": -7,
+        "common": -5
+      }
+    },
+    {
+      "id": "1115308799",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 237,
+        "clausura": 69,
+        "common": 306
+      },
+      "missed_fo": {
+        "apertura": 195,
+        "clausura": 75,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": 42,
+        "clausura": -6,
+        "common": 36
+      }
+    },
+    {
+      "id": "1033596919",
+      "score": 509,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 236,
+        "clausura": 75,
+        "common": 311
+      },
+      "diff_fo": {
+        "apertura": -37,
+        "clausura": -12,
+        "common": -49
+      }
+    },
+    {
+      "id": "1096489838",
+      "score": 508,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 1,
+        "common": 5
+      },
+      "fo": {
+        "apertura": 213,
+        "clausura": 67,
+        "common": 280
+      },
+      "missed_fo": {
+        "apertura": 181,
+        "clausura": 67,
+        "common": 248
+      },
+      "diff_fo": {
+        "apertura": 32,
+        "clausura": 0,
+        "common": 32
+      }
+    },
+    {
+      "id": "152317185",
+      "score": 506,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 234,
+        "clausura": 81,
+        "common": 315
+      },
+      "missed_fo": {
+        "apertura": 190,
+        "clausura": 85,
+        "common": 275
+      },
+      "diff_fo": {
+        "apertura": 44,
+        "clausura": -4,
+        "common": 40
+      }
+    },
+    {
+      "id": "73116796",
+      "score": 505,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 210,
+        "clausura": 59,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 155,
+        "clausura": 61,
+        "common": 216
+      },
+      "diff_fo": {
+        "apertura": 55,
+        "clausura": -2,
+        "common": 53
+      }
+    },
+    {
+      "id": "1116144526",
+      "score": 499,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 198,
+        "clausura": 194,
+        "common": 392
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 187,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": -2,
+        "clausura": 7,
+        "common": 5
+      }
+    },
+    {
+      "id": "1111685266",
+      "score": 496,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 7,
+        "clausura": 0,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 68,
+        "common": 298
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 70,
+        "common": 267
+      },
+      "diff_fo": {
+        "apertura": 33,
+        "clausura": -2,
+        "common": 31
+      }
+    },
+    {
+      "id": "1076901343",
+      "score": 494,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 126,
+        "common": 345
+      },
+      "missed_fo": {
+        "apertura": 193,
+        "clausura": 122,
+        "common": 315
+      },
+      "diff_fo": {
+        "apertura": 26,
+        "clausura": 4,
+        "common": 30
+      }
+    },
+    {
+      "id": "1113412675",
+      "score": 492,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 2,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 7,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 177,
+        "clausura": 192,
+        "common": 369
+      },
+      "missed_fo": {
+        "apertura": 207,
+        "clausura": 171,
+        "common": 378
+      },
+      "diff_fo": {
+        "apertura": -30,
+        "clausura": 21,
+        "common": -9
+      }
+    },
+    {
+      "id": "1116848369",
+      "score": 491,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 225,
+        "clausura": 111,
+        "common": 336
+      },
+      "missed_fo": {
+        "apertura": 211,
+        "clausura": 131,
+        "common": 342
+      },
+      "diff_fo": {
+        "apertura": 14,
+        "clausura": -20,
+        "common": -6
+      }
+    },
+    {
+      "id": "1113104848",
+      "score": 485,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 9,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 217,
+        "clausura": 268,
+        "common": 485
+      },
+      "missed_fo": {
+        "apertura": 266,
+        "clausura": 283,
+        "common": 549
+      },
+      "diff_fo": {
+        "apertura": -49,
+        "clausura": -15,
+        "common": -64
+      }
+    },
+    {
+      "id": "1111769718",
+      "score": 485,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 218,
+        "clausura": 135,
+        "common": 353
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 135,
+        "common": 326
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": 0,
+        "common": 27
+      }
+    },
+    {
+      "id": "1024867435",
+      "score": 481,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 5,
+        "common": 5
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 15,
+        "common": 15
+      },
+      "fo": {
+        "apertura": 148,
+        "clausura": 333,
+        "common": 481
+      },
+      "missed_fo": {
+        "apertura": 234,
+        "clausura": 269,
+        "common": 503
+      },
+      "diff_fo": {
+        "apertura": -86,
+        "clausura": 64,
+        "common": -22
+      }
+    },
+    {
+      "id": "1068332740",
+      "score": 473,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 174,
+        "clausura": 66,
+        "common": 240
+      },
+      "missed_fo": {
+        "apertura": 196,
+        "clausura": 70,
+        "common": 266
+      },
+      "diff_fo": {
+        "apertura": -22,
+        "clausura": -4,
+        "common": -26
+      }
+    },
+    {
+      "id": "5275903",
+      "score": 471,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 10,
+        "common": 14
+      },
+      "fo": {
+        "apertura": 191,
+        "clausura": 280,
+        "common": 471
+      },
+      "missed_fo": {
+        "apertura": 192,
+        "clausura": 278,
+        "common": 470
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": 2,
+        "common": 1
+      }
+    },
+    {
+      "id": "1061493572",
+      "score": 460,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 207,
+        "clausura": 53,
+        "common": 260
+      },
+      "missed_fo": {
+        "apertura": 210,
+        "clausura": 60,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -3,
+        "clausura": -7,
+        "common": -10
+      }
+    },
+    {
+      "id": "151923911",
+      "score": 450,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 3,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 170,
+        "clausura": 120,
+        "common": 290
+      },
+      "missed_fo": {
+        "apertura": 226,
+        "clausura": 138,
+        "common": 364
+      },
+      "diff_fo": {
+        "apertura": -56,
+        "clausura": -18,
+        "common": -74
+      }
+    },
+    {
+      "id": "1058102914",
+      "score": 442,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 0,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 83,
+        "common": 283
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": -20,
+        "common": -21
+      }
+    },
+    {
+      "id": "135066850",
+      "score": 442,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 201,
+        "clausura": 72,
+        "common": 273
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 77,
+        "common": 277
+      },
+      "diff_fo": {
+        "apertura": 1,
+        "clausura": -5,
+        "common": -4
+      }
+    },
+    {
+      "id": "1115416060",
+      "score": 430,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 70,
+        "common": 257
+      },
+      "missed_fo": {
+        "apertura": 177,
+        "clausura": 73,
+        "common": 250
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -3,
+        "common": 7
+      }
+    },
+    {
+      "id": "1115355124",
+      "score": 390,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 171,
+        "clausura": 55,
+        "common": 226
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 67,
+        "common": 265
+      },
+      "diff_fo": {
+        "apertura": -27,
+        "clausura": -12,
+        "common": -39
+      }
+    },
+    {
+      "id": "1116125876",
+      "score": 323,
+      "leagues": [],
+      "place_in_league": "__undefined__",
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 168,
+        "clausura": 75,
+        "common": 243
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 79,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -23,
+        "clausura": -4,
+        "common": -27
+      }
+    }
+  ],
+  "Общий этап": []
+}

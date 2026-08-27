@@ -1,0 +1,4077 @@
+[
+  {
+    "id": "1024867435",
+    "score": 481,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 1,
+      "Apertura": 32,
+      "CommonFO": 23,
+      "ByScore": 23
+    },
+    "results": {
+      "wins": {
+        "apertura": 0,
+        "clausura": 5,
+        "common": 5
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 15,
+        "common": 15
+      },
+      "fo": {
+        "apertura": 148,
+        "clausura": 333,
+        "common": 481
+      },
+      "missed_fo": {
+        "apertura": 234,
+        "clausura": 269,
+        "common": 503
+      },
+      "diff_fo": {
+        "apertura": -86,
+        "clausura": 64,
+        "common": -22
+      },
+      "matchesPlayed": 8,
+      "teamCostTotal": 796.5,
+      "teamCostAvg": 99.56,
+      "subsUsedCount": 32,
+      "subsTotalCount": 43,
+      "subsCoef": 74.42,
+      "uniqueUsedPlayers": [
+        "231516",
+        "230527",
+        "230883",
+        "231288",
+        "230882",
+        "230550",
+        "231281",
+        "230698",
+        "230511",
+        "231497",
+        "231527",
+        "231431",
+        "230965",
+        "230478",
+        "230769",
+        "230555",
+        "230990",
+        "230840",
+        "230867",
+        "230980",
+        "230765",
+        "230844",
+        "231515",
+        "230579",
+        "230862",
+        "230631",
+        "230624",
+        "230871",
+        "231276",
+        "230898",
+        "231292",
+        "230885",
+        "230425",
+        "230877",
+        "231514",
+        "230646",
+        "231692",
+        "230529",
+        "230863",
+        "230518",
+        "230880",
+        "231503",
+        "230551",
+        "231513"
+      ],
+      "portugezePoints": 44,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 76,
+      "prizeMaxFoInLosedTour": 60,
+      "prizeCurrentWinStrike": 5,
+      "prizeMaxWinStrike": 5,
+      "prizeCurrentNoLoseStrike": 5,
+      "prizeMaxNoLoseStrike": 5,
+      "prizeMaxStoppedNoLoseStrike": 4,
+      "prizeMaxLosedDiff": 19,
+      "cup": {
+        "fo": 333,
+        "missed_fo": 269,
+        "diff_fo": 64,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 12.8,
+        "diff_fo_arr": [
+          6,
+          24,
+          6,
+          27,
+          1
+        ],
+        "standings": [
+          32,
+          30,
+          29,
+          25,
+          23
+        ],
+        "lowest_winning_pos_diff": 30
+      }
+    }
+  },
+  {
+    "id": "5275903",
+    "score": 471,
+    "isMartin": 1,
+    "isMartinWC": 1,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 2,
+      "Apertura": 16,
+      "CommonFO": 25,
+      "ByScore": 25
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 10,
+        "common": 14
+      },
+      "fo": {
+        "apertura": 191,
+        "clausura": 280,
+        "common": 471
+      },
+      "missed_fo": {
+        "apertura": 192,
+        "clausura": 278,
+        "common": 470
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": 2,
+        "common": 1
+      },
+      "matchesPlayed": 8,
+      "teamCostTotal": 799,
+      "teamCostAvg": 99.88,
+      "subsUsedCount": 24,
+      "subsTotalCount": 43,
+      "subsCoef": 55.81,
+      "uniqueUsedPlayers": [
+        "230632",
+        "230527",
+        "231288",
+        "231066",
+        "231489",
+        "230628",
+        "231542",
+        "230571",
+        "231057",
+        "231129",
+        "231276",
+        "231507",
+        "230696",
+        "231290",
+        "230740",
+        "231515",
+        "230438",
+        "230867",
+        "231514",
+        "230517",
+        "230755",
+        "230919",
+        "231595",
+        "230870",
+        "231195",
+        "230516",
+        "230529",
+        "230551",
+        "231502",
+        "230518",
+        "230506",
+        "231494",
+        "231499",
+        "230543",
+        "230871",
+        "230883",
+        "230878"
+      ],
+      "portugezePoints": 10,
+      "larinPoints": 0,
+      "prizeMinWins": 2,
+      "prizeMaxFoInTour": 80,
+      "prizeMaxFoInLosedTour": 43,
+      "prizeCurrentWinStrike": 1,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 1,
+      "prizeMaxNoLoseStrike": 5,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 10,
+      "cup": {
+        "fo": 280,
+        "missed_fo": 278,
+        "diff_fo": 2,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 0.4,
+        "diff_fo_arr": [
+          7,
+          3,
+          0,
+          -10,
+          2
+        ],
+        "standings": [
+          26,
+          25,
+          22,
+          24,
+          25
+        ],
+        "lowest_winning_pos_diff": 16
+      }
+    }
+  },
+  {
+    "id": "1113442132",
+    "score": 525,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 3,
+      "Apertura": 5,
+      "CommonFO": 3,
+      "ByScore": 3
+    },
+    "results": {
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 135,
+        "common": 354
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 126,
+        "common": 324
+      },
+      "diff_fo": {
+        "apertura": 21,
+        "clausura": 9,
+        "common": 30
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 498.5,
+      "teamCostAvg": 99.7,
+      "subsUsedCount": 20,
+      "subsTotalCount": 27,
+      "subsCoef": 74.07,
+      "uniqueUsedPlayers": [
+        "231515",
+        "231195",
+        "231289",
+        "230712",
+        "230880",
+        "231432",
+        "231592",
+        "230697",
+        "230867",
+        "231184",
+        "231107",
+        "231633",
+        "230832",
+        "230643",
+        "230744",
+        "231660",
+        "231502",
+        "230633",
+        "230632",
+        "231142",
+        "230529",
+        "231129",
+        "231054",
+        "230542",
+        "230934",
+        "231353",
+        "230541",
+        "230527",
+        "230898",
+        "231692",
+        "230532",
+        "231494",
+        "231516",
+        "230624",
+        "230536",
+        "230863",
+        "230555",
+        "230566",
+        "231504",
+        "231509",
+        "230425",
+        "230871",
+        "231492",
+        "230883",
+        "231513",
+        "231503"
+      ],
+      "portugezePoints": 3,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 82,
+      "prizeMaxFoInLosedTour": 60,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 4,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 4,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 3,
+      "cup": {
+        "fo": 135,
+        "missed_fo": 126,
+        "diff_fo": 9,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          12,
+          -3
+        ],
+        "standings": [
+          8,
+          8
+        ],
+        "lowest_winning_pos_diff": -14
+      }
+    }
+  },
+  {
+    "id": "1076901343",
+    "score": 494,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 4,
+      "Apertura": 4,
+      "CommonFO": 18,
+      "ByScore": 18
+    },
+    "results": {
+      "wins": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 3,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 219,
+        "clausura": 126,
+        "common": 345
+      },
+      "missed_fo": {
+        "apertura": 193,
+        "clausura": 122,
+        "common": 315
+      },
+      "diff_fo": {
+        "apertura": 26,
+        "clausura": 4,
+        "common": 30
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 498.5,
+      "teamCostAvg": 99.7,
+      "subsUsedCount": 23,
+      "subsTotalCount": 27,
+      "subsCoef": 85.19,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231289",
+        "230713",
+        "230711",
+        "230525",
+        "231117",
+        "231648",
+        "231184",
+        "231105",
+        "231583",
+        "231668",
+        "231592",
+        "230482",
+        "231435",
+        "231437",
+        "230921",
+        "230695",
+        "231515",
+        "231516",
+        "231124",
+        "231129",
+        "231061",
+        "230527",
+        "231359",
+        "230532",
+        "230980",
+        "231273",
+        "231514",
+        "230555",
+        "230632",
+        "231132",
+        "231353",
+        "230924",
+        "230744",
+        "230518",
+        "230919",
+        "230643",
+        "230867",
+        "230562",
+        "231494",
+        "231501",
+        "230506",
+        "231500",
+        "231713"
+      ],
+      "portugezePoints": 9,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 78,
+      "prizeMaxFoInLosedTour": 59,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 4,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 4,
+      "prizeMaxStoppedNoLoseStrike": 2,
+      "prizeMaxLosedDiff": 8,
+      "cup": {
+        "fo": 126,
+        "missed_fo": 122,
+        "diff_fo": 4,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          12,
+          -8
+        ],
+        "standings": [
+          12,
+          11
+        ],
+        "lowest_winning_pos_diff": -19
+      }
+    }
+  },
+  {
+    "id": "1095496719",
+    "score": 515,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 5,
+      "Apertura": 11,
+      "CommonFO": 7,
+      "ByScore": 7
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 6,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 208,
+        "clausura": 207,
+        "common": 415
+      },
+      "missed_fo": {
+        "apertura": 199,
+        "clausura": 188,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": 9,
+        "clausura": 19,
+        "common": 28
+      },
+      "matchesPlayed": 6,
+      "teamCostTotal": 599,
+      "teamCostAvg": 99.83,
+      "subsUsedCount": 11,
+      "subsTotalCount": 31,
+      "subsCoef": 35.48,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231516",
+        "230711",
+        "230883",
+        "230879",
+        "231432",
+        "231278",
+        "230697",
+        "231057",
+        "231129",
+        "231273",
+        "230746",
+        "230478",
+        "231290",
+        "230769",
+        "231776",
+        "231368",
+        "231515",
+        "230555",
+        "230867",
+        "231501",
+        "230532",
+        "230624",
+        "230863",
+        "231592",
+        "230877"
+      ],
+      "portugezePoints": 38,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 83,
+      "prizeMaxFoInLosedTour": 75,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 2,
+      "prizeMaxLosedDiff": 6,
+      "cup": {
+        "fo": 207,
+        "missed_fo": 188,
+        "diff_fo": 19,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          20,
+          5,
+          -6
+        ],
+        "standings": [
+          9,
+          7,
+          8
+        ],
+        "lowest_winning_pos_diff": -11
+      }
+    }
+  },
+  {
+    "id": "1116848321",
+    "score": 520,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 6,
+      "Apertura": 30,
+      "CommonFO": 5,
+      "ByScore": 5
+    },
+    "results": {
+      "wins": {
+        "apertura": 0,
+        "clausura": 4,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 12,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 333,
+        "common": 520
+      },
+      "missed_fo": {
+        "apertura": 221,
+        "clausura": 303,
+        "common": 524
+      },
+      "diff_fo": {
+        "apertura": -34,
+        "clausura": 30,
+        "common": -4
+      },
+      "matchesPlayed": 8,
+      "teamCostTotal": 798,
+      "teamCostAvg": 99.75,
+      "subsUsedCount": 33,
+      "subsTotalCount": 43,
+      "subsCoef": 76.74,
+      "uniqueUsedPlayers": [
+        "230529",
+        "230884",
+        "231515",
+        "231281",
+        "231509",
+        "231278",
+        "230697",
+        "230865",
+        "230614",
+        "230696",
+        "231475",
+        "230935",
+        "231027",
+        "230634",
+        "231227",
+        "230862",
+        "230701",
+        "230549",
+        "231195",
+        "230624",
+        "230871",
+        "231114",
+        "230980",
+        "230632",
+        "231514",
+        "230898",
+        "231692",
+        "230885",
+        "230425",
+        "230536",
+        "231057",
+        "230555",
+        "231501",
+        "231592",
+        "230863",
+        "230527",
+        "231500",
+        "230867",
+        "231504",
+        "230893",
+        "230551",
+        "230883",
+        "230870"
+      ],
+      "portugezePoints": 26,
+      "larinPoints": 5,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 85,
+      "prizeMaxFoInLosedTour": 75,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 4,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 4,
+      "prizeMaxStoppedNoLoseStrike": 5,
+      "prizeMaxLosedDiff": 17,
+      "cup": {
+        "fo": 333,
+        "missed_fo": 303,
+        "diff_fo": 30,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 6,
+        "diff_fo_arr": [
+          4,
+          8,
+          9,
+          10,
+          -1
+        ],
+        "standings": [
+          18,
+          15,
+          14,
+          13,
+          5
+        ],
+        "lowest_winning_pos_diff": 17
+      }
+    }
+  },
+  {
+    "id": "1113104848",
+    "score": 485,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 7,
+      "Apertura": 28,
+      "CommonFO": 21,
+      "ByScore": 21
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 3,
+        "common": 4
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 2,
+        "common": 4
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 9,
+        "common": 12
+      },
+      "fo": {
+        "apertura": 217,
+        "clausura": 268,
+        "common": 485
+      },
+      "missed_fo": {
+        "apertura": 266,
+        "clausura": 283,
+        "common": 549
+      },
+      "diff_fo": {
+        "apertura": -49,
+        "clausura": -15,
+        "common": -64
+      },
+      "matchesPlayed": 8,
+      "teamCostTotal": 798.5,
+      "teamCostAvg": 99.81,
+      "subsUsedCount": 39,
+      "subsTotalCount": 43,
+      "subsCoef": 90.7,
+      "uniqueUsedPlayers": [
+        "231195",
+        "231288",
+        "230580",
+        "230880",
+        "231489",
+        "230878",
+        "231281",
+        "230698",
+        "230697",
+        "231184",
+        "231502",
+        "231367",
+        "230967",
+        "231078",
+        "231089",
+        "230618",
+        "231515",
+        "230624",
+        "230840",
+        "231132",
+        "231057",
+        "231066",
+        "230632",
+        "230695",
+        "230517",
+        "230513",
+        "230527",
+        "231193",
+        "231592",
+        "230990",
+        "231094",
+        "231086",
+        "230912",
+        "231364",
+        "231061",
+        "231114",
+        "230877",
+        "230883",
+        "230867",
+        "230525",
+        "230529",
+        "231499",
+        "230548",
+        "231514",
+        "230532",
+        "231320",
+        "230870",
+        "230862",
+        "230552",
+        "230871",
+        "230649"
+      ],
+      "portugezePoints": 15,
+      "larinPoints": 0,
+      "prizeMinWins": 2,
+      "prizeMaxFoInTour": 88,
+      "prizeMaxFoInLosedTour": 75,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 4,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 4,
+      "prizeMaxStoppedNoLoseStrike": 4,
+      "prizeMaxLosedDiff": 27,
+      "cup": {
+        "fo": 268,
+        "missed_fo": 283,
+        "diff_fo": -15,
+        "matchesPlayed": 5,
+        "avg_diff_fo": -3,
+        "diff_fo_arr": [
+          2,
+          3,
+          9,
+          -27,
+          -2
+        ],
+        "standings": [
+          15,
+          14,
+          17,
+          19,
+          21
+        ],
+        "lowest_winning_pos_diff": 6
+      }
+    }
+  },
+  {
+    "id": "73116796",
+    "score": 505,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 8,
+      "Apertura": 1,
+      "CommonFO": 15,
+      "ByScore": 15
+    },
+    "results": {
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 210,
+        "clausura": 59,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 155,
+        "clausura": 61,
+        "common": 216
+      },
+      "diff_fo": {
+        "apertura": 55,
+        "clausura": -2,
+        "common": 53
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 398.5,
+      "teamCostAvg": 99.63,
+      "subsUsedCount": 19,
+      "subsTotalCount": 23,
+      "subsCoef": 82.61,
+      "uniqueUsedPlayers": [
+        "230555",
+        "231289",
+        "230880",
+        "230709",
+        "230936",
+        "231648",
+        "231592",
+        "230473",
+        "230697",
+        "231184",
+        "231107",
+        "230764",
+        "230491",
+        "230832",
+        "230751",
+        "231756",
+        "231129",
+        "231516",
+        "230624",
+        "230995",
+        "231057",
+        "231016",
+        "231142",
+        "231515",
+        "231370",
+        "230527",
+        "230631",
+        "231584",
+        "230541",
+        "230980",
+        "231353",
+        "230721",
+        "230898",
+        "230914",
+        "231061",
+        "231288",
+        "230743",
+        "231499",
+        "230525",
+        "231195",
+        "230867",
+        "230518",
+        "231494",
+        "230804",
+        "231500",
+        "231450",
+        "231512",
+        "230862",
+        "230871",
+        "230863",
+        "230877",
+        "231498"
+      ],
+      "portugezePoints": 6,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 85,
+      "prizeMaxFoInLosedTour": 59,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 2,
+      "prizeMaxLosedDiff": 2,
+      "cup": {
+        "fo": 59,
+        "missed_fo": 61,
+        "diff_fo": -2,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -2
+        ],
+        "standings": [
+          20
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "152317185",
+    "score": 506,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 9,
+      "Apertura": 2,
+      "CommonFO": 14,
+      "ByScore": 14
+    },
+    "results": {
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 234,
+        "clausura": 81,
+        "common": 315
+      },
+      "missed_fo": {
+        "apertura": 190,
+        "clausura": 85,
+        "common": 275
+      },
+      "diff_fo": {
+        "apertura": 44,
+        "clausura": -4,
+        "common": 40
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 398.5,
+      "teamCostAvg": 99.63,
+      "subsUsedCount": 21,
+      "subsTotalCount": 23,
+      "subsCoef": 91.3,
+      "uniqueUsedPlayers": [
+        "231516",
+        "230555",
+        "231195",
+        "230712",
+        "230880",
+        "231281",
+        "230471",
+        "230571",
+        "230697",
+        "231129",
+        "231276",
+        "230784",
+        "230741",
+        "230938",
+        "231294",
+        "230493",
+        "231515",
+        "230764",
+        "230633",
+        "231061",
+        "230632",
+        "231142",
+        "230631",
+        "230867",
+        "231514",
+        "231359",
+        "230695",
+        "230914",
+        "231358",
+        "230746",
+        "230832",
+        "230429",
+        "230744",
+        "230529",
+        "230536",
+        "231092",
+        "230924",
+        "230565",
+        "231181",
+        "230566",
+        "230556",
+        "230533",
+        "231501",
+        "231499",
+        "230554",
+        "230518",
+        "231494",
+        "230541",
+        "231492",
+        "230877",
+        "230506"
+      ],
+      "portugezePoints": 40,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 84,
+      "prizeMaxFoInLosedTour": 81,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 4,
+      "cup": {
+        "fo": 81,
+        "missed_fo": 85,
+        "diff_fo": -4,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -4
+        ],
+        "standings": [
+          1
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1111769718",
+    "score": 485,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 10,
+      "Apertura": 9,
+      "CommonFO": 22,
+      "ByScore": 22
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 218,
+        "clausura": 135,
+        "common": 353
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 135,
+        "common": 326
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": 0,
+        "common": 27
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 496,
+      "teamCostAvg": 99.2,
+      "subsUsedCount": 25,
+      "subsTotalCount": 27,
+      "subsCoef": 92.59,
+      "uniqueUsedPlayers": [
+        "231515",
+        "230633",
+        "231195",
+        "230712",
+        "231288",
+        "231432",
+        "231592",
+        "230697",
+        "230868",
+        "231184",
+        "230836",
+        "230898",
+        "230832",
+        "231144",
+        "230769",
+        "231668",
+        "231278",
+        "230555",
+        "231290",
+        "231333",
+        "231061",
+        "231016",
+        "231142",
+        "230521",
+        "231516",
+        "230552",
+        "230862",
+        "231359",
+        "230914",
+        "230632",
+        "230631",
+        "230532",
+        "231692",
+        "230429",
+        "230885",
+        "230744",
+        "230527",
+        "230536",
+        "231500",
+        "231589",
+        "230863",
+        "230566",
+        "230871",
+        "230883",
+        "230529",
+        "231024",
+        "230548",
+        "230518",
+        "231504",
+        "231494",
+        "230884",
+        "230879"
+      ],
+      "portugezePoints": 8,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 86,
+      "prizeMaxFoInLosedTour": 62,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 2,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 2,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 11,
+      "cup": {
+        "fo": 135,
+        "missed_fo": 135,
+        "diff_fo": 0,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          3,
+          -3
+        ],
+        "standings": [
+          9,
+          9
+        ],
+        "lowest_winning_pos_diff": -16
+      }
+    }
+  },
+  {
+    "id": "144762187",
+    "score": 509,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 11,
+      "Apertura": 3,
+      "CommonFO": 9,
+      "ByScore": 9
+    },
+    "results": {
+      "wins": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 9,
+        "clausura": 0,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 209,
+        "clausura": 79,
+        "common": 288
+      },
+      "missed_fo": {
+        "apertura": 182,
+        "clausura": 80,
+        "common": 262
+      },
+      "diff_fo": {
+        "apertura": 27,
+        "clausura": -1,
+        "common": 26
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 398,
+      "teamCostAvg": 99.5,
+      "subsUsedCount": 15,
+      "subsTotalCount": 23,
+      "subsCoef": 65.22,
+      "uniqueUsedPlayers": [
+        "231515",
+        "230712",
+        "230883",
+        "231288",
+        "230880",
+        "231066",
+        "231647",
+        "230571",
+        "230697",
+        "231057",
+        "231274",
+        "231495",
+        "231456",
+        "231624",
+        "231437",
+        "230690",
+        "230529",
+        "230892",
+        "230990",
+        "230836",
+        "231129",
+        "231061",
+        "231142",
+        "231107",
+        "230555",
+        "231345",
+        "230721",
+        "231353",
+        "230898",
+        "230425",
+        "230536",
+        "230579",
+        "230867",
+        "231589",
+        "230871",
+        "231592",
+        "230518",
+        "230527",
+        "230769",
+        "231494",
+        "230539",
+        "231516",
+        "230746",
+        "231498",
+        "230870",
+        "230506",
+        "231501"
+      ],
+      "portugezePoints": 7,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 79,
+      "prizeMaxFoInLosedTour": 79,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 1,
+      "cup": {
+        "fo": 79,
+        "missed_fo": 80,
+        "diff_fo": -1,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -1
+        ],
+        "standings": [
+          11
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1116144526",
+    "score": 499,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 12,
+      "Apertura": 21,
+      "CommonFO": 16,
+      "ByScore": 16
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 198,
+        "clausura": 194,
+        "common": 392
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 187,
+        "common": 387
+      },
+      "diff_fo": {
+        "apertura": -2,
+        "clausura": 7,
+        "common": 5
+      },
+      "matchesPlayed": 6,
+      "teamCostTotal": 597.5,
+      "teamCostAvg": 99.58,
+      "subsUsedCount": 13,
+      "subsTotalCount": 31,
+      "subsCoef": 41.94,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231195",
+        "230712",
+        "231288",
+        "231281",
+        "231432",
+        "231648",
+        "230697",
+        "230865",
+        "230979",
+        "231181",
+        "231641",
+        "231078",
+        "231649",
+        "231147",
+        "230892",
+        "230532",
+        "230555",
+        "230527",
+        "230518",
+        "231501",
+        "230862",
+        "231353",
+        "231132",
+        "230981",
+        "231516",
+        "230867",
+        "231096",
+        "230879",
+        "231515",
+        "230510",
+        "230893"
+      ],
+      "portugezePoints": 46,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 77,
+      "prizeMaxFoInLosedTour": 63,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 4,
+      "prizeMaxLosedDiff": 9,
+      "cup": {
+        "fo": 194,
+        "missed_fo": 187,
+        "diff_fo": 7,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          5,
+          11,
+          -9
+        ],
+        "standings": [
+          16,
+          11,
+          19
+        ],
+        "lowest_winning_pos_diff": 7
+      }
+    }
+  },
+  {
+    "id": "1111051849",
+    "score": 547,
+    "isMartin": 1,
+    "isMartinWC": 1,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 13,
+      "Apertura": 22,
+      "CommonFO": 1,
+      "ByScore": 1
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 2,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 6,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 215,
+        "clausura": 221,
+        "common": 436
+      },
+      "missed_fo": {
+        "apertura": 219,
+        "clausura": 213,
+        "common": 432
+      },
+      "diff_fo": {
+        "apertura": -4,
+        "clausura": 8,
+        "common": 4
+      },
+      "matchesPlayed": 6,
+      "teamCostTotal": 598.5,
+      "teamCostAvg": 99.75,
+      "subsUsedCount": 13,
+      "subsTotalCount": 31,
+      "subsCoef": 41.94,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231515",
+        "230713",
+        "230883",
+        "231489",
+        "231281",
+        "231592",
+        "230697",
+        "230867",
+        "231583",
+        "230458",
+        "231177",
+        "230898",
+        "230478",
+        "230769",
+        "230532",
+        "230624",
+        "231513",
+        "230537",
+        "231066",
+        "231142",
+        "230527",
+        "231509",
+        "231057",
+        "230552",
+        "230536",
+        "230877",
+        "231504",
+        "230871"
+      ],
+      "portugezePoints": 3,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 87,
+      "prizeMaxFoInLosedTour": 74,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 3,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 9,
+      "cup": {
+        "fo": 221,
+        "missed_fo": 213,
+        "diff_fo": 8,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          15,
+          2,
+          -9
+        ],
+        "standings": [
+          3,
+          1,
+          1
+        ],
+        "lowest_winning_pos_diff": -1
+      }
+    }
+  },
+  {
+    "id": "1116848369",
+    "score": 491,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 14,
+      "Apertura": 10,
+      "CommonFO": 20,
+      "ByScore": 20
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 3,
+        "common": 9
+      },
+      "fo": {
+        "apertura": 225,
+        "clausura": 111,
+        "common": 336
+      },
+      "missed_fo": {
+        "apertura": 211,
+        "clausura": 131,
+        "common": 342
+      },
+      "diff_fo": {
+        "apertura": 14,
+        "clausura": -20,
+        "common": -6
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 499,
+      "teamCostAvg": 99.8,
+      "subsUsedCount": 20,
+      "subsTotalCount": 27,
+      "subsCoef": 74.07,
+      "uniqueUsedPlayers": [
+        "231515",
+        "231195",
+        "231289",
+        "230712",
+        "230882",
+        "231648",
+        "230697",
+        "230867",
+        "231184",
+        "231100",
+        "231583",
+        "230746",
+        "230651",
+        "230832",
+        "231197",
+        "231670",
+        "230624",
+        "231516",
+        "230632",
+        "231057",
+        "231061",
+        "231000",
+        "231142",
+        "230541",
+        "231514",
+        "230555",
+        "231592",
+        "231353",
+        "230936",
+        "230990",
+        "231359",
+        "230924",
+        "230429",
+        "230584",
+        "230425",
+        "230527",
+        "230552",
+        "231494",
+        "231504",
+        "230529",
+        "230504",
+        "230863",
+        "230518",
+        "230536",
+        "231493",
+        "230553",
+        "231497",
+        "231513",
+        "230544"
+      ],
+      "portugezePoints": 3,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 82,
+      "prizeMaxFoInLosedTour": 78,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 2,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 2,
+      "prizeMaxStoppedNoLoseStrike": 2,
+      "prizeMaxLosedDiff": 24,
+      "cup": {
+        "fo": 111,
+        "missed_fo": 131,
+        "diff_fo": -20,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          4,
+          -24
+        ],
+        "standings": [
+          7,
+          16
+        ],
+        "lowest_winning_pos_diff": -23
+      }
+    }
+  },
+  {
+    "id": "1028890564",
+    "score": 509,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 15,
+      "Apertura": 13,
+      "CommonFO": 10,
+      "ByScore": 10
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 5,
+        "clausura": 3,
+        "common": 8
+      },
+      "fo": {
+        "apertura": 227,
+        "clausura": 138,
+        "common": 365
+      },
+      "missed_fo": {
+        "apertura": 225,
+        "clausura": 145,
+        "common": 370
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": -7,
+        "common": -5
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 498.5,
+      "teamCostAvg": 99.7,
+      "subsUsedCount": 8,
+      "subsTotalCount": 27,
+      "subsCoef": 29.63,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231515",
+        "231516",
+        "230990",
+        "231432",
+        "231648",
+        "230618",
+        "230697",
+        "231129",
+        "231276",
+        "231583",
+        "231633",
+        "230746",
+        "230478",
+        "231400",
+        "231660",
+        "231359",
+        "230867",
+        "231489",
+        "231501",
+        "230862",
+        "231061",
+        "230579",
+        "230565",
+        "230555",
+        "230536",
+        "231290",
+        "230539",
+        "231499",
+        "231494",
+        "230527"
+      ],
+      "portugezePoints": 2,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 88,
+      "prizeMaxFoInLosedTour": 59,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 4,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 11,
+      "cup": {
+        "fo": 138,
+        "missed_fo": 145,
+        "diff_fo": -7,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          4,
+          -11
+        ],
+        "standings": [
+          2,
+          4
+        ],
+        "lowest_winning_pos_diff": -27
+      }
+    }
+  },
+  {
+    "id": "1111685266",
+    "score": 496,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 16,
+      "Apertura": 6,
+      "CommonFO": 17,
+      "ByScore": 17
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "points": {
+        "apertura": 7,
+        "clausura": 0,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 68,
+        "common": 298
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 70,
+        "common": 267
+      },
+      "diff_fo": {
+        "apertura": 33,
+        "clausura": -2,
+        "common": 31
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 399.5,
+      "teamCostAvg": 99.88,
+      "subsUsedCount": 15,
+      "subsTotalCount": 23,
+      "subsCoef": 65.22,
+      "uniqueUsedPlayers": [
+        "231516",
+        "230632",
+        "231195",
+        "230989",
+        "230576",
+        "230708",
+        "231432",
+        "230697",
+        "230867",
+        "231273",
+        "231276",
+        "231354",
+        "231455",
+        "230641",
+        "231024",
+        "231621",
+        "230880",
+        "230442",
+        "230885",
+        "230695",
+        "230529",
+        "230527",
+        "230532",
+        "231515",
+        "231756",
+        "230517",
+        "231353",
+        "230898",
+        "230425",
+        "230624",
+        "231501",
+        "230662",
+        "231198",
+        "231191",
+        "231057",
+        "231507",
+        "230506",
+        "231494",
+        "231514",
+        "230518",
+        "230811",
+        "230552",
+        "230555",
+        "230876",
+        "230877",
+        "230541"
+      ],
+      "portugezePoints": 39,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 90,
+      "prizeMaxFoInLosedTour": 68,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 2,
+      "cup": {
+        "fo": 68,
+        "missed_fo": 70,
+        "diff_fo": -2,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -2
+        ],
+        "standings": [
+          5
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1113412675",
+    "score": 492,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 17,
+      "Apertura": 29,
+      "CommonFO": 19,
+      "ByScore": 19
+    },
+    "results": {
+      "wins": {
+        "apertura": 0,
+        "clausura": 2,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 7,
+        "common": 7
+      },
+      "fo": {
+        "apertura": 177,
+        "clausura": 192,
+        "common": 369
+      },
+      "missed_fo": {
+        "apertura": 207,
+        "clausura": 171,
+        "common": 378
+      },
+      "diff_fo": {
+        "apertura": -30,
+        "clausura": 21,
+        "common": -9
+      },
+      "matchesPlayed": 6,
+      "teamCostTotal": 598.5,
+      "teamCostAvg": 99.75,
+      "subsUsedCount": 29,
+      "subsTotalCount": 31,
+      "subsCoef": 93.55,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231195",
+        "231289",
+        "230883",
+        "230990",
+        "231432",
+        "231595",
+        "230473",
+        "230697",
+        "231274",
+        "231583",
+        "230746",
+        "230478",
+        "231290",
+        "230769",
+        "231730",
+        "230868",
+        "231372",
+        "230712",
+        "231756",
+        "230884",
+        "231288",
+        "230980",
+        "231515",
+        "231514",
+        "230555",
+        "231359",
+        "231589",
+        "230517",
+        "231276",
+        "230527",
+        "230695",
+        "230898",
+        "230885",
+        "230429",
+        "230740",
+        "230624",
+        "230867",
+        "231061",
+        "231501",
+        "230536",
+        "230863",
+        "231058",
+        "231507",
+        "230518",
+        "230541",
+        "231516"
+      ],
+      "portugezePoints": 26,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 71,
+      "prizeMaxFoInLosedTour": 71,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 2,
+      "prizeCurrentNoLoseStrike": 3,
+      "prizeMaxNoLoseStrike": 3,
+      "prizeMaxStoppedNoLoseStrike": 3,
+      "prizeMaxLosedDiff": 11,
+      "cup": {
+        "fo": 192,
+        "missed_fo": 171,
+        "diff_fo": 21,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          2,
+          19,
+          0
+        ],
+        "standings": [
+          28,
+          26,
+          25
+        ],
+        "lowest_winning_pos_diff": 23
+      }
+    }
+  },
+  {
+    "id": "1115308799",
+    "score": 509,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 18,
+      "Apertura": 7,
+      "CommonFO": 11,
+      "ByScore": 11
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 237,
+        "clausura": 69,
+        "common": 306
+      },
+      "missed_fo": {
+        "apertura": 195,
+        "clausura": 75,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": 42,
+        "clausura": -6,
+        "common": 36
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 396,
+      "teamCostAvg": 99,
+      "subsUsedCount": 20,
+      "subsTotalCount": 23,
+      "subsCoef": 86.96,
+      "uniqueUsedPlayers": [
+        "231515",
+        "231516",
+        "231195",
+        "231289",
+        "231489",
+        "231592",
+        "230697",
+        "230867",
+        "231752",
+        "231180",
+        "231583",
+        "230651",
+        "231025",
+        "230634",
+        "230486",
+        "231753",
+        "230555",
+        "230632",
+        "231029",
+        "231002",
+        "230529",
+        "231061",
+        "231016",
+        "230695",
+        "231514",
+        "230516",
+        "231353",
+        "230541",
+        "230624",
+        "230527",
+        "230720",
+        "230662",
+        "230885",
+        "230425",
+        "230746",
+        "231057",
+        "230536",
+        "230863",
+        "231456",
+        "230548",
+        "230518",
+        "230886",
+        "231504",
+        "230884",
+        "230879",
+        "230553",
+        "230551",
+        "230874"
+      ],
+      "portugezePoints": 3,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 92,
+      "prizeMaxFoInLosedTour": 69,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 2,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 2,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 6,
+      "cup": {
+        "fo": 69,
+        "missed_fo": 75,
+        "diff_fo": -6,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -6
+        ],
+        "standings": [
+          2
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1116778891",
+    "score": 525,
+    "isMartin": 1,
+    "isMartinWC": 1,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 19,
+      "Apertura": 19,
+      "CommonFO": 4,
+      "ByScore": 4
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 3,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 190,
+        "clausura": 145,
+        "common": 335
+      },
+      "missed_fo": {
+        "apertura": 188,
+        "clausura": 129,
+        "common": 317
+      },
+      "diff_fo": {
+        "apertura": 2,
+        "clausura": 16,
+        "common": 18
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 500,
+      "teamCostAvg": 100,
+      "subsUsedCount": 22,
+      "subsTotalCount": 27,
+      "subsCoef": 81.48,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231515",
+        "231516",
+        "231288",
+        "230990",
+        "231542",
+        "231278",
+        "230517",
+        "231129",
+        "230458",
+        "231668",
+        "230746",
+        "230478",
+        "231290",
+        "230769",
+        "230701",
+        "230442",
+        "230697",
+        "231195",
+        "231276",
+        "230755",
+        "230555",
+        "231345",
+        "230867",
+        "230863",
+        "230898",
+        "231514",
+        "230527",
+        "231692",
+        "230887",
+        "230885",
+        "230425",
+        "231092",
+        "231240",
+        "230536",
+        "230565",
+        "231592",
+        "231057",
+        "230883",
+        "230518",
+        "231504",
+        "231499",
+        "230871",
+        "230877",
+        "230870",
+        "230552"
+      ],
+      "portugezePoints": 24,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 81,
+      "prizeMaxFoInLosedTour": 66,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 20,
+      "cup": {
+        "fo": 145,
+        "missed_fo": 129,
+        "diff_fo": 16,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          21,
+          -5
+        ],
+        "standings": [
+          19,
+          18
+        ],
+        "lowest_winning_pos_diff": 7
+      }
+    }
+  },
+  {
+    "id": "1113269933",
+    "score": 520,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 20,
+      "Apertura": 8,
+      "CommonFO": 6,
+      "ByScore": 6
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 226,
+        "clausura": 60,
+        "common": 286
+      },
+      "missed_fo": {
+        "apertura": 197,
+        "clausura": 81,
+        "common": 278
+      },
+      "diff_fo": {
+        "apertura": 29,
+        "clausura": -21,
+        "common": 8
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 400,
+      "teamCostAvg": 100,
+      "subsUsedCount": 22,
+      "subsTotalCount": 23,
+      "subsCoef": 95.65,
+      "uniqueUsedPlayers": [
+        "231515",
+        "231516",
+        "231289",
+        "230711",
+        "230882",
+        "231648",
+        "231114",
+        "230697",
+        "230867",
+        "231583",
+        "231668",
+        "230531",
+        "231633",
+        "230478",
+        "230769",
+        "230914",
+        "230529",
+        "231756",
+        "231292",
+        "231129",
+        "231061",
+        "231142",
+        "230632",
+        "230695",
+        "231589",
+        "230541",
+        "230510",
+        "231514",
+        "230555",
+        "230980",
+        "230532",
+        "230527",
+        "231132",
+        "231353",
+        "230429",
+        "230744",
+        "230883",
+        "230746",
+        "230863",
+        "230565",
+        "230552",
+        "231504",
+        "230518",
+        "231502",
+        "231501",
+        "230665"
+      ],
+      "portugezePoints": 14,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 86,
+      "prizeMaxFoInLosedTour": 60,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 2,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 2,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 21,
+      "cup": {
+        "fo": 60,
+        "missed_fo": 81,
+        "diff_fo": -21,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -21
+        ],
+        "standings": [
+          12
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1061493572",
+    "score": 460,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 21,
+      "Apertura": 12,
+      "CommonFO": 26,
+      "ByScore": 26
+    },
+    "results": {
+      "wins": {
+        "apertura": 2,
+        "clausura": 0,
+        "common": 2
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 6,
+        "clausura": 0,
+        "common": 6
+      },
+      "fo": {
+        "apertura": 207,
+        "clausura": 53,
+        "common": 260
+      },
+      "missed_fo": {
+        "apertura": 210,
+        "clausura": 60,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -3,
+        "clausura": -7,
+        "common": -10
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 396.5,
+      "teamCostAvg": 99.13,
+      "subsUsedCount": 18,
+      "subsTotalCount": 23,
+      "subsCoef": 78.26,
+      "uniqueUsedPlayers": [
+        "231516",
+        "231195",
+        "230711",
+        "231288",
+        "230882",
+        "230990",
+        "231432",
+        "230697",
+        "230868",
+        "231583",
+        "231581",
+        "230898",
+        "230453",
+        "230662",
+        "230425",
+        "230529",
+        "231278",
+        "230632",
+        "231029",
+        "231061",
+        "231142",
+        "230555",
+        "231515",
+        "230579",
+        "230541",
+        "230695",
+        "230527",
+        "230532",
+        "230746",
+        "230885",
+        "230478",
+        "231500",
+        "230624",
+        "231353",
+        "230880",
+        "230862",
+        "230518",
+        "230877",
+        "231494",
+        "231514",
+        "230484",
+        "230769"
+      ],
+      "portugezePoints": 8,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 93,
+      "prizeMaxFoInLosedTour": 53,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 2,
+      "prizeMaxLosedDiff": 7,
+      "cup": {
+        "fo": 53,
+        "missed_fo": 60,
+        "diff_fo": -7,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -7
+        ],
+        "standings": [
+          24
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1096489838",
+    "score": 508,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 22,
+      "Apertura": 14,
+      "CommonFO": 13,
+      "ByScore": 13
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 1,
+        "common": 5
+      },
+      "fo": {
+        "apertura": 213,
+        "clausura": 67,
+        "common": 280
+      },
+      "missed_fo": {
+        "apertura": 181,
+        "clausura": 67,
+        "common": 248
+      },
+      "diff_fo": {
+        "apertura": 32,
+        "clausura": 0,
+        "common": 32
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 399.5,
+      "teamCostAvg": 99.88,
+      "subsUsedCount": 18,
+      "subsTotalCount": 23,
+      "subsCoef": 78.26,
+      "uniqueUsedPlayers": [
+        "231516",
+        "231195",
+        "231289",
+        "230711",
+        "230989",
+        "231432",
+        "231648",
+        "230571",
+        "230697",
+        "230862",
+        "231581",
+        "231080",
+        "230782",
+        "230832",
+        "231147",
+        "231515",
+        "231278",
+        "230624",
+        "230746",
+        "231129",
+        "231015",
+        "231142",
+        "231729",
+        "230695",
+        "231353",
+        "230555",
+        "230632",
+        "230541",
+        "230527",
+        "230980",
+        "230518",
+        "230885",
+        "230425",
+        "231589",
+        "230536",
+        "231507",
+        "230880",
+        "231504",
+        "230665",
+        "231494",
+        "230525",
+        "230898",
+        "231492",
+        "231513",
+        "231493",
+        "230879",
+        "230528"
+      ],
+      "portugezePoints": 7,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 81,
+      "prizeMaxFoInLosedTour": 52,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 1,
+      "prizeMaxNoLoseStrike": 2,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 10,
+      "cup": {
+        "fo": 67,
+        "missed_fo": 67,
+        "diff_fo": 0,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          0
+        ],
+        "standings": [
+          14
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1115479394",
+    "score": 528,
+    "isMartin": 1,
+    "isMartinWC": 1,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 23,
+      "Apertura": 17,
+      "CommonFO": 2,
+      "ByScore": 2
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 230,
+        "clausura": 143,
+        "common": 373
+      },
+      "missed_fo": {
+        "apertura": 220,
+        "clausura": 145,
+        "common": 365
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -2,
+        "common": 8
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 499,
+      "teamCostAvg": 99.8,
+      "subsUsedCount": 17,
+      "subsTotalCount": 27,
+      "subsCoef": 62.96,
+      "uniqueUsedPlayers": [
+        "231515",
+        "230632",
+        "230527",
+        "231288",
+        "231489",
+        "230626",
+        "231542",
+        "230571",
+        "231057",
+        "231276",
+        "231503",
+        "230746",
+        "230478",
+        "231290",
+        "230769",
+        "230867",
+        "231432",
+        "231066",
+        "230844",
+        "231129",
+        "231193",
+        "230898",
+        "231151",
+        "231507",
+        "231353",
+        "230438",
+        "231692",
+        "230425",
+        "230610",
+        "230980",
+        "230744",
+        "230883",
+        "231494",
+        "231195",
+        "230576",
+        "230529",
+        "231501",
+        "231509",
+        "230877",
+        "230518",
+        "231504",
+        "230863"
+      ],
+      "portugezePoints": 29,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 95,
+      "prizeMaxFoInLosedTour": 81,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 7,
+      "cup": {
+        "fo": 143,
+        "missed_fo": 145,
+        "diff_fo": -2,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          0,
+          -2
+        ],
+        "standings": [
+          6,
+          2
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1058102914",
+    "score": 442,
+    "isMartin": 1,
+    "isMartinWC": 1,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 24,
+      "Apertura": 15,
+      "CommonFO": 28,
+      "ByScore": 28
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "loses": {
+        "apertura": 1,
+        "clausura": 1,
+        "common": 2
+      },
+      "points": {
+        "apertura": 4,
+        "clausura": 0,
+        "common": 4
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 83,
+        "common": 283
+      },
+      "diff_fo": {
+        "apertura": -1,
+        "clausura": -20,
+        "common": -21
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 388.5,
+      "teamCostAvg": 97.13,
+      "subsUsedCount": 15,
+      "subsTotalCount": 23,
+      "subsCoef": 65.22,
+      "uniqueUsedPlayers": [
+        "231195",
+        "230527",
+        "231288",
+        "231193",
+        "231489",
+        "231432",
+        "230935",
+        "230571",
+        "231057",
+        "231277",
+        "231105",
+        "231704",
+        "230643",
+        "231378",
+        "230661",
+        "230697",
+        "230701",
+        "231680",
+        "231592",
+        "231516",
+        "231276",
+        "231756",
+        "231515",
+        "231514",
+        "230632",
+        "230924",
+        "230624",
+        "231359",
+        "231353",
+        "230579",
+        "230867",
+        "230883",
+        "230877",
+        "231504",
+        "230517",
+        "230665",
+        "231507",
+        "230871",
+        "230863",
+        "230525"
+      ],
+      "portugezePoints": 39,
+      "larinPoints": 30,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 76,
+      "prizeMaxFoInLosedTour": 63,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 2,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 20,
+      "cup": {
+        "fo": 63,
+        "missed_fo": 83,
+        "diff_fo": -20,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -20
+        ],
+        "standings": [
+          22
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1115416060",
+    "score": 430,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 25,
+      "Apertura": 18,
+      "CommonFO": 30,
+      "ByScore": 30
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 187,
+        "clausura": 70,
+        "common": 257
+      },
+      "missed_fo": {
+        "apertura": 177,
+        "clausura": 73,
+        "common": 250
+      },
+      "diff_fo": {
+        "apertura": 10,
+        "clausura": -3,
+        "common": 7
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 400,
+      "teamCostAvg": 100,
+      "subsUsedCount": 16,
+      "subsTotalCount": 23,
+      "subsCoef": 69.57,
+      "uniqueUsedPlayers": [
+        "230529",
+        "231289",
+        "230712",
+        "230883",
+        "230990",
+        "231489",
+        "230697",
+        "231276",
+        "231502",
+        "231527",
+        "231583",
+        "230746",
+        "230665",
+        "230478",
+        "231089",
+        "231515",
+        "231290",
+        "231142",
+        "231129",
+        "230541",
+        "231680",
+        "231353",
+        "231345",
+        "231514",
+        "230632",
+        "231500",
+        "231061",
+        "230755",
+        "230721",
+        "230750",
+        "230914",
+        "231114",
+        "230624",
+        "231231",
+        "231592",
+        "230867",
+        "230551"
+      ],
+      "portugezePoints": 42,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 70,
+      "prizeMaxFoInLosedTour": 70,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 6,
+      "cup": {
+        "fo": 70,
+        "missed_fo": 73,
+        "diff_fo": -3,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -3
+        ],
+        "standings": [
+          25
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "135066850",
+    "score": 442,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 26,
+      "Apertura": 20,
+      "CommonFO": 29,
+      "ByScore": 29
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 201,
+        "clausura": 72,
+        "common": 273
+      },
+      "missed_fo": {
+        "apertura": 200,
+        "clausura": 77,
+        "common": 277
+      },
+      "diff_fo": {
+        "apertura": 1,
+        "clausura": -5,
+        "common": -4
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 396,
+      "teamCostAvg": 99,
+      "subsUsedCount": 14,
+      "subsTotalCount": 23,
+      "subsCoef": 60.87,
+      "uniqueUsedPlayers": [
+        "231289",
+        "230713",
+        "230712",
+        "231288",
+        "230880",
+        "231648",
+        "230475",
+        "230511",
+        "231107",
+        "231584",
+        "231581",
+        "230510",
+        "230866",
+        "230741",
+        "231634",
+        "230632",
+        "231753",
+        "231515",
+        "230840",
+        "230695",
+        "231132",
+        "230867",
+        "231142",
+        "231516",
+        "231125",
+        "230541",
+        "230936",
+        "230746",
+        "230479",
+        "230877",
+        "231057",
+        "230576",
+        "231061"
+      ],
+      "portugezePoints": 6,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 76,
+      "prizeMaxFoInLosedTour": 76,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 5,
+      "cup": {
+        "fo": 72,
+        "missed_fo": 77,
+        "diff_fo": -5,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -5
+        ],
+        "standings": [
+          17
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1116086751",
+    "score": 514,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 27,
+      "Apertura": 23,
+      "CommonFO": 8,
+      "ByScore": 8
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 197,
+        "clausura": 72,
+        "common": 269
+      },
+      "missed_fo": {
+        "apertura": 206,
+        "clausura": 87,
+        "common": 293
+      },
+      "diff_fo": {
+        "apertura": -9,
+        "clausura": -15,
+        "common": -24
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 395.5,
+      "teamCostAvg": 98.88,
+      "subsUsedCount": 20,
+      "subsTotalCount": 23,
+      "subsCoef": 86.96,
+      "uniqueUsedPlayers": [
+        "231195",
+        "231289",
+        "230712",
+        "230883",
+        "231288",
+        "230882",
+        "231592",
+        "230697",
+        "231184",
+        "231580",
+        "230914",
+        "230477",
+        "231435",
+        "231292",
+        "231197",
+        "230633",
+        "231668",
+        "231515",
+        "230840",
+        "231129",
+        "231061",
+        "231016",
+        "231142",
+        "231514",
+        "230555",
+        "231114",
+        "231353",
+        "230624",
+        "230532",
+        "230541",
+        "230527",
+        "230924",
+        "230885",
+        "231151",
+        "230744",
+        "231500",
+        "231057",
+        "230646",
+        "231507",
+        "230863",
+        "231193",
+        "230877",
+        "230529",
+        "230551",
+        "231494",
+        "231501",
+        "230536",
+        "230521",
+        "230862",
+        "230898"
+      ],
+      "portugezePoints": 17,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 77,
+      "prizeMaxFoInLosedTour": 73,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 15,
+      "cup": {
+        "fo": 72,
+        "missed_fo": 87,
+        "diff_fo": -15,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -15
+        ],
+        "standings": [
+          20
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1068332740",
+    "score": 473,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 28,
+      "Apertura": 24,
+      "CommonFO": 24,
+      "ByScore": 24
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 174,
+        "clausura": 66,
+        "common": 240
+      },
+      "missed_fo": {
+        "apertura": 196,
+        "clausura": 70,
+        "common": 266
+      },
+      "diff_fo": {
+        "apertura": -22,
+        "clausura": -4,
+        "common": -26
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 396.5,
+      "teamCostAvg": 99.13,
+      "subsUsedCount": 17,
+      "subsTotalCount": 23,
+      "subsCoef": 73.91,
+      "uniqueUsedPlayers": [
+        "231516",
+        "231288",
+        "230525",
+        "231281",
+        "231542",
+        "231733",
+        "230571",
+        "230701",
+        "231057",
+        "231464",
+        "230614",
+        "231527",
+        "230623",
+        "231455",
+        "231583",
+        "230695",
+        "230555",
+        "231168",
+        "230425",
+        "230892",
+        "230980",
+        "231195",
+        "230765",
+        "230529",
+        "230862",
+        "231514",
+        "230527",
+        "230579",
+        "230532",
+        "230671",
+        "230898",
+        "230744",
+        "230867",
+        "231114",
+        "231589",
+        "231240",
+        "230536",
+        "231515",
+        "230871",
+        "230565",
+        "230877",
+        "230538",
+        "231504",
+        "231507",
+        "230551",
+        "231494",
+        "230887"
+      ],
+      "portugezePoints": 25,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 72,
+      "prizeMaxFoInLosedTour": 72,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 4,
+      "cup": {
+        "fo": 66,
+        "missed_fo": 70,
+        "diff_fo": -4,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -4
+        ],
+        "standings": [
+          30
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1116125876",
+    "score": 323,
+    "isMartin": 1,
+    "isMartinWC": 1,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 29,
+      "Apertura": 25,
+      "CommonFO": 32,
+      "ByScore": 32
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 168,
+        "clausura": 75,
+        "common": 243
+      },
+      "missed_fo": {
+        "apertura": 191,
+        "clausura": 79,
+        "common": 270
+      },
+      "diff_fo": {
+        "apertura": -23,
+        "clausura": -4,
+        "common": -27
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 399.5,
+      "teamCostAvg": 99.88,
+      "subsUsedCount": 18,
+      "subsTotalCount": 23,
+      "subsCoef": 78.26,
+      "uniqueUsedPlayers": [
+        "231516",
+        "230632",
+        "230711",
+        "230581",
+        "231287",
+        "231489",
+        "231432",
+        "230517",
+        "230697",
+        "230511",
+        "231527",
+        "231519",
+        "231407",
+        "230720",
+        "231651",
+        "230442",
+        "231515",
+        "230551",
+        "230597",
+        "231353",
+        "230898",
+        "230675",
+        "231142",
+        "230973",
+        "231096",
+        "231514",
+        "231359",
+        "230631",
+        "230980",
+        "231078",
+        "230992",
+        "230436",
+        "230425"
+      ],
+      "portugezePoints": 0,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 75,
+      "prizeMaxFoInLosedTour": 75,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 23,
+      "cup": {
+        "fo": 75,
+        "missed_fo": 79,
+        "diff_fo": -4,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -4
+        ],
+        "standings": [
+          29
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1115355124",
+    "score": 390,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 30,
+      "Apertura": 26,
+      "CommonFO": 31,
+      "ByScore": 31
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 171,
+        "clausura": 55,
+        "common": 226
+      },
+      "missed_fo": {
+        "apertura": 198,
+        "clausura": 67,
+        "common": 265
+      },
+      "diff_fo": {
+        "apertura": -27,
+        "clausura": -12,
+        "common": -39
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 397,
+      "teamCostAvg": 99.25,
+      "subsUsedCount": 4,
+      "subsTotalCount": 23,
+      "subsCoef": 17.39,
+      "uniqueUsedPlayers": [
+        "230884",
+        "231515",
+        "230632",
+        "231288",
+        "231281",
+        "231432",
+        "231542",
+        "230697",
+        "231057",
+        "231129",
+        "231089",
+        "230644",
+        "231309",
+        "230809",
+        "231440",
+        "230836",
+        "231359",
+        "230710",
+        "231142",
+        "231066",
+        "230578",
+        "230527",
+        "231195",
+        "230529",
+        "230518",
+        "230863",
+        "230555",
+        "230551",
+        "230803"
+      ],
+      "portugezePoints": 46,
+      "larinPoints": 0,
+      "prizeMinWins": 0,
+      "prizeMaxFoInTour": 75,
+      "prizeMaxFoInLosedTour": 55,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 0,
+      "prizeMaxLosedDiff": 12,
+      "cup": {
+        "fo": 55,
+        "missed_fo": 67,
+        "diff_fo": -12,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -12
+        ],
+        "standings": [
+          31
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "1033596919",
+    "score": 509,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 31,
+      "Apertura": 27,
+      "CommonFO": 12,
+      "ByScore": 12
+    },
+    "results": {
+      "wins": {
+        "apertura": 1,
+        "clausura": 0,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 2,
+        "clausura": 1,
+        "common": 3
+      },
+      "points": {
+        "apertura": 3,
+        "clausura": 0,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 199,
+        "clausura": 63,
+        "common": 262
+      },
+      "missed_fo": {
+        "apertura": 236,
+        "clausura": 75,
+        "common": 311
+      },
+      "diff_fo": {
+        "apertura": -37,
+        "clausura": -12,
+        "common": -49
+      },
+      "matchesPlayed": 4,
+      "teamCostTotal": 397,
+      "teamCostAvg": 99.25,
+      "subsUsedCount": 21,
+      "subsTotalCount": 23,
+      "subsCoef": 91.3,
+      "uniqueUsedPlayers": [
+        "231516",
+        "231195",
+        "230883",
+        "230876",
+        "231595",
+        "230571",
+        "230572",
+        "230700",
+        "231129",
+        "231276",
+        "231500",
+        "231113",
+        "231643",
+        "231633",
+        "231583",
+        "231168",
+        "230695",
+        "230614",
+        "230632",
+        "231132",
+        "230555",
+        "231124",
+        "231054",
+        "231515",
+        "231589",
+        "230863",
+        "230980",
+        "230527",
+        "230517",
+        "230990",
+        "230551",
+        "230510",
+        "230710",
+        "230532",
+        "231353",
+        "231107",
+        "231114",
+        "231501",
+        "230646",
+        "231057",
+        "231592",
+        "230867",
+        "231590",
+        "231499",
+        "230539",
+        "230862",
+        "230425"
+      ],
+      "portugezePoints": 23,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 83,
+      "prizeMaxFoInLosedTour": 63,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 1,
+      "prizeMaxLosedDiff": 13,
+      "cup": {
+        "fo": 63,
+        "missed_fo": 75,
+        "diff_fo": -12,
+        "matchesPlayed": 1,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -12
+        ],
+        "standings": [
+          22
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    }
+  },
+  {
+    "id": "151923911",
+    "score": 450,
+    "isMartin": 1,
+    "isMartinWC": 0,
+    "leagues": [],
+    "place_in_league": {
+      "Common": 32,
+      "Apertura": 31,
+      "CommonFO": 27,
+      "ByScore": 27
+    },
+    "results": {
+      "wins": {
+        "apertura": 0,
+        "clausura": 1,
+        "common": 1
+      },
+      "draws": {
+        "apertura": 0,
+        "clausura": 0,
+        "common": 0
+      },
+      "loses": {
+        "apertura": 3,
+        "clausura": 1,
+        "common": 4
+      },
+      "points": {
+        "apertura": 0,
+        "clausura": 3,
+        "common": 3
+      },
+      "fo": {
+        "apertura": 170,
+        "clausura": 120,
+        "common": 290
+      },
+      "missed_fo": {
+        "apertura": 226,
+        "clausura": 138,
+        "common": 364
+      },
+      "diff_fo": {
+        "apertura": -56,
+        "clausura": -18,
+        "common": -74
+      },
+      "matchesPlayed": 5,
+      "teamCostTotal": 499,
+      "teamCostAvg": 99.8,
+      "subsUsedCount": 18,
+      "subsTotalCount": 27,
+      "subsCoef": 66.67,
+      "uniqueUsedPlayers": [
+        "230884",
+        "231515",
+        "231516",
+        "231288",
+        "230550",
+        "230626",
+        "231281",
+        "230698",
+        "230536",
+        "230612",
+        "230696",
+        "230432",
+        "230938",
+        "231290",
+        "230834",
+        "230541",
+        "230844",
+        "231353",
+        "231142",
+        "230624",
+        "231359",
+        "230555",
+        "230632",
+        "230527",
+        "230695",
+        "230924",
+        "230887",
+        "230885",
+        "230425",
+        "230981",
+        "230990",
+        "231514",
+        "230919",
+        "230877",
+        "231494",
+        "231501",
+        "231504",
+        "230510",
+        "230518",
+        "231500",
+        "230646"
+      ],
+      "portugezePoints": 30,
+      "larinPoints": 0,
+      "prizeMinWins": 1,
+      "prizeMaxFoInTour": 80,
+      "prizeMaxFoInLosedTour": 71,
+      "prizeCurrentWinStrike": 0,
+      "prizeMaxWinStrike": 1,
+      "prizeCurrentNoLoseStrike": 0,
+      "prizeMaxNoLoseStrike": 1,
+      "prizeMaxStoppedNoLoseStrike": 3,
+      "prizeMaxLosedDiff": 19,
+      "cup": {
+        "fo": 120,
+        "missed_fo": 138,
+        "diff_fo": -18,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          1,
+          -19
+        ],
+        "standings": [
+          27,
+          29
+        ],
+        "lowest_winning_pos_diff": 16
+      }
+    }
+  }
+]

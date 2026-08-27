@@ -1,0 +1,1922 @@
+{
+  "config": {
+    "name": "Кубок",
+    "matchesTours": [
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      32,
+      36
+    ],
+    "matchesToursNames": [
+      "Отб",
+      "1/16",
+      "1/16 НС",
+      "1/8",
+      "1/8 НС",
+      "1/4",
+      "1/4 НС",
+      "1/2",
+      "1/2 НС",
+      "Финал ВС",
+      "Финал НС",
+      "Гранд-финал"
+    ],
+    "matches": [
+      [
+        {
+          "home": "1116848321",
+          "away": "1113227695",
+          "type": "up",
+          "home_score": 60,
+          "away_score": 44,
+          "result": 1
+        },
+        {
+          "home": "1024867435",
+          "away": "152317185",
+          "type": "up",
+          "home_score": 53,
+          "away_score": 59,
+          "result": 2
+        },
+        {
+          "home": "1116314918",
+          "away": "5275903",
+          "type": "up",
+          "home_score": 54,
+          "away_score": 46,
+          "result": 1
+        },
+        {
+          "home": "1095496719",
+          "away": "1071227986",
+          "type": "up",
+          "home_score": 50,
+          "away_score": 38,
+          "result": 1
+        },
+        {
+          "home": "1115479394",
+          "away": "1116851933",
+          "type": "up",
+          "home_score": 48,
+          "away_score": 48,
+          "result": 0
+        },
+        {
+          "home": "1039593659",
+          "away": "1063076888",
+          "type": "up",
+          "home_score": 53,
+          "away_score": 46,
+          "result": 1
+        },
+        {
+          "home": "1116139003",
+          "away": "1111685266",
+          "type": "up",
+          "home_score": 42,
+          "away_score": 54,
+          "result": 2
+        },
+        {
+          "home": "1116532842",
+          "away": "1076901343",
+          "type": "up",
+          "home_score": 46,
+          "away_score": 51,
+          "result": 2
+        },
+        {
+          "home": "1115355124",
+          "away": "1116843142",
+          "type": "up",
+          "home_score": 30,
+          "away_score": 45,
+          "result": 2
+        },
+        {
+          "home": "73116796",
+          "away": "1115308799",
+          "type": "up",
+          "home_score": 54,
+          "away_score": 62,
+          "result": 2
+        },
+        {
+          "home": "1061493572",
+          "away": "1113104848",
+          "type": "up",
+          "home_score": 61,
+          "away_score": 57,
+          "result": 1
+        },
+        {
+          "home": "1116782572",
+          "away": "1115416060",
+          "type": "up",
+          "home_score": 48,
+          "away_score": 38,
+          "result": 1
+        },
+        {
+          "home": "1116778891",
+          "away": "1071548719",
+          "type": "up",
+          "home_score": 44,
+          "away_score": 67,
+          "result": 2
+        },
+        {
+          "home": "1033596919",
+          "away": "1116843193",
+          "type": "up",
+          "home_score": 53,
+          "away_score": 59,
+          "result": 2
+        },
+        {
+          "home": "151923911",
+          "away": "1116314982",
+          "type": "up",
+          "home_score": 56,
+          "away_score": 53,
+          "result": 1
+        },
+        {
+          "home": "1116847210",
+          "away": "1111769718",
+          "type": "up",
+          "home_score": 31,
+          "away_score": 53,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1116848369",
+          "away": "1116848321",
+          "type": "up",
+          "home_score": 69,
+          "away_score": 59,
+          "result": 1
+        },
+        {
+          "home": "135066850",
+          "away": "152317185",
+          "type": "up",
+          "home_score": 54,
+          "away_score": 52,
+          "result": 1
+        },
+        {
+          "home": "1115413541",
+          "away": "1116314918",
+          "type": "up",
+          "home_score": 56,
+          "away_score": 37,
+          "result": 1
+        },
+        {
+          "home": "1116311079",
+          "away": "1095496719",
+          "type": "up",
+          "home_score": 65,
+          "away_score": 50,
+          "result": 1
+        },
+        {
+          "home": "1111051849",
+          "away": "1115479394",
+          "type": "up",
+          "home_score": 47,
+          "away_score": 62,
+          "result": 2
+        },
+        {
+          "home": "1116144526",
+          "away": "1039593659",
+          "type": "up",
+          "home_score": 54,
+          "away_score": 33,
+          "result": 1
+        },
+        {
+          "home": "1068332740",
+          "away": "1111685266",
+          "type": "up",
+          "home_score": 54,
+          "away_score": 63,
+          "result": 2
+        },
+        {
+          "home": "1058102914",
+          "away": "1076901343",
+          "type": "up",
+          "home_score": 58,
+          "away_score": 59,
+          "result": 2
+        },
+        {
+          "home": "1111024349",
+          "away": "1116843142",
+          "type": "up",
+          "home_score": 67,
+          "away_score": 60,
+          "result": 1
+        },
+        {
+          "home": "1116086751",
+          "away": "1115308799",
+          "type": "up",
+          "home_score": 50,
+          "away_score": 50,
+          "result": 0
+        },
+        {
+          "home": "1113412675",
+          "away": "1061493572",
+          "type": "up",
+          "home_score": 64,
+          "away_score": 67,
+          "result": 2
+        },
+        {
+          "home": "1113442132",
+          "away": "1116782572",
+          "type": "up",
+          "home_score": 53,
+          "away_score": 63,
+          "result": 2
+        },
+        {
+          "home": "1113269933",
+          "away": "1071548719",
+          "type": "up",
+          "home_score": 50,
+          "away_score": 51,
+          "result": 2
+        },
+        {
+          "home": "144762187",
+          "away": "1116843193",
+          "type": "up",
+          "home_score": 61,
+          "away_score": 60,
+          "result": 1
+        },
+        {
+          "home": "1096489838",
+          "away": "151923911",
+          "type": "up",
+          "home_score": 53,
+          "away_score": 77,
+          "result": 2
+        },
+        {
+          "home": "1116309020",
+          "away": "1111769718",
+          "type": "up",
+          "home_score": 45,
+          "away_score": 67,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1116847210",
+          "away": "1116848321",
+          "type": "down",
+          "home_score": 107,
+          "away_score": 114,
+          "result": 2
+        },
+        {
+          "home": "1116314982",
+          "away": "152317185",
+          "type": "down",
+          "home_score": 77,
+          "away_score": 100,
+          "result": 2
+        },
+        {
+          "home": "1033596919",
+          "away": "1116314918",
+          "type": "down",
+          "home_score": 80,
+          "away_score": 103,
+          "result": 2
+        },
+        {
+          "home": "1116778891",
+          "away": "1095496719",
+          "type": "down",
+          "home_score": 96,
+          "away_score": 113,
+          "result": 2
+        },
+        {
+          "home": "1115416060",
+          "away": "1111051849",
+          "type": "down",
+          "home_score": 108,
+          "away_score": 111,
+          "result": 2
+        },
+        {
+          "home": "1113104848",
+          "away": "1039593659",
+          "type": "down",
+          "home_score": 99,
+          "away_score": 77,
+          "result": 1
+        },
+        {
+          "home": "73116796",
+          "away": "1068332740",
+          "type": "down",
+          "home_score": 108,
+          "away_score": 115,
+          "result": 2
+        },
+        {
+          "home": "1115355124",
+          "away": "1058102914",
+          "type": "down",
+          "home_score": 106,
+          "away_score": 100,
+          "result": 1
+        },
+        {
+          "home": "1116532842",
+          "away": "1116843142",
+          "type": "down",
+          "home_score": 105,
+          "away_score": 78,
+          "result": 1
+        },
+        {
+          "home": "1116139003",
+          "away": "1116086751",
+          "type": "down",
+          "home_score": 91,
+          "away_score": 129,
+          "result": 2
+        },
+        {
+          "home": "1063076888",
+          "away": "1113412675",
+          "type": "down",
+          "home_score": 118,
+          "away_score": 121,
+          "result": 2
+        },
+        {
+          "home": "1116851933",
+          "away": "1113442132",
+          "type": "down",
+          "home_score": 98,
+          "away_score": 105,
+          "result": 2
+        },
+        {
+          "home": "1071227986",
+          "away": "1113269933",
+          "type": "down",
+          "home_score": 86,
+          "away_score": 116,
+          "result": 2
+        },
+        {
+          "home": "5275903",
+          "away": "1116843193",
+          "type": "down",
+          "home_score": 74,
+          "away_score": 110,
+          "result": 2
+        },
+        {
+          "home": "1024867435",
+          "away": "1096489838",
+          "type": "down",
+          "home_score": 111,
+          "away_score": 104,
+          "result": 1
+        },
+        {
+          "home": "1113227695",
+          "away": "1116309020",
+          "type": "down",
+          "home_score": 83,
+          "away_score": 92,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1116848369",
+          "away": "135066850",
+          "type": "up",
+          "home_score": 48,
+          "away_score": 55,
+          "result": 2
+        },
+        {
+          "home": "1115413541",
+          "away": "1116311079",
+          "type": "up",
+          "home_score": 66,
+          "away_score": 59,
+          "result": 1
+        },
+        {
+          "home": "1115479394",
+          "away": "1116144526",
+          "type": "up",
+          "home_score": 62,
+          "away_score": 76,
+          "result": 2
+        },
+        {
+          "home": "1111685266",
+          "away": "1076901343",
+          "type": "up",
+          "home_score": 81,
+          "away_score": 80,
+          "result": 1
+        },
+        {
+          "home": "1111024349",
+          "away": "1115308799",
+          "type": "up",
+          "home_score": 59,
+          "away_score": 67,
+          "result": 2
+        },
+        {
+          "home": "1061493572",
+          "away": "1116782572",
+          "type": "up",
+          "home_score": 68,
+          "away_score": 54,
+          "result": 1
+        },
+        {
+          "home": "1071548719",
+          "away": "144762187",
+          "type": "up",
+          "home_score": 35,
+          "away_score": 60,
+          "result": 2
+        },
+        {
+          "home": "151923911",
+          "away": "1111769718",
+          "type": "up",
+          "home_score": 67,
+          "away_score": 60,
+          "result": 1
+        },
+        {
+          "home": "1116848321",
+          "away": "152317185",
+          "type": "down",
+          "home_score": 63,
+          "away_score": 71,
+          "result": 2
+        },
+        {
+          "home": "1116314918",
+          "away": "1095496719",
+          "type": "down",
+          "home_score": 52,
+          "away_score": 36,
+          "result": 1
+        },
+        {
+          "home": "1111051849",
+          "away": "1113104848",
+          "type": "down",
+          "home_score": 45,
+          "away_score": 66,
+          "result": 2
+        },
+        {
+          "home": "1068332740",
+          "away": "1115355124",
+          "type": "down",
+          "home_score": 52,
+          "away_score": 52,
+          "result": 0
+        },
+        {
+          "home": "1116532842",
+          "away": "1116086751",
+          "type": "down",
+          "home_score": 64,
+          "away_score": 69,
+          "result": 2
+        },
+        {
+          "home": "1113412675",
+          "away": "1113442132",
+          "type": "down",
+          "home_score": 70,
+          "away_score": 58,
+          "result": 1
+        },
+        {
+          "home": "1113269933",
+          "away": "5275903",
+          "type": "down",
+          "home_score": 55,
+          "away_score": 50,
+          "result": 1
+        },
+        {
+          "home": "1024867435",
+          "away": "1116309020",
+          "type": "down",
+          "home_score": 58,
+          "away_score": 46,
+          "result": 1
+        }
+      ],
+      [
+        {
+          "home": "1116311079",
+          "away": "152317185",
+          "type": "down",
+          "home_score": 57,
+          "away_score": 42,
+          "result": 1
+        },
+        {
+          "home": "1116848369",
+          "away": "1116314918",
+          "type": "down",
+          "home_score": 41,
+          "away_score": 45,
+          "result": 2
+        },
+        {
+          "home": "1076901343",
+          "away": "1113104848",
+          "type": "down",
+          "home_score": 50,
+          "away_score": 45,
+          "result": 1
+        },
+        {
+          "home": "1115479394",
+          "away": "1115355124",
+          "type": "down",
+          "home_score": 57,
+          "away_score": 44,
+          "result": 1
+        },
+        {
+          "home": "1116782572",
+          "away": "1116086751",
+          "type": "down",
+          "home_score": 48,
+          "away_score": 37,
+          "result": 1
+        },
+        {
+          "home": "1111024349",
+          "away": "1113412675",
+          "type": "down",
+          "home_score": 59,
+          "away_score": 52,
+          "result": 1
+        },
+        {
+          "home": "1111769718",
+          "away": "1113269933",
+          "type": "down",
+          "home_score": 58,
+          "away_score": 50,
+          "result": 1
+        },
+        {
+          "home": "1071548719",
+          "away": "1024867435",
+          "type": "down",
+          "home_score": 49,
+          "away_score": 41,
+          "result": 1
+        }
+      ],
+      [
+        {
+          "home": "135066850",
+          "away": "1115413541",
+          "type": "up",
+          "home_score": 42,
+          "away_score": 73,
+          "result": 2
+        },
+        {
+          "home": "1116144526",
+          "away": "1111685266",
+          "type": "up",
+          "home_score": 61,
+          "away_score": 38,
+          "result": 1
+        },
+        {
+          "home": "1115308799",
+          "away": "1061493572",
+          "type": "up",
+          "home_score": 72,
+          "away_score": 62,
+          "result": 1
+        },
+        {
+          "home": "144762187",
+          "away": "151923911",
+          "type": "up",
+          "home_score": 64,
+          "away_score": 84,
+          "result": 2
+        },
+        {
+          "home": "1116314918",
+          "away": "1116311079",
+          "type": "down",
+          "home_score": 52,
+          "away_score": 78,
+          "result": 2
+        },
+        {
+          "home": "1115479394",
+          "away": "1076901343",
+          "type": "down",
+          "home_score": 47,
+          "away_score": 54,
+          "result": 2
+        },
+        {
+          "home": "1111024349",
+          "away": "1116782572",
+          "type": "down",
+          "home_score": 55,
+          "away_score": 47,
+          "result": 1
+        },
+        {
+          "home": "1071548719",
+          "away": "1111769718",
+          "type": "down",
+          "home_score": 37,
+          "away_score": 45,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1116311079",
+          "away": "1061493572",
+          "type": "down",
+          "home_score": 54,
+          "away_score": 71,
+          "result": 2
+        },
+        {
+          "home": "1076901343",
+          "away": "144762187",
+          "type": "down",
+          "home_score": 66,
+          "away_score": 61,
+          "result": 1
+        },
+        {
+          "home": "1111024349",
+          "away": "135066850",
+          "type": "down",
+          "home_score": 48,
+          "away_score": 51,
+          "result": 2
+        },
+        {
+          "home": "1111769718",
+          "away": "1111685266",
+          "type": "down",
+          "home_score": 55,
+          "away_score": 59,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1115413541",
+          "away": "1116144526",
+          "type": "up",
+          "home_score": 45,
+          "away_score": 48,
+          "result": 2
+        },
+        {
+          "home": "1115308799",
+          "away": "151923911",
+          "type": "up",
+          "home_score": 70,
+          "away_score": 58,
+          "result": 1
+        },
+        {
+          "home": "1061493572",
+          "away": "1076901343",
+          "type": "down",
+          "home_score": 55,
+          "away_score": 65,
+          "result": 2
+        },
+        {
+          "home": "135066850",
+          "away": "1111685266",
+          "type": "down",
+          "home_score": 47,
+          "away_score": 52,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1111685266",
+          "away": "151923911",
+          "type": "down",
+          "home_score": 66,
+          "away_score": 100,
+          "result": 2
+        },
+        {
+          "home": "1076901343",
+          "away": "1115413541",
+          "type": "down",
+          "home_score": 77,
+          "away_score": 71,
+          "result": 1
+        }
+      ],
+      [
+        {
+          "home": "1116144526",
+          "away": "1115308799",
+          "type": "up",
+          "home_score": 37,
+          "away_score": 44,
+          "result": 2
+        },
+        {
+          "home": "151923911",
+          "away": "1076901343",
+          "type": "down",
+          "home_score": 40,
+          "away_score": 46,
+          "result": 2
+        }
+      ],
+      [
+        {
+          "home": "1116144526",
+          "away": "1076901343",
+          "type": "down",
+          "home_score": 66,
+          "away_score": 54,
+          "result": 1
+        }
+      ],
+      [
+        {
+          "home": "1115308799",
+          "away": "1116144526",
+          "type": "up",
+          "home_score": 54,
+          "away_score": 55,
+          "result": 2
+        }
+      ]
+    ]
+  },
+  "profiles": [
+    {
+      "id": "1116848369",
+      "cup": {
+        "fo": 158,
+        "missed_fo": 159,
+        "diff_fo": -1,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          10,
+          -7,
+          -4
+        ],
+        "standings": [
+          1,
+          2,
+          6
+        ],
+        "lowest_winning_pos_diff": -20
+      }
+    },
+    {
+      "id": "1113269933",
+      "cup": {
+        "fo": 271,
+        "missed_fo": 245,
+        "diff_fo": 26,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 6.5,
+        "diff_fo_arr": [
+          -1,
+          30,
+          5,
+          -8
+        ],
+        "standings": [
+          5,
+          3,
+          3,
+          4
+        ],
+        "lowest_winning_pos_diff": -41
+      }
+    },
+    {
+      "id": "1113442132",
+      "cup": {
+        "fo": 216,
+        "missed_fo": 231,
+        "diff_fo": -15,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -10,
+          7,
+          -12
+        ],
+        "standings": [
+          13,
+          16,
+          21
+        ],
+        "lowest_winning_pos_diff": -20
+      }
+    },
+    {
+      "id": "1076901343",
+      "cup": {
+        "fo": 602,
+        "missed_fo": 570,
+        "diff_fo": 32,
+        "matchesPlayed": 10,
+        "avg_diff_fo": 3.2,
+        "diff_fo_arr": [
+          5,
+          1,
+          -1,
+          5,
+          7,
+          5,
+          10,
+          6,
+          6,
+          -12
+        ],
+        "standings": [
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "lowest_winning_pos_diff": -4
+      }
+    },
+    {
+      "id": "73116796",
+      "cup": {
+        "fo": 162,
+        "missed_fo": 177,
+        "diff_fo": -15,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -8,
+          -7
+        ],
+        "standings": [
+          9,
+          9
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1111769718",
+      "cup": {
+        "fo": 338,
+        "missed_fo": 289,
+        "diff_fo": 49,
+        "matchesPlayed": 6,
+        "avg_diff_fo": 8.17,
+        "diff_fo_arr": [
+          22,
+          22,
+          -7,
+          8,
+          8,
+          -4
+        ],
+        "standings": [
+          4,
+          3,
+          5,
+          3,
+          3,
+          6
+        ],
+        "lowest_winning_pos_diff": -1
+      }
+    },
+    {
+      "id": "1096489838",
+      "cup": {
+        "fo": 157,
+        "missed_fo": 188,
+        "diff_fo": -31,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -24,
+          -7
+        ],
+        "standings": [
+          6,
+          11
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116144526",
+      "cup": {
+        "fo": 397,
+        "missed_fo": 330,
+        "diff_fo": 67,
+        "matchesPlayed": 7,
+        "avg_diff_fo": 9.57,
+        "diff_fo_arr": [
+          21,
+          14,
+          23,
+          3,
+          -7,
+          12,
+          1
+        ],
+        "standings": [
+          16,
+          6,
+          2,
+          4,
+          6,
+          5,
+          9
+        ],
+        "lowest_winning_pos_diff": 4
+      }
+    },
+    {
+      "id": "1068332740",
+      "cup": {
+        "fo": 221,
+        "missed_fo": 223,
+        "diff_fo": -2,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -9,
+          7,
+          0
+        ],
+        "standings": [
+          10,
+          5,
+          7
+        ],
+        "lowest_winning_pos_diff": -4
+      }
+    },
+    {
+      "id": "1061493572",
+      "cup": {
+        "fo": 384,
+        "missed_fo": 366,
+        "diff_fo": 18,
+        "matchesPlayed": 6,
+        "avg_diff_fo": 3,
+        "diff_fo_arr": [
+          4,
+          3,
+          14,
+          -10,
+          17,
+          -10
+        ],
+        "standings": [
+          13,
+          11,
+          14,
+          7,
+          5,
+          8
+        ],
+        "lowest_winning_pos_diff": -2
+      }
+    },
+    {
+      "id": "1113412675",
+      "cup": {
+        "fo": 307,
+        "missed_fo": 302,
+        "diff_fo": 5,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 1.25,
+        "diff_fo_arr": [
+          -3,
+          3,
+          12,
+          -7
+        ],
+        "standings": [
+          13,
+          7,
+          10,
+          8
+        ],
+        "lowest_winning_pos_diff": -11
+      }
+    },
+    {
+      "id": "1115413541",
+      "cup": {
+        "fo": 311,
+        "missed_fo": 263,
+        "diff_fo": 48,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 9.6,
+        "diff_fo_arr": [
+          19,
+          7,
+          31,
+          -3,
+          -6
+        ],
+        "standings": [
+          24,
+          18,
+          12,
+          12,
+          14
+        ],
+        "lowest_winning_pos_diff": 6
+      }
+    },
+    {
+      "id": "144762187",
+      "cup": {
+        "fo": 246,
+        "missed_fo": 245,
+        "diff_fo": 1,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 0.25,
+        "diff_fo_arr": [
+          1,
+          25,
+          -20,
+          -5
+        ],
+        "standings": [
+          15,
+          20,
+          21,
+          21
+        ],
+        "lowest_winning_pos_diff": -4
+      }
+    },
+    {
+      "id": "1111024349",
+      "cup": {
+        "fo": 288,
+        "missed_fo": 277,
+        "diff_fo": 11,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 2.2,
+        "diff_fo_arr": [
+          7,
+          -8,
+          7,
+          8,
+          -3
+        ],
+        "standings": [
+          35,
+          36,
+          34,
+          36,
+          37
+        ],
+        "lowest_winning_pos_diff": 26
+      }
+    },
+    {
+      "id": "1116311079",
+      "cup": {
+        "fo": 313,
+        "missed_fo": 281,
+        "diff_fo": 32,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 6.4,
+        "diff_fo_arr": [
+          15,
+          -7,
+          15,
+          26,
+          -17
+        ],
+        "standings": [
+          4,
+          12,
+          10,
+          6,
+          9
+        ],
+        "lowest_winning_pos_diff": 5
+      }
+    },
+    {
+      "id": "1115308799",
+      "cup": {
+        "fo": 419,
+        "missed_fo": 375,
+        "diff_fo": 44,
+        "matchesPlayed": 7,
+        "avg_diff_fo": 6.29,
+        "diff_fo_arr": [
+          8,
+          0,
+          8,
+          10,
+          12,
+          7,
+          -1
+        ],
+        "standings": [
+          25,
+          23,
+          15,
+          14,
+          10,
+          9,
+          6
+        ],
+        "lowest_winning_pos_diff": 16
+      }
+    },
+    {
+      "id": "135066850",
+      "cup": {
+        "fo": 249,
+        "missed_fo": 273,
+        "diff_fo": -24,
+        "matchesPlayed": 5,
+        "avg_diff_fo": -4.8,
+        "diff_fo_arr": [
+          2,
+          7,
+          -31,
+          3,
+          -5
+        ],
+        "standings": [
+          8,
+          17,
+          20,
+          20,
+          23
+        ],
+        "lowest_winning_pos_diff": 15
+      }
+    },
+    {
+      "id": "151923911",
+      "cup": {
+        "fo": 482,
+        "missed_fo": 412,
+        "diff_fo": 70,
+        "matchesPlayed": 7,
+        "avg_diff_fo": 10,
+        "diff_fo_arr": [
+          3,
+          24,
+          7,
+          20,
+          -12,
+          34,
+          -6
+        ],
+        "standings": [
+          29,
+          25,
+          19,
+          8,
+          8,
+          5,
+          5
+        ],
+        "lowest_winning_pos_diff": 19
+      }
+    },
+    {
+      "id": "1116314918",
+      "cup": {
+        "fo": 343,
+        "missed_fo": 337,
+        "diff_fo": 6,
+        "matchesPlayed": 6,
+        "avg_diff_fo": 1,
+        "diff_fo_arr": [
+          8,
+          -19,
+          23,
+          16,
+          4,
+          -26
+        ],
+        "standings": [
+          36,
+          41,
+          39,
+          38,
+          36,
+          33
+        ],
+        "lowest_winning_pos_diff": 30
+      }
+    },
+    {
+      "id": "1116086751",
+      "cup": {
+        "fo": 285,
+        "missed_fo": 253,
+        "diff_fo": 32,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 8,
+        "diff_fo_arr": [
+          0,
+          38,
+          5,
+          -11
+        ],
+        "standings": [
+          18,
+          6,
+          7,
+          11
+        ],
+        "lowest_winning_pos_diff": -18
+      }
+    },
+    {
+      "id": "1071227986",
+      "cup": {
+        "fo": 124,
+        "missed_fo": 166,
+        "diff_fo": -42,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -12,
+          -30
+        ],
+        "standings": [
+          45,
+          45
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1024867435",
+      "cup": {
+        "fo": 263,
+        "missed_fo": 258,
+        "diff_fo": 5,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 1.25,
+        "diff_fo_arr": [
+          -6,
+          7,
+          12,
+          -8
+        ],
+        "standings": [
+          34,
+          29,
+          29,
+          27
+        ],
+        "lowest_winning_pos_diff": 18
+      }
+    },
+    {
+      "id": "1116848321",
+      "cup": {
+        "fo": 296,
+        "missed_fo": 291,
+        "diff_fo": 5,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 1.25,
+        "diff_fo_arr": [
+          16,
+          -10,
+          7,
+          -8
+        ],
+        "standings": [
+          24,
+          21,
+          23,
+          22
+        ],
+        "lowest_winning_pos_diff": -9
+      }
+    },
+    {
+      "id": "1058102914",
+      "cup": {
+        "fo": 158,
+        "missed_fo": 165,
+        "diff_fo": -7,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -1,
+          -6
+        ],
+        "standings": [
+          22,
+          27
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116778891",
+      "cup": {
+        "fo": 140,
+        "missed_fo": 180,
+        "diff_fo": -40,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -23,
+          -17
+        ],
+        "standings": [
+          40,
+          38
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116532842",
+      "cup": {
+        "fo": 215,
+        "missed_fo": 198,
+        "diff_fo": 17,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -5,
+          27,
+          -5
+        ],
+        "standings": [
+          30,
+          28,
+          25
+        ],
+        "lowest_winning_pos_diff": -19
+      }
+    },
+    {
+      "id": "1115416060",
+      "cup": {
+        "fo": 146,
+        "missed_fo": 159,
+        "diff_fo": -13,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -10,
+          -3
+        ],
+        "standings": [
+          27,
+          33
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1113227695",
+      "cup": {
+        "fo": 127,
+        "missed_fo": 152,
+        "diff_fo": -25,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -16,
+          -9
+        ],
+        "standings": [
+          33,
+          35
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1115355124",
+      "cup": {
+        "fo": 232,
+        "missed_fo": 254,
+        "diff_fo": -22,
+        "matchesPlayed": 4,
+        "avg_diff_fo": -5.5,
+        "diff_fo_arr": [
+          -15,
+          6,
+          0,
+          -13
+        ],
+        "standings": [
+          44,
+          42,
+          43,
+          45
+        ],
+        "lowest_winning_pos_diff": 15
+      }
+    },
+    {
+      "id": "1113104848",
+      "cup": {
+        "fo": 267,
+        "missed_fo": 233,
+        "diff_fo": 34,
+        "matchesPlayed": 4,
+        "avg_diff_fo": 8.5,
+        "diff_fo_arr": [
+          -4,
+          22,
+          21,
+          -5
+        ],
+        "standings": [
+          30,
+          30,
+          25,
+          29
+        ],
+        "lowest_winning_pos_diff": 2
+      }
+    },
+    {
+      "id": "1063076888",
+      "cup": {
+        "fo": 164,
+        "missed_fo": 174,
+        "diff_fo": -10,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -7,
+          -3
+        ],
+        "standings": [
+          34,
+          26
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1033596919",
+      "cup": {
+        "fo": 133,
+        "missed_fo": 162,
+        "diff_fo": -29,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -6,
+          -23
+        ],
+        "standings": [
+          16,
+          24
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116314982",
+      "cup": {
+        "fo": 130,
+        "missed_fo": 156,
+        "diff_fo": -26,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -3,
+          -23
+        ],
+        "standings": [
+          41,
+          46
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1111685266",
+      "cup": {
+        "fo": 413,
+        "missed_fo": 439,
+        "diff_fo": -26,
+        "matchesPlayed": 7,
+        "avg_diff_fo": -3.71,
+        "diff_fo_arr": [
+          12,
+          9,
+          1,
+          -23,
+          4,
+          5,
+          -34
+        ],
+        "standings": [
+          19,
+          20,
+          11,
+          19,
+          18,
+          18,
+          19
+        ],
+        "lowest_winning_pos_diff": 12
+      }
+    },
+    {
+      "id": "1115479394",
+      "cup": {
+        "fo": 276,
+        "missed_fo": 269,
+        "diff_fo": 7,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 1.4,
+        "diff_fo_arr": [
+          0,
+          15,
+          -14,
+          13,
+          -7
+        ],
+        "standings": [
+          28,
+          30,
+          24,
+          20,
+          23
+        ],
+        "lowest_winning_pos_diff": 14
+      }
+    },
+    {
+      "id": "1116851933",
+      "cup": {
+        "fo": 146,
+        "missed_fo": 153,
+        "diff_fo": -7,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          0,
+          -7
+        ],
+        "standings": [
+          41,
+          36
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "152317185",
+      "cup": {
+        "fo": 324,
+        "missed_fo": 304,
+        "diff_fo": 20,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 4,
+        "diff_fo_arr": [
+          6,
+          -2,
+          23,
+          8,
+          -15
+        ],
+        "standings": [
+          13,
+          8,
+          8,
+          4,
+          5
+        ],
+        "lowest_winning_pos_diff": -18
+      }
+    },
+    {
+      "id": "1113514956",
+      "cup": {
+        "fo": 0,
+        "missed_fo": 0,
+        "diff_fo": 0,
+        "matchesPlayed": 0,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [],
+        "standings": [],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "5275903",
+      "cup": {
+        "fo": 170,
+        "missed_fo": 219,
+        "diff_fo": -49,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -8,
+          -36,
+          -5
+        ],
+        "standings": [
+          38,
+          44,
+          44
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116139003",
+      "cup": {
+        "fo": 133,
+        "missed_fo": 183,
+        "diff_fo": -50,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -12,
+          -38
+        ],
+        "standings": [
+          32,
+          37
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116782572",
+      "cup": {
+        "fo": 260,
+        "missed_fo": 251,
+        "diff_fo": 9,
+        "matchesPlayed": 5,
+        "avg_diff_fo": 1.8,
+        "diff_fo_arr": [
+          10,
+          10,
+          -14,
+          11,
+          -8
+        ],
+        "standings": [
+          26,
+          26,
+          28,
+          24,
+          28
+        ],
+        "lowest_winning_pos_diff": 13
+      }
+    },
+    {
+      "id": "1116847210",
+      "cup": {
+        "fo": 138,
+        "missed_fo": 167,
+        "diff_fo": -29,
+        "matchesPlayed": 2,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -22,
+          -7
+        ],
+        "standings": [
+          46,
+          41
+        ],
+        "lowest_winning_pos_diff": null
+      }
+    },
+    {
+      "id": "1116309020",
+      "cup": {
+        "fo": 183,
+        "missed_fo": 208,
+        "diff_fo": -25,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -22,
+          9,
+          -12
+        ],
+        "standings": [
+          28,
+          32,
+          32
+        ],
+        "lowest_winning_pos_diff": -3
+      }
+    },
+    {
+      "id": "1111051849",
+      "cup": {
+        "fo": 203,
+        "missed_fo": 236,
+        "diff_fo": -33,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          -15,
+          3,
+          -21
+        ],
+        "standings": [
+          16,
+          20,
+          23
+        ],
+        "lowest_winning_pos_diff": -13
+      }
+    },
+    {
+      "id": "1039593659",
+      "cup": {
+        "fo": 163,
+        "missed_fo": 199,
+        "diff_fo": -36,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          7,
+          -21,
+          -22
+        ],
+        "standings": [
+          47,
+          47,
+          48
+        ],
+        "lowest_winning_pos_diff": 13
+      }
+    },
+    {
+      "id": "1095496719",
+      "cup": {
+        "fo": 249,
+        "missed_fo": 251,
+        "diff_fo": -2,
+        "matchesPlayed": 4,
+        "avg_diff_fo": -0.5,
+        "diff_fo_arr": [
+          12,
+          -15,
+          17,
+          -16
+        ],
+        "standings": [
+          39,
+          36,
+          34,
+          35
+        ],
+        "lowest_winning_pos_diff": -4
+      }
+    },
+    {
+      "id": "1116843193",
+      "cup": {
+        "fo": 229,
+        "missed_fo": 188,
+        "diff_fo": 41,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          6,
+          -1,
+          36
+        ],
+        "standings": [
+          18,
+          19,
+          16
+        ],
+        "lowest_winning_pos_diff": 2
+      }
+    },
+    {
+      "id": "1116843142",
+      "cup": {
+        "fo": 183,
+        "missed_fo": 202,
+        "diff_fo": -19,
+        "matchesPlayed": 3,
+        "avg_diff_fo": 0,
+        "diff_fo_arr": [
+          15,
+          -7,
+          -27
+        ],
+        "standings": [
+          48,
+          48,
+          47
+        ],
+        "lowest_winning_pos_diff": 4
+      }
+    },
+    {
+      "id": "1071548719",
+      "cup": {
+        "fo": 239,
+        "missed_fo": 240,
+        "diff_fo": -1,
+        "matchesPlayed": 5,
+        "avg_diff_fo": -0.2,
+        "diff_fo_arr": [
+          23,
+          1,
+          -25,
+          8,
+          -8
+        ],
+        "standings": [
+          49,
+          49,
+          49,
+          49,
+          49
+        ],
+        "lowest_winning_pos_diff": 44
+      }
+    }
+  ]
+}

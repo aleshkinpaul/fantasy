@@ -1,0 +1,3041 @@
+[
+  {
+    "id": 1,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "1024867435",
+        "value": 1,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 1,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "1024867435",
+        "value": 1,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 1,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "1111051849",
+        "value": 547,
+        "sortParam": 547
+      },
+      {
+        "id": "1115479394",
+        "value": 528,
+        "sortParam": 528
+      },
+      {
+        "id": "1116778891",
+        "value": 525,
+        "sortParam": 525
+      },
+      {
+        "id": "5275903",
+        "value": 471,
+        "sortParam": 471
+      },
+      {
+        "id": "1058102914",
+        "value": 442,
+        "sortParam": 442
+      },
+      {
+        "id": "1116125876",
+        "value": 323,
+        "sortParam": 323
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "1111051849",
+        "value": 547,
+        "sortParam": 547
+      },
+      {
+        "id": "1115479394",
+        "value": 528,
+        "sortParam": 528
+      },
+      {
+        "id": "1116778891",
+        "value": 525,
+        "sortParam": 525
+      },
+      {
+        "id": "5275903",
+        "value": 471,
+        "sortParam": 471
+      },
+      {
+        "id": "1058102914",
+        "value": 442,
+        "sortParam": 442
+      },
+      {
+        "id": "1116125876",
+        "value": 323,
+        "sortParam": 323
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "1116125876",
+        "value": 323,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 390,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 430,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 442,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 442,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 450,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 460,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 471,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 473,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 481,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 485,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 485,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 491,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 492,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 494,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 496,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 499,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 505,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 506,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 508,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 509,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 509,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 509,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 509,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 514,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 515,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 520,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 520,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 525,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 525,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 528,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 547,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "1116125876",
+        "value": 323,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 430,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 442,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 442,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 450,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 460,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 471,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 473,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 481,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 485,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 485,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 491,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 492,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 494,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 496,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 505,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 506,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 508,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 509,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 509,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 509,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 514,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 520,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 520,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 525,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 525,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 528,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "5275903",
+        "value": 1,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "5275903",
+        "value": 1,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "73116796",
+        "value": 52,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 52,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 51,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 51,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 50,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 49,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 48,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 47,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 47,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 47,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 47,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 47,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 46,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 46,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 46,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 46,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 44,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 44,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 43,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 42,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 42,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 41,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 40,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 37,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 37,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 33,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116125876",
+        "value": 33,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 32,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 31,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 29,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 29,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 26,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "73116796",
+        "value": 52,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 52,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 51,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 51,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 50,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 49,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 48,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 47,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 47,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 47,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 47,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 47,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 46,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 46,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 46,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 46,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 44,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 44,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 43,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 42,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 42,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 41,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 40,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 37,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 37,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 33,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116125876",
+        "value": 33,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 32,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 31,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 29,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 29,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 26,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "1116144526",
+        "value": 46,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 46,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 44,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 42,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 40,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 39,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 39,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 38,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 30,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 29,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 26,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 26,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 25,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 24,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 23,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 17,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 15,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 14,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 10,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 9,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 8,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 8,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 7,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 7,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 6,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 6,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 3,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 3,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 3,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 3,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 2,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "1116144526",
+        "value": 46,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 46,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 44,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 42,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 40,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 39,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 39,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 38,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 30,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 29,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 26,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 26,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 25,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 24,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 23,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 17,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 15,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 14,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 10,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 9,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 8,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 8,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 7,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 7,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 6,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 6,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 3,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 3,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 3,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 3,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 2,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "152317185",
+        "value": 81,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 81,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 79,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 78,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 76,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 75,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 75,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 75,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116125876",
+        "value": 75,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 74,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 73,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 72,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 71,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 71,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 70,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 69,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 68,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 66,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 63,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 63,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 63,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 62,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 60,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 60,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 60,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 59,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 59,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 59,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 55,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 53,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 52,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 43,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "152317185",
+        "value": 81,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 81,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 79,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 78,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 76,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 75,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 75,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 75,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116125876",
+        "value": 75,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1111051849",
+        "value": 74,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 73,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 72,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 71,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 71,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 70,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 69,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 68,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 66,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 63,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 63,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 63,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 62,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 60,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 60,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 60,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 59,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 59,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 59,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 55,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 53,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 52,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 43,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "1058102914",
+        "value": 30,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 5,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "1058102914",
+        "value": 30,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 5,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "state": 1,
+    "nominees": [
+      {
+        "id": "1111051849",
+        "value": 547,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 528,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 525,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 525,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 520,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 520,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 515,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 514,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 509,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 509,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 509,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 509,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 508,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 506,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 505,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 499,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 496,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 494,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 492,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 491,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 485,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 485,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 481,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 473,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 471,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 460,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 450,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 442,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 442,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 430,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 390,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116125876",
+        "value": 323,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      }
+    ],
+    "activeLeaders": [
+      {
+        "id": "1111051849",
+        "value": 547,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1115479394",
+        "value": 528,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 1,
+          "common": 4
+        }
+      },
+      {
+        "id": "1113442132",
+        "value": 525,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116778891",
+        "value": 525,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 3,
+          "common": 6
+        }
+      },
+      {
+        "id": "1116848321",
+        "value": 520,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 12,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113269933",
+        "value": 520,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1095496719",
+        "value": 515,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 6,
+          "common": 12
+        }
+      },
+      {
+        "id": "1116086751",
+        "value": 514,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "144762187",
+        "value": 509,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1028890564",
+        "value": 509,
+        "sortParam": {
+          "apertura": 5,
+          "clausura": 3,
+          "common": 8
+        }
+      },
+      {
+        "id": "1115308799",
+        "value": 509,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "1033596919",
+        "value": 509,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1096489838",
+        "value": 508,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 1,
+          "common": 5
+        }
+      },
+      {
+        "id": "152317185",
+        "value": 506,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "73116796",
+        "value": 505,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 0,
+          "common": 9
+        }
+      },
+      {
+        "id": "1116144526",
+        "value": 499,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 6,
+          "common": 9
+        }
+      },
+      {
+        "id": "1111685266",
+        "value": 496,
+        "sortParam": {
+          "apertura": 7,
+          "clausura": 0,
+          "common": 7
+        }
+      },
+      {
+        "id": "1076901343",
+        "value": 494,
+        "sortParam": {
+          "apertura": 9,
+          "clausura": 3,
+          "common": 12
+        }
+      },
+      {
+        "id": "1113412675",
+        "value": 492,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 7,
+          "common": 7
+        }
+      },
+      {
+        "id": "1116848369",
+        "value": 491,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1113104848",
+        "value": 485,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 9,
+          "common": 12
+        }
+      },
+      {
+        "id": "1111769718",
+        "value": 485,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 3,
+          "common": 9
+        }
+      },
+      {
+        "id": "1024867435",
+        "value": 481,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 15,
+          "common": 15
+        }
+      },
+      {
+        "id": "1068332740",
+        "value": 473,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "5275903",
+        "value": 471,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 10,
+          "common": 14
+        }
+      },
+      {
+        "id": "1061493572",
+        "value": 460,
+        "sortParam": {
+          "apertura": 6,
+          "clausura": 0,
+          "common": 6
+        }
+      },
+      {
+        "id": "151923911",
+        "value": 450,
+        "sortParam": {
+          "apertura": 0,
+          "clausura": 3,
+          "common": 3
+        }
+      },
+      {
+        "id": "1058102914",
+        "value": 442,
+        "sortParam": {
+          "apertura": 4,
+          "clausura": 0,
+          "common": 4
+        }
+      },
+      {
+        "id": "135066850",
+        "value": 442,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115416060",
+        "value": 430,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1115355124",
+        "value": 390,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      },
+      {
+        "id": "1116125876",
+        "value": 323,
+        "sortParam": {
+          "apertura": 3,
+          "clausura": 0,
+          "common": 3
+        }
+      }
+    ]
+  }
+]
