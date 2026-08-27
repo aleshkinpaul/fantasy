@@ -16,6 +16,8 @@ import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { PrizesListComponent } from './prizes-list.component';
 import { LeagueH2HDataService } from './league-h2h-data.service';
+import { CompetitionDataLoaderService } from '../../competition/data/competition-data-loader.service';
+import { CompetitionType } from '../../competition/models/competition.models';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -141,7 +143,8 @@ export class LeagueH2HPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public loader: LoaderService,
-    private dataService: LeagueH2HDataService
+    private dataService: LeagueH2HDataService,
+    private competitionLoader: CompetitionDataLoaderService
   ) {}
 
   ngOnInit() {
@@ -150,36 +153,17 @@ export class LeagueH2HPageComponent implements OnInit {
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
 
-    forkJoin([
-      this.service.getData('/assets/data/profiles.json'),
-      this.service.getData('/assets/data/consts.json'),
-      this.service.getData('/assets/data/teams.json'),
-    ])
-    .subscribe({
-      next: ([profiles, consts, teams]) => {
-        this.profiles = Object.values(profiles[yearParam][this.route.snapshot.url[0].path]);
-        this.consts = consts;
-        this.consts = this.consts.league.find(x =>
-          x.type === this.route.snapshot.url[0].path
-          && ( x.yearStart === yearParam || !yearParam )
-        );
-        this.competitionType = this.consts.type;
-        this.drawGap = this.consts.drawGap || 0; 
-        this.playOffToursArr = this.consts?.cup?.matchesTours || [];
-        this.teams = teams;
-
-        const sources = [];
-
-        sources.push(this.http.get(this.consts.squad_link));
-        if (!!this.consts.squad_link_2) sources.push(this.http.get(this.consts.squad_link_2));
-
-        forkJoin([
-          ...sources
-        ])
-        .subscribe({
-          next: ([squads, squads_2]) => {
+    const competitionType = this.route.snapshot.url[0].path as CompetitionType;
+    this.competitionLoader.load(competitionType, yearParam).subscribe({
+      next: ({ profiles, config, teams, squads, squads2 }) => {
+              this.profiles = profiles;
+              this.consts = config;
+              this.competitionType = config.type;
+              this.drawGap = config.drawGap || 0;
+              this.playOffToursArr = config.cup?.matchesTours || [];
+              this.teams = teams;
               this.squads = squads;
-              this.squads_2 = squads_2;
+              this.squads_2 = squads2;
               
               this.lastTour = Object.keys(this.squads.data.tours).length;
 
@@ -640,12 +624,11 @@ export class LeagueH2HPageComponent implements OnInit {
             this.setConfTabId(this.activeTabs.confTabId);
 
             this.getMatchesForLeague();
-          },
-          error: err => {
+      },
+      error: err => {
             logger.error('Ошибка при получении данных:', err);
-          }
-        });
-    }});
+      }
+    });
   }
 
   getMatchesForLeague() {
