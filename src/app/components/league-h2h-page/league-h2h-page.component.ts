@@ -286,7 +286,16 @@ export class LeagueH2HPageComponent implements OnInit {
               
               for (let i = 0; i < this.lastTour; i++) {  
                 const currentStage = this.dataService.getCurrentStage(i + 1, this.consts.stages[0].lastTour);
-                this.processMatchesForTour(i, profilesDetails, matches, currentStage);
+                this.dataService.processTour({
+                  tourIndex: i,
+                  currentStage,
+                  profiles: profilesDetails,
+                  matches: matches[i + 1],
+                  squads: this.squads,
+                  drawGap: this.drawGap,
+                  competitionType: this.competitionType,
+                  playOffTours: this.playOffToursArr,
+                });
                 this.profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
               }
 
@@ -646,81 +655,6 @@ export class LeagueH2HPageComponent implements OnInit {
           })));
       }
     }
-  }
-
-  /**
-   * Process all matches for a given tour
-   * Delegates to service for all calculations
-   */
-  private processMatchesForTour(
-    tourIndex: number,
-    profilesDetails: any[],
-    matches: any,
-    currentStage: string
-  ): void {
-    matches[tourIndex + 1].forEach(match => {
-      // Calculate match result
-      const matchResult = this.dataService.calculateMatchResult(
-        +this.squads.data.players[match.home].team.results_by_tour[tourIndex + 1].tour_score,
-        +this.squads.data.players[match.away].team.results_by_tour[tourIndex + 1].tour_score,
-        this.route.snapshot.url[0].path ===  'spain' || !this.playOffToursArr.includes(tourIndex + 1) ? this.drawGap : 0
-      );
-
-      match.home_score = matchResult.homeScore;
-      match.away_score = matchResult.awayScore;
-      match.result = matchResult.result;
-
-      const homeProfile = profilesDetails.find(x => x.id === match.home);
-      const awayProfile = profilesDetails.find(x => x.id === match.away);
-      const matchDiffFo = Math.abs(matchResult.homeScore - matchResult.awayScore);
-
-      // Update FO (fantasy objectives)
-      this.dataService.updateFO(homeProfile, awayProfile, matchResult, currentStage);
-      
-      // Update match counts (wins/draws/losses)
-      homeProfile.results.matchesPlayed += 1;
-      awayProfile.results.matchesPlayed += 1;
-      this.dataService.updateMatchCounts(homeProfile, awayProfile, matchResult.result, currentStage);
-
-      // Update strikes
-      this.dataService.updateStrikes(
-        homeProfile,
-        awayProfile,
-        matchResult.result,
-        matchResult.homeScore,
-        matchResult.awayScore,
-        matchDiffFo,
-        tourIndex
-      );
-
-      // Update FO records
-      this.dataService.updateMaxFoInTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore);
-      this.dataService.updateMaxFoInLosedTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore, matchResult.result);
-
-      // Update team cost
-      this.dataService.updateTeamCostAvg(
-        homeProfile,
-        awayProfile,
-        homeProfile.team.rosters_by_tour[tourIndex + 1].team_cost,
-        awayProfile.team.rosters_by_tour[tourIndex + 1].team_cost
-      );
-
-      // Update substitutions
-      const homeActSquad = this.dataService.getActiveSquad(homeProfile.team.rosters_by_tour, tourIndex + 1);
-      const homePrevSquad = tourIndex > 0 ? this.dataService.getActiveSquad(homeProfile.team.rosters_by_tour, tourIndex) : [];
-      const awayActSquad = this.dataService.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex + 1);
-      const awayPrevSquad = tourIndex > 0 ? this.dataService.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex) : [];
-
-      if (this.route.snapshot.url[0].path ===  'spain') 
-        this.dataService.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
-      
-      if (this.route.snapshot.url[0].path ===  'world-cup')
-        this.dataService.updateSubsWC(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
-
-      // Update common results
-      this.dataService.updateCommonResults(homeProfile);
-      this.dataService.updateCommonResults(awayProfile);
-    });
   }
 
   updateProfilesByStage(stageType = '', leagueType = '') {

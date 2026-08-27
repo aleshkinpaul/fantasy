@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import {
+  CompetitionMatch,
+  CompetitionType,
+  FantasyFullInfoResponse,
+} from '../../competition/models/competition.models';
 
 export interface IMatchResult {
   homeScore: number;
@@ -14,10 +19,103 @@ export interface IStrikeState {
   maxStoppedNoLoseStrike: number;
 }
 
+export interface TourProcessingContext {
+  tourIndex: number;
+  currentStage: string;
+  profiles: any[];
+  matches: CompetitionMatch[];
+  squads: FantasyFullInfoResponse;
+  drawGap: number;
+  competitionType: CompetitionType;
+  playOffTours: number[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class LeagueH2HDataService {
+  processTour(context: TourProcessingContext): void {
+    const {
+      tourIndex,
+      currentStage,
+      profiles,
+      matches,
+      squads,
+      drawGap,
+      competitionType,
+      playOffTours,
+    } = context;
+
+    matches.forEach(match => {
+      const effectiveDrawGap = competitionType === 'spain' || !playOffTours.includes(tourIndex + 1)
+        ? drawGap
+        : 0;
+      const matchResult = this.calculateMatchResult(
+        +squads.data.players[match.home].team.results_by_tour[tourIndex + 1].tour_score,
+        +squads.data.players[match.away].team.results_by_tour[tourIndex + 1].tour_score,
+        effectiveDrawGap
+      );
+
+      match.home_score = matchResult.homeScore;
+      match.away_score = matchResult.awayScore;
+      match.result = matchResult.result;
+
+      const homeProfile = profiles.find(profile => profile.id === match.home);
+      const awayProfile = profiles.find(profile => profile.id === match.away);
+      if (!homeProfile || !awayProfile) {
+        throw new Error(`Не найдены профили матча ${match.home} — ${match.away}`);
+      }
+      const matchDiffFo = Math.abs(matchResult.homeScore - matchResult.awayScore);
+
+      this.updateFO(homeProfile, awayProfile, matchResult, currentStage);
+      homeProfile.results.matchesPlayed += 1;
+      awayProfile.results.matchesPlayed += 1;
+      this.updateMatchCounts(homeProfile, awayProfile, matchResult.result, currentStage);
+      this.updateStrikes(
+        homeProfile,
+        awayProfile,
+        matchResult.result,
+        matchResult.homeScore,
+        matchResult.awayScore,
+        matchDiffFo,
+        tourIndex
+      );
+      this.updateMaxFoInTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore);
+      this.updateMaxFoInLosedTour(
+        homeProfile,
+        awayProfile,
+        matchResult.homeScore,
+        matchResult.awayScore,
+        matchResult.result
+      );
+      this.updateTeamCostAvg(
+        homeProfile,
+        awayProfile,
+        homeProfile.team.rosters_by_tour[tourIndex + 1].team_cost,
+        awayProfile.team.rosters_by_tour[tourIndex + 1].team_cost
+      );
+
+      const homeActSquad = this.getActiveSquad(homeProfile.team.rosters_by_tour, tourIndex + 1);
+      const homePrevSquad = tourIndex > 0
+        ? this.getActiveSquad(homeProfile.team.rosters_by_tour, tourIndex)
+        : [];
+      const awayActSquad = this.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex + 1);
+      const awayPrevSquad = tourIndex > 0
+        ? this.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex)
+        : [];
+
+      if (competitionType === 'spain') {
+        this.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+      }
+      if (competitionType === 'world-cup') {
+        this.updateSubsWC(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+      }
+
+      this.updateCommonResults(homeProfile);
+      this.updateCommonResults(awayProfile);
+    });
+  }
+
   /**
    * Calculates match result based on scores and draw gap
    */
