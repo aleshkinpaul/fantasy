@@ -4,7 +4,9 @@ import {
   SeasonCompetitionConfig,
 } from '../models/competition.models';
 
-export function validateCompetitionData(data: LoadedCompetitionData): void {
+export function validateCompetitionData(
+  data: Pick<LoadedCompetitionData, 'config' | 'profiles' | 'squads' | 'squads2'>,
+): void {
   validateConfig(data.config);
 
   const localProfileIds = new Set(data.profiles.map(profile => profile.id));

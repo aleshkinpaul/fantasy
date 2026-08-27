@@ -5,6 +5,7 @@ import {
   CompetitionConfigFile,
   CompetitionType,
   FantasyFullInfoResponse,
+  FantasyTourStatsResponse,
   LoadedCompetitionData,
   LocalProfile,
   ProfilesFile,
@@ -43,7 +44,7 @@ export class CompetitionDataLoaderService {
 
         return forkJoin(requests).pipe(
           map(responses => {
-            const data: LoadedCompetitionData = {
+            const data = {
               profiles,
               config,
               teams,
@@ -56,6 +57,35 @@ export class CompetitionDataLoaderService {
               squads: mergeCompetitionStages(data.squads, data.squads2),
             };
           })
+        );
+      }),
+      switchMap(data => {
+        const lastTour = Object.keys(data.squads.data.tours).length;
+        const firstStageTours = Math.max(...Object.keys(data.squads.data.matches).map(Number));
+        const firstStageLastTour = data.config.tour_link_2 && lastTour > firstStageTours
+          ? firstStageTours
+          : lastTour;
+        const secondStageLastTour = data.config.tour_link_2 && lastTour > firstStageTours
+          ? lastTour - firstStageTours
+          : 0;
+
+        const latestRequests = [
+          this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link}${firstStageLastTour}`),
+        ];
+        if (secondStageLastTour && data.config.tour_link_2) {
+          latestRequests.push(
+            this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link_2}${secondStageLastTour}`),
+          );
+        }
+
+        const tourRequests = Array.from({ length: lastTour }, (_, index) =>
+          this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link}${index + 1}`));
+
+        return forkJoin({
+          latestPlayerStats: forkJoin(latestRequests),
+          playerStatsByTour: forkJoin(tourRequests),
+        }).pipe(
+          map(stats => ({ ...data, ...stats }) as LoadedCompetitionData)
         );
       })
     );

@@ -165,4 +165,6 @@ export interface LoadedCompetitionData {
   teams: RealTeamReference[];
   squads: FantasyFullInfoResponse;
   squads2?: FantasyFullInfoResponse;
+  latestPlayerStats: FantasyTourStatsResponse[];
+  playerStatsByTour: FantasyTourStatsResponse[];
 }

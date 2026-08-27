@@ -3,9 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ISquadDetails, IProfileDetails, IContsConfig } from '../../models/domain';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { logger } from '../../utils/logger';
@@ -97,57 +96,9 @@ export class LeagueH2HPageComponent implements OnInit {
   ];
   public larinId: string = "230935";
 
-    // {
-    // "8155" - Англия
-    // "230526" рэшфорд
-    // 
-    // "8156" - Аргентина
-    // "230534" - Муссо
-    // "230542" - Молина
-    // "230546" - Альмада
-    // "230544" - Симеоне
-    // "230553" - Альварес
-    // 
-    // "8159" - Бразилия
-    // "230633" - Рафинья
-    // 
-    // "8168" - Испания
-    // "230860" - Пубиль
-    // "230861" - Жоан Гарсия
-    // "230862" - Кубарси
-    // "230868" - Льоренте
-    // "230874" - Баэна
-    // "230875" - Гави
-    // "230879" - Ольмо
-    // "230880" - Педри
-    // "230882" - Ферран
-    // "230884" - Ямаль
-    // "231768" - Эрик Гарсия
-    // 
-    // "8176" - Мексика
-    // "231111" - Варгас
-    // 
-    // "8177" - Нидерланды
-    // "231139" - де Йонг
-    // 
-    // "8179" - Норвегия
-    // "231194" - Серлот
-    // 
-    // "8182" - Португалия
-    // "231274" - Жоау Конселу
-    // 
-    // "8189" - Уругвай
-    // "231473" - Араухо
-    // "231480" - Хименес
-    // 
-    // "8190" - Франция
-    // "231500" - Кунде
-    // }
-
   public isLoading$?: Observable<boolean>;
   constructor(
     public service: DataService, 
-    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     public loader: LoaderService,
@@ -163,7 +114,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
     const competitionType = this.route.snapshot.url[0].path as CompetitionType;
     this.competitionLoader.load(competitionType, yearParam).subscribe({
-      next: ({ profiles, config, teams, squads }) => {
+      next: ({ profiles, config, teams, squads, latestPlayerStats, playerStatsByTour }) => {
               this.profiles = profiles;
               this.consts = config;
               this.competitionType = config.type;
@@ -349,21 +300,20 @@ export class LeagueH2HPageComponent implements OnInit {
                 this.teamsArr.push(obj);
             });
 
+            const profilesByScore = Object.assign(
+              [],
+              this.profilesDetails
+                .map(profile => ({ id: profile.squadDetails.id, score: +profile.squadDetails.score }))
+                .sort(this.sortByScore),
+            );
+            this.profilesDetails.forEach(profile => {
+              const profileIndex = profilesByScore.findIndex(item => item.id === profile.id);
+              if (!profile.place_in_league) profile.place_in_league = {};
+              profile.place_in_league['ByScore'] = profileIndex + 1;
+            });
+
             // Игроки
-            const playersLinksArr = [];
-            const firstStageMaxTours = Math.max(...Object.keys(squads.data.matches));
-            const firstLastTour = !!this.consts.tour_link_2 && this.lastTour > firstStageMaxTours ? firstStageMaxTours : this.lastTour;
-            const secondLastTour = !!this.consts.tour_link_2 && this.lastTour > firstStageMaxTours ? this.lastTour - firstStageMaxTours : 0;
-
-            playersLinksArr.push(this.http.get(`${this.consts.tour_link + firstLastTour}`));
-
-            if (!!secondLastTour) playersLinksArr.push(this.http.get(`${this.consts.tour_link_2 + secondLastTour}`));
-
-            forkJoin([
-              ...playersLinksArr
-            ])
-            .subscribe({
-              next: ([objPlayers, objPlayers_2]) => {
+            const [objPlayers, objPlayers_2] = latestPlayerStats;
                 logger.debug('Игроки: ', objPlayers, objPlayers_2);
                 
                 if (!!objPlayers_2) {
@@ -438,24 +388,8 @@ export class LeagueH2HPageComponent implements OnInit {
                 if (this.route.snapshot.url[0].path ===  'spain') this.updatePrizes();
                 if (this.route.snapshot.url[0].path ===  'champions-league') this.updatePrizesCL();
                 if (this.route.snapshot.url[0].path ===  'world-cup') this.updatePrizesWC();
-              },
-              error: err => {
 
-              }  
-            });
-
-            const sourcesPlayersStats = [];
-            for (let i = 0; i < this.lastTour; i++) {
-              sourcesPlayersStats.push(this.http.get(`${this.consts.tour_link + (i+1)}`));
-            }
-
-            console.log(sourcesPlayersStats);
-
-            forkJoin([
-              ...sourcesPlayersStats
-            ])
-            .subscribe({
-              next: (dataPlayersStats) => {
+            const dataPlayersStats = playerStatsByTour;
                 console.log('dataPlayersStats', dataPlayersStats);
 
                 const playersPointsByTour = [];
@@ -510,21 +444,8 @@ export class LeagueH2HPageComponent implements OnInit {
 
 
                 if (this.route.snapshot.url[0].path ===  'world-cup') this.updatePrizesWC();
-              },
-              error: err => {
-
-              }  
-            });
             
 
-            const profilesByScore = Object.assign([], this.profilesDetails.map(profile => ({ id: profile.squadDetails.id, score: +profile.squadDetails.score })).sort(this.sortByScore));
-            
-            this.profilesDetails.forEach((profile, ind) => {
-              const prInd = profilesByScore.findIndex(p => p.id === profile.id); 
-              if (!profile.place_in_league) profile.place_in_league = {};
-              profile.place_in_league['ByScore'] = prInd + 1;
-            })
-              
             this.unitedProfiles = this.profilesDetails;
 
             logger.debug('this.unitedProfiles', this.unitedProfiles);
