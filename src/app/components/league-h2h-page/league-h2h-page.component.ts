@@ -19,6 +19,11 @@ import { LeagueH2HDataService } from './league-h2h-data.service';
 import { CompetitionDataLoaderService } from '../../competition/data/competition-data-loader.service';
 import { CompetitionType } from '../../competition/models/competition.models';
 import { calculateCup } from '../../competition/domain/cup-calculator';
+import {
+  calculateChampionsLeaguePrizes,
+  calculateSpainPrizes,
+  calculateWorldCupPrizes,
+} from '../../competition/domain/prize-calculator';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -723,274 +728,30 @@ export class LeagueH2HPageComponent implements OnInit {
     this.updateProfilesByStage();
   }
 
-  countPrizeNominees(profiles, prizeInd, keyId = "") {
-    const prizesObj = this.consts.prizes.find(prize => prize.id === prizeInd);
-    const valueSortCoef = +[1,2,3,9,10].includes(prizeInd);
-    const paramSortCoef = +[18].includes(prizeInd)
-
-    const placeVal2Prize = this.profilesDetails.find(profile => profile.id === '1115308799').place_in_league['Primera'];
-    const placeVal3Prize = this.profilesDetails.find(profile => profile.id === '1113412675').place_in_league['Primera'];
-    const placeVal10Prize = this.profilesDetails.find(profile => profile.id === '1116311079').place_in_league['Primera'];
-
-    profiles.forEach(profile => {
-      const profileResult = prizesObj.nomineesArr.find(nominee => nominee.profileId === profile.id);
-      
-      if (prizeInd === 7 && ["1028890564", "1116311743", "154819672"].includes(profile.id))
-        {
-          profile.prizes = {};
-          profile.team = {};
-          profile.results = {};
-          profile.team.title = "BallBoy17";
-          profile.results.subsCoef = 100;
-          profile.results.points = 0;
-        }
-
-      profile.prizes[prizeInd] = {
-        value: 
-          prizeInd === 1 ?
-            (!profile.place_in_league['Primera'] || profile.place_in_league['Primera'] < 4 ? 0 : profile.place_in_league['Primera'])
-          : prizeInd === 2 ?
-            (
-              !(placeVal2Prize === 10) ?
-                ( !profile.place_in_league['Primera'] || profile.place_in_league['Primera'] < 10 ? 0 : profile.place_in_league['Primera'])
-                : ( !profile.place_in_league['Segunda'] || profile.place_in_league['Segunda'] < 10 ? 0 : profile.place_in_league['Segunda'])
-              
-            )
-          : prizeInd === 3 ?
-            (
-              !(placeVal3Prize === 13) ?
-                (!profile.place_in_league['Primera'] || profile.place_in_league['Primera'] < 13 ? 0 : profile.place_in_league['Primera'])
-                : (!profile.place_in_league['Segunda'] || profile.place_in_league['Segunda'] < 13 ? 0 : profile.place_in_league['Segunda'])
-            )
-          : prizeInd === 4 ?
-            (!profile.place_in_league['Primera'] || +profile.sex === 1 ? 0 : profile.results.points['clausura'])
-          : prizeInd === 5 ?
-            (!profile.place_in_league['Segunda'] || +profile.sex === 1 ? 0 : profile.results.points['clausura'])
-          : prizeInd === 6 ?
-            (profile.isMartin === 1 ? profile.results.fo['common'] : 0)
-          : prizeInd === 7 ?
-            (!!profileResult ? profileResult.points : 0)
-          : prizeInd === 8 ?
-            Object.values(profile.team.rosters_by_tour).reduce((a, b) => {
-              return a + b.players.base.includes(keyId) + b.players.bench.includes(keyId);
-            }, 0)
-          : prizeInd === 9 ?
-            profile.results.teamCostAvg
-          : prizeInd === 10 ?
-            (!profile.place_in_league['Primera'] || profile.place_in_league['Primera'] <= placeVal10Prize ? 0 : profile.place_in_league['Primera'])
-          : prizeInd === 11 ?
-            Object.values(profile.team.rosters_by_tour).reduce((a, b) => {
-              return a + +(b.captain_id === keyId);
-            }, 0)
-          : prizeInd === 12 ?
-            profile.place_in_league['Apertura'] - profile.place_in_league['Common']
-          : prizeInd === 13 ?
-            profile.results.prizeMinWins
-          : prizeInd === 15 ?
-            profile.results.prizeMaxFoInTour
-          : prizeInd === 16 ?
-            profile.results.prizeMaxWinStrike
-          : prizeInd === 17 ?
-            profile.results.prizeMaxFoInLosedTour
-          : prizeInd === 18 ?
-            profile.results.prizeMaxStoppedNoLoseStrike
-          : prizeInd === 19 ?
-            profile.results.prizeMaxLosedDiff
-          : prizeInd === 20 ?
-            profile.results.cup.lowest_winning_pos_diff || 0
-          : prizeInd === 21 ?
-            profile.results.cup.avg_diff_fo
-          : '-',
-
-        sortParam: 
-          prizeInd === 7 ?
-            (!!profileResult ? profileResult.points : 0)
-            : profile.results.points
-      }
-    })
-
-    prizesObj.nomineesArr = this.profiles
-      .filter(profile => 
-        prizeInd !== 14
-        && (
-          prizeInd === 7 && profile.id === "1028890564"
-          || !["1028890564", "1116311743", "154819672"].includes(profile.id) && profile.prizes[prizeInd]?.value !== 0
-        )
-      )
-      .sort(
-        (a, b) =>
-          a.prizes[prizeInd].value === b.prizes[prizeInd].value ? 
-            (1 - 2 * paramSortCoef) * (b.prizes[prizeInd].sortParam - a.prizes[prizeInd].sortParam) : 
-            (1 - 2 * valueSortCoef) * (b.prizes[prizeInd].value - a.prizes[prizeInd].value)
-      )
-    
-    prizesObj.activeLeaders = prizesObj.nomineesArr.filter(nominee => {
-      return ( !prizesObj.excluded
-          || !!prizesObj.excluded && !prizesObj.excluded.includes(nominee.id)
-        ) &&
-        ( !prizesObj.isActivity
-          || !!prizesObj.isActivity && nominee.results.subsCoef > 50
-        ) &&
-        ( prizeInd !== 11 
-          || prizeInd === 11 && nominee.prizes[prizeInd].value >= 3
-        )
-    });
-  }
-
   updatePrizes() {
-    this.consts.prizes.forEach(prize =>
-      this.countPrizeNominees(
-        prize.id === 7 ?
-          this.profiles
-          : this.profiles.filter(profile => !["1028890564", "1116311743", "154819672"].includes(profile.id))
-        , prize.id
-        , prize.id === 8 ? 
-          "213955"
-          : prize.id === 11 ?
-            "213946"
-            : ""
-      )
-    )
-
-    this.consts.prizes.forEach((prize) => {
-      if (!!prize.isFinalStage) prize.state = 2;
-      if (!!prize.nomineesArr.length) prize.state = 1;
-      if (!prize.state && !prize.nomineesArr.length) prize.state = 3;
+    this.prizesToShow = calculateSpainPrizes({
+      prizes: this.consts.prizes,
+      profiles: this.profiles,
+      profilesDetails: this.profilesDetails,
     });
-
-    const prizeWinners = this.consts.prizes.map(prize => !!prize.activeLeaders[0] ? prize.activeLeaders[0].id : '');
-    ["1063076888", "1116843193"].forEach(id => prizeWinners.push(id));
-
-    const profilesExceptWinners = this.profilesDetails.filter(profile => !prizeWinners.includes(profile.id));
-    const activeProfilesExceptWinners = profilesExceptWinners.filter(profile => profile.results.subsCoef > 50 && !this.consts.prizes[13].excluded.includes(profile.id));
-
-    this.consts.prizes[13].nomineesArr = activeProfilesExceptWinners;
-    this.consts.prizes[13].activeLeaders.push(activeProfilesExceptWinners[Math.floor(Math.random() * activeProfilesExceptWinners.length)]);
-    this.consts.prizes[13].state = 1;
-
-    this.prizesToShow = this.consts.prizes;
 
     logger.debug('this.prizesToShow', this.prizesToShow);
   }
 
   updatePrizesCL() {
-    this.consts.prizes.forEach((prize, prizeInd) => {
-      const valueSortCoef = +[].includes(prizeInd);
-      const paramSortCoef = +[].includes(prizeInd);
-
-      this.profilesDetails.forEach(profile => {
-        profile.prizes[prize.id] = {
-          value: 
-            prize.id === 1 ?
-              (profile.place_in_league['ByScore'] < 7 ? 0 : profile.score)
-            : prize.id === 2 ?
-              (profile.squadDetails.max_medals_in_a_row < 2 ? 0 : profile.squadDetails.max_medals_in_a_row)
-            : prize.id === 3 ?
-              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
-            : prize.id === 4 ?
-              !!prize.nomineesArr && prize.nomineesArr[0] === profile.id ? 1 : 0
-            : 0,
-
-          sortParam: 
-            prize.id === 2 ?
-              profile.score
-              : profile.results.points
-        }
-      })
-
-      prize.nomineesArr = this.profilesDetails
-        .filter(profile => profile.prizes[prize.id].value > 0)
-        .sort(
-          (a, b) =>
-            a.prizes[prize.id].value === b.prizes[prize.id].value ? 
-              (1 - 2 * paramSortCoef) * (b.prizes[prize.id].sortParam - a.prizes[prize.id].sortParam) : 
-              (1 - 2 * valueSortCoef) * (b.prizes[prize.id].value - a.prizes[prize.id].value)
-        )
-    
-      prize.activeLeaders = prize.nomineesArr.filter(nominee => {
-        return ( !prize.excluded
-            || !!prize.excluded && !prize.excluded.includes(nominee.id)
-          ) &&
-          ( !prize.isActivity
-            || !!prize.isActivity && nominee.results.subsCoef > 50
-          ) &&
-          ( prizeInd !== 11 
-            || prizeInd === 11 && nominee.prizes[prizeInd].value >= 3
-          )
-      });
+    this.prizesToShow = calculateChampionsLeaguePrizes({
+      prizes: this.consts.prizes,
+      profiles: this.profiles,
+      profilesDetails: this.profilesDetails,
     });
-
-    this.consts.prizes.forEach((prize) => {
-      if (!!prize.isFinalStage) prize.state = 2;
-      if (!!prize.nomineesArr.length) prize.state = 1;
-      if (!prize.state && !prize.nomineesArr.length) prize.state = 3;
-    });
-    
-    this.prizesToShow = this.consts.prizes;
   }
 
   updatePrizesWC() {
-    this.consts.prizes.forEach((prize, prizeInd) => {
-      const valueSortCoef = +[2].includes(prizeInd);
-      const paramSortCoef = +[].includes(prizeInd);
-      const isManual = !!prize.isManual;
-
-      this.profilesDetails.forEach(profile => {
-        profile.prizes[prize.id] = {
-          value: 
-            prize.id === 1 ?
-              prize.defaultNomineesArr.includes(profile.id) ? 1 : 0
-            : prize.id === 2 ?
-            (profile.isMartinWC === 1 ? profile.score : 0)
-            : prize.id === 3 ?
-              profile.score
-            : prize.id === 4 ?
-              prize.defaultNomineesArr.includes(profile.id) ? 1 : 0
-            : prize.id === 5 ?
-              profile.results.uniqueUsedPlayers.length
-            : prize.id === 6 ?
-              profile.results.portugezePoints
-            : prize.id === 7 ?
-              profile.results.prizeMaxFoInLosedTour
-            : prize.id === 8 ?
-              +profile.results.larinPoints
-            : prize.id === 9 ?
-              profile.score
-            : 0,
-
-          sortParam: 
-            prize.id === 2 ?
-              profile.score
-            : profile.results.points
-        }
-      })
-
-      prize.nomineesArr = this.profilesDetails
-        .filter(profile => profile.prizes[prize.id].value > 0)
-        .sort(
-          (a, b) =>
-            a.prizes[prize.id].value === b.prizes[prize.id].value ? 
-              (1 - 2 * paramSortCoef) * (b.prizes[prize.id].sortParam - a.prizes[prize.id].sortParam) : 
-              (1 - 2 * valueSortCoef) * (b.prizes[prize.id].value - a.prizes[prize.id].value)
-        )
-    
-      prize.activeLeaders = prize.nomineesArr.filter(nominee => {
-        return ( !prize.excluded
-            || !!prize.excluded && !prize.excluded.includes(nominee.id)
-          ) &&
-          ( !prize.isActivity
-            || !!prize.isActivity && nominee.results.subsCoef > 50
-          )
-      });
+    this.prizesToShow = calculateWorldCupPrizes({
+      prizes: this.consts.prizes,
+      profiles: this.profiles,
+      profilesDetails: this.profilesDetails,
     });
-
-    this.consts.prizes.forEach((prize) => {
-      if (!!prize.isFinalStage) prize.state = 2;
-      if (!!prize.nomineesArr.length) prize.state = 1;
-      if (!prize.state && !prize.nomineesArr.length) prize.state = 3;
-    });
-    
-    this.prizesToShow = this.consts.prizes;
   }
 
   getMedian(arr: number[]): number {
