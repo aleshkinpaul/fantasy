@@ -12,6 +12,7 @@ import {
   SeasonCompetitionConfig,
 } from '../models/competition.models';
 import { validateCompetitionData } from '../config/competition-data.validator';
+import { mergeCompetitionStages } from './competition-stages.merger';
 
 @Injectable({ providedIn: 'root' })
 export class CompetitionDataLoaderService {
@@ -50,7 +51,10 @@ export class CompetitionDataLoaderService {
               squads2: responses['squads2'],
             };
             validateCompetitionData(data);
-            return data;
+            return {
+              ...data,
+              squads: mergeCompetitionStages(data.squads, data.squads2),
+            };
           })
         );
       })

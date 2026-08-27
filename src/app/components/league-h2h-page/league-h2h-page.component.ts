@@ -168,7 +168,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
     const competitionType = this.route.snapshot.url[0].path as CompetitionType;
     this.competitionLoader.load(competitionType, yearParam).subscribe({
-      next: ({ profiles, config, teams, squads, squads2 }) => {
+      next: ({ profiles, config, teams, squads }) => {
               this.profiles = profiles;
               this.consts = config;
               this.competitionType = config.type;
@@ -176,36 +176,8 @@ export class LeagueH2HPageComponent implements OnInit {
               this.playOffToursArr = config.cup?.matchesTours || [];
               this.teams = teams;
               this.squads = squads;
-              this.squads_2 = squads2;
               
               this.lastTour = Object.keys(this.squads.data.tours).length;
-
-              if (!!this.squads_2) {
-                let firstToursCount = 0;
-                Object.values(this.squads.data.players).forEach(player => {
-                  const player2 = Object.values(this.squads_2.data.players).find(player2 => player2.id === player.id);
-                  
-                  firstToursCount = Object.keys(player.team.results_by_tour).length;
-                  
-                  const firstToursPoints = player.team.results_by_tour[firstToursCount].total_score;
-
-                  Object.values(player2.team.results_by_tour).forEach((match2,ind2) => {
-                    match2.total_score = (+match2.total_score + +firstToursPoints).toString();
-                    player.team.results_by_tour[firstToursCount + ind2 + 1] = match2;
-                  })
-                  
-                  Object.values(player2.team.rosters_by_tour).forEach((match2,ind2) => {
-                    player.team.rosters_by_tour[firstToursCount + ind2 + 1] = match2;
-                  })
-                })
-
-                Object.values(this.squads_2.data.tours).forEach(tour => {
-                  tour.number = (+tour.number + firstToursCount).toString();
-                  this.squads.data.tours[tour.number] = tour;
-                });
-
-                this.lastTour += Object.keys(this.squads_2.data.tours).length
-              }
               
               this.updateTabs();
 
@@ -329,7 +301,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
                   profile.squadDetails = {
                     id: squadInfo?.id,
-                    name: squadInfo?.team.title || this.squads_2?.data.players[profile.id].team.title,
+                    name: squadInfo.team.title,
                     score: squadInfo?.team.results_by_tour[this.lastTour].total_score,
                     diff: this.lastTour > 1 ?
                       calculatePlaceAfterTour(this.squads, profile.id, this.lastTour - 1)
