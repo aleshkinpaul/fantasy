@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../service/data.service';
@@ -74,7 +73,7 @@ export class LeagueH2HPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const yearParam = +this.route.snapshot.queryParams?.year || '';
+    const yearParam = +this.route.snapshot.queryParams['year'] || 0;
     
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
@@ -204,8 +203,8 @@ export class LeagueH2HPageComponent implements OnInit {
 
     this.setQueryParam(this.activeTabs);
     this.isShowUnitedTableByPoints = false;
-    this.updateStageTypeByTabId(ind);
-    this.updateLeagueTypeByConfId(0);
+    this.updateStageTypeByTabId();
+    this.updateLeagueTypeByConfId();
     
     this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
     this.getMatchesForLeague();
@@ -214,7 +213,7 @@ export class LeagueH2HPageComponent implements OnInit {
   setConfId(ind) {
     this.activeTabs.confId = ind;
     this.setQueryParam(this.activeTabs);
-    this.updateLeagueTypeByConfId(ind);
+    this.updateLeagueTypeByConfId();
     this.updateProfilesByStage(this.chosenStage, this.chosenLeague);
     this.getMatchesForLeague();
   }
@@ -235,10 +234,10 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   updateTabs() {    
-    const tabIdParam = +this.route.snapshot.queryParams?.tabId || '';
-    const confIdParam = +this.route.snapshot.queryParams?.confId || '';
-    const confTabIdParam = +this.route.snapshot.queryParams?.confTabId || '';
-    const activeTourIdParam = +this.route.snapshot.queryParams?.tourId || '';
+    const tabIdParam = +this.route.snapshot.queryParams['tabId'] || '';
+    const confIdParam = +this.route.snapshot.queryParams['confId'] || '';
+    const confTabIdParam = +this.route.snapshot.queryParams['confTabId'] || '';
+    const activeTourIdParam = +this.route.snapshot.queryParams['tourId'] || '';
 
     if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
     if (!!confIdParam) this.activeTabs.confId = confIdParam;
