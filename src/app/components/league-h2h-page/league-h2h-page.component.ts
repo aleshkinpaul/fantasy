@@ -31,6 +31,7 @@ import {
   getPlaceAfterTour as calculatePlaceAfterTour,
   getSeasonMedals,
 } from '../../competition/domain/standings-calculator';
+import { calculateSquadRatings } from '../../competition/domain/rating-calculator';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -81,12 +82,6 @@ export class LeagueH2HPageComponent implements OnInit {
   public lastTour: number = 1;
 
   private playersArr: string[] = [];
-  private ratingMax: number = 0;
-  private ratingMed: number = 0;
-  private ratingKoefs = [19, 15, 12, 10, 9];
-  private lastToursDetails = [];
-  private maxResultValue = 1;
-  private minResultValue = 1;
   public playersRatingArr: number[] = [];
   private drawGap = 0;
   private playOffToursArr: number[] = [];
@@ -183,15 +178,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
               this.playersArr = Object.values(this.squads.data.players).map(player => player.id);
               
-              Object.values(this.squads.data.tours)
-              .forEach((tour, ind) => {
-                const objMaxMin = this.getMinMaxInTour(tour.number);
-                tour.max = objMaxMin.max;
-                tour.med = objMaxMin.med;
-                tour.min = objMaxMin.min;
-              });
-
-              this.calcRating();
+              this.playersRatingArr = calculateSquadRatings(this.squads, this.lastTour);
               const squadDetailsValue = [];
 
               const matches = this.consts.matches;
@@ -662,16 +649,6 @@ export class LeagueH2HPageComponent implements OnInit {
     });
   }
 
-  getMedian(arr: number[]): number {
-    // Delegate to service
-    return this.dataService.getMedian(arr);
-  }
-
-  getCurrentStage(tourNumber: number): string {
-    // Delegate to service
-    return this.dataService.getCurrentStage(tourNumber, this.consts.stages[0].lastTour);
-  }
-
   setTabId(ind) {
     this.activeTabs.tabId = ind;
     this.activeTabs.confId = 0;
@@ -782,71 +759,6 @@ export class LeagueH2HPageComponent implements OnInit {
     return obj2.count - obj1.count;
   }       
 
-  calcRating() {
-    this.lastToursDetails = [];
-
-    for (let i = 0; i < this.lastTour; i++) {
-      if (i > 4) break;
-      this.lastToursDetails.push(this.getMinMaxInTour(this.lastTour - i));
-    }
-
-    this.ratingMed = -this.ratingKoefs.reduce((acc, cur) => acc + cur, 0);
-
-    this.maxResultValue = this.lastToursDetails.reduce((acc, cur, ind) =>
-      acc + (cur.max - cur.med)/cur.med * this.ratingKoefs[ind]
-    , 0) - this.ratingMed;
-
-    this.minResultValue = this.lastToursDetails.reduce((acc, cur, ind) =>
-      acc + (cur.min - cur.med)/cur.med * this.ratingKoefs[ind]
-    , 0) - this.ratingMed;
-
-    Object.values(this.squads.data.players).forEach(player => {
-      const lastPlayerToursDetails = [];
-
-      for (let i = 0; i < this.lastTour; i++) {
-        if (i > 4) break;
-        lastPlayerToursDetails.push(this.squads.data.players[player.id].team.results_by_tour[this.lastTour - i].tour_score);
-      }
-  
-      const playersRating = this.lastToursDetails.reduce((acc, cur, ind) =>
-        acc + (lastPlayerToursDetails[ind] - cur.med)/cur.med * this.ratingKoefs[ind]
-      , 0);
-  
-      this.squads.data.players[player.id].team.rating = Math.round((playersRating - this.ratingMed)/this.maxResultValue*1000)/100;
-      this.playersRatingArr.push(this.squads.data.players[player.id].team.rating);
-    });
-
-    this.playersRatingArr.sort((a, b) => a - b);
-  }
-
-  calcPlayerRating(id) {
-    const lastPlayerToursDetails = [];
-
-      for (let i = 0; i < this.lastTour; i++) {
-        if (i > 4) break;
-        lastPlayerToursDetails.push(this.squads.data.players[id].team.results_by_tour[this.lastTour - i].tour_score);
-      }
-
-    const playersRating = this.lastToursDetails.reduce((acc, cur, ind) =>
-      acc + (lastPlayerToursDetails[ind] - cur.med)/cur.med * this.ratingKoefs[ind]
-    , 0);
-
-    return Math.round((playersRating - this.ratingMed)/this.maxResultValue*1000)/100;
-  }
-
-  getMinMaxInTour(tourNum): any {
-    const tourResults = Object.values(this.squads.data.players)
-      .map(player => player.team.results_by_tour[tourNum.toString()].tour_score);
-
-    tourResults.sort(this.sortCustom);
-
-    return {
-      max: tourResults[0],
-      med: this.getMedian(tourResults),
-      min: tourResults[tourResults.length - 1]
-    };
-  }
-
   getPosition(num) {
     if (num === "12") return 'нп';
     if (num === "11") return 'пз';
@@ -864,7 +776,4 @@ export class LeagueH2HPageComponent implements OnInit {
     return b.score - a.score;
   }
 
-  sortCustom(a, b): number {
-    return (b - a);
-  }
 }
