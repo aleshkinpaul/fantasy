@@ -18,6 +18,7 @@ import { PrizesListComponent } from './prizes-list.component';
 import { LeagueH2HDataService } from './league-h2h-data.service';
 import { CompetitionDataLoaderService } from '../../competition/data/competition-data-loader.service';
 import { CompetitionType } from '../../competition/models/competition.models';
+import { calculateCup } from '../../competition/domain/cup-calculator';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -709,68 +710,12 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   updateCupMatches() {
-    const actualCupTour = Math.max(
-      ...this.consts.cup.matchesTours.filter(val => val <= this.lastTour)
-    );
-    const indOfActualCupTour = this.consts.cup.matchesTours.indexOf(actualCupTour) + 1;
-
-    this.profilesDetails.forEach(profile => {
-      profile.results.cup = {
-        fo: 0,
-        missed_fo: 0,
-        diff_fo: 0,
-        matchesPlayed: 0,
-        avg_diff_fo: 0,
-        diff_fo_arr: [],
-        standings: [],
-        lowest_winning_pos_diff: null
-      };
+    calculateCup({
+      cup: this.consts.cup,
+      profiles: this.profilesDetails,
+      squads: this.squads,
+      lastTour: this.lastTour,
     });
-
-    for (let i = 0; i < indOfActualCupTour; i++) {  
-      this.consts.cup.matches[i].forEach(match => {
-        const tour = this.consts.cup.matchesTours[i];
-
-        match.home_score = +this.squads.data.players[match.home].team.results_by_tour[tour].tour_score;
-        match.away_score = +this.squads.data.players[match.away].team.results_by_tour[tour].tour_score;
-        match.result = Math.abs(match.home_score - match.away_score) === 0 ? 0 :
-          match.home_score > match.away_score ? 1 : 2;
-
-        const homeProfile = this.profilesDetails.find(x => x.id === match.home);
-        const awayProfile = this.profilesDetails.find(x => x.id === match.away);
-
-        homeProfile.results.cup.fo += match.home_score;
-        homeProfile.results.cup.missed_fo += match.away_score;
-        homeProfile.results.cup.diff_fo = homeProfile.results.cup.fo - homeProfile.results.cup.missed_fo;
-        homeProfile.results.cup.diff_fo_arr.push(match.home_score - match.away_score);
-        homeProfile.results.cup.matchesPlayed += 1;
-        homeProfile.results.cup.standings.push(this.getPlaceAfterTour(homeProfile.id, tour));
-        if (homeProfile.results.cup.matchesPlayed > 3) homeProfile.results.cup.avg_diff_fo = Math.round(homeProfile.results.cup.diff_fo / homeProfile.results.cup.matchesPlayed * 100) / 100;
-
-        awayProfile.results.cup.fo += match.away_score;
-        awayProfile.results.cup.missed_fo += match.home_score;
-        awayProfile.results.cup.diff_fo = awayProfile.results.cup.fo - awayProfile.results.cup.missed_fo;
-        awayProfile.results.cup.diff_fo_arr.push(match.away_score - match.home_score);
-        awayProfile.results.cup.matchesPlayed += 1;
-        awayProfile.results.cup.standings.push(this.getPlaceAfterTour(awayProfile.id, tour));
-        if (awayProfile.results.cup.matchesPlayed > 3) awayProfile.results.cup.avg_diff_fo = Math.round(awayProfile.results.cup.diff_fo / awayProfile.results.cup.matchesPlayed * 100) / 100;
-      
-        if (match.result === 1) {
-          const curDiff = this.getPlaceAfterTour(homeProfile.id, tour) - this.getPlaceAfterTour(awayProfile.id, tour);
-
-          if (homeProfile.results.cup.lowest_winning_pos_diff === null) homeProfile.results.cup.lowest_winning_pos_diff = curDiff;
-          homeProfile.results.cup.lowest_winning_pos_diff = Math.max(homeProfile.results.cup.lowest_winning_pos_diff, curDiff);
-        }
-
-        if (match.result === 2) {
-          const curDiff = this.getPlaceAfterTour(awayProfile.id, tour) - this.getPlaceAfterTour(homeProfile.id, tour);
-
-
-          if (awayProfile.results.cup.lowest_winning_pos_diff === null) awayProfile.results.cup.lowest_winning_pos_diff = curDiff;
-          awayProfile.results.cup.lowest_winning_pos_diff = Math.max(awayProfile.results.cup.lowest_winning_pos_diff, curDiff);
-        }
-      })
-    }
   }
 
   toggleUnitedRating() {
