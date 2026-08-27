@@ -2,6 +2,7 @@ import {
   CompetitionCup,
   FantasyFullInfoResponse,
 } from '../models/competition.models';
+import { getPlaceAfterTour } from './standings-calculator';
 
 interface CupProfile {
   id: string;
@@ -93,24 +94,4 @@ function updateLowestWinningDifference(profile: CupProfile, difference: number):
   const result = profile.results.cup!;
   if (result.lowest_winning_pos_diff === null) result.lowest_winning_pos_diff = difference;
   result.lowest_winning_pos_diff = Math.max(result.lowest_winning_pos_diff, difference);
-}
-
-function getPlaceAfterTour(squads: FantasyFullInfoResponse, profileId: string, tour: number): number {
-  const standings = Object.values(squads.data.players)
-    .map(player => ({ id: player.id, score: +player.team.results_by_tour[tour].total_score, position: 0 }))
-    .sort((left, right) => right.score - left.score);
-
-  standings.forEach((player, index) => {
-    player.position = index === 0
-      ? 1
-      : standings[index - 1].score === player.score
-        ? standings[index - 1].position
-        : standings[index - 1].position < 3
-          ? standings[index - 1].position + 1
-          : index + 1;
-  });
-
-  const profile = standings.find(player => player.id === profileId);
-  if (!profile) throw new Error(`Не найдено место участника ${profileId} после тура ${tour}`);
-  return profile.position;
 }

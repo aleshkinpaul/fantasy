@@ -24,6 +24,13 @@ import {
   calculateSpainPrizes,
   calculateWorldCupPrizes,
 } from '../../competition/domain/prize-calculator';
+import {
+  buildLeagueRatings,
+  compareByFantasyScore,
+  compareStandings,
+  getPlaceAfterTour as calculatePlaceAfterTour,
+  getSeasonMedals,
+} from '../../competition/domain/standings-calculator';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -302,102 +309,31 @@ export class LeagueH2HPageComponent implements OnInit {
                   competitionType: this.competitionType,
                   playOffTours: this.playOffToursArr,
                 });
-                this.profilesDetails = Object.assign([], profilesDetails.sort(this.sortStandings.bind(this)))
+                this.profilesDetails = Object.assign(
+                  [],
+                  profilesDetails.sort((left, right) => compareStandings(left, right, this.chosenStage)),
+                );
               }
 
               if (!!this.consts.cup)
                 this.updateCupMatches();
 
-              // общий зачет в баллах
-              this.profilesDetails.forEach(profile => {
-                this.consts.stages.forEach((stage, stageInd) => {
-                  stage.leagues.forEach(league => {
-                    if (!profile.leagues) profile.leagues = [];
-
-                    if (league.profiles.includes(profile.id))
-                      profile.leagues[stageInd === 0 ? 'apertura' : 'clausura'] = league.name;
-                  })
-                })
-              });
-
-              // рейтинг по лигам
-              const tempChosenStage = this.chosenStage;
-              this.consts.stages.forEach((stage, stageInd) => {
-                this.chosenStage = stage.name.toLowerCase();
-
-                stage.leagues.forEach(league => {
-                  let profilesForLeague = this.profilesDetails
-                    .filter(x => !!x.leagues[this.chosenStage] && x.leagues[this.chosenStage] === league.name)
-                  
-                  profilesForLeague.sort(this.sortStandings.bind(this));
-
-                  this.leaguesRatings[league.name] = profilesForLeague;
-                })
-              });
-
-              let profilesForLeague = this.profilesDetails.map(profile => Object.assign({}, profile));
-              this.chosenStage = 'common';
-              profilesForLeague.sort(this.sortStandings.bind(this));
-              this.leaguesRatings['Common'] = profilesForLeague;
-
-              profilesForLeague = this.profilesDetails.map(profile => Object.assign({}, profile));
-              this.chosenStage = 'apertura';
-              profilesForLeague.sort(this.sortStandings.bind(this));
-              this.leaguesRatings['Apertura'] = profilesForLeague;
-
-              profilesForLeague = this.profilesDetails.map(profile => Object.assign({}, profile));
-              this.chosenStage = 'common';
-              profilesForLeague.sort(this.sortStandingsByFO.bind(this));
-              this.leaguesRatings['CommonFO'] = profilesForLeague;
-
-              this.chosenStage = tempChosenStage;
-
-              // фиксация мест в каждой лиге у команд
-              this.consts.stages.forEach((stage, stageInd) => {
-                const stageName = stage.name.toLowerCase();
-
-                stage.leagues.forEach(league => {
-                  this.leaguesRatings[league.name].forEach((profile, ind) => {
-                    if (!profile.place_in_league) profile.place_in_league = {};
-                    profile.place_in_league[league.name] = ind + 1;
-                  })
-                })
-              });
-
-              if (!!this.leaguesRatings['Common'])
-                this.leaguesRatings['Common'].forEach((profile, ind) => {
-                  const pr = this.profilesDetails.find(p => p.id === profile.id);
-                  if (!pr.place_in_league) pr.place_in_league = {};
-                  pr.place_in_league['Common'] = ind + 1;
-                })
-
-              if (!!this.leaguesRatings['Apertura'])
-                this.leaguesRatings['Apertura'].forEach((profile, ind) => {
-                  const pr = this.profilesDetails.find(p => p.id === profile.id); 
-                  if (!pr.place_in_league) pr.place_in_league = {};
-                  pr.place_in_league['Apertura'] = ind + 1;
-                })
-
-              if (!!this.leaguesRatings['CommonFO'])
-                this.leaguesRatings['CommonFO'].forEach((profile, ind) => {
-                  const pr = this.profilesDetails.find(p => p.id === profile.id); 
-                  if (!pr.place_in_league) pr.place_in_league = {};
-                  pr.place_in_league['CommonFO'] = ind + 1;
-                })
+              this.leaguesRatings = buildLeagueRatings(this.profilesDetails, this.consts.stages);
               
               this.playersArr.map(playerId => {
                 const profile = this.profiles.find(profile => profile.id === playerId);
                 
                 if (!!profile) {
                   const squadInfo = this.squads.data.players[profile.id];
-                  const objMedals = this.getMedalsInSeason(profile.id);
+                  const objMedals = getSeasonMedals(this.squads, profile.id, this.lastTour);
 
                   profile.squadDetails = {
                     id: squadInfo?.id,
                     name: squadInfo?.team.title || this.squads_2?.data.players[profile.id].team.title,
                     score: squadInfo?.team.results_by_tour[this.lastTour].total_score,
                     diff: this.lastTour > 1 ?
-                      this.getPlaceAfterTour(profile.id, this.lastTour - 1) - this.getPlaceAfterTour(profile.id, this.lastTour)
+                      calculatePlaceAfterTour(this.squads, profile.id, this.lastTour - 1)
+                      - calculatePlaceAfterTour(this.squads, profile.id, this.lastTour)
                       : 0,
                     rating_of_prize_positions: objMedals.gold * 3 + objMedals.silver * 2 + objMedals.bronze,
                     gold_medals: objMedals.gold,
@@ -832,23 +768,11 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   sortStandings(a, b) {
-    if (a.results.points[this.chosenStage] > b.results.points[this.chosenStage]) return -1;
-    if (a.results.points[this.chosenStage] < b.results.points[this.chosenStage]) return 1;
-    
-    if (a.results.diff_fo[this.chosenStage] > b.results.diff_fo[this.chosenStage]) return -1;
-    if (a.results.diff_fo[this.chosenStage] < b.results.diff_fo[this.chosenStage]) return 1;
-    
-    if (a.results.fo[this.chosenStage] > b.results.fo[this.chosenStage]) return -1;
-    if (a.results.fo[this.chosenStage] < b.results.fo[this.chosenStage]) return 1;
-
-    return 0;
+    return compareStandings(a, b, this.chosenStage);
   }
 
   sortStandingsByFO(a, b) {
-    if (a.score > b.score) return -1;
-    if (a.score < b.score) return 1;
-
-    return 0;
+    return compareByFantasyScore(a, b);
   }
 
   getProfileRating(profileId) {
@@ -949,81 +873,6 @@ export class LeagueH2HPageComponent implements OnInit {
       med: this.getMedian(tourResults),
       min: tourResults[tourResults.length - 1]
     };
-  }
-
-  getMedalsInSeason(id) {
-    const obj = {
-      gold: 0,
-      silver: 0,
-      bronze: 0,
-      medalsArr: [],
-      curMedalsInARow: 0,
-      maxMedalsInARow: 0
-    }
-
-    for (let i = 1; i <= this.lastTour; i++) {
-      
-      const placeInTour = this.getPlaceInTour(id, i);
-
-      obj.gold += +(placeInTour === 1);
-      obj.silver += +(placeInTour === 2);
-      obj.bronze += +(placeInTour === 3);
-
-      obj.medalsArr.push(placeInTour <= 3 ? placeInTour : 0);
-
-      if (placeInTour <= 3) {
-        obj.curMedalsInARow += 1;
-        obj.maxMedalsInARow = Math.max(obj.maxMedalsInARow, obj.curMedalsInARow);
-      } else {
-        obj.curMedalsInARow = 0;
-      }
-    }
-
-    return obj;
-  }
-
-  getPlaceInTour(id, tour) {
-    const standingsArr = Object.values(this.squads.data.players).map(player => {
-      return {
-        id: player.id,
-        score: player.team.results_by_tour[tour].tour_score
-      }
-    });
-
-    standingsArr.sort(this.sortByScore);
-    standingsArr.forEach((player, ind) => {
-      player.position =
-        ind === 0 ? 
-          1 :
-          standingsArr[ind-1].score === player.score ? 
-            standingsArr[ind-1].position : 
-            standingsArr[ind-1].position + 1;
-    });
-
-    return standingsArr.find(player => player.id === id).position;
-  }
-
-  getPlaceAfterTour(id, tour) {
-    const standingsArr = Object.values(this.squads.data.players).map(player => {
-      return {
-        id: player.id,
-        score: player.team.results_by_tour[tour].total_score
-      }
-    });
-
-    standingsArr.sort(this.sortByScore);
-    standingsArr.forEach((player, ind) => {
-      player.position =
-        ind === 0 ? 
-          1 :
-          standingsArr[ind-1].score === player.score ? 
-            standingsArr[ind-1].position : 
-            standingsArr[ind-1].position < 3 ?
-              standingsArr[ind-1].position + 1 :
-              ind + 1;
-    });
-
-    return standingsArr.find(player => player.id === id).position;
   }
 
   getPosition(num) {
