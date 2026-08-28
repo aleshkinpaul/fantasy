@@ -5,6 +5,11 @@ import { LoaderService } from 'src/app/service/loader.service';
 import { Observable } from 'rxjs';
 import { CompetitionMatch } from '../../competition/models/competition.models';
 import { IActiveCompetitionTabs, IProfileDetails } from '../../models/domain';
+import {
+  findProfile,
+  getMatchResultForProfile,
+  requireProfile,
+} from '../../competition/domain/competition-match-selectors';
 
 @Component({
   selector: 'app-matches',
@@ -31,15 +36,11 @@ export class MatchesComponent {
   }
 
   getMatchResult(matchesArr: CompetitionMatch[], profileId: string): 0 | 1 | 2 {
-    const match = this.requireMatch(matchesArr, profileId);
-    return match.result === 0 ? 0 :
-      match.home === profileId ?
-        (match.result === 1 ? 1 : 2) :
-        (match.result === 2 ? 1 : 2);
+    return getMatchResultForProfile(matchesArr, profileId);
   }
 
   getProfileInfo(profileId: string): IProfileDetails | undefined {
-    return this.profilesArr.find(profile => profile.id === profileId);
+    return findProfile(this.profilesArr, profileId);
   }
 
   getTeamId(profileId: string): string {
@@ -55,15 +56,7 @@ export class MatchesComponent {
   }
 
   private requireProfile(profileId: string): IProfileDetails {
-    const profile = this.getProfileInfo(profileId);
-    if (!profile) throw new Error(`Не найден профиль ${profileId}`);
-    return profile;
-  }
-
-  private requireMatch(matches: CompetitionMatch[], profileId: string): CompetitionMatch {
-    const match = matches.find(item => item.home === profileId || item.away === profileId);
-    if (!match) throw new Error(`Не найден матч профиля ${profileId}`);
-    return match;
+    return requireProfile(this.profilesArr, profileId);
   }
 }
 
