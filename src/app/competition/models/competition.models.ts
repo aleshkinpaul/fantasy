@@ -95,7 +95,6 @@ export interface CompetitionMatch {
 export interface CompetitionLeague {
   name: string;
   profiles: string[];
-  schedule?: Record<string, string[]>;
 }
 
 export interface CompetitionStage {
