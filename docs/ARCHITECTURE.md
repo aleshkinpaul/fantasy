@@ -72,7 +72,7 @@ flowchart LR
 6. `CompetitionFacade` запускает H2H, таблицы, рейтинг, кубок, специальные показатели и призы;
 7. компонент получает готовую модель и управляет только вкладками и query-параметрами.
 
-Вычислительные модули находятся в `src/app/competition/domain`, загрузка и facade — в `competition/data`, валидация и наборы сезонных правил — в `competition/config`. Набор выбирается полем `rulesId` конфигурации; для старых snapshots действует совместимый fallback `season-${yearStart}`.
+Вычислительные модули находятся в `src/app/competition/domain`, загрузка и facade — в `competition/data`, валидация и наборы сезонных правил — в `competition/config`. Registry содержит специальные id и лимиты замен по турам. Набор выбирается полем `rulesId` конфигурации; для старых snapshots действует совместимый fallback `season-${yearStart}`.
 
 `LoaderInterceptor` вызывает loader для каждого HTTP-запроса и скрывает его через секунду после завершения. Сейчас loader хранит только boolean, поэтому параллельные запросы могут преждевременно скрыть индикатор.
 

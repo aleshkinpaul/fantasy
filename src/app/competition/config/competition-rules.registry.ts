@@ -28,6 +28,24 @@ const RULES: Record<string, CompetitionRuntimeRules> = {
         prize10: '1116311079',
       },
     },
+    substitutions: {
+      spain: {
+        defaultLimit: 3,
+        limitsByTourIndex: { '19': 4, '20': 4, '21': 4 },
+      },
+      'world-cup': {
+        defaultLimit: 0,
+        limitsByTourIndex: {
+          '1': 4,
+          '2': 4,
+          '3': 15,
+          '4': 4,
+          '5': 4,
+          '6': 6,
+          '7': 6,
+        },
+      },
+    },
   },
 };
 

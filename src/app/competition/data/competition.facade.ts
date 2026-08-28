@@ -79,6 +79,7 @@ export class CompetitionFacade {
         drawGap: config.drawGap || 0,
         competitionType: config.type,
         playOffTours: config.cup?.matchesTours || [],
+        substitutionRules: rules.substitutions[config.type],
       });
       profilesDetails.sort((left, right) => compareStandings(left, right, 'common'));
     }

@@ -155,9 +155,15 @@ export interface SpainPrizeRules {
   };
 }
 
+export interface SubstitutionRules {
+  defaultLimit: number;
+  limitsByTourIndex: Record<string, number>;
+}
+
 export interface CompetitionRuntimeRules {
   playerStats: SpecialPlayerRules;
   spainPrizes?: SpainPrizeRules;
+  substitutions: Partial<Record<CompetitionType, SubstitutionRules>>;
 }
 
 export interface SeasonCompetitionConfig {

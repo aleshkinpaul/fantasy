@@ -3,6 +3,7 @@ import {
   CompetitionMatch,
   CompetitionType,
   FantasyFullInfoResponse,
+  SubstitutionRules,
 } from '../../competition/models/competition.models';
 
 export interface IMatchResult {
@@ -28,6 +29,7 @@ export interface TourProcessingContext {
   drawGap: number;
   competitionType: CompetitionType;
   playOffTours: number[];
+  substitutionRules?: SubstitutionRules;
 }
 
 @Injectable({
@@ -44,6 +46,7 @@ export class LeagueH2HDataService {
       drawGap,
       competitionType,
       playOffTours,
+      substitutionRules,
     } = context;
 
     matches.forEach(match => {
@@ -104,11 +107,17 @@ export class LeagueH2HDataService {
         ? this.getActiveSquad(awayProfile.team.rosters_by_tour, tourIndex)
         : [];
 
-      if (competitionType === 'spain') {
-        this.updateSubs(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
-      }
-      if (competitionType === 'world-cup') {
-        this.updateSubsWC(homeProfile, awayProfile, tourIndex, homeActSquad, homePrevSquad, awayActSquad, awayPrevSquad);
+      if (substitutionRules) {
+        this.updateSubs(
+          homeProfile,
+          awayProfile,
+          tourIndex,
+          homeActSquad,
+          homePrevSquad,
+          awayActSquad,
+          awayPrevSquad,
+          substitutionRules,
+        );
       }
 
       this.updateCommonResults(homeProfile);
@@ -281,15 +290,14 @@ export class LeagueH2HDataService {
     homeActSquad: string[],
     homePrevSquad: string[],
     awayActSquad: string[],
-    awayPrevSquad: string[]
+    awayPrevSquad: string[],
+    rules: SubstitutionRules,
   ): void {
-    homeProfile.results.subsTotalCount += tourIndex > 0 ? 3 : 0;
-    awayProfile.results.subsTotalCount += tourIndex > 0 ? 3 : 0;
-
-    if ([19, 20, 21].includes(tourIndex)) {
-      homeProfile.results.subsTotalCount += 1;
-      awayProfile.results.subsTotalCount += 1;
-    }
+    const substitutionsLimit = tourIndex > 0
+      ? rules.limitsByTourIndex[tourIndex.toString()] ?? rules.defaultLimit
+      : 0;
+    homeProfile.results.subsTotalCount += substitutionsLimit;
+    awayProfile.results.subsTotalCount += substitutionsLimit;
 
     if (tourIndex > 0) {
       const homeSubsUsed = 15 - homeActSquad.filter(pId => homePrevSquad.includes(pId)).length;
@@ -304,47 +312,6 @@ export class LeagueH2HDataService {
         Math.round(awayProfile.results.subsUsedCount / awayProfile.results.subsTotalCount * 10000) / 100;
     }
   }
-  /**
-   * Updates substitution metrics wc
-   */
-  updateSubsWC(
-    homeProfile: any,
-    awayProfile: any,
-    tourIndex: number,
-    homeActSquad: string[],
-    homePrevSquad: string[],
-    awayActSquad: string[],
-    awayPrevSquad: string[]
-  ): void {
-    if ([1, 2, 4, 5].includes(tourIndex)) {
-      homeProfile.results.subsTotalCount += 4;
-      awayProfile.results.subsTotalCount += 4;
-    }
-
-    if ([3].includes(tourIndex)) {
-      homeProfile.results.subsTotalCount += 15;
-      awayProfile.results.subsTotalCount += 15;
-    }
-
-    if ([6, 7].includes(tourIndex)) {
-      homeProfile.results.subsTotalCount += 6;
-      awayProfile.results.subsTotalCount += 6;
-    }
-
-    if (tourIndex > 0) {
-      const homeSubsUsed = 15 - homeActSquad.filter(pId => homePrevSquad.includes(pId)).length;
-      const awaySubsUsed = 15 - awayActSquad.filter(pId => awayPrevSquad.includes(pId)).length;
-
-      homeProfile.results.subsUsedCount += homeSubsUsed;
-      homeProfile.results.subsCoef = 
-        Math.round(homeProfile.results.subsUsedCount / homeProfile.results.subsTotalCount * 10000) / 100;
-
-      awayProfile.results.subsUsedCount += awaySubsUsed;
-      awayProfile.results.subsCoef = 
-        Math.round(awayProfile.results.subsUsedCount / awayProfile.results.subsTotalCount * 10000) / 100;
-    }
-  }
-
   /**
    * Helper: Update max win strike
    */
