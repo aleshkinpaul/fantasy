@@ -32,9 +32,6 @@ export class LeagueH2HPageComponent implements OnInit {
   // public tours;
   // public squadsDetails = [];
 	public squadsDetails = new BehaviorSubject<ISquadDetails[]>([])
-  public squadsDetails$ = this.squadsDetails.asObservable();
-	public tours = new BehaviorSubject<any[]>([])
-  public tours$ = this.tours.asObservable();
   public activeTabs = {
     tabId: 1,
     confId: 0,
@@ -43,8 +40,6 @@ export class LeagueH2HPageComponent implements OnInit {
     cupTourId: 1
   }
 
-  public isOnlyActivePrizes = true;
-  public isShowAllPrizes = true;
   public isShowUnitedTableByPoints = false;
   public prizesToShow = [];
   public unitedProfiles = [];
@@ -53,11 +48,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public leaguesRatings: Record<string, IProfileDetails[]> = {};
   public chosenStage = 'common';
   public chosenLeague = '';
-  public tabId;
-  public confId;
   public competitionType;
-
-  public testInd: number = 0;
 
   public lastTour: number = 1;
 
@@ -266,23 +257,6 @@ export class LeagueH2HPageComponent implements OnInit {
       queryParamsHandling: 'merge',
       replaceUrl: true
     });
-  }
-
-  getMatchResult(matchesArr, profileId) {
-    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
-    const opponentId = match.home === profileId ? match.away : match.home;
-    return match.result === 0 ? 0 :
-      match.home === profileId ?
-        (match.result === 1 ? 1 : 2) :
-        (match.result === 2 ? 1 : 2)
-  }
-
-  sortByTransfersCount(obj1, obj2) {
-    return obj2.transfers_count - obj1.transfers_count;
-  }
-
-  sortByPointsCount(obj1, obj2) {
-    return +obj2.points - +obj1.points;
   }
 
 }
