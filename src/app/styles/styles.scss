@@ -3,21 +3,21 @@
 @import 'mixins.scss';
 
 // consts
-$main-header-bg-color:      #ffffff;
+$main-header-bg-color:      $color-surface;
 $main-logo-size:            60px;
-$main-logo-border-color:    #00000054;
-$main-bg-color:             #CE4843;
-$main-bg-blue-color:        rgba(30, 41, 59);
+$main-logo-border-color:    $color-border;
+$main-bg-color:             $color-canvas;
+$main-bg-blue-color:        $color-canvas;
 
-$main-button-font-color:    #DBD6BB;
-$main-button-bg-color:      #5B764B;
+$main-button-font-color:    #ffffff;
+$main-button-bg-color:      $color-primary;
 
-$header-bg-color:           #CE4843;
+$header-bg-color:           $color-surface-blue;
 $row-height:                40px;
-$row-color:                 #0a1d2c;
-$even-row-color:            #f5f5f5;
-$label-bg-color:            #0D4055;
-$label-font-color:          #62AFC1;
+$row-color:                 $color-surface;
+$even-row-color:            $color-surface-muted;
+$label-bg-color:            $color-surface-blue;
+$label-font-color:          $color-primary;
 $logo-size:                 32px;
 
 $first-place-font-color:    #d3c26c;
@@ -29,14 +29,15 @@ $third-place-bg-color:      #6A3805;
 $special-place-font-color:  #56ad9a;
 $special-place-bg-color:    #056a54;
 
-$positive-font-color:       #2c814e;
-$positive-bg-color:         #D1F1DA;
-$negative-font-color:       #420b08;
-$negative-bg-color:         #F4CCCC;
+$positive-font-color:       $color-success;
+$positive-bg-color:         $color-success-bg;
+$negative-font-color:       $color-danger;
+$negative-bg-color:         $color-danger-bg;
 
 // styles
 :root {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 // Responsive breakpoints
@@ -53,7 +54,10 @@ $bp-xs: 450px;
 
 body {
   margin: 0;
-  font-family: 'Prosto_One';
+  font-family: $font-family-base;
+  color: $color-text;
+  background: $color-canvas;
+  line-height: 1.45;
 }
 
 h1,
@@ -71,10 +75,12 @@ ul {
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html, body {
   position: relative;
+  min-height: 100%;
 }
 
 // mixins

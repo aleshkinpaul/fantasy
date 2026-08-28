@@ -1,274 +1,259 @@
 @import "styles.scss";
 
-  .match-title { padding-bottom: $space-20px; text-align: center; }
-  .matches-list {
-    @include flex-column($space-10px);
-    margin-bottom: $space-20px;
+:host {
+  display: block;
+}
 
-    .match-item {
-      @include flex-row($space-10px);
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      gap: 20px;
+.match-title {
+  margin-bottom: 18px;
+  color: $color-text;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+}
 
-      &.up-half {
-        border: 1px solid rgb(0, 255, 0);
-        border-radius: 15px;
-        background-color: rgba(255, 255, 255, 0.05);
+.matches-list {
+  @include flex-column(10px);
+
+  .match-item {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) 60px 112px 60px minmax(120px, 1fr);
+    gap: 12px;
+    align-items: center;
+    min-height: 86px;
+    padding: 12px 16px;
+    background: rgba($color-surface-muted, 0.5);
+    border: 1px solid $color-border;
+    border-radius: $border-radius-lg;
+    transition: background $transition-fast, border-color $transition-fast,
+      transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      background: $color-surface-blue;
+      border-color: rgba($color-primary, 0.3);
+      box-shadow: $shadow-sm;
+      transform: translateY(-1px);
+    }
+
+    &.up-half {
+      border-left: 4px solid $color-success;
+    }
+
+    &.down-half {
+      border-left: 4px solid $color-danger;
+    }
+
+    a {
+      min-width: 0;
+      color: inherit;
+      text-decoration: none;
+      border-radius: $border-radius-md;
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+    }
+
+    .home-name-link,
+    .away-name-link,
+    .home-logo-link,
+    .away-logo-link,
+    .score-row {
+      @include flex-center;
+      min-width: 0;
+    }
+
+    .name-container {
+      @include flex-column(2px);
+      width: 100%;
+      min-width: 0;
+      text-align: right;
+
+      > * {
+        @include text-truncate;
       }
 
-      &.down-half {
-        border: 1px solid rgb(255, 0, 0);
-        border-radius: 15px;
-        background-color: rgba(255, 255, 255, 0.05);
+      .team-name {
+        color: $color-text;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
       }
 
-      a {
-        text-decoration: none;
-        color: inherit;
-
-        &.away-name-link {
-          flex-direction: row-reverse;
-
-          .name-container > * {
-            text-align: start;
-          }
-        }
+      .player-name {
+        color: $color-text-muted;
+        font-size: $font-size-xs;
       }
+    }
 
-      .name-container {
-        @include flex-column(0);
-        justify-content: center;
-        width: 200px;
-        min-width: 0;
-        flex: 1 1 200px;
+    .away-name-link .name-container {
+      text-align: left;
+    }
 
-        .player-name {
-          opacity: .6;
-          font-size: 12px;
-        }
-
-        & > * {
-          text-align: end;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
+    .home-logo-link,
+    .away-logo-link {
+      width: 58px;
+      height: 58px;
+      justify-self: center;
 
       .logo-container {
-        width: calc($logo-size * 2);
-        @include flex-row(0);
-        align-items: center;
-        box-sizing: border-box;
+        @include logo-well(58px, 14px);
+      }
+    }
 
-        .logo-img {
-          width: calc($logo-size * 2);
-          height: calc($logo-size * 2);
+    .score-row {
+      gap: 4px;
+      font-variant-numeric: tabular-nums;
 
-          &.opponent {
-            cursor: pointer;
-          }
+      .score {
+        @include flex-center;
+        min-width: 42px;
+        height: 42px;
+        padding: 0 7px;
+        color: $color-neutral;
+        background: $color-neutral-bg;
+        border-radius: $border-radius-md;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+
+        &.green-text {
+          color: $color-success;
+          background: $color-success-bg;
+        }
+
+        &.red-text {
+          color: $color-danger;
+          background: $color-danger-bg;
+        }
+
+        &.grey-text {
+          color: $color-neutral;
+          background: $color-neutral-bg;
         }
       }
 
-      .result {
-        align-self: center;
-        font-size: 14px;
-        min-width: 30px;
-        text-align: center;
-      }
-
-      > span {
-        align-self: center;
-        font-size: 14px;
-      }
-
-      // New flattened children when reordering for responsive layouts
-      .home-name-link,
-      .home-logo-link,
-      .away-logo-link,
-      .away-name-link,
-      .score-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .home-logo-link,
-      .away-logo-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc($logo-size * 2);
-        height: calc($logo-size * 2);
-        flex: 0 0 calc($logo-size * 2);
-        box-sizing: border-box;
-        margin: 0;
-
-        .logo-container {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-sizing: border-box;
-
-          .logo-img {
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-          }
-        }
-      }
-
-      .home-name-link .name-container,
-      .away-name-link .name-container {
-        text-align: center;
-        flex: 0 0 220px;
-        max-width: 220px;
-        min-width: 0;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      .score-sep {
+        color: $color-text-muted;
       }
     }
   }
+}
 
-  .button-container {
-    margin: 10px auto;
-    @include flex-row(0);
-    justify-content: center;
-    align-items: center;
-    
-    .prizes-button {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 10px;
-      background-color: #fff;
-      color: $row-color;
+.green-bg { background: $color-success-bg; }
+.red-bg { background: $color-danger-bg; }
+.grey-bg { background: $color-neutral-bg; }
+.green-text { color: $color-success; }
+.red-text { color: $color-danger; }
+.grey-text { color: $color-neutral; }
 
-      &:hover {
-        opacity: .8;
-        cursor: pointer;
-      }
-    }
-  }
-
-// Matches responsive
 @include respond-max($bp-md) {
   .matches-list .match-item {
-    padding: 8px;
-  }
+    grid-template-columns: minmax(90px, 1fr) 52px 100px 52px minmax(90px, 1fr);
+    gap: 8px;
+    padding: 10px;
 
-  .matches-list .team .name-container { width: 140px; }
-  .matches-list .team .logo-img { width: calc($logo-size * 1.6); height: calc($logo-size * 1.6); }
+    .home-logo-link,
+    .away-logo-link {
+      width: 50px;
+      height: 50px;
 
-  .matches-list .home-logo-link,
-  .matches-list .away-logo-link {
-    width: calc($logo-size * 1.6);
-    height: calc($logo-size * 1.6);
+      .logo-container {
+        width: 50px;
+        height: 50px;
+        flex-basis: 50px;
+      }
+    }
   }
 }
 
 @include respond-max($bp-sm) {
-  .matches-list .match-item { flex-direction: column; gap: 8px; align-items: center; }
-
-  .matches-list .match-item > a,
-  .matches-list .match-item > span,
-  .matches-list .match-item > .score-row,
-  .matches-list .match-item > a {
+  .matches-list {
     width: 100%;
-    display: block;
-    text-align: center;
+    max-width: calc(100vw - 46px);
+    gap: 8px;
+    overflow: hidden;
+
+    .match-item {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+      grid-template-areas:
+        "home-logo score away-logo"
+        "home-name score away-name";
+      gap: 5px 8px;
+      min-height: 104px;
+      padding: 10px 8px;
+      border-radius: $border-radius-md;
+
+      .home-name-link { grid-area: home-name; }
+      .home-logo-link { grid-area: home-logo; }
+      .score-row { grid-area: score; }
+      .away-logo-link { grid-area: away-logo; }
+      .away-name-link { grid-area: away-name; }
+
+      .home-name-link,
+      .away-name-link {
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .name-container {
+        text-align: center;
+
+        .team-name {
+          font-size: 12px;
+        }
+
+        .player-name {
+          font-size: 11px;
+        }
+      }
+
+      .home-logo-link,
+      .away-logo-link {
+        justify-self: center;
+        width: 42px;
+        height: 42px;
+
+        .logo-container {
+          width: 42px;
+          height: 42px;
+          padding: 3px;
+          flex-basis: 42px;
+          border-radius: 9px;
+        }
+      }
+
+      .score-row {
+        align-self: center;
+        gap: 2px;
+
+        .score {
+          min-width: 32px;
+          height: 36px;
+          padding: 0 4px;
+          font-size: $font-size-sm;
+        }
+      }
+    }
   }
-
-  .matches-list .team {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 6px 0;
-  }
-
-  .matches-list .team .name-container {
-    width: auto;
-    min-width: 0;
-    text-align: center;
-  }
-
-  .matches-list .team .logo-container {
-    margin: 0 auto;
-  }
-
-  .matches-list .team .logo-img { width: calc($logo-size * 1.4); height: calc($logo-size * 1.4); }
-
-  .matches-list .home-logo-link,
-  .matches-list .away-logo-link {
-    width: calc($logo-size * 1.4);
-    height: calc($logo-size * 1.4);
-  }
-
-  .matches-list .team .result {
-    margin-top: 4px;
-    font-size: 16px;
-  }
-
-  .matches-list .score-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 18px;
-    color: #fff;
-    padding: 6px 0;
-  }
-
-  // Mobile ordering for flattened structure: logo1, name1, score, name2, logo2
-  .matches-list .home-logo-link { order: 1 }
-  .matches-list .home-name-link { order: 2 }
-  .matches-list .score-row { order: 3 }
-  .matches-list .away-name-link { order: 4 }
-  .matches-list .away-logo-link { order: 5 }
 }
 
 @include respond-max($bp-xs) {
-  .matches-list .team .name-container > * { font-size: 12px }
+  .matches-list .match-item {
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+
+    .home-logo-link,
+    .away-logo-link,
+    .home-logo-link .logo-container,
+    .away-logo-link .logo-container {
+      width: 38px;
+      height: 38px;
+      flex-basis: 38px;
+    }
+
+    .name-container .player-name {
+      display: none;
+    }
+  }
 }
-
-  .h2-title {
-    text-align: center;
-  }
-
-  .green-bg   { background-color: rgba(0, 255, 0, 0.3) }
-  .red-bg     { background-color: rgba(255, 0, 0, 0.3) }
-  .grey-bg    { background-color: rgba(255, 255, 255, 0.3) }
-  .green-text { color: green }
-  .red-text   { color: red }
-  .grey-text  { color: grey }
-
-  .first {
-    span {
-      color: $first-place-font-color;
-      background-color: $first-place-bg-color;
-    }
-  }
-
-  .second {
-    span {
-      color: $second-place-font-color;
-      background-color: $second-place-bg-color;
-    }
-  }
-
-  .third {
-    span {
-      color: $third-place-font-color;
-      background-color: $third-place-bg-color;
-    }
-  }
-

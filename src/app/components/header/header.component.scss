@@ -1,104 +1,113 @@
 @import "styles.scss";
 
 .header-container {
+  position: sticky;
+  top: 0;
+  z-index: z-index('sticky');
   width: 100%;
-  // background-color: $main-header-bg-color;
-  color: $main-logo-border-color;
-  
+  color: $color-text;
+  background: rgba($color-surface, 0.96);
+  border-bottom: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  backdrop-filter: blur(12px);
+
   &.ucl,
   &.cwc {
-    color: #fff;
-
-    .main-container {
-      .left-container .logo-container {
-        border-color: #fff;
-      }
-      
-      .right-container {
-        border-color: #fff;
-      }
-    }
+    color: $color-text;
   }
-
-  // -webkit-box-shadow: 0px -3px 5px 5px rgba(34, 60, 80, 0.75);
-  // -moz-box-shadow:    0px -3px 5px 5px rgba(34, 60, 80, 0.75);
-  // box-shadow:         0px -3px 5px 5px rgba(34, 60, 80, 0.75);
 
   .main-container {
     @include main-container();
-    height: 80px;
-    @include flex-row(40px);
-    justify-content: flex-start;
-    align-items: center;
-    @media (max-width: 900px) { height: 70px; gap: 30px; }
-    @media (max-width: 600px) { height: 60px; gap: 20px; }
-    @media (max-width: 450px) { height: 50px; gap: 15px; }
+    @include flex-row($space-lg, flex-start);
+    height: 76px;
 
     .left-container {
-      @include flex-row($space-20px);
-      align-items: center;
+      @include flex-row($space-md, flex-start);
+      min-width: 0;
 
       .logo-container {
-        width: $main-logo-size;
-        height: $main-logo-size;
-        border-radius: 50%;
-        border: 2px solid $main-logo-border-color;
+        @include logo-well(52px, 50%);
+        padding: 0;
         cursor: pointer;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        transition: transform $transition-fast, box-shadow $transition-fast;
 
-        .logo-img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: $shadow-md;
+        }
+
+        &:focus-visible {
+          @include focus-ring;
         }
       }
 
       .main-title {
-        vertical-align: middle;
-        flex-shrink: 0;
+        font-family: $font-family-brand;
+        font-size: $font-size-2xl;
+        color: $color-primary-hover;
+        white-space: nowrap;
       }
     }
 
     .right-container {
-      @include flex-row(0);
-      
-      padding-left: 40px;
-      border-left: 5px solid $main-logo-border-color;
-      
-      @media (max-width: 900px) { padding-left: 30px; border-left-width: 4px }
-      @media (max-width: 600px) { padding-left: 20px; border-left-width: 3px }
-      @media (max-width: 450px) { padding-left: 15px; border-left-width: 2px }
+      min-width: 0;
+      padding-left: $space-lg;
+      border-left: 1px solid $color-border;
 
-      & > * {
-        align-self: center;
+      .main-title {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-text;
       }
     }
   }
 }
 
-// Header responsive
 @include respond-max($bp-md) {
   .header-container .main-container {
-    height: 70px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+    height: 64px;
+    padding: 6px 16px;
+    gap: 14px;
 
-  .header-container .main-container .main-title { display: none; }
+    .left-container {
+      gap: 10px;
+
+      .logo-container {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+      }
+
+      .main-title {
+        font-size: $font-size-lg;
+      }
+    }
+
+    .right-container {
+      padding-left: 14px;
+
+      .main-title {
+        font-size: $font-size-base;
+      }
+    }
+  }
 }
 
 @include respond-max($bp-sm) {
   .header-container .main-container {
-    height: 60px;
+    height: 56px;
+    padding-inline: 12px;
+
+    .left-container .main-title {
+      display: none;
+    }
+
+    .right-container {
+      padding-left: 12px;
+
+      .main-title {
+        display: block;
+      }
+    }
   }
-
-  .header-container .logo-container { width: 44px; height: 44px; }
-}
-
-@include respond-max($bp-xs) {
-  .header-container .logo-container { width: 38px; height: 38px; }
 }

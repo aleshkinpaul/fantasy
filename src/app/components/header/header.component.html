@@ -5,7 +5,7 @@
   }">
   <div class="main-container">
     <div class="left-container">
-      <div class="logo-container" (click)="goHome()">
+      <div class="logo-container" role="button" tabindex="0" aria-label="На главную" (click)="goHome()" (keydown.enter)="goHome()">
         <img src="assets/logos/main-logo-circle.png" alt="fr fantasy logo" class="logo-img">
       </div>
       <h1 class="main-title">FR Fantasy</h1>

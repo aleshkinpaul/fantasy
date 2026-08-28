@@ -34,9 +34,9 @@
       <div class="nominees-container" [ngSwitch]="item.state">
         <div class="nominees-header-container">
           <div class="prize-title">Лидеры:</div>
-          <div class="show-all-button" *ngSwitchCase="1" (click)="toggleShowAllNominees(item)">
+          <button type="button" class="show-all-button" *ngSwitchCase="1" (click)="toggleShowAllNominees(item)">
             {{ !!item.isShowAll ? "Показать лидеров" : "Показать всех" }}
-          </div>
+          </button>
         </div>
         <span *ngIf="!!item.infoOnTour">Данные на {{ item.infoOnTour }} тур</span>
         <ul class="nominees-list" *ngSwitchCase="1">

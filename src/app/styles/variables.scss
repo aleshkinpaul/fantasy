@@ -2,13 +2,34 @@
 // Design Tokens & CSS Variables
 // ============================================
 
-// Color Palette
+// Light interface palette. Color names describe roles rather than pages.
+$color-canvas: #F2F0EB;
+$color-surface: #FCFBF8;
+$color-surface-muted: #E8EBEE;
+$color-surface-blue: #E7EFF7;
+$color-surface-beige: #E9E0D2;
+$color-logo-surface: #DDE2E8;
+$color-border: #CDD3D9;
+$color-text: #182433;
+$color-text-muted: #596575;
+$color-primary: #285D8F;
+$color-primary-hover: #1F4A73;
+$color-success: #247145;
+$color-success-bg: #DFEEE4;
+$color-danger: #A93636;
+$color-danger-bg: #F3DEDC;
+$color-neutral: #53606D;
+$color-neutral-bg: #E5E8EB;
+$color-warning: #8A6116;
+$color-warning-bg: #F2E6CB;
+
+// Compatibility map for existing components during incremental migration.
 $colors: (
-  primary: #CE4843,
-  primary-dark: #A83936,
-  secondary: #5B764B,
-  secondary-light: #7a9963,
-  accent: rgba(30, 41, 59),
+  primary: $color-primary,
+  primary-dark: $color-primary-hover,
+  secondary: $color-surface-beige,
+  secondary-light: $color-surface-blue,
+  accent: $color-text,
   
   // Neutrals
   white: #ffffff,
@@ -30,18 +51,19 @@ $colors: (
   bronze: #6A3805,
   
   // Status
-  success: #2c814e,
-  success-bg: #D1F1DA,
-  error: #420b08,
-  error-bg: #F4CCCC,
-  warning: #d97706,
-  warning-bg: #fef3c7,
-  info: #1f2937,
-  info-bg: #e0e7ff,
+  success: $color-success,
+  success-bg: $color-success-bg,
+  error: $color-danger,
+  error-bg: $color-danger-bg,
+  warning: $color-warning,
+  warning-bg: $color-warning-bg,
+  info: $color-primary,
+  info-bg: $color-surface-blue,
 );
 
 // Typography
-$font-family-base: 'Prosto_One', sans-serif;
+$font-family-base: 'TildaSans', Arial, sans-serif;
+$font-family-brand: 'Prosto_One', sans-serif;
 $font-family-code: 'Courier New', monospace;
 
 $font-size-xs: 0.75rem;      // 12px
@@ -72,17 +94,17 @@ $space-50px: 50px;
 $space-2xl: 3rem;      // 48px
 
 // Border Radius
-$border-radius-sm: 2px;
-$border-radius-md: 4px;
-$border-radius-lg: 8px;
-$border-radius-xl: 12px;
+$border-radius-sm: 6px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
 $border-radius-full: 9999px;
 
 // Shadows
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+$shadow-sm: 0 1px 3px rgba(24, 36, 51, 0.08);
+$shadow-md: 0 4px 16px rgba(24, 36, 51, 0.06);
+$shadow-lg: 0 12px 28px rgba(24, 36, 51, 0.09);
+$shadow-xl: 0 20px 40px rgba(24, 36, 51, 0.12);
 
 // Breakpoints
 $breakpoint-xs: 320px;

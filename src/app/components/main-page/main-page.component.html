@@ -1,10 +1,10 @@
 <div class="navigation-container">
-  <div class="wc-button button" (click)="goToUrl('world-cup/new?year=2025')">ЧМ 2026</div>
-  <div class="spain-button button" (click)="goToUrl('spain/new?year=2026')">Ла Лига 2026/27</div>
-  <div class="ucl-button button" (click)="goToUrl('champions-league/new?year=2025')">Лига Чемпионов 2025/26</div>
+  <div class="wc-button button" role="button" tabindex="0" (click)="goToUrl('world-cup/new?year=2025')" (keydown.enter)="goToUrl('world-cup/new?year=2025')">ЧМ 2026</div>
+  <div class="spain-button button" role="button" tabindex="0" (click)="goToUrl('spain/new?year=2026')" (keydown.enter)="goToUrl('spain/new?year=2026')">Ла Лига 2026/27</div>
+  <div class="ucl-button button" role="button" tabindex="0" (click)="goToUrl('champions-league/new?year=2025')" (keydown.enter)="goToUrl('champions-league/new?year=2025')">Лига Чемпионов 2025/26</div>
   <h2>Архивные лиги:</h2>
-  <div class="spain-button button archive" (click)="goToUrl('spain/new?year=2025')">Ла Лига 2025/26</div>
-  <div class="spain-button button archive" (click)="goToUrl('spain?year=2024')">Ла Лига 2024/25</div>
-  <div class="ucl-button button archive" (click)="goToUrl('champions-league?year=2024')">Лига Чемпионов 2024/25</div>
-  <div class="cwc-button button archive" (click)="goToUrl('club-world-cup?year=2024')">Клубный Чемпионат Мира 25</div>
+  <div class="spain-button button archive" role="button" tabindex="0" (click)="goToUrl('spain/new?year=2025')" (keydown.enter)="goToUrl('spain/new?year=2025')">Ла Лига 2025/26</div>
+  <div class="spain-button button archive" role="button" tabindex="0" (click)="goToUrl('spain?year=2024')" (keydown.enter)="goToUrl('spain?year=2024')">Ла Лига 2024/25</div>
+  <div class="ucl-button button archive" role="button" tabindex="0" (click)="goToUrl('champions-league?year=2024')" (keydown.enter)="goToUrl('champions-league?year=2024')">Лига Чемпионов 2024/25</div>
+  <div class="cwc-button button archive" role="button" tabindex="0" (click)="goToUrl('club-world-cup?year=2024')" (keydown.enter)="goToUrl('club-world-cup?year=2024')">Клубный Чемпионат Мира 25</div>
 </div>

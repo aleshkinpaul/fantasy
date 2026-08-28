@@ -1,357 +1,307 @@
 @import "styles.scss";
 
+:host {
+  display: block;
+  min-width: 720px;
+}
+
 .table {
-  @include main-container();
-  max-width: 1200px;
-  min-height: 500px;
-  font-family: 'Exo2';
-  background-color: $row-color;
-  color: #fff;
   width: 100%;
+  color: $color-text;
+  background: $color-surface;
+  border-collapse: collapse;
+  border-radius: $border-radius-xl;
+  font-family: $font-family-base;
+  font-variant-numeric: tabular-nums;
   text-align: center;
-  border-collapse: separate;
-  border-spacing: 0 1px;
 
-  &.standings {
-      .sub-info {
-        min-width: 40px;
+  th,
+  td {
+    padding: 9px 8px;
+    border-bottom: 1px solid rgba($color-border, 0.74);
+    vertical-align: middle;
+  }
 
-        &.wide-sub-info {
-          min-width: 80px;
-        }
+  .table-header {
+    color: $color-primary-hover;
+    background: $color-surface-blue;
 
-        &.points {
-          .points-info {
-            @include flex-row(0);
-            justify-content: center;
-            align-items: center;
-            height: 30px;
-            color: $label-font-color;
-            background-color: $label-bg-color;
-          }
-        }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      height: 52px;
+      background: $color-surface-blue;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      white-space: nowrap;
+
+      &:first-child {
+        border-top-left-radius: $border-radius-xl;
       }
 
-      .table-header {
-        // background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
-
-        th:last-child {
-          width: calc(2 * $row-height - 30px);
-          @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
-          @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
-          @media (max-width: 450px) { width: calc(2 * $row-height - 50px) !important; }
-        }
-      }
-
-      .table-body {
-
-        &:before {
-          content:"@";
-          display:block;
-          line-height:5px;
-          text-indent:-99999px;
-        }
-
-        .table-row{
-          position: relative;
-          height: $row-height;
-    
-          background-color: $row-color;
-    
-          // &:nth-child(2n) {
-          //   background-color: $even-row-color;
-          // }
-
-          &:hover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff09;
-            cursor: pointer;
-            pointer-events: none;
-          }
-
-          td {
-            position: relative;
-
-            .score {
-              position: relative;
-              margin: 0 auto;
-
-              &.first-score::after,
-              &.second-score::after,
-              &.third-score::after {
-                content: '';
-                position: absolute;
-                left: 50%;
-                bottom: -5px;
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-
-                transform: translateX(-50%);
-              }
-
-              &.first-score::after  { background-color: $first-place-bg-color; }
-              &.second-score::after { background-color: $second-place-bg-color; }
-              &.third-score::after  { background-color: $third-place-bg-color; }
-            }
-
-            &:first-child,
-            &:last-child {
-      
-              span {
-                display: block;
-                margin: 5px;
-                width: calc($row-height - 10px);
-                line-height: calc($row-height - 10px);
-      
-                align-self: center;
-                text-align: center;
-                vertical-align: middle;
-      
-                color: $label-font-color;
-                background-color: $label-bg-color;
-                // box-sizing: border-box;
-              }
-            }
-
-            &:first-child{
-              width: $row-height;
-              height: $row-height;
-            }
-      
-            &:last-child {
-              width: calc(2 * $row-height - 20px);
-              height: $row-height;
-              box-sizing: border-box;
-              @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
-              @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
-              @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
-      
-              span {
-                width: calc(2 * $row-height - 20px);
-                @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
-                @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
-                @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
-              }
-            }
-      
-            & {
-              &.first {
-                span {
-                  color: $first-place-font-color;
-                  background-color: $first-place-bg-color;
-                }
-              }
-
-              &.second {
-                span {
-                  color: $second-place-font-color;
-                  background-color: $second-place-bg-color;
-                }
-              }
-
-              &.third {
-                span {
-                  color: $third-place-font-color;
-                  background-color: $third-place-bg-color;
-                }
-              }
-              
-              &.special {
-                span {
-                  color: $special-place-font-color;
-                  background-color: $special-place-bg-color;
-                }
-              }
-
-              &.neg-diff {
-                color: $negative-font-color;
-                background-color: $negative-bg-color;
-              }
-            }
-          }
-        }
-    
-        .item-name-container {
-          padding-left: 5px;
-          height: $row-height;
-    
-          @include flex-row($space-10px);
-          align-items: center;
-    
-          font-family: "Exo2";
-
-          .team-link {
-            width: 100%;
-            color: inherit;
-            text-decoration: none;
-
-            &:hover {
-              opacity: .8;
-              cursor: pointer;
-            }
-          }
-
-          .item-team-container {
-            @include flex-row($space-10px, flex-start);
-            align-items: center;
-    
-            .logo-container {
-              position: relative;
-              width: $logo-size;
-              // height: $logo-size;
-            
-              @include flex-row(0);
-              align-items: center;
-              box-sizing: border-box;
-      
-              .logo-img {
-                width: $logo-size;
-                height: $logo-size;
-              }
-
-              .conference-label-container {
-                position: absolute;
-                right: -5px;
-                bottom: -5px;
-
-                .label {
-                  @include flex-row(0);
-                  justify-content: center;
-                  align-items: center;
-
-                  width: 15px;
-                  height: 15px;
-
-                  font-size: 8px;
-
-                  font-weight: 600;
-                  border-radius: 50%;
-
-                  &.blue-label {
-                    color: #094d81;
-                    background-color: #55ACEE;
-                  }
-
-                  &.yellow-label {
-                    color: #7c5900;
-                    background-color: #FCCB4D;
-                  }
-
-                  &.red-label {
-                    color: #910700;
-                    background-color: #FF4E44;
-                  }
-                }
-              }
-            }
-      
-            .team-container {
-              @include flex-column(0);
-              min-width: 125px;
-      
-              .team-name {
-                display: block;
-                width: 100%;
-        
-                align-self: left;
-                text-align: left;
-              }
-      
-              .person-name {
-                opacity: .7;
-        
-                align-self: left;
-                text-align: left;
-              }
-            }
-          }
-        }
+      &:last-child {
+        border-top-right-radius: $border-radius-xl;
       }
     }
   }
 
-.button-container {
-  margin: 10px auto;
-  @include flex-row(0);
-  justify-content: center;
-  align-items: center;
-  
-  .prizes-button {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 10px;
-    background-color: #fff;
-    color: $row-color;
-    width: 100%;
-    
-    &:hover {
-      opacity: 0.8;
-      cursor: pointer;
+  .table-body {
+    .table-row {
+      height: 56px;
+      background: $color-surface;
+      transition: background $transition-fast;
+
+      &:nth-child(even) {
+        background: rgba($color-surface-muted, 0.52);
+      }
+
+      &:hover {
+        background: $color-surface-blue;
+      }
+
+      &:last-child td {
+        border-bottom: 0;
+      }
     }
   }
-}
 
-.h2-title {
-  text-align: center;
-}
+  .sub-info {
+    min-width: 42px;
+    font-size: $font-size-sm;
 
-.green-bg { background-color: rgba(0, 255, 0, 0.3); }
-.red-bg { background-color: rgba(255, 0, 0, 0.3); }
-.grey-bg { background-color: rgba(255, 255, 255, 0.3); }
-.green-text { color: green; }
-.red-text { color: red; }
-.grey-text { color: grey; }
+    &.wide-sub-info {
+      min-width: 88px;
+    }
 
-.first {
-  span {
-    color: $first-place-font-color;
-    background-color: $first-place-bg-color;
+    &.points {
+      padding: 7px;
+    }
+  }
+
+  .points-info {
+    @include flex-center;
+    min-width: 42px;
+    height: 34px;
+    padding: 0 8px;
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+    border: 1px solid rgba($color-primary, 0.18);
+    border-radius: $border-radius-md;
+    font-weight: $font-weight-semibold;
+  }
+
+  td:first-child {
+    width: 52px;
+
+    > span {
+      @include flex-center;
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+      color: $color-primary-hover;
+      background: $color-surface-blue;
+      border-radius: 50%;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  td:last-child > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 54px;
+    min-height: 34px;
+    padding: 4px 8px;
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+    border-radius: $border-radius-md;
+    font-weight: $font-weight-semibold;
+  }
+
+  .item-name-container {
+    min-width: 240px;
+    padding-left: 10px;
+
+    .team-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      border-radius: $border-radius-md;
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+    }
+  }
+
+  .item-team-container {
+    @include flex-row(10px, flex-start);
+    min-width: 0;
+
+    .logo-container {
+      position: relative;
+      @include logo-well(40px, 10px);
+
+      .conference-label-container {
+        position: absolute;
+        right: -5px;
+        bottom: -5px;
+
+        .label {
+          @include flex-center;
+          width: 18px;
+          height: 18px;
+          border: 2px solid $color-surface;
+          border-radius: 50%;
+          font-size: 8px;
+          font-weight: $font-weight-bold;
+
+          &.blue-label {
+            color: #174F78;
+            background: #A9D2EC;
+          }
+
+          &.yellow-label {
+            color: #73520B;
+            background: #F3D889;
+          }
+
+          &.red-label {
+            color: #7A2727;
+            background: #EFB1AC;
+          }
+        }
+      }
+    }
+
+    .team-container {
+      @include flex-column(1px);
+      min-width: 0;
+      align-items: flex-start;
+      text-align: left;
+
+      .team-name,
+      .person-name {
+        display: block;
+        max-width: 180px;
+        @include text-truncate;
+      }
+
+      .team-name {
+        color: $color-text;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+      }
+
+      .person-name {
+        color: $color-text-muted;
+        font-size: $font-size-xs;
+      }
+    }
+  }
+
+  .score {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin: 0 auto;
+    background: $color-surface;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    &.first-score::after,
+    &.second-score::after,
+    &.third-score::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid $color-surface;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.first-score::after { background: #B99A2E; }
+    &.second-score::after { background: #8A96A3; }
+    &.third-score::after { background: #A66D42; }
+  }
+
+  .neg-diff {
+    color: $color-danger;
+    background: $color-danger-bg;
   }
 }
 
-.second {
-  span {
-    color: $second-place-font-color;
-    background-color: $second-place-bg-color;
-  }
+.first > span {
+  color: #66520D !important;
+  background: #F1E5B8 !important;
 }
 
-.third {
-  span {
-    color: $third-place-font-color;
-    background-color: $third-place-bg-color;
-  }
+.second > span {
+  color: #4F5A65 !important;
+  background: #DDE2E7 !important;
 }
 
-.special {
-  span {
-    color: $special-place-font-color;
-    background-color: $special-place-bg-color;
-  }
+.third > span {
+  color: #774822 !important;
+  background: #E8D2BF !important;
 }
+
+.special > span {
+  color: #226454 !important;
+  background: #D8ECE6 !important;
+}
+
+.green-bg { background: $color-success-bg; }
+.red-bg { background: $color-danger-bg; }
+.grey-bg { background: $color-neutral-bg; }
+.green-text { color: $color-success; }
+.red-text { color: $color-danger; }
+.grey-text { color: $color-neutral; }
 
 .align-left {
-  padding-left: 5px;
+  padding-left: 10px !important;
   text-align: left;
 }
 
-.loading-spinner-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  color: #fff;
-}
+@include respond-max($bp-sm) {
+  :host {
+    min-width: 660px;
+  }
 
-a {
-  text-decoration: none;
-  color: inherit;
+  .table {
+    th,
+    td {
+      padding: 7px 6px;
+    }
+
+    .table-header th,
+    .sub-info,
+    .item-team-container .team-container .team-name {
+      font-size: $font-size-xs;
+    }
+
+    .item-name-container {
+      min-width: 210px;
+    }
+
+    .item-team-container {
+      .logo-container {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+      }
+
+      .team-container .team-name,
+      .team-container .person-name {
+        max-width: 145px;
+      }
+    }
+  }
 }

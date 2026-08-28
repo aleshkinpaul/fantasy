@@ -1,43 +1,63 @@
 @import "styles.scss";
 
 .navigation-container {
-  width: 100%;
-  height: calc(100vh - 100px);
-
-  display: flex;
-  flex-direction: column;
+  @include flex-column($space-sm);
+  width: min(100% - 24px, 620px);
+  min-height: calc(100vh - 76px);
+  margin: 0 auto;
+  padding: 48px 0;
   justify-content: center;
-  gap: 10px;
 
   h2 {
-    margin-top: 20px;
+    margin: 28px 0 6px;
+    font-size: $font-size-xl;
+    color: $color-text;
     text-align: center;
   }
 
   .button {
-    padding: 15px 10px;
-    width: 20%;
-    min-width: 260px;
-
-    box-sizing: border-box;
-
-    align-self: center;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 18px;
+    color: #fff;
+    background: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+    font-weight: $font-weight-semibold;
     text-align: center;
-
-    color: $main-button-font-color;
-    background-color: $main-button-bg-color;
-
-    transition: background-color .6s ease, color .6s ease;
-
     cursor: pointer;
+    transition: background $transition-fast, border-color $transition-fast,
+      transform $transition-fast, box-shadow $transition-fast;
 
     &:hover {
-      background-color: $main-button-font-color;
-      color: $main-button-bg-color;
+      background: $color-primary-hover;
+      border-color: $color-primary-hover;
+      box-shadow: $shadow-md;
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
     }
 
     &.archive {
-      filter: grayscale(80%);
+      color: $color-primary;
+      background: $color-surface;
+      border-color: $color-border;
+      box-shadow: none;
+
+      &:hover {
+        background: $color-surface-blue;
+        border-color: rgba($color-primary, 0.35);
+      }
     }
+  }
+}
+
+@include respond-max($bp-sm) {
+  .navigation-container {
+    min-height: calc(100vh - 56px);
+    padding: 24px 0;
   }
 }

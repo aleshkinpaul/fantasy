@@ -94,7 +94,33 @@
 }
 
 @mixin border-bottom-thin {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $color-border;
+}
+
+@mixin focus-ring {
+  outline: 3px solid rgba($color-primary, 0.28);
+  outline-offset: 2px;
+}
+
+@mixin logo-well($size: 40px, $radius: 10px) {
+  @include flex-center;
+  width: $size;
+  height: $size;
+  padding: 4px;
+  flex: 0 0 $size;
+  overflow: hidden;
+  border: 1px solid darken($color-logo-surface, 8%);
+  border-radius: $radius;
+  background: linear-gradient(145deg, lighten($color-logo-surface, 7%), $color-logo-surface);
+  box-sizing: border-box;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+      drop-shadow(0 1px 1px rgba(24, 36, 51, 0.38));
+  }
 }
 
 // Responsive utilities

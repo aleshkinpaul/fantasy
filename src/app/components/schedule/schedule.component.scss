@@ -1,194 +1,177 @@
 @import "styles.scss";
 
-  .table {
-    @include main-container();
-    max-width: 1200px;
-    min-height: 500px;
-    font-family: 'Exo2';
-    background-color: $row-color;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    border-collapse: separate;
-    border-spacing: 0 1px;
+:host {
+  display: block;
+  min-width: 760px;
+}
 
-    &.schedule {
-      margin: 0 auto;
-      max-width: 800px;
+.table {
+  width: 100%;
+  color: $color-text;
+  background: $color-surface;
+  border-collapse: collapse;
+  font-family: $font-family-base;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
 
-      .table-body {
+  th,
+  td {
+    padding: 8px;
+    border-right: 1px solid rgba($color-border, 0.56);
+    border-bottom: 1px solid rgba($color-border, 0.7);
+    vertical-align: middle;
 
-        &:before {
-          content:"@";
-          display:block;
-          line-height:5px;
-          text-indent:-99999px;
-        }
-        
-        .table-row{
-          // display: flex;
-          // justify-content: space-between;
+    &:last-child {
+      border-right: 0;
+    }
+  }
 
-          position: relative;
-          height: $row-height;
-    
-          background-color: $row-color;
-    
-          // &:nth-child(2n) {
-          //   background-color: $even-row-color;
-          // }
+  .table-header th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    height: 52px;
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
 
-          &:hover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff09;
-            cursor: pointer;
-            pointer-events: none;
-          }
+  .table-row {
+    height: 54px;
+    background: $color-surface;
 
-          td {
-            position: relative;
+    &:nth-child(even) {
+      background: rgba($color-surface-muted, 0.52);
+    }
 
-            &:first-child {
-              & > span {
-                display: block;
-              }
-            }
+    &:hover {
+      background: $color-surface-blue;
+    }
 
-            .red-bg { background-color: rgba(255, 0, 0, 0.3); }
-            .grey-bg { background-color: rgba(255, 255, 255, 0.3); }
-            .green-text { color: green; }
-            .red-text { color: red; }
-            .grey-text { color: grey; }
-            .first span { color: $first-place-font-color; background-color: $first-place-bg-color; }
-            .second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
-            .third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
-            .special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
+    &:last-child td {
+      border-bottom: 0;
+    }
+  }
 
-            &.item-name-container {
-              padding-left: 5px;
-              height: $row-height;
+  .item-name-container {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    min-width: 220px;
+    background: inherit;
+    box-shadow: 1px 0 $color-border;
 
-              @include flex-row($space-10px);
-              align-items: center;
+    .team-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
 
-              font-family: "Exo2";
-
-              .team-link {
-                width: 100%;
-                color: inherit;
-                text-decoration: none;
-
-                &:hover {
-                  opacity: .8;
-                  cursor: pointer;
-                }
-              }
-            }
-
-            .item-team-container {
-              @include flex-row($space-10px, 'start');
-              align-items: center;
-
-              .logo-container {
-                width: $logo-size;
-                @include flex-row(0);
-                align-items: center;
-                box-sizing: border-box;
-
-                .logo-img {
-                  width: $logo-size;
-                  height: $logo-size;
-
-                  &.opponent {
-                    cursor: pointer;
-                  }
-                }
-              }
-
-              .team-container {
-                min-width: 80px;
-                @include flex-column(0);
-                align-items: flex-start;
-
-                .team-name {
-                  display: block;
-                  width: 100%;
-
-                  align-self: left;
-                  text-align: left;
-                }
-
-                .person-name {
-                  opacity: .7;
-
-                  align-self: left;
-                  text-align: left;
-                }
-              }
-            }
-          }
-        }
+      &:focus-visible {
+        @include focus-ring;
       }
     }
   }
 
-  .button-container { margin: $space-10px auto; @include flex-row(0); justify-content: center; align-items: center; }
-  .prizes-button { display: inline-block; padding: $space-5px $space-10px; border-radius: 10px; background-color: #fff; color: $row-color; }
-  .prizes-button:hover { opacity: .8; cursor: pointer; }
+  .sub-info {
+    min-width: 54px;
+  }
 
-  .format-tab {
-    @include flex-column($space-20px);
+  .item-team-container {
+    @include flex-row(9px, flex-start);
+    min-width: 0;
 
-    .img-container {
-      width: 100%;
+    .logo-container {
+      @include logo-well(38px, 9px);
 
-      img {
+      &.green-bg {
+        background: $color-success-bg;
+        border-color: rgba($color-success, 0.35);
+      }
+
+      &.red-bg {
+        background: $color-danger-bg;
+        border-color: rgba($color-danger, 0.35);
+      }
+
+      &.grey-bg {
+        background: $color-neutral-bg;
+        border-color: rgba($color-neutral, 0.3);
+      }
+
+      a {
+        display: block;
         width: 100%;
+        height: 100%;
       }
 
-      &:hover {
-        opacity: .6;
+      .opponent {
+        cursor: pointer;
+      }
+    }
+
+    .team-container {
+      @include flex-column(1px);
+      min-width: 0;
+      align-items: flex-start;
+      text-align: left;
+
+      .team-name,
+      .person-name {
+        display: block;
+        max-width: 160px;
+        @include text-truncate;
+      }
+
+      .team-name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+      }
+
+      .person-name {
+        color: $color-text-muted;
+        font-size: $font-size-xs;
       }
     }
   }
+}
 
-  .h2-title {
-    text-align: center;
+.green-bg { background: $color-success-bg; }
+.red-bg { background: $color-danger-bg; }
+.grey-bg { background: $color-neutral-bg; }
+.green-text { color: $color-success; }
+.red-text { color: $color-danger; }
+.grey-text { color: $color-neutral; }
+
+.align-left {
+  padding-left: 12px !important;
+  text-align: left;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@include respond-max($bp-sm) {
+  :host {
+    min-width: 700px;
   }
 
-  .green-bg   { background-color: rgba(0, 255, 0, 0.3) }
-  .red-bg     { background-color: rgba(255, 0, 0, 0.3) }
-  .grey-bg    { background-color: rgba(255, 255, 255, 0.3) }
-  .green-text { color: green }
-  .red-text   { color: red }
-  .grey-text  { color: grey }
+  .table {
+    th,
+    td {
+      padding: 7px 6px;
+    }
 
-  .first {
-    span {
-      color: $first-place-font-color;
-      background-color: $first-place-bg-color;
+    .item-name-container {
+      min-width: 200px;
+    }
+
+    .item-team-container .logo-container {
+      width: 34px;
+      height: 34px;
+      flex-basis: 34px;
     }
   }
-
-  .second {
-    span {
-      color: $second-place-font-color;
-      background-color: $second-place-bg-color;
-    }
-  }
-
-  .third {
-    span {
-      color: $third-place-font-color;
-      background-color: $third-place-bg-color;
-    }
-  }
-
-  .special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
-
-  a { text-decoration: none; color: inherit; }
+}

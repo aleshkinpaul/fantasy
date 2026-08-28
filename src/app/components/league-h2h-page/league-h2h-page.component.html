@@ -2,12 +2,12 @@
 
   <!-- Вкладки -->
   <ul class="nav-list">
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 1}" (click)="setTabId(1)" id="stage_0" *ngIf="this.consts.stages.length > 0">{{ this.consts.stages[0].name }}</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" id="stage_1" *ngIf="this.consts.stages.length > 1">{{ this.consts.stages[1].name }}</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 3}" (click)="setTabId(3)" id="prizes">Призы</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 4}" (click)="setTabId(4)" id="format">Формат</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 5}" (click)="setTabId(5)" *ngIf="!!consts.cup" id="cup">{{ consts.cup?.name }}</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.tabId === 100}" (click)="setTabId(100)" id="all">Общий зачет</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.tabId === 1}" (click)="setTabId(1)" (keydown.enter)="setTabId(1)" id="stage_0" *ngIf="this.consts.stages.length > 0">{{ this.consts.stages[0].name }}</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.tabId === 2}" (click)="setTabId(2)" (keydown.enter)="setTabId(2)" id="stage_1" *ngIf="this.consts.stages.length > 1">{{ this.consts.stages[1].name }}</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.tabId === 3}" (click)="setTabId(3)" (keydown.enter)="setTabId(3)" id="prizes">Призы</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.tabId === 4}" (click)="setTabId(4)" (keydown.enter)="setTabId(4)" id="format">Формат</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.tabId === 5}" (click)="setTabId(5)" (keydown.enter)="setTabId(5)" *ngIf="!!consts.cup" id="cup">{{ consts.cup?.name }}</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.tabId === 100}" (click)="setTabId(100)" (keydown.enter)="setTabId(100)" id="all">Общий зачет</li>
   </ul>
 
   <!-- Лиги -->
@@ -15,26 +15,32 @@
     <li
       *ngFor="let item of this.consts.stages[0].leagues; index as leagueInd"
       class="nav-item"
+      role="button"
+      tabindex="0"
       [ngClass]="{'active': activeTabs.confId === leagueInd}"
       [id]="'conf_' + leagueInd"
       (click)="setConfId(leagueInd)"
+      (keydown.enter)="setConfId(leagueInd)"
     >{{ item.name }}</li>
   </ul>
   <ul class="nav-list" *ngIf="activeTabs.tabId === 2">
     <li
       *ngFor="let item of this.consts.stages[1].leagues; index as leagueInd"
       class="nav-item"
+      role="button"
+      tabindex="0"
       [ngClass]="{'active': activeTabs.confId === leagueInd}"
       [id]="'conf_' + leagueInd"
       (click)="setConfId(leagueInd)"
+      (keydown.enter)="setConfId(leagueInd)"
     >{{ item.name }}</li>
   </ul>
 
   <!-- Вкладки лиг -->
   <ul class="nav-list" *ngIf="[1,2].includes(activeTabs.tabId)">
-    <li class="nav-item" [ngClass]="{'active': activeTabs.confTabId === 1}" (click)="setConfTabId(1)" id="table">Таблица</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.confTabId === 2}" (click)="setConfTabId(2)" id="schedule">Расписание</li>
-    <li class="nav-item" [ngClass]="{'active': activeTabs.confTabId === 3}" (click)="setConfTabId(3)" id="matches">Матчи</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 1}" (click)="setConfTabId(1)" (keydown.enter)="setConfTabId(1)" id="table">Таблица</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 2}" (click)="setConfTabId(2)" (keydown.enter)="setConfTabId(2)" id="schedule">Расписание</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 3}" (click)="setConfTabId(3)" (keydown.enter)="setConfTabId(3)" id="matches">Матчи</li>
   </ul>
 
   <div *ngIf="[1,2].includes(activeTabs.tabId)">
@@ -59,7 +65,7 @@
   </div>
 
   <div class="button-container" *ngIf="activeTabs.tabId === 100">
-    <div class="prizes-button" (click)="toggleUnitedRating()">{{ !isShowUnitedTableByPoints ? 'Открыть таблицу по очкам' : 'Открыть таблицу по фэнтези-очкам' }}</div>
+    <button type="button" class="prizes-button" (click)="toggleUnitedRating()">{{ !isShowUnitedTableByPoints ? 'Открыть таблицу по очкам' : 'Открыть таблицу по фэнтези-очкам' }}</button>
   </div>
 
   <!-- Таблица -->
@@ -92,8 +98,11 @@
       <li
         *ngFor="let tourMatches of currentLeagueMatches; index as i"
         class="tour-item"
+        role="button"
+        tabindex="0"
         [ngClass]="{'active': activeTabs.tourId === i+1}"
         (click)="setTourId(i+1)"
+        (keydown.enter)="setTourId(i+1)"
       >{{ i + 1 }}</li>
     </ul>
     <app-matches
@@ -111,9 +120,12 @@
       <li
         *ngFor="let tourMatches of cup.matches; index as i"
         class="tour-item"
+        role="button"
+        tabindex="0"
         [ngClass]="{'active': activeTabs.cupTourId === i + 1}"
         (click)="setCupTourId(i+1)"
         (click)="setTourId(i+1)"
+        (keydown.enter)="setCupTourId(i+1); setTourId(i+1)"
       >{{ cup.matchesToursNames?.[i] }}</li>
     </ul>
     <app-matches

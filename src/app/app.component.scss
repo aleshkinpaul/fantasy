@@ -2,15 +2,16 @@
 
 .app-container {
   min-height: 100vh;
-  background-color: $main-bg-color;
+  color: $color-text;
+  background-color: $color-canvas;
 
   &.ucl,
   &.cwc {
-    background-color: $main-bg-blue-color;
-    color: #fff;
+    background-color: $color-canvas;
+    color: $color-text;
   }
 
   &.spain {
-    background-color: #FFFFFF;
+    background-color: $color-canvas;
   }
 }
