@@ -1,13 +1,13 @@
 import { FantasyFullInfoResponse } from '../models/competition.models';
-import { calculateSquadRatings, getLegacyMedian } from './rating-calculator';
+import { calculateSquadRatings, getTourMedian } from './rating-calculator';
 
 describe('rating calculator', () => {
-  it('preserves the 2025-26 median semantics for string API scores', () => {
-    expect(getLegacyMedian(['10', '20'])).toBe(1005);
+  it('calculates a numeric median for string API scores', () => {
+    expect(getTourMedian(['10', '20'])).toBe(15);
   });
 
   it('returns the middle score for an odd number of values', () => {
-    expect(getLegacyMedian(['10', '30', '20'])).toBe('20');
+    expect(getTourMedian(['10', '30', '20'])).toBe('20');
   });
 
   it('skips a partially populated tour with a zero median', () => {
@@ -20,8 +20,11 @@ describe('rating calculator', () => {
     const ratings = calculateSquadRatings(squads, 3);
 
     expect(ratings.every(Number.isFinite)).toBeTrue();
-    expect(squads.data.players['first'].team.rating)
-      .toBeGreaterThan(squads.data.players['third'].team.rating!);
+    expect(squads.data.players['first'].team.rating).toBe(10);
+    expect(squads.data.players['second'].team.rating).toBe(4.1);
+    expect(squads.data.players['third'].team.rating).toBe(0);
+    expect(ratings[0]).toBe(0);
+    expect(ratings[ratings.length - 1]).toBe(10);
   });
 });
 

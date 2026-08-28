@@ -146,11 +146,13 @@
     .logo-container {
       position: relative;
       @include logo-well(48px, 11px);
+      overflow: visible;
 
       .conference-label-container {
         position: absolute;
         right: -5px;
         bottom: -5px;
+        z-index: 2;
 
         .label {
           @include flex-center;

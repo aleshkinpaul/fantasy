@@ -30,20 +30,33 @@ export function calculateSquadRatings(
     }
   }
 
-  const ratingMedian = -RATING_COEFFICIENTS.reduce((sum, coefficient) => sum + coefficient, 0);
-  const maxResultValue = ratedTours.reduce((sum, { range }, index) =>
-    sum + (Number(range.max) - Number(range.med)) / Number(range.med) * RATING_COEFFICIENTS[index], 0) - ratingMedian;
+  const maxResultValue = calculateWeightedResult(ratedTours, ({ range }) => Number(range.max));
+  const minResultValue = calculateWeightedResult(ratedTours, ({ range }) => Number(range.min));
+  const resultRange = maxResultValue - minResultValue;
 
   const ratings: number[] = [];
   Object.values(squads.data.players).forEach(player => {
-    const rawRating = ratedTours.reduce((sum, { tour, range }, index) =>
-      sum + (Number(player.team.results_by_tour[tour].tour_score) - Number(range.med))
-        / Number(range.med) * RATING_COEFFICIENTS[index], 0);
-    player.team.rating = Math.round((rawRating - ratingMedian) / maxResultValue * 1000) / 100;
+    const rawRating = calculateWeightedResult(
+      ratedTours,
+      ({ tour }) => Number(player.team.results_by_tour[tour].tour_score),
+    );
+    const normalizedRating = resultRange === 0
+      ? 5
+      : (rawRating - minResultValue) / resultRange * 10;
+    player.team.rating = Math.round(Math.max(0, Math.min(10, normalizedRating)) * 100) / 100;
     ratings.push(player.team.rating);
   });
 
   return ratings.sort((left, right) => left - right);
+}
+
+function calculateWeightedResult(
+  ratedTours: Array<{ tour: number; range: TourRange }>,
+  getScore: (tour: { tour: number; range: TourRange }) => number,
+): number {
+  return ratedTours.reduce((sum, ratedTour, index) =>
+    sum + (getScore(ratedTour) - Number(ratedTour.range.med))
+      / Number(ratedTour.range.med) * RATING_COEFFICIENTS[index], 0);
 }
 
 function isUsableRatingRange(range: TourRange): boolean {
@@ -58,12 +71,12 @@ function getTourRange(squads: FantasyFullInfoResponse, tour: string | number): T
 
   return {
     max: scores[0],
-    med: getLegacyMedian(scores),
+    med: getTourMedian(scores),
     min: scores[scores.length - 1],
   };
 }
 
-export function getLegacyMedian(
+export function getTourMedian(
   values: FantasyTourResult['tour_score'][],
 ): FantasyTourResult['tour_score'] | number {
   if (!values.length) return 0;
@@ -71,6 +84,5 @@ export function getLegacyMedian(
   const middle = Math.floor(sorted.length / 2);
   if (sorted.length % 2 !== 0) return sorted[middle];
 
-  // API scores are strings; concatenation before division is part of the 2025-26 formula.
-  return Number(sorted[middle - 1] + sorted[middle]) / 2;
+  return (Number(sorted[middle - 1]) + Number(sorted[middle])) / 2;
 }
