@@ -16,7 +16,7 @@ export interface IProfileDetails {
   place_in_league?: Record<string, number>;
   isMartin?: number;
   isMartinWC?: number;
-  sex?: string;
+  sex?: string | number;
 }
 
 export interface ITeamData {
@@ -105,7 +105,34 @@ export interface ICupResults {
 
 export interface IPrizeInfo {
   value: string | number;
-  sortParam: number;
+  sortParam: number | Record<string, number>;
+}
+
+export interface IPrizeNominee {
+  id: string;
+  name: string;
+  logo: string;
+  team: { title: string };
+  prizes: Record<number, IPrizeInfo>;
+  results: { subsCoef: number };
+}
+
+export interface IRuntimePrize {
+  id: number;
+  name?: string;
+  nomineesArr: IPrizeNominee[];
+  activeLeaders: IPrizeNominee[];
+  excluded?: string[];
+  isActivity?: boolean;
+  isFinalStage?: boolean;
+  state?: number;
+  author?: string;
+  condition?: string;
+  reward?: string;
+  icon?: string;
+  infoOnTour?: number;
+  isSecret?: boolean;
+  isShowAll?: boolean;
 }
 
 export interface IMatch {

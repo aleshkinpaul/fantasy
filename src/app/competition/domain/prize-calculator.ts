@@ -1,9 +1,25 @@
-import { SpainPrizeRules } from '../models/competition.models';
+import {
+  IProfileDetails,
+  IPrizeNominee,
+  IRuntimePrize,
+} from '../../models/domain';
+import {
+  CompetitionPrizeConfig,
+  LocalProfile,
+  SpainPrizeRules,
+} from '../models/competition.models';
+
+type PrizeSourceProfile = LocalProfile & Partial<IProfileDetails>;
+
+interface ManualPrizeNominee {
+  profileId: string;
+  points: number;
+}
 
 export interface PrizeCalculationInput {
-  prizes: any[];
-  profiles: any[];
-  profilesDetails: any[];
+  prizes: CompetitionPrizeConfig[];
+  profiles: PrizeSourceProfile[];
+  profilesDetails: IProfileDetails[];
   random?: () => number;
 }
 
@@ -11,120 +27,87 @@ export interface SpainPrizeCalculationInput extends PrizeCalculationInput {
   rules: SpainPrizeRules;
 }
 
-function updatePrizeStates(prizes: any[]): void {
+function updatePrizeStates(prizes: CompetitionPrizeConfig[]): void {
   prizes.forEach(prize => {
+    const nomineesCount = prize.nomineesArr?.length ?? 0;
     if (prize.isFinalStage) prize.state = 2;
-    if (prize.nomineesArr.length) prize.state = 1;
-    if (!prize.state && !prize.nomineesArr.length) prize.state = 3;
+    if (nomineesCount) prize.state = 1;
+    if (!prize.state && !nomineesCount) prize.state = 3;
   });
 }
 
 function countSpainPrizeNominees(
-  prizes: any[],
-  allProfiles: any[],
-  profilesDetails: any[],
-  eligibleProfiles: any[],
+  prizes: CompetitionPrizeConfig[],
+  allProfiles: PrizeSourceProfile[],
+  profilesDetails: IProfileDetails[],
+  eligibleProfiles: PrizeSourceProfile[],
   prizeId: number,
   rules: SpainPrizeRules,
   keyId = '',
 ): void {
-  const prize = prizes.find(item => item.id === prizeId);
+  const prize = requirePrize(prizes, prizeId);
   const sortValueAscending = [1, 2, 3, 9, 10].includes(prizeId);
   const sortParamAscending = prizeId === 18;
+  const manualNominees = (prize.nomineesArr ?? []).filter(isManualPrizeNominee);
+  const detailedProfiles = new Map(profilesDetails.map(profile => [profile.id, profile]));
+  const calculatedNominees = new Map<string, IPrizeNominee>();
 
-  const placeVal2Prize = profilesDetails.find(profile =>
-    profile.id === rules.placeReferenceProfileIds.prize2).place_in_league.Primera;
-  const placeVal3Prize = profilesDetails.find(profile =>
-    profile.id === rules.placeReferenceProfileIds.prize3).place_in_league.Primera;
-  const placeVal10Prize = profilesDetails.find(profile =>
-    profile.id === rules.placeReferenceProfileIds.prize10).place_in_league.Primera;
+  const placeVal2Prize = getPrimeraPlace(profilesDetails, rules.placeReferenceProfileIds.prize2);
+  const placeVal3Prize = getPrimeraPlace(profilesDetails, rules.placeReferenceProfileIds.prize3);
+  const placeVal10Prize = getPrimeraPlace(profilesDetails, rules.placeReferenceProfileIds.prize10);
 
-  eligibleProfiles.forEach(profile => {
-    const manualNominee = prize.nomineesArr.find(nominee => nominee.profileId === profile.id);
+  eligibleProfiles.forEach(sourceProfile => {
+    const manualNominee = manualNominees.find(nominee => nominee.profileId === sourceProfile.id);
 
-    if (prizeId === 7 && rules.guestProfileIds.includes(profile.id)) {
-      profile.prizes = {};
-      profile.team = { title: 'BallBoy17' };
-      profile.results = {
-        subsCoef: 100,
-        points: 0,
-      };
+    if (prizeId === 7 && rules.guestProfileIds.includes(sourceProfile.id)) {
+      const guestNominee = initializeGuestNominee(sourceProfile, manualNominee?.points ?? 0, prizeId);
+      calculatedNominees.set(guestNominee.id, guestNominee);
+      return;
     }
 
+    const profile = detailedProfiles.get(sourceProfile.id);
+    if (!profile) throw new Error(`Не найден runtime-профиль ${sourceProfile.id} для приза ${prizeId}`);
+
     profile.prizes[prizeId] = {
-      value:
-        prizeId === 1
-          ? (!profile.place_in_league.Primera || profile.place_in_league.Primera < 4 ? 0 : profile.place_in_league.Primera)
-          : prizeId === 2
-            ? placeVal2Prize !== 10
-              ? (!profile.place_in_league.Primera || profile.place_in_league.Primera < 10 ? 0 : profile.place_in_league.Primera)
-              : (!profile.place_in_league.Segunda || profile.place_in_league.Segunda < 10 ? 0 : profile.place_in_league.Segunda)
-            : prizeId === 3
-              ? placeVal3Prize !== 13
-                ? (!profile.place_in_league.Primera || profile.place_in_league.Primera < 13 ? 0 : profile.place_in_league.Primera)
-                : (!profile.place_in_league.Segunda || profile.place_in_league.Segunda < 13 ? 0 : profile.place_in_league.Segunda)
-              : prizeId === 4
-                ? (!profile.place_in_league.Primera || +profile.sex === 1 ? 0 : profile.results.points.clausura)
-                : prizeId === 5
-                  ? (!profile.place_in_league.Segunda || +profile.sex === 1 ? 0 : profile.results.points.clausura)
-                  : prizeId === 6
-                    ? (profile.isMartin === 1 ? profile.results.fo.common : 0)
-                    : prizeId === 7
-                      ? (manualNominee ? manualNominee.points : 0)
-                      : prizeId === 8
-                        ? Object.values<any>(profile.team.rosters_by_tour).reduce((sum, roster) =>
-                          sum + roster.players.base.includes(keyId) + roster.players.bench.includes(keyId), 0)
-                        : prizeId === 9
-                          ? profile.results.teamCostAvg
-                          : prizeId === 10
-                            ? (!profile.place_in_league.Primera || profile.place_in_league.Primera <= placeVal10Prize ? 0 : profile.place_in_league.Primera)
-                            : prizeId === 11
-                              ? Object.values<any>(profile.team.rosters_by_tour).reduce((sum, roster) =>
-                                sum + +(roster.captain_id === keyId), 0)
-                              : prizeId === 12
-                                ? profile.place_in_league.Apertura - profile.place_in_league.Common
-                                : prizeId === 13
-                                  ? profile.results.prizeMinWins
-                                  : prizeId === 15
-                                    ? profile.results.prizeMaxFoInTour
-                                    : prizeId === 16
-                                      ? profile.results.prizeMaxWinStrike
-                                      : prizeId === 17
-                                        ? profile.results.prizeMaxFoInLosedTour
-                                        : prizeId === 18
-                                          ? profile.results.prizeMaxStoppedNoLoseStrike
-                                          : prizeId === 19
-                                            ? profile.results.prizeMaxLosedDiff
-                                            : prizeId === 20
-                                              ? profile.results.cup.lowest_winning_pos_diff || 0
-                                              : prizeId === 21
-                                                ? profile.results.cup.avg_diff_fo
-                                                : '-',
-      sortParam: prizeId === 7
-        ? (manualNominee ? manualNominee.points : 0)
-        : profile.results.points,
+      value: getSpainPrizeValue(
+        profile,
+        prizeId,
+        manualNominee?.points ?? 0,
+        keyId,
+        placeVal2Prize,
+        placeVal3Prize,
+        placeVal10Prize,
+      ),
+      sortParam: prizeId === 7 ? manualNominee?.points ?? 0 : profile.results.points,
     };
+    calculatedNominees.set(profile.id, profile);
   });
 
-  prize.nomineesArr = allProfiles
+  const nominees = allProfiles
+    .map(profile => calculatedNominees.get(profile.id))
+    .filter((profile): profile is IPrizeNominee => Boolean(profile))
     .filter(profile =>
       prizeId !== 14
       && (
         prizeId === 7 && profile.id === rules.specialGuestId
         || !rules.guestProfileIds.includes(profile.id) && profile.prizes[prizeId]?.value !== 0
       ))
-    .sort((a, b) =>
-      a.prizes[prizeId].value === b.prizes[prizeId].value
-        ? (sortParamAscending ? -1 : 1) * (b.prizes[prizeId].sortParam - a.prizes[prizeId].sortParam)
-        : (sortValueAscending ? -1 : 1) * (b.prizes[prizeId].value - a.prizes[prizeId].value));
+    .sort((left, right) => compareNominees(
+      left,
+      right,
+      prizeId,
+      sortValueAscending,
+      sortParamAscending,
+    ));
 
-  prize.activeLeaders = prize.nomineesArr.filter(nominee =>
+  prize.nomineesArr = nominees;
+  prize.activeLeaders = nominees.filter(nominee =>
     (!prize.excluded || !prize.excluded.includes(nominee.id))
     && (!prize.isActivity || nominee.results.subsCoef > 50)
-    && (prizeId !== 11 || nominee.prizes[prizeId].value >= 3));
+    && (prizeId !== 11 || Number(nominee.prizes[prizeId].value) >= 3));
 }
 
-export function calculateSpainPrizes(input: SpainPrizeCalculationInput): any[] {
+export function calculateSpainPrizes(input: SpainPrizeCalculationInput): IRuntimePrize[] {
   const { prizes, profiles, profilesDetails, rules, random = Math.random } = input;
 
   prizes.forEach(prize => countSpainPrizeNominees(
@@ -145,76 +128,79 @@ export function calculateSpainPrizes(input: SpainPrizeCalculationInput): any[] {
 
   updatePrizeStates(prizes);
 
-  const winnerIds = prizes.map(prize => prize.activeLeaders[0]?.id || '');
+  const winnerIds = prizes.map(prize => getActiveLeaders(prize)[0]?.id || '');
   winnerIds.push(...rules.extraWinnerIds);
 
   const randomPrize = prizes[rules.randomPrizeIndex];
+  if (!randomPrize) throw new Error(`Не найден случайный приз с индексом ${rules.randomPrizeIndex}`);
   const randomPrizeNominees = profilesDetails.filter(profile =>
     !winnerIds.includes(profile.id)
     && profile.results.subsCoef > 50
-    && !randomPrize.excluded.includes(profile.id));
+    && !(randomPrize.excluded ?? []).includes(profile.id));
 
   randomPrize.nomineesArr = randomPrizeNominees;
-  randomPrize.activeLeaders.push(randomPrizeNominees[Math.floor(random() * randomPrizeNominees.length)]);
+  getActiveLeaders(randomPrize).push(
+    randomPrizeNominees[Math.floor(random() * randomPrizeNominees.length)],
+  );
   randomPrize.state = 1;
 
-  return prizes;
+  return asRuntimePrizes(prizes);
 }
 
-export function calculateChampionsLeaguePrizes(input: PrizeCalculationInput): any[] {
+export function calculateChampionsLeaguePrizes(input: PrizeCalculationInput): IRuntimePrize[] {
   const { prizes, profilesDetails } = input;
 
   prizes.forEach((prize, prizeIndex) => {
+    const configuredNominee = prize.nomineesArr?.[0];
     profilesDetails.forEach(profile => {
       profile.prizes[prize.id] = {
         value:
           prize.id === 1
-            ? (profile.place_in_league.ByScore < 7 ? 0 : profile.score)
+            ? (profile.place_in_league!['ByScore'] < 7 ? 0 : profile.score)
             : prize.id === 2
-              ? (profile.squadDetails.max_medals_in_a_row < 2 ? 0 : profile.squadDetails.max_medals_in_a_row)
+              ? (profile.squadDetails!.max_medals_in_a_row! < 2 ? 0 : profile.squadDetails!.max_medals_in_a_row!)
               : prize.id === 3
-                ? (prize.nomineesArr?.[0] === profile.id ? 1 : 0)
+                ? (configuredNominee === profile.id ? 1 : 0)
                 : prize.id === 4
-                  ? (prize.nomineesArr?.[0] === profile.id ? 1 : 0)
+                  ? (configuredNominee === profile.id ? 1 : 0)
                   : 0,
         sortParam: prize.id === 2 ? profile.score : profile.results.points,
       };
     });
 
-    prize.nomineesArr = profilesDetails
-      .filter(profile => profile.prizes[prize.id].value > 0)
-      .sort((a, b) =>
-        a.prizes[prize.id].value === b.prizes[prize.id].value
-          ? b.prizes[prize.id].sortParam - a.prizes[prize.id].sortParam
-          : b.prizes[prize.id].value - a.prizes[prize.id].value);
+    const nominees = profilesDetails
+      .filter(profile => Number(profile.prizes[prize.id].value) > 0)
+      .sort((left, right) => compareNominees(left, right, prize.id));
 
-    prize.activeLeaders = prize.nomineesArr.filter(nominee =>
+    prize.nomineesArr = nominees;
+    prize.activeLeaders = nominees.filter(nominee =>
       (!prize.excluded || !prize.excluded.includes(nominee.id))
       && (!prize.isActivity || nominee.results.subsCoef > 50)
-      && (prizeIndex !== 11 || nominee.prizes[prizeIndex].value >= 3));
+      && (prizeIndex !== 11 || Number(nominee.prizes[prizeIndex].value) >= 3));
   });
 
   updatePrizeStates(prizes);
-  return prizes;
+  return asRuntimePrizes(prizes);
 }
 
-export function calculateWorldCupPrizes(input: PrizeCalculationInput): any[] {
+export function calculateWorldCupPrizes(input: PrizeCalculationInput): IRuntimePrize[] {
   const { prizes, profilesDetails } = input;
 
   prizes.forEach((prize, prizeIndex) => {
     const sortValueAscending = prizeIndex === 2;
+    const defaultNominees = prize.defaultNomineesArr ?? [];
 
     profilesDetails.forEach(profile => {
       profile.prizes[prize.id] = {
         value:
           prize.id === 1
-            ? (prize.defaultNomineesArr.includes(profile.id) ? 1 : 0)
+            ? (defaultNominees.includes(profile.id) ? 1 : 0)
             : prize.id === 2
               ? (profile.isMartinWC === 1 ? profile.score : 0)
               : prize.id === 3
                 ? profile.score
                 : prize.id === 4
-                  ? (prize.defaultNomineesArr.includes(profile.id) ? 1 : 0)
+                  ? (defaultNominees.includes(profile.id) ? 1 : 0)
                   : prize.id === 5
                     ? profile.results.uniqueUsedPlayers.length
                     : prize.id === 6
@@ -230,18 +216,121 @@ export function calculateWorldCupPrizes(input: PrizeCalculationInput): any[] {
       };
     });
 
-    prize.nomineesArr = profilesDetails
-      .filter(profile => profile.prizes[prize.id].value > 0)
-      .sort((a, b) =>
-        a.prizes[prize.id].value === b.prizes[prize.id].value
-          ? b.prizes[prize.id].sortParam - a.prizes[prize.id].sortParam
-          : (sortValueAscending ? -1 : 1) * (b.prizes[prize.id].value - a.prizes[prize.id].value));
+    const nominees = profilesDetails
+      .filter(profile => Number(profile.prizes[prize.id].value) > 0)
+      .sort((left, right) => compareNominees(left, right, prize.id, sortValueAscending));
 
-    prize.activeLeaders = prize.nomineesArr.filter(nominee =>
+    prize.nomineesArr = nominees;
+    prize.activeLeaders = nominees.filter(nominee =>
       (!prize.excluded || !prize.excluded.includes(nominee.id))
       && (!prize.isActivity || nominee.results.subsCoef > 50));
   });
 
   updatePrizeStates(prizes);
-  return prizes;
+  return asRuntimePrizes(prizes);
+}
+
+function getSpainPrizeValue(
+  profile: IProfileDetails,
+  prizeId: number,
+  manualPoints: number,
+  keyId: string,
+  placeVal2Prize: number,
+  placeVal3Prize: number,
+  placeVal10Prize: number,
+): string | number {
+  const place = profile.place_in_league!;
+  switch (prizeId) {
+    case 1: return !place['Primera'] || place['Primera'] < 4 ? 0 : place['Primera'];
+    case 2: return placeVal2Prize !== 10
+      ? (!place['Primera'] || place['Primera'] < 10 ? 0 : place['Primera'])
+      : (!place['Segunda'] || place['Segunda'] < 10 ? 0 : place['Segunda']);
+    case 3: return placeVal3Prize !== 13
+      ? (!place['Primera'] || place['Primera'] < 13 ? 0 : place['Primera'])
+      : (!place['Segunda'] || place['Segunda'] < 13 ? 0 : place['Segunda']);
+    case 4: return !place['Primera'] || +profile.sex! === 1 ? 0 : profile.results.points['clausura'];
+    case 5: return !place['Segunda'] || +profile.sex! === 1 ? 0 : profile.results.points['clausura'];
+    case 6: return profile.isMartin === 1 ? profile.results.fo['common'] : 0;
+    case 7: return manualPoints;
+    case 8: return Object.values(profile.team.rosters_by_tour).reduce((sum, roster) =>
+      sum + Number(roster.players.base.includes(keyId)) + Number(roster.players.bench.includes(keyId)), 0);
+    case 9: return profile.results.teamCostAvg;
+    case 10: return !place['Primera'] || place['Primera'] <= placeVal10Prize ? 0 : place['Primera'];
+    case 11: return Object.values(profile.team.rosters_by_tour).reduce((sum, roster) =>
+      sum + Number(roster.captain_id === keyId), 0);
+    case 12: return place['Apertura'] - place['Common'];
+    case 13: return profile.results.prizeMinWins;
+    case 15: return profile.results.prizeMaxFoInTour;
+    case 16: return profile.results.prizeMaxWinStrike;
+    case 17: return profile.results.prizeMaxFoInLosedTour;
+    case 18: return profile.results.prizeMaxStoppedNoLoseStrike;
+    case 19: return profile.results.prizeMaxLosedDiff;
+    case 20: return profile.results.cup!.lowest_winning_pos_diff || 0;
+    case 21: return profile.results.cup!.avg_diff_fo;
+    default: return '-';
+  }
+}
+
+function compareNominees(
+  left: IPrizeNominee,
+  right: IPrizeNominee,
+  prizeId: number,
+  sortValueAscending = false,
+  sortParamAscending = false,
+): number {
+  const leftPrize = left.prizes[prizeId];
+  const rightPrize = right.prizes[prizeId];
+  if (leftPrize.value === rightPrize.value) {
+    return (sortParamAscending ? -1 : 1)
+      * (Number(rightPrize.sortParam) - Number(leftPrize.sortParam));
+  }
+  return (sortValueAscending ? -1 : 1)
+    * (Number(rightPrize.value) - Number(leftPrize.value));
+}
+
+function initializeGuestNominee(
+  profile: PrizeSourceProfile,
+  points: number,
+  prizeId: number,
+): IPrizeNominee {
+  profile.prizes = {};
+  profile.team = { title: 'BallBoy17' } as IProfileDetails['team'];
+  profile.results = {
+    subsCoef: 100,
+    points: 0,
+  } as unknown as IProfileDetails['results'];
+  profile.prizes[prizeId] = { value: points, sortParam: points };
+  return profile as unknown as IPrizeNominee;
+}
+
+function getPrimeraPlace(profiles: IProfileDetails[], profileId: string): number {
+  const profile = profiles.find(item => item.id === profileId);
+  if (!profile?.place_in_league) {
+    throw new Error(`Не найден reference-профиль ${profileId} для расчета призов`);
+  }
+  return profile.place_in_league['Primera'];
+}
+
+function requirePrize(prizes: CompetitionPrizeConfig[], prizeId: number): CompetitionPrizeConfig {
+  const prize = prizes.find(item => item.id === prizeId);
+  if (!prize) throw new Error(`Не найден приз ${prizeId}`);
+  return prize;
+}
+
+function isManualPrizeNominee(value: unknown): value is ManualPrizeNominee {
+  return Boolean(value)
+    && typeof value === 'object'
+    && 'profileId' in value
+    && 'points' in value
+    && typeof value.profileId === 'string'
+    && typeof value.points === 'number';
+}
+
+function getActiveLeaders(prize: CompetitionPrizeConfig): IPrizeNominee[] {
+  if (!prize.activeLeaders) prize.activeLeaders = [];
+  return prize.activeLeaders as IPrizeNominee[];
+}
+
+function asRuntimePrizes(prizes: CompetitionPrizeConfig[]): IRuntimePrize[] {
+  return prizes as unknown as IRuntimePrize[];
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IPrizeNominee, IRuntimePrize } from '../../models/domain';
 
 @Component({
   selector: 'app-prizes-list',
@@ -9,13 +10,16 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class PrizesListComponent {
-  @Input() prizes: any[] = [];
+  @Input() prizes: IRuntimePrize[] = [];
 
-  toggleShowAllNominees(prize: any): void {
+  toggleShowAllNominees(prize: IRuntimePrize): void {
     prize.isShowAll = !prize.isShowAll;
   }
 
-  shouldDisplay(nominee: any, nomineesArr: any[], activeLeaders: any[], isShowAll: boolean, index: number): boolean {
+  shouldDisplay(
+    isShowAll: boolean,
+    index: number,
+  ): boolean {
     if (isShowAll) return true;
     if (index >= 5) return false;
     return true;
@@ -28,7 +32,11 @@ export class PrizesListComponent {
     return 'assets/logos/2025/icons/medal.png';
   }
 
-  isUnusuitableItem(nominee: any, activeLeaders: any[], isShowAll: boolean): boolean {
+  isUnusuitableItem(
+    nominee: IPrizeNominee,
+    activeLeaders: IPrizeNominee[],
+    isShowAll: boolean,
+  ): boolean {
     return isShowAll && !activeLeaders.includes(nominee);
   }
 

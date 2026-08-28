@@ -4,6 +4,7 @@ import { LeagueH2HDataService } from '../../components/league-h2h-page/league-h2
 import {
   IProfileDetails,
   IProfileResults,
+  IRuntimePrize,
   ISquadDetails,
 } from '../../models/domain';
 import { calculateCup } from '../domain/cup-calculator';
@@ -44,7 +45,7 @@ export interface CompetitionViewModel {
   leaguesRatings: Record<string, IProfileDetails[]>;
   squadsDetails: ISquadDetails[];
   playersRating: number[];
-  prizes: CompetitionPrizeConfig[];
+  prizes: IRuntimePrize[];
   lastTour: number;
 }
 
@@ -183,7 +184,7 @@ export class CompetitionFacade {
     profiles: RuntimeProfile[],
     profilesDetails: IProfileDetails[],
     spainRules?: SpainPrizeRules,
-  ): CompetitionPrizeConfig[] {
+  ): IRuntimePrize[] {
     if (type === 'spain') {
       if (!spainRules) throw new Error('Для турнира Испании не настроены правила призов');
       return calculateSpainPrizes({ prizes, profiles, profilesDetails, rules: spainRules });

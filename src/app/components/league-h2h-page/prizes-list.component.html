@@ -40,7 +40,7 @@
             <li
               class="nominee-item"
               [ngClass]="{ 'unsuitable-item': isUnusuitableItem(nominee, item.activeLeaders, item.isShowAll) }"
-              *ngIf="shouldDisplay(nominee, item.nomineesArr, item.activeLeaders, item.isShowAll, nomInd)"
+              *ngIf="shouldDisplay(item.isShowAll, nomInd)"
             >
               <div class="nominee-main-container">
                 <div class="team-container">

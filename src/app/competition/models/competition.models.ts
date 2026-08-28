@@ -125,6 +125,9 @@ export interface CompetitionPrizeConfig {
   nomineesArr?: unknown[];
   activeLeaders?: unknown[];
   state?: number;
+  infoOnTour?: number;
+  isSecret?: boolean;
+  isShowAll?: boolean;
   [key: string]: unknown;
 }
 

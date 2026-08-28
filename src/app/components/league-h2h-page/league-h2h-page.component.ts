@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataService } from '../../service/data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ISquadDetails, IProfileDetails } from '../../models/domain';
+import { IRuntimePrize, ISquadDetails, IProfileDetails } from '../../models/domain';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { logger } from '../../utils/logger';
@@ -13,7 +13,7 @@ import { MatchesComponent } from '../matches/matches.component';
 import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { PrizesListComponent } from './prizes-list.component';
-import { CompetitionType } from '../../competition/models/competition.models';
+import { CompetitionMatch, CompetitionType } from '../../competition/models/competition.models';
 import {
   compareByFantasyScore,
   compareStandings,
@@ -42,10 +42,10 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   public isShowUnitedTableByPoints = false;
-  public prizesToShow = [];
+  public prizesToShow: IRuntimePrize[] = [];
   public unitedProfiles = [];
   public profilesDetails: IProfileDetails[] = [];
-  public currentLeagueMatches: any[] = [];
+  public currentLeagueMatches: CompetitionMatch[][] = [];
   public leaguesRatings: Record<string, IProfileDetails[]> = {};
   public chosenStage = 'common';
   public chosenLeague = '';
