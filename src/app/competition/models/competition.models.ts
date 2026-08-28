@@ -144,7 +144,11 @@ export interface CompetitionPrizeConfig {
 
 export interface CompetitionPrizeReference {
   key: string;
-  overrides?: Omit<Partial<CompetitionPrizeConfig>, 'id'>;
+  overrides?: {
+    id?: never;
+    excluded?: string[];
+    [key: string]: unknown;
+  };
 }
 
 export interface SpecialPlayerRules {

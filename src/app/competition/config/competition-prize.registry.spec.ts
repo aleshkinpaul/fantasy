@@ -12,7 +12,7 @@ describe('resolveCompetitionPrizes', () => {
     expect(prizes.length).toBe(1);
     expect(prizes[0].id).toBe(6);
     expect(prizes[0].icon).toBe('assets/logos/2026/icons/real-madrid.png');
-    expect(prizes[0].excluded).toEqual(['guest']);
+    expect(prizes[0].excluded).toEqual(['guest', '5275903']);
   });
 
   it('allows a season without prize references', () => {
@@ -27,6 +27,32 @@ describe('resolveCompetitionPrizes', () => {
     first[0].nomineesArr!.push('runtime nominee');
 
     expect(second[0].nomineesArr).toEqual([]);
+  });
+
+  it('automatically excludes each reusable prize author', () => {
+    const config = createConfig({
+      prizeRefs: [
+        { key: 'classic' },
+        { key: 'turtle-hunt' },
+        { key: 'handy-hands' },
+        { key: 'martin-points' },
+        { key: 'fire-match' },
+        { key: 'first-hundred' },
+        { key: 'legendary-seven' },
+        { key: 'soft-kitty' },
+      ],
+    });
+
+    expect(resolveCompetitionPrizes(config).map(prize => prize.excluded?.[0])).toEqual([
+      '1076901343',
+      '1058102914',
+      '73116796',
+      '1116309099',
+      '1113442132',
+      '1116848369',
+      '152317185',
+      '5275903',
+    ]);
   });
 
   it('rejects an unknown prize template', () => {

@@ -8,11 +8,13 @@ import { SPAIN_PRIZE_IDS } from './spain-prize.ids';
 interface PrizeTemplate {
   prize: CompetitionPrizeConfig;
   iconFile?: string;
+  authorProfileId?: string;
 }
 
 const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
   'martin-league': {
     iconFile: 'real-madrid.png',
+    authorProfileId: '5275903',
     prize: {
       id: SPAIN_PRIZE_IDS.MARTIN_LEAGUE,
       name: '"Лига Мартина"',
@@ -27,6 +29,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
   },
   'soft-kitty': {
     iconFile: 'paw.png',
+    authorProfileId: '5275903',
     prize: {
       id: SPAIN_PRIZE_IDS.SOFT_KITTY,
       name: '"Soft Kitty"',
@@ -40,6 +43,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   classic: {
+    authorProfileId: '1076901343',
     prize: {
       id: SPAIN_PRIZE_IDS.CLASSIC,
       name: 'Классика',
@@ -53,6 +57,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'spicy-pepe': {
+    authorProfileId: '1116907944',
     prize: {
       id: SPAIN_PRIZE_IDS.SPICY_PEPE,
       name: 'Привкус Пепе',
@@ -67,6 +72,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'turtle-hunt': {
+    authorProfileId: '1058102914',
     prize: {
       id: SPAIN_PRIZE_IDS.TURTLE_HUNT,
       name: 'Охота за черепахой',
@@ -80,6 +86,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'handy-hands': {
+    authorProfileId: '73116796',
     prize: {
       id: SPAIN_PRIZE_IDS.HANDY_HANDS,
       name: 'Очумелые ручки',
@@ -93,6 +100,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'martin-points': {
+    authorProfileId: '1116309099',
     prize: {
       id: SPAIN_PRIZE_IDS.MARTIN_POINTS,
       name: 'Че? Мартин!',
@@ -106,6 +114,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'fire-match': {
+    authorProfileId: '1113442132',
     prize: {
       id: SPAIN_PRIZE_IDS.FIRE_MATCH,
       name: 'Наш огооонь',
@@ -119,6 +128,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'first-hundred': {
+    authorProfileId: '1116848369',
     prize: {
       id: SPAIN_PRIZE_IDS.FIRST_HUNDRED,
       name: 'СОТОЧКА',
@@ -133,6 +143,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
   },
   'girl-power-primera': {
     iconFile: 'girl.png',
+    authorProfileId: '1068332740',
     prize: {
       id: SPAIN_PRIZE_IDS.GIRL_POWER_PRIMERA,
       name: '"Girl Power" (Primera)',
@@ -147,6 +158,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
   },
   'girl-power-segunda': {
     iconFile: 'girl.png',
+    authorProfileId: '1068332740',
     prize: {
       id: SPAIN_PRIZE_IDS.GIRL_POWER_SEGUNDA,
       name: '"Girl Power" (Segunda)',
@@ -160,6 +172,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'legendary-seven': {
+    authorProfileId: '152317185',
     prize: {
       id: SPAIN_PRIZE_IDS.LEGENDARY_SEVEN,
       name: 'Легендарная Семерка',
@@ -191,11 +204,17 @@ function resolvePrize(reference: CompetitionPrizeReference, yearStart: number): 
   const template = PRIZE_TEMPLATES[reference.key];
   if (!template) throw new Error(`Не найден шаблон приза ${reference.key}`);
 
-  const { iconFile, prize } = template;
+  const { iconFile, prize, authorProfileId } = template;
+  const excluded = [
+    ...(prize.excluded ?? []),
+    ...(reference.overrides?.excluded ?? []),
+    ...(authorProfileId ? [authorProfileId] : []),
+  ].filter((profileId, index, values) => values.indexOf(profileId) === index);
   return clonePrize({
     ...prize,
     ...(iconFile ? { icon: `assets/logos/${yearStart}/icons/${iconFile}` } : {}),
     ...reference.overrides,
+    excluded,
   });
 }
 

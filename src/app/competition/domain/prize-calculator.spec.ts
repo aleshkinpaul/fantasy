@@ -98,12 +98,19 @@ describe('prize calculator', () => {
       sportPlayers: [
         sportPlayer('efficient', '10', 5, 20),
         sportPlayer('expensive', '11', 7, 100),
+        sportPlayer('second', '11', 5, 15),
+        sportPlayer('third', '12', 5, 10),
+        sportPlayer('fourth', '10', 5, 5),
+        sportPlayer('fifth', '11', 5, 4),
+        sportPlayer('sixth', '12', 5, 3),
       ],
     });
 
     expect(result[0].activeLeaders.map(profile => profile.id)).toEqual(['leader', 'runner-up']);
     expect(leader.prizes[SPAIN_PRIZE_IDS.HANDY_HANDS].value).toBe(14);
-    expect(result[0].calculationInfo).toBe('efficient: 20 FO / 5 = 4');
+    expect(result[0].calculationInfo).toContain('1. efficient — 20 FO / 5 = 4');
+    expect(result[0].calculationInfo).toContain('5. fifth — 4 FO / 5 = 0.8');
+    expect(result[0].calculationInfo).not.toContain('sixth');
   });
 
   it('keeps a placeholder prize without calculated nominees', () => {

@@ -185,9 +185,13 @@ function calculateNewSpainPrize(
       valueByProfile = profile => profile.results.prizeMaxWinDiffAgainstTarget ?? 0;
       break;
     case SPAIN_PRIZE_IDS.HANDY_HANDS: {
-      const player = getBestValuePlayer(sportPlayers);
+      const valuePlayers = getBestValuePlayers(sportPlayers);
+      const player = valuePlayers[0];
       if (player) {
-        prize.calculationInfo = `${player.name}: ${player.score} FO / ${player.cost} = ${formatRatio(player.ratio)}`;
+        prize.calculationInfo = valuePlayers.slice(0, 5)
+          .map((item, index) =>
+            `${index + 1}. ${item.name} — ${item.score} FO / ${item.cost} = ${formatRatio(item.ratio)}`)
+          .join('; ');
       }
       valueByProfile = profile => player ? profile.results.selectedPlayerPoints?.[player.id] ?? 0 : 0;
       break;
@@ -248,13 +252,13 @@ function setCalculatedNominees(
     && (!prize.isActivity || nominee.results.subsCoef > 50));
 }
 
-function getBestValuePlayer(players: SportPlayer[]): {
+function getBestValuePlayers(players: SportPlayer[]): Array<{
   id: string;
   name: string;
   cost: number;
   score: number;
   ratio: number;
-} | undefined {
+}> {
   return players
     .filter(player => ['10', '11', '12'].includes(player.amplua_id) && player.cost > 0 && player.cost <= 6)
     .map(player => ({
@@ -268,7 +272,7 @@ function getBestValuePlayer(players: SportPlayer[]): {
       || right.score - left.score
       || left.cost - right.cost
       || left.id.localeCompare(right.id))
-    .map(player => ({ ...player, ratio: player.score / player.cost }))[0];
+    .map(player => ({ ...player, ratio: player.score / player.cost }));
 }
 
 function formatRatio(value: number): string {
