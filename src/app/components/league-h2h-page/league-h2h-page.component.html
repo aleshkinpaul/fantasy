@@ -1,4 +1,4 @@
-<div class="main-container" *ngIf="!(isLoading$ | async)">
+<div class="main-container" *ngIf="!(isLoading$ | async) && !loadError && consts">
 
   <!-- Вкладки -->
   <ul class="nav-list">
@@ -125,5 +125,10 @@
     ></app-matches>
   </div>
 </div>
+<section class="load-error" *ngIf="!(isLoading$ | async) && loadError">
+  <h2>Не удалось загрузить данные турнира</h2>
+  <p>Проверьте соединение и доступность сервиса статистики, затем попробуйте ещё раз.</p>
+  <button type="button" (click)="loadCompetition()">Повторить</button>
+</section>
 <app-default-loader *ngIf="(isLoading$ | async)" class="loading-spinner-container"></app-default-loader>
 

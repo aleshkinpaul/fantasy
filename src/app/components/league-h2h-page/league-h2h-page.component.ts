@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataService } from '../../service/data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ISquadDetails, IProfileDetails } from '../../models/domain';
@@ -49,6 +50,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public chosenStage = 'common';
   public chosenLeague = '';
   public competitionType;
+  public loadError = false;
 
   public lastTour: number = 1;
 
@@ -60,17 +62,24 @@ export class LeagueH2HPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public loader: LoaderService,
-    private competitionFacade: CompetitionFacade
+    private competitionFacade: CompetitionFacade,
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit() {
-    const yearParam = +this.route.snapshot.queryParams['year'] || 0;
-    
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
+    this.loadCompetition();
+  }
 
+  loadCompetition(): void {
+    const yearParam = +this.route.snapshot.queryParams['year'] || 0;
     const competitionType = this.route.snapshot.url[0].path as CompetitionType;
-    this.competitionFacade.load(competitionType, yearParam).subscribe({
+    this.loadError = false;
+
+    this.competitionFacade.load(competitionType, yearParam)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
       next: viewModel => {
               this.consts = viewModel.config;
               this.competitionType = viewModel.config.type;
@@ -92,6 +101,7 @@ export class LeagueH2HPageComponent implements OnInit {
             this.getMatchesForLeague();
       },
       error: err => {
+            this.loadError = true;
             logger.error('Ошибка при получении данных:', err);
       }
     });
