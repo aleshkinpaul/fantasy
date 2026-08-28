@@ -1,9 +1,12 @@
-import { FantasyFullInfoResponse } from '../models/competition.models';
+import {
+  FantasyFullInfoResponse,
+  FantasyTourResult,
+} from '../models/competition.models';
 
 interface TourRange {
-  max: any;
-  med: any;
-  min: any;
+  max: FantasyTourResult['tour_score'];
+  med: FantasyTourResult['tour_score'] | number;
+  min: FantasyTourResult['tour_score'];
 }
 
 const RATING_COEFFICIENTS = [19, 15, 12, 10, 9];
@@ -26,17 +29,17 @@ export function calculateSquadRatings(
 
   const ratingMedian = -RATING_COEFFICIENTS.reduce((sum, coefficient) => sum + coefficient, 0);
   const maxResultValue = recentTourRanges.reduce((sum, range, index) =>
-    sum + (range.max - range.med) / range.med * RATING_COEFFICIENTS[index], 0) - ratingMedian;
+    sum + (Number(range.max) - Number(range.med)) / Number(range.med) * RATING_COEFFICIENTS[index], 0) - ratingMedian;
 
   const ratings: number[] = [];
   Object.values(squads.data.players).forEach(player => {
-    const recentScores: any[] = [];
+    const recentScores: FantasyTourResult['tour_score'][] = [];
     for (let offset = 0; offset < lastTour && offset < RATING_COEFFICIENTS.length; offset++) {
       recentScores.push(player.team.results_by_tour[lastTour - offset].tour_score);
     }
 
     const rawRating = recentTourRanges.reduce((sum, range, index) =>
-      sum + (recentScores[index] - range.med) / range.med * RATING_COEFFICIENTS[index], 0);
+      sum + (Number(recentScores[index]) - Number(range.med)) / Number(range.med) * RATING_COEFFICIENTS[index], 0);
     player.team.rating = Math.round((rawRating - ratingMedian) / maxResultValue * 1000) / 100;
     ratings.push(player.team.rating);
   });
@@ -45,9 +48,9 @@ export function calculateSquadRatings(
 }
 
 function getTourRange(squads: FantasyFullInfoResponse, tour: string | number): TourRange {
-  const scores: any[] = Object.values(squads.data.players)
+  const scores: FantasyTourResult['tour_score'][] = Object.values(squads.data.players)
     .map(player => player.team.results_by_tour[tour.toString()].tour_score)
-    .sort((left, right) => (right as any) - (left as any));
+    .sort((left, right) => Number(right) - Number(left));
 
   return {
     max: scores[0],
@@ -56,12 +59,14 @@ function getTourRange(squads: FantasyFullInfoResponse, tour: string | number): T
   };
 }
 
-function getLegacyMedian(values: any[]): number {
+export function getLegacyMedian(
+  values: FantasyTourResult['tour_score'][],
+): FantasyTourResult['tour_score'] | number {
   if (!values.length) return 0;
-  const sorted = [...values].sort((left, right) => right - left);
+  const sorted = [...values].sort((left, right) => Number(right) - Number(left));
   const middle = Math.floor(sorted.length / 2);
   if (sorted.length % 2 !== 0) return sorted[middle];
 
   // API scores are strings; concatenation before division is part of the 2025-26 formula.
-  return (sorted[middle - 1] + sorted[middle]) / 2;
+  return Number(sorted[middle - 1] + sorted[middle]) / 2;
 }

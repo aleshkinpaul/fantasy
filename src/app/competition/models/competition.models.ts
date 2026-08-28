@@ -13,9 +13,9 @@ export interface FantasyTour {
   number: string;
   start: string;
   end: string;
-  max?: number;
-  med?: number;
-  min?: number;
+  max?: string | number;
+  med?: string | number;
+  min?: string | number;
 }
 
 export interface FantasyTourResult {
