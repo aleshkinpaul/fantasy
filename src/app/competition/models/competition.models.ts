@@ -171,9 +171,14 @@ export interface SubstitutionRules {
   limitsByTourIndex: Record<string, number>;
 }
 
+export interface PrizeMetricRules {
+  maxLosingDifferenceFirstTour: number;
+}
+
 export interface CompetitionRuntimeRules {
   playerStats: SpecialPlayerRules;
   spainPrizes?: SpainPrizeRules;
+  prizeMetrics: PrizeMetricRules;
   substitutions: Partial<Record<CompetitionType, SubstitutionRules>>;
 }
 

@@ -23,6 +23,7 @@ export interface TourProcessingContext {
   competitionType: CompetitionType;
   playOffTours: number[];
   substitutionRules?: SubstitutionRules;
+  maxLosingDifferenceFirstTour: number;
 }
 
 @Injectable({
@@ -40,6 +41,7 @@ export class LeagueH2HDataService {
       competitionType,
       playOffTours,
       substitutionRules,
+      maxLosingDifferenceFirstTour,
     } = context;
 
     matches.forEach(match => {
@@ -74,7 +76,8 @@ export class LeagueH2HDataService {
         matchResult.homeScore,
         matchResult.awayScore,
         matchDiffFo,
-        tourIndex
+        tourIndex,
+        maxLosingDifferenceFirstTour,
       );
       this.updateMaxFoInTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore);
       this.updateMaxFoInLosedTour(
@@ -187,7 +190,8 @@ export class LeagueH2HDataService {
     homeScore: number,
     awayScore: number,
     matchDiffFo: number,
-    tourIndex: number
+    tourIndex: number,
+    maxLosingDifferenceFirstTour: number,
   ): void {
     if (result === 0) { // draw
       this.resetWinStrike(homeProfile);
@@ -206,7 +210,10 @@ export class LeagueH2HDataService {
       awayProfile.results.prizeCurrentNoLoseStrike = 0;
 
       if (matchDiffFo <= 5) homeProfile.results.prizeMinWins += 1;
-      if (matchDiffFo > awayProfile.results.prizeMaxLosedDiff && tourIndex > 1) {
+      if (
+        matchDiffFo > awayProfile.results.prizeMaxLosedDiff
+        && tourIndex + 1 >= maxLosingDifferenceFirstTour
+      ) {
         awayProfile.results.prizeMaxLosedDiff = matchDiffFo;
       }
     } else { // away win
@@ -219,7 +226,10 @@ export class LeagueH2HDataService {
       homeProfile.results.prizeCurrentNoLoseStrike = 0;
 
       if (matchDiffFo <= 5) awayProfile.results.prizeMinWins += 1;
-      if (matchDiffFo > homeProfile.results.prizeMaxLosedDiff && tourIndex > 1) {
+      if (
+        matchDiffFo > homeProfile.results.prizeMaxLosedDiff
+        && tourIndex + 1 >= maxLosingDifferenceFirstTour
+      ) {
         homeProfile.results.prizeMaxLosedDiff = matchDiffFo;
       }
     }

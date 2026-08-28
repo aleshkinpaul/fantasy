@@ -81,6 +81,7 @@ export class CompetitionFacade {
         competitionType: config.type,
         playOffTours: config.cup?.matchesTours || [],
         substitutionRules: rules.substitutions[config.type],
+        maxLosingDifferenceFirstTour: rules.prizeMetrics.maxLosingDifferenceFirstTour,
       });
       profilesDetails.sort((left, right) => compareStandings(left, right, 'common'));
     }

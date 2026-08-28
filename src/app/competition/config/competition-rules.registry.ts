@@ -28,6 +28,9 @@ const RULES: Record<string, CompetitionRuntimeRules> = {
         prize10: '1116311079',
       },
     },
+    prizeMetrics: {
+      maxLosingDifferenceFirstTour: 3,
+    },
     substitutions: {
       spain: {
         defaultLimit: 3,
@@ -58,6 +61,9 @@ const RULES: Record<string, CompetitionRuntimeRules> = {
     spainPrizes: {
       guestProfileIds: [],
       extraWinnerIds: [],
+    },
+    prizeMetrics: {
+      maxLosingDifferenceFirstTour: 1,
     },
     substitutions: {
       spain: {

@@ -1,4 +1,4 @@
-import { ITeamData } from '../../models/domain';
+import { IProfileDetails, ITeamData } from '../../models/domain';
 import { LeagueH2HDataService } from './league-h2h-data.service';
 
 describe('LeagueH2HDataService', () => {
@@ -27,6 +27,26 @@ describe('LeagueH2HDataService', () => {
 
     expect(service.countSquadChanges(rosters, 2)).toBe(3);
   });
+
+  it('counts the largest losing difference from the configured first tour', () => {
+    const home = createStrikeProfile();
+    const away = createStrikeProfile();
+
+    service.updateStrikes(home, away, 1, 100, 70, 30, 0, 1);
+
+    expect(away.results.prizeMaxLosedDiff).toBe(30);
+  });
+
+  it('preserves the legacy third-tour threshold when configured', () => {
+    const home = createStrikeProfile();
+    const away = createStrikeProfile();
+
+    service.updateStrikes(home, away, 1, 100, 70, 30, 0, 3);
+    expect(away.results.prizeMaxLosedDiff).toBe(0);
+
+    service.updateStrikes(home, away, 1, 90, 70, 20, 2, 3);
+    expect(away.results.prizeMaxLosedDiff).toBe(20);
+  });
 });
 
 function createRoster(players: string[]): ITeamData['rosters_by_tour'][number] {
@@ -39,4 +59,18 @@ function createRoster(players: string[]): ITeamData['rosters_by_tour'][number] {
       bench: players.slice(11),
     },
   };
+}
+
+function createStrikeProfile(): IProfileDetails {
+  return {
+    results: {
+      prizeCurrentWinStrike: 0,
+      prizeMaxWinStrike: 0,
+      prizeCurrentNoLoseStrike: 0,
+      prizeMaxNoLoseStrike: 0,
+      prizeMaxStoppedNoLoseStrike: 0,
+      prizeMinWins: 0,
+      prizeMaxLosedDiff: 0,
+    },
+  } as IProfileDetails;
 }
