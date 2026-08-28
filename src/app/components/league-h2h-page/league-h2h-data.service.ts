@@ -5,6 +5,7 @@ import {
   FantasyFullInfoResponse,
   SubstitutionRules,
 } from '../../competition/models/competition.models';
+import { IProfileDetails, ITeamData } from '../../models/domain';
 
 export interface IMatchResult {
   homeScore: number;
@@ -12,18 +13,10 @@ export interface IMatchResult {
   result: 0 | 1 | 2; // 0 = draw, 1 = home win, 2 = away win
 }
 
-export interface IStrikeState {
-  currentWinStrike: number;
-  maxWinStrike: number;
-  currentNoLoseStrike: number;
-  maxNoLoseStrike: number;
-  maxStoppedNoLoseStrike: number;
-}
-
 export interface TourProcessingContext {
   tourIndex: number;
   currentStage: string;
-  profiles: any[];
+  profiles: IProfileDetails[];
   matches: CompetitionMatch[];
   squads: FantasyFullInfoResponse;
   drawGap: number;
@@ -143,9 +136,9 @@ export class LeagueH2HDataService {
    * Updates FOills (fantasy points) for both profiles
    */
   updateFO(
-    homeProfile: any,
-    awayProfile: any,
-    match: any,
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
+    match: IMatchResult,
     stage: string
   ): void {
     homeProfile.results.fo[stage] += match.homeScore;
@@ -162,7 +155,12 @@ export class LeagueH2HDataService {
   /**
    * Updates win/loss/draw counts for both profiles
    */
-  updateMatchCounts(homeProfile: any, awayProfile: any, result: 0 | 1 | 2, stage: string): void {
+  updateMatchCounts(
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
+    result: 0 | 1 | 2,
+    stage: string,
+  ): void {
     if (result === 0) { // draw
       homeProfile.results.draws[stage] += 1;
       awayProfile.results.draws[stage] += 1;
@@ -183,8 +181,8 @@ export class LeagueH2HDataService {
    * Updates strike statistics (win streaks and no-lose streaks)
    */
   updateStrikes(
-    homeProfile: any,
-    awayProfile: any,
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
     result: 0 | 1 | 2,
     homeScore: number,
     awayScore: number,
@@ -231,8 +229,8 @@ export class LeagueH2HDataService {
    * Updates max fantasy points in a tour
    */
   updateMaxFoInTour(
-    homeProfile: any,
-    awayProfile: any,
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
     homeScore: number,
     awayScore: number
   ): void {
@@ -248,8 +246,8 @@ export class LeagueH2HDataService {
    * Updates max fantasy points in losing tours
    */
   updateMaxFoInLosedTour(
-    homeProfile: any,
-    awayProfile: any,
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
     homeScore: number,
     awayScore: number,
     result: 0 | 1 | 2
@@ -266,8 +264,8 @@ export class LeagueH2HDataService {
    * Updates team cost averages
    */
   updateTeamCostAvg(
-    homeProfile: any,
-    awayProfile: any,
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
     homeTeamCost: number,
     awayTeamCost: number
   ): void {
@@ -284,8 +282,8 @@ export class LeagueH2HDataService {
    * Updates substitution metrics
    */
   updateSubs(
-    homeProfile: any,
-    awayProfile: any,
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
     tourIndex: number,
     homeActSquad: string[],
     homePrevSquad: string[],
@@ -315,7 +313,7 @@ export class LeagueH2HDataService {
   /**
    * Helper: Update max win strike
    */
-  private updateMaxWinStrike(profile: any): void {
+  private updateMaxWinStrike(profile: IProfileDetails): void {
     if (profile.results.prizeCurrentWinStrike > profile.results.prizeMaxWinStrike) {
       profile.results.prizeMaxWinStrike = profile.results.prizeCurrentWinStrike;
     }
@@ -324,7 +322,7 @@ export class LeagueH2HDataService {
   /**
    * Helper: Update max no-lose streak
    */
-  private updateMaxNoloseStrike(profile: any): void {
+  private updateMaxNoloseStrike(profile: IProfileDetails): void {
     if (profile.results.prizeCurrentNoLoseStrike > profile.results.prizeMaxNoLoseStrike) {
       profile.results.prizeMaxNoLoseStrike = profile.results.prizeCurrentNoLoseStrike;
     }
@@ -333,7 +331,7 @@ export class LeagueH2HDataService {
   /**
    * Helper: Update max stopped no-lose streak
    */
-  private updateMaxStoppedNolose(profile: any, opponentStrike: number): void {
+  private updateMaxStoppedNolose(profile: IProfileDetails, opponentStrike: number): void {
     if (opponentStrike > profile.results.prizeMaxStoppedNoLoseStrike) {
       profile.results.prizeMaxStoppedNoLoseStrike = opponentStrike;
     }
@@ -342,7 +340,7 @@ export class LeagueH2HDataService {
   /**
    * Helper: Reset win strike
    */
-  private resetWinStrike(profile: any): void {
+  private resetWinStrike(profile: IProfileDetails): void {
     if (profile.results.prizeCurrentWinStrike > profile.results.prizeMaxWinStrike) {
       profile.results.prizeMaxWinStrike = profile.results.prizeCurrentWinStrike;
     }
@@ -352,7 +350,7 @@ export class LeagueH2HDataService {
   /**
    * Aggregates apertura and clausura results for common stage
    */
-  updateCommonResults(profile: any): void {
+  updateCommonResults(profile: IProfileDetails): void {
     profile.results.wins['common'] = profile.results.wins['apertura'] + profile.results.wins['clausura'];
     profile.results.draws['common'] = profile.results.draws['apertura'] + profile.results.draws['clausura'];
     profile.results.loses['common'] = profile.results.loses['apertura'] + profile.results.loses['clausura'];
@@ -388,7 +386,10 @@ export class LeagueH2HDataService {
   /**
    * Extracts active squad (base + bench)
    */
-  getActiveSquad(rosters: any, tourNumber: string | number): string[] {
+  getActiveSquad(
+    rosters: ITeamData['rosters_by_tour'],
+    tourNumber: string | number,
+  ): string[] {
     const roster = rosters[tourNumber];
     if (!roster) return [];
     return roster.players.base.concat(roster.players.bench);
@@ -397,7 +398,7 @@ export class LeagueH2HDataService {
   /**
    * Counts squad changes
    */
-  countSquadChanges(rosters: any, maxTour: number): number {
+  countSquadChanges(rosters: ITeamData['rosters_by_tour'], maxTour: number): number {
     let changes = 0;
     
     for (let i = 2; i <= maxTour; i++) {
