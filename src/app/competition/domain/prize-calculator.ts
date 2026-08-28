@@ -191,7 +191,7 @@ function calculateNewSpainPrize(
         prize.calculationInfo = valuePlayers.slice(0, 5)
           .map((item, index) =>
             `${index + 1}. ${item.name} — ${item.score} FO / ${item.cost} = ${formatRatio(item.ratio)}`)
-          .join('; ');
+          .join('\n');
       }
       valueByProfile = profile => player ? profile.results.selectedPlayerPoints?.[player.id] ?? 0 : 0;
       break;

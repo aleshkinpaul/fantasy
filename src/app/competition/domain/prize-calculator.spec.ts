@@ -111,6 +111,7 @@ describe('prize calculator', () => {
     expect(result[0].calculationInfo).toContain('1. efficient — 20 FO / 5 = 4');
     expect(result[0].calculationInfo).toContain('5. fifth — 4 FO / 5 = 0.8');
     expect(result[0].calculationInfo).not.toContain('sixth');
+    expect(result[0].calculationInfo?.split('\n').length).toBe(5);
   });
 
   it('keeps a placeholder prize without calculated nominees', () => {
