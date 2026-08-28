@@ -1,18 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
+import { FantasyFullInfoResponse } from '../../competition/models/competition.models';
+import { IProfileDetails, ISquadDetails } from '../../models/domain';
 
 interface StandingPlayer {
   id: string;
-  score: number;
+  score: string;
   position: number;
-}
-
-interface SquadPlayer {
-  id: string;
-  team: {
-    results_by_tour: Record<string | number, { tour_score: number }>;
-  };
 }
 
 @Component({
@@ -23,11 +18,11 @@ interface SquadPlayer {
   imports: [CommonModule]
 })
 export class StandingsComponent {
-  @Input() profilesArr = [];
-  @Input() playersRatingArr = [];
+  @Input() profilesArr: IProfileDetails[] = [];
+  @Input() playersRatingArr: number[] = [];
   @Input() lastTour = 1;
-  @Input() squadsDetails = [];
-  @Input() squads;
+  @Input() squadsDetails: ISquadDetails[] = [];
+  @Input() squads!: FantasyFullInfoResponse;
   @Input() chosenStage = '';
   @Input() chosenLeague = '';
   @Input() isShowUnitedTableByPoints = false;
@@ -36,12 +31,12 @@ export class StandingsComponent {
     public service: DataService
   ) {}
 
-  getSquadDetails(profileId) {
+  getSquadDetails(profileId: string): ISquadDetails | undefined {
     return this.squadsDetails.find(squad => squad.id === profileId);
   }
 
   getPlaceInTour(id: string, tour: string | number): number | undefined {
-    const players = Object.values(this.squads.data.players) as SquadPlayer[];
+    const players = Object.values(this.squads.data.players);
     const standingsArr: StandingPlayer[] = players.map(player => {
       return {
         id: player.id,
@@ -50,7 +45,7 @@ export class StandingsComponent {
       }
     });
 
-    standingsArr.sort(this.service.sortByScore);
+    standingsArr.sort((left, right) => Number(right.score) - Number(left.score));
     standingsArr.forEach((player, ind) => {
       player.position =
         ind === 0 ? 

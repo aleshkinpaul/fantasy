@@ -1,6 +1,14 @@
 // Extended type models for league and tournament data structures
 import { IGroup } from './model';
 
+export interface IActiveCompetitionTabs {
+  tabId: number;
+  confId: number;
+  confTabId: number;
+  tourId: number;
+  cupTourId: number;
+}
+
 export interface IProfileDetails {
   id: string;
   name: string;

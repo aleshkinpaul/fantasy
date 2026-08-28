@@ -83,6 +83,7 @@ export interface FantasyTourStatsResponse {
 export interface CompetitionMatch {
   home: string;
   away: string;
+  type?: 'up' | 'down';
   home_score?: number;
   away_score?: number;
   result?: 0 | 1 | 2;

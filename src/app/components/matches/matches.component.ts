@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
 import { LoaderService } from 'src/app/service/loader.service';
 import { Observable } from 'rxjs';
+import { CompetitionMatch } from '../../competition/models/competition.models';
+import { IActiveCompetitionTabs, IProfileDetails } from '../../models/domain';
 
 @Component({
   selector: 'app-matches',
@@ -12,12 +14,12 @@ import { Observable } from 'rxjs';
   imports: [CommonModule]
 })
 export class MatchesComponent {
-  @Input() profilesArr = [];
-  @Input() currentLeagueMatches = [];
+  @Input() profilesArr: IProfileDetails[] = [];
+  @Input() currentLeagueMatches: CompetitionMatch[][] = [];
   @Input() lastTour = 1;
   @Input() firstTour = 1;
-  @Input() activeTabs;
-  @Input() matchesTours = [];
+  @Input() activeTabs!: IActiveCompetitionTabs;
+  @Input() matchesTours: number[] = [];
 
   public readonly isLoading$: Observable<boolean>;
 
@@ -28,28 +30,40 @@ export class MatchesComponent {
     this.isLoading$ = this.loader.isLoading$;
   }
 
-  getMatchResult(matchesArr, profileId) {
-    const match = matchesArr.find(match => match.home === profileId || match.away === profileId);
+  getMatchResult(matchesArr: CompetitionMatch[], profileId: string): 0 | 1 | 2 {
+    const match = this.requireMatch(matchesArr, profileId);
     return match.result === 0 ? 0 :
       match.home === profileId ?
         (match.result === 1 ? 1 : 2) :
-        (match.result === 2 ? 1 : 2)
+        (match.result === 2 ? 1 : 2);
   }
 
-  getProfileInfo(profileId) {
+  getProfileInfo(profileId: string): IProfileDetails | undefined {
     return this.profilesArr.find(profile => profile.id === profileId);
   }
 
-  getTeamId(profileId) {
-    return this.profilesArr.find(profile => profile.id === profileId).team.id;
+  getTeamId(profileId: string): string {
+    return this.requireProfile(profileId).team.id;
   }
 
-  getTeamLogo(profileId) {
-    return this.profilesArr.find(profile => profile.id === profileId).logo;
+  getTeamLogo(profileId: string): string {
+    return this.requireProfile(profileId).logo;
   }
 
-  getTeamTitle(profileId) {
-    return this.profilesArr.find(profile => profile.id === profileId).team.title;
+  getTeamTitle(profileId: string): string {
+    return this.requireProfile(profileId).team.title;
+  }
+
+  private requireProfile(profileId: string): IProfileDetails {
+    const profile = this.getProfileInfo(profileId);
+    if (!profile) throw new Error(`Не найден профиль ${profileId}`);
+    return profile;
+  }
+
+  private requireMatch(matches: CompetitionMatch[], profileId: string): CompetitionMatch {
+    const match = matches.find(item => item.home === profileId || item.away === profileId);
+    if (!match) throw new Error(`Не найден матч профиля ${profileId}`);
+    return match;
   }
 }
 

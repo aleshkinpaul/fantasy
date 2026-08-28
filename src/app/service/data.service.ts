@@ -24,9 +24,16 @@ export class DataService {
     return this.http.get<T>(url);
   }
   
-  getRgbForTour(score: number, max: number, min: number): string {
-    const range = max - min;
-    const normalizedScore = range === 0 ? 0.5 : (score - min) / range;
+  getRgbForTour(
+    score: string | number,
+    max: string | number | undefined,
+    min: string | number | undefined,
+  ): string {
+    const scoreValue = Number(score);
+    const maxValue = Number(max);
+    const minValue = Number(min);
+    const range = maxValue - minValue;
+    const normalizedScore = range === 0 ? 0.5 : (scoreValue - minValue) / range;
     const value = Math.max(0, Math.min(1, normalizedScore));
 
     const colors = [
