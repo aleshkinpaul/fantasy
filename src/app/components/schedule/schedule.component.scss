@@ -16,7 +16,7 @@
 
   th,
   td {
-    padding: 8px;
+    padding: 4px 6px;
     border-right: 1px solid rgba($color-border, 0.56);
     border-bottom: 1px solid rgba($color-border, 0.7);
     vertical-align: middle;
@@ -30,7 +30,7 @@
     position: sticky;
     top: 0;
     z-index: 3;
-    height: 52px;
+    height: 48px;
     color: $color-primary-hover;
     background: $color-surface-blue;
     font-size: $font-size-sm;
@@ -38,7 +38,7 @@
   }
 
   .table-row {
-    height: 54px;
+    height: 50px;
     background: $color-surface;
 
     &:nth-child(even) {
@@ -82,7 +82,7 @@
     min-width: 0;
 
     .logo-container {
-      @include logo-well(38px, 9px);
+      @include logo-well(44px, 10px);
 
       &.green-bg {
         background: $color-success-bg;
@@ -161,7 +161,7 @@ a {
   .table {
     th,
     td {
-      padding: 7px 6px;
+      padding: 3px 5px;
     }
 
     .item-name-container {
@@ -169,9 +169,9 @@ a {
     }
 
     .item-team-container .logo-container {
-      width: 34px;
-      height: 34px;
-      flex-basis: 34px;
+      width: 40px;
+      height: 40px;
+      flex-basis: 40px;
     }
   }
 }

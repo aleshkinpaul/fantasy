@@ -25,13 +25,22 @@ export class DataService {
   }
   
   getRgbForTour(
-    score: string | number,
-    max: string | number | undefined,
-    min: string | number | undefined,
+    score: string | number | null | undefined,
+    max: string | number | null | undefined,
+    min: string | number | null | undefined,
   ): string {
+    if ([score, max, min].some(value => value === null || value === undefined || value === '')) {
+      return 'rgb(83, 96, 109)';
+    }
+
     const scoreValue = Number(score);
     const maxValue = Number(max);
     const minValue = Number(min);
+
+    if (![scoreValue, maxValue, minValue].every(Number.isFinite)) {
+      return 'rgb(83, 96, 109)';
+    }
+
     const range = maxValue - minValue;
     const normalizedScore = range === 0 ? 0.5 : (scoreValue - minValue) / range;
     const value = Math.max(0, Math.min(1, normalizedScore));

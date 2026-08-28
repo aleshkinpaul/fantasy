@@ -23,6 +23,12 @@ describe('DataService', () => {
     expect(service.getRgbForTour(101, 100, 0)).toBe('rgb(55, 112, 82)');
   });
 
+  it('uses a neutral color when scale data is incomplete', () => {
+    expect(service.getRgbForTour(undefined, 100, 0)).toBe('rgb(83, 96, 109)');
+    expect(service.getRgbForTour(50, undefined, undefined)).toBe('rgb(83, 96, 109)');
+    expect(service.getRgbForTour(null, 100, 0)).toBe('rgb(83, 96, 109)');
+  });
+
   it('exposes the current route name without exposing the subject', () => {
     service.setUrlName('spain');
 

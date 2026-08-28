@@ -48,7 +48,7 @@
 
   .table-body {
     .table-row {
-      height: 56px;
+      height: 64px;
       background: $color-surface;
       transition: background $transition-fast;
 
@@ -141,7 +141,7 @@
 
     .logo-container {
       position: relative;
-      @include logo-well(40px, 10px);
+      @include logo-well(48px, 11px);
 
       .conference-label-container {
         position: absolute;
@@ -293,9 +293,9 @@
 
     .item-team-container {
       .logo-container {
-        width: 36px;
-        height: 36px;
-        flex-basis: 36px;
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
       }
 
       .team-container .team-name,
