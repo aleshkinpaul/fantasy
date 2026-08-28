@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "import:h2h-calendar": "node scripts/import-h2h-calendar.mjs",
     "capture:season-2025": "node scripts/season-regression.mjs capture",
     "verify:season-2025": "node scripts/season-regression.mjs verify",
     "mypage": "ng build --base-href=https://fr-fantasy.ru/"

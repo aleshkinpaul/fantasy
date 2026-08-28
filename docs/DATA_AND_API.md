@@ -1,6 +1,6 @@
 # Данные и внешний API
 
-Документ описывает фактический контракт, на который опирается текущий frontend. Официальной схемы API в репозитории нет; структура восстановлена из кода, сохраненных ответов 2024–25 и живых ответов `fantasy-h2h.ru`, проверенных 26 августа 2026 года.
+Документ описывает фактический контракт, на который опирается текущий frontend. Официальной схемы API в репозитории нет; структура восстановлена из кода, сохраненных ответов 2024–25 и живых ответов `fantasy-h2h.ru`, проверенных 28 августа 2026 года.
 
 ## Источники данных
 
@@ -97,6 +97,7 @@ interface SeasonCompetition {
   matches?: Record<string, Match[]>;
   stages?: Stage[];
   prizes?: Prize[];
+  prizeRefs?: PrizeReference[];
   cup?: Cup;
 
   // Только формат КЧМ-2025:
@@ -173,9 +174,16 @@ interface Prize {
   activeLeaders?: unknown[]; // runtime
   state?: number;            // runtime
 }
+
+interface PrizeReference {
+  key: string;
+  overrides?: Partial<Prize>; // сезонные исключения или измененный текст карточки
+}
 ```
 
-`id` выбирает конкретную формулу в `countPrizeNominees`. Добавление нового id без кода расчета обычно приведет к значению `'-'`. `updatePrizes`, `updatePrizesCL` и `updatePrizesWC` также содержат profile id, player id и team id.
+`prizes` содержит сезонные inline-карточки и сохранен для обратной совместимости. `prizeRefs` позволяет выбрать любое подмножество переиспользуемых карточек из `competition-prize.registry.ts`; отсутствие ссылок означает сезон без этих призов. `overrides` задает только сезонные отличия, например `excluded`. Loader объединяет оба списка и создает независимые runtime-массивы, поэтому вычисление номинантов одного сезона не меняет шаблон или другой сезон.
+
+`id` выбирает конкретную формулу в `prize-calculator.ts`. Добавление нового id без стратегии расчета обычно приведет к значению `'-'`. Специальные profile/player/team id хранятся в `competition-rules.registry.ts`.
 
 ### Конфигурация КЧМ
 
@@ -232,7 +240,7 @@ interface FullInfoResponse {
     season: string;
     tours: Record<string, ApiTour>;
     players: Record<string, FantasyParticipant>;
-    matches: Record<string, unknown[]>;
+    matches: Record<string, ApiH2HMatch[]>;
   };
 }
 
@@ -240,6 +248,13 @@ interface ApiTour {
   number: string;
   start: string; // "YYYY-MM-DD HH:mm:ss"
   end: string;
+}
+
+interface ApiH2HMatch {
+  home_player: string;
+  away_player: string;
+  home_score: string;
+  away_score: string;
 }
 
 interface FantasyParticipant {
@@ -282,7 +297,7 @@ interface Roster {
 - состав содержит 15 id и имеет `players.base`, `players.bench`;
 - для новых H2H-страниц доступен `team_cost`, иначе средняя стоимость станет `NaN`.
 
-В живом ответе Ла Лиги 2025–26 на дату проверки было 49 участников и 38 туров. Поле `data.matches` присутствует, но сайт не использует его как H2H-календарь: календарь берется из `config.matches` сезонного файла. Для ЛЧ количество ключей `data.matches` используется как граница первого внешнего этапа.
+В ответе `la_liga_2026_fr_primera` находятся 48 участников, 15 полных туров по 24 H2H-матча и fantasy-данные двух уже сыгранных туров. У матчей туров 1–2 заполнен счет, у будущих туров счет `0:0`. Скрипт `npm run import:h2h-calendar -- <URL> <season-file>` проверяет состав, дубли и границы лиг, затем переносит только пары в `config.matches`. Счет намеренно не копируется: приложение рассчитывает его из `results_by_tour`, сохраняя один источник истины. Для ЛЧ количество ключей `data.matches` также используется как граница первого внешнего этапа.
 
 ## API `sport_players_tour_stat`
 

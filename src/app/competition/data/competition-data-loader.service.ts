@@ -9,6 +9,7 @@ import {
   SeasonCompetitionFile,
 } from '../models/competition.models';
 import { validateCompetitionData } from '../config/competition-data.validator';
+import { resolveCompetitionPrizes } from '../config/competition-prize.registry';
 import { mergeCompetitionStages } from './competition-stages.merger';
 
 @Injectable({ providedIn: 'root' })
@@ -93,7 +94,13 @@ export class CompetitionDataLoaderService {
     if (file.status === 'draft') {
       throw new Error(`Турнир ${type} сезона ${yearStart} готовится к публикации`);
     }
-    return file;
+    return {
+      ...file,
+      config: {
+        ...file.config,
+        prizes: resolveCompetitionPrizes(file.config),
+      },
+    };
   }
 }
 

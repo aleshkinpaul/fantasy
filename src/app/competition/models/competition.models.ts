@@ -49,6 +49,13 @@ export interface FantasyParticipant {
   team: FantasyTeam;
 }
 
+export interface FantasyH2HMatch {
+  home_player: string;
+  away_player: string;
+  home_score: string;
+  away_score: string;
+}
+
 export interface FantasyFullInfoResponse {
   result: number;
   data: {
@@ -58,7 +65,7 @@ export interface FantasyFullInfoResponse {
     season: string;
     tours: Record<string, FantasyTour>;
     players: Record<string, FantasyParticipant>;
-    matches: Record<string, unknown[]>;
+    matches: Record<string, FantasyH2HMatch[]>;
   };
 }
 
@@ -132,6 +139,11 @@ export interface CompetitionPrizeConfig {
   [key: string]: unknown;
 }
 
+export interface CompetitionPrizeReference {
+  key: string;
+  overrides?: Omit<Partial<CompetitionPrizeConfig>, 'id'>;
+}
+
 export interface SpecialPlayerRules {
   forbiddenTeamIds: string[];
   forbiddenPlayerIds: string[];
@@ -183,6 +195,7 @@ export interface SeasonCompetitionConfig {
   matches: Record<string, CompetitionMatch[]>;
   stages: CompetitionStage[];
   prizes: CompetitionPrizeConfig[];
+  prizeRefs?: CompetitionPrizeReference[];
   cup?: CompetitionCup;
 }
 
