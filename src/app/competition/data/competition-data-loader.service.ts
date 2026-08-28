@@ -2,15 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, map, Observable, switchMap, throwError } from 'rxjs';
 import {
-  CompetitionConfigFile,
   CompetitionType,
   FantasyFullInfoResponse,
   FantasyTourStatsResponse,
   LoadedCompetitionData,
-  LocalProfile,
-  ProfilesFile,
-  RealTeamReference,
-  SeasonCompetitionConfig,
+  SeasonCompetitionFile,
 } from '../models/competition.models';
 import { validateCompetitionData } from '../config/competition-data.validator';
 import { mergeCompetitionStages } from './competition-stages.merger';
@@ -24,17 +20,10 @@ export class CompetitionDataLoaderService {
       return throwError(() => new Error(`Не указан год начала сезона для турнира ${type}`));
     }
 
-    return forkJoin({
-      profilesFile: this.http.get<ProfilesFile>('/assets/data/profiles.json'),
-      configFile: this.http.get<CompetitionConfigFile>('/assets/data/consts.json'),
-      teams: this.http.get<RealTeamReference[]>('/assets/data/teams.json'),
-    }).pipe(
-      map(({ profilesFile, configFile, teams }) => ({
-        profiles: this.selectProfiles(profilesFile, type, yearStart),
-        config: this.selectConfig(configFile, type, yearStart),
-        teams,
-      })),
-      switchMap(({ profiles, config, teams }) => {
+    const seasonFileUrl = getSeasonCompetitionFileUrl(type, yearStart);
+    return this.http.get<SeasonCompetitionFile>(seasonFileUrl).pipe(
+      map(file => this.validateSeasonFile(file, type, yearStart)),
+      switchMap(({ profiles, config }) => {
         const requests: Record<string, Observable<FantasyFullInfoResponse>> = {
           squads: this.http.get<FantasyFullInfoResponse>(config.squad_link),
         };
@@ -47,7 +36,6 @@ export class CompetitionDataLoaderService {
             const data = {
               profiles,
               config,
-              teams,
               squads: responses['squads'],
               squads2: responses['squads2'],
             };
@@ -91,21 +79,22 @@ export class CompetitionDataLoaderService {
     );
   }
 
-  private selectProfiles(file: ProfilesFile, type: CompetitionType, yearStart: number): LocalProfile[] {
-    const season = file[String(yearStart)];
-    if (!season || Array.isArray(season)) {
-      throw new Error(`Профили сезона ${yearStart} имеют устаревший или отсутствующий формат`);
+  private validateSeasonFile(
+    file: SeasonCompetitionFile,
+    type: CompetitionType,
+    yearStart: number,
+  ): SeasonCompetitionFile {
+    if (!file?.config || !Array.isArray(file.profiles)) {
+      throw new Error(`Некорректный файл данных ${type} для сезона ${yearStart}`);
     }
-    const profiles = season[type];
-    if (!profiles) throw new Error(`Не найдены профили ${type} для сезона ${yearStart}`);
-    return profiles;
+    if (file.config.type !== type || file.config.yearStart !== yearStart) {
+      throw new Error(`Файл данных не соответствует турниру ${type} сезона ${yearStart}`);
+    }
+    return file;
   }
+}
 
-  private selectConfig(file: CompetitionConfigFile, type: CompetitionType, yearStart: number): SeasonCompetitionConfig {
-    const config = file.league.find(candidate =>
-      candidate['type'] === type && candidate['yearStart'] === yearStart
-    );
-    if (!config) throw new Error(`Не найдена конфигурация ${type} для сезона ${yearStart}`);
-    return config as unknown as SeasonCompetitionConfig;
-  }
+export function getSeasonCompetitionFileUrl(type: CompetitionType, yearStart: number): string {
+  const yearEnd = String(yearStart + 1).slice(-2);
+  return `/assets/data/seasons/${yearStart}-${yearEnd}/${type}.json`;
 }

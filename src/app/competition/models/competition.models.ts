@@ -9,10 +9,6 @@ export interface LocalProfile {
   sex?: number;
 }
 
-export interface ProfilesFile {
-  [year: string]: LocalProfile[] | Partial<Record<CompetitionType, LocalProfile[]>>;
-}
-
 export interface FantasyTour {
   number: string;
   start: string;
@@ -186,16 +182,14 @@ export interface SeasonCompetitionConfig {
   cup?: CompetitionCup;
 }
 
-export interface CompetitionConfigFile {
-  league: Array<SeasonCompetitionConfig | Record<string, unknown>>;
+export interface SeasonCompetitionFile {
+  config: SeasonCompetitionConfig;
+  profiles: LocalProfile[];
 }
-
-export interface RealTeamReference { id: string; name: string; logo: string }
 
 export interface LoadedCompetitionData {
   profiles: LocalProfile[];
   config: SeasonCompetitionConfig;
-  teams: RealTeamReference[];
   squads: FantasyFullInfoResponse;
   squads2?: FantasyFullInfoResponse;
   latestPlayerStats: FantasyTourStatsResponse[];

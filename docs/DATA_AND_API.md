@@ -6,9 +6,10 @@
 
 | Источник | Роль | Загружается во время работы |
 |---|---|---|
-| `assets/data/profiles.json` | имена, ники, пол, ссылки и локальные логотипы участников | да |
-| `assets/data/consts.json` | ссылки API, участники, календарь, этапы, кубок, призы | да |
-| `assets/data/teams.json` | справочник реальных клубов для архивной статистики | да |
+| `assets/data/seasons/{YYYY-YY}/{type}.json` | актуальные профили, ссылки API, календарь, этапы, кубок и призы одного турнира | да |
+| `assets/data/profiles.json` | профили архивных страниц 2024–25 | только архивом |
+| `assets/data/consts.json` | конфигурации архивных страниц 2024–25 и КЧМ-2025 | только архивом |
+| `assets/data/teams.json` | справочник реальных клубов для архивной статистики | только архивом |
 | `assets/data/2024_2025/**` | сохраненные ответы API Ла Лиги 2024–25 | нет |
 | `fantasy-h2h.ru/api/h2h_tournament/full_info/**` | профили внешнего турнира, туры, составы и FO | да |
 | `fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/**/{tour}` | футболисты и их очки по турам | да |
@@ -27,18 +28,34 @@
 
 Все внешние id обычно строки, даже если содержат только цифры. В конфигурации КЧМ team id и индексы пар — числа. Не следует неявно преобразовывать id в number.
 
-## `profiles.json`
+## Сезонные файлы актуальных турниров
+
+Для актуальной H2H-страницы один турнир хранится в одном файле:
+
+```text
+assets/data/seasons/2025-26/spain.json
+assets/data/seasons/2025-26/champions-league.json
+assets/data/seasons/2025-26/world-cup.json
+```
+
+```ts
+interface SeasonCompetitionFile {
+  config: SeasonCompetition;
+  profiles: Profile[];
+}
+```
+
+`CompetitionDataLoaderService` строит путь из route type и `?year`: например, `spain + 2026` превращается в `/assets/data/seasons/2026-27/spain.json`. Поля `config.type` и `config.yearStart` проверяются после загрузки.
+
+Массив `profiles` может включать резервные или гостевые профили, но фактический состав турнира всегда задает `config.profiles`.
+
+## Legacy `profiles.json`
 
 Структура различается по поколениям страниц:
 
 ```ts
 type ProfilesFile = {
   "2024": Profile[];
-  "2025": {
-    spain: Profile[];
-    "champions-league": Profile[];
-    "world-cup": Profile[];
-  };
 };
 
 interface Profile {
@@ -51,9 +68,9 @@ interface Profile {
 }
 ```
 
-H2H-страница ожидает вложенность `profiles[year][competitionType]`. Архивная страница и КЧМ ожидают `profiles[year]` как массив. При создании `2026` нужно использовать актуальную вложенную форму.
+Этот файл читают только архивная страница и КЧМ. Новые сезоны в него не добавляются.
 
-## `consts.json`
+## Legacy `consts.json` и сезонный `config`
 
 ```ts
 interface ConstsFile {
@@ -89,7 +106,7 @@ interface SeasonCompetition {
 }
 ```
 
-`id` и `typeId` сохранились от старой интеграции и текущими расчетами почти не используются. Критические поля выбора записи — `type` и `yearStart`.
+В legacy `consts.json` оболочка `ConstsFile` нужна архивным страницам. В актуальном сезонном файле один объект `SeasonCompetition` лежит прямо в поле `config`. `id` и `typeId` сохранились от старой интеграции и текущими расчетами почти не используются; обязательное соответствие проверяется по `type` и `yearStart`.
 
 ### Календарь H2H
 
@@ -103,7 +120,7 @@ interface Match {
 }
 ```
 
-Каждый профиль из матча должен существовать одновременно в `SeasonCompetition.profiles`, нужном массиве `profiles.json` и `full_info.data.players` внешнего API.
+Каждый профиль из матча должен существовать одновременно в `config.profiles`, массиве `profiles` того же сезонного файла и `full_info.data.players` внешнего API.
 
 ### Этапы и лиги
 
@@ -120,11 +137,10 @@ interface Stage {
 interface League {
   name: string;
   profiles: string[];
-  schedule?: Record<string, string[]>;
 }
 ```
 
-`schedule` дублирует удобное представление соперников конкретного профиля, а `matches` остается источником для расчета. При генерации сезона оба представления должны совпадать.
+Обе UI-вкладки календаря используют `config.matches`; отдельное представление соперников по профилю не хранится.
 
 ### Кубок
 
@@ -266,7 +282,7 @@ interface Roster {
 - состав содержит 15 id и имеет `players.base`, `players.bench`;
 - для новых H2H-страниц доступен `team_cost`, иначе средняя стоимость станет `NaN`.
 
-В живом ответе Ла Лиги 2025–26 на дату проверки было 49 участников и 38 туров. Поле `data.matches` присутствует, но сайт не использует его как H2H-календарь: календарь берется из `consts.json`. Для ЛЧ количество ключей `data.matches` используется как граница первого внешнего этапа.
+В живом ответе Ла Лиги 2025–26 на дату проверки было 49 участников и 38 туров. Поле `data.matches` присутствует, но сайт не использует его как H2H-календарь: календарь берется из `config.matches` сезонного файла. Для ЛЧ количество ключей `data.matches` используется как граница первого внешнего этапа.
 
 ## API `sport_players_tour_stat`
 
@@ -332,7 +348,6 @@ H2H-страница может загрузить endpoint каждого пр�
 4. ровно одну игру участника в рамках ожидаемого тура/лиги;
 5. отсутствие самоигр и дубликатов пар;
 6. соответствие `stages.firstTour/lastTour` ключам `matches`;
-7. соответствие `league.schedule` календарю `matches`;
-8. согласованность трех cup-массивов;
-9. существование всех logo/icon/image путей;
-10. существование hard-coded player/team/profile id, используемых призами.
+7. согласованность трех cup-массивов;
+8. существование всех logo/icon/image путей;
+9. существование всех player/team/profile id из набора сезонных правил.

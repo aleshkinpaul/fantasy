@@ -209,11 +209,7 @@ function responseKey(url) {
 
 function relevantResponse(url) {
   const key = responseKey(url);
-  return key?.startsWith('api:') || [
-    'local:/assets/data/profiles.json',
-    'local:/assets/data/consts.json',
-    'local:/assets/data/teams.json',
-  ].includes(key);
+  return key?.startsWith('api:') || key?.startsWith('local:/assets/data/seasons/');
 }
 
 const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
