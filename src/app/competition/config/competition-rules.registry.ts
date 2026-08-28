@@ -47,6 +47,25 @@ const RULES: Record<string, CompetitionRuntimeRules> = {
       },
     },
   },
+  'season-2026': {
+    playerStats: {
+      forbiddenTeamIds: ['8368', '8369'],
+      forbiddenPlayerIds: ['241107'],
+      worldCupForbiddenPlayerIds: [],
+      portugueseTeamId: '',
+      larinPlayerId: '',
+    },
+    spainPrizes: {
+      guestProfileIds: [],
+      extraWinnerIds: [],
+    },
+    substitutions: {
+      spain: {
+        defaultLimit: 3,
+        limitsByTourIndex: { '19': 4, '20': 4, '21': 4 },
+      },
+    },
+  },
 };
 
 export function getCompetitionRules(rulesId: string): CompetitionRuntimeRules {

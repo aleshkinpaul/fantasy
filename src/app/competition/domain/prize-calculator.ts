@@ -52,9 +52,15 @@ function countSpainPrizeNominees(
   const detailedProfiles = new Map(profilesDetails.map(profile => [profile.id, profile]));
   const calculatedNominees = new Map<string, IPrizeNominee>();
 
-  const placeVal2Prize = getPrimeraPlace(profilesDetails, rules.placeReferenceProfileIds.prize2);
-  const placeVal3Prize = getPrimeraPlace(profilesDetails, rules.placeReferenceProfileIds.prize3);
-  const placeVal10Prize = getPrimeraPlace(profilesDetails, rules.placeReferenceProfileIds.prize10);
+  const placeVal2Prize = prizeId === 2
+    ? getPrimeraPlace(profilesDetails, requirePlaceReference(rules, 'prize2'))
+    : 0;
+  const placeVal3Prize = prizeId === 3
+    ? getPrimeraPlace(profilesDetails, requirePlaceReference(rules, 'prize3'))
+    : 0;
+  const placeVal10Prize = prizeId === 10
+    ? getPrimeraPlace(profilesDetails, requirePlaceReference(rules, 'prize10'))
+    : 0;
 
   eligibleProfiles.forEach(sourceProfile => {
     const manualNominee = manualNominees.find(nominee => nominee.profileId === sourceProfile.id);
@@ -110,39 +116,44 @@ function countSpainPrizeNominees(
 export function calculateSpainPrizes(input: SpainPrizeCalculationInput): IRuntimePrize[] {
   const { prizes, profiles, profilesDetails, rules, random = Math.random } = input;
 
-  prizes.forEach(prize => countSpainPrizeNominees(
-    prizes,
-    profiles,
-    profilesDetails,
-    prize.id === 7
-      ? profiles
-      : profiles.filter(profile => !rules.guestProfileIds.includes(profile.id)),
-    prize.id,
-    rules,
-    prize.id === 8
-      ? rules.frequentPlayerId
+  prizes.forEach(prize => {
+    const keyId = prize.id === 8
+      ? requireRuleId(rules.frequentPlayerId, 'frequentPlayerId', prize.id)
       : prize.id === 11
-        ? rules.frequentCaptainId
-        : '',
-  ));
+        ? requireRuleId(rules.frequentCaptainId, 'frequentCaptainId', prize.id)
+        : '';
+    countSpainPrizeNominees(
+      prizes,
+      profiles,
+      profilesDetails,
+      prize.id === 7
+        ? profiles
+        : profiles.filter(profile => !rules.guestProfileIds.includes(profile.id)),
+      prize.id,
+      rules,
+      keyId,
+    );
+  });
 
   updatePrizeStates(prizes);
 
   const winnerIds = prizes.map(prize => getActiveLeaders(prize)[0]?.id || '');
   winnerIds.push(...rules.extraWinnerIds);
 
-  const randomPrize = prizes[rules.randomPrizeIndex];
-  if (!randomPrize) throw new Error(`Не найден случайный приз с индексом ${rules.randomPrizeIndex}`);
-  const randomPrizeNominees = profilesDetails.filter(profile =>
-    !winnerIds.includes(profile.id)
-    && profile.results.subsCoef > 50
-    && !(randomPrize.excluded ?? []).includes(profile.id));
+  if (rules.randomPrizeIndex !== undefined) {
+    const randomPrize = prizes[rules.randomPrizeIndex];
+    if (!randomPrize) throw new Error(`Не найден случайный приз с индексом ${rules.randomPrizeIndex}`);
+    const randomPrizeNominees = profilesDetails.filter(profile =>
+      !winnerIds.includes(profile.id)
+      && profile.results.subsCoef > 50
+      && !(randomPrize.excluded ?? []).includes(profile.id));
 
-  randomPrize.nomineesArr = randomPrizeNominees;
-  getActiveLeaders(randomPrize).push(
-    randomPrizeNominees[Math.floor(random() * randomPrizeNominees.length)],
-  );
-  randomPrize.state = 1;
+    randomPrize.nomineesArr = randomPrizeNominees;
+    getActiveLeaders(randomPrize).push(
+      randomPrizeNominees[Math.floor(random() * randomPrizeNominees.length)],
+    );
+    randomPrize.state = 1;
+  }
 
   return asRuntimePrizes(prizes);
 }
@@ -309,6 +320,20 @@ function getPrimeraPlace(profiles: IProfileDetails[], profileId: string): number
     throw new Error(`Не найден reference-профиль ${profileId} для расчета призов`);
   }
   return profile.place_in_league['Primera'];
+}
+
+function requirePlaceReference(
+  rules: SpainPrizeRules,
+  key: 'prize2' | 'prize3' | 'prize10',
+): string {
+  const profileId = rules.placeReferenceProfileIds?.[key];
+  if (!profileId) throw new Error(`Не настроен reference-профиль ${key}`);
+  return profileId;
+}
+
+function requireRuleId(value: string | undefined, field: string, prizeId: number): string {
+  if (!value) throw new Error(`Для приза ${prizeId} не настроено правило ${field}`);
+  return value;
 }
 
 function requirePrize(prizes: CompetitionPrizeConfig[], prizeId: number): CompetitionPrizeConfig {

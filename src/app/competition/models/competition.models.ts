@@ -143,14 +143,14 @@ export interface SpecialPlayerRules {
 export interface SpainPrizeRules {
   guestProfileIds: string[];
   extraWinnerIds: string[];
-  specialGuestId: string;
-  frequentPlayerId: string;
-  frequentCaptainId: string;
-  randomPrizeIndex: number;
-  placeReferenceProfileIds: {
-    prize2: string;
-    prize3: string;
-    prize10: string;
+  specialGuestId?: string;
+  frequentPlayerId?: string;
+  frequentCaptainId?: string;
+  randomPrizeIndex?: number;
+  placeReferenceProfileIds?: {
+    prize2?: string;
+    prize3?: string;
+    prize10?: string;
   };
 }
 
@@ -187,6 +187,7 @@ export interface SeasonCompetitionConfig {
 }
 
 export interface SeasonCompetitionFile {
+  status?: 'draft' | 'published';
   config: SeasonCompetitionConfig;
   profiles: LocalProfile[];
 }

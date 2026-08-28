@@ -90,6 +90,9 @@ export class CompetitionDataLoaderService {
     if (file.config.type !== type || file.config.yearStart !== yearStart) {
       throw new Error(`Файл данных не соответствует турниру ${type} сезона ${yearStart}`);
     }
+    if (file.status === 'draft') {
+      throw new Error(`Турнир ${type} сезона ${yearStart} готовится к публикации`);
+    }
     return file;
   }
 }
