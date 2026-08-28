@@ -26,11 +26,16 @@
     </tr>
   </thead>
   <tbody class="table-body">
-    <tr *ngFor="let profile of profilesArr; index as i" class="table-row">
+    <tr
+      *ngFor="let profile of profilesArr; index as i"
+      class="table-row"
+      [class.qualification-boundary]="qualifiedPlaces > 0 && i + 1 === qualifiedPlaces"
+    >
       <td [ngClass]="{
         'first':    i + 1 === 1,
         'second':   i + 1 === 2,
-        'third':    i + 1 === 3
+        'third':    i + 1 === 3,
+        'qualified': qualifiedPlaces > 0 && i < qualifiedPlaces
       }">
         <span>
           {{ i + 1 }}
@@ -41,11 +46,14 @@
           <div class="item-team-container">
             <div class="logo-container">
               <img [src]="!!profile.logo ? profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
-              <div class="conference-label-container" [ngSwitch]="profile.leagues[0]">
+              <div
+                *ngIf="chosenStage === 'common'"
+                class="conference-label-container"
+                [ngSwitch]="profile.leagues?.['apertura']"
+              >
                 <span class="label blue-label" *ngSwitchCase="'Конференция Анчелотти'">КА</span>
                 <span class="label yellow-label" *ngSwitchCase="'Конференция Муньоса'">КМ</span>
                 <span class="label red-label" *ngSwitchCase="'Конференция Зидана'">КЗ</span>
-                <span class="label" *ngSwitchDefault></span>
               </div>
             </div>
             <div class="team-container">

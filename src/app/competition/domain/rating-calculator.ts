@@ -22,29 +22,33 @@ export function calculateSquadRatings(
     tour.min = range.min;
   });
 
-  const recentTourRanges: TourRange[] = [];
-  for (let offset = 0; offset < lastTour && offset < RATING_COEFFICIENTS.length; offset++) {
-    recentTourRanges.push(getTourRange(squads, lastTour - offset));
+  const ratedTours: Array<{ tour: number; range: TourRange }> = [];
+  for (let tour = lastTour; tour >= 1 && ratedTours.length < RATING_COEFFICIENTS.length; tour--) {
+    const range = getTourRange(squads, tour);
+    if (isUsableRatingRange(range)) {
+      ratedTours.push({ tour, range });
+    }
   }
 
   const ratingMedian = -RATING_COEFFICIENTS.reduce((sum, coefficient) => sum + coefficient, 0);
-  const maxResultValue = recentTourRanges.reduce((sum, range, index) =>
+  const maxResultValue = ratedTours.reduce((sum, { range }, index) =>
     sum + (Number(range.max) - Number(range.med)) / Number(range.med) * RATING_COEFFICIENTS[index], 0) - ratingMedian;
 
   const ratings: number[] = [];
   Object.values(squads.data.players).forEach(player => {
-    const recentScores: FantasyTourResult['tour_score'][] = [];
-    for (let offset = 0; offset < lastTour && offset < RATING_COEFFICIENTS.length; offset++) {
-      recentScores.push(player.team.results_by_tour[lastTour - offset].tour_score);
-    }
-
-    const rawRating = recentTourRanges.reduce((sum, range, index) =>
-      sum + (Number(recentScores[index]) - Number(range.med)) / Number(range.med) * RATING_COEFFICIENTS[index], 0);
+    const rawRating = ratedTours.reduce((sum, { tour, range }, index) =>
+      sum + (Number(player.team.results_by_tour[tour].tour_score) - Number(range.med))
+        / Number(range.med) * RATING_COEFFICIENTS[index], 0);
     player.team.rating = Math.round((rawRating - ratingMedian) / maxResultValue * 1000) / 100;
     ratings.push(player.team.rating);
   });
 
   return ratings.sort((left, right) => left - right);
+}
+
+function isUsableRatingRange(range: TourRange): boolean {
+  const values = [range.max, range.med, range.min].map(Number);
+  return values.every(Number.isFinite) && Number(range.med) !== 0;
 }
 
 function getTourRange(squads: FantasyFullInfoResponse, tour: string | number): TourRange {

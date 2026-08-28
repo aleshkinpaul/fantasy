@@ -63,6 +63,10 @@
       &:last-child td {
         border-bottom: 0;
       }
+
+      &.qualification-boundary td {
+        border-bottom: 2px solid rgba($color-primary, 0.48);
+      }
     }
   }
 
@@ -251,6 +255,12 @@
 .third > span {
   color: #774822 !important;
   background: #E8D2BF !important;
+}
+
+.qualified > span {
+  color: $color-primary-hover;
+  background: $color-surface-blue;
+  box-shadow: 0 0 0 1px rgba($color-primary, 0.34);
 }
 
 .special > span {

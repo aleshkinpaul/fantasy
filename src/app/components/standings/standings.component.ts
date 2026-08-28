@@ -25,6 +25,7 @@ export class StandingsComponent {
   @Input() squads!: FantasyFullInfoResponse;
   @Input() chosenStage = '';
   @Input() chosenLeague = '';
+  @Input() qualifiedPlaces = 0;
   @Input() isShowUnitedTableByPoints = false;
 
   constructor(

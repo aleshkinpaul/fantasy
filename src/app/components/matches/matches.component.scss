@@ -67,7 +67,6 @@
       @include flex-column(2px);
       width: 100%;
       min-width: 0;
-      text-align: right;
 
       > * {
         @include text-truncate;
@@ -85,8 +84,12 @@
       }
     }
 
+    .home-name-link .name-container {
+      text-align: right;
+    }
+
     .away-name-link .name-container {
-      text-align: center;
+      text-align: left;
     }
 
     .home-logo-link,
@@ -197,7 +200,8 @@
         overflow: hidden;
       }
 
-      .name-container {
+      .home-name-link .name-container,
+      .away-name-link .name-container {
         text-align: center;
 
         .team-name {
