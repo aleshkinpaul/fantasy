@@ -2,6 +2,13 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPrizeNominee, IRuntimePrize } from '../../models/domain';
 
+const MEDAL_IMAGES = [
+  'assets/icons/prizes/gold-medal.png',
+  'assets/icons/prizes/silver-medal.png',
+  'assets/icons/prizes/bronze-medal.png',
+] as const;
+const DEFAULT_MEDAL_IMAGE = 'assets/icons/prizes/medal.png';
+
 @Component({
   selector: 'app-prizes-list',
   templateUrl: './prizes-list.component.html',
@@ -26,10 +33,7 @@ export class PrizesListComponent {
   }
 
   getMedalImage(index: number): string {
-    if (index === 0) return 'assets/logos/2025/icons/gold-medal.png';
-    if (index === 1) return 'assets/logos/2025/icons/silver-medal.png';
-    if (index === 2) return 'assets/logos/2025/icons/bronze-medal.png';
-    return 'assets/logos/2025/icons/medal.png';
+    return MEDAL_IMAGES[index] ?? DEFAULT_MEDAL_IMAGE;
   }
 
   isUnusuitableItem(
