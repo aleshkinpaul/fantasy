@@ -9,4 +9,9 @@ describe('PrizesListComponent', () => {
     expect(component.getMedalImage(2)).toBe('assets/icons/prizes/bronze-medal.png');
     expect(component.getMedalImage(3)).toBe('assets/icons/prizes/medal.png');
   });
+
+  it('uses a generic medal for a prize without its own icon', () => {
+    expect(component.getPrizeImage()).toBe('assets/icons/prizes/medal.png');
+    expect(component.getPrizeImage('custom.png')).toBe('custom.png');
+  });
 });

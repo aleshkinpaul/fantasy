@@ -1,5 +1,6 @@
 import { IProfileDetails } from '../../models/domain';
 import { CompetitionPrizeConfig } from '../models/competition.models';
+import { SPAIN_PRIZE_IDS } from '../config/spain-prize.ids';
 import { calculateSpainPrizes, calculateWorldCupPrizes } from './prize-calculator';
 
 describe('prize calculator', () => {
@@ -57,7 +58,85 @@ describe('prize calculator', () => {
     expect(result[0].activeLeaders.map(profile => profile.id))
       .toEqual(['leader', 'runner-up']);
   });
+
+  it('selects every woman who first reaches one hundred in the same eligible tour', () => {
+    const first = createProfile('first', 0, 100);
+    first.sex = 2;
+    first.team.results_by_tour = { 4: tourResult(100), 5: tourResult(0) };
+    const second = createProfile('second', 0, 100);
+    second.sex = 2;
+    second.team.results_by_tour = { 4: tourResult(105), 5: tourResult(0) };
+    const later = createProfile('later', 0, 100);
+    later.sex = 2;
+    later.team.results_by_tour = { 4: tourResult(90), 5: tourResult(120) };
+
+    const result = calculateSpainPrizes({
+      prizes: [prize(SPAIN_PRIZE_IDS.FIRST_HUNDRED)],
+      profiles: [],
+      profilesDetails: [first, second, later],
+      rules: {
+        guestProfileIds: [],
+        extraWinnerIds: [],
+        firstHundredEligibleTours: [4, 5],
+      },
+    });
+
+    expect(result[0].activeLeaders.map(profile => profile.id)).toEqual(['second', 'first']);
+  });
+
+  it('uses total score divided by constant cost to select the value player', () => {
+    const leader = createProfile('leader', 0, 100);
+    leader.results.selectedPlayerPoints = { efficient: 14, expensive: 30 };
+    const runnerUp = createProfile('runner-up', 0, 100);
+    runnerUp.results.selectedPlayerPoints = { efficient: 8, expensive: 40 };
+
+    const result = calculateSpainPrizes({
+      prizes: [prize(SPAIN_PRIZE_IDS.HANDY_HANDS)],
+      profiles: [],
+      profilesDetails: [leader, runnerUp],
+      rules: { guestProfileIds: [], extraWinnerIds: [] },
+      sportPlayers: [
+        sportPlayer('efficient', '10', 5, 20),
+        sportPlayer('expensive', '11', 7, 100),
+      ],
+    });
+
+    expect(result[0].activeLeaders.map(profile => profile.id)).toEqual(['leader', 'runner-up']);
+    expect(leader.prizes[SPAIN_PRIZE_IDS.HANDY_HANDS].value).toBe(14);
+    expect(result[0].calculationInfo).toBe('efficient: 20 FO / 5 = 4');
+  });
+
+  it('keeps a placeholder prize without calculated nominees', () => {
+    const result = calculateSpainPrizes({
+      prizes: [{ ...prize(SPAIN_PRIZE_IDS.SPICY_PEPE), isPlaceholder: true }],
+      profiles: [],
+      profilesDetails: [createProfile('profile', 0, 100)],
+      rules: { guestProfileIds: [], extraWinnerIds: [] },
+    });
+
+    expect(result[0].nomineesArr).toEqual([]);
+    expect(result[0].state).toBe(2);
+  });
 });
+
+function prize(id: number): CompetitionPrizeConfig {
+  return { id, nomineesArr: [], activeLeaders: [] };
+}
+
+function tourResult(score: number): { tour_score: number; total_score: number; total_place: number } {
+  return { tour_score: score, total_score: score, total_place: 1 };
+}
+
+function sportPlayer(id: string, position: string, cost: number, score: number) {
+  return {
+    id,
+    name: id,
+    amplua_id: position,
+    team_id: 'club',
+    cost,
+    stat_by_tours: { 1: { score, match_time: 90 } },
+  };
+}
 
 function createProfile(id: string, uniquePlayers: number, subsCoef: number): IProfileDetails {
   return {

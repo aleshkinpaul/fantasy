@@ -47,6 +47,26 @@ describe('LeagueH2HDataService', () => {
     service.updateStrikes(home, away, 1, 90, 70, 20, 2, 3);
     expect(away.results.prizeMaxLosedDiff).toBe(20);
   });
+
+  it('tracks league-only prize metrics for the winner', () => {
+    const hunter = createStrikeProfile('hunter');
+    const turtle = createStrikeProfile('turtle');
+
+    service.updateLeaguePrizeMetrics(hunter, turtle, 1, 25, 175, 'turtle');
+
+    expect(hunter.results.prizeMaxWinDiffAgainstTarget).toBe(25);
+    expect(hunter.results.prizeMaxWinningMatchTotalFo).toBe(175);
+  });
+
+  it('does not track prize metrics for a draw', () => {
+    const home = createStrikeProfile('home');
+    const away = createStrikeProfile('away');
+
+    service.updateLeaguePrizeMetrics(home, away, 0, 3, 197, 'away');
+
+    expect(home.results.prizeMaxWinDiffAgainstTarget).toBe(0);
+    expect(home.results.prizeMaxWinningMatchTotalFo).toBe(0);
+  });
 });
 
 function createRoster(players: string[]): ITeamData['rosters_by_tour'][number] {
@@ -61,8 +81,9 @@ function createRoster(players: string[]): ITeamData['rosters_by_tour'][number] {
   };
 }
 
-function createStrikeProfile(): IProfileDetails {
+function createStrikeProfile(id = 'profile'): IProfileDetails {
   return {
+    id,
     results: {
       prizeCurrentWinStrike: 0,
       prizeMaxWinStrike: 0,
@@ -71,6 +92,9 @@ function createStrikeProfile(): IProfileDetails {
       prizeMaxStoppedNoLoseStrike: 0,
       prizeMinWins: 0,
       prizeMaxLosedDiff: 0,
+      prizeMaxWinDiffAgainstTarget: 0,
+      prizeMaxWinningMatchTotalFo: 0,
+      selectedPlayerPoints: {},
     },
   } as IProfileDetails;
 }

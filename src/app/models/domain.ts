@@ -97,6 +97,9 @@ export interface IProfileResults {
   prizeMaxNoLoseStrike: number;
   prizeMaxStoppedNoLoseStrike: number;
   prizeMaxLosedDiff: number;
+  prizeMaxWinDiffAgainstTarget?: number;
+  prizeMaxWinningMatchTotalFo?: number;
+  selectedPlayerPoints?: Record<string, number>;
   cup?: ICupResults;
 }
 
@@ -138,6 +141,7 @@ export interface IRuntimePrize {
   condition?: string;
   reward?: string;
   icon?: string;
+  calculationInfo?: string;
   infoOnTour?: number;
   isSecret?: boolean;
   isShowAll?: boolean;

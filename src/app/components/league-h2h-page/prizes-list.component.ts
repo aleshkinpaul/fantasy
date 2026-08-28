@@ -36,6 +36,10 @@ export class PrizesListComponent {
     return MEDAL_IMAGES[index] ?? DEFAULT_MEDAL_IMAGE;
   }
 
+  getPrizeImage(icon?: string): string {
+    return icon || DEFAULT_MEDAL_IMAGE;
+  }
+
   isUnusuitableItem(
     nominee: IPrizeNominee,
     activeLeaders: IPrizeNominee[],

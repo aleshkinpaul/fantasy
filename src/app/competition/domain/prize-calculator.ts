@@ -6,8 +6,10 @@ import {
 import {
   CompetitionPrizeConfig,
   LocalProfile,
+  SportPlayer,
   SpainPrizeRules,
 } from '../models/competition.models';
+import { SPAIN_PRIZE_IDS } from '../config/spain-prize.ids';
 
 type PrizeSourceProfile = LocalProfile & Partial<IProfileDetails>;
 
@@ -25,6 +27,7 @@ export interface PrizeCalculationInput {
 
 export interface SpainPrizeCalculationInput extends PrizeCalculationInput {
   rules: SpainPrizeRules;
+  sportPlayers?: SportPlayer[];
 }
 
 function updatePrizeStates(prizes: CompetitionPrizeConfig[]): void {
@@ -114,9 +117,17 @@ function countSpainPrizeNominees(
 }
 
 export function calculateSpainPrizes(input: SpainPrizeCalculationInput): IRuntimePrize[] {
-  const { prizes, profiles, profilesDetails, rules, random = Math.random } = input;
+  const { prizes, profiles, profilesDetails, rules, sportPlayers = [], random = Math.random } = input;
 
   prizes.forEach(prize => {
+    if (prize.isPlaceholder) {
+      prize.nomineesArr = [];
+      prize.activeLeaders = [];
+      prize.state = 2;
+      return;
+    }
+    if (calculateNewSpainPrize(prize, profilesDetails, rules, sportPlayers)) return;
+
     const keyId = prize.id === 8
       ? requireRuleId(rules.frequentPlayerId, 'frequentPlayerId', prize.id)
       : prize.id === 11
@@ -156,6 +167,120 @@ export function calculateSpainPrizes(input: SpainPrizeCalculationInput): IRuntim
   }
 
   return asRuntimePrizes(prizes);
+}
+
+function calculateNewSpainPrize(
+  prize: CompetitionPrizeConfig,
+  profiles: IProfileDetails[],
+  rules: SpainPrizeRules,
+  sportPlayers: SportPlayer[],
+): boolean {
+  let valueByProfile: ((profile: IProfileDetails) => number) | undefined;
+
+  switch (prize.id) {
+    case SPAIN_PRIZE_IDS.CLASSIC:
+      valueByProfile = profile => profile.score;
+      break;
+    case SPAIN_PRIZE_IDS.TURTLE_HUNT:
+      valueByProfile = profile => profile.results.prizeMaxWinDiffAgainstTarget ?? 0;
+      break;
+    case SPAIN_PRIZE_IDS.HANDY_HANDS: {
+      const player = getBestValuePlayer(sportPlayers);
+      if (player) {
+        prize.calculationInfo = `${player.name}: ${player.score} FO / ${player.cost} = ${formatRatio(player.ratio)}`;
+      }
+      valueByProfile = profile => player ? profile.results.selectedPlayerPoints?.[player.id] ?? 0 : 0;
+      break;
+    }
+    case SPAIN_PRIZE_IDS.MARTIN_POINTS: {
+      const martinPlayerIds = rules.martinPlayerIds ?? [];
+      valueByProfile = profile => martinPlayerIds.reduce(
+        (sum, playerId) => sum + (profile.results.selectedPlayerPoints?.[playerId] ?? 0),
+        0,
+      );
+      break;
+    }
+    case SPAIN_PRIZE_IDS.FIRE_MATCH:
+      valueByProfile = profile => profile.results.prizeMaxWinningMatchTotalFo ?? 0;
+      break;
+    case SPAIN_PRIZE_IDS.FIRST_HUNDRED: {
+      const firstWinningTour = getFirstHundredTour(profiles, rules.firstHundredEligibleTours ?? []);
+      valueByProfile = profile => {
+        if (!firstWinningTour || Number(profile.sex) !== 2) return 0;
+        const score = Number(profile.team.results_by_tour[firstWinningTour]?.tour_score ?? 0);
+        return score >= 100 ? score : 0;
+      };
+      break;
+    }
+    case SPAIN_PRIZE_IDS.LEGENDARY_SEVEN:
+      valueByProfile = profile => profile.place_in_league?.['ByScore'] === 7 ? profile.score : 0;
+      break;
+    default:
+      return false;
+  }
+
+  setCalculatedNominees(prize, profiles, valueByProfile);
+  return true;
+}
+
+function setCalculatedNominees(
+  prize: CompetitionPrizeConfig,
+  profiles: IProfileDetails[],
+  valueByProfile: (profile: IProfileDetails) => number,
+): void {
+  profiles.forEach(profile => {
+    profile.prizes[prize.id] = {
+      value: valueByProfile(profile),
+      sortParam: profile.score,
+    };
+  });
+
+  const nominees = profiles
+    .filter(profile => Number(profile.prizes[prize.id].value) > 0)
+    .sort((left, right) => {
+      const valueDifference = Number(right.prizes[prize.id].value) - Number(left.prizes[prize.id].value);
+      return valueDifference || right.score - left.score;
+    });
+
+  prize.nomineesArr = nominees;
+  prize.activeLeaders = nominees.filter(nominee =>
+    !(prize.excluded ?? []).includes(nominee.id)
+    && (!prize.isActivity || nominee.results.subsCoef > 50));
+}
+
+function getBestValuePlayer(players: SportPlayer[]): {
+  id: string;
+  name: string;
+  cost: number;
+  score: number;
+  ratio: number;
+} | undefined {
+  return players
+    .filter(player => ['10', '11', '12'].includes(player.amplua_id) && player.cost > 0 && player.cost <= 6)
+    .map(player => ({
+      id: player.id,
+      name: player.name,
+      cost: player.cost,
+      score: Object.values(player.stat_by_tours).reduce((sum, stat) => sum + stat.score, 0),
+    }))
+    .sort((left, right) =>
+      right.score / right.cost - left.score / left.cost
+      || right.score - left.score
+      || left.cost - right.cost
+      || left.id.localeCompare(right.id))
+    .map(player => ({ ...player, ratio: player.score / player.cost }))[0];
+}
+
+function formatRatio(value: number): string {
+  return String(Math.round(value * 100) / 100);
+}
+
+function getFirstHundredTour(profiles: IProfileDetails[], eligibleTours: number[]): number | undefined {
+  return [...eligibleTours]
+    .sort((left, right) => left - right)
+    .find(tour => profiles.some(profile =>
+      Number(profile.sex) === 2
+      && Number(profile.team.results_by_tour[tour]?.tour_score ?? 0) >= 100));
 }
 
 export function calculateChampionsLeaguePrizes(input: PrizeCalculationInput): IRuntimePrize[] {

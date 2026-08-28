@@ -31,6 +31,7 @@ import {
   LoadedCompetitionData,
   LocalProfile,
   SeasonCompetitionConfig,
+  SportPlayer,
   SpainPrizeRules,
 } from '../models/competition.models';
 import { CompetitionDataLoaderService } from './competition-data-loader.service';
@@ -82,6 +83,7 @@ export class CompetitionFacade {
         playOffTours: config.cup?.matchesTours || [],
         substitutionRules: rules.substitutions[config.type],
         maxLosingDifferenceFirstTour: rules.prizeMetrics.maxLosingDifferenceFirstTour,
+        turtleTargetProfileId: rules.spainPrizes?.turtleTargetProfileId,
       });
       profilesDetails.sort((left, right) => compareStandings(left, right, 'common'));
     }
@@ -93,8 +95,21 @@ export class CompetitionFacade {
     this.assignScorePlaces(profilesDetails);
     applySquadEligibility(profilesDetails, data.latestPlayerStats, lastTour, rules.playerStats);
 
-    let prizes = this.calculatePrizes(config.type, config.prizes, profiles, profilesDetails, rules.spainPrizes);
-    applyTourPlayerStats(profilesDetails, data.playerStatsByTour, lastTour, rules.playerStats);
+    const sportPlayers = applyTourPlayerStats(
+      profilesDetails,
+      data.playerStatsByTour,
+      lastTour,
+      rules.playerStats,
+      Boolean(rules.spainPrizes?.martinPlayerIds?.length),
+    );
+    let prizes = this.calculatePrizes(
+      config.type,
+      config.prizes,
+      profiles,
+      profilesDetails,
+      rules.spainPrizes,
+      sportPlayers,
+    );
     if (config.type === 'world-cup') {
       prizes = calculateWorldCupPrizes({ prizes: config.prizes, profiles, profilesDetails });
     }
@@ -185,10 +200,11 @@ export class CompetitionFacade {
     profiles: RuntimeProfile[],
     profilesDetails: IProfileDetails[],
     spainRules?: SpainPrizeRules,
+    sportPlayers: SportPlayer[] = [],
   ): IRuntimePrize[] {
     if (type === 'spain') {
       if (!spainRules) throw new Error('Для турнира Испании не настроены правила призов');
-      return calculateSpainPrizes({ prizes, profiles, profilesDetails, rules: spainRules });
+      return calculateSpainPrizes({ prizes, profiles, profilesDetails, rules: spainRules, sportPlayers });
     }
     if (type === 'champions-league') {
       return calculateChampionsLeaguePrizes({ prizes, profiles, profilesDetails });

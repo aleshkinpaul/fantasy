@@ -24,6 +24,7 @@ export interface TourProcessingContext {
   playOffTours: number[];
   substitutionRules?: SubstitutionRules;
   maxLosingDifferenceFirstTour: number;
+  turtleTargetProfileId?: string;
 }
 
 @Injectable({
@@ -42,6 +43,7 @@ export class LeagueH2HDataService {
       playOffTours,
       substitutionRules,
       maxLosingDifferenceFirstTour,
+      turtleTargetProfileId,
     } = context;
 
     matches.forEach(match => {
@@ -79,6 +81,16 @@ export class LeagueH2HDataService {
         tourIndex,
         maxLosingDifferenceFirstTour,
       );
+      if (turtleTargetProfileId) {
+        this.updateLeaguePrizeMetrics(
+          homeProfile,
+          awayProfile,
+          matchResult.result,
+          matchDiffFo,
+          matchResult.homeScore + matchResult.awayScore,
+          turtleTargetProfileId,
+        );
+      }
       this.updateMaxFoInTour(homeProfile, awayProfile, matchResult.homeScore, matchResult.awayScore);
       this.updateMaxFoInLosedTour(
         homeProfile,
@@ -119,6 +131,31 @@ export class LeagueH2HDataService {
       this.updateCommonResults(homeProfile);
       this.updateCommonResults(awayProfile);
     });
+  }
+
+  updateLeaguePrizeMetrics(
+    homeProfile: IProfileDetails,
+    awayProfile: IProfileDetails,
+    result: 0 | 1 | 2,
+    matchDiffFo: number,
+    matchTotalFo: number,
+    turtleTargetProfileId?: string,
+  ): void {
+    if (result === 0) return;
+
+    const winner = result === 1 ? homeProfile : awayProfile;
+    const loser = result === 1 ? awayProfile : homeProfile;
+    winner.results.prizeMaxWinningMatchTotalFo = Math.max(
+      winner.results.prizeMaxWinningMatchTotalFo ?? 0,
+      matchTotalFo,
+    );
+
+    if (loser.id === turtleTargetProfileId) {
+      winner.results.prizeMaxWinDiffAgainstTarget = Math.max(
+        winner.results.prizeMaxWinDiffAgainstTarget ?? 0,
+        matchDiffFo,
+      );
+    }
   }
 
   /**

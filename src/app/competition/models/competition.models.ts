@@ -76,6 +76,7 @@ export interface SportPlayer {
   name: string;
   amplua_id: string;
   team_id: string;
+  cost: number;
   stat_by_tours: Record<string, SportPlayerTourStat>;
 }
 
@@ -128,6 +129,7 @@ export interface CompetitionPrizeConfig {
   isFinalStage?: boolean;
   isActivity?: boolean;
   isManual?: boolean;
+  isPlaceholder?: boolean;
   excluded?: string[];
   defaultNomineesArr?: string[];
   nomineesArr?: unknown[];
@@ -136,6 +138,7 @@ export interface CompetitionPrizeConfig {
   infoOnTour?: number;
   isSecret?: boolean;
   isShowAll?: boolean;
+  calculationInfo?: string;
   [key: string]: unknown;
 }
 
@@ -164,6 +167,9 @@ export interface SpainPrizeRules {
     prize3?: string;
     prize10?: string;
   };
+  turtleTargetProfileId?: string;
+  martinPlayerIds?: string[];
+  firstHundredEligibleTours?: number[];
 }
 
 export interface SubstitutionRules {

@@ -4,7 +4,7 @@
       <div class="info-container">
         <div class="card-header-container">
           <div class="prize-icon">
-            <img [src]="item.icon" [alt]="'приз '+item.name">
+            <img [src]="getPrizeImage(item.icon)" [alt]="'приз '+item.name">
           </div>
           <div class="card-title-container">
             <div class="prize-name">{{ item.name }}</div>
@@ -20,6 +20,10 @@
         <div class="prize-condition">
           <span class="prize-title">Описание:</span>
           <span class="prize-description">{{ item.condition }}</span>
+        </div>
+        <div class="prize-condition" *ngIf="item.calculationInfo">
+          <span class="prize-title">Текущий расчёт:</span>
+          <span class="prize-description">{{ item.calculationInfo }}</span>
         </div>
         <div class="prize-reward">
           <span class="prize-title">Приз:</span>

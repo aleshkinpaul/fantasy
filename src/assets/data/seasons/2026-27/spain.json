@@ -1610,12 +1610,52 @@
     "prizes": [],
     "prizeRefs": [
       {
+        "key": "classic"
+      },
+      {
         "key": "martin-league",
         "overrides": {
           "excluded": [
             "5275903"
           ]
         }
+      },
+      {
+        "key": "spicy-pepe"
+      },
+      {
+        "key": "turtle-hunt"
+      },
+      {
+        "key": "handy-hands"
+      },
+      {
+        "key": "martin-points"
+      },
+      {
+        "key": "fire-match"
+      },
+      {
+        "key": "first-hundred"
+      },
+      {
+        "key": "girl-power-primera",
+        "overrides": {
+          "excluded": [
+            "1068332740"
+          ]
+        }
+      },
+      {
+        "key": "girl-power-segunda",
+        "overrides": {
+          "excluded": [
+            "1068332740"
+          ]
+        }
+      },
+      {
+        "key": "legendary-seven"
       },
       {
         "key": "soft-kitty"
@@ -1672,6 +1712,7 @@
       "id": "1116864335",
       "name": "Богдан Студеникин_1116864335",
       "nick": "Богдан Студеникин_1116864335",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1116864335/",
       "logo": "assets/logos/default.png"
     },
@@ -1679,6 +1720,7 @@
       "id": "1117327108",
       "name": "Problemka",
       "nick": "Problemka",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117327108/",
       "logo": "assets/logos/default.png"
     },
@@ -1702,6 +1744,7 @@
       "id": "1116309099",
       "name": "Fraxxxy",
       "nick": "Fraxxxy",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1116309099/",
       "logo": "assets/logos/default.png"
     },
@@ -1725,6 +1768,7 @@
       "id": "151671085",
       "name": "BWD",
       "nick": "BWD",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/151671085/",
       "logo": "assets/logos/default.png"
     },
@@ -1732,6 +1776,7 @@
       "id": "1117329215",
       "name": "ingysh08",
       "nick": "ingysh08",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117329215/",
       "logo": "assets/logos/default.png"
     },
@@ -1747,6 +1792,7 @@
       "id": "1117333432",
       "name": "shuraevarseny",
       "nick": "shuraevarseny",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117333432/",
       "logo": "assets/logos/default.png"
     },
@@ -1762,6 +1808,7 @@
       "id": "1116907944",
       "name": "Alexander Toroptcev",
       "nick": "Alexander Toroptcev",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1116907944/",
       "logo": "assets/logos/default.png"
     },
@@ -1769,6 +1816,7 @@
       "id": "1117067824",
       "name": "Madridista17",
       "nick": "Madridista17",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117067824/",
       "logo": "assets/logos/default.png"
     },
@@ -1888,6 +1936,7 @@
       "id": "1117333090",
       "name": "b7dir",
       "nick": "b7dir",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117333090/",
       "logo": "assets/logos/default.png"
     },
@@ -1943,6 +1992,7 @@
       "id": "1117331183",
       "name": "LinaShalk",
       "nick": "LinaShalk",
+      "sex": 2,
       "url": "https://www.sports.ru/profile/1117331183/",
       "logo": "assets/logos/default.png"
     },
@@ -1950,6 +2000,7 @@
       "id": "1117327481",
       "name": "OlesyaTyumenkova",
       "nick": "OlesyaTyumenkova",
+      "sex": 2,
       "url": "https://www.sports.ru/profile/1117327481/",
       "logo": "assets/logos/default.png"
     },
@@ -1957,6 +2008,7 @@
       "id": "1117333943",
       "name": "Alekso Berlucci",
       "nick": "Alekso Berlucci",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117333943/",
       "logo": "assets/logos/default.png"
     },
@@ -1964,6 +2016,7 @@
       "id": "1117333428",
       "name": "Денис Францевич",
       "nick": "Денис Францевич",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117333428/",
       "logo": "assets/logos/default.png"
     },
@@ -2019,6 +2072,7 @@
       "id": "1117333496",
       "name": "Artem Vartanyan",
       "nick": "Artem Vartanyan",
+      "sex": 1,
       "url": "https://www.sports.ru/profile/1117333496/",
       "logo": "assets/logos/default.png"
     },
@@ -2026,6 +2080,7 @@
       "id": "1056354922",
       "name": "Natalia Shakirova",
       "nick": "Natalia Shakirova",
+      "sex": 2,
       "url": "https://www.sports.ru/profile/1056354922/",
       "logo": "assets/logos/default.png"
     },

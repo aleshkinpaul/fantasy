@@ -61,6 +61,18 @@ const RULES: Record<string, CompetitionRuntimeRules> = {
     spainPrizes: {
       guestProfileIds: [],
       extraWinnerIds: [],
+      turtleTargetProfileId: '1111769718',
+      martinPlayerIds: [
+        '237645',
+        '237505',
+        '237347',
+        '237305',
+        '237823',
+        '241108',
+        '237484',
+        '237711',
+      ],
+      firstHundredEligibleTours: Array.from({ length: 35 }, (_, index) => index + 4),
     },
     prizeMetrics: {
       maxLosingDifferenceFirstTour: 1,
