@@ -14,6 +14,7 @@ export interface MatchCenterPlayer {
   startsPositionGroup: boolean;
   cost?: number;
   realTeamId?: string;
+  isNewToSquad: boolean;
   isCaptain: boolean;
   isViceCaptain: boolean;
   isBench: boolean;

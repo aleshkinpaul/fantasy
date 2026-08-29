@@ -303,6 +303,11 @@
         content: '';
       }
     }
+
+    &.new-player {
+      background: rgba($color-warning-bg, 0.72);
+      box-shadow: inset 3px 0 0 $color-warning;
+    }
   }
 }
 
@@ -316,6 +321,26 @@
   border-radius: $border-radius-sm;
   font-size: 10px;
   font-weight: $font-weight-bold;
+}
+
+.position-9 {
+  color: $color-warning;
+  background: $color-warning-bg;
+}
+
+.position-10 {
+  color: $color-primary-hover;
+  background: $color-surface-blue;
+}
+
+.position-11 {
+  color: $color-success;
+  background: $color-success-bg;
+}
+
+.position-12 {
+  color: $color-danger;
+  background: $color-danger-bg;
 }
 
 .club-logo {
@@ -337,13 +362,35 @@
   }
 }
 
+.player-name-wrap {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
 .player-name {
   min-width: 0;
+  flex: 1;
   overflow: hidden;
   font-size: $font-size-sm;
   font-weight: $font-weight-medium;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.new-player-badge {
+  padding: 2px 5px;
+  flex: 0 0 auto;
+  color: $color-warning;
+  background: $color-surface;
+  border: 1px solid rgba($color-warning, 0.28);
+  border-radius: $border-radius-full;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .player-cost {
@@ -372,6 +419,10 @@
 
 .bench-list li {
   opacity: 0.78;
+
+  &.new-player {
+    opacity: 0.94;
+  }
 }
 
 @media (max-width: 800px) {

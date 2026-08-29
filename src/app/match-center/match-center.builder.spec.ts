@@ -48,6 +48,36 @@ describe('buildMatchCenterTeam', () => {
     ]);
     expect(team.bench.map(item => item.id)).toEqual(['bench-forward', 'bench-goalkeeper']);
   });
+
+  it('marks players absent from both parts of the previous tour roster as new', () => {
+    const input = profile();
+    input.team.rosters_by_tour[1].players = {
+      base: ['stays-in-base'],
+      bench: ['moves-to-base'],
+    };
+    input.team.rosters_by_tour[2] = {
+      team_cost: 100,
+      total_score: 0,
+      captain_id: 'moves-to-base',
+      players: {
+        base: ['moves-to-base', 'new-in-base'],
+        bench: ['stays-in-base', 'new-on-bench'],
+      },
+    };
+    const players = [
+      player('stays-in-base', '10'),
+      player('moves-to-base', '11'),
+      player('new-in-base', '12'),
+      player('new-on-bench', '9'),
+    ];
+
+    const team = buildMatchCenterTeam(input, 2, players);
+
+    expect(team.base.find(item => item.id === 'moves-to-base')?.isNewToSquad).toBeFalse();
+    expect(team.base.find(item => item.id === 'new-in-base')?.isNewToSquad).toBeTrue();
+    expect(team.bench.find(item => item.id === 'stays-in-base')?.isNewToSquad).toBeFalse();
+    expect(team.bench.find(item => item.id === 'new-on-bench')?.isNewToSquad).toBeTrue();
+  });
 });
 
 function profile(): IProfileDetails {

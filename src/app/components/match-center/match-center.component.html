@@ -106,8 +106,9 @@
           <ul class="player-list">
             <li
               *ngFor="let player of team.base"
-              [class.position-group-start]="player.startsPositionGroup">
-              <span class="position">{{ player.position }}</span>
+              [class.position-group-start]="player.startsPositionGroup"
+              [class.new-player]="player.isNewToSquad">
+              <span [class]="'position position-' + (player.positionId || 'unknown')">{{ player.position }}</span>
               <span class="club-logo" aria-hidden="true">
                 <img
                   *ngIf="player.realTeamId"
@@ -115,7 +116,10 @@
                   alt=""
                   (error)="hideMissingClubLogo($event)">
               </span>
-              <span class="player-name">{{ player.name }}</span>
+              <span class="player-name-wrap">
+                <span class="player-name">{{ player.name }}</span>
+                <span class="new-player-badge" *ngIf="player.isNewToSquad">новый</span>
+              </span>
               <span class="captain-badge" *ngIf="player.isCaptain">C</span>
               <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
               <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
@@ -124,8 +128,8 @@
 
           <h4 class="bench-title">Запас</h4>
           <ul class="player-list bench-list">
-            <li *ngFor="let player of team.bench">
-              <span class="position">{{ player.position }}</span>
+            <li *ngFor="let player of team.bench" [class.new-player]="player.isNewToSquad">
+              <span [class]="'position position-' + (player.positionId || 'unknown')">{{ player.position }}</span>
               <span class="club-logo" aria-hidden="true">
                 <img
                   *ngIf="player.realTeamId"
@@ -133,7 +137,10 @@
                   alt=""
                   (error)="hideMissingClubLogo($event)">
               </span>
-              <span class="player-name">{{ player.name }}</span>
+              <span class="player-name-wrap">
+                <span class="player-name">{{ player.name }}</span>
+                <span class="new-player-badge" *ngIf="player.isNewToSquad">новый</span>
+              </span>
               <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
               <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
             </li>
