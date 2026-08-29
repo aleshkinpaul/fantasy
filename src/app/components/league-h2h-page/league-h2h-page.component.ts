@@ -34,13 +34,16 @@ import { ConferenceParticipantsComponent } from '../conference-participants/conf
 import { MatchCenterComponent } from '../match-center/match-center.component';
 import { MatchForecastService, getTournamentCatalogId } from '../../match-center/match-forecast.service';
 import { MatchCenterSelection, MatchForecastView } from '../../match-center/match-center.models';
+import { TourInsightsComponent } from '../tour-insights/tour-insights.component';
+import { TourInsights } from '../../tour-insights/tour-insights.models';
+import { calculateTourInsights } from '../../tour-insights/tour-insights-calculator';
 
 @Component({
   selector: 'app-league-h2h-page',
   templateUrl: './league-h2h-page.component.html',
   styleUrls: ['./league-h2h-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent, ConferenceParticipantsComponent, MatchCenterComponent],
+  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent, ConferenceParticipantsComponent, MatchCenterComponent, TourInsightsComponent],
 })
 export class LeagueH2HPageComponent implements OnInit {
   public consts!: SeasonCompetitionConfig;
@@ -51,7 +54,8 @@ export class LeagueH2HPageComponent implements OnInit {
     confId: 0,
     confTabId: 1,
     tourId: 1,
-    cupTourId: 1
+    cupTourId: 1,
+    tourView: 'matches',
   }
 
   public isShowUnitedTableByPoints = false;
@@ -69,7 +73,9 @@ export class LeagueH2HPageComponent implements OnInit {
   public selectedSportPlayers: SportPlayer[] = [];
   public matchForecast: MatchForecastView | null = null;
   public forecastLoading = false;
+  public tourInsights: TourInsights | null = null;
   private forecastSubscription?: Subscription;
+  private insightsForecastSubscription?: Subscription;
 
   public lastTour = 1;
 
@@ -86,7 +92,10 @@ export class LeagueH2HPageComponent implements OnInit {
     private destroyRef: DestroyRef,
   ) {
     this.isLoading$ = this.loader.isLoading$;
-    this.destroyRef.onDestroy(() => this.forecastSubscription?.unsubscribe());
+    this.destroyRef.onDestroy(() => {
+      this.forecastSubscription?.unsubscribe();
+      this.insightsForecastSubscription?.unsubscribe();
+    });
   }
 
   ngOnInit(): void {
@@ -116,12 +125,13 @@ export class LeagueH2HPageComponent implements OnInit {
               this.unitedProfiles = this.profilesDetails;
 
               this.updateTabs();
+              const initialConfId = this.activeTabs.confId;
 
-            this.setTabId(this.activeTabs.tabId);
-            this.setConfId(this.activeTabs.confId);
-            this.setConfTabId(this.activeTabs.confTabId);
+              this.setTabId(this.activeTabs.tabId, false);
+              this.setConfId(initialConfId);
+              this.setConfTabId(this.activeTabs.confTabId);
 
-            this.getMatchesForLeague();
+              this.getMatchesForLeague();
       },
       error: err => {
             this.loadError = true;
@@ -145,6 +155,7 @@ export class LeagueH2HPageComponent implements OnInit {
           }));
       }
     }
+    this.refreshTourInsights();
   }
 
   updateProfilesByStage(stageType = '', leagueType = ''): void {
@@ -203,15 +214,18 @@ export class LeagueH2HPageComponent implements OnInit {
     this.updateProfilesByStage();
   }
 
-  setTabId(ind: number): void {
+  setTabId(ind: number, resetTour = true): void {
     this.activeTabs.tabId = ind;
     this.activeTabs.confId = 0;
     
-    if (!!this.consts.stages[ind-1])
-      this.activeTabs.tourId = Math.min(
-        this.lastTour - this.consts.stages[ind-1].firstTour + 1
-        , this.consts.stages[ind-1].lastTour
-      );
+    if (!!this.consts.stages[ind-1]) {
+      const stage = this.consts.stages[ind-1];
+      const stageToursCount = stage.lastTour - stage.firstTour + 1;
+      const latestRelativeTour = Math.max(1, this.lastTour - stage.firstTour + 1);
+      this.activeTabs.tourId = resetTour
+        ? Math.min(latestRelativeTour, stageToursCount)
+        : Math.max(1, Math.min(this.activeTabs.tourId, stageToursCount));
+    }
 
     if (ind === 5 && this.consts.cup) {
       const cup = this.consts.cup;
@@ -250,7 +264,14 @@ export class LeagueH2HPageComponent implements OnInit {
 
   setTourId(ind: number): void {
     this.activeTabs.tourId = ind;
-    this.setQueryParam(this.activeTabs)
+    this.setQueryParam(this.activeTabs);
+    this.refreshTourInsights();
+  }
+
+  setTourView(view: 'matches' | 'insights'): void {
+    this.activeTabs.tourView = view;
+    this.setQueryParam(this.activeTabs);
+    if (view === 'insights') this.refreshTourInsights();
   }
 
   setCupTourId(ind: number): void {
@@ -263,12 +284,53 @@ export class LeagueH2HPageComponent implements OnInit {
     const confIdParam = +this.route.snapshot.queryParams['confId'] || '';
     const confTabIdParam = +this.route.snapshot.queryParams['confTabId'] || '';
     const activeTourIdParam = +this.route.snapshot.queryParams['tourId'] || '';
+    const tourViewParam = this.route.snapshot.queryParams['tourView'];
 
     if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
     if (!!confIdParam) this.activeTabs.confId = confIdParam;
     if (!!confTabIdParam) this.activeTabs.confTabId = confTabIdParam;
 
     this.activeTabs.tourId = !!activeTourIdParam ? activeTourIdParam : this.lastTour;
+    this.activeTabs.tourView = tourViewParam === 'insights' ? 'insights' : 'matches';
+  }
+
+  private refreshTourInsights(): void {
+    this.insightsForecastSubscription?.unsubscribe();
+    const stage = this.consts?.stages[this.activeTabs.tabId - 1];
+    const league = stage?.leagues[this.activeTabs.confId];
+    if (!stage || !league) {
+      this.tourInsights = null;
+      return;
+    }
+
+    const relativeTourIndex = Math.max(0, this.activeTabs.tourId - 1);
+    const tour = stage.firstTour + relativeTourIndex;
+    const tournamentId = getTournamentCatalogId(
+      this.consts.type,
+      this.consts.yearStart,
+      this.consts.yearEnd,
+    );
+    const calculate = (forecast?: Parameters<typeof calculateTourInsights>[0]['forecast']) =>
+      calculateTourInsights({
+        tournamentId,
+        tour,
+        lastTour: this.lastTour,
+        stageName: stage.name,
+        leagueName: league.name,
+        profileIds: league.profiles,
+        matches: this.currentLeagueMatches[relativeTourIndex] || [],
+        profiles: this.profilesDetails,
+        sportPlayers: this.sportPlayersByTour[tour] || [],
+        drawGap: this.consts.drawGap || 0,
+        forecast,
+        capabilities: { playerScores: false, played: false },
+      });
+
+    this.tourInsights = calculate();
+    if (tour > this.lastTour) return;
+    this.insightsForecastSubscription = this.matchForecastService
+      .loadTourSnapshot(tournamentId, tour)
+      .subscribe(snapshot => this.tourInsights = calculate(snapshot));
   }
 
   sortStandings(a: IProfileDetails, b: IProfileDetails): number {

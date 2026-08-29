@@ -7,6 +7,7 @@ export interface IActiveCompetitionTabs {
   confTabId: number;
   tourId: number;
   cupTourId: number;
+  tourView: 'matches' | 'insights';
 }
 
 export interface IProfileDetails {

@@ -108,7 +108,20 @@
         (keydown.enter)="setTourId(i+1)"
       >{{ i + 1 }}</li>
     </ul>
+    <div class="tour-view-toggle" role="group" aria-label="Режим просмотра тура">
+      <button
+        type="button"
+        [class.active]="activeTabs.tourView === 'matches'"
+        [attr.aria-pressed]="activeTabs.tourView === 'matches'"
+        (click)="setTourView('matches')">Матчи</button>
+      <button
+        type="button"
+        [class.active]="activeTabs.tourView === 'insights'"
+        [attr.aria-pressed]="activeTabs.tourView === 'insights'"
+        (click)="setTourView('insights')">Статистика тура</button>
+    </div>
     <app-matches
+      *ngIf="activeTabs.tourView === 'matches'"
       [profilesArr]="unitedProfiles"
       [currentLeagueMatches]="currentLeagueMatches"
       [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
@@ -116,6 +129,13 @@
       [activeTabs]="activeTabs"
       (matchOpen)="openMatchCenter($event)"
     ></app-matches>
+    <app-tour-insights
+      *ngIf="activeTabs.tourView === 'insights' && tourInsights as insights"
+      [insights]="insights"
+      [yearStart]="consts.yearStart"
+      [yearEnd]="consts.yearEnd"
+      (matchOpen)="openMatchCenter($event)">
+    </app-tour-insights>
   </div>
 
   <!-- Участники конференции -->

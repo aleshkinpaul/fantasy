@@ -1,5 +1,6 @@
 import { SportPlayer } from '../competition/models/competition.models';
 import { IProfileDetails, IRoster } from '../models/domain';
+import { getRosterChanges, getRosterSelection } from '../tour-insights/roster-selectors';
 import { MatchCenterPlayer, MatchCenterTeam } from './match-center.models';
 
 const POSITION_LABELS: Record<string, string> = {
@@ -21,14 +22,15 @@ export function buildMatchCenterTeam(
   tour: number,
   sportPlayers: SportPlayer[],
 ): MatchCenterTeam {
-  const roster = profile.team.rosters_by_tour[tour];
-  if (!roster) {
+  const selection = getRosterSelection(profile, tour);
+  if (!selection) {
     return { profile, base: [], bench: [], hasRoster: false };
   }
 
+  const roster = selection.roster;
   const playersById = new Map(sportPlayers.map(player => [player.id, player]));
-  const newPlayerIds = getNewPlayerIds(profile, tour);
-  const base = roster.players.base
+  const newPlayerIds = new Set(getRosterChanges(profile, tour)?.added || []);
+  const base = selection.base
     .map(playerId => buildPlayer(playerId, false, roster, playersById, newPlayerIds))
     .sort((left, right) => getPositionOrder(left.positionId) - getPositionOrder(right.positionId))
     .map((player, index, players) => ({
@@ -40,7 +42,7 @@ export function buildMatchCenterTeam(
     profile,
     teamCost: Number.isFinite(Number(roster.team_cost)) ? Number(roster.team_cost) : undefined,
     base,
-    bench: roster.players.bench.map(playerId =>
+    bench: selection.bench.map(playerId =>
       buildPlayer(playerId, true, roster, playersById, newPlayerIds)),
     hasRoster: true,
   };
@@ -67,21 +69,6 @@ function buildPlayer(
     isViceCaptain: roster.vice_captain_id === playerId,
     isBench,
   };
-}
-
-function getNewPlayerIds(profile: IProfileDetails, tour: number): Set<string> {
-  const currentRoster = profile.team.rosters_by_tour[tour];
-  const previousRoster = profile.team.rosters_by_tour[tour - 1];
-  if (!currentRoster || !previousRoster) return new Set<string>();
-
-  const previousPlayers = new Set([
-    ...previousRoster.players.base,
-    ...previousRoster.players.bench,
-  ]);
-  return new Set(
-    [...currentRoster.players.base, ...currentRoster.players.bench]
-      .filter(playerId => !previousPlayers.has(playerId)),
-  );
 }
 
 function getPositionOrder(positionId?: string): number {

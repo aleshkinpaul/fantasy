@@ -1,0 +1,242 @@
+<section class="tour-insights" [attr.aria-label]="'Статистика ' + insights.context.tour + ' тура'">
+  <header class="insights-header">
+    <div>
+      <span class="section-caption">Обзор тура</span>
+      <h3>{{ insights.context.tour }} тур · {{ insights.context.leagueName }}</h3>
+      <p>{{ insights.context.stageName }} · {{ insights.context.teamsCount }} команд</p>
+    </div>
+
+    <div class="coverage" *ngIf="insights.status === 'ready'">
+      <span>{{ insights.coverage.scoredTeams }}/{{ insights.context.teamsCount }} результатов</span>
+      <span>{{ insights.coverage.loadedRosters }}/{{ insights.context.teamsCount }} составов</span>
+      <span *ngIf="insights.coverage.identifiedPlayerSlots < insights.coverage.selectedPlayerSlots">
+        {{ insights.coverage.identifiedPlayerSlots }}/{{ insights.coverage.selectedPlayerSlots }} игроков распознано
+      </span>
+    </div>
+  </header>
+
+  <div class="insights-empty" *ngIf="insights.status === 'upcoming'">
+    <span class="empty-icon" aria-hidden="true">⌛</span>
+    <div>
+      <h4>Статистика появится после завершения тура</h4>
+      <p>Будущие результаты и выборы участников не рассчитываются заранее.</p>
+    </div>
+  </div>
+
+  <div class="insights-empty" *ngIf="insights.status === 'unavailable'">
+    <span class="empty-icon" aria-hidden="true">i</span>
+    <div>
+      <h4>Недостаточно данных для обзора</h4>
+      <p>Проверьте результаты и составы выбранной лиги за этот тур.</p>
+    </div>
+  </div>
+
+  <div class="insights-sections" *ngIf="insights.status === 'ready'">
+    <details class="insight-section" open>
+      <summary>
+        <span class="summary-icon team-icon" aria-hidden="true">ФО</span>
+        <span><strong>Команды</strong><small>Результаты относительно соперников и медианы лиги</small></span>
+      </summary>
+
+      <div class="section-body metric-grid">
+        <article class="metric-card">
+          <div class="metric-heading">
+            <h4>Топ по ФО</h4>
+            <span *ngIf="insights.teams.medianScore !== undefined">Медиана {{ insights.teams.medianScore }}</span>
+          </div>
+          <ng-container *ngTemplateOutlet="teamRanking; context: { items: insights.teams.topScores, mode: 'score' }"></ng-container>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Выше медианы</h4><span>Разница ФО</span></div>
+          <ng-container *ngTemplateOutlet="teamRanking; context: { items: insights.teams.aboveMedian, mode: 'delta' }"></ng-container>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Ниже медианы</h4><span>Разница ФО</span></div>
+          <ng-container *ngTemplateOutlet="teamRanking; context: { items: insights.teams.belowMedian, mode: 'delta' }"></ng-container>
+        </article>
+
+        <article class="metric-card facts-card">
+          <h4>Факты тура</h4>
+          <div class="fact" *ngIf="insights.teams.highestScoringLoser as item">
+            <span>Самое результативное поражение</span>
+            <strong>{{ item.team.teamTitle }} · {{ item.value }} ФО</strong>
+          </div>
+          <div class="fact" *ngIf="insights.teams.lowestScoringWinner as item">
+            <span>Самая экономная победа</span>
+            <strong>{{ item.team.teamTitle }} · {{ item.value }} ФО</strong>
+          </div>
+        </article>
+      </div>
+    </details>
+
+    <details class="insight-section" open>
+      <summary>
+        <span class="summary-icon match-icon" aria-hidden="true">VS</span>
+        <span><strong>Матчи</strong><small>Результативность, плотность счета и неожиданные исходы</small></span>
+      </summary>
+
+      <div class="section-body metric-grid">
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Самые результативные</h4><span>Сумма ФО</span></div>
+          <ng-container *ngTemplateOutlet="matchRanking; context: { items: insights.matches.mostProductive, mode: 'sum' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Самые упорные</h4><span>Разница ФО</span></div>
+          <ng-container *ngTemplateOutlet="matchRanking; context: { items: insights.matches.closest, mode: 'difference' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Крупнейшие победы</h4><span>Разница ФО</span></div>
+          <ng-container *ngTemplateOutlet="matchRanking; context: { items: insights.matches.biggestWins, mode: 'difference' }"></ng-container>
+        </article>
+        <article class="metric-card" *ngIf="insights.matches.biggestUpsets.length">
+          <div class="metric-heading"><h4>Неожиданные победы</h4><span>Шанс победителя</span></div>
+          <ng-container *ngTemplateOutlet="matchRanking; context: { items: insights.matches.biggestUpsets, mode: 'probability' }"></ng-container>
+        </article>
+      </div>
+    </details>
+
+    <details class="insight-section">
+      <summary>
+        <span class="summary-icon player-icon" aria-hidden="true">11</span>
+        <span><strong>Выбор футболистов</strong><small>Популярность, капитаны и трансферные волны</small></span>
+      </summary>
+
+      <div class="section-body metric-grid">
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Во всех составах</h4><span>Из загруженных команд</span></div>
+          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostPopular, mode: 'usage', key: 'popular' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>В основе</h4><span>Стартовые 11</span></div>
+          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostPopularBase, mode: 'usage', key: 'base' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Капитаны</h4><span>Назначений</span></div>
+          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostPopularCaptains, mode: 'usage', key: 'captains' }"></ng-container>
+        </article>
+        <article class="metric-card" *ngIf="insights.players.mostAdded.length">
+          <div class="metric-heading"><h4>Волна покупок</h4><span>Добавили в туре</span></div>
+          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostAdded, mode: 'change', key: 'added' }"></ng-container>
+        </article>
+        <article class="metric-card" *ngIf="insights.players.mostDropped.length">
+          <div class="metric-heading"><h4>Волна продаж</h4><span>Убрали из состава</span></div>
+          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostDropped, mode: 'change', key: 'dropped' }"></ng-container>
+        </article>
+        <article class="metric-card" *ngIf="insights.players.popularClubs.length">
+          <div class="metric-heading"><h4>Популярные клубы</h4><span>Доля всех слотов</span></div>
+          <ol class="metric-list">
+            <li *ngFor="let item of insights.players.popularClubs">
+              <span class="rank">{{ item.rank }}</span>
+              <span class="club-logo">
+                <img [src]="getRealClubLogo(item.realTeamId)" alt="" (error)="hideBrokenImage($event)">
+              </span>
+              <span class="row-copy"><strong>Клуб #{{ item.realTeamId }}</strong><small>{{ item.baseCount }} раз в основе</small></span>
+              <span class="metric-value">{{ item.count }} <small>{{ item.share }}%</small></span>
+            </li>
+          </ol>
+        </article>
+      </div>
+    </details>
+
+    <details class="insight-section">
+      <summary>
+        <span class="summary-icon manager-icon" aria-hidden="true">M</span>
+        <span><strong>Решения участников</strong><small>Активность и отличие от шаблона лиги</small></span>
+      </summary>
+
+      <div class="section-body metric-grid">
+        <article class="metric-card" *ngIf="insights.participants.mostActive.length">
+          <div class="metric-heading"><h4>Самые активные</h4><span>Новых игроков</span></div>
+          <ng-container *ngTemplateOutlet="participantRanking; context: { items: insights.participants.mostActive, mode: 'count' }"></ng-container>
+        </article>
+        <article class="metric-card" *ngIf="insights.participants.mostStable.length">
+          <div class="metric-heading"><h4>Самые стабильные</h4><span>Новых игроков</span></div>
+          <ng-container *ngTemplateOutlet="participantRanking; context: { items: insights.participants.mostStable, mode: 'count' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Самые оригинальные</h4><span>Средняя популярность</span></div>
+          <ng-container *ngTemplateOutlet="participantRanking; context: { items: insights.participants.mostOriginal, mode: 'percent' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Самые шаблонные</h4><span>Средняя популярность</span></div>
+          <ng-container *ngTemplateOutlet="participantRanking; context: { items: insights.participants.mostTemplate, mode: 'percent' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Оригинальная основа</h4><span>Средняя популярность</span></div>
+          <ng-container *ngTemplateOutlet="participantRanking; context: { items: insights.participants.mostOriginalBase, mode: 'percent' }"></ng-container>
+        </article>
+        <article class="metric-card">
+          <div class="metric-heading"><h4>Уникальные выборы</h4><span>Только у одной команды</span></div>
+          <ng-container *ngTemplateOutlet="participantRanking; context: { items: insights.participants.mostUniquePicks, mode: 'count' }"></ng-container>
+        </article>
+      </div>
+    </details>
+  </div>
+</section>
+
+<ng-template #teamRanking let-items="items" let-mode="mode">
+  <ol class="metric-list">
+    <li *ngFor="let item of items">
+      <span class="rank">{{ item.rank }}</span>
+      <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
+      <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
+      <span class="metric-value" [class.negative]="mode === 'delta' && item.delta < 0">
+        <ng-container *ngIf="mode === 'score'; else deltaValue">{{ item.value }} <small>ФО</small></ng-container>
+        <ng-template #deltaValue>{{ item.delta > 0 ? '+' : '' }}{{ item.delta }}</ng-template>
+      </span>
+    </li>
+  </ol>
+</ng-template>
+
+<ng-template #matchRanking let-items="items" let-mode="mode">
+  <ol class="metric-list match-list">
+    <li *ngFor="let item of items">
+      <span class="rank">{{ item.rank }}</span>
+      <button type="button" class="match-row" (click)="openMatch(item)">
+        <span class="match-teams">
+          <strong>{{ item.home.teamTitle }}</strong>
+          <small>{{ item.away.teamTitle }}</small>
+        </span>
+        <span class="match-score">{{ item.homeScore }}:{{ item.awayScore }}</span>
+        <span class="metric-value" *ngIf="mode === 'sum'">Σ {{ item.combinedScore }}</span>
+        <span class="metric-value" *ngIf="mode === 'difference'">Δ {{ item.difference }}</span>
+        <span class="metric-value" *ngIf="mode === 'probability'">{{ item.winnerProbability }}%</span>
+      </button>
+    </li>
+  </ol>
+</ng-template>
+
+<ng-template #playerRanking let-items="items" let-mode="mode" let-key="key">
+  <ol class="metric-list">
+    <li *ngFor="let item of visiblePlayerItems(items, key)">
+      <span class="rank">{{ item.rank }}</span>
+      <span class="position-badge" [attr.data-position]="item.player.positionId">{{ getPositionLabel(item.player.positionId) }}</span>
+      <span class="club-logo" *ngIf="item.player.realTeamId">
+        <img [src]="getRealClubLogo(item.player.realTeamId)" alt="" (error)="hideBrokenImage($event)">
+      </span>
+      <span class="row-copy"><strong>{{ item.player.name }}</strong><small *ngIf="mode === 'usage'">{{ item.baseCount }} в основе · {{ item.captainCount }} капитаном</small></span>
+      <span class="metric-value">{{ item.count }} <small>{{ item.share }}%</small></span>
+    </li>
+  </ol>
+  <button
+    *ngIf="items.length > 5"
+    type="button"
+    class="list-toggle"
+    (click)="togglePlayerList(key)"
+  >
+    {{ expandedPlayerLists.has(key) ? 'Свернуть' : 'Показать всех · ' + items.length }}
+  </button>
+</ng-template>
+
+<ng-template #participantRanking let-items="items" let-mode="mode">
+  <ol class="metric-list">
+    <li *ngFor="let item of items">
+      <span class="rank">{{ item.rank }}</span>
+      <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
+      <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
+      <span class="metric-value">{{ item.value }}<small *ngIf="mode === 'percent'">%</small></span>
+    </li>
+  </ol>
+</ng-template>

@@ -32,18 +32,26 @@ export class MatchForecastService {
     drawGap: number;
     lastTour: number;
   }): Observable<MatchForecastView> {
+    return this.loadTourSnapshot(input.tournamentId, input.selection.tour).pipe(
+      map(snapshot => snapshot
+        ? this.getFixedForecast(snapshot, input.selection)
+        : this.getFallback(input),
+      ),
+    );
+  }
+
+  loadTourSnapshot(
+    tournamentId: string,
+    tour: number,
+  ): Observable<ForecastSnapshotFile | undefined> {
     return this.manifest$.pipe(
       switchMap(manifest => {
         const entry = manifest.snapshots.find(snapshot =>
-          snapshot.tournamentId === input.tournamentId
-          && snapshot.tour === input.selection.tour,
+          snapshot.tournamentId === tournamentId && snapshot.tour === tour,
         );
-
-        if (!entry) return of(this.getFallback(input));
-
+        if (!entry) return of(undefined);
         return this.http.get<ForecastSnapshotFile>(entry.path).pipe(
-          map(snapshot => this.getFixedForecast(snapshot, input.selection)),
-          catchError(() => of(this.getFallback(input))),
+          catchError(() => of(undefined)),
         );
       }),
     );
