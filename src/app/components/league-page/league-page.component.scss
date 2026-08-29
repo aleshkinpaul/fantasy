@@ -1,215 +1,253 @@
-@import "styles.scss";
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+$place-gold: #8a6816;
+$place-gold-bg: #f3e8c8;
+$place-silver: #5f6974;
+$place-silver-bg: #e4e8eb;
+$place-bronze: #81562f;
+$place-bronze-bg: #eee0d2;
+
+:host {
+  display: block;
+}
 
 .main-container {
-  @include main-container();
-  font-family: 'Exo2';
-  color: #fff;
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: clamp(14px, 2vw, 28px) clamp(8px, 3vw, 40px) 40px;
+  overflow-x: auto;
+  color: $color-text;
+  font-family: $font-family-base;
+  scrollbar-color: $color-border transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar { height: 8px; }
+  &::-webkit-scrollbar-thumb { background: $color-border; border-radius: $border-radius-full; }
+}
+
+.table {
+  width: 100%;
+  min-width: 920px;
+  overflow: hidden;
+  text-align: center;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+
+  th,
+  td {
+    padding: 7px 6px;
+    border-bottom: 1px solid rgba($color-border, .7);
+    font-variant-numeric: tabular-nums;
+  }
+
+  th {
+    height: 52px;
+    color: $color-text-muted;
+    background: $color-surface-blue;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: .02em;
+    white-space: nowrap;
+  }
+
+  th:first-child,
+  td:first-child {
+    width: 48px;
+    min-width: 48px;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 310px;
+    min-width: 310px;
+  }
+
+  th:last-child,
+  td:last-child {
+    width: 76px;
+    min-width: 76px;
+  }
+
+  .sub-info { min-width: 42px; font-size: $font-size-xs; }
+  .tour-info { min-width: 48px; }
+  .medals-info { min-width: 36px; }
+
+  tbody tr {
+    height: 58px;
+    background: $color-surface;
+    transition: background $transition-fast;
+
+    &:nth-child(even) { background: rgba($color-surface-muted, .33); }
+    &:hover { background: $color-surface-blue; }
+    &:last-child td { border-bottom: 0; }
+  }
+}
+
+.align-left {
+  padding-left: 12px !important;
+  text-align: left;
+}
+
+.item-name-container {
+  text-align: left;
+
+  .team-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+
+    &:focus-visible { @include focus-ring; }
+  }
+
+  .item-team-container {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .logo-container {
+    @include logo-well(42px, 10px);
+  }
+
+  .team-container {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .team-name,
+  .person-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .team-name { color: $color-text; font-size: $font-size-sm; font-weight: $font-weight-semibold; }
+  .person-name { color: $color-text-muted; font-size: $font-size-xs; }
+}
+
+.table-row {
+  > td:first-child,
+  > td:last-child {
+    > span:not(.diff-elem) {
+      display: grid;
+      min-width: 32px;
+      min-height: 32px;
+      padding: 3px 6px;
+      place-items: center;
+      color: $color-primary;
+      background: $color-surface-blue;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-bold;
+    }
+
+    &.first > span:not(.diff-elem) { color: $place-gold; background: $place-gold-bg; }
+    &.second > span:not(.diff-elem) { color: $place-silver; background: $place-silver-bg; }
+    &.third > span:not(.diff-elem) { color: $place-bronze; background: $place-bronze-bg; }
+    &.special > span:not(.diff-elem) { color: $color-success; background: $color-success-bg; }
+  }
+
+  > td:first-child { position: relative; }
+}
+
+.diff-elem {
+  position: absolute;
+  top: 4px;
+  right: 1px;
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border-radius: $border-radius-full;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+
+  &.pos-diff { color: $color-success; background: $color-success-bg; }
+  &.neg-diff { color: $color-danger; background: $color-danger-bg; }
+}
+
+.score {
+  position: relative;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin: auto;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+
+  &.first-score::after,
+  &.second-score::after,
+  &.third-score::after {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 9px;
+    height: 9px;
+    content: '';
+    border: 2px solid $color-surface;
+    border-radius: $border-radius-full;
+  }
+
+  &.first-score::after { background: $place-gold; }
+  &.second-score::after { background: $place-silver; }
+  &.third-score::after { background: $place-bronze; }
+}
+
+.loading-spinner-container {
+  display: block;
+  min-height: 60vh;
+}
+
+@media (max-width: 700px) {
+  .main-container {
+    padding-inline: 0;
+  }
 
   .table {
-    width: 100%;
-    text-align: center;
-    border-collapse: separate;
-    border-spacing: 0 1px;
+    min-width: 870px;
+    border-inline: 0;
+    border-radius: 0;
 
-    .table-header {
-      // background: linear-gradient(90deg,$header-bg-color 0%, #d6615d 56%, $header-bg-color 100%);
-
-      th:last-child {
-        width: calc(2 * $row-height - 30px);
-        @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
-        @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
-        @media (max-width: 450px) { width: calc(2 * $row-height - 50px) !important; }
-      }
+    th:first-child,
+    td:first-child,
+    th:nth-child(2),
+    td:nth-child(2) {
+      position: sticky;
+      z-index: 2;
     }
 
-    .table-body {
+    th:first-child,
+    td:first-child { left: 0; }
 
-      &:before {
-        content:"@";
-        display:block;
-        line-height:5px;
-        text-indent:-99999px;
-      }
-
-      .table-row{
-        position: relative;
-        height: $row-height;
-  
-        background-color: $row-color;
-  
-        // &:nth-child(2n) {
-        //   background-color: $even-row-color;
-        // }
-
-        &:hover::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: #ffffff09;
-          cursor: pointer;
-          pointer-events: none;
-        }
-
-        td {
-          position: relative;
-
-          .score {
-            position: relative;
-
-            &.first-score::after,
-            &.second-score::after,
-            &.third-score::after {
-              content: '';
-              position: absolute;
-              left: 50%;
-              bottom: -5px;
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-
-              transform: translateX(-50%);
-            }
-
-            &.first-score::after  { background-color: $first-place-bg-color; color: $first-place-font-color !important; border-color: $first-place-font-color !important; }
-            &.second-score::after { background-color: $second-place-bg-color; color: $second-place-font-color !important; border-color: $second-place-font-color !important; }
-            &.third-score::after  { background-color: $third-place-bg-color; color: $third-place-font-color !important; border-color: $third-place-font-color !important; }
-          }
-
-          &:first-child,
-          &:last-child {
-    
-            span {
-              display: block;}
-            &.second-score::after { background-color: $second-place-bg-color; }
-            &.third-score::after  {
-              background-color: $third-place-bg-color;
-              line-height: calc($row-height - 10px);
-
-              align-self: center;
-              text-align: center;
-              vertical-align: middle;
-
-              color: $label-font-color;
-              background-color: $label-bg-color;
-            }
-          }
-
-          &:first-child{
-            width: $row-height;
-            height: $row-height;
-          }
-    
-          &:last-child {
-            width: calc(2 * $row-height - 20px);
-            height: $row-height;
-
-            box-sizing: border-box;
-
-            @media (max-width: 900px) {
-              width: calc(2 * $row-height - 40px);
-            }
-
-
-            @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
-            @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
-            @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
-
-            span {
-              width: calc(2 * $row-height - 20px);
-              @media (max-width: 900px) { width: calc(2 * $row-height - 40px); }
-              @media (max-width: 600px) { width: calc(2 * $row-height - 45px); }
-              @media (max-width: 450px) { width: calc(2 * $row-height - 50px); }
-              color: $first-place-font-color;
-              background-color: $first-place-bg-color;
-            }
-
-            &.second span { color: $second-place-font-color; background-color: $second-place-bg-color; }
-            &.third span { color: $third-place-font-color; background-color: $third-place-bg-color; }
-            &.special span { color: $special-place-font-color; background-color: $special-place-bg-color; }
-
-            &.neg-diff {
-              color: $negative-font-color;
-              background-color: $negative-bg-color;
-            }
-          }
-        }
-      }
-  
-      .item-name-container {
-        padding-left: 5px;
-        height: $row-height;
-  
-        @include flex-row($space-10px);
-        align-items: center;
-  
-        font-family: "Exo2";
-
-        .team-link {
-          width: 100%;
-          color: inherit;
-          text-decoration: none;
-
-          &:hover {
-            opacity: .8;
-            cursor: pointer;
-          }
-        }
-
-        .item-team-container {
-          @include flex-row($space-10px);
-          align-items: center;
-  
-          .logo-container {
-            width: $logo-size;
-            // height: $logo-size;
-          
-            @include flex-row(0);
-            align-items: center;
-            box-sizing: border-box;
-    
-            .logo-img {
-              width: $logo-size;
-              height: $logo-size;
-            }
-          }
-    
-          .team-container {
-            @include flex-column(0);
-    
-            .team-name {
-              display: block;
-              width: 100%;
-      
-              align-self: left;
-              text-align: left;
-            }
-    
-            .person-name {
-              opacity: .7;
-      
-              align-self: left;
-              text-align: left;
-            }
-          }
-        }
-      }
+    th:nth-child(2),
+    td:nth-child(2) {
+      left: 48px;
+      width: 210px;
+      min-width: 210px;
+      box-shadow: 7px 0 12px -12px rgba($color-text, .75);
     }
-  }
 
-  .loading-spinner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-  }
+    th:first-child,
+    th:nth-child(2) { z-index: 4; background: $color-surface-blue; }
 
-  .align-left {
-    padding-left: 5px;
-    text-align: left;
+    tbody td:first-child,
+    tbody td:nth-child(2) { background: $color-surface; }
+
+    tbody tr:nth-child(even) td:first-child,
+    tbody tr:nth-child(even) td:nth-child(2) { background: mix($color-surface-muted, $color-surface, 33%); }
+
+    tbody tr:hover td:first-child,
+    tbody tr:hover td:nth-child(2) { background: $color-surface-blue; }
   }
 }
