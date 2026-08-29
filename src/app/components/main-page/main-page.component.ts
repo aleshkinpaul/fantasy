@@ -1,19 +1,54 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, catchError, of } from 'rxjs';
+
+import { TournamentTimelineGroup, TournamentTimelineItem } from '../../models/tournament-catalog';
+import { TournamentCatalogService } from '../../service/tournament-catalog.service';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent]
+  imports: [CommonModule]
 })
 export class MainPageComponent {
-  constructor(private router: Router) {}
+  readonly timeline$: Observable<TournamentTimelineGroup[]>;
+  loadError = false;
 
-  goToUrl(url) {
-    this.router.navigateByUrl(url);
+  constructor(
+    private readonly router: Router,
+    catalogService: TournamentCatalogService
+  ) {
+    this.timeline$ = catalogService.loadTimeline().pipe(
+      catchError(error => {
+        console.error('Failed to load tournament catalog', error);
+        this.loadError = true;
+        return of([]);
+      })
+    );
+  }
+
+  openTournament(event: MouseEvent, tournament: TournamentTimelineItem): void {
+    if (tournament.status === 'scheduled') {
+      event.preventDefault();
+      return;
+    }
+
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    event.preventDefault();
+    void this.router.navigateByUrl(tournament.route);
+  }
+
+  trackSeason(_index: number, season: TournamentTimelineGroup): string {
+    return season.period;
+  }
+
+  trackTournament(_index: number, tournament: TournamentTimelineItem): string {
+    return tournament.id;
   }
 }

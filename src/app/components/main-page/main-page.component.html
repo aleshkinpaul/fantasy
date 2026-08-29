@@ -1,10 +1,58 @@
-<div class="navigation-container">
-  <div class="wc-button button" role="button" tabindex="0" (click)="goToUrl('world-cup/new?year=2025')" (keydown.enter)="goToUrl('world-cup/new?year=2025')">ЧМ 2026</div>
-  <div class="spain-button button" role="button" tabindex="0" (click)="goToUrl('spain/new?year=2026')" (keydown.enter)="goToUrl('spain/new?year=2026')">Ла Лига 2026/27</div>
-  <div class="ucl-button button" role="button" tabindex="0" (click)="goToUrl('champions-league/new?year=2025')" (keydown.enter)="goToUrl('champions-league/new?year=2025')">Лига Чемпионов 2025/26</div>
-  <h2>Архивные лиги:</h2>
-  <div class="spain-button button archive" role="button" tabindex="0" (click)="goToUrl('spain/new?year=2025')" (keydown.enter)="goToUrl('spain/new?year=2025')">Ла Лига 2025/26</div>
-  <div class="spain-button button archive" role="button" tabindex="0" (click)="goToUrl('spain?year=2024')" (keydown.enter)="goToUrl('spain?year=2024')">Ла Лига 2024/25</div>
-  <div class="ucl-button button archive" role="button" tabindex="0" (click)="goToUrl('champions-league?year=2024')" (keydown.enter)="goToUrl('champions-league?year=2024')">Лига Чемпионов 2024/25</div>
-  <div class="cwc-button button archive" role="button" tabindex="0" (click)="goToUrl('club-world-cup?year=2024')" (keydown.enter)="goToUrl('club-world-cup?year=2024')">Клубный Чемпионат Мира 25</div>
-</div>
+<main class="timeline-page">
+  <header class="page-intro">
+    <p class="eyebrow">FR Fantasy</p>
+    <h1>Турниры</h1>
+    <p class="intro-text">Все соревнования сообщества — от текущего сезона до архивных розыгрышей.</p>
+  </header>
+
+  <ng-container *ngIf="timeline$ | async as seasons">
+    <section
+      class="season-group"
+      *ngFor="let season of seasons; trackBy: trackSeason"
+      [attr.aria-labelledby]="'season-' + season.yearStart">
+      <div class="season-heading">
+        <p class="season-caption">Сезон</p>
+        <h2 [id]="'season-' + season.yearStart">{{ season.period }}</h2>
+      </div>
+
+      <div class="tournament-list">
+        <a
+          class="tournament-card"
+          *ngFor="let tournament of season.tournaments; trackBy: trackTournament"
+          [class.is-active]="tournament.status === 'active'"
+          [class.is-scheduled]="tournament.status === 'scheduled'"
+          [class.is-archive]="tournament.isArchive"
+          [attr.href]="tournament.status === 'scheduled' ? null : tournament.route"
+          [attr.aria-disabled]="tournament.status === 'scheduled' ? true : null"
+          [attr.tabindex]="tournament.status === 'scheduled' ? -1 : null"
+          (click)="openTournament($event, tournament)">
+          <span class="timeline-marker" aria-hidden="true">{{ tournament.shortLabel }}</span>
+
+          <span class="card-body">
+            <span class="card-meta">
+              <span class="kind-label">{{ tournament.kindLabel }}</span>
+              <span class="status-badge">{{ tournament.statusLabel }}</span>
+            </span>
+            <strong class="tournament-title">{{ tournament.title }}</strong>
+            <span class="tournament-description" *ngIf="tournament.description">
+              {{ tournament.description }}
+            </span>
+          </span>
+
+          <span class="card-action" aria-hidden="true">
+            <ng-container *ngIf="tournament.status !== 'scheduled'; else comingSoon">→</ng-container>
+            <ng-template #comingSoon>Скоро</ng-template>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="state-card error-state" *ngIf="loadError" role="alert">
+      Не удалось загрузить список турниров. Обновите страницу, чтобы попробовать ещё раз.
+    </div>
+
+    <div class="state-card" *ngIf="!loadError && seasons.length === 0">
+      Турниры пока не добавлены.
+    </div>
+  </ng-container>
+</main>

@@ -1,63 +1,333 @@
-@import "styles.scss";
+@import "variables.scss";
+@import "mixins.scss";
 
-.navigation-container {
-  @include flex-column($space-sm);
-  width: min(100% - 24px, 620px);
-  min-height: calc(100vh - 76px);
+.timeline-page {
+  width: calc(100% - 40px);
+  max-width: 980px;
   margin: 0 auto;
-  padding: 48px 0;
-  justify-content: center;
+  padding: 54px 0 80px;
+}
 
-  h2 {
-    margin: 28px 0 6px;
-    font-size: $font-size-xl;
-    color: $color-text;
-    text-align: center;
+.page-intro {
+  max-width: 640px;
+  margin-bottom: 48px;
+
+  .eyebrow {
+    margin-bottom: $space-sm;
+    color: $color-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  .button {
-    width: 100%;
-    min-height: 52px;
-    padding: 14px 18px;
-    color: #fff;
-    background: $color-primary;
-    border: 1px solid $color-primary;
-    border-radius: $border-radius-lg;
-    box-shadow: $shadow-sm;
+  h1 {
+    color: $color-text;
+    font-family: $font-family-brand;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.08;
+  }
+
+  .intro-text {
+    margin-top: $space-md;
+    color: $color-text-muted;
+    font-size: $font-size-lg;
+  }
+}
+
+.season-group {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 32px;
+  margin-top: 42px;
+}
+
+.season-heading {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  padding-top: 3px;
+
+  .season-caption {
+    color: $color-text-muted;
+    font-size: $font-size-xs;
     font-weight: $font-weight-semibold;
-    text-align: center;
-    cursor: pointer;
-    transition: background $transition-fast, border-color $transition-fast,
-      transform $transition-fast, box-shadow $transition-fast;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
 
-    &:hover {
-      background: $color-primary-hover;
-      border-color: $color-primary-hover;
-      box-shadow: $shadow-md;
-      transform: translateY(-1px);
+  h2 {
+    margin-top: 2px;
+    color: $color-primary-hover;
+    font-family: $font-family-brand;
+    font-size: $font-size-xl;
+    white-space: nowrap;
+  }
+}
+
+.tournament-list {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding-left: 34px;
+
+  &::before {
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 12px;
+    width: 2px;
+    content: '';
+    background: $color-border;
+    border-radius: $border-radius-full;
+  }
+}
+
+.tournament-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: $space-lg;
+  min-height: 124px;
+  padding: 22px 24px;
+  color: $color-text;
+  text-decoration: none;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+  transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+
+  &:not(.is-scheduled):hover {
+    border-color: rgba($color-primary, 0.45);
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+
+    .card-action {
+      color: $color-primary-hover;
+      transform: translateX(3px);
+    }
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &.is-active {
+    background: linear-gradient(135deg, $color-surface 30%, $color-surface-blue 100%);
+    border-color: rgba($color-primary, 0.55);
+    box-shadow: $shadow-md;
+
+    .timeline-marker {
+      color: #fff;
+      background: $color-primary;
+      border-color: $color-primary;
     }
 
-    &:focus-visible {
-      @include focus-ring;
+    .status-badge {
+      color: $color-success;
+      background: $color-success-bg;
+    }
+  }
+
+  &.is-scheduled {
+    cursor: default;
+    background: rgba($color-surface-beige, 0.55);
+    border-style: dashed;
+
+    .timeline-marker {
+      color: $color-warning;
+      background: $color-warning-bg;
+      border-color: rgba($color-warning, 0.35);
     }
 
-    &.archive {
-      color: $color-primary;
-      background: $color-surface;
+    .status-badge {
+      color: $color-warning;
+      background: $color-warning-bg;
+    }
+  }
+
+  &.is-archive {
+    color: $color-text-muted;
+    background: rgba($color-surface-muted, 0.52);
+    border-color: rgba($color-border, 0.85);
+    box-shadow: none;
+
+    .timeline-marker {
+      color: $color-neutral;
+      background: $color-neutral-bg;
       border-color: $color-border;
-      box-shadow: none;
+    }
 
-      &:hover {
-        background: $color-surface-blue;
-        border-color: rgba($color-primary, 0.35);
-      }
+    .kind-label,
+    .tournament-description {
+      color: $color-text-muted;
+    }
+
+    .status-badge {
+      color: $color-neutral;
+      background: $color-neutral-bg;
     }
   }
 }
 
-@include respond-max($bp-sm) {
-  .navigation-container {
-    min-height: calc(100vh - 56px);
-    padding: 24px 0;
+.timeline-marker {
+  position: absolute;
+  top: 50%;
+  left: -48px;
+  z-index: 1;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  color: $color-primary;
+  background: $color-surface-blue;
+  border: 4px solid $color-canvas;
+  border-radius: 50%;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  transform: translateY(-50%);
+}
+
+.card-body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  overflow-wrap: anywhere;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+}
+
+.kind-label {
+  color: $color-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  padding: 3px 8px;
+  color: $color-neutral;
+  background: $color-neutral-bg;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  line-height: 1.25;
+}
+
+.tournament-title {
+  font-size: $font-size-xl;
+  line-height: 1.25;
+}
+
+.tournament-description {
+  margin-top: 6px;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}
+
+.card-action {
+  align-self: center;
+  color: $color-primary;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  transition: color $transition-fast, transform $transition-fast;
+
+  .is-scheduled & {
+    color: $color-warning;
+    font-size: $font-size-sm;
+  }
+}
+
+.state-card {
+  padding: $space-lg;
+  color: $color-text-muted;
+  text-align: center;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+
+  &.error-state {
+    color: $color-danger;
+    background: $color-danger-bg;
+    border-color: rgba($color-danger, 0.25);
+  }
+}
+
+@media (max-width: 600px) {
+  .timeline-page {
+    width: calc(100% - 24px);
+    padding: 32px 0 56px;
+  }
+
+  .page-intro {
+    margin-bottom: 34px;
+
+    .intro-text {
+      font-size: $font-size-base;
+    }
+  }
+
+  .season-group {
+    display: block;
+    margin-top: 36px;
+  }
+
+  .season-heading {
+    position: static;
+    margin-bottom: 16px;
+
+    h2 {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .tournament-list {
+    gap: 12px;
+    padding-left: 25px;
+
+    &::before {
+      left: 7px;
+    }
+  }
+
+  .tournament-card {
+    min-height: 108px;
+    padding: 18px 16px 18px 20px;
+    gap: 12px;
+    border-radius: $border-radius-lg;
+  }
+
+  .timeline-marker {
+    left: -38px;
+    width: 42px;
+    height: 42px;
+    border-width: 3px;
+    font-size: 11px;
+  }
+
+  .card-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .tournament-title {
+    font-size: $font-size-lg;
+  }
+
+  .card-action {
+    font-size: $font-size-xl;
+
+    .is-scheduled & {
+      display: none;
+    }
   }
 }

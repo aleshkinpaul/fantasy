@@ -28,13 +28,7 @@ interface TournamentCatalogItem {
   title: string;
   route: string;
   status: 'scheduled' | 'active' | 'completed';
-  startsAt?: string;
-  endsAt?: string;
-  logo?: string;
-  source?: {
-    competitionType?: string;
-    seasonYear?: number;
-  };
+  description?: string;
 }
 ```
 
@@ -82,6 +76,8 @@ src/assets/data/forecasts/{tournamentId}/tour-{tour}.json
 
 ## 1. Таймлайн турниров на главной странице
 
+**Статус:** реализовано 29 августа 2026 года.
+
 ### Пользовательский сценарий
 
 Главная страница показывает вертикальный таймлайн от новых периодов к старым. Каждый период имеет отдельный заголовок, например `2026–27`, и собственную группу турниров.
@@ -101,7 +97,7 @@ src/assets/data/forecasts/{tournamentId}/tour-{tour}.json
 2. Перенести все ссылки из `main-page.component.html` в каталог.
 3. Добавить проверку уникальности `id`, корректности route, периода, статуса и порядка.
 4. Построить view model: сортировка периодов по `yearStart` убыванию, турниров — по `kind`.
-5. Заменить набор кнопок компонентами `TournamentTimelineComponent` и `TournamentTimelineItemComponent`.
+5. Заменить набор кнопок динамической разметкой таймлайна в `MainPageComponent`.
 6. Добавить desktop-таймлайн и компактную mobile-версию.
 7. Для Кубка использовать ссылку на кубковую вкладку соответствующей Ла Лиги, пока у него нет отдельной страницы.
 

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "la-liga-2026-27",
+    "period": "2026–27",
+    "yearStart": 2026,
+    "kind": "la-liga",
+    "title": "Ла Лига 2026/27",
+    "route": "/spain/new?year=2026",
+    "status": "active",
+    "description": "48 участников · конференции Анчелотти, Муньоса и Зидана"
+  },
+  {
+    "id": "la-liga-cup-2026-27",
+    "period": "2026–27",
+    "yearStart": 2026,
+    "kind": "cup",
+    "title": "Кубок Ла Лиги 2026/27",
+    "route": "/spain/new?year=2026&tabId=5",
+    "status": "scheduled",
+    "description": "Старт после публикации расписания кубковых матчей"
+  },
+  {
+    "id": "la-liga-2025-26",
+    "period": "2025–26",
+    "yearStart": 2025,
+    "kind": "la-liga",
+    "title": "Ла Лига 2025/26",
+    "route": "/spain/new?year=2025",
+    "status": "completed",
+    "description": "Apertura и Clausura"
+  },
+  {
+    "id": "la-liga-cup-2025-26",
+    "period": "2025–26",
+    "yearStart": 2025,
+    "kind": "cup",
+    "title": "Кубок Ла Лиги 2025/26",
+    "route": "/spain/new?year=2025&tabId=5",
+    "status": "completed",
+    "description": "Кубковая сетка сезона"
+  },
+  {
+    "id": "champions-league-2025-26",
+    "period": "2025–26",
+    "yearStart": 2025,
+    "kind": "champions-league",
+    "title": "Лига чемпионов 2025/26",
+    "route": "/champions-league/new?year=2025",
+    "status": "completed",
+    "description": "Общий этап и плей-офф"
+  },
+  {
+    "id": "world-cup-2026",
+    "period": "2025–26",
+    "yearStart": 2025,
+    "kind": "summer",
+    "title": "Чемпионат мира 2026",
+    "route": "/world-cup/new?year=2025",
+    "status": "completed",
+    "description": "Летний турнир сборных"
+  },
+  {
+    "id": "la-liga-2024-25",
+    "period": "2024–25",
+    "yearStart": 2024,
+    "kind": "la-liga",
+    "title": "Ла Лига 2024/25",
+    "route": "/spain?year=2024",
+    "status": "completed"
+  },
+  {
+    "id": "champions-league-2024-25",
+    "period": "2024–25",
+    "yearStart": 2024,
+    "kind": "champions-league",
+    "title": "Лига чемпионов 2024/25",
+    "route": "/champions-league?year=2024",
+    "status": "completed"
+  },
+  {
+    "id": "club-world-cup-2025",
+    "period": "2024–25",
+    "yearStart": 2024,
+    "kind": "summer",
+    "title": "Клубный чемпионат мира 2025",
+    "route": "/club-world-cup?year=2024",
+    "status": "completed",
+    "description": "Командный летний турнир"
+  }
+]
