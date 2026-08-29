@@ -20,6 +20,16 @@
     "description": "Старт после публикации расписания кубковых матчей"
   },
   {
+    "id": "champions-league-2026-27",
+    "period": "2026–27",
+    "yearStart": 2026,
+    "kind": "champions-league",
+    "title": "Лига чемпионов 2026/27",
+    "route": "/champions-league/new?year=2026",
+    "status": "scheduled",
+    "description": "Турнир ещё не начался"
+  },
+  {
     "id": "la-liga-2025-26",
     "period": "2025–26",
     "yearStart": 2025,

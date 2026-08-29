@@ -41,6 +41,7 @@
     <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 1}" (click)="setConfTabId(1)" (keydown.enter)="setConfTabId(1)" id="table">Таблица</li>
     <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 2}" (click)="setConfTabId(2)" (keydown.enter)="setConfTabId(2)" id="schedule">Расписание</li>
     <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 3}" (click)="setConfTabId(3)" (keydown.enter)="setConfTabId(3)" id="matches">Матчи</li>
+    <li class="nav-item" role="button" tabindex="0" [ngClass]="{'active': activeTabs.confTabId === 4}" (click)="setConfTabId(4)" (keydown.enter)="setConfTabId(4)" id="participants">Участники</li>
   </ul>
 
   <div *ngIf="[1,2].includes(activeTabs.tabId)">
@@ -115,28 +116,46 @@
     ></app-matches>
   </div>
 
+  <!-- Участники конференции -->
+  <app-conference-participants
+    *ngIf="[1,2].includes(activeTabs.tabId) && activeTabs.confTabId === 4"
+    [profileIds]="this.consts.stages[activeTabs.tabId - 1].leagues[activeTabs.confId].profiles"
+    [profiles]="profilesDetails"
+    [competitionType]="competitionType">
+  </app-conference-participants>
+
   <!-- Матчи кубка по турам -->
-  <div class="matches-container" *ngIf="activeTabs.tabId === 5 && consts.cup as cup">
-    <ul class="tours-list">
-      <li
-        *ngFor="let tourMatches of cup.matches; index as i"
-        class="tour-item"
-        role="button"
-        tabindex="0"
-        [ngClass]="{'active': activeTabs.cupTourId === i + 1}"
-        (click)="setCupTourId(i+1)"
-        (click)="setTourId(i+1)"
-        (keydown.enter)="setCupTourId(i+1); setTourId(i+1)"
-      >{{ cup.matchesToursNames?.[i] }}</li>
-    </ul>
-    <app-matches
-      [profilesArr]="this.profilesDetails"
-      [currentLeagueMatches]="cup.matches"
-      [matchesTours]="cup.matchesTours"
-      [lastTour]="lastTour"
-      [activeTabs]="activeTabs"
-    ></app-matches>
-  </div>
+  <ng-container *ngIf="activeTabs.tabId === 5 && consts.cup as cup">
+    <section class="cup-awaiting" *ngIf="!hasCupSchedule()">
+      <span class="cup-awaiting-icon" aria-hidden="true">К</span>
+      <div>
+        <p class="cup-awaiting-caption">Кубок {{ getSeasonPeriod() }}</p>
+        <h2>Ожидается расписание</h2>
+        <p>Матчи и раунды появятся здесь после публикации кубковой сетки.</p>
+      </div>
+    </section>
+
+    <div class="matches-container" *ngIf="hasCupSchedule()">
+      <ul class="tours-list">
+        <li
+          *ngFor="let tourMatches of cup.matches; index as i"
+          class="tour-item"
+          role="button"
+          tabindex="0"
+          [ngClass]="{'active': activeTabs.cupTourId === i + 1}"
+          (click)="setCupTourId(i+1); setTourId(i+1)"
+          (keydown.enter)="setCupTourId(i+1); setTourId(i+1)"
+        >{{ cup.matchesToursNames?.[i] }}</li>
+      </ul>
+      <app-matches
+        [profilesArr]="this.profilesDetails"
+        [currentLeagueMatches]="cup.matches"
+        [matchesTours]="cup.matchesTours"
+        [lastTour]="lastTour"
+        [activeTabs]="activeTabs"
+      ></app-matches>
+    </div>
+  </ng-container>
 </div>
 <section class="load-error" *ngIf="!(isLoading$ | async) && loadError">
   <h2>Не удалось загрузить данные турнира</h2>

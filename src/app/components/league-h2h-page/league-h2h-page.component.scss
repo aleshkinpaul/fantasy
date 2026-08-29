@@ -83,6 +83,52 @@
   box-shadow: $shadow-md;
 }
 
+.cup-awaiting {
+  display: flex;
+  max-width: 720px;
+  min-height: 190px;
+  margin: 24px auto 0;
+  padding: 32px;
+  align-items: center;
+  gap: 24px;
+  color: $color-text;
+  background: linear-gradient(135deg, $color-surface 30%, rgba($color-surface-beige, 0.72));
+  border: 1px dashed rgba($color-warning, 0.5);
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+
+  h2 {
+    margin: 4px 0 8px;
+    font-size: $font-size-2xl;
+  }
+
+  p:last-child {
+    color: $color-text-muted;
+  }
+}
+
+.cup-awaiting-icon {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  flex: 0 0 78px;
+  place-items: center;
+  color: $color-warning;
+  background: $color-warning-bg;
+  border: 1px solid rgba($color-warning, 0.32);
+  border-radius: 50%;
+  font-family: $font-family-brand;
+  font-size: $font-size-2xl;
+}
+
+.cup-awaiting-caption {
+  color: $color-warning;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -251,5 +297,19 @@ a {
   .matches-container,
   .format-tab {
     padding: 12px;
+  }
+
+  .cup-awaiting {
+    padding: 24px 18px;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .cup-awaiting-icon {
+    width: 64px;
+    height: 64px;
+    flex-basis: 64px;
   }
 }

@@ -1,0 +1,26 @@
+<article class="participant-card">
+  <a
+    class="participant-link"
+    [href]="getTeamUrl()"
+    target="_blank"
+    rel="noopener noreferrer"
+    [attr.aria-label]="profile.team.title + ' — ' + profile.name + '. Открыть фэнтези-команду'">
+    <div class="logo-container">
+      <img
+        *ngIf="profile.logo && !imageFailed; else fallbackLogo"
+        [src]="profile.logo"
+        [alt]="'Логотип команды ' + profile.team.title"
+        (error)="onImageError()">
+      <ng-template #fallbackLogo>
+        <span class="logo-fallback" aria-hidden="true">{{ getInitials() }}</span>
+      </ng-template>
+    </div>
+
+    <div class="participant-caption">
+      <strong class="team-name" [title]="profile.team.title">{{ profile.team.title }}</strong>
+      <span class="participant-name" [title]="profile.name">{{ profile.name }}</span>
+    </div>
+
+    <span class="external-mark" aria-hidden="true">↗</span>
+  </a>
+</article>

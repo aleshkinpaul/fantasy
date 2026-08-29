@@ -1,0 +1,31 @@
+<section class="participants-panel" aria-labelledby="participants-heading">
+  <header class="participants-heading">
+    <div>
+      <p class="section-caption">Состав конференции</p>
+      <h3 id="participants-heading">Участники</h3>
+    </div>
+    <span class="participants-count">{{ participants.length }}</span>
+  </header>
+
+  <div class="participants-grid" *ngIf="participants.length; else emptyState">
+    <ng-container *ngFor="let participant of participants; trackBy: trackParticipant">
+      <app-participant-card
+        *ngIf="participant.profile as profile; else missingProfile"
+        [profile]="profile"
+        [competitionType]="competitionType">
+      </app-participant-card>
+
+      <ng-template #missingProfile>
+        <article class="missing-profile">
+          <span class="missing-icon" aria-hidden="true">?</span>
+          <strong>Данные участника недоступны</strong>
+          <span>ID {{ participant.profileId }}</span>
+        </article>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty-state">В этой конференции пока нет участников.</div>
+  </ng-template>
+</section>

@@ -1,0 +1,111 @@
+@import "../../styles/variables.scss";
+
+:host {
+  display: block;
+}
+
+.participants-panel {
+  margin-top: 16px;
+  padding: 24px;
+  background: $color-surface-muted;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+}
+
+.participants-heading {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+
+  h3 {
+    margin: 2px 0 0;
+    color: $color-text;
+    font-size: $font-size-2xl;
+  }
+}
+
+.section-caption {
+  color: $color-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.participants-count {
+  display: grid;
+  min-width: 38px;
+  height: 32px;
+  padding-inline: 9px;
+  place-items: center;
+  color: $color-primary-hover;
+  background: $color-surface-blue;
+  border-radius: $border-radius-full;
+  font-weight: $font-weight-bold;
+}
+
+.participants-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.missing-profile {
+  display: flex;
+  min-height: 222px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: $color-text-muted;
+  text-align: center;
+  background: rgba($color-surface, 0.7);
+  border: 1px dashed $color-border;
+  border-radius: $border-radius-xl;
+
+  span:last-child {
+    font-size: $font-size-xs;
+  }
+}
+
+.missing-icon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 6px;
+  place-items: center;
+  color: $color-neutral;
+  background: $color-neutral-bg;
+  border-radius: 50%;
+  font-family: $font-family-brand;
+  font-size: $font-size-2xl;
+}
+
+.empty-state {
+  padding: 36px 20px;
+  color: $color-text-muted;
+  text-align: center;
+  background: $color-surface;
+  border: 1px dashed $color-border;
+  border-radius: $border-radius-lg;
+}
+
+@media (max-width: 900px) {
+  .participants-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .participants-panel {
+    padding: 14px;
+  }
+
+  .participants-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
