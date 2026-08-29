@@ -94,6 +94,9 @@ fantasy/
 | Названия реальных клубов для архивной статистики | `src/assets/data/teams.json` |
 | Команды и сетка КЧМ-2025 | `teams`, `groups`, `tours` записи `club-world-cup` |
 | Турниры, сезоны, статусы и ссылки главной страницы | `src/assets/data/tournaments.json` |
+| Предматчевые котировки | `src/assets/data/forecasts/manifest.json` и snapshots по турниру/туру |
+
+Матч-центр собран в `src/app/components/match-center`, а подготовка составов и котировок — в `src/app/match-center`. Снимок будущего тура создается до его начала командой `npm run forecast:snapshot -- <type> <yearStart> <tour>` и после публикации считается неизменяемым.
 
 ## План развития
 

@@ -63,6 +63,19 @@
       min-width: 0;
     }
 
+    button.score-row {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+    }
+
     .name-container {
       @include flex-column(2px);
       width: 100%;

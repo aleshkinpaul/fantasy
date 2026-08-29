@@ -99,10 +99,23 @@
         border-color: rgba($color-neutral, 0.3);
       }
 
-      a {
+      a,
+      .opponent-button {
         display: block;
         width: 100%;
         height: 100%;
+      }
+
+      .opponent-button {
+        padding: 0;
+        background: transparent;
+        border: 0;
+        border-radius: inherit;
+        cursor: pointer;
+
+        &:focus-visible {
+          @include focus-ring;
+        }
       }
 
       .opponent {

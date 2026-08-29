@@ -2,7 +2,7 @@ import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataService } from '../../service/data.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import {
   IActiveCompetitionTabs,
   IRuntimePrize,
@@ -23,6 +23,7 @@ import {
   CompetitionType,
   FantasyFullInfoResponse,
   SeasonCompetitionConfig,
+  SportPlayer,
 } from '../../competition/models/competition.models';
 import {
   compareByFantasyScore,
@@ -30,13 +31,16 @@ import {
 } from '../../competition/domain/standings-calculator';
 import { CompetitionFacade } from '../../competition/data/competition.facade';
 import { ConferenceParticipantsComponent } from '../conference-participants/conference-participants.component';
+import { MatchCenterComponent } from '../match-center/match-center.component';
+import { MatchForecastService, getTournamentCatalogId } from '../../match-center/match-forecast.service';
+import { MatchCenterSelection, MatchForecastView } from '../../match-center/match-center.models';
 
 @Component({
   selector: 'app-league-h2h-page',
   templateUrl: './league-h2h-page.component.html',
   styleUrls: ['./league-h2h-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent, ConferenceParticipantsComponent],
+  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent, ConferenceParticipantsComponent, MatchCenterComponent],
 })
 export class LeagueH2HPageComponent implements OnInit {
   public consts!: SeasonCompetitionConfig;
@@ -60,6 +64,12 @@ export class LeagueH2HPageComponent implements OnInit {
   public chosenLeague = '';
   public competitionType!: CompetitionType;
   public loadError = false;
+  public sportPlayersByTour: Record<number, SportPlayer[]> = {};
+  public selectedMatch: MatchCenterSelection | null = null;
+  public selectedSportPlayers: SportPlayer[] = [];
+  public matchForecast: MatchForecastView | null = null;
+  public forecastLoading = false;
+  private forecastSubscription?: Subscription;
 
   public lastTour = 1;
 
@@ -72,9 +82,11 @@ export class LeagueH2HPageComponent implements OnInit {
     private router: Router,
     public loader: LoaderService,
     private competitionFacade: CompetitionFacade,
+    private matchForecastService: MatchForecastService,
     private destroyRef: DestroyRef,
   ) {
     this.isLoading$ = this.loader.isLoading$;
+    this.destroyRef.onDestroy(() => this.forecastSubscription?.unsubscribe());
   }
 
   ngOnInit(): void {
@@ -100,6 +112,7 @@ export class LeagueH2HPageComponent implements OnInit {
               this.leaguesRatings = viewModel.leaguesRatings;
               this.prizesToShow = viewModel.prizes;
               this.squadsDetails.next(viewModel.squadsDetails);
+              this.sportPlayersByTour = viewModel.sportPlayersByTour;
               this.unitedProfiles = this.profilesDetails;
 
               this.updateTabs();
@@ -277,6 +290,47 @@ export class LeagueH2HPageComponent implements OnInit {
 
   getSeasonPeriod(): string {
     return `${this.consts.yearStart}/${String(this.consts.yearEnd).slice(-2)}`;
+  }
+
+  openMatchCenter(selection: MatchCenterSelection): void {
+    this.selectedMatch = selection;
+    this.selectedSportPlayers = this.sportPlayersByTour[selection.tour]
+      || this.sportPlayersByTour[this.lastTour]
+      || [];
+    this.matchForecast = null;
+    this.forecastLoading = true;
+    this.forecastSubscription?.unsubscribe();
+    this.forecastSubscription = this.matchForecastService.resolve({
+      tournamentId: getTournamentCatalogId(
+        this.consts.type,
+        this.consts.yearStart,
+        this.consts.yearEnd,
+      ),
+      selection,
+      profiles: this.profilesDetails,
+      drawGap: this.consts.drawGap || 0,
+      lastTour: this.lastTour,
+    }).subscribe({
+      next: forecast => {
+        this.matchForecast = forecast;
+        this.forecastLoading = false;
+      },
+      error: error => {
+        logger.error('Не удалось загрузить прогноз матча:', error);
+        this.matchForecast = {
+          state: 'unavailable',
+          message: 'Котировки временно недоступны. Составы команд можно посмотреть ниже.',
+        };
+        this.forecastLoading = false;
+      },
+    });
+  }
+
+  closeMatchCenter(): void {
+    this.forecastSubscription?.unsubscribe();
+    this.selectedMatch = null;
+    this.matchForecast = null;
+    this.forecastLoading = false;
   }
 
   setQueryParam(newParam: IActiveCompetitionTabs): void {

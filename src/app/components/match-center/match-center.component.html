@@ -1,0 +1,133 @@
+<div class="match-center-backdrop" (mousedown)="closeFromBackdrop($event)">
+  <section
+    class="match-center-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="match-center-title">
+    <header class="dialog-header">
+      <div>
+        <p class="dialog-caption">Матч-центр · {{ tour }} тур</p>
+        <h2 id="match-center-title">Составы и прогноз</h2>
+      </div>
+      <button #closeButton type="button" class="close-button" (click)="close()" aria-label="Закрыть матч-центр">×</button>
+    </header>
+
+    <div class="match-hero" *ngIf="teams.length === 2">
+      <div class="hero-team home-team">
+        <div class="hero-logo"><img [src]="teams[0].profile.logo || 'assets/logos/default.png'" alt=""></div>
+        <div>
+          <strong>{{ teams[0].profile.team.title }}</strong>
+          <span>{{ teams[0].profile.name }}</span>
+        </div>
+      </div>
+
+      <div class="hero-score">
+        <span class="match-status">{{ isCompleted() ? 'Матч завершён' : 'Предстоящий матч' }}</span>
+        <div class="score-value" *ngIf="isCompleted(); else versus">
+          {{ match.home_score }} <small>:</small> {{ match.away_score }}
+        </div>
+        <ng-template #versus><div class="versus">VS</div></ng-template>
+      </div>
+
+      <div class="hero-team away-team">
+        <div class="hero-logo"><img [src]="teams[1].profile.logo || 'assets/logos/default.png'" alt=""></div>
+        <div>
+          <strong>{{ teams[1].profile.team.title }}</strong>
+          <span>{{ teams[1].profile.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="forecast-panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-caption">Котировки</p>
+          <h3>Вероятность исхода</h3>
+        </div>
+        <span class="forecast-state" *ngIf="forecast">
+          {{ forecast.state === 'fixed' ? 'Зафиксировано' : forecast.state === 'preview' ? 'Предварительно' : 'Нет данных' }}
+        </span>
+      </div>
+
+      <div class="forecast-loading" *ngIf="forecastLoading">Загружаем прогноз…</div>
+
+      <ng-container *ngIf="!forecastLoading && forecast as currentForecast">
+        <div class="forecast-unavailable" *ngIf="currentForecast.state === 'unavailable'">
+          {{ currentForecast.message }}
+        </div>
+
+        <div *ngIf="currentForecast.forecast as values">
+          <div class="probability-grid">
+            <div class="probability home-probability">
+              <span>П1</span>
+              <strong>{{ values.homeWinProbability }}%</strong>
+            </div>
+            <div class="probability draw-probability">
+              <span>Ничья</span>
+              <strong>{{ values.drawProbability }}%</strong>
+            </div>
+            <div class="probability away-probability">
+              <span>П2</span>
+              <strong>{{ values.awayWinProbability }}%</strong>
+            </div>
+          </div>
+
+          <div class="probability-bar" aria-hidden="true">
+            <span class="home-bar" [style.width.%]="values.homeWinProbability"></span>
+            <span class="draw-bar" [style.width.%]="values.drawProbability"></span>
+            <span class="away-bar" [style.width.%]="values.awayWinProbability"></span>
+          </div>
+
+          <div class="forecast-details">
+            <span>Ожидаемые ФО: {{ values.expectedHomeScore }} — {{ values.expectedAwayScore }}</span>
+            <span>Форма: {{ values.homeForm }} — {{ values.awayForm }}</span>
+            <span>Туры: {{ values.basedOnTours.length ? values.basedOnTours.join(', ') : 'нет истории' }}</span>
+            <span>Уверенность: {{ getConfidenceLabel() }}</span>
+          </div>
+          <p class="forecast-note" *ngIf="currentForecast.message">{{ currentForecast.message }}</p>
+        </div>
+      </ng-container>
+    </section>
+
+    <div class="squads-grid">
+      <section class="squad-panel" *ngFor="let team of teams; index as teamIndex">
+        <header class="squad-heading">
+          <div>
+            <p class="section-caption">{{ teamIndex === 0 ? 'Хозяева' : 'Гости' }}</p>
+            <h3>{{ team.profile.team.title }}</h3>
+          </div>
+          <span *ngIf="team.teamCost !== undefined">{{ team.teamCost }} млн</span>
+        </header>
+
+        <ng-container *ngIf="team.hasRoster; else rosterUnavailable">
+          <h4>Основной состав</h4>
+          <ul class="player-list">
+            <li *ngFor="let player of team.base">
+              <span class="position">{{ player.position }}</span>
+              <span class="player-name">{{ player.name }}</span>
+              <span class="captain-badge" *ngIf="player.isCaptain">C</span>
+              <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
+              <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
+            </li>
+          </ul>
+
+          <h4 class="bench-title">Запас</h4>
+          <ul class="player-list bench-list">
+            <li *ngFor="let player of team.bench">
+              <span class="position">{{ player.position }}</span>
+              <span class="player-name">{{ player.name }}</span>
+              <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
+              <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
+            </li>
+          </ul>
+        </ng-container>
+
+        <ng-template #rosterUnavailable>
+          <div class="roster-unavailable">
+            Состав появится после его публикации во внешнем API.
+          </div>
+        </ng-template>
+      </section>
+    </div>
+  </section>
+</div>

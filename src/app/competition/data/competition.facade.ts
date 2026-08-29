@@ -48,6 +48,7 @@ export interface CompetitionViewModel {
   playersRating: number[];
   prizes: IRuntimePrize[];
   lastTour: number;
+  sportPlayersByTour: Record<number, SportPlayer[]>;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -123,6 +124,12 @@ export class CompetitionFacade {
       playersRating,
       prizes,
       lastTour,
+      sportPlayersByTour: Object.fromEntries(
+        data.playerStatsByTour.map((response, index) => [
+          index + 1,
+          Object.values(response.data.players),
+        ]),
+      ),
     };
   }
 

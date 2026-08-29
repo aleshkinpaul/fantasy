@@ -42,9 +42,11 @@ export interface ITourResult {
 }
 
 export interface IRoster {
+  id?: string;
   team_cost: number;
   total_score: number;
   captain_id: string;
+  vice_captain_id?: string;
   players: {
     base: string[];
     bench: string[];

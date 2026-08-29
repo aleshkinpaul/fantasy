@@ -91,6 +91,7 @@
       [currentLeagueMatches]="currentLeagueMatches"
       [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
       [lastTour]="lastTour"
+      (matchOpen)="openMatchCenter($event)"
     ></app-schedule>
   </div>
   
@@ -113,6 +114,7 @@
       [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
       [lastTour]="lastTour"
       [activeTabs]="activeTabs"
+      (matchOpen)="openMatchCenter($event)"
     ></app-matches>
   </div>
 
@@ -153,10 +155,22 @@
         [matchesTours]="cup.matchesTours"
         [lastTour]="lastTour"
         [activeTabs]="activeTabs"
+        (matchOpen)="openMatchCenter($event)"
       ></app-matches>
     </div>
   </ng-container>
 </div>
+<app-match-center
+  *ngIf="selectedMatch as selection"
+  [match]="selection.match"
+  [tour]="selection.tour"
+  [lastTour]="lastTour"
+  [profiles]="profilesDetails"
+  [sportPlayers]="selectedSportPlayers"
+  [forecast]="matchForecast"
+  [forecastLoading]="forecastLoading"
+  (closed)="closeMatchCenter()">
+</app-match-center>
 <section class="load-error" *ngIf="!(isLoading$ | async) && loadError">
   <h2>Не удалось загрузить данные турнира</h2>
   <p>Проверьте соединение и доступность сервиса статистики, затем попробуйте ещё раз.</p>

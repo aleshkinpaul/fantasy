@@ -1,0 +1,397 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.match-center-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: z-index('modal');
+  padding: 28px;
+  overflow-y: auto;
+  background: rgba($color-text, 0.56);
+  backdrop-filter: blur(6px);
+}
+
+.match-center-dialog {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 24px;
+  color: $color-text;
+  background: $color-canvas;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-xl;
+}
+
+.dialog-header,
+.section-heading,
+.squad-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dialog-header {
+  margin-bottom: 20px;
+
+  h2 {
+    margin-top: 2px;
+    font-size: $font-size-2xl;
+  }
+}
+
+.dialog-caption,
+.section-caption {
+  color: $color-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.close-button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: $color-text-muted;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 50%;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.match-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr);
+  gap: 18px;
+  padding: 20px;
+  align-items: center;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+}
+
+.hero-team {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 14px;
+
+  > div:last-child {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  strong,
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  span {
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  &.away-team {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+}
+
+.hero-logo {
+  @include logo-well(72px, 18px);
+  padding: 7px;
+}
+
+.hero-score {
+  text-align: center;
+}
+
+.match-status {
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+}
+
+.score-value,
+.versus {
+  margin-top: 4px;
+  color: $color-primary-hover;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  font-variant-numeric: tabular-nums;
+
+  small {
+    color: $color-text-muted;
+  }
+}
+
+.forecast-panel {
+  margin-top: 16px;
+  padding: 20px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+
+  h3 {
+    margin-top: 2px;
+    font-size: $font-size-xl;
+  }
+}
+
+.forecast-state {
+  padding: 5px 10px;
+  color: $color-primary-hover;
+  background: $color-surface-blue;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+}
+
+.forecast-loading,
+.forecast-unavailable,
+.roster-unavailable {
+  margin-top: 16px;
+  padding: 24px;
+  color: $color-text-muted;
+  text-align: center;
+  background: $color-surface-muted;
+  border-radius: $border-radius-lg;
+}
+
+.probability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.probability {
+  display: flex;
+  padding: 12px 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: $color-surface-muted;
+  border-radius: $border-radius-md;
+
+  span {
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  strong {
+    font-size: $font-size-xl;
+  }
+}
+
+.home-probability strong { color: $color-success; }
+.draw-probability strong { color: $color-neutral; }
+.away-probability strong { color: $color-primary; }
+
+.probability-bar {
+  display: flex;
+  height: 8px;
+  margin-top: 12px;
+  overflow: hidden;
+  background: $color-neutral-bg;
+  border-radius: $border-radius-full;
+
+  .home-bar { background: $color-success; }
+  .draw-bar { background: $color-neutral; }
+  .away-bar { background: $color-primary; }
+}
+
+.forecast-details {
+  display: flex;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+}
+
+.forecast-note {
+  margin-top: 10px;
+  color: $color-warning;
+  font-size: $font-size-xs;
+}
+
+.squads-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.squad-panel {
+  min-width: 0;
+  padding: 20px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+
+  h3 {
+    margin-top: 2px;
+    font-size: $font-size-lg;
+  }
+
+  h4 {
+    margin: 18px 0 8px;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .squad-heading > span {
+    color: $color-primary-hover;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.player-list {
+  display: grid;
+  gap: 5px;
+
+  li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto auto;
+    min-height: 38px;
+    padding: 6px 8px;
+    align-items: center;
+    gap: 7px;
+    background: rgba($color-surface-muted, 0.58);
+    border-radius: $border-radius-sm;
+  }
+}
+
+.position {
+  display: grid;
+  width: 30px;
+  height: 26px;
+  place-items: center;
+  color: $color-primary-hover;
+  background: $color-surface-blue;
+  border-radius: $border-radius-sm;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+}
+
+.player-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-cost {
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+  white-space: nowrap;
+}
+
+.captain-badge {
+  display: grid;
+  min-width: 23px;
+  height: 23px;
+  padding-inline: 4px;
+  place-items: center;
+  color: #fff;
+  background: $color-primary;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+
+  &.vice {
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+  }
+}
+
+.bench-list li {
+  opacity: 0.78;
+}
+
+@media (max-width: 800px) {
+  .match-center-backdrop {
+    padding: 0;
+  }
+
+  .match-center-dialog {
+    min-height: 100vh;
+    padding: 16px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .match-hero {
+    grid-template-columns: minmax(0, 1fr) 76px minmax(0, 1fr);
+    padding: 14px 10px;
+    gap: 8px;
+  }
+
+  .hero-team,
+  .hero-team.away-team {
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+  }
+
+  .hero-logo {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  .hero-team span {
+    display: none;
+  }
+
+  .score-value,
+  .versus {
+    font-size: $font-size-xl;
+  }
+
+  .squads-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .probability-grid {
+    gap: 5px;
+  }
+
+  .probability {
+    padding: 9px 8px;
+    align-items: flex-start;
+    flex-direction: column;
+
+    strong {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .forecast-panel,
+  .squad-panel {
+    padding: 14px;
+  }
+}

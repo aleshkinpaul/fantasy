@@ -14,8 +14,8 @@
   position: relative;
   display: flex;
   height: 100%;
-  min-height: 222px;
-  padding: 22px 16px 18px;
+  min-height: 252px;
+  padding: 14px 12px 12px;
   align-items: center;
   flex-direction: column;
   color: $color-text;
@@ -43,9 +43,9 @@
 }
 
 .logo-container {
-  @include logo-well(112px, 22px);
-  padding: 10px;
-  margin-bottom: 16px;
+  @include logo-well(164px, 26px);
+  padding: 9px;
+  margin-bottom: 9px;
 
   img {
     max-width: 100%;
@@ -69,7 +69,7 @@
   min-width: 0;
   align-items: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
   text-align: center;
 }
 
@@ -83,13 +83,13 @@
 }
 
 .team-name {
-  font-size: $font-size-base;
+  font-size: 13px;
   font-weight: $font-weight-bold;
 }
 
 .participant-name {
   color: $color-text-muted;
-  font-size: $font-size-sm;
+  font-size: 11px;
 }
 
 .external-mark {
@@ -103,14 +103,14 @@
 
 @media (max-width: 600px) {
   .participant-link {
-    min-height: 190px;
-    padding: 18px 12px 15px;
+    min-height: 218px;
+    padding: 12px 8px 10px;
   }
 
   .logo-container {
-    width: 92px;
-    height: 92px;
-    flex-basis: 92px;
-    border-radius: 18px;
+    width: 132px;
+    height: 132px;
+    flex-basis: 132px;
+    border-radius: 22px;
   }
 }

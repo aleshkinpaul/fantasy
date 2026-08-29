@@ -27,11 +27,15 @@
         </div>
       </a>
 
-      <div class="score-row">
+      <button
+        type="button"
+        class="score-row"
+        (click)="openMatch(match, i)"
+        [attr.aria-label]="'Открыть матч ' + getTeamTitle(match.home) + ' — ' + getTeamTitle(match.away)">
         <span class="score home-score" [ngClass]="{ 'green-text':  getMatchResult(tourMatches, match.home) === 1 && i < lastTour, 'red-text': getMatchResult(tourMatches, match.home) === 2 && i < lastTour, 'grey-text': getMatchResult(tourMatches, match.home) === 0 && i < lastTour }">{{ match.home_score }}</span>
         <span class="score-sep"> - </span>
         <span class="score away-score" [ngClass]="{ 'green-text':  getMatchResult(tourMatches, match.home) === 2 && i < lastTour, 'red-text': getMatchResult(tourMatches, match.home) === 1 && i < lastTour, 'grey-text': getMatchResult(tourMatches, match.home) === 0 && i < lastTour }">{{ match.away_score }}</span>
-      </div>
+      </button>
 
       <a class="away-logo-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.away)" target="_blank">
         <div class="logo-container">

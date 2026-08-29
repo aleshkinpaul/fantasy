@@ -50,12 +50,12 @@
 .participants-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 8px;
 }
 
 .missing-profile {
   display: flex;
-  min-height: 222px;
+  min-height: 252px;
   padding: 20px;
   align-items: center;
   justify-content: center;

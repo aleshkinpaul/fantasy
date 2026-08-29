@@ -31,7 +31,11 @@
               'red-bg':    getMatchResult(tourMatches, profile.id) === 2 && tourInd + firstTour - 1 < lastTour,
               'grey-bg':   getMatchResult(tourMatches, profile.id) === 0 && tourInd + firstTour - 1 < lastTour
             }">
-            <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getOpponentTeamId(tourMatches, profile.id)" target="_blank">
+            <button
+              type="button"
+              class="opponent-button"
+              (click)="openMatch(tourMatches, profile.id, tourInd)"
+              [attr.aria-label]="'Открыть матч с ' + getOpponentTeamTitle(tourMatches, profile.id)">
               <img
                 class="logo-img opponent"
                 [src]="!!getOpponentTeamLogo(tourMatches, profile.id) ?
@@ -39,7 +43,7 @@
                 [alt]="!!getOpponentTeamTitle(tourMatches, profile.id) ?
                   getOpponentTeamTitle(tourMatches, profile.id) : ''"
               >
-            </a>
+            </button>
           </div>
         </div>
       </td>

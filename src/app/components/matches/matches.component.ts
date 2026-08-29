@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from 'src/app/service/data.service';
 import { LoaderService } from 'src/app/service/loader.service';
@@ -10,6 +10,7 @@ import {
   getMatchResultForProfile,
   requireProfile,
 } from '../../competition/domain/competition-match-selectors';
+import { MatchCenterSelection } from '../../match-center/match-center.models';
 
 @Component({
   selector: 'app-matches',
@@ -25,6 +26,7 @@ export class MatchesComponent {
   @Input() firstTour = 1;
   @Input() activeTabs!: IActiveCompetitionTabs;
   @Input() matchesTours: number[] = [];
+  @Output() matchOpen = new EventEmitter<MatchCenterSelection>();
 
   public readonly isLoading$: Observable<boolean>;
 
@@ -53,6 +55,13 @@ export class MatchesComponent {
 
   getTeamTitle(profileId: string): string {
     return this.requireProfile(profileId).team.title;
+  }
+
+  openMatch(match: CompetitionMatch, tourIndex: number): void {
+    const tour = this.matchesTours.length
+      ? this.matchesTours[tourIndex]
+      : this.firstTour + tourIndex;
+    this.matchOpen.emit({ match, tour });
   }
 
   private requireProfile(profileId: string): IProfileDetails {
