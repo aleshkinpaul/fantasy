@@ -43,6 +43,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   classic: {
+    iconFile: 'victory.png',
     authorProfileId: '1076901343',
     prize: {
       id: SPAIN_PRIZE_IDS.CLASSIC,
@@ -57,6 +58,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'spicy-pepe': {
+    iconFile: 'red.png',
     authorProfileId: '1116907944',
     prize: {
       id: SPAIN_PRIZE_IDS.SPICY_PEPE,
@@ -72,6 +74,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'turtle-hunt': {
+    iconFile: 'tmnt.png',
     authorProfileId: '1058102914',
     prize: {
       id: SPAIN_PRIZE_IDS.TURTLE_HUNT,
@@ -86,6 +89,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'handy-hands': {
+    iconFile: 'frog.png',
     authorProfileId: '73116796',
     prize: {
       id: SPAIN_PRIZE_IDS.HANDY_HANDS,
@@ -100,6 +104,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'martin-points': {
+    iconFile: 'wood.png',
     authorProfileId: '1116309099',
     prize: {
       id: SPAIN_PRIZE_IDS.MARTIN_POINTS,
@@ -114,6 +119,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'fire-match': {
+    iconFile: 'motivation.png',
     authorProfileId: '1113442132',
     prize: {
       id: SPAIN_PRIZE_IDS.FIRE_MATCH,
@@ -128,6 +134,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'first-hundred': {
+    iconFile: '100.png',
     authorProfileId: '1116848369',
     prize: {
       id: SPAIN_PRIZE_IDS.FIRST_HUNDRED,
@@ -172,6 +179,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
     },
   },
   'legendary-seven': {
+    iconFile: 'ronaldo.png',
     authorProfileId: '152317185',
     prize: {
       id: SPAIN_PRIZE_IDS.LEGENDARY_SEVEN,
