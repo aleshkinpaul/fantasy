@@ -62,10 +62,13 @@ export class MatchForecastService {
     }
 
     return {
-      state: 'fixed',
+      state: snapshot.provenance === 'reconstructed' ? 'reconstructed' : 'fixed',
       forecast,
       generatedAt: snapshot.generatedAt,
       algorithmVersion: snapshot.algorithmVersion,
+      message: snapshot.provenance === 'reconstructed'
+        ? 'Расчёт восстановлен по данным, которые были доступны до начала матча.'
+        : undefined,
     };
   }
 

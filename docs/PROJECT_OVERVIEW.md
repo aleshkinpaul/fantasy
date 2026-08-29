@@ -96,7 +96,7 @@ fantasy/
 | Турниры, сезоны, статусы и ссылки главной страницы | `src/assets/data/tournaments.json` |
 | Предматчевые котировки | `src/assets/data/forecasts/manifest.json` и snapshots по турниру/туру |
 
-Матч-центр собран в `src/app/components/match-center`, а подготовка составов и котировок — в `src/app/match-center`. Снимок будущего тура создается до его начала командой `npm run forecast:snapshot -- <type> <yearStart> <tour>` и после публикации считается неизменяемым.
+Матч-центр собран в `src/app/components/match-center`, а подготовка составов и рейтинговых котировок — в `src/app/match-center`. Снимок будущего тура создается до его начала командой `npm run forecast:snapshot -- <type> <yearStart> <tour>` и после старта тура считается неизменяемым. Параметры модели проверяются на замороженном сезоне 2025/26 командой `npm run forecast:calibrate`; восстановленные задним числом расчеты хранятся отдельно от реально опубликованных по полю `provenance`.
 
 ## План развития
 

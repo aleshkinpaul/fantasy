@@ -31,6 +31,24 @@ describe('calculateMatchForecast', () => {
     expect(forecast.confidence).toBe('low');
   });
 
+  it('uses a neutral low-confidence prior before the first tour', () => {
+    const forecast = calculateMatchForecast({
+      homeProfileId: 'home',
+      awayProfileId: 'away',
+      targetTour: 1,
+      drawGap: 3,
+      profiles: [profile('home', []), profile('away', [])],
+    });
+
+    expect(forecast.homeForm).toBe(5);
+    expect(forecast.awayForm).toBe(5);
+    expect(forecast.homeWinProbability).toBe(42);
+    expect(forecast.drawProbability).toBe(16);
+    expect(forecast.awayWinProbability).toBe(42);
+    expect(forecast.basedOnTours).toEqual([]);
+    expect(forecast.confidence).toBe('low');
+  });
+
   it('does not use scores from the target or future tours', () => {
     const baseline = calculateMatchForecast({
       homeProfileId: 'home',

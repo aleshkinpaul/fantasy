@@ -11,6 +11,7 @@
     "capture:season-2025": "node scripts/season-regression.mjs capture",
     "verify:season-2025": "node scripts/season-regression.mjs verify",
     "forecast:snapshot": "node scripts/generate-forecast-snapshot.mjs",
+    "forecast:calibrate": "node scripts/calibrate-forecast.mjs",
     "mypage": "ng build --base-href=https://fr-fantasy.ru/"
   },
   "private": true,

@@ -2,6 +2,21 @@
   "snapshots": [
     {
       "tournamentId": "la-liga-2026-27",
+      "tour": 1,
+      "path": "/assets/data/forecasts/la-liga-2026-27/tour-1.json"
+    },
+    {
+      "tournamentId": "la-liga-2026-27",
+      "tour": 2,
+      "path": "/assets/data/forecasts/la-liga-2026-27/tour-2.json"
+    },
+    {
+      "tournamentId": "la-liga-2026-27",
+      "tour": 3,
+      "path": "/assets/data/forecasts/la-liga-2026-27/tour-3.json"
+    },
+    {
+      "tournamentId": "la-liga-2026-27",
       "tour": 4,
       "path": "/assets/data/forecasts/la-liga-2026-27/tour-4.json"
     }

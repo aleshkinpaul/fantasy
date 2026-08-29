@@ -1,0 +1,324 @@
+{
+  "tournamentId": "la-liga-2026-27",
+  "tour": 2,
+  "generatedAt": "2026-08-29T15:53:57.133Z",
+  "algorithmVersion": "rating-softmax-v2",
+  "inputLastTour": 3,
+  "calculationLastTour": 1,
+  "inputHash": "abac9bc5c5816032b7ef17209db116abee7eab2bbbbe0d4a86e7e445cce445ec",
+  "provenance": "reconstructed",
+  "forecasts": [
+    {
+      "homeProfileId": "1117329215",
+      "awayProfileId": "1113227695",
+      "homeWinProbability": 43,
+      "drawProbability": 17,
+      "awayWinProbability": 40,
+      "homeForm": 1.14,
+      "awayForm": 0,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1058102914",
+      "awayProfileId": "1116864335",
+      "homeWinProbability": 45,
+      "drawProbability": 17,
+      "awayWinProbability": 38,
+      "homeForm": 2.57,
+      "awayForm": 0.29,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1117333432",
+      "awayProfileId": "1033596919",
+      "homeWinProbability": 48,
+      "drawProbability": 17,
+      "awayWinProbability": 35,
+      "homeForm": 6.14,
+      "awayForm": 2.14,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1116907944",
+      "awayProfileId": "1024867435",
+      "homeWinProbability": 47,
+      "drawProbability": 17,
+      "awayWinProbability": 36,
+      "homeForm": 7.14,
+      "awayForm": 4.14,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1116848321",
+      "awayProfileId": "1116144526",
+      "homeWinProbability": 47,
+      "drawProbability": 17,
+      "awayWinProbability": 36,
+      "homeForm": 4.71,
+      "awayForm": 1.29,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1111051849",
+      "awayProfileId": "1117327108",
+      "homeWinProbability": 55,
+      "drawProbability": 16,
+      "awayWinProbability": 29,
+      "homeForm": 9.14,
+      "awayForm": 1.14,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1116309099",
+      "awayProfileId": "135066850",
+      "homeWinProbability": 41,
+      "drawProbability": 17,
+      "awayWinProbability": 42,
+      "homeForm": 6.14,
+      "awayForm": 6.29,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "151671085",
+      "awayProfileId": "1117067824",
+      "homeWinProbability": 51,
+      "drawProbability": 17,
+      "awayWinProbability": 32,
+      "homeForm": 10,
+      "awayForm": 4.43,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "73116796",
+      "awayProfileId": "1116314918",
+      "homeWinProbability": 40,
+      "drawProbability": 17,
+      "awayWinProbability": 43,
+      "homeForm": 7.71,
+      "awayForm": 8.86,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1111769718",
+      "awayProfileId": "1113269933",
+      "homeWinProbability": 44,
+      "drawProbability": 17,
+      "awayWinProbability": 39,
+      "homeForm": 7.43,
+      "awayForm": 5.71,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "144762187",
+      "awayProfileId": "1068332740",
+      "homeWinProbability": 41,
+      "drawProbability": 17,
+      "awayWinProbability": 42,
+      "homeForm": 5.14,
+      "awayForm": 5.71,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1117333090",
+      "awayProfileId": "1076901343",
+      "homeWinProbability": 44,
+      "drawProbability": 17,
+      "awayWinProbability": 39,
+      "homeForm": 7.14,
+      "awayForm": 5.57,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1113104848",
+      "awayProfileId": "152317185",
+      "homeWinProbability": 39,
+      "drawProbability": 17,
+      "awayWinProbability": 44,
+      "homeForm": 4.57,
+      "awayForm": 6,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1096489838",
+      "awayProfileId": "1115413541",
+      "homeWinProbability": 42,
+      "drawProbability": 17,
+      "awayWinProbability": 41,
+      "homeForm": 6.14,
+      "awayForm": 5.86,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1116314982",
+      "awayProfileId": "1116086751",
+      "homeWinProbability": 34,
+      "drawProbability": 17,
+      "awayWinProbability": 49,
+      "homeForm": 2,
+      "awayForm": 6.71,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1116778891",
+      "awayProfileId": "1116848369",
+      "homeWinProbability": 31,
+      "drawProbability": 16,
+      "awayWinProbability": 53,
+      "homeForm": 0.71,
+      "awayForm": 7,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1111685266",
+      "awayProfileId": "1095496719",
+      "homeWinProbability": 48,
+      "drawProbability": 17,
+      "awayWinProbability": 35,
+      "homeForm": 4.57,
+      "awayForm": 1,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "151923911",
+      "awayProfileId": "5275903",
+      "homeWinProbability": 40,
+      "drawProbability": 17,
+      "awayWinProbability": 43,
+      "homeForm": 2.86,
+      "awayForm": 3.86,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1115416060",
+      "awayProfileId": "1117333428",
+      "homeWinProbability": 42,
+      "drawProbability": 17,
+      "awayWinProbability": 41,
+      "homeForm": 4,
+      "awayForm": 3.86,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1115308799",
+      "awayProfileId": "1117331183",
+      "homeWinProbability": 44,
+      "drawProbability": 17,
+      "awayWinProbability": 39,
+      "homeForm": 7.29,
+      "awayForm": 5.71,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1115479394",
+      "awayProfileId": "1113442132",
+      "homeWinProbability": 44,
+      "drawProbability": 17,
+      "awayWinProbability": 39,
+      "homeForm": 5,
+      "awayForm": 3.29,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1056354922",
+      "awayProfileId": "1113412675",
+      "homeWinProbability": 40,
+      "drawProbability": 17,
+      "awayWinProbability": 43,
+      "homeForm": 4.71,
+      "awayForm": 5.71,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1117327481",
+      "awayProfileId": "1117333943",
+      "homeWinProbability": 45,
+      "drawProbability": 17,
+      "awayWinProbability": 38,
+      "homeForm": 5.29,
+      "awayForm": 3,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    },
+    {
+      "homeProfileId": "1115355124",
+      "awayProfileId": "1117333496",
+      "homeWinProbability": 35,
+      "drawProbability": 17,
+      "awayWinProbability": 48,
+      "homeForm": 1.14,
+      "awayForm": 5.14,
+      "basedOnTours": [
+        1
+      ],
+      "confidence": "low"
+    }
+  ]
+}

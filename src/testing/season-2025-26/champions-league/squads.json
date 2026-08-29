@@ -32,7 +32,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "269",
     "team_id": "497484",
-    "rating": 9
+    "rating": 9.03
   },
   {
     "id": "1063076888",
@@ -67,7 +67,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "386",
     "team_id": "497518",
-    "rating": 8.04
+    "rating": 8.02
   },
   {
     "id": "1113412675",
@@ -102,7 +102,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "186",
     "team_id": "500405",
-    "rating": 9.05
+    "rating": 9.07
   },
   {
     "id": "1116086751",
@@ -137,7 +137,7 @@
     "cur_medals_in_a_row": 1,
     "totalPlaces": "1138",
     "team_id": "498352",
-    "rating": 8.49
+    "rating": 8.45
   },
   {
     "id": "1113442132",
@@ -172,7 +172,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "693",
     "team_id": "497509",
-    "rating": 8.54
+    "rating": 8.52
   },
   {
     "id": "1096489838",
@@ -207,7 +207,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "374",
     "team_id": "499737",
-    "rating": 9.28
+    "rating": 9.26
   },
   {
     "id": "1116778891",
@@ -242,7 +242,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "796",
     "team_id": "498221",
-    "rating": 8.4
+    "rating": 8.38
   },
   {
     "id": "1115308799",
@@ -277,7 +277,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "1080",
     "team_id": "497533",
-    "rating": 8.55
+    "rating": 8.56
   },
   {
     "id": "151923911",
@@ -312,7 +312,7 @@
     "cur_medals_in_a_row": 1,
     "totalPlaces": "734",
     "team_id": "499742",
-    "rating": 8.29
+    "rating": 8.23
   },
   {
     "id": "1116848369",
@@ -382,7 +382,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "1080",
     "team_id": "497494",
-    "rating": 8.24
+    "rating": 8.22
   },
   {
     "id": "1061493572",
@@ -417,7 +417,7 @@
     "cur_medals_in_a_row": 1,
     "totalPlaces": "1766",
     "team_id": "497538",
-    "rating": 8.49
+    "rating": 8.44
   },
   {
     "id": "152317185",
@@ -452,7 +452,7 @@
     "cur_medals_in_a_row": 1,
     "totalPlaces": "1405",
     "team_id": "499375",
-    "rating": 8.33
+    "rating": 8.28
   },
   {
     "id": "1116848321",
@@ -487,7 +487,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "2512",
     "team_id": "499744",
-    "rating": 8.09
+    "rating": 8
   },
   {
     "id": "1058102914",
@@ -522,7 +522,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "2251",
     "team_id": "503833",
-    "rating": 7.65
+    "rating": 7.63
   },
   {
     "id": "1116144526",
@@ -592,7 +592,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "1739",
     "team_id": "498187",
-    "rating": 6.16
+    "rating": 6.2
   },
   {
     "id": "1116311079",
@@ -627,7 +627,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "1439",
     "team_id": "497969",
-    "rating": 8.16
+    "rating": 8.14
   },
   {
     "id": "1068332740",
@@ -697,7 +697,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "2386",
     "team_id": "500402",
-    "rating": 7.71
+    "rating": 7.66
   },
   {
     "id": "1111685266",
@@ -732,7 +732,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "1955",
     "team_id": "497558",
-    "rating": 8.06
+    "rating": 8.01
   },
   {
     "id": "135066850",
@@ -767,7 +767,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "3181",
     "team_id": "498766",
-    "rating": 4.72
+    "rating": 4.75
   },
   {
     "id": "1024867435",
@@ -802,7 +802,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "3213",
     "team_id": "500519",
-    "rating": 6.51
+    "rating": 6.54
   },
   {
     "id": "1033596919",
@@ -837,7 +837,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "3706",
     "team_id": "499751",
-    "rating": 4.72
+    "rating": 4.67
   },
   {
     "id": "1111024349",
@@ -872,7 +872,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "2693",
     "team_id": "498468",
-    "rating": 4.47
+    "rating": 4.53
   },
   {
     "id": "1115355124",
@@ -907,7 +907,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "3858",
     "team_id": "498958",
-    "rating": 3.32
+    "rating": 3.29
   },
   {
     "id": "1076901343",
@@ -942,7 +942,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "4310",
     "team_id": "499731",
-    "rating": 3.06
+    "rating": 3.03
   },
   {
     "id": "1116782572",
@@ -977,7 +977,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "4063",
     "team_id": "497580",
-    "rating": 2.53
+    "rating": 2.49
   },
   {
     "id": "1113269933",
@@ -1012,7 +1012,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "4624",
     "team_id": "500075",
-    "rating": 2.11
+    "rating": 2.1
   },
   {
     "id": "1095496719",
@@ -1047,7 +1047,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "4287",
     "team_id": "499570",
-    "rating": 4.27
+    "rating": 4.25
   },
   {
     "id": "1115479394",
@@ -1082,7 +1082,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "4785",
     "team_id": "499818",
-    "rating": 1.84
+    "rating": 1.83
   },
   {
     "id": "1113227695",
@@ -1187,7 +1187,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "4922",
     "team_id": "499239",
-    "rating": 1.13
+    "rating": 1.09
   },
   {
     "id": "1116847210",
@@ -1222,7 +1222,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "5182",
     "team_id": "499552",
-    "rating": 1.44
+    "rating": 1.43
   },
   {
     "id": "1115413541",
@@ -1257,7 +1257,7 @@
     "cur_medals_in_a_row": 0,
     "totalPlaces": "5298",
     "team_id": "499101",
-    "rating": 0.4
+    "rating": 0.42
   },
   {
     "id": "1116532842",

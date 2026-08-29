@@ -29,7 +29,7 @@ export interface MatchCenterTeam {
 }
 
 export type ForecastConfidence = 'low' | 'medium' | 'high';
-export type ForecastState = 'fixed' | 'preview' | 'unavailable';
+export type ForecastState = 'fixed' | 'reconstructed' | 'preview' | 'unavailable';
 
 export interface MatchForecast {
   homeProfileId: string;
@@ -37,8 +37,6 @@ export interface MatchForecast {
   homeWinProbability: number;
   drawProbability: number;
   awayWinProbability: number;
-  expectedHomeScore: number;
-  expectedAwayScore: number;
   homeForm: number;
   awayForm: number;
   basedOnTours: number[];
@@ -59,6 +57,9 @@ export interface ForecastSnapshotFile {
   generatedAt: string;
   algorithmVersion: string;
   inputLastTour: number;
+  calculationLastTour?: number;
+  inputHash?: string;
+  provenance?: 'published' | 'reconstructed';
   forecasts: MatchForecast[];
 }
 

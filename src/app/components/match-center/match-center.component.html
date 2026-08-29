@@ -47,7 +47,7 @@
           <h3>Вероятность исхода</h3>
         </div>
         <span class="forecast-state" *ngIf="forecast">
-          {{ forecast.state === 'fixed' ? 'Зафиксировано' : forecast.state === 'preview' ? 'Предварительно' : 'Нет данных' }}
+          {{ forecast.state === 'fixed' ? 'Зафиксировано' : forecast.state === 'reconstructed' ? 'Восстановлено' : forecast.state === 'preview' ? 'Предварительно' : 'Нет данных' }}
         </span>
       </div>
 
@@ -81,8 +81,7 @@
           </div>
 
           <div class="forecast-details">
-            <span>Ожидаемые ФО: {{ values.expectedHomeScore }} — {{ values.expectedAwayScore }}</span>
-            <span>Форма: {{ values.homeForm }} — {{ values.awayForm }}</span>
+            <span>Рейтинг формы: {{ values.homeForm }} — {{ values.awayForm }}</span>
             <span>Туры: {{ values.basedOnTours.length ? values.basedOnTours.join(', ') : 'нет истории' }}</span>
             <span>Уверенность: {{ getConfidenceLabel() }}</span>
           </div>

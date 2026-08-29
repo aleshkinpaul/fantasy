@@ -1,5 +1,5 @@
 import { FantasyFullInfoResponse } from '../models/competition.models';
-import { calculateSquadRatings, getTourMedian } from './rating-calculator';
+import { calculateFormRatings, calculateSquadRatings, getRatingTourNumbers, getTourMedian } from './rating-calculator';
 
 describe('rating calculator', () => {
   it('calculates a numeric median for string API scores', () => {
@@ -25,6 +25,37 @@ describe('rating calculator', () => {
     expect(squads.data.players['third'].team.rating).toBe(0);
     expect(ratings[0]).toBe(0);
     expect(ratings[ratings.length - 1]).toBe(10);
+  });
+
+  it('calculates an as-of rating without using later tours', () => {
+    const squads = createSquads([
+      ['30', '10', '1000'],
+      ['20', '20', '0'],
+      ['10', '30', '0'],
+    ]);
+    const profiles = Object.entries(squads.data.players)
+      .map(([id, player]) => ({ id, team: player.team }));
+
+    const ratings = calculateFormRatings(profiles, 2);
+
+    expect(ratings['first']).toBe(4.41);
+    expect(ratings['second']).toBe(5);
+    expect(ratings['third']).toBe(5.59);
+    expect(getRatingTourNumbers(profiles, 2)).toEqual([1, 2]);
+  });
+
+  it('keeps null scores at zero for participants eliminated from a later stage', () => {
+    const profiles = [
+      { id: 'eliminated', team: { results_by_tour: { 1: { tour_score: null } } } },
+      { id: 'median', team: { results_by_tour: { 1: { tour_score: '10' } } } },
+      { id: 'leader', team: { results_by_tour: { 1: { tour_score: '20' } } } },
+    ];
+
+    const ratings = calculateFormRatings(profiles, 1);
+
+    expect(ratings['eliminated']).toBe(0);
+    expect(ratings['median']).toBe(5);
+    expect(ratings['leader']).toBe(10);
   });
 });
 
