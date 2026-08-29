@@ -29,6 +29,8 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
   @Input() match!: CompetitionMatch;
   @Input() tour = 1;
   @Input() lastTour = 1;
+  @Input() yearStart = 0;
+  @Input() yearEnd = 0;
   @Input() profiles: IProfileDetails[] = [];
   @Input() sportPlayers: SportPlayer[] = [];
   @Input() forecast: MatchForecastView | null = null;
@@ -95,5 +97,22 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
     if (confidence === 'high') return 'высокая';
     if (confidence === 'medium') return 'средняя';
     return 'низкая';
+  }
+
+  getScoreClass(teamIndex: 0 | 1): string {
+    if (!this.isCompleted() || this.match.result === undefined) return '';
+    if (this.match.result === 0) return 'draw-score';
+    const isWinner = (teamIndex === 0 && this.match.result === 1)
+      || (teamIndex === 1 && this.match.result === 2);
+    return isWinner ? 'winner-score' : 'loser-score';
+  }
+
+  getClubLogoPath(realTeamId?: string): string {
+    const season = `${this.yearStart}-${String(this.yearEnd).slice(-2)}`;
+    return `assets/logos/real-clubs/${season}/${realTeamId}.png`;
+  }
+
+  hideMissingClubLogo(event: Event): void {
+    (event.target as HTMLImageElement).hidden = true;
   }
 }

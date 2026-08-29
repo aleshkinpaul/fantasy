@@ -24,7 +24,9 @@
       <div class="hero-score">
         <span class="match-status">{{ isCompleted() ? 'Матч завершён' : 'Предстоящий матч' }}</span>
         <div class="score-value" *ngIf="isCompleted(); else versus">
-          {{ match.home_score }} <small>:</small> {{ match.away_score }}
+          <span [ngClass]="getScoreClass(0)">{{ match.home_score }}</span>
+          <small>:</small>
+          <span [ngClass]="getScoreClass(1)">{{ match.away_score }}</span>
         </div>
         <ng-template #versus><div class="versus">VS</div></ng-template>
       </div>
@@ -102,8 +104,17 @@
         <ng-container *ngIf="team.hasRoster; else rosterUnavailable">
           <h4>Основной состав</h4>
           <ul class="player-list">
-            <li *ngFor="let player of team.base">
+            <li
+              *ngFor="let player of team.base"
+              [class.position-group-start]="player.startsPositionGroup">
               <span class="position">{{ player.position }}</span>
+              <span class="club-logo" aria-hidden="true">
+                <img
+                  *ngIf="player.realTeamId"
+                  [src]="getClubLogoPath(player.realTeamId)"
+                  alt=""
+                  (error)="hideMissingClubLogo($event)">
+              </span>
               <span class="player-name">{{ player.name }}</span>
               <span class="captain-badge" *ngIf="player.isCaptain">C</span>
               <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
@@ -115,6 +126,13 @@
           <ul class="player-list bench-list">
             <li *ngFor="let player of team.bench">
               <span class="position">{{ player.position }}</span>
+              <span class="club-logo" aria-hidden="true">
+                <img
+                  *ngIf="player.realTeamId"
+                  [src]="getClubLogoPath(player.realTeamId)"
+                  alt=""
+                  (error)="hideMissingClubLogo($event)">
+              </span>
               <span class="player-name">{{ player.name }}</span>
               <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
               <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
@@ -124,7 +142,7 @@
 
         <ng-template #rosterUnavailable>
           <div class="roster-unavailable">
-            Состав появится после его публикации во внешнем API.
+            Состав появится после начала тура.
           </div>
         </ng-template>
       </section>

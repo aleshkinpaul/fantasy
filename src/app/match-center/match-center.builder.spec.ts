@@ -21,6 +21,33 @@ describe('buildMatchCenterTeam', () => {
     expect(team.hasRoster).toBeFalse();
     expect(team.base).toEqual([]);
   });
+
+  it('sorts only the starting lineup by position and preserves the API bench order', () => {
+    const input = profile();
+    input.team.rosters_by_tour[1].players = {
+      base: ['forward', 'goalkeeper', 'midfielder', 'defender', 'forward-2'],
+      bench: ['bench-forward', 'bench-goalkeeper'],
+    };
+    const players = [
+      player('forward', '12'),
+      player('goalkeeper', '9'),
+      player('midfielder', '11'),
+      player('defender', '10'),
+      player('forward-2', '12'),
+      player('bench-forward', '12'),
+      player('bench-goalkeeper', '9'),
+    ];
+
+    const team = buildMatchCenterTeam(input, 1, players);
+
+    expect(team.base.map(item => item.id)).toEqual([
+      'goalkeeper', 'defender', 'midfielder', 'forward', 'forward-2',
+    ]);
+    expect(team.base.map(item => item.startsPositionGroup)).toEqual([
+      false, true, true, true, false,
+    ]);
+    expect(team.bench.map(item => item.id)).toEqual(['bench-forward', 'bench-goalkeeper']);
+  });
 });
 
 function profile(): IProfileDetails {

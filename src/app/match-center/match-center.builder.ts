@@ -9,6 +9,13 @@ const POSITION_LABELS: Record<string, string> = {
   '12': 'НП',
 };
 
+const POSITION_ORDER: Record<string, number> = {
+  '9': 0,
+  '10': 1,
+  '11': 2,
+  '12': 3,
+};
+
 export function buildMatchCenterTeam(
   profile: IProfileDetails,
   tour: number,
@@ -20,10 +27,18 @@ export function buildMatchCenterTeam(
   }
 
   const playersById = new Map(sportPlayers.map(player => [player.id, player]));
+  const base = roster.players.base
+    .map(playerId => buildPlayer(playerId, false, roster, playersById))
+    .sort((left, right) => getPositionOrder(left.positionId) - getPositionOrder(right.positionId))
+    .map((player, index, players) => ({
+      ...player,
+      startsPositionGroup: index > 0 && player.positionId !== players[index - 1].positionId,
+    }));
+
   return {
     profile,
     teamCost: Number.isFinite(Number(roster.team_cost)) ? Number(roster.team_cost) : undefined,
-    base: roster.players.base.map(playerId => buildPlayer(playerId, false, roster, playersById)),
+    base,
     bench: roster.players.bench.map(playerId => buildPlayer(playerId, true, roster, playersById)),
     hasRoster: true,
   };
@@ -40,10 +55,16 @@ function buildPlayer(
     id: playerId,
     name: player?.name || `Игрок #${playerId}`,
     position: POSITION_LABELS[player?.amplua_id || ''] || '—',
+    positionId: player?.amplua_id,
+    startsPositionGroup: false,
     cost: player?.cost,
     realTeamId: player?.team_id,
     isCaptain: roster.captain_id === playerId,
     isViceCaptain: roster.vice_captain_id === playerId,
     isBench,
   };
+}
+
+function getPositionOrder(positionId?: string): number {
+  return POSITION_ORDER[positionId || ''] ?? Number.MAX_SAFE_INTEGER;
 }

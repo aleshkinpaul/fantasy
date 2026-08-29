@@ -10,6 +10,8 @@ export interface MatchCenterPlayer {
   id: string;
   name: string;
   position: string;
+  positionId?: string;
+  startsPositionGroup: boolean;
   cost?: number;
   realTeamId?: string;
   isCaptain: boolean;

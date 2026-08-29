@@ -140,6 +140,17 @@
   }
 }
 
+.score-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+
+  .winner-score { color: $color-success; }
+  .loser-score { color: $color-danger; }
+  .draw-score { color: $color-warning; }
+}
+
 .forecast-panel {
   margin-top: 16px;
   padding: 20px;
@@ -270,14 +281,28 @@
   gap: 5px;
 
   li {
+    position: relative;
     display: grid;
-    grid-template-columns: 34px minmax(0, 1fr) auto auto;
+    grid-template-columns: 34px 30px minmax(0, 1fr) auto auto;
     min-height: 38px;
     padding: 6px 8px;
     align-items: center;
     gap: 7px;
     background: rgba($color-surface-muted, 0.58);
     border-radius: $border-radius-sm;
+
+    &.position-group-start {
+      margin-top: 8px;
+
+      &::before {
+        position: absolute;
+        top: -7px;
+        right: 0;
+        left: 0;
+        border-top: 1px solid $color-border;
+        content: '';
+      }
+    }
   }
 }
 
@@ -291,6 +316,25 @@
   border-radius: $border-radius-sm;
   font-size: 10px;
   font-weight: $font-weight-bold;
+}
+
+.club-logo {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  place-items: center;
+  overflow: hidden;
+  background: $color-logo-surface;
+  border: 1px solid rgba($color-border, 0.8);
+  border-radius: 50%;
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
 }
 
 .player-name {
