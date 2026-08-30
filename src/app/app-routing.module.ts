@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'club-world-cup', 
     loadComponent: () => import('./components/cwc-page/cwc-page.component').then(m => m.CWCPageComponent)
   },
+  {
+    path: 'hall-of-fame',
+    loadComponent: () => import('./components/hall-of-fame/hall-of-fame.component').then(m => m.HallOfFameComponent),
+    pathMatch: 'full'
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

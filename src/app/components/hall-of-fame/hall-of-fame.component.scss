@@ -1,0 +1,602 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+$bp-lg: 1200px;
+$bp-md: 900px;
+$bp-sm: 600px;
+
+@mixin respond-max($breakpoint) {
+  @media (max-width: $breakpoint) { @content; }
+}
+
+.hall-page {
+  width: calc(100% - 40px);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 52px 0 88px;
+  color: $color-text;
+}
+
+.hall-hero {
+  max-width: 760px;
+  margin-bottom: 34px;
+
+  .eyebrow,
+  .section-kicker {
+    color: $color-primary;
+  }
+
+  h1 {
+    margin-top: 6px;
+    font-family: $font-family-brand;
+    font-size: clamp(2.35rem, 7vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-copy {
+    max-width: 680px;
+    margin-top: 18px;
+    color: $color-text-muted;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.55;
+  }
+}
+
+.eyebrow,
+.section-kicker,
+.kind-label {
+  margin: 0;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hall-loading,
+.hall-error,
+.empty-filter {
+  padding: 32px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+}
+
+.hall-loading {
+  @include flex-row(12px, center);
+  color: $color-text-muted;
+}
+
+.loading-mark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid $color-border;
+  border-top-color: $color-primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.summary-card {
+  @include flex-column(4px);
+  min-height: 106px;
+  padding: 20px;
+  justify-content: center;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+
+  strong {
+    color: $color-primary-hover;
+    font-family: $font-family-brand;
+    font-size: $font-size-3xl;
+  }
+
+  span {
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+}
+
+.champions-section,
+.history-section,
+.leaders-section {
+  margin-top: 64px;
+}
+
+.section-heading {
+  @include flex-row(32px, space-between);
+  margin-bottom: 24px;
+  align-items: flex-end;
+
+  h2 {
+    margin-top: 5px;
+    font-family: $font-family-brand;
+    font-size: clamp(1.55rem, 4vw, 2.25rem);
+  }
+
+  > p {
+    max-width: 430px;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    line-height: 1.45;
+    text-align: right;
+  }
+}
+
+.section-kicker {
+  color: $color-primary;
+}
+
+.champion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.champion-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 66px minmax(0, 1fr);
+  gap: 14px;
+  min-height: 102px;
+  padding: 16px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid darken($color-surface-beige, 7%);
+  border-radius: $border-radius-xl;
+  background: linear-gradient(135deg, lighten($color-surface-beige, 6%), $color-surface-beige);
+  box-shadow: $shadow-sm;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &:focus-visible { @include focus-ring; }
+}
+
+.champion-crown {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  color: color(gold);
+  font-size: $font-size-lg;
+}
+
+.champion-logo,
+.podium-logo {
+  @include logo-well(66px, 16px);
+}
+
+.champion-copy,
+.podium-copy {
+  @include flex-column(2px);
+  min-width: 0;
+  justify-content: center;
+
+  strong { @include text-truncate; }
+
+  small,
+  span {
+    @include text-truncate;
+    color: $color-text-muted;
+  }
+}
+
+.champion-copy {
+  padding-right: 14px;
+
+  .champion-type {
+    color: $color-primary;
+    font-size: 0.68rem;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  strong { font-size: $font-size-base; }
+  small { font-size: $font-size-xs; }
+
+  .champion-period {
+    margin-top: 3px;
+    color: $color-warning;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.filter-panel {
+  @include flex-row(20px, space-between);
+  margin-bottom: 32px;
+  padding: 12px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  background: rgba($color-surface, 0.9);
+  box-shadow: $shadow-sm;
+}
+
+.title-filters {
+  display: flex;
+  gap: 7px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+
+  button {
+    padding: 9px 13px;
+    flex: 0 0 auto;
+    color: $color-text-muted;
+    font: inherit;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    border: 1px solid transparent;
+    border-radius: $border-radius-full;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover { background: $color-surface-muted; }
+
+    &.active {
+      color: #fff;
+      background: $color-primary;
+    }
+
+    &:focus-visible { @include focus-ring; }
+  }
+}
+
+.period-filter {
+  @include flex-row(8px, flex-start);
+  flex: 0 0 auto;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+
+  select {
+    min-height: 38px;
+    padding: 0 32px 0 11px;
+    color: $color-text;
+    font: inherit;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    background: $color-surface;
+  }
+}
+
+.season-block {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.season-label {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+  padding-top: 13px;
+
+  span {
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin-top: 2px;
+    color: $color-primary-hover;
+    font-family: $font-family-brand;
+    font-size: $font-size-xl;
+  }
+}
+
+.season-tournaments {
+  @include flex-column(16px);
+}
+
+.tournament-card {
+  overflow: hidden;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+}
+
+.tournament-header {
+  @include flex-row(18px, space-between);
+  padding: 20px 22px;
+  border-bottom: 1px solid $color-border;
+  background: linear-gradient(100deg, $color-surface-blue, $color-surface);
+
+  .kind-label { color: $color-primary; }
+
+  h4 {
+    margin-top: 3px;
+    font-family: $font-family-brand;
+    font-size: $font-size-lg;
+  }
+
+  a {
+    flex: 0 0 auto;
+    color: $color-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+
+    &:hover { color: $color-primary-hover; }
+    &:focus-visible { @include focus-ring; }
+  }
+}
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.stage-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  background: lighten($color-canvas, 2%);
+}
+
+.stage-heading {
+  @include flex-row(16px, space-between);
+  margin-bottom: 12px;
+
+  div span {
+    color: $color-primary;
+    font-size: 0.68rem;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h5 {
+    margin-top: 2px;
+    font-size: $font-size-base;
+  }
+}
+
+.stage-complete,
+.team-badge {
+  padding: 4px 7px;
+  color: $color-neutral;
+  font-size: 0.65rem;
+  font-weight: $font-weight-bold;
+  border-radius: $border-radius-full;
+  background: $color-neutral-bg;
+}
+
+.podium-list {
+  @include flex-column(8px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.podium-entry {
+  display: grid;
+  grid-template-columns: 70px 54px minmax(0, 1fr) auto;
+  gap: 11px;
+  min-width: 0;
+  padding: 10px;
+  align-items: center;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  background: $color-surface;
+
+  &.place-1 { border-color: rgba(color(gold), 0.48); }
+  &.place-2 { border-color: rgba(color(silver), 0.55); }
+  &.place-3 { border-color: rgba(color(bronze), 0.34); }
+}
+
+.place-mark {
+  @include flex-column(0);
+  color: $color-text-muted;
+
+  strong {
+    font-family: $font-family-brand;
+    font-size: $font-size-xl;
+    line-height: 1;
+  }
+
+  span {
+    margin-top: 3px;
+    font-size: 0.64rem;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+.place-1 .place-mark strong { color: color(gold); }
+.place-2 .place-mark strong { color: color(silver); }
+.place-3 .place-mark strong { color: color(bronze); }
+
+.podium-logo {
+  width: 54px;
+  height: 54px;
+  flex-basis: 54px;
+  border-radius: 13px;
+}
+
+.podium-copy {
+  strong { font-size: $font-size-sm; }
+  span { font-size: $font-size-xs; }
+}
+
+.leaders-table {
+  overflow: hidden;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+}
+
+.leader-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) repeat(3, 100px);
+  min-height: 62px;
+  padding: 0 20px;
+  align-items: center;
+  border-top: 1px solid $color-border;
+
+  > span,
+  > strong { text-align: center; }
+}
+
+.leader-head {
+  min-height: 46px;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-top: 0;
+  background: $color-surface-blue;
+
+  span:first-child { text-align: left; }
+}
+
+.leader-person {
+  @include flex-row(10px, flex-start);
+  min-width: 0;
+
+  strong { @include text-truncate; }
+}
+
+.leader-rank {
+  width: 22px;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+  text-align: center;
+}
+
+.leader-avatar {
+  @include flex-center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  color: $color-primary-hover;
+  font-family: $font-family-brand;
+  border-radius: 50%;
+  background: $color-surface-blue;
+}
+
+.leaders-toggle {
+  display: block;
+  margin: 14px auto 0;
+  padding: 9px 15px;
+  color: $color-primary;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  border: 0;
+  border-radius: $border-radius-full;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover { background: $color-surface-blue; }
+  &:focus-visible { @include focus-ring; }
+}
+
+@include respond-max($bp-lg) {
+  .champion-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@include respond-max($bp-md) {
+  .hall-page {
+    width: calc(100% - 24px);
+    padding-top: 34px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+
+    > p { text-align: left; }
+  }
+
+  .filter-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .season-block {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .season-label {
+    position: static;
+    padding-top: 0;
+  }
+
+  .leader-row {
+    grid-template-columns: minmax(190px, 1fr) repeat(3, 70px);
+    padding-inline: 12px;
+  }
+}
+
+@include respond-max($bp-sm) {
+  .champion-grid,
+  .summary-grid { grid-template-columns: 1fr; }
+
+  .summary-card {
+    min-height: 82px;
+    padding: 14px 18px;
+  }
+
+  .champions-section,
+  .history-section,
+  .leaders-section { margin-top: 48px; }
+
+  .stage-grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 10px;
+  }
+
+  .tournament-header { padding: 16px; }
+  .tournament-header a { font-size: 0; }
+  .tournament-header a span { font-size: $font-size-lg; }
+
+  .stage-card { padding: 10px; }
+
+  .podium-entry {
+    grid-template-columns: 42px 48px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .place-mark span,
+  .team-badge { display: none; }
+
+  .podium-logo {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .leaders-table { overflow-x: auto; }
+  .leader-row { min-width: 540px; }
+}

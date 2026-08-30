@@ -10,6 +10,15 @@
       </div>
       <h1 class="main-title">FR Fantasy</h1>
     </div>
+    <nav class="main-nav" aria-label="Главное меню">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="clearContext()"
+      >Турниры</a>
+      <a routerLink="/hall-of-fame" routerLinkActive="active">Зал славы</a>
+    </nav>
     <div class="right-container" *ngIf="!isMain">
       <h2 class="main-title">{{ subTitle }}</h2>
     </div>

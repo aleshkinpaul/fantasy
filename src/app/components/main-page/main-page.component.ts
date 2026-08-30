@@ -5,6 +5,7 @@ import { Observable, catchError, of } from 'rxjs';
 
 import { TournamentTimelineGroup, TournamentTimelineItem } from '../../models/tournament-catalog';
 import { TournamentCatalogService } from '../../service/tournament-catalog.service';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-main-page',
@@ -19,8 +20,10 @@ export class MainPageComponent {
 
   constructor(
     private readonly router: Router,
-    catalogService: TournamentCatalogService
+    catalogService: TournamentCatalogService,
+    dataService: DataService
   ) {
+    dataService.setUrlName('');
     this.timeline$ = catalogService.loadTimeline().pipe(
       catchError(error => {
         console.error('Failed to load tournament catalog', error);

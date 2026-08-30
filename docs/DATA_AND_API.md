@@ -377,6 +377,53 @@ H2H-страница может загрузить endpoint каждого пр�
 
 `src/assets/data/2024_2025/spain/squads.json` и `tours/tour1.json` … `tour38.json` повторяют API-контракты старого сезона. Они полезны для разработки схем, регрессионных тестов и анализа изменений API, но приложение их не читает. Snapshot roster 2024–25 не всегда содержит `team_cost`.
 
+## Реестр достижений и Зал славы
+
+`src/assets/data/achievements.json` — локальный исторический snapshot победителей и призеров. Он не пересчитывается при открытии страницы и не зависит от доступности архивных API.
+
+```ts
+interface AchievementRegistry {
+  version: 1;
+  participants: Array<{
+    id: string;          // стабильный participantId
+    name: string;
+    profileIds: string[]; // все подтвержденные аккаунты человека
+  }>;
+  placements: Array<{
+    tournamentId: string; // ссылка на tournaments.json
+    stageId: string;      // например primera, segunda, play-off
+    stageTitle: string;
+    titleType:
+      | 'la-liga-primera'
+      | 'la-liga-segunda'
+      | 'cup'
+      | 'champions-league'
+      | 'world-cup'
+      | 'club-world-cup';
+    place: 1 | 2 | 3;
+    recipient: {
+      id: string;
+      type: 'participant' | 'team';
+      label: string; // историческое название команды
+      logo: string;  // исторический логотип
+      members: Array<{
+        participantId: string;
+        profileId: string; // аккаунт, использованный именно в этом турнире
+      }>;
+    };
+  }>;
+}
+```
+
+Runtime-валидатор отклоняет неизвестные или незавершенные турниры, повторные placements, неверные места, отсутствующих участников, чужие profile id и один profile id у нескольких participant. Каждый турнир со статусом `completed` обязан иметь хотя бы один placement. Поэтому после завершения сезона порядок обновления такой:
+
+1. перевести турнир в `completed` в `tournaments.json`;
+2. зафиксировать итоговый пьедестал в `achievements.json` с историческими названием и логотипом;
+3. при новом аккаунте добавить profile id существующему participant, не создавая второго человека;
+4. открыть `/hall-of-fame`: новый сезон, действующий чемпион и личный рейтинг строятся без правки компонента.
+
+Примера и Сегунда считаются разными типами титула. Совместное третье место хранится двумя placements с `place: 3`. Командный результат хранится одним placement с несколькими `members`; в личной статистике он засчитывается каждому члену команды.
+
 ## Валидация нового сезона
 
 Перед подключением конфигурации следует автоматически проверить:

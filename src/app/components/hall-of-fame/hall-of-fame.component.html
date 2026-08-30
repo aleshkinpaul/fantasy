@@ -1,0 +1,198 @@
+<main class="hall-page">
+  <section class="hall-hero">
+    <p class="eyebrow">История FR Fantasy</p>
+    <h1>Зал славы</h1>
+    <p class="hero-copy">
+      Победители и призёры завершённых турниров — от личных чемпионатов до командного Клубного чемпионата мира.
+    </p>
+  </section>
+
+  <div class="hall-loading" *ngIf="loading" aria-live="polite">
+    <span class="loading-mark"></span>
+    <span>Собираем пьедесталы…</span>
+  </div>
+
+  <section class="hall-error" *ngIf="loadError">
+    <h2>Не удалось открыть Зал славы</h2>
+    <p>Проверьте локальные данные достижений и обновите страницу.</p>
+  </section>
+
+  <ng-container *ngIf="hall as data">
+    <section class="summary-grid" aria-label="Зал славы в цифрах">
+      <article class="summary-card">
+        <strong>{{ data.summary.competitions }}</strong>
+        <span>завершённых зачётов</span>
+      </article>
+      <article class="summary-card">
+        <strong>{{ data.summary.champions }}</strong>
+        <span>чемпионских записей</span>
+      </article>
+      <article class="summary-card">
+        <strong>{{ data.summary.podiumEntries }}</strong>
+        <span>мест на пьедестале</span>
+      </article>
+      <article class="summary-card">
+        <strong>{{ data.summary.participants }}</strong>
+        <span>разных участников</span>
+      </article>
+    </section>
+
+    <section class="champions-section" *ngIf="data.currentChampions.length">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Последние победители</p>
+          <h2>Действующие чемпионы</h2>
+        </div>
+        <p>Статус определяется автоматически по последнему завершённому розыгрышу каждого формата.</p>
+      </div>
+
+      <div class="champion-grid">
+        <a
+          class="champion-card"
+          *ngFor="let champion of data.currentChampions"
+          [href]="champion.tournamentRoute"
+          (click)="openTournament($event, champion.tournamentRoute)"
+        >
+          <span class="champion-crown" aria-hidden="true">★</span>
+          <div class="champion-logo">
+            <img [src]="champion.placement.recipient.logo" [alt]="champion.placement.displayName">
+          </div>
+          <div class="champion-copy">
+            <span class="champion-type">{{ champion.titleTypeLabel }}</span>
+            <strong>{{ champion.placement.displayName }}</strong>
+            <small *ngIf="champion.placement.teamName">{{ champion.placement.teamName }}</small>
+            <small *ngIf="!champion.placement.teamName">{{ champion.placement.memberNames.join(' · ') }}</small>
+            <span class="champion-period">{{ champion.period }}</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="history-section">
+      <div class="section-heading history-heading">
+        <div>
+          <p class="section-kicker">Все результаты</p>
+          <h2>Пьедесталы по сезонам</h2>
+        </div>
+      </div>
+
+      <div class="filter-panel">
+        <div class="title-filters" aria-label="Фильтр по турниру">
+          <button
+            type="button"
+            *ngFor="let filter of titleFilters"
+            [class.active]="activeTitle === filter.value"
+            [attr.aria-pressed]="activeTitle === filter.value"
+            (click)="selectTitle(filter.value)"
+          >{{ filter.label }}</button>
+        </div>
+        <label class="period-filter">
+          <span>Сезон</span>
+          <select [value]="activePeriod" (change)="selectPeriod($event)">
+            <option value="all">Все сезоны</option>
+            <option *ngFor="let period of data.periods" [value]="period">{{ period }}</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="empty-filter" *ngIf="filteredSeasons.length === 0">
+        Для выбранного сочетания пока нет завершённых турниров.
+      </div>
+
+      <section class="season-block" *ngFor="let season of filteredSeasons; trackBy: trackSeason">
+        <div class="season-label">
+          <span>Сезон</span>
+          <h3>{{ season.period }}</h3>
+        </div>
+
+        <div class="season-tournaments">
+          <article class="tournament-card" *ngFor="let result of season.tournaments">
+            <header class="tournament-header">
+              <div>
+                <span class="kind-label">{{ result.tournament.kindLabel }}</span>
+                <h4>{{ result.tournament.title }}</h4>
+              </div>
+              <a
+                [href]="result.tournament.route"
+                (click)="openTournament($event, result.tournament.route)"
+                aria-label="Открыть турнир"
+              >Открыть <span aria-hidden="true">↗</span></a>
+            </header>
+
+            <div class="stage-grid">
+              <section class="stage-card" *ngFor="let stage of result.stages; trackBy: trackById">
+                <div class="stage-heading">
+                  <div>
+                    <span>{{ stage.titleTypeLabel }}</span>
+                    <h5>{{ stage.title }}</h5>
+                  </div>
+                  <span class="stage-complete">Завершён</span>
+                </div>
+
+                <ol class="podium-list">
+                  <li
+                    *ngFor="let placement of stage.placements"
+                    class="podium-entry place-{{ placement.place }}"
+                  >
+                    <div class="place-mark" [attr.aria-label]="placement.place + ' место'">
+                      <strong>{{ placement.place }}</strong>
+                      <span>{{ placeLabel(placement.place) }}</span>
+                    </div>
+                    <div class="podium-logo">
+                      <img [src]="placement.recipient.logo" [alt]="placement.displayName">
+                    </div>
+                    <div class="podium-copy">
+                      <strong>{{ placement.displayName }}</strong>
+                      <span *ngIf="placement.teamName">{{ placement.teamName }}</span>
+                      <span *ngIf="!placement.teamName">{{ placement.memberNames.join(' · ') }}</span>
+                    </div>
+                    <span class="team-badge" *ngIf="placement.recipient.type === 'team'">Команда</span>
+                  </li>
+                </ol>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="leaders-section" *ngIf="data.leaders.length">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Личный зачёт</p>
+          <h2>Самые титулованные</h2>
+        </div>
+        <p>Командные достижения засчитываются каждому участнику состава.</p>
+      </div>
+
+      <div class="leaders-table" role="table" aria-label="Самые титулованные участники">
+        <div class="leader-row leader-head" role="row">
+          <span role="columnheader">Участник</span>
+          <span role="columnheader">Титулы</span>
+          <span role="columnheader">Финалы</span>
+          <span role="columnheader">Пьедесталы</span>
+        </div>
+        <div
+          class="leader-row"
+          role="row"
+          *ngFor="let leader of (showAllLeaders ? data.leaders : data.leaders.slice(0, 8)); let index = index"
+        >
+          <div class="leader-person" role="cell">
+            <span class="leader-rank">{{ index + 1 }}</span>
+            <span class="leader-avatar" aria-hidden="true">{{ leader.name.charAt(0) }}</span>
+            <strong>{{ leader.name }}</strong>
+          </div>
+          <strong role="cell">{{ leader.championships }}</strong>
+          <span role="cell">{{ leader.finals }}</span>
+          <span role="cell">{{ leader.podiums }}</span>
+        </div>
+      </div>
+      <button
+        class="leaders-toggle"
+        type="button"
+        *ngIf="data.leaders.length > 8"
+        (click)="showAllLeaders = !showAllLeaders"
+      >{{ showAllLeaders ? 'Скрыть продолжение' : 'Показать всех участников' }}</button>
+    </section>
+  </ng-container>
+</main>

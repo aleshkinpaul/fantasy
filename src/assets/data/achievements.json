@@ -1,0 +1,394 @@
+{
+  "version": 1,
+  "participants": [
+    { "id": "pavel-aleshkin", "name": "Павел Алешкин", "profileIds": ["73116796"] },
+    { "id": "ubush-sarangov", "name": "Убуш Сарангов", "profileIds": ["1113269933"] },
+    { "id": "danir-erendzhenov", "name": "Данир Эрендженов", "profileIds": ["1076901343"] },
+    { "id": "ramiz-aliev", "name": "Рамиз Алиев", "profileIds": ["1111769718"] },
+    { "id": "aleksandr-tsurkov", "name": "Александр Цурков", "profileIds": ["1061493572"] },
+    { "id": "aleksandr-kornienko", "name": "Александр Корниенко", "profileIds": ["1116778891"] },
+    { "id": "vladimir-bannov", "name": "Владимир Баннов", "profileIds": ["1116144526"] },
+    { "id": "saryal-fedotov", "name": "Сарыал Федотов", "profileIds": ["1115308799"] },
+    { "id": "daniil-shalkovskiy", "name": "Даниил Шалковский", "profileIds": ["1096489838"] },
+    { "id": "evgeniy-prokopenko", "name": "Евгений Прокопенко", "profileIds": ["1113412675"] },
+    { "id": "aleksandr-akimenko", "name": "Александр Акименко", "profileIds": ["1113442132"] },
+    { "id": "artem-safin", "name": "Артём Сафин", "profileIds": ["1116086751"] },
+    { "id": "veronika-vuychenko", "name": "Вероника Вуйченко", "profileIds": ["1024867435"] },
+    { "id": "artem-chanyshev", "name": "Артём Чанышев", "profileIds": ["1116848321"] },
+    { "id": "martin-babayan", "name": "Мартин Бабаян", "profileIds": ["5275903"] },
+    { "id": "dmitriy-shchetinin", "name": "Дмитрий Щетинин", "profileIds": ["1063076888"] },
+    { "id": "viktoriya-rocheva", "name": "Виктория Рочева", "profileIds": ["1111051849"] },
+    { "id": "ivan-shuraev", "name": "Иван Шураев", "profileIds": ["1116146089", "1116848369"] },
+    { "id": "igor-belousov", "name": "Игорь Белоусов", "profileIds": ["1116311079"] },
+    { "id": "aleksandr-skvarko", "name": "Александр Скварко", "profileIds": ["1103401223"] },
+    { "id": "nikolay-nadoyan", "name": "Николай Надоян", "profileIds": ["1115355124"] },
+    { "id": "denis-fedotov", "name": "Денис Федотов", "profileIds": ["1111685266"] },
+    { "id": "konstantin-kalinkov", "name": "Константин Калинков", "profileIds": ["1116782572"] },
+    { "id": "kirill-yakovchenko", "name": "Кирилл Яковченко", "profileIds": ["151923911"] },
+    { "id": "dmitriy-bulavko", "name": "Дмитрий Булавко", "profileIds": ["1095496719"] }
+  ],
+  "placements": [
+    {
+      "tournamentId": "la-liga-2025-26",
+      "stageId": "primera",
+      "stageTitle": "Примера",
+      "titleType": "la-liga-primera",
+      "place": 1,
+      "recipient": {
+        "id": "la-liga-2025-26-primera-pavel-aleshkin",
+        "type": "participant",
+        "label": "ducks",
+        "logo": "assets/logos/2025/scaled/ducks.png",
+        "members": [{ "participantId": "pavel-aleshkin", "profileId": "73116796" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2025-26",
+      "stageId": "primera",
+      "stageTitle": "Примера",
+      "titleType": "la-liga-primera",
+      "place": 2,
+      "recipient": {
+        "id": "la-liga-2025-26-primera-ubush-sarangov",
+        "type": "participant",
+        "label": "Лотос",
+        "logo": "assets/logos/2025/scaled/лотос.png",
+        "members": [{ "participantId": "ubush-sarangov", "profileId": "1113269933" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2025-26",
+      "stageId": "primera",
+      "stageTitle": "Примера",
+      "titleType": "la-liga-primera",
+      "place": 3,
+      "recipient": {
+        "id": "la-liga-2025-26-primera-danir-erendzhenov",
+        "type": "participant",
+        "label": "Марсельская рулетка",
+        "logo": "assets/logos/2025/scaled/Марсельская рулетка.png",
+        "members": [{ "participantId": "danir-erendzhenov", "profileId": "1076901343" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2025-26",
+      "stageId": "segunda",
+      "stageTitle": "Сегунда",
+      "titleType": "la-liga-segunda",
+      "place": 1,
+      "recipient": {
+        "id": "la-liga-2025-26-segunda-ramiz-aliev",
+        "type": "participant",
+        "label": "BIG TURTLES",
+        "logo": "assets/logos/2025/scaled/big turtles.png",
+        "members": [{ "participantId": "ramiz-aliev", "profileId": "1111769718" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2025-26",
+      "stageId": "segunda",
+      "stageTitle": "Сегунда",
+      "titleType": "la-liga-segunda",
+      "place": 2,
+      "recipient": {
+        "id": "la-liga-2025-26-segunda-aleksandr-tsurkov",
+        "type": "participant",
+        "label": "Абельинья",
+        "logo": "assets/logos/2025/scaled/абельинья.png",
+        "members": [{ "participantId": "aleksandr-tsurkov", "profileId": "1061493572" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2025-26",
+      "stageId": "segunda",
+      "stageTitle": "Сегунда",
+      "titleType": "la-liga-segunda",
+      "place": 3,
+      "recipient": {
+        "id": "la-liga-2025-26-segunda-aleksandr-kornienko",
+        "type": "participant",
+        "label": "Baby Madrid",
+        "logo": "assets/logos/2025/scaled/baby madrid.png",
+        "members": [{ "participantId": "aleksandr-kornienko", "profileId": "1116778891" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-cup-2025-26",
+      "stageId": "cup",
+      "stageTitle": "Кубок",
+      "titleType": "cup",
+      "place": 1,
+      "recipient": {
+        "id": "la-liga-cup-2025-26-vladimir-bannov",
+        "type": "participant",
+        "label": "hmynm",
+        "logo": "assets/logos/2025/scaled/hmynm.png",
+        "members": [{ "participantId": "vladimir-bannov", "profileId": "1116144526" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-cup-2025-26",
+      "stageId": "cup",
+      "stageTitle": "Кубок",
+      "titleType": "cup",
+      "place": 2,
+      "recipient": {
+        "id": "la-liga-cup-2025-26-saryal-fedotov",
+        "type": "participant",
+        "label": "SaREAL FC",
+        "logo": "assets/logos/2025/scaled/sareal fc.png",
+        "members": [{ "participantId": "saryal-fedotov", "profileId": "1115308799" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-cup-2025-26",
+      "stageId": "cup",
+      "stageTitle": "Кубок",
+      "titleType": "cup",
+      "place": 3,
+      "recipient": {
+        "id": "la-liga-cup-2025-26-danir-erendzhenov",
+        "type": "participant",
+        "label": "Марсельская рулетка",
+        "logo": "assets/logos/2025/scaled/Марсельская рулетка.png",
+        "members": [{ "participantId": "danir-erendzhenov", "profileId": "1076901343" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2025-26",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "champions-league",
+      "place": 1,
+      "recipient": {
+        "id": "champions-league-2025-26-daniil-shalkovskiy",
+        "type": "participant",
+        "label": "Lion Force",
+        "logo": "assets/logos/2025/scaled/lion force.png",
+        "members": [{ "participantId": "daniil-shalkovskiy", "profileId": "1096489838" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2025-26",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "champions-league",
+      "place": 2,
+      "recipient": {
+        "id": "champions-league-2025-26-evgeniy-prokopenko",
+        "type": "participant",
+        "label": "Мопед",
+        "logo": "assets/logos/2025/scaled/мопед.png",
+        "members": [{ "participantId": "evgeniy-prokopenko", "profileId": "1113412675" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2025-26",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "champions-league",
+      "place": 3,
+      "recipient": {
+        "id": "champions-league-2025-26-aleksandr-akimenko",
+        "type": "participant",
+        "label": "Свидетели Золотого Мяча",
+        "logo": "assets/logos/2025/scaled/ucl_свидетели золотого мяча.png",
+        "members": [{ "participantId": "aleksandr-akimenko", "profileId": "1113442132" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2025-26",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "champions-league",
+      "place": 3,
+      "recipient": {
+        "id": "champions-league-2025-26-artem-safin",
+        "type": "participant",
+        "label": "Марионетка Роналду",
+        "logo": "assets/logos/2025/scaled/ucl_марионетка роналду.png",
+        "members": [{ "participantId": "artem-safin", "profileId": "1116086751" }]
+      }
+    },
+    {
+      "tournamentId": "world-cup-2026",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "world-cup",
+      "place": 1,
+      "recipient": {
+        "id": "world-cup-2026-veronika-vuychenko",
+        "type": "participant",
+        "label": "la furia rosa",
+        "logo": "assets/logos/2025/wc26/bel.png",
+        "members": [{ "participantId": "veronika-vuychenko", "profileId": "1024867435" }]
+      }
+    },
+    {
+      "tournamentId": "world-cup-2026",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "world-cup",
+      "place": 2,
+      "recipient": {
+        "id": "world-cup-2026-artem-chanyshev",
+        "type": "participant",
+        "label": "Последний шанс",
+        "logo": "assets/logos/2025/wc26/par.png",
+        "members": [{ "participantId": "artem-chanyshev", "profileId": "1116848321" }]
+      }
+    },
+    {
+      "tournamentId": "world-cup-2026",
+      "stageId": "play-off",
+      "stageTitle": "Плей-офф",
+      "titleType": "world-cup",
+      "place": 3,
+      "recipient": {
+        "id": "world-cup-2026-martin-babayan",
+        "type": "participant",
+        "label": "Старый Чамартин",
+        "logo": "assets/logos/2025/wc26/can.png",
+        "members": [{ "participantId": "martin-babayan", "profileId": "5275903" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2024-25",
+      "stageId": "overall",
+      "stageTitle": "Общий зачёт",
+      "titleType": "la-liga-primera",
+      "place": 1,
+      "recipient": {
+        "id": "la-liga-2024-25-dmitriy-shchetinin",
+        "type": "participant",
+        "label": "Andar con rodeos",
+        "logo": "assets/logos/Andar con rodeos.png",
+        "members": [{ "participantId": "dmitriy-shchetinin", "profileId": "1063076888" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2024-25",
+      "stageId": "overall",
+      "stageTitle": "Общий зачёт",
+      "titleType": "la-liga-primera",
+      "place": 2,
+      "recipient": {
+        "id": "la-liga-2024-25-viktoriya-rocheva",
+        "type": "participant",
+        "label": "Испанский эчпочмак",
+        "logo": "assets/logos/испанский эчпочмак.png",
+        "members": [{ "participantId": "viktoriya-rocheva", "profileId": "1111051849" }]
+      }
+    },
+    {
+      "tournamentId": "la-liga-2024-25",
+      "stageId": "overall",
+      "stageTitle": "Общий зачёт",
+      "titleType": "la-liga-primera",
+      "place": 3,
+      "recipient": {
+        "id": "la-liga-2024-25-daniil-shalkovskiy",
+        "type": "participant",
+        "label": "Lion Force",
+        "logo": "assets/logos/LionForce.png",
+        "members": [{ "participantId": "daniil-shalkovskiy", "profileId": "1096489838" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2024-25",
+      "stageId": "overall",
+      "stageTitle": "Общий зачёт",
+      "titleType": "champions-league",
+      "place": 1,
+      "recipient": {
+        "id": "champions-league-2024-25-pavel-aleshkin",
+        "type": "participant",
+        "label": "ducks",
+        "logo": "assets/logos/ducks.png",
+        "members": [{ "participantId": "pavel-aleshkin", "profileId": "73116796" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2024-25",
+      "stageId": "overall",
+      "stageTitle": "Общий зачёт",
+      "titleType": "champions-league",
+      "place": 2,
+      "recipient": {
+        "id": "champions-league-2024-25-dmitriy-shchetinin",
+        "type": "participant",
+        "label": "Andar con rodeos",
+        "logo": "assets/logos/Andar con rodeos.png",
+        "members": [{ "participantId": "dmitriy-shchetinin", "profileId": "1063076888" }]
+      }
+    },
+    {
+      "tournamentId": "champions-league-2024-25",
+      "stageId": "overall",
+      "stageTitle": "Общий зачёт",
+      "titleType": "champions-league",
+      "place": 3,
+      "recipient": {
+        "id": "champions-league-2024-25-viktoriya-rocheva",
+        "type": "participant",
+        "label": "Испанский эчпочмак",
+        "logo": "assets/logos/испанский эчпочмак.png",
+        "members": [{ "participantId": "viktoriya-rocheva", "profileId": "1111051849" }]
+      }
+    },
+    {
+      "tournamentId": "club-world-cup-2025",
+      "stageId": "team-play-off",
+      "stageTitle": "Командный турнир",
+      "titleType": "club-world-cup",
+      "place": 1,
+      "recipient": {
+        "id": "club-world-cup-2025-fondo-poker",
+        "type": "team",
+        "label": "Fondo Poker",
+        "logo": "assets/logos/cwc-2025/fondo poker.png",
+        "members": [
+          { "participantId": "ivan-shuraev", "profileId": "1116146089" },
+          { "participantId": "daniil-shalkovskiy", "profileId": "1096489838" },
+          { "participantId": "igor-belousov", "profileId": "1116311079" }
+        ]
+      }
+    },
+    {
+      "tournamentId": "club-world-cup-2025",
+      "stageId": "team-play-off",
+      "stageTitle": "Командный турнир",
+      "titleType": "club-world-cup",
+      "place": 2,
+      "recipient": {
+        "id": "club-world-cup-2025-rkm",
+        "type": "team",
+        "label": "Ремонтада космических мусликов",
+        "logo": "assets/logos/cwc-2025/ркм.png",
+        "members": [
+          { "participantId": "aleksandr-skvarko", "profileId": "1103401223" },
+          { "participantId": "nikolay-nadoyan", "profileId": "1115355124" },
+          { "participantId": "denis-fedotov", "profileId": "1111685266" }
+        ]
+      }
+    },
+    {
+      "tournamentId": "club-world-cup-2025",
+      "stageId": "team-play-off",
+      "stageTitle": "Командный турнир",
+      "titleType": "club-world-cup",
+      "place": 3,
+      "recipient": {
+        "id": "club-world-cup-2025-federation",
+        "type": "team",
+        "label": "Феде-рация",
+        "logo": "assets/logos/cwc-2025/феде-рация.png",
+        "members": [
+          { "participantId": "konstantin-kalinkov", "profileId": "1116782572" },
+          { "participantId": "kirill-yakovchenko", "profileId": "151923911" },
+          { "participantId": "dmitriy-bulavko", "profileId": "1095496719" }
+        ]
+      }
+    }
+  ]
+}

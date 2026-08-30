@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit {
           name === 'spain'            ? 'Ла Лига'         :
           name === 'champions-league' ? 'Лига Чемпионов'  :
           name === 'spain-cup'        ? 'Кубок Испании'   : 
-          name === 'club-world-cup'   ? 'Клубный ЧМ'      : ''
+          name === 'club-world-cup'   ? 'Клубный ЧМ'      :
+          name === 'hall-of-fame'     ? 'Зал славы'       : '';
       }
     });
   }
@@ -41,4 +42,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
     this.service.setUrlName('');
   };
+
+  clearContext(): void {
+    this.service.setUrlName('');
+  }
 }
