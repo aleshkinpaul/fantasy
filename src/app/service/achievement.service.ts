@@ -28,7 +28,8 @@ export const TITLE_TYPE_LABELS: Record<AchievementTitleType, string> = {
   cup: 'Кубок',
   'champions-league': 'Лига чемпионов',
   'world-cup': 'Чемпионат мира',
-  'club-world-cup': 'Клубный чемпионат мира'
+  'club-world-cup': 'Клубный чемпионат мира',
+  euro: 'Евро'
 };
 
 const TITLE_TYPE_ORDER: Record<AchievementTitleType, number> = {
@@ -37,7 +38,18 @@ const TITLE_TYPE_ORDER: Record<AchievementTitleType, number> = {
   cup: 2,
   'champions-league': 3,
   'world-cup': 4,
-  'club-world-cup': 5
+  'club-world-cup': 5,
+  euro: 6
+};
+
+export const TROPHY_ICONS: Record<AchievementTitleType, string> = {
+  'la-liga-primera': 'assets/icons/trophies/la-liga-primera.png',
+  'la-liga-segunda': 'assets/icons/trophies/la-liga-segunda.png',
+  cup: 'assets/icons/trophies/cup.png',
+  'champions-league': 'assets/icons/trophies/champions-league.png',
+  'world-cup': 'assets/icons/trophies/world-cup.png',
+  'club-world-cup': 'assets/icons/trophies/club-world-cup.png',
+  euro: 'assets/icons/trophies/euro.png'
 };
 
 @Injectable({ providedIn: 'root' })
@@ -151,6 +163,7 @@ function buildTournament(
         title: first.stageTitle,
         titleType: first.titleType,
         titleTypeLabel: TITLE_TYPE_LABELS[first.titleType],
+        trophyIcon: TROPHY_ICONS[first.titleType],
         placements: stagePlacements
           .map(placement => resolvePlacement(placement, participants))
           .sort((left, right) => left.place - right.place || left.displayName.localeCompare(right.displayName, 'ru'))
@@ -189,11 +202,20 @@ function buildLeaders(
         name: participants.get(member.participantId)!.name,
         championships: 0,
         finals: 0,
-        podiums: 0
+        podiums: 0,
+        trophies: []
       };
       leader.podiums += 1;
       if (placement.place <= 2) leader.finals += 1;
-      if (placement.place === 1) leader.championships += 1;
+      if (placement.place === 1) {
+        leader.championships += 1;
+        leader.trophies.push({
+          id: `${placement.tournamentId}-${placement.stageId}-${member.participantId}`,
+          titleType: placement.titleType,
+          label: TITLE_TYPE_LABELS[placement.titleType],
+          icon: TROPHY_ICONS[placement.titleType]
+        });
+      }
       leaders.set(member.participantId, leader);
     });
   });
@@ -220,6 +242,7 @@ function buildCurrentChampions(seasons: HallSeason[]): HallChampion[] {
           period: season.period,
           tournamentTitle: tournament.tournament.title,
           tournamentRoute: tournament.tournament.route,
+          trophyIcon: TROPHY_ICONS[stage.titleType],
           placement
         })));
       });

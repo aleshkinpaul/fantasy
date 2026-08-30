@@ -82,6 +82,10 @@ export class HallOfFameComponent implements OnInit {
     return place === 1 ? 'Чемпион' : place === 2 ? 'Финалист' : 'Бронза';
   }
 
+  hideBrokenIcon(event: Event): void {
+    (event.target as HTMLImageElement).hidden = true;
+  }
+
   trackSeason(_index: number, season: HallSeason): string {
     return season.period;
   }

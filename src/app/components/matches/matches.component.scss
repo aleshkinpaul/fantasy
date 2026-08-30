@@ -113,6 +113,8 @@
 
       .logo-container {
         @include logo-well(58px, 14px);
+        position: relative;
+        overflow: visible;
       }
     }
 
@@ -152,6 +154,26 @@
       }
     }
   }
+}
+
+.martin-match-badge {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  z-index: 2;
+  min-width: 22px;
+  padding: 2px 5px;
+  color: $color-primary-hover;
+  border: 1px solid rgba($color-primary, .32);
+  border-radius: $border-radius-full;
+  background: $color-surface-blue;
+  box-shadow: $shadow-sm;
+  font-size: 8px;
+  font-weight: $font-weight-bold;
+  letter-spacing: .04em;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateX(-50%);
 }
 
 .green-bg { background: $color-success-bg; }

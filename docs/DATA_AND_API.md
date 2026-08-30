@@ -11,6 +11,8 @@
 | `assets/data/consts.json` | конфигурации архивных страниц 2024–25 и КЧМ-2025 | только архивом |
 | `assets/data/teams.json` | справочник реальных клубов для архивной статистики | только архивом |
 | `assets/data/2024_2025/**` | сохраненные ответы API Ла Лиги 2024–25 | нет |
+| `assets/data/archive-cups.json` | сетка и зафиксированные результаты архивных кубков | да |
+| `assets/data/retro-tournaments.json` | итоговые таблицы турниров 2023–24, импортированные из CSV | да |
 | `assets/data/forecasts/**` | опубликованные до тура и явно помеченные восстановленные котировки матч-центра | да |
 | `fantasy-h2h.ru/api/h2h_tournament/full_info/**` | профили внешнего турнира, туры, составы и FO | да |
 | `fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/**/{tour}` | футболисты и их очки по турам | да |

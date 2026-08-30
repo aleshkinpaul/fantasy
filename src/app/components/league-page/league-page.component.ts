@@ -14,6 +14,7 @@ import { StandingsComponent } from '../standings/standings.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { MatchesComponent } from '../matches/matches.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
+import { isHistoricalMartinLeagueMember } from '../../competition/config/martin-league.registry';
 
 @Component({
   selector: 'app-league-page',
@@ -38,6 +39,7 @@ export class LeaguePageComponent implements OnInit {
   public teamsArr = [];
   public allSquads = [];
   public lastTour: number = 1;
+  public yearStart = 0;
 
   private playersArr = [];
   private ratingMax: number = 0;
@@ -58,6 +60,7 @@ export class LeaguePageComponent implements OnInit {
 
   ngOnInit() {
     const yearParam = +this.route.snapshot.queryParams?.year || '';
+    this.yearStart = +yearParam;
     // console.log('snapshot: ', this.route.snapshot);
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
@@ -304,6 +307,11 @@ export class LeaguePageComponent implements OnInit {
           }
         });
     }});
+  }
+
+  isMartinLeagueMember(teamName: string): boolean {
+    return this.service.getUrlName() === 'spain'
+      && isHistoricalMartinLeagueMember(this.yearStart, teamName);
   }
 
   sortByTransfersCount(obj1, obj2) {

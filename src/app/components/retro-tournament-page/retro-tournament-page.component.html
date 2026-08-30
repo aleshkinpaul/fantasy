@@ -1,0 +1,78 @@
+<main class="retro-page">
+  <div class="state-card" *ngIf="loading">Загружаем итоговую таблицу…</div>
+  <div class="state-card state-error" *ngIf="!loading && loadError" role="alert">
+    Итоги этого турнира не найдены.
+  </div>
+
+  <ng-container *ngIf="tournament as data">
+    <header class="retro-hero">
+      <div>
+        <p class="eyebrow">Архив · общий зачёт</p>
+        <h1>{{ data.title }}</h1>
+        <p>Финальные результаты восстановлены из сохранённой турнирной таблицы.</p>
+      </div>
+      <div class="hero-facts" aria-label="Сводка турнира">
+        <span><strong>{{ data.standings.length }}</strong> участников</span>
+        <span><strong>{{ data.tourCount }}</strong> туров</span>
+      </div>
+    </header>
+
+    <section class="standings-card" aria-labelledby="retro-standings-title">
+      <div class="table-heading">
+        <div>
+          <p class="eyebrow">Финальная классификация</p>
+          <h2 id="retro-standings-title">Общий зачёт</h2>
+        </div>
+        <span>Нажмите на строку, чтобы увидеть результаты по турам</span>
+      </div>
+
+      <div class="standing-head" aria-hidden="true">
+        <span>Место</span>
+        <span>Команда</span>
+        <span>ФО</span>
+        <span>Среднее</span>
+        <span>Макс.</span>
+        <span *ngIf="hasMedals">Медали</span>
+      </div>
+
+      <article
+        class="standing-row place-{{ standing.place }}"
+        *ngFor="let standing of data.standings; trackBy: trackStanding"
+        [class.is-expanded]="expandedParticipantId === standing.participantId"
+      >
+        <button type="button" class="standing-main" (click)="toggleTours(standing)" [attr.aria-expanded]="expandedParticipantId === standing.participantId">
+          <span class="place">{{ standing.place }}</span>
+          <span class="identity">
+            <span class="logo-well"><img [src]="standing.logo" [alt]="standing.teamName"></span>
+            <span class="identity-copy">
+              <strong>{{ standing.teamName }}</strong>
+              <small>{{ standing.participantName }}</small>
+              <em *ngIf="!standing.matched">ретро-профиль</em>
+            </span>
+          </span>
+          <strong class="score">{{ standing.totalScore }}</strong>
+          <span class="metric"><small>Среднее</small>{{ standing.averageScore | number:'1.1-2' }}</span>
+          <span class="metric"><small>Максимум</small>{{ standing.maxScore }}</span>
+          <span class="medals" *ngIf="hasMedals">
+            <ng-container *ngIf="standing.medals as medalData; else noMedals">
+              <span title="Победы в туре">🥇 {{ medalData.gold }}</span>
+              <span title="Вторые места в туре">🥈 {{ medalData.silver }}</span>
+              <span title="Третьи места в туре">🥉 {{ medalData.bronze }}</span>
+            </ng-container>
+            <ng-template #noMedals>—</ng-template>
+          </span>
+          <span class="expand-mark" aria-hidden="true">⌄</span>
+        </button>
+
+        <div class="tour-history" *ngIf="expandedParticipantId === standing.participantId">
+          <span *ngFor="let score of standing.tourScores; let tour = index">
+            <small>{{ tour + 1 }} тур</small>
+            <strong>{{ score === null ? '—' : score }}</strong>
+          </span>
+        </div>
+      </article>
+    </section>
+
+    <p class="source-note">Источник: {{ data.sourceFile }} · данные не зависят от внешнего API.</p>
+  </ng-container>
+</main>

@@ -8,6 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "import:h2h-calendar": "node scripts/import-h2h-calendar.mjs",
+    "import:retro": "node scripts/import-retro-tournaments.mjs",
+    "import:archive-cup": "node scripts/import-king-cup-2024.mjs",
     "capture:season-2025": "node scripts/season-regression.mjs capture",
     "verify:season-2025": "node scripts/season-regression.mjs verify",
     "forecast:snapshot": "node scripts/generate-forecast-snapshot.mjs",

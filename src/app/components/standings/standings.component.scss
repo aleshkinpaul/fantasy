@@ -67,6 +67,18 @@
       &.qualification-boundary td {
         border-bottom: 2px solid rgba($color-primary, 0.48);
       }
+
+      &.martin-league-member {
+        background: linear-gradient(90deg, rgba($color-primary, .10), rgba($color-surface-blue, .54));
+
+        &:nth-child(even) {
+          background: linear-gradient(90deg, rgba($color-primary, .12), rgba($color-surface-blue, .66));
+        }
+
+        &:hover {
+          background: rgba($color-primary, .14);
+        }
+      }
     }
   }
 
@@ -192,6 +204,26 @@
         display: block;
         max-width: 180px;
         @include text-truncate;
+      }
+
+      .team-name-line {
+        display: flex;
+        max-width: 190px;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .martin-league-badge {
+        flex: 0 0 auto;
+        padding: 2px 5px;
+        color: $color-primary-hover;
+        background: $color-surface-blue;
+        border: 1px solid rgba($color-primary, .28);
+        border-radius: $border-radius-full;
+        font-size: 8px;
+        font-weight: $font-weight-bold;
+        letter-spacing: .04em;
+        line-height: 1.2;
       }
 
       .team-name {

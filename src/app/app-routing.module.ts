@@ -40,6 +40,11 @@ const routes: Routes = [
     loadComponent: () => import('./components/hall-of-fame/hall-of-fame.component').then(m => m.HallOfFameComponent),
     pathMatch: 'full'
   },
+  {
+    path: 'retro/:tournamentId',
+    loadComponent: () => import('./components/retro-tournament-page/retro-tournament-page.component').then(m => m.RetroTournamentPageComponent),
+    pathMatch: 'full'
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

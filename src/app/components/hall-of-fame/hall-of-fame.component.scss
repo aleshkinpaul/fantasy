@@ -148,10 +148,11 @@ $bp-sm: 600px;
 .champion-card {
   position: relative;
   display: grid;
-  grid-template-columns: 66px minmax(0, 1fr);
+  grid-template-columns: 66px minmax(0, 1fr) 88px;
   gap: 14px;
-  min-height: 102px;
+  min-height: 128px;
   padding: 16px;
+  align-items: center;
   overflow: hidden;
   color: inherit;
   text-decoration: none;
@@ -169,17 +170,54 @@ $bp-sm: 600px;
   &:focus-visible { @include focus-ring; }
 }
 
-.champion-crown {
-  position: absolute;
-  top: 7px;
-  right: 10px;
+.champion-trophy {
+  grid-column: 3;
+  grid-row: 1;
+  width: 88px;
+  height: 88px;
+  align-self: center;
+  justify-self: end;
+  border: 0;
+  border-radius: 20px;
+  background: rgba($color-surface, .5);
+
+  img {
+    inset: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+  }
+}
+
+.trophy-slot {
+  position: relative;
+  @include flex-center;
+  width: 80px;
+  height: 80px;
+  flex: 0 0 30px;
+  overflow: hidden;
   color: color(gold);
-  font-size: $font-size-lg;
+  font-size: $font-size-base;
+  border: 1px solid rgba(color(gold), .35);
+  border-radius: 9px;
+  background: rgba($color-surface, .82);
+
+  img {
+    position: absolute;
+    inset: 3px;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    object-fit: contain;
+  }
 }
 
 .champion-logo,
 .podium-logo {
   @include logo-well(66px, 16px);
+}
+
+.champion-logo {
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .champion-copy,
@@ -198,7 +236,8 @@ $bp-sm: 600px;
 }
 
 .champion-copy {
-  padding-right: 14px;
+  grid-column: 2;
+  grid-row: 1;
 
   .champion-type {
     color: $color-primary;
@@ -219,6 +258,14 @@ $bp-sm: 600px;
   }
 }
 
+.champion-copy .member-list,
+.podium-copy .member-list {
+  overflow: visible;
+  white-space: normal;
+  text-overflow: clip;
+  line-height: 1.35;
+}
+
 .filter-panel {
   @include flex-row(20px, space-between);
   margin-bottom: 32px;
@@ -231,10 +278,10 @@ $bp-sm: 600px;
 
 .title-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 7px;
   min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: thin;
+  overflow: visible;
 
   button {
     padding: 9px 13px;
@@ -386,6 +433,9 @@ $bp-sm: 600px;
   background: $color-neutral-bg;
 }
 
+.stage-status { @include flex-row(7px, flex-end); }
+.stage-trophy { width: 28px; height: 28px; flex-basis: 28px; border-radius: 8px; }
+
 .podium-list {
   @include flex-column(8px);
   margin: 0;
@@ -454,7 +504,7 @@ $bp-sm: 600px;
 
 .leader-row {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) repeat(3, 100px);
+  grid-template-columns: minmax(260px, 1fr) minmax(150px, 220px) repeat(2, 100px);
   min-height: 62px;
   padding: 0 20px;
   align-items: center;
@@ -463,6 +513,15 @@ $bp-sm: 600px;
   > span,
   > strong { text-align: center; }
 }
+
+.leader-titles {
+  @include flex-row(9px, center);
+
+  > strong { min-width: 18px; text-align: center; }
+}
+
+.leader-trophies { @include flex-row(4px, flex-start); flex-wrap: wrap; }
+.leader-trophy { width: 26px; height: 26px; flex-basis: 26px; border-radius: 7px; font-size: $font-size-sm; }
 
 .leader-head {
   min-height: 46px;
@@ -554,7 +613,7 @@ $bp-sm: 600px;
   }
 
   .leader-row {
-    grid-template-columns: minmax(190px, 1fr) repeat(3, 70px);
+    grid-template-columns: minmax(190px, 1fr) minmax(130px, 180px) repeat(2, 70px);
     padding-inline: 12px;
   }
 }
@@ -566,6 +625,25 @@ $bp-sm: 600px;
   .summary-card {
     min-height: 82px;
     padding: 14px 18px;
+  }
+
+  .champion-card {
+    grid-template-columns: 58px minmax(0, 1fr) 68px;
+    gap: 10px;
+    min-height: 112px;
+    padding: 13px;
+  }
+
+  .champion-logo {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  .champion-trophy {
+    width: 68px;
+    height: 68px;
+    border-radius: 16px;
   }
 
   .champions-section,
@@ -598,5 +676,5 @@ $bp-sm: 600px;
   }
 
   .leaders-table { overflow-x: auto; }
-  .leader-row { min-width: 540px; }
+  .leader-row { min-width: 620px; }
 }

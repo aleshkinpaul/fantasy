@@ -1,0 +1,293 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.archive-cup-page {
+  width: calc(100% - 40px);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 34px 0 84px;
+  color: $color-text;
+}
+
+.back-nav {
+  @include flex-row(20px, space-between);
+  margin-bottom: 30px;
+
+  a {
+    color: $color-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+
+    &:hover { color: $color-primary-hover; }
+    &:focus-visible { @include focus-ring; }
+  }
+}
+
+.cup-hero {
+  max-width: 760px;
+}
+
+.hero-copy {
+  padding: 28px 0;
+
+  .eyebrow {
+    margin: 0 0 8px;
+    color: $color-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: $font-family-brand;
+    font-size: clamp(2.4rem, 7vw, 4.8rem);
+    line-height: .98;
+    letter-spacing: -.035em;
+  }
+
+  > p:last-of-type {
+    max-width: 620px;
+    margin-top: 18px;
+    color: $color-text-muted;
+    font-size: $font-size-lg;
+    line-height: 1.5;
+  }
+}
+
+.format-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+
+  span {
+    padding: 7px 11px;
+    color: $color-primary-hover;
+    border: 1px solid rgba($color-primary, .2);
+    border-radius: $border-radius-full;
+    background: $color-surface-blue;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.round-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 30px;
+  padding: 4px 2px 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+
+  button {
+    flex: 0 0 auto;
+    padding: 9px 14px;
+    color: $color-text-muted;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-full;
+    background: $color-surface;
+    font: inherit;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: color $transition-fast, border-color $transition-fast, background $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+      border-color: rgba($color-primary, .35);
+    }
+
+    &:focus-visible { @include focus-ring; }
+
+    &.active {
+      color: #fff;
+      border-color: $color-primary;
+      background: $color-primary;
+    }
+  }
+}
+
+.rounds {
+  margin-top: 18px;
+}
+
+.round-section {
+  padding: 22px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+}
+
+.round-heading {
+  @include flex-row(22px, space-between);
+  margin-bottom: 18px;
+  align-items: flex-end;
+
+  p {
+    margin: 0;
+    color: $color-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin-top: 3px;
+    font-family: $font-family-brand;
+    font-size: $font-size-2xl;
+  }
+
+  > span {
+    padding: 6px 9px;
+    color: $color-text-muted;
+    border-radius: $border-radius-full;
+    background: $color-surface-muted;
+    font-size: $font-size-xs;
+    white-space: nowrap;
+  }
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  &.compact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.cup-match {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  background: lighten($color-canvas, 2%);
+}
+
+.team-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 66px;
+  padding: 10px 12px;
+  align-items: center;
+  border-top: 1px solid rgba($color-border, .7);
+
+  &:first-child { border-top: 0; }
+
+  &.winner {
+    background: $color-success-bg;
+
+    .team-score { color: $color-success; }
+  }
+}
+
+.team-logo {
+  position: relative;
+  @include logo-well(44px, 10px);
+  overflow: visible;
+}
+
+.martin-match-badge {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  z-index: 2;
+  min-width: 22px;
+  padding: 2px 5px;
+  color: $color-primary-hover;
+  border: 1px solid rgba($color-primary, .32);
+  border-radius: $border-radius-full;
+  background: $color-surface-blue;
+  box-shadow: $shadow-sm;
+  font-size: 8px;
+  font-weight: $font-weight-bold;
+  letter-spacing: .04em;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.team-copy {
+  @include flex-column(1px);
+  min-width: 0;
+
+  strong,
+  small { @include text-truncate; }
+  strong { font-size: $font-size-sm; }
+  small { color: $color-text-muted; font-size: $font-size-xs; }
+}
+
+.team-score {
+  min-width: 34px;
+  font-family: $font-family-brand;
+  font-size: $font-size-xl;
+  text-align: center;
+}
+
+.leg-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 12px;
+  padding: 8px 12px;
+  color: $color-text-muted;
+  border-top: 1px dashed $color-border;
+  background: $color-surface;
+  font-size: $font-size-xs;
+
+  strong { margin-left: auto; color: $color-primary; }
+}
+
+.state-card {
+  padding: 32px;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+
+  &.error-state {
+    color: $color-danger;
+    background: $color-danger-bg;
+  }
+
+  a { color: $color-primary; }
+}
+
+@media (max-width: 980px) {
+  .match-grid.compact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .archive-cup-page {
+    width: calc(100% - 24px);
+    padding-top: 22px;
+  }
+
+  .back-nav { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .hero-copy { padding-top: 8px; }
+  .hero-copy > p:last-of-type { font-size: $font-size-base; }
+
+  .round-tabs { margin-top: 22px; }
+  .rounds { margin-top: 12px; }
+  .round-section { padding: 12px; }
+
+  .round-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .match-grid,
+  .match-grid.compact-grid { grid-template-columns: 1fr; }
+}

@@ -1,1 +1,96 @@
-<p>cup-page works!</p>
+<main class="archive-cup-page">
+  <div class="state-card" *ngIf="loading" aria-live="polite">Загружаем кубковую сетку…</div>
+  <div class="state-card error-state" *ngIf="loadError">
+    <h1>Кубок не найден</h1>
+    <p>Для выбранного сезона пока нет сохранённой сетки.</p>
+    <a routerLink="/">Вернуться к турнирам</a>
+  </div>
+
+  <ng-container *ngIf="tournament as cup">
+    <nav class="back-nav" aria-label="Навигация по турниру">
+      <a routerLink="/">← Все турниры</a>
+      <a routerLink="/spain" [queryParams]="{ year: cup.yearStart }">Таблица Ла Лиги {{ cup.period }}</a>
+    </nav>
+
+    <header class="cup-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Архив · {{ cup.period }}</p>
+        <h1>{{ cup.title }}</h1>
+        <p>{{ cup.description }}</p>
+        <div class="format-facts" aria-label="Формат турнира">
+          <span>{{ cup.rounds.length }} раундов</span>
+          <span>{{ matchesCount(cup) }} пар</span>
+          <span>полуфинал · 2 матча</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="round-tabs" role="tablist" aria-label="Этапы Кубка Короля">
+      <button
+        *ngFor="let round of cup.rounds; trackBy: trackById"
+        type="button"
+        role="tab"
+        [class.active]="activeRoundId === round.id"
+        [attr.aria-selected]="activeRoundId === round.id"
+        (click)="selectRound(round.id)">
+        {{ round.title }}
+      </button>
+    </nav>
+
+    <section class="rounds" aria-label="Результаты Кубка Короля" *ngIf="activeRound(cup) as round">
+      <article class="round-section">
+        <header class="round-heading">
+          <div>
+            <p>Кубок Короля</p>
+            <h2>{{ round.title }}</h2>
+          </div>
+          <span>{{ round.tours.length === 1 ? round.tours[0] + ' тур' : round.tours.join(' и ') + ' туры' }} Ла Лиги</span>
+        </header>
+
+        <div class="match-grid" [class.compact-grid]="round.matches.length > 8">
+          <article class="cup-match" *ngFor="let match of round.matches; trackBy: trackById">
+            <div class="team-row" [class.winner]="isWinner(match, match.first)">
+              <span class="team-logo">
+                <span
+                  *ngIf="isMartinLeagueMember(cup, match.first)"
+                  class="martin-match-badge"
+                  title="Участник Лиги Мартина"
+                  aria-label="Участник Лиги Мартина">ЛМ</span>
+                <img [src]="match.first.logo" [alt]="match.first.teamName">
+              </span>
+              <span class="team-copy">
+                <strong>{{ match.first.teamName }}</strong>
+                <small>{{ match.first.participantName }}</small>
+              </span>
+              <strong class="team-score">{{ scoreFor(match, match.first) }}</strong>
+            </div>
+
+            <div class="team-row" [class.winner]="isWinner(match, match.second)">
+              <span class="team-logo">
+                <span
+                  *ngIf="isMartinLeagueMember(cup, match.second)"
+                  class="martin-match-badge"
+                  title="Участник Лиги Мартина"
+                  aria-label="Участник Лиги Мартина">ЛМ</span>
+                <img [src]="match.second.logo" [alt]="match.second.teamName">
+              </span>
+              <span class="team-copy">
+                <strong>{{ match.second.teamName }}</strong>
+                <small>{{ match.second.participantName }}</small>
+              </span>
+              <strong class="team-score">{{ scoreFor(match, match.second) }}</strong>
+            </div>
+
+            <div class="leg-list" *ngIf="match.legs.length > 1">
+              <span *ngFor="let leg of match.legs">
+                {{ leg.tour }} тур:
+                {{ legScoreFor(leg, match.first) }}:{{ legScoreFor(leg, match.second) }}
+              </span>
+              <strong>Сумма двух матчей</strong>
+            </div>
+          </article>
+        </div>
+      </article>
+    </section>
+  </ng-container>
+</main>

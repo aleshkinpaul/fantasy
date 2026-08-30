@@ -20,7 +20,11 @@
       </tr>
     </thead>
     <tbody class="table-body">
-      <tr *ngFor="let item of squadsDetails.value; index as i" class="table-row">
+      <tr
+        *ngFor="let item of squadsDetails.value; index as i"
+        class="table-row"
+        [class.martin-league-member]="isMartinLeagueMember(item.name)"
+      >
         <td [ngClass]="{
           'first':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 1,
           'second':   (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 2,
@@ -50,8 +54,13 @@
                 <img [src]="!!item.profile.logo ? item.profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">
               </div>
               <div class="team-container">
-                <span class="team-name">
-                  {{ item.name }}
+                <span class="team-name-line">
+                  <span class="team-name">{{ item.name }}</span>
+                  <span
+                    *ngIf="isMartinLeagueMember(item.name)"
+                    class="martin-league-badge"
+                    title="Участник Лиги Мартина"
+                  >ЛМ</span>
                 </span>
                 <span class="person-name">{{ item.profile.name }}</span>
               </div>

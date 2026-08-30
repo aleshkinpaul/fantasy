@@ -25,7 +25,21 @@ describe('AchievementService domain', () => {
       name: 'Participant A',
       championships: 2,
       finals: 2,
-      podiums: 2
+      podiums: 2,
+      trophies: [
+        {
+          id: 'ucl-play-off-a',
+          titleType: 'champions-league',
+          label: 'Лига чемпионов',
+          icon: 'assets/icons/trophies/champions-league.png'
+        },
+        {
+          id: 'team-cup-team-play-off-a',
+          titleType: 'club-world-cup',
+          label: 'Клубный чемпионат мира',
+          icon: 'assets/icons/trophies/club-world-cup.png'
+        }
+      ]
     });
   });
 

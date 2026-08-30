@@ -37,7 +37,7 @@ AppComponent
 | `/champions-league/new` | `LeagueH2HPageComponent` | актуальная ЛЧ |
 | `/champions-league` | `LeaguePageComponent` | архивная реализация |
 | `/world-cup/new` | `LeagueH2HPageComponent` | ЧМ-2026 |
-| `/spain-cup` | `CupPageComponent` | пока пусто |
+| `/spain-cup?year=2024` | `CupPageComponent` | архивная сетка Кубка Короля 2024/25 из локального snapshot |
 | `/club-world-cup` | `CWCPageComponent` | КЧМ-2025 |
 
 Неизвестный route перенаправляется на `/`. Страницы турниров загружаются лениво через `loadComponent`.

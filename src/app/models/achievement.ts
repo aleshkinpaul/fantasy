@@ -6,7 +6,8 @@ export type AchievementTitleType =
   | 'cup'
   | 'champions-league'
   | 'world-cup'
-  | 'club-world-cup';
+  | 'club-world-cup'
+  | 'euro';
 
 export type AchievementPlace = 1 | 2 | 3;
 
@@ -55,7 +56,15 @@ export interface HallStage {
   title: string;
   titleType: AchievementTitleType;
   titleTypeLabel: string;
+  trophyIcon: string;
   placements: HallPlacement[];
+}
+
+export interface HallTrophy {
+  id: string;
+  titleType: AchievementTitleType;
+  label: string;
+  icon: string;
 }
 
 export interface HallTournament {
@@ -75,6 +84,7 @@ export interface HallLeader {
   championships: number;
   finals: number;
   podiums: number;
+  trophies: HallTrophy[];
 }
 
 export interface HallChampion {
@@ -83,6 +93,7 @@ export interface HallChampion {
   period: string;
   tournamentTitle: string;
   tournamentRoute: string;
+  trophyIcon: string;
   placement: HallPlacement;
 }
 

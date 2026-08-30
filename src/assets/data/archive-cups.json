@@ -1,0 +1,1301 @@
+{
+  "version": 1,
+  "tournaments": [
+    {
+      "id": "la-liga-cup-2024-25",
+      "title": "Кубок Короля 2024/25",
+      "period": "2024–25",
+      "yearStart": 2024,
+      "format": "knockout",
+      "description": "Классический кубок на вылет; полуфиналы состоят из двух матчей.",
+      "sourceDocument": "docs/Кубок Короля 2024-25 - описание для добавления.md",
+      "championProfileId": "73116796",
+      "rounds": [
+        {
+          "id": "qualifying",
+          "title": "Отборочный раунд",
+          "tours": [
+            14
+          ],
+          "matches": [
+            {
+              "id": "qualifying-1",
+              "first": {
+                "profileId": "1116311743",
+                "participantName": "Евгений Старокожев",
+                "teamName": "Starokozhev",
+                "logo": "assets/logos/starokozhev.png"
+              },
+              "second": {
+                "profileId": "26761799",
+                "participantName": "Жанна Нургалиева",
+                "teamName": "Железные яйца Переса",
+                "logo": "assets/logos/Iron Balls of Peres 2.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1116311743",
+                  "awayProfileId": "26761799",
+                  "homeScore": 43,
+                  "awayScore": 63
+                }
+              ],
+              "firstTotal": 43,
+              "secondTotal": 63,
+              "winnerProfileId": "26761799"
+            },
+            {
+              "id": "qualifying-2",
+              "first": {
+                "profileId": "1116309020",
+                "participantName": "Эдуард Папенко",
+                "teamName": "Real madrid",
+                "logo": "assets/logos/real madrid ep.png"
+              },
+              "second": {
+                "profileId": "1113514956",
+                "participantName": "Артём Молдавский",
+                "teamName": "Skyters",
+                "logo": "assets/logos/skyters.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1116309020",
+                  "awayProfileId": "1113514956",
+                  "homeScore": 54,
+                  "awayScore": 59
+                }
+              ],
+              "firstTotal": 54,
+              "secondTotal": 59,
+              "winnerProfileId": "1113514956"
+            },
+            {
+              "id": "qualifying-3",
+              "first": {
+                "profileId": "1068332740",
+                "participantName": "Дарья Кузнецкая",
+                "teamName": "Люмос Солем.",
+                "logo": "assets/logos/lumos solem.png"
+              },
+              "second": {
+                "profileId": "1021067842",
+                "participantName": "Руслан Гасангусейнов",
+                "teamName": "Эмоции Гарета Бэйла",
+                "logo": "assets/logos/emotions of gareth bale.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1068332740",
+                  "awayProfileId": "1021067842",
+                  "homeScore": 48,
+                  "awayScore": 41
+                }
+              ],
+              "firstTotal": 48,
+              "secondTotal": 41,
+              "winnerProfileId": "1068332740"
+            },
+            {
+              "id": "qualifying-4",
+              "first": {
+                "profileId": "1116311079",
+                "participantName": "Игорь Белоусов",
+                "teamName": "Volidol",
+                "logo": "assets/logos/volidol.png"
+              },
+              "second": {
+                "profileId": "1071548719",
+                "participantName": "Андрей Курнаков",
+                "teamName": "Финансовый рычаг Саутгейта",
+                "logo": "assets/logos/финансовый рычаг саутгейта.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1116311079",
+                  "awayProfileId": "1071548719",
+                  "homeScore": 54,
+                  "awayScore": 32
+                }
+              ],
+              "firstTotal": 54,
+              "secondTotal": 32,
+              "winnerProfileId": "1116311079"
+            },
+            {
+              "id": "qualifying-5",
+              "first": {
+                "profileId": "1085900357",
+                "participantName": "Григорий Сергеичев",
+                "teamName": "Черепаший суп",
+                "logo": "assets/logos/черепаший суп.png"
+              },
+              "second": {
+                "profileId": "5275903",
+                "participantName": "Мартин Бабаян",
+                "teamName": "Los Viejitos de Chamartín",
+                "logo": "assets/logos/Los Viejitos de Chamartín.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1085900357",
+                  "awayProfileId": "5275903",
+                  "homeScore": 36,
+                  "awayScore": 52
+                }
+              ],
+              "firstTotal": 36,
+              "secondTotal": 52,
+              "winnerProfileId": "5275903"
+            },
+            {
+              "id": "qualifying-6",
+              "first": {
+                "profileId": "1097941691",
+                "participantName": "Вениамин Филатов",
+                "teamName": "Мыши-байкеры с марса",
+                "logo": "assets/logos/mice bikers from mars.png"
+              },
+              "second": {
+                "profileId": "1116314918",
+                "participantName": "Александр Ларин",
+                "teamName": "Левая бровь Анчелотти",
+                "logo": "assets/logos/левая бровь анчелотти.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1097941691",
+                  "awayProfileId": "1116314918",
+                  "homeScore": 51,
+                  "awayScore": 43
+                }
+              ],
+              "firstTotal": 51,
+              "secondTotal": 43,
+              "winnerProfileId": "1097941691"
+            },
+            {
+              "id": "qualifying-7",
+              "first": {
+                "profileId": "149061310",
+                "participantName": "Михаил Брыксин",
+                "teamName": "Мижганис C.F.",
+                "logo": "assets/logos/мижганис c.f..png"
+              },
+              "second": {
+                "profileId": "1116139003",
+                "participantName": "Ани Меликян",
+                "teamName": "se come una paella",
+                "logo": "assets/logos/se come una paella.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "149061310",
+                  "awayProfileId": "1116139003",
+                  "homeScore": 40,
+                  "awayScore": 49
+                }
+              ],
+              "firstTotal": 40,
+              "secondTotal": 49,
+              "winnerProfileId": "1116139003"
+            },
+            {
+              "id": "qualifying-8",
+              "first": {
+                "profileId": "1115367480",
+                "participantName": "Александр Лаптев",
+                "teamName": "КоготьВалверде",
+                "logo": "assets/logos/the valverde's claw.png"
+              },
+              "second": {
+                "profileId": "1116138036",
+                "participantName": "Антон Чернышев",
+                "teamName": "Правая нога Ойярсабаля",
+                "logo": "assets/logos/oyarzabal's right leg.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1115367480",
+                  "awayProfileId": "1116138036",
+                  "homeScore": 54,
+                  "awayScore": 41
+                }
+              ],
+              "firstTotal": 54,
+              "secondTotal": 41,
+              "winnerProfileId": "1115367480"
+            },
+            {
+              "id": "qualifying-9",
+              "first": {
+                "profileId": "1115416060",
+                "participantName": "Натиа Карчава",
+                "teamName": "Cherry_pie",
+                "logo": "assets/logos/cherry pie.png"
+              },
+              "second": {
+                "profileId": "1116314995",
+                "participantName": "Алексей Мельников",
+                "teamName": "BadBoysWhite",
+                "logo": "assets/logos/bad boys white.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1115416060",
+                  "awayProfileId": "1116314995",
+                  "homeScore": 50,
+                  "awayScore": 54
+                }
+              ],
+              "firstTotal": 50,
+              "secondTotal": 54,
+              "winnerProfileId": "1116314995"
+            },
+            {
+              "id": "qualifying-10",
+              "first": {
+                "profileId": "154819672",
+                "participantName": "Марк Кубыш",
+                "teamName": "слоны",
+                "logo": "assets/logos/слоны.png"
+              },
+              "second": {
+                "profileId": "1071227986",
+                "participantName": "Вадим Евтеев",
+                "teamName": "Kopf89",
+                "logo": "assets/logos/kopf89.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "154819672",
+                  "awayProfileId": "1071227986",
+                  "homeScore": 39,
+                  "awayScore": 47
+                }
+              ],
+              "firstTotal": 39,
+              "secondTotal": 47,
+              "winnerProfileId": "1071227986"
+            },
+            {
+              "id": "qualifying-11",
+              "first": {
+                "profileId": "144762187",
+                "participantName": "Тимофей Онорин",
+                "teamName": "onorintimka",
+                "logo": "assets/logos/onorintimka.png"
+              },
+              "second": {
+                "profileId": "1033596919",
+                "participantName": "Андрей Орлов",
+                "teamName": "Madrid Skaters",
+                "logo": "assets/logos/Madrid Skaters.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "144762187",
+                  "awayProfileId": "1033596919",
+                  "homeScore": 56,
+                  "awayScore": 54
+                }
+              ],
+              "firstTotal": 56,
+              "secondTotal": 54,
+              "winnerProfileId": "144762187"
+            },
+            {
+              "id": "qualifying-12",
+              "first": {
+                "profileId": "73116796",
+                "participantName": "Павел Алешкин",
+                "teamName": "ducks",
+                "logo": "assets/logos/ducks.png"
+              },
+              "second": {
+                "profileId": "1116314982",
+                "participantName": "Арсен Эристаев",
+                "teamName": "Zhulduz",
+                "logo": "assets/logos/zhulduz.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "73116796",
+                  "awayProfileId": "1116314982",
+                  "homeScore": 51,
+                  "awayScore": 44
+                }
+              ],
+              "firstTotal": 51,
+              "secondTotal": 44,
+              "winnerProfileId": "73116796"
+            },
+            {
+              "id": "qualifying-13",
+              "first": {
+                "profileId": "1116316056",
+                "participantName": "Петр Трубицын",
+                "teamName": "krya team",
+                "logo": "assets/logos/krya team.png"
+              },
+              "second": {
+                "profileId": "1115355124",
+                "participantName": "Николай Надоян",
+                "teamName": "Дыхание космоса",
+                "logo": "assets/logos/the breath of space.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1116316056",
+                  "awayProfileId": "1115355124",
+                  "homeScore": 34,
+                  "awayScore": 32
+                }
+              ],
+              "firstTotal": 34,
+              "secondTotal": 32,
+              "winnerProfileId": "1116316056"
+            },
+            {
+              "id": "qualifying-14",
+              "first": {
+                "profileId": "1039593659",
+                "participantName": "Максим Богомаз",
+                "teamName": "ChistoPoPrikolu",
+                "logo": "assets/logos/chistopoprikolu.png"
+              },
+              "second": {
+                "profileId": "1116086751",
+                "participantName": "Артём Сафин",
+                "teamName": "Дирдам Лаер",
+                "logo": "assets/logos/dirdam laer.png"
+              },
+              "legs": [
+                {
+                  "tour": 14,
+                  "homeProfileId": "1039593659",
+                  "awayProfileId": "1116086751",
+                  "homeScore": 40,
+                  "awayScore": 46
+                }
+              ],
+              "firstTotal": 40,
+              "secondTotal": 46,
+              "winnerProfileId": "1116086751"
+            }
+          ]
+        },
+        {
+          "id": "round-of-32",
+          "title": "1/16 финала",
+          "tours": [
+            18
+          ],
+          "matches": [
+            {
+              "id": "round-of-32-1",
+              "first": {
+                "profileId": "1116311079",
+                "participantName": "Игорь Белоусов",
+                "teamName": "Volidol",
+                "logo": "assets/logos/volidol.png"
+              },
+              "second": {
+                "profileId": "1111024349",
+                "participantName": "Тимур Магомедов",
+                "teamName": "TimsTeam",
+                "logo": "assets/logos/timsteam.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1116311079",
+                  "awayProfileId": "1111024349",
+                  "homeScore": 71,
+                  "awayScore": 50
+                }
+              ],
+              "firstTotal": 71,
+              "secondTotal": 50,
+              "winnerProfileId": "1116311079"
+            },
+            {
+              "id": "round-of-32-2",
+              "first": {
+                "profileId": "1116314995",
+                "participantName": "Алексей Мельников",
+                "teamName": "BadBoysWhite",
+                "logo": "assets/logos/bad boys white.png"
+              },
+              "second": {
+                "profileId": "1024867435",
+                "participantName": "Вероника Вуйченко",
+                "teamName": "unodostres",
+                "logo": "assets/logos/unodostres.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1116314995",
+                  "awayProfileId": "1024867435",
+                  "homeScore": 55,
+                  "awayScore": 76
+                }
+              ],
+              "firstTotal": 55,
+              "secondTotal": 76,
+              "winnerProfileId": "1024867435"
+            },
+            {
+              "id": "round-of-32-3",
+              "first": {
+                "profileId": "73116796",
+                "participantName": "Павел Алешкин",
+                "teamName": "ducks",
+                "logo": "assets/logos/ducks.png"
+              },
+              "second": {
+                "profileId": "1071227986",
+                "participantName": "Вадим Евтеев",
+                "teamName": "Kopf89",
+                "logo": "assets/logos/kopf89.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "73116796",
+                  "awayProfileId": "1071227986",
+                  "homeScore": 87,
+                  "awayScore": 84
+                }
+              ],
+              "firstTotal": 87,
+              "secondTotal": 84,
+              "winnerProfileId": "73116796"
+            },
+            {
+              "id": "round-of-32-4",
+              "first": {
+                "profileId": "1116144526",
+                "participantName": "Владимир Баннов",
+                "teamName": "Vova_b",
+                "logo": "assets/logos/vova_b.png"
+              },
+              "second": {
+                "profileId": "1113442132",
+                "participantName": "Александр Акименко",
+                "teamName": "FC PEPElats",
+                "logo": "assets/logos/fc pepelats.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1116144526",
+                  "awayProfileId": "1113442132",
+                  "homeScore": 60,
+                  "awayScore": 76
+                }
+              ],
+              "firstTotal": 60,
+              "secondTotal": 76,
+              "winnerProfileId": "1113442132"
+            },
+            {
+              "id": "round-of-32-5",
+              "first": {
+                "profileId": "1111769718",
+                "participantName": "Рамиз Алиев",
+                "teamName": "BIG TURTLES",
+                "logo": "assets/logos/big turtles.png"
+              },
+              "second": {
+                "profileId": "1115367480",
+                "participantName": "Александр Лаптев",
+                "teamName": "КоготьВалверде",
+                "logo": "assets/logos/the valverde's claw.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1111769718",
+                  "awayProfileId": "1115367480",
+                  "homeScore": 95,
+                  "awayScore": 49
+                }
+              ],
+              "firstTotal": 95,
+              "secondTotal": 49,
+              "winnerProfileId": "1111769718"
+            },
+            {
+              "id": "round-of-32-6",
+              "first": {
+                "profileId": "144762187",
+                "participantName": "Тимофей Онорин",
+                "teamName": "onorintimka",
+                "logo": "assets/logos/onorintimka.png"
+              },
+              "second": {
+                "profileId": "1116316056",
+                "participantName": "Петр Трубицын",
+                "teamName": "krya team",
+                "logo": "assets/logos/krya team.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "144762187",
+                  "awayProfileId": "1116316056",
+                  "homeScore": 40,
+                  "awayScore": 67
+                }
+              ],
+              "firstTotal": 40,
+              "secondTotal": 67,
+              "winnerProfileId": "1116316056"
+            },
+            {
+              "id": "round-of-32-7",
+              "first": {
+                "profileId": "1113227695",
+                "participantName": "Диана Еприкян",
+                "teamName": "Черные Мамбы",
+                "logo": "assets/logos/Black Mambas.png"
+              },
+              "second": {
+                "profileId": "1097941691",
+                "participantName": "Вениамин Филатов",
+                "teamName": "Мыши-байкеры с марса",
+                "logo": "assets/logos/mice bikers from mars.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1113227695",
+                  "awayProfileId": "1097941691",
+                  "homeScore": 57,
+                  "awayScore": 72
+                }
+              ],
+              "firstTotal": 57,
+              "secondTotal": 72,
+              "winnerProfileId": "1097941691"
+            },
+            {
+              "id": "round-of-32-8",
+              "first": {
+                "profileId": "1111051849",
+                "participantName": "Виктория Рочева",
+                "teamName": "Испанский эчпочмак",
+                "logo": "assets/logos/испанский эчпочмак.png"
+              },
+              "second": {
+                "profileId": "1103401223",
+                "participantName": "Александр Скварко",
+                "teamName": "ремонтада",
+                "logo": "assets/logos/ремонтада.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1111051849",
+                  "awayProfileId": "1103401223",
+                  "homeScore": 89,
+                  "awayScore": 56
+                }
+              ],
+              "firstTotal": 89,
+              "secondTotal": 56,
+              "winnerProfileId": "1111051849"
+            },
+            {
+              "id": "round-of-32-9",
+              "first": {
+                "profileId": "26761799",
+                "participantName": "Жанна Нургалиева",
+                "teamName": "Железные яйца Переса",
+                "logo": "assets/logos/Iron Balls of Peres 2.png"
+              },
+              "second": {
+                "profileId": "1063076888",
+                "participantName": "Дмитрий Щетинин",
+                "teamName": "Andar con rodeos",
+                "logo": "assets/logos/Andar con rodeos.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "26761799",
+                  "awayProfileId": "1063076888",
+                  "homeScore": 64,
+                  "awayScore": 71
+                }
+              ],
+              "firstTotal": 64,
+              "secondTotal": 71,
+              "winnerProfileId": "1063076888"
+            },
+            {
+              "id": "round-of-32-10",
+              "first": {
+                "profileId": "152317185",
+                "participantName": "Равил Магеррамов",
+                "teamName": "Ravil_Real_Madrid",
+                "logo": "assets/logos/ravil_real_madrid.png"
+              },
+              "second": {
+                "profileId": "1068332740",
+                "participantName": "Дарья Кузнецкая",
+                "teamName": "Люмос Солем.",
+                "logo": "assets/logos/lumos solem.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "152317185",
+                  "awayProfileId": "1068332740",
+                  "homeScore": 65,
+                  "awayScore": 38
+                }
+              ],
+              "firstTotal": 65,
+              "secondTotal": 38,
+              "winnerProfileId": "152317185"
+            },
+            {
+              "id": "round-of-32-11",
+              "first": {
+                "profileId": "135066850",
+                "participantName": "Кирилл Кожухов",
+                "teamName": "Пас Хуанито",
+                "logo": "assets/logos/the pass of juanito 2.png"
+              },
+              "second": {
+                "profileId": "151923911",
+                "participantName": "Кирилл Яковченко",
+                "teamName": "Sevastopol",
+                "logo": "assets/logos/Sevastopol.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "135066850",
+                  "awayProfileId": "151923911",
+                  "homeScore": 79,
+                  "awayScore": 84
+                }
+              ],
+              "firstTotal": 79,
+              "secondTotal": 84,
+              "winnerProfileId": "151923911"
+            },
+            {
+              "id": "round-of-32-12",
+              "first": {
+                "profileId": "5275903",
+                "participantName": "Мартин Бабаян",
+                "teamName": "Los Viejitos de Chamartín",
+                "logo": "assets/logos/Los Viejitos de Chamartín.png"
+              },
+              "second": {
+                "profileId": "1116146089",
+                "participantName": "Иван Шураев",
+                "teamName": "shmelek",
+                "logo": "assets/logos/shmelek.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "5275903",
+                  "awayProfileId": "1116146089",
+                  "homeScore": 66,
+                  "awayScore": 62
+                }
+              ],
+              "firstTotal": 66,
+              "secondTotal": 62,
+              "winnerProfileId": "5275903"
+            },
+            {
+              "id": "round-of-32-13",
+              "first": {
+                "profileId": "1113514956",
+                "participantName": "Артём Молдавский",
+                "teamName": "Skyters",
+                "logo": "assets/logos/skyters.png"
+              },
+              "second": {
+                "profileId": "1116139003",
+                "participantName": "Ани Меликян",
+                "teamName": "se come una paella",
+                "logo": "assets/logos/se come una paella.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1113514956",
+                  "awayProfileId": "1116139003",
+                  "homeScore": 66,
+                  "awayScore": 90
+                }
+              ],
+              "firstTotal": 66,
+              "secondTotal": 90,
+              "winnerProfileId": "1116139003"
+            },
+            {
+              "id": "round-of-32-14",
+              "first": {
+                "profileId": "1116086751",
+                "participantName": "Артём Сафин",
+                "teamName": "Дирдам Лаер",
+                "logo": "assets/logos/dirdam laer.png"
+              },
+              "second": {
+                "profileId": "1115368794",
+                "participantName": "Дмитрий Багрий",
+                "teamName": "Сахалин",
+                "logo": "assets/logos/sakhalin.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1116086751",
+                  "awayProfileId": "1115368794",
+                  "homeScore": 67,
+                  "awayScore": 59
+                }
+              ],
+              "firstTotal": 67,
+              "secondTotal": 59,
+              "winnerProfileId": "1116086751"
+            },
+            {
+              "id": "round-of-32-15",
+              "first": {
+                "profileId": "1113412675",
+                "participantName": "Евгений Прокопенко",
+                "teamName": "ФК Уже не красное пузо",
+                "logo": "assets/logos/фк уже не красное пузо.png"
+              },
+              "second": {
+                "profileId": "1096489838",
+                "participantName": "Даниил Шалковский",
+                "teamName": "Lion Force",
+                "logo": "assets/logos/LionForce.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1113412675",
+                  "awayProfileId": "1096489838",
+                  "homeScore": 35,
+                  "awayScore": 70
+                }
+              ],
+              "firstTotal": 35,
+              "secondTotal": 70,
+              "winnerProfileId": "1096489838"
+            },
+            {
+              "id": "round-of-32-16",
+              "first": {
+                "profileId": "1115413541",
+                "participantName": "Елена Соколинская",
+                "teamName": "RMonte Carlo",
+                "logo": "assets/logos/rmonte carlo 2.png"
+              },
+              "second": {
+                "profileId": "1115308799",
+                "participantName": "Сарыал Федотов",
+                "teamName": "SaREAL",
+                "logo": "assets/logos/sareal fc.png"
+              },
+              "legs": [
+                {
+                  "tour": 18,
+                  "homeProfileId": "1115413541",
+                  "awayProfileId": "1115308799",
+                  "homeScore": 46,
+                  "awayScore": 74
+                }
+              ],
+              "firstTotal": 46,
+              "secondTotal": 74,
+              "winnerProfileId": "1115308799"
+            }
+          ]
+        },
+        {
+          "id": "round-of-16",
+          "title": "1/8 финала",
+          "tours": [
+            22
+          ],
+          "matches": [
+            {
+              "id": "round-of-16-1",
+              "first": {
+                "profileId": "1116311079",
+                "participantName": "Игорь Белоусов",
+                "teamName": "Volidol",
+                "logo": "assets/logos/volidol.png"
+              },
+              "second": {
+                "profileId": "1024867435",
+                "participantName": "Вероника Вуйченко",
+                "teamName": "unodostres",
+                "logo": "assets/logos/unodostres.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "1116311079",
+                  "awayProfileId": "1024867435",
+                  "homeScore": 38,
+                  "awayScore": 25
+                }
+              ],
+              "firstTotal": 38,
+              "secondTotal": 25,
+              "winnerProfileId": "1116311079"
+            },
+            {
+              "id": "round-of-16-2",
+              "first": {
+                "profileId": "73116796",
+                "participantName": "Павел Алешкин",
+                "teamName": "ducks",
+                "logo": "assets/logos/ducks.png"
+              },
+              "second": {
+                "profileId": "1113442132",
+                "participantName": "Александр Акименко",
+                "teamName": "FC PEPElats",
+                "logo": "assets/logos/fc pepelats.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "73116796",
+                  "awayProfileId": "1113442132",
+                  "homeScore": 50,
+                  "awayScore": 39
+                }
+              ],
+              "firstTotal": 50,
+              "secondTotal": 39,
+              "winnerProfileId": "73116796"
+            },
+            {
+              "id": "round-of-16-3",
+              "first": {
+                "profileId": "1111769718",
+                "participantName": "Рамиз Алиев",
+                "teamName": "BIG TURTLES",
+                "logo": "assets/logos/big turtles.png"
+              },
+              "second": {
+                "profileId": "1116316056",
+                "participantName": "Петр Трубицын",
+                "teamName": "krya team",
+                "logo": "assets/logos/krya team.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "1111769718",
+                  "awayProfileId": "1116316056",
+                  "homeScore": 31,
+                  "awayScore": 25
+                }
+              ],
+              "firstTotal": 31,
+              "secondTotal": 25,
+              "winnerProfileId": "1111769718"
+            },
+            {
+              "id": "round-of-16-4",
+              "first": {
+                "profileId": "1097941691",
+                "participantName": "Вениамин Филатов",
+                "teamName": "Мыши-байкеры с марса",
+                "logo": "assets/logos/mice bikers from mars.png"
+              },
+              "second": {
+                "profileId": "1111051849",
+                "participantName": "Виктория Рочева",
+                "teamName": "Испанский эчпочмак",
+                "logo": "assets/logos/испанский эчпочмак.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "1097941691",
+                  "awayProfileId": "1111051849",
+                  "homeScore": 41,
+                  "awayScore": 45
+                }
+              ],
+              "firstTotal": 41,
+              "secondTotal": 45,
+              "winnerProfileId": "1111051849"
+            },
+            {
+              "id": "round-of-16-5",
+              "first": {
+                "profileId": "1063076888",
+                "participantName": "Дмитрий Щетинин",
+                "teamName": "Andar con rodeos",
+                "logo": "assets/logos/Andar con rodeos.png"
+              },
+              "second": {
+                "profileId": "152317185",
+                "participantName": "Равил Магеррамов",
+                "teamName": "Ravil_Real_Madrid",
+                "logo": "assets/logos/ravil_real_madrid.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "1063076888",
+                  "awayProfileId": "152317185",
+                  "homeScore": 35,
+                  "awayScore": 32
+                }
+              ],
+              "firstTotal": 35,
+              "secondTotal": 32,
+              "winnerProfileId": "1063076888"
+            },
+            {
+              "id": "round-of-16-6",
+              "first": {
+                "profileId": "151923911",
+                "participantName": "Кирилл Яковченко",
+                "teamName": "Sevastopol",
+                "logo": "assets/logos/Sevastopol.png"
+              },
+              "second": {
+                "profileId": "5275903",
+                "participantName": "Мартин Бабаян",
+                "teamName": "Los Viejitos de Chamartín",
+                "logo": "assets/logos/Los Viejitos de Chamartín.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "151923911",
+                  "awayProfileId": "5275903",
+                  "homeScore": 42,
+                  "awayScore": 38
+                }
+              ],
+              "firstTotal": 42,
+              "secondTotal": 38,
+              "winnerProfileId": "151923911"
+            },
+            {
+              "id": "round-of-16-7",
+              "first": {
+                "profileId": "1116139003",
+                "participantName": "Ани Меликян",
+                "teamName": "se come una paella",
+                "logo": "assets/logos/se come una paella.png"
+              },
+              "second": {
+                "profileId": "1116086751",
+                "participantName": "Артём Сафин",
+                "teamName": "Дирдам Лаер",
+                "logo": "assets/logos/dirdam laer.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "1116139003",
+                  "awayProfileId": "1116086751",
+                  "homeScore": 31,
+                  "awayScore": 24
+                }
+              ],
+              "firstTotal": 31,
+              "secondTotal": 24,
+              "winnerProfileId": "1116139003"
+            },
+            {
+              "id": "round-of-16-8",
+              "first": {
+                "profileId": "1096489838",
+                "participantName": "Даниил Шалковский",
+                "teamName": "Lion Force",
+                "logo": "assets/logos/LionForce.png"
+              },
+              "second": {
+                "profileId": "1115308799",
+                "participantName": "Сарыал Федотов",
+                "teamName": "SaREAL",
+                "logo": "assets/logos/sareal fc.png"
+              },
+              "legs": [
+                {
+                  "tour": 22,
+                  "homeProfileId": "1096489838",
+                  "awayProfileId": "1115308799",
+                  "homeScore": 44,
+                  "awayScore": 42
+                }
+              ],
+              "firstTotal": 44,
+              "secondTotal": 42,
+              "winnerProfileId": "1096489838"
+            }
+          ]
+        },
+        {
+          "id": "quarter-finals",
+          "title": "1/4 финала",
+          "tours": [
+            26
+          ],
+          "matches": [
+            {
+              "id": "quarter-finals-1",
+              "first": {
+                "profileId": "1116311079",
+                "participantName": "Игорь Белоусов",
+                "teamName": "Volidol",
+                "logo": "assets/logos/volidol.png"
+              },
+              "second": {
+                "profileId": "73116796",
+                "participantName": "Павел Алешкин",
+                "teamName": "ducks",
+                "logo": "assets/logos/ducks.png"
+              },
+              "legs": [
+                {
+                  "tour": 26,
+                  "homeProfileId": "1116311079",
+                  "awayProfileId": "73116796",
+                  "homeScore": 28,
+                  "awayScore": 31
+                }
+              ],
+              "firstTotal": 28,
+              "secondTotal": 31,
+              "winnerProfileId": "73116796"
+            },
+            {
+              "id": "quarter-finals-2",
+              "first": {
+                "profileId": "1111769718",
+                "participantName": "Рамиз Алиев",
+                "teamName": "BIG TURTLES",
+                "logo": "assets/logos/big turtles.png"
+              },
+              "second": {
+                "profileId": "1111051849",
+                "participantName": "Виктория Рочева",
+                "teamName": "Испанский эчпочмак",
+                "logo": "assets/logos/испанский эчпочмак.png"
+              },
+              "legs": [
+                {
+                  "tour": 26,
+                  "homeProfileId": "1111769718",
+                  "awayProfileId": "1111051849",
+                  "homeScore": 38,
+                  "awayScore": 29
+                }
+              ],
+              "firstTotal": 38,
+              "secondTotal": 29,
+              "winnerProfileId": "1111769718"
+            },
+            {
+              "id": "quarter-finals-3",
+              "first": {
+                "profileId": "1063076888",
+                "participantName": "Дмитрий Щетинин",
+                "teamName": "Andar con rodeos",
+                "logo": "assets/logos/Andar con rodeos.png"
+              },
+              "second": {
+                "profileId": "151923911",
+                "participantName": "Кирилл Яковченко",
+                "teamName": "Sevastopol",
+                "logo": "assets/logos/Sevastopol.png"
+              },
+              "legs": [
+                {
+                  "tour": 26,
+                  "homeProfileId": "1063076888",
+                  "awayProfileId": "151923911",
+                  "homeScore": 31,
+                  "awayScore": 25
+                }
+              ],
+              "firstTotal": 31,
+              "secondTotal": 25,
+              "winnerProfileId": "1063076888"
+            },
+            {
+              "id": "quarter-finals-4",
+              "first": {
+                "profileId": "1116139003",
+                "participantName": "Ани Меликян",
+                "teamName": "se come una paella",
+                "logo": "assets/logos/se come una paella.png"
+              },
+              "second": {
+                "profileId": "1096489838",
+                "participantName": "Даниил Шалковский",
+                "teamName": "Lion Force",
+                "logo": "assets/logos/LionForce.png"
+              },
+              "legs": [
+                {
+                  "tour": 26,
+                  "homeProfileId": "1116139003",
+                  "awayProfileId": "1096489838",
+                  "homeScore": 33,
+                  "awayScore": 44
+                }
+              ],
+              "firstTotal": 33,
+              "secondTotal": 44,
+              "winnerProfileId": "1096489838"
+            }
+          ]
+        },
+        {
+          "id": "semi-finals",
+          "title": "1/2 финала",
+          "tours": [
+            30,
+            32
+          ],
+          "matches": [
+            {
+              "id": "semi-finals-1",
+              "first": {
+                "profileId": "73116796",
+                "participantName": "Павел Алешкин",
+                "teamName": "ducks",
+                "logo": "assets/logos/ducks.png"
+              },
+              "second": {
+                "profileId": "1111769718",
+                "participantName": "Рамиз Алиев",
+                "teamName": "BIG TURTLES",
+                "logo": "assets/logos/big turtles.png"
+              },
+              "legs": [
+                {
+                  "tour": 30,
+                  "homeProfileId": "73116796",
+                  "awayProfileId": "1111769718",
+                  "homeScore": 44,
+                  "awayScore": 43
+                },
+                {
+                  "tour": 32,
+                  "homeProfileId": "1111769718",
+                  "awayProfileId": "73116796",
+                  "homeScore": 53,
+                  "awayScore": 63
+                }
+              ],
+              "firstTotal": 107,
+              "secondTotal": 96,
+              "winnerProfileId": "73116796"
+            },
+            {
+              "id": "semi-finals-2",
+              "first": {
+                "profileId": "1063076888",
+                "participantName": "Дмитрий Щетинин",
+                "teamName": "Andar con rodeos",
+                "logo": "assets/logos/Andar con rodeos.png"
+              },
+              "second": {
+                "profileId": "1096489838",
+                "participantName": "Даниил Шалковский",
+                "teamName": "Lion Force",
+                "logo": "assets/logos/LionForce.png"
+              },
+              "legs": [
+                {
+                  "tour": 30,
+                  "homeProfileId": "1063076888",
+                  "awayProfileId": "1096489838",
+                  "homeScore": 45,
+                  "awayScore": 42
+                },
+                {
+                  "tour": 32,
+                  "homeProfileId": "1096489838",
+                  "awayProfileId": "1063076888",
+                  "homeScore": 61,
+                  "awayScore": 75
+                }
+              ],
+              "firstTotal": 120,
+              "secondTotal": 103,
+              "winnerProfileId": "1063076888"
+            }
+          ]
+        },
+        {
+          "id": "final",
+          "title": "Финал",
+          "tours": [
+            36
+          ],
+          "matches": [
+            {
+              "id": "final-1",
+              "first": {
+                "profileId": "73116796",
+                "participantName": "Павел Алешкин",
+                "teamName": "ducks",
+                "logo": "assets/logos/ducks.png"
+              },
+              "second": {
+                "profileId": "1063076888",
+                "participantName": "Дмитрий Щетинин",
+                "teamName": "Andar con rodeos",
+                "logo": "assets/logos/Andar con rodeos.png"
+              },
+              "legs": [
+                {
+                  "tour": 36,
+                  "homeProfileId": "73116796",
+                  "awayProfileId": "1063076888",
+                  "homeScore": 73,
+                  "awayScore": 54
+                }
+              ],
+              "firstTotal": 73,
+              "secondTotal": 54,
+              "winnerProfileId": "73116796"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

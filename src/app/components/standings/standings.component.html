@@ -30,6 +30,7 @@
       *ngFor="let profile of profilesArr; index as i"
       class="table-row"
       [class.qualification-boundary]="qualifiedPlaces > 0 && i + 1 === qualifiedPlaces"
+      [class.martin-league-member]="showMartinLeague && profile.isMartin === 1"
     >
       <td [ngClass]="{
         'first':    i + 1 === 1,
@@ -57,8 +58,13 @@
               </div>
             </div>
             <div class="team-container">
-              <span class="team-name">
-                {{ profile.team.title }}
+              <span class="team-name-line">
+                <span class="team-name">{{ profile.team.title }}</span>
+                <span
+                  *ngIf="showMartinLeague && profile.isMartin === 1"
+                  class="martin-league-badge"
+                  title="Участник Лиги Мартина"
+                >ЛМ</span>
               </span>
               <span class="person-name">{{ profile.name }}</span>
             </div>

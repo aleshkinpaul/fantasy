@@ -26,6 +26,7 @@ export class MatchesComponent {
   @Input() firstTour = 1;
   @Input() activeTabs!: IActiveCompetitionTabs;
   @Input() matchesTours: number[] = [];
+  @Input() showMartinLeague = false;
   @Output() matchOpen = new EventEmitter<MatchCenterSelection>();
 
   public readonly isLoading$: Observable<boolean>;
@@ -55,6 +56,10 @@ export class MatchesComponent {
 
   getTeamTitle(profileId: string): string {
     return this.requireProfile(profileId).team.title;
+  }
+
+  isMartinLeagueMember(profileId: string): boolean {
+    return this.showMartinLeague && this.getProfileInfo(profileId)?.isMartin === 1;
   }
 
   openMatch(match: CompetitionMatch, tourIndex: number): void {

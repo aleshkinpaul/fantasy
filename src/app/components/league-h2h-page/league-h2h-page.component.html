@@ -81,6 +81,7 @@
       [chosenStage]="chosenStage"
       [chosenLeague]="chosenLeague"
       [qualifiedPlaces]="consts.stages[activeTabs.tabId - 1]?.qualifiedPlaces || 0"
+      [showMartinLeague]="competitionType === 'spain'"
     ></app-standings>
   </div>
 
@@ -127,6 +128,7 @@
       [firstTour]="this.consts.stages[activeTabs.tabId - 1].firstTour"
       [lastTour]="lastTour"
       [activeTabs]="activeTabs"
+      [showMartinLeague]="competitionType === 'spain'"
       (matchOpen)="openMatchCenter($event)"
     ></app-matches>
     <app-tour-insights
@@ -175,6 +177,7 @@
         [matchesTours]="cup.matchesTours"
         [lastTour]="lastTour"
         [activeTabs]="activeTabs"
+        [showMartinLeague]="competitionType === 'spain'"
         (matchOpen)="openMatchCenter($event)"
       ></app-matches>
     </div>

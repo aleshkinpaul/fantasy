@@ -53,7 +53,10 @@
           [href]="champion.tournamentRoute"
           (click)="openTournament($event, champion.tournamentRoute)"
         >
-          <span class="champion-crown" aria-hidden="true">★</span>
+          <span class="champion-trophy trophy-slot" [title]="champion.titleTypeLabel">
+            <span aria-hidden="true"></span>
+            <img [src]="champion.trophyIcon" alt="" (error)="hideBrokenIcon($event)">
+          </span>
           <div class="champion-logo">
             <img [src]="champion.placement.recipient.logo" [alt]="champion.placement.displayName">
           </div>
@@ -61,7 +64,7 @@
             <span class="champion-type">{{ champion.titleTypeLabel }}</span>
             <strong>{{ champion.placement.displayName }}</strong>
             <small *ngIf="champion.placement.teamName">{{ champion.placement.teamName }}</small>
-            <small *ngIf="!champion.placement.teamName">{{ champion.placement.memberNames.join(' · ') }}</small>
+            <small class="member-list" *ngIf="!champion.placement.teamName">{{ champion.placement.memberNames.join(' · ') }}</small>
             <span class="champion-period">{{ champion.period }}</span>
           </div>
         </a>
@@ -126,7 +129,13 @@
                     <span>{{ stage.titleTypeLabel }}</span>
                     <h5>{{ stage.title }}</h5>
                   </div>
-                  <span class="stage-complete">Завершён</span>
+                  <span class="stage-status">
+                    <span class="trophy-slot stage-trophy" [title]="stage.titleTypeLabel">
+                      <span aria-hidden="true"></span>
+                      <img [src]="stage.trophyIcon" alt="" (error)="hideBrokenIcon($event)">
+                    </span>
+                    <span class="stage-complete">Завершён</span>
+                  </span>
                 </div>
 
                 <ol class="podium-list">
@@ -144,7 +153,7 @@
                     <div class="podium-copy">
                       <strong>{{ placement.displayName }}</strong>
                       <span *ngIf="placement.teamName">{{ placement.teamName }}</span>
-                      <span *ngIf="!placement.teamName">{{ placement.memberNames.join(' · ') }}</span>
+                      <span class="member-list" *ngIf="!placement.teamName">{{ placement.memberNames.join(' · ') }}</span>
                     </div>
                     <span class="team-badge" *ngIf="placement.recipient.type === 'team'">Команда</span>
                   </li>
@@ -175,14 +184,22 @@
         <div
           class="leader-row"
           role="row"
-          *ngFor="let leader of (showAllLeaders ? data.leaders : data.leaders.slice(0, 8)); let index = index"
+          *ngFor="let leader of (showAllLeaders ? data.leaders : data.leaders.slice(0, 10)); let index = index"
         >
           <div class="leader-person" role="cell">
             <span class="leader-rank">{{ index + 1 }}</span>
             <span class="leader-avatar" aria-hidden="true">{{ leader.name.charAt(0) }}</span>
             <strong>{{ leader.name }}</strong>
           </div>
-          <strong role="cell">{{ leader.championships }}</strong>
+          <div class="leader-titles" role="cell">
+            <strong>{{ leader.championships }}</strong>
+            <span class="leader-trophies" *ngIf="leader.trophies.length">
+              <span class="trophy-slot leader-trophy" *ngFor="let trophy of leader.trophies; trackBy: trackById" [title]="trophy.label">
+                <span aria-hidden="true"></span>
+                <img [src]="trophy.icon" alt="" (error)="hideBrokenIcon($event)">
+              </span>
+            </span>
+          </div>
           <span role="cell">{{ leader.finals }}</span>
           <span role="cell">{{ leader.podiums }}</span>
         </div>

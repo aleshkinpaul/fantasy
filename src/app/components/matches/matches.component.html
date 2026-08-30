@@ -19,6 +19,11 @@
 
       <a class="home-logo-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.home)" target="_blank">
         <div class="logo-container">
+          <span
+            *ngIf="isMartinLeagueMember(match.home)"
+            class="martin-match-badge"
+            title="Участник Лиги Мартина"
+            aria-label="Участник Лиги Мартина">ЛМ</span>
           <img
             class="logo-img opponent"
             [src]="!!getTeamLogo(match.home) ? getTeamLogo(match.home) : 'assets/logos/default.png'"
@@ -39,6 +44,11 @@
 
       <a class="away-logo-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.away)" target="_blank">
         <div class="logo-container">
+          <span
+            *ngIf="isMartinLeagueMember(match.away)"
+            class="martin-match-badge"
+            title="Участник Лиги Мартина"
+            aria-label="Участник Лиги Мартина">ЛМ</span>
           <img
             class="logo-img opponent"
             [src]="!!getTeamLogo(match.away) ? getTeamLogo(match.away) : 'assets/logos/default.png'"

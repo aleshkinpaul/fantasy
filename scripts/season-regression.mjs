@@ -557,7 +557,10 @@ async function verifyCompetition(competition) {
           body: Buffer.from(JSON.stringify(stored.body)).toString('base64'),
         })
       : client.send('Fetch.continueRequest', { requestId: event.requestId });
-    action.catch(error => { failure = error; });
+    action.catch(error => {
+      const isAlreadyContinuedRequest = !stored && error.message.includes('Invalid InterceptionId');
+      if (!isAlreadyContinuedRequest) failure = error;
+    });
   });
 
   client.on('Network.requestWillBeSent', event => {

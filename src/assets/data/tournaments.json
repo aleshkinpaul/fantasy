@@ -7,17 +7,17 @@
     "title": "Ла Лига 2026/27",
     "route": "/spain/new?year=2026",
     "status": "active",
-    "description": "48 участников · конференции Анчелотти, Муньоса и Зидана"
+    "description": "h2h · конференции Анчелотти, Муньоса и Зидана"
   },
   {
     "id": "la-liga-cup-2026-27",
     "period": "2026–27",
     "yearStart": 2026,
     "kind": "cup",
-    "title": "Кубок Ла Лиги 2026/27",
+    "title": "Кубок Короля 2026/27",
     "route": "/spain/new?year=2026&tabId=5",
     "status": "scheduled",
-    "description": "Старт после публикации расписания кубковых матчей"
+    "description": "плей-офф · h2h · Старт после публикации расписания кубковых матчей"
   },
   {
     "id": "champions-league-2026-27",
@@ -27,7 +27,7 @@
     "title": "Лига чемпионов 2026/27",
     "route": "/champions-league/new?year=2026",
     "status": "scheduled",
-    "description": "Турнир ещё не начался"
+    "description": "h2h · Турнир ещё не начался"
   },
   {
     "id": "la-liga-2025-26",
@@ -37,17 +37,17 @@
     "title": "Ла Лига 2025/26",
     "route": "/spain/new?year=2025",
     "status": "completed",
-    "description": "Apertura и Clausura"
+    "description": "h2h"
   },
   {
     "id": "la-liga-cup-2025-26",
     "period": "2025–26",
     "yearStart": 2025,
     "kind": "cup",
-    "title": "Кубок Ла Лиги 2025/26",
+    "title": "Кубок Короля 2025/26",
     "route": "/spain/new?year=2025&tabId=5",
     "status": "completed",
-    "description": "Кубковая сетка сезона"
+    "description": "плей-офф · h2h"
   },
   {
     "id": "champions-league-2025-26",
@@ -57,7 +57,7 @@
     "title": "Лига чемпионов 2025/26",
     "route": "/champions-league/new?year=2025",
     "status": "completed",
-    "description": "Общий этап и плей-офф"
+    "description": "h2h"
   },
   {
     "id": "world-cup-2026",
@@ -67,7 +67,7 @@
     "title": "Чемпионат мира 2026",
     "route": "/world-cup/new?year=2025",
     "status": "completed",
-    "description": "Летний турнир сборных"
+    "description": "летний турнир сборных · h2h"
   },
   {
     "id": "la-liga-2024-25",
@@ -76,7 +76,18 @@
     "kind": "la-liga",
     "title": "Ла Лига 2024/25",
     "route": "/spain?year=2024",
-    "status": "completed"
+    "status": "completed",
+    "description": "общий зачёт"
+  },
+  {
+    "id": "la-liga-cup-2024-25",
+    "period": "2024–25",
+    "yearStart": 2024,
+    "kind": "cup",
+    "title": "Кубок Короля 2024/25",
+    "route": "/spain-cup?year=2024",
+    "status": "completed",
+    "description": "плей-офф · полуфиналы из двух матчей"
   },
   {
     "id": "champions-league-2024-25",
@@ -85,7 +96,8 @@
     "kind": "champions-league",
     "title": "Лига чемпионов 2024/25",
     "route": "/champions-league?year=2024",
-    "status": "completed"
+    "status": "completed",
+    "description": "общий зачёт"
   },
   {
     "id": "club-world-cup-2025",
@@ -95,6 +107,36 @@
     "title": "Клубный чемпионат мира 2025",
     "route": "/club-world-cup?year=2024",
     "status": "completed",
-    "description": "Командный летний турнир"
+    "description": "летний турнир · командный · h2h"
+  },
+  {
+    "id": "la-liga-2023-24",
+    "period": "2023–24",
+    "yearStart": 2023,
+    "kind": "la-liga",
+    "title": "Ла Лига 2023/24",
+    "route": "/retro/la-liga-2023-24",
+    "status": "completed",
+    "description": "общий зачёт"
+  },
+  {
+    "id": "champions-league-2023-24",
+    "period": "2023–24",
+    "yearStart": 2023,
+    "kind": "champions-league",
+    "title": "Лига чемпионов 2023/24",
+    "route": "/retro/champions-league-2023-24",
+    "status": "completed",
+    "description": "общий зачёт"
+  },
+  {
+    "id": "euro-2024",
+    "period": "2023–24",
+    "yearStart": 2023,
+    "kind": "summer",
+    "title": "Евро 2024",
+    "route": "/retro/euro-2024",
+    "status": "completed",
+    "description": "летний турнир · общий зачёт"
   }
 ]

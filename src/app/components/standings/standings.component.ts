@@ -27,6 +27,7 @@ export class StandingsComponent {
   @Input() chosenLeague = '';
   @Input() qualifiedPlaces = 0;
   @Input() isShowUnitedTableByPoints = false;
+  @Input() showMartinLeague = false;
 
   constructor(
     public service: DataService
