@@ -12,6 +12,7 @@ export interface RatingTournamentColumn {
   isLive: boolean;
   included: boolean;
   seasonWeight: number;
+  kindWeight: number;
   participantCount: number;
 }
 

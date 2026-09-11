@@ -74,6 +74,34 @@ describe('calculatePowerRating', () => {
     expect(newcomer.experienceFactor).toBe(0.7);
     expect(regular.rating).toBeGreaterThan(newcomer.rating);
   });
+
+  it('gives league and Champions League more weight than cup and summer tournaments', () => {
+    const league = makeTournament('league-2026', 2026, 'completed');
+    const cup = {
+      ...makeTournament('cup-2026', 2026, 'completed'),
+      kind: 'cup' as const,
+      kindLabel: 'Кубок',
+      shortLabel: 'КК',
+    };
+    const profiles = [
+      makeProfile('league-winner', 'Победитель лиги', [
+        makeHistory(league, 100, 1),
+        makeHistory(cup, 90, 2),
+      ]),
+      makeProfile('cup-winner', 'Победитель кубка', [
+        makeHistory(league, 90, 2),
+        makeHistory(cup, 100, 1),
+      ]),
+    ];
+
+    const rating = calculatePowerRating(profiles, makeTimeline(league, cup), true);
+
+    expect(rating.columns.find(column => column.id === league.id)?.kindWeight).toBe(1);
+    expect(rating.columns.find(column => column.id === cup.id)?.kindWeight).toBe(0.75);
+    expect(rating.rows[0].participantId).toBe('league-winner');
+    expect(rating.rows[0].rating).toBe(5.71);
+    expect(rating.rows[1].rating).toBe(4.29);
+  });
 });
 
 function makeTimeline(...tournaments: TournamentTimelineItem[]): TournamentTimelineGroup[] {

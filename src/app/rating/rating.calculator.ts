@@ -21,6 +21,13 @@ const KIND_ORDER: Record<TournamentKind, number> = {
   summer: 3,
 };
 
+const KIND_WEIGHT: Record<TournamentKind, number> = {
+  'la-liga': 1,
+  'champions-league': 1,
+  cup: 0.75,
+  summer: 0.5,
+};
+
 export function calculatePowerRating(
   profiles: ParticipantProfile[],
   timeline: TournamentTimelineGroup[],
@@ -99,6 +106,7 @@ function buildColumn(
     isLive: tournament.status === 'active',
     included,
     seasonWeight: included ? seasonWeight : 0,
+    kindWeight: KIND_WEIGHT[tournament.kind],
     participantCount: entries.length,
   };
 }
@@ -153,9 +161,11 @@ function buildParticipantRow(
     const cell = cells[column.id];
     return cell?.included ? [{ cell, column }] : [];
   });
-  const weightTotal = countedCells.reduce((sum, item) => sum + item.column.seasonWeight, 0);
+  const weightTotal = countedCells.reduce((sum, item) =>
+    sum + item.column.seasonWeight * item.column.kindWeight, 0);
   const weightedPower = weightTotal
-    ? countedCells.reduce((sum, item) => sum + item.cell.tournamentPower! * item.column.seasonWeight, 0) / weightTotal
+    ? countedCells.reduce((sum, item) =>
+      sum + item.cell.tournamentPower! * item.column.seasonWeight * item.column.kindWeight, 0) / weightTotal
     : 0;
   const activeYears = new Set(countedCells.map(item => item.column.yearStart));
   const consistencyBonus = recentSeasonPair.length === 2

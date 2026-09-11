@@ -54,6 +54,8 @@ export class RatingPageComponent implements OnInit {
     if (cell.fantasyRank !== undefined) parts.push(`место по ФО: ${cell.fantasyRank}`);
     if (cell.officialPlace !== undefined) parts.push(`итоговое место: ${cell.officialPlace}`);
     if (cell.tournamentPower !== undefined) parts.push(`сила в турнире: ${this.formatRating(cell.tournamentPower * 10)}`);
+    parts.push(`вес турнира: ${this.formatScore(column.kindWeight)}`);
+    if (column.included) parts.push(`вес сезона: ${this.formatScore(column.seasonWeight)}`);
     if (!cell.included && column.isLive) parts.push('live-результат не включён в рейтинг');
     return parts.join(' · ');
   }
