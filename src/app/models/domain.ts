@@ -8,6 +8,8 @@ export interface IActiveCompetitionTabs {
   tourId: number;
   cupTourId: number;
   tourView: 'matches' | 'insights';
+  insightsScope: 'league' | 'competition';
+  insightsPeriod: 'tour' | 'season';
 }
 
 export interface IProfileDetails {
@@ -48,10 +50,35 @@ export interface IRoster {
   total_score: number;
   captain_id: string;
   vice_captain_id?: string;
+  players_stat?: Record<string, IRosterPlayerMatchStat[]> | [];
   players: {
     base: string[];
     bench: string[];
   };
+}
+
+export interface IRosterPlayerMatchStat {
+  active_match: 0 | 1;
+  in_start_list: 0 | 1;
+  from_reserve: 0 | 1;
+  was_replaced: 0 | 1;
+  full_match: 0 | 1;
+  '60min_match': 0 | 1;
+  match_time: number;
+  goals: number;
+  assists: number;
+  fantasy_assists: number;
+  red_cards: number;
+  yellow_cards: number;
+  clean_sheet: number;
+  penalty_saves: number;
+  shot_saves: number;
+  penalty_missed: number;
+  goal_against: number;
+  penalty_force: number;
+  ball_recovery: number;
+  own_goals: number;
+  penalty_conceded: number;
 }
 
 export interface ISquadDetails {
@@ -102,6 +129,7 @@ export interface IProfileResults {
   prizeMaxLosedDiff: number;
   prizeMaxWinDiffAgainstTarget?: number;
   prizeMaxWinningMatchTotalFo?: number;
+  countedRedCards?: number;
   selectedPlayerPoints?: Record<string, number>;
   cup?: ICupResults;
 }

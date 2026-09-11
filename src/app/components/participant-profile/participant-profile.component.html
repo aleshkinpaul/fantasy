@@ -1,0 +1,124 @@
+<main class="profile-page">
+  <div class="profile-state" *ngIf="loading" aria-live="polite">Собираем историю участника…</div>
+  <div class="profile-state error" *ngIf="loadError">
+    <h1>Не удалось открыть профиль</h1>
+    <p>Проверьте локальные исторические данные и обновите страницу.</p>
+  </div>
+  <div class="profile-state" *ngIf="missing">
+    <h1>Участник не найден</h1>
+    <p>Возможно, профиль ещё не связан с историческим реестром.</p>
+    <a routerLink="/hall-of-fame">Вернуться в Зал славы</a>
+  </div>
+
+  <ng-container *ngIf="profile as participant">
+    <section class="profile-hero">
+      <div class="hero-logo">
+        <img
+          *ngIf="participant.currentTeam?.logo && !hasFailedImage('hero'); else heroFallback"
+          [src]="participant.currentTeam?.logo"
+          [alt]="participant.currentTeam?.teamName || participant.name"
+          (error)="failImage('hero')">
+        <ng-template #heroFallback><span>{{ initials(participant.currentTeam?.teamName || participant.name) }}</span></ng-template>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Профиль участника</p>
+        <h1>{{ participant.name }}</h1>
+        <strong *ngIf="participant.currentTeam?.teamName">{{ participant.currentTeam?.teamName }}</strong>
+        <p>
+          {{ participant.profileIds.length === 1
+            ? 'Один игровой профиль в истории турниров'
+            : participant.profileIds.length + ' игровых профиля объединены в одну историю' }}
+        </p>
+      </div>
+      <div class="hero-status" *ngIf="participant.currentTeam">
+        <span>{{ participant.currentTeam.statusLabel }}</span>
+        <strong>{{ participant.currentTeam.title }}</strong>
+      </div>
+    </section>
+
+    <section class="summary-grid" aria-label="Личная статистика">
+      <article><strong>{{ participant.summary.tournaments }}</strong><span>турниров</span></article>
+      <article><strong>{{ participant.summary.championships }}</strong><span>титулов</span></article>
+      <article><strong>{{ participant.summary.podiums }}</strong><span>пьедесталов</span></article>
+      <article>
+        <strong>{{ participant.summary.bestOverallPlace || '—' }}</strong>
+        <span>лучшее место в общем зачёте</span>
+      </article>
+      <article>
+        <strong>{{ participant.summary.scoredTournaments ? formatScore(participant.summary.knownTotalScore) : '—' }}</strong>
+        <span>ФО в {{ participant.summary.scoredTournaments }} сохранённых турнирах</span>
+      </article>
+    </section>
+
+    <section class="profile-section" *ngIf="participant.teamVersions.length">
+      <header class="section-heading">
+        <div><p class="eyebrow">Айдентика</p><h2>История команд</h2></div>
+        <p>Логотипы и названия сохранены в контексте конкретных сезонов и аккаунтов.</p>
+      </header>
+      <div class="team-history">
+        <article *ngFor="let team of participant.teamVersions">
+          <div class="team-logo">
+            <img
+              *ngIf="team.logo && !hasFailedImage(team.id); else teamFallback"
+              [src]="team.logo"
+              [alt]="team.teamName || participant.name"
+              (error)="failImage(team.id)">
+            <ng-template #teamFallback><span>{{ initials(team.teamName || participant.name) }}</span></ng-template>
+          </div>
+          <strong>{{ team.teamName || 'Название команды не сохранено' }}</strong>
+          <span>{{ team.firstPeriod === team.lastPeriod ? team.firstPeriod : team.firstPeriod + ' — ' + team.lastPeriod }}</span>
+          <small>{{ team.tournaments }} {{ team.tournaments === 1 ? 'турнир' : 'турнира' }}</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="profile-section">
+      <header class="section-heading">
+        <div><p class="eyebrow">Результаты</p><h2>Турниры по сезонам</h2></div>
+        <p>ФО и места отображаются только для турниров с локально сохранённой итоговой таблицей.</p>
+      </header>
+
+      <div class="tournament-history">
+        <article
+          class="tournament-entry"
+          *ngFor="let tournament of participant.tournaments; trackBy: trackTournament"
+          [class.current]="tournament.status === 'active'">
+          <div class="entry-line" aria-hidden="true"><span></span></div>
+          <div class="entry-card">
+            <header>
+              <div>
+                <span class="period">{{ tournament.period }} · {{ tournament.kindLabel }}</span>
+                <h3>{{ tournament.title }}</h3>
+                <p *ngIf="tournament.teamName">{{ tournament.teamName }}</p>
+              </div>
+              <a [href]="tournament.route" (click)="openTournament($event, tournament.route)">Открыть турнир <span aria-hidden="true">↗</span></a>
+            </header>
+
+            <div class="achievement-list" *ngIf="tournament.achievements.length">
+              <div *ngFor="let achievement of tournament.achievements" class="achievement place-{{ achievement.place }}">
+                <span class="achievement-trophy">
+                  <img [src]="achievement.trophyIcon" alt="" (error)="($any($event.target)).hidden = true">
+                </span>
+                <div>
+                  <strong>{{ placeLabel(achievement.place) }} · {{ achievement.stageTitle }}</strong>
+                  <small *ngIf="achievement.isTeamAchievement">В составе команды «{{ achievement.recipientLabel }}»</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="stats-grid" *ngIf="tournament.stats as stats; else identityOnly">
+              <div><strong>{{ stats.place }}</strong><span>место</span></div>
+              <div><strong>{{ formatScore(stats.totalScore) }}</strong><span>всего ФО</span></div>
+              <div><strong>{{ formatScore(stats.averageScore) }}</strong><span>ФО за тур</span></div>
+              <div><strong>{{ formatScore(stats.maxScore) }}</strong><span>лучший тур</span></div>
+              <div><strong>{{ stats.toursPlayed }}</strong><span>туров</span></div>
+            </div>
+            <ng-template #identityOnly>
+              <p class="coverage-note">Состав участника сохранён. Детальная итоговая статистика этого турнира пока не перенесена в локальный архив.</p>
+            </ng-template>
+          </div>
+        </article>
+      </div>
+    </section>
+  </ng-container>
+</main>

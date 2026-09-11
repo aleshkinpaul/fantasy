@@ -55,6 +55,34 @@ describe('resolveCompetitionPrizes', () => {
     ]);
   });
 
+  it('allows the author to participate when enabled for the season', () => {
+    const config = createConfig({
+      prizeRefs: [{
+        key: 'classic',
+        overrides: { allowAuthorParticipation: true },
+      }],
+    });
+
+    const [prize] = resolveCompetitionPrizes(config);
+
+    expect(prize.allowAuthorParticipation).toBeTrue();
+    expect(prize.excluded).not.toContain('1076901343');
+  });
+
+  it('keeps explicit exclusions when author participation is enabled', () => {
+    const config = createConfig({
+      prizeRefs: [{
+        key: 'classic',
+        overrides: {
+          allowAuthorParticipation: true,
+          excluded: ['1076901343', 'guest'],
+        },
+      }],
+    });
+
+    expect(resolveCompetitionPrizes(config)[0].excluded).toEqual(['1076901343', 'guest']);
+  });
+
   it('rejects an unknown prize template', () => {
     const config = createConfig({ prizeRefs: [{ key: 'unknown' }] });
 

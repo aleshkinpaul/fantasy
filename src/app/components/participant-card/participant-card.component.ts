@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { IProfileDetails } from '../../models/domain';
 
 @Component({
   selector: 'app-participant-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './participant-card.component.html',
   styleUrls: ['./participant-card.component.scss']
 })

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import {
   AchievementTitleType,
@@ -16,7 +16,7 @@ type HallTitleFilter = AchievementTitleType | 'all';
 @Component({
   selector: 'app-hall-of-fame',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './hall-of-fame.component.html',
   styleUrls: ['./hall-of-fame.component.scss']
 })

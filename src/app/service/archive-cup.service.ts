@@ -29,6 +29,10 @@ export class ArchiveCupService {
       map(registry => registry.tournaments.find(tournament => tournament.yearStart === yearStart)),
     );
   }
+
+  loadTournaments(): Observable<ArchiveCupTournament[]> {
+    return this.registry$.pipe(map(registry => registry.tournaments));
+  }
 }
 
 export function validateArchiveCupRegistry(value: unknown): ArchiveCupRegistry {

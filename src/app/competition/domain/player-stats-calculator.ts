@@ -3,20 +3,18 @@ import {
   SpecialPlayerRules,
   SportPlayer,
 } from '../models/competition.models';
-
-interface PlayerRoster {
-  captain_id: string;
-  players: { base: string[]; bench: string[] };
-}
+import { IRoster } from '../../models/domain';
+import { resolveFantasyLineup } from './fantasy-lineup-resolver';
 
 interface PlayerStatsProfile {
   team: {
-    rosters_by_tour: Record<string | number, PlayerRoster>;
+    rosters_by_tour: Record<string | number, IRoster>;
   };
   results: {
     portugezePoints: number;
     larinPoints: number;
     uniqueUsedPlayers: string[];
+    countedRedCards?: number;
     selectedPlayerPoints?: Record<string, number>;
   };
   isMartin?: number;
@@ -69,21 +67,30 @@ export function applyTourPlayerStats(
   const playersById = new Map(players.map(player => [player.id, player]));
 
   profiles.forEach(profile => {
+    if (trackSelectedPlayerPoints) {
+      profile.results.selectedPlayerPoints = {};
+      profile.results.countedRedCards = 0;
+    }
+
     for (let tour = 1; tour <= lastTour; tour++) {
       const roster = profile.team.rosters_by_tour[tour.toString()];
       const playerIds = roster.players.base.concat(roster.players.bench);
 
       if (trackSelectedPlayerPoints) {
-        if (!profile.results.selectedPlayerPoints) profile.results.selectedPlayerPoints = {};
         playerIds.forEach(playerId => {
-          const player = playersById.get(playerId);
-          if (!player) throw new Error(`В статистике тура ${tour} отсутствует игрок ${playerId}`);
-          if (!shouldCountSelectedPlayer(player, tour)) return;
-
-          const score = player.stat_by_tours[tour].score;
-          const captainMultiplier = roster.captain_id === playerId ? 2 : 1;
+          if (!playersById.has(playerId)) {
+            throw new Error(`В статистике тура ${tour} отсутствует игрок ${playerId}`);
+          }
+        });
+        const lineup = resolveFantasyLineup(roster, tour, playersById, true);
+        lineup.countedPlayerIds.forEach(playerId => {
+          const countedPlayer = lineup.players[playerId];
+          if (!countedPlayer) throw new Error(`В зачётном составе тура ${tour} отсутствует игрок ${playerId}`);
           profile.results.selectedPlayerPoints![playerId] =
-            (profile.results.selectedPlayerPoints![playerId] ?? 0) + score * captainMultiplier;
+            (profile.results.selectedPlayerPoints![playerId] ?? 0)
+            + (countedPlayer.displayFantasyScore ?? 0);
+          profile.results.countedRedCards =
+            (profile.results.countedRedCards ?? 0) + countedPlayer.redCards;
         });
       }
 
@@ -108,12 +115,6 @@ export function applyTourPlayerStats(
   });
 
   return players;
-}
-
-// The API does not expose the future "counted in fantasy result" flag yet.
-// Until it appears, every player in base + bench is eligible; captain points are doubled above.
-function shouldCountSelectedPlayer(_player: SportPlayer, _tour: number): boolean {
-  return true;
 }
 
 function mergeLatestPlayers(stats: FantasyTourStatsResponse[]): Record<string, SportPlayer> {

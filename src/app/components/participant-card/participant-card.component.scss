@@ -7,7 +7,27 @@
 }
 
 .participant-card {
+  position: relative;
   height: 100%;
+}
+
+.profile-mark {
+  position: absolute;
+  z-index: 2;
+  top: 11px;
+  left: 11px;
+  padding: 5px 8px;
+  color: $color-primary-hover;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid rgba($color-primary, .26);
+  border-radius: $border-radius-full;
+  background: rgba($color-surface, .9);
+
+  &:hover { color: #fff; background: $color-primary; }
+  &:focus-visible { @include focus-ring; }
 }
 
 .participant-link {

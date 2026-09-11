@@ -266,6 +266,18 @@ $bp-sm: 600px;
   line-height: 1.35;
 }
 
+.participant-profile-link,
+.member-links a,
+.leader-person {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover { color: $color-primary; }
+  &:focus-visible { @include focus-ring; }
+}
+
+.member-links a { white-space: normal; }
+
 .filter-panel {
   @include flex-row(20px, space-between);
   margin-bottom: 32px;

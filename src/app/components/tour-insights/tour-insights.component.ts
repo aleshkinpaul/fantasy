@@ -5,8 +5,11 @@ import { MatchCenterSelection } from '../../match-center/match-center.models';
 import {
   RankedMatchInsight,
   RankedPlayerInsight,
+  InsightsPeriod,
+  InsightsScope,
   TourInsights,
 } from '../../tour-insights/tour-insights.models';
+import { RealClubIndex } from '../../models/real-club';
 
 @Component({
   selector: 'app-tour-insights',
@@ -17,13 +20,36 @@ import {
 })
 export class TourInsightsComponent {
   @Input({ required: true }) insights!: TourInsights;
-  @Input() yearStart = 0;
-  @Input() yearEnd = 0;
+  @Input() scope: InsightsScope = 'league';
+  @Input() period: InsightsPeriod = 'tour';
+  @Input() realClubIndex: RealClubIndex = new Map();
   @Output() matchOpen = new EventEmitter<MatchCenterSelection>();
+  @Output() scopeChange = new EventEmitter<InsightsScope>();
+  @Output() periodChange = new EventEmitter<InsightsPeriod>();
   readonly expandedPlayerLists = new Set<string>();
 
   openMatch(item: RankedMatchInsight): void {
-    this.matchOpen.emit({ match: item.match, tour: this.insights.context.tour });
+    this.matchOpen.emit({ match: item.match, tour: item.tour });
+  }
+
+  setScope(scope: InsightsScope): void {
+    if (this.scope === scope) return;
+    this.expandedPlayerLists.clear();
+    this.scopeChange.emit(scope);
+  }
+
+  setPeriod(period: InsightsPeriod): void {
+    if (this.period === period) return;
+    this.expandedPlayerLists.clear();
+    this.periodChange.emit(period);
+  }
+
+  get expectedObservations(): number {
+    return this.insights.context.teamsCount * this.insights.context.toursCount;
+  }
+
+  get isSeason(): boolean {
+    return this.insights.context.period === 'season';
   }
 
   visiblePlayerItems(items: RankedPlayerInsight[], key: string): RankedPlayerInsight[] {
@@ -41,8 +67,11 @@ export class TourInsightsComponent {
   }
 
   getRealClubLogo(realTeamId?: string): string {
-    if (!realTeamId || !this.yearStart || !this.yearEnd) return '';
-    return `assets/logos/real-clubs/${this.yearStart}-${String(this.yearEnd).slice(-2)}/${realTeamId}.png`;
+    return realTeamId ? this.realClubIndex.get(realTeamId)?.logo || '' : '';
+  }
+
+  getRealClubName(realTeamId: string): string {
+    return this.realClubIndex.get(realTeamId)?.name || `Клуб #${realTeamId}`;
   }
 
   hideBrokenImage(event: Event): void {

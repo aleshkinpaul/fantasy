@@ -151,9 +151,19 @@
                       <img [src]="placement.recipient.logo" [alt]="placement.displayName">
                     </div>
                     <div class="podium-copy">
-                      <strong>{{ placement.displayName }}</strong>
+                      <a
+                        *ngIf="placement.recipient.type === 'participant'; else teamPlacementName"
+                        class="participant-profile-link"
+                        [routerLink]="['/participants', placement.recipient.members[0].participantId]"
+                      ><strong>{{ placement.displayName }}</strong></a>
+                      <ng-template #teamPlacementName><strong>{{ placement.displayName }}</strong></ng-template>
                       <span *ngIf="placement.teamName">{{ placement.teamName }}</span>
-                      <span class="member-list" *ngIf="!placement.teamName">{{ placement.memberNames.join(' · ') }}</span>
+                      <span class="member-list member-links" *ngIf="!placement.teamName">
+                        <ng-container *ngFor="let member of placement.recipient.members; let memberIndex = index">
+                          <span *ngIf="memberIndex > 0" aria-hidden="true"> · </span>
+                          <a [routerLink]="['/participants', member.participantId]">{{ placement.memberNames[memberIndex] }}</a>
+                        </ng-container>
+                      </span>
                     </div>
                     <span class="team-badge" *ngIf="placement.recipient.type === 'team'">Команда</span>
                   </li>
@@ -186,11 +196,11 @@
           role="row"
           *ngFor="let leader of (showAllLeaders ? data.leaders : data.leaders.slice(0, 10)); let index = index"
         >
-          <div class="leader-person" role="cell">
+          <a class="leader-person" role="cell" [routerLink]="['/participants', leader.participantId]">
             <span class="leader-rank">{{ index + 1 }}</span>
             <span class="leader-avatar" aria-hidden="true">{{ leader.name.charAt(0) }}</span>
             <strong>{{ leader.name }}</strong>
-          </div>
+          </a>
           <div class="leader-titles" role="cell">
             <strong>{{ leader.championships }}</strong>
             <span class="leader-trophies" *ngIf="leader.trophies.length">

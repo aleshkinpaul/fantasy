@@ -134,8 +134,11 @@
     <app-tour-insights
       *ngIf="activeTabs.tourView === 'insights' && tourInsights as insights"
       [insights]="insights"
-      [yearStart]="consts.yearStart"
-      [yearEnd]="consts.yearEnd"
+      [scope]="activeTabs.insightsScope"
+      [period]="activeTabs.insightsPeriod"
+      [realClubIndex]="realClubIndex"
+      (scopeChange)="setInsightsScope($event)"
+      (periodChange)="setInsightsPeriod($event)"
       (matchOpen)="openMatchCenter($event)">
     </app-tour-insights>
   </div>
@@ -187,9 +190,9 @@
   *ngIf="selectedMatch as selection"
   [match]="selection.match"
   [tour]="selection.tour"
+  [tourEndsAt]="squads.data.tours[selection.tour]?.end"
   [lastTour]="lastTour"
-  [yearStart]="consts.yearStart"
-  [yearEnd]="consts.yearEnd"
+  [realClubIndex]="realClubIndex"
   [profiles]="profilesDetails"
   [sportPlayers]="selectedSportPlayers"
   [forecast]="matchForecast"

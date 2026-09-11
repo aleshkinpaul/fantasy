@@ -13,6 +13,7 @@ import { LoaderService } from 'src/app/service/loader.service';
 import { logger } from 'src/app/utils/logger';
 import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
+import { findRealClubByExternalId, RealClub } from '../../models/real-club';
 
 @Component({
   selector: 'app-cwc-page',
@@ -29,7 +30,7 @@ export class CWCPageComponent implements OnInit {
   public profiles;
   public consts;
   public squads;
-  public teams;
+  public teams: RealClub[] = [];
   public results = [];
   public groupResults = [];
   public additionalGroup = {
@@ -110,7 +111,7 @@ export class CWCPageComponent implements OnInit {
     forkJoin([
       this.service.getData('/assets/data/profiles.json'),
       this.service.getData('/assets/data/consts.json'),
-      this.service.getData('/assets/data/teams.json'),
+      this.service.getData<RealClub[]>('/assets/data/teams.json'),
     ])
     .subscribe({
       next: ([profiles, consts, teams]) => {
@@ -770,7 +771,7 @@ export class CWCPageComponent implements OnInit {
   };
 
   getClubName(id) {
-    const clubInfo = this.teams.find(team => team.id === id);
+    const clubInfo = findRealClubByExternalId(this.teams, id);
     return clubInfo?.name;
   }
 

@@ -3,6 +3,8 @@ import { IProfileDetails } from '../models/domain';
 import { ForecastSnapshotFile } from '../match-center/match-center.models';
 
 export type TourInsightsStatus = 'ready' | 'upcoming' | 'unavailable';
+export type InsightsScope = 'league' | 'competition';
+export type InsightsPeriod = 'tour' | 'season';
 
 export interface InsightTeamRef {
   profileId: string;
@@ -20,6 +22,7 @@ export interface RankedTeamInsight {
 
 export interface RankedMatchInsight {
   rank: number;
+  tour: number;
   match: CompetitionMatch;
   home: InsightTeamRef;
   away: InsightTeamRef;
@@ -64,6 +67,9 @@ export interface TourInsights {
   status: TourInsightsStatus;
   context: {
     tour: number;
+    period: InsightsPeriod;
+    scope: InsightsScope;
+    toursCount: number;
     stageName: string;
     leagueName: string;
     teamsCount: number;
@@ -124,8 +130,18 @@ export interface TourInsightsInput {
   sportPlayers: SportPlayer[];
   drawGap: number;
   forecast?: ForecastSnapshotFile;
+  period?: InsightsPeriod;
+  scope?: InsightsScope;
+  tourData?: TourInsightsTourData[];
   capabilities?: {
     playerScores: boolean;
     played: boolean;
   };
+}
+
+export interface TourInsightsTourData {
+  tour: number;
+  matches: CompetitionMatch[];
+  sportPlayers: SportPlayer[];
+  forecast?: ForecastSnapshotFile;
 }

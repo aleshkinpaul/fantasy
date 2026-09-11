@@ -26,8 +26,8 @@
     "kind": "champions-league",
     "title": "Лига чемпионов 2026/27",
     "route": "/champions-league/new?year=2026",
-    "status": "scheduled",
-    "description": "h2h · Турнир ещё не начался"
+    "status": "active",
+    "description": "h2h · общий этап · 48 команд"
   },
   {
     "id": "la-liga-2025-26",

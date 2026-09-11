@@ -1,14 +1,29 @@
-<section class="tour-insights" [attr.aria-label]="'Статистика ' + insights.context.tour + ' тура'">
+<section class="tour-insights" [attr.aria-label]="isSeason ? 'Статистика за сезон' : 'Статистика ' + insights.context.tour + ' тура'">
+  <div class="insights-filters">
+    <div class="filter-group" role="group" aria-label="Охват статистики">
+      <span>Охват</span>
+      <button type="button" [class.active]="scope === 'league'" [attr.aria-pressed]="scope === 'league'" (click)="setScope('league')">
+        Конференция / группа
+      </button>
+      <button type="button" [class.active]="scope === 'competition'" [attr.aria-pressed]="scope === 'competition'" (click)="setScope('competition')">Вся лига</button>
+    </div>
+    <div class="filter-group" role="group" aria-label="Период статистики">
+      <span>Период</span>
+      <button type="button" [class.active]="period === 'tour'" [attr.aria-pressed]="period === 'tour'" (click)="setPeriod('tour')">Выбранный тур</button>
+      <button type="button" [class.active]="period === 'season'" [attr.aria-pressed]="period === 'season'" (click)="setPeriod('season')">Весь сезон</button>
+    </div>
+  </div>
+
   <header class="insights-header">
     <div>
-      <span class="section-caption">Обзор тура</span>
-      <h3>{{ insights.context.tour }} тур · {{ insights.context.leagueName }}</h3>
-      <p>{{ insights.context.stageName }} · {{ insights.context.teamsCount }} команд</p>
+      <span class="section-caption">{{ isSeason ? 'Обзор сезона' : 'Обзор тура' }}</span>
+      <h3>{{ isSeason ? 'Весь сезон' : insights.context.tour + ' тур' }} · {{ insights.context.leagueName }}</h3>
+      <p>{{ insights.context.stageName }} · {{ insights.context.teamsCount }} команд<span *ngIf="isSeason"> · {{ insights.context.toursCount }} туров</span></p>
     </div>
 
     <div class="coverage" *ngIf="insights.status === 'ready'">
-      <span>{{ insights.coverage.scoredTeams }}/{{ insights.context.teamsCount }} результатов</span>
-      <span>{{ insights.coverage.loadedRosters }}/{{ insights.context.teamsCount }} составов</span>
+      <span>{{ insights.coverage.scoredTeams }}/{{ expectedObservations }} результатов</span>
+      <span>{{ insights.coverage.loadedRosters }}/{{ expectedObservations }} составов</span>
       <span *ngIf="insights.coverage.identifiedPlayerSlots < insights.coverage.selectedPlayerSlots">
         {{ insights.coverage.identifiedPlayerSlots }}/{{ insights.coverage.selectedPlayerSlots }} игроков распознано
       </span>
@@ -27,7 +42,7 @@
     <span class="empty-icon" aria-hidden="true">i</span>
     <div>
       <h4>Недостаточно данных для обзора</h4>
-      <p>Проверьте результаты и составы выбранной лиги за этот тур.</p>
+      <p>Проверьте результаты и составы выбранной лиги за указанный период.</p>
     </div>
   </div>
 
@@ -41,7 +56,7 @@
       <div class="section-body metric-grid">
         <article class="metric-card">
           <div class="metric-heading">
-            <h4>Топ по ФО</h4>
+            <h4>{{ isSeason ? 'Топ по ФО за сезон' : 'Топ по ФО' }}</h4>
             <span *ngIf="insights.teams.medianScore !== undefined">Медиана {{ insights.teams.medianScore }}</span>
           </div>
           <ng-container *ngTemplateOutlet="teamRanking; context: { items: insights.teams.topScores, mode: 'score' }"></ng-container>
@@ -58,7 +73,7 @@
         </article>
 
         <article class="metric-card facts-card">
-          <h4>Факты тура</h4>
+          <h4>{{ isSeason ? 'Факты сезона' : 'Факты тура' }}</h4>
           <div class="fact" *ngIf="insights.teams.highestScoringLoser as item">
             <span>Самое результативное поражение</span>
             <strong>{{ item.team.teamTitle }} · {{ item.value }} ФО</strong>
@@ -97,10 +112,30 @@
       </div>
     </details>
 
+    <details class="insight-section captain-section" open>
+      <summary>
+        <span class="summary-icon captain-icon" aria-hidden="true">C</span>
+        <span>
+          <strong>{{ isSeason ? 'Капитаны сезона' : 'Капитаны тура' }}</strong>
+          <small>Футболисты, которых чаще всего назначали капитанами</small>
+        </span>
+      </summary>
+
+      <div class="section-body captain-body">
+        <article class="metric-card captain-card">
+          <div class="metric-heading">
+            <h4>Топ капитанов</h4>
+            <span>{{ isSeason ? 'Назначений за сезон' : 'Выборов в туре' }}</span>
+          </div>
+          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostPopularCaptains, mode: 'captain', key: 'captains' }"></ng-container>
+        </article>
+      </div>
+    </details>
+
     <details class="insight-section">
       <summary>
         <span class="summary-icon player-icon" aria-hidden="true">11</span>
-        <span><strong>Выбор футболистов</strong><small>Популярность, капитаны и трансферные волны</small></span>
+        <span><strong>Выбор футболистов</strong><small>Популярность игроков и трансферные волны</small></span>
       </summary>
 
       <div class="section-body metric-grid">
@@ -112,16 +147,12 @@
           <div class="metric-heading"><h4>В основе</h4><span>Стартовые 11</span></div>
           <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostPopularBase, mode: 'usage', key: 'base' }"></ng-container>
         </article>
-        <article class="metric-card">
-          <div class="metric-heading"><h4>Капитаны</h4><span>Назначений</span></div>
-          <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostPopularCaptains, mode: 'usage', key: 'captains' }"></ng-container>
-        </article>
         <article class="metric-card" *ngIf="insights.players.mostAdded.length">
-          <div class="metric-heading"><h4>Волна покупок</h4><span>Добавили в туре</span></div>
+          <div class="metric-heading"><h4>Волна покупок</h4><span>{{ isSeason ? 'Добавили за сезон' : 'Добавили в туре' }}</span></div>
           <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostAdded, mode: 'change', key: 'added' }"></ng-container>
         </article>
         <article class="metric-card" *ngIf="insights.players.mostDropped.length">
-          <div class="metric-heading"><h4>Волна продаж</h4><span>Убрали из состава</span></div>
+          <div class="metric-heading"><h4>Волна продаж</h4><span>{{ isSeason ? 'Убрали за сезон' : 'Убрали из состава' }}</span></div>
           <ng-container *ngTemplateOutlet="playerRanking; context: { items: insights.players.mostDropped, mode: 'change', key: 'dropped' }"></ng-container>
         </article>
         <article class="metric-card" *ngIf="insights.players.popularClubs.length">
@@ -130,9 +161,13 @@
             <li *ngFor="let item of insights.players.popularClubs">
               <span class="rank">{{ item.rank }}</span>
               <span class="club-logo">
-                <img [src]="getRealClubLogo(item.realTeamId)" alt="" (error)="hideBrokenImage($event)">
+                <img
+                  *ngIf="getRealClubLogo(item.realTeamId) as clubLogo"
+                  [src]="clubLogo"
+                  alt=""
+                  (error)="hideBrokenImage($event)">
               </span>
-              <span class="row-copy"><strong>Клуб #{{ item.realTeamId }}</strong><small>{{ item.baseCount }} раз в основе</small></span>
+              <span class="row-copy"><strong>{{ getRealClubName(item.realTeamId) }}</strong><small>{{ item.baseCount }} раз в основе</small></span>
               <span class="metric-value">{{ item.count }} <small>{{ item.share }}%</small></span>
             </li>
           </ol>
@@ -199,6 +234,7 @@
           <strong>{{ item.home.teamTitle }}</strong>
           <small>{{ item.away.teamTitle }}</small>
         </span>
+        <span class="match-tour" *ngIf="isSeason">{{ item.tour }} тур</span>
         <span class="match-score">{{ item.homeScore }}:{{ item.awayScore }}</span>
         <span class="metric-value" *ngIf="mode === 'sum'">Σ {{ item.combinedScore }}</span>
         <span class="metric-value" *ngIf="mode === 'difference'">Δ {{ item.difference }}</span>
@@ -213,10 +249,14 @@
     <li *ngFor="let item of visiblePlayerItems(items, key)">
       <span class="rank">{{ item.rank }}</span>
       <span class="position-badge" [attr.data-position]="item.player.positionId">{{ getPositionLabel(item.player.positionId) }}</span>
-      <span class="club-logo" *ngIf="item.player.realTeamId">
-        <img [src]="getRealClubLogo(item.player.realTeamId)" alt="" (error)="hideBrokenImage($event)">
+      <span class="club-logo" *ngIf="getRealClubLogo(item.player.realTeamId) as clubLogo">
+        <img [src]="clubLogo" alt="" (error)="hideBrokenImage($event)">
       </span>
-      <span class="row-copy"><strong>{{ item.player.name }}</strong><small *ngIf="mode === 'usage'">{{ item.baseCount }} в основе · {{ item.captainCount }} капитаном</small></span>
+      <span class="row-copy">
+        <strong>{{ item.player.name }}</strong>
+        <small *ngIf="mode === 'usage'">{{ item.baseCount }} в основе · {{ item.captainCount }} капитаном</small>
+        <small *ngIf="mode === 'captain'">{{ item.captainCount }} {{ isSeason ? 'назначений' : 'выборов' }} капитаном</small>
+      </span>
       <span class="metric-value">{{ item.count }} <small>{{ item.share }}%</small></span>
     </li>
   </ol>

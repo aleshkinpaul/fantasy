@@ -1,7 +1,11 @@
 import { IProfileDetails } from '../../models/domain';
 import { CompetitionPrizeConfig } from '../models/competition.models';
 import { SPAIN_PRIZE_IDS } from '../config/spain-prize.ids';
-import { calculateSpainPrizes, calculateWorldCupPrizes } from './prize-calculator';
+import {
+  calculateChampionsLeaguePrizes,
+  calculateSpainPrizes,
+  calculateWorldCupPrizes,
+} from './prize-calculator';
 
 describe('prize calculator', () => {
   it('sorts nominees and applies the activity filter', () => {
@@ -84,11 +88,11 @@ describe('prize calculator', () => {
     expect(result[0].activeLeaders.map(profile => profile.id)).toEqual(['second', 'first']);
   });
 
-  it('uses total score divided by constant cost to select the value player', () => {
+  it('sums points from every player tied for the best value ratio', () => {
     const leader = createProfile('leader', 0, 100);
-    leader.results.selectedPlayerPoints = { efficient: 14, expensive: 30 };
+    leader.results.selectedPlayerPoints = { efficient: 14, tied: 6, expensive: 30 };
     const runnerUp = createProfile('runner-up', 0, 100);
-    runnerUp.results.selectedPlayerPoints = { efficient: 8, expensive: 40 };
+    runnerUp.results.selectedPlayerPoints = { efficient: 8, tied: 10, expensive: 40 };
 
     const result = calculateSpainPrizes({
       prizes: [prize(SPAIN_PRIZE_IDS.HANDY_HANDS)],
@@ -97,33 +101,88 @@ describe('prize calculator', () => {
       rules: { guestProfileIds: [], extraWinnerIds: [] },
       sportPlayers: [
         sportPlayer('efficient', '10', 5, 20),
+        sportPlayer('tied', '12', 4, 16),
         sportPlayer('expensive', '11', 7, 100),
         sportPlayer('second', '11', 5, 15),
         sportPlayer('third', '12', 5, 10),
         sportPlayer('fourth', '10', 5, 5),
         sportPlayer('fifth', '11', 5, 4),
-        sportPlayer('sixth', '12', 5, 3),
       ],
     });
 
     expect(result[0].activeLeaders.map(profile => profile.id)).toEqual(['leader', 'runner-up']);
-    expect(leader.prizes[SPAIN_PRIZE_IDS.HANDY_HANDS].value).toBe(14);
+    expect(leader.prizes[SPAIN_PRIZE_IDS.HANDY_HANDS].value).toBe(20);
+    expect(runnerUp.prizes[SPAIN_PRIZE_IDS.HANDY_HANDS].value).toBe(18);
+    expect(result[0].calculationInfo).toContain('В зачёт идут: efficient, tied');
     expect(result[0].calculationInfo).toContain('1. efficient — 20 FO / 5 = 4');
-    expect(result[0].calculationInfo).toContain('5. fifth — 4 FO / 5 = 0.8');
-    expect(result[0].calculationInfo).not.toContain('sixth');
-    expect(result[0].calculationInfo?.split('\n').length).toBe(5);
+    expect(result[0].calculationInfo).toContain('2. tied — 16 FO / 4 = 4');
+    expect(result[0].calculationInfo?.split('\n').length).toBe(6);
   });
 
-  it('keeps a placeholder prize without calculated nominees', () => {
+  it('ranks Spicy Pepe by red cards from counted players', () => {
+    const leader = createProfile('leader', 0, 100);
+    leader.results.countedRedCards = 3;
+    const runnerUp = createProfile('runner-up', 0, 100);
+    runnerUp.results.countedRedCards = 1;
+
     const result = calculateSpainPrizes({
-      prizes: [{ ...prize(SPAIN_PRIZE_IDS.SPICY_PEPE), isPlaceholder: true }],
+      prizes: [prize(SPAIN_PRIZE_IDS.SPICY_PEPE)],
       profiles: [],
-      profilesDetails: [createProfile('profile', 0, 100)],
+      profilesDetails: [runnerUp, createProfile('zero', 0, 100), leader],
       rules: { guestProfileIds: [], extraWinnerIds: [] },
     });
 
-    expect(result[0].nomineesArr).toEqual([]);
-    expect(result[0].state).toBe(2);
+    expect(result[0].nomineesArr.map(profile => profile.id)).toEqual(['leader', 'runner-up']);
+    expect(result[0].activeLeaders.map(profile => profile.id)).toEqual(['leader', 'runner-up']);
+  });
+
+  it('sums only tracked points for configured Martin players', () => {
+    const leader = createProfile('leader', 0, 100);
+    leader.results.selectedPlayerPoints = { martin1: 7, martin2: 5, other: 100 };
+    const runnerUp = createProfile('runner-up', 0, 100);
+    runnerUp.results.selectedPlayerPoints = { martin1: 3, martin2: 4, other: 200 };
+
+    const result = calculateSpainPrizes({
+      prizes: [prize(SPAIN_PRIZE_IDS.MARTIN_POINTS)],
+      profiles: [],
+      profilesDetails: [runnerUp, leader],
+      rules: {
+        guestProfileIds: [],
+        extraWinnerIds: [],
+        martinPlayerIds: ['martin1', 'martin2'],
+      },
+    });
+
+    expect(leader.prizes[SPAIN_PRIZE_IDS.MARTIN_POINTS].value).toBe(12);
+    expect(runnerUp.prizes[SPAIN_PRIZE_IDS.MARTIN_POINTS].value).toBe(7);
+  });
+
+  it('keeps a Champions League manual prize pending until its nominee is configured', () => {
+    const profile = createProfile('winner', 0, 100);
+    const pendingPrize: CompetitionPrizeConfig = {
+      ...prize(101),
+      isManual: true,
+      isFinalStage: true,
+    };
+
+    const pendingResult = calculateChampionsLeaguePrizes({
+      prizes: [pendingPrize],
+      profiles: [],
+      profilesDetails: [profile],
+    });
+
+    expect(pendingResult[0].nomineesArr).toEqual([]);
+    expect(pendingResult[0].state).toBe(2);
+
+    pendingPrize.nomineesArr = ['winner'];
+    const completedResult = calculateChampionsLeaguePrizes({
+      prizes: [pendingPrize],
+      profiles: [],
+      profilesDetails: [profile],
+    });
+
+    expect(completedResult[0].nomineesArr.map(nominee => nominee.id)).toEqual(['winner']);
+    expect(completedResult[0].state).toBe(1);
   });
 });
 

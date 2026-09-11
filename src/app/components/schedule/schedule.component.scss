@@ -42,7 +42,8 @@
     background: $color-surface;
 
     &:nth-child(even) {
-      background: rgba($color-surface-muted, 0.52);
+      // background: rgba($color-surface-muted, 0.52);
+      background: $color-surface-muted;
     }
 
     &:hover {

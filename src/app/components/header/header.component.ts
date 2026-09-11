@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
           name === 'champions-league' ? 'Лига Чемпионов'  :
           name === 'spain-cup'        ? 'Кубок Испании'   : 
           name === 'club-world-cup'   ? 'Клубный ЧМ'      :
-          name === 'hall-of-fame'     ? 'Зал славы'       : '';
+          name === 'hall-of-fame'     ? 'Зал славы'       :
+          name === 'participant'      ? 'Участник'        : '';
       }
     });
   }

@@ -4,6 +4,7 @@ export interface LocalProfile {
   id: string;
   name: string;
   nick: string;
+  teamName?: string;
   url: string;
   logo: string;
   sex?: number;
@@ -31,7 +32,32 @@ export interface FantasyRoster {
   vice_captain_id: string;
   team_cost?: number;
   total_score?: string;
+  players_stat?: Record<string, FantasyRosterPlayerMatchStat[]> | [];
   players: { base: string[]; bench: string[] };
+}
+
+export interface FantasyRosterPlayerMatchStat {
+  active_match: 0 | 1;
+  in_start_list: 0 | 1;
+  from_reserve: 0 | 1;
+  was_replaced: 0 | 1;
+  full_match: 0 | 1;
+  '60min_match': 0 | 1;
+  match_time: number;
+  goals: number;
+  assists: number;
+  fantasy_assists: number;
+  red_cards: number;
+  yellow_cards: number;
+  clean_sheet: number;
+  penalty_saves: number;
+  shot_saves: number;
+  penalty_missed: number;
+  goal_against: number;
+  penalty_force: number;
+  ball_recovery: number;
+  own_goals: number;
+  penalty_conceded: number;
 }
 
 export interface FantasyTeam {
@@ -130,6 +156,7 @@ export interface CompetitionPrizeConfig {
   isActivity?: boolean;
   isManual?: boolean;
   isPlaceholder?: boolean;
+  allowAuthorParticipation?: boolean;
   excluded?: string[];
   defaultNomineesArr?: string[];
   nomineesArr?: unknown[];
@@ -146,6 +173,7 @@ export interface CompetitionPrizeReference {
   key: string;
   overrides?: {
     id?: never;
+    allowAuthorParticipation?: boolean;
     excluded?: string[];
     [key: string]: unknown;
   };
@@ -207,6 +235,7 @@ export interface SeasonCompetitionConfig {
   rulesId?: string;
   format_img_link?: string;
   profiles: string[];
+  drawPots?: string[][];
   matches: Record<string, CompetitionMatch[]>;
   stages: CompetitionStage[];
   prizes: CompetitionPrizeConfig[];

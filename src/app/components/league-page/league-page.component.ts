@@ -15,6 +15,7 @@ import { ScheduleComponent } from '../schedule/schedule.component';
 import { MatchesComponent } from '../matches/matches.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { isHistoricalMartinLeagueMember } from '../../competition/config/martin-league.registry';
+import { findRealClubByExternalId, RealClub } from '../../models/real-club';
 
 @Component({
   selector: 'app-league-page',
@@ -28,7 +29,7 @@ export class LeaguePageComponent implements OnInit {
   public profiles;
   public consts;
   public squads;
-  public teams;
+  public teams: RealClub[] = [];
   // public tours;
   // public squadsDetails = [];
 	public squadsDetails = new BehaviorSubject<ISquadDetails[]>([])
@@ -68,7 +69,7 @@ export class LeaguePageComponent implements OnInit {
     forkJoin([
       this.service.getData('/assets/data/profiles.json'),
       this.service.getData('/assets/data/consts.json'),
-      this.service.getData('/assets/data/teams.json'),
+      this.service.getData<RealClub[]>('/assets/data/teams.json'),
     ])
     .subscribe({
       next: ([profiles, consts, teams]) => {
@@ -492,7 +493,7 @@ export class LeaguePageComponent implements OnInit {
   };
 
   getClubName(id) {
-    const clubInfo = this.teams.find(team => team.id === id);
+    const clubInfo = findRealClubByExternalId(this.teams, id);
     return clubInfo?.name;
   }
 

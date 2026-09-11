@@ -1610,7 +1610,10 @@
     "prizes": [],
     "prizeRefs": [
       {
-        "key": "classic"
+        "key": "classic",
+        "overrides": {
+          "allowAuthorParticipation": true
+        }
       },
       {
         "key": "martin-league"

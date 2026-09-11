@@ -10,6 +10,7 @@ import {
   RankedTeamInsight,
   TourInsights,
   TourInsightsInput,
+  TourInsightsTourData,
 } from './tour-insights.models';
 import { getRosterChanges, getRosterSelection } from './roster-selectors';
 
@@ -26,36 +27,43 @@ interface PlayerUsage {
 
 interface ParticipantSelection {
   profile: IProfileDetails;
+  tour: number;
   all: string[];
   base: string[];
   added?: string[];
 }
 
 export function calculateTourInsights(input: TourInsightsInput): TourInsights {
+  const tourData = getTourData(input);
   const profileIds = new Set(input.profileIds);
   const profilesById = new Map(input.profiles.map(profile => [profile.id, profile]));
   const leagueProfiles = input.profileIds
     .map(profileId => profilesById.get(profileId))
     .filter((profile): profile is IProfileDetails => Boolean(profile));
-  const leagueMatches = input.matches.filter(match =>
-    profileIds.has(match.home) && profileIds.has(match.away),
-  );
-  const result = emptyInsights(input, leagueMatches.length);
+  const completedTourData = tourData.filter(item => item.tour <= input.lastTour);
+  const result = emptyInsights(input, completedTourData.length);
 
-  if (input.tour > input.lastTour) return result;
+  if ((input.period || 'tour') === 'tour' && input.tour > input.lastTour) return result;
 
   const teamRefs = new Map(leagueProfiles.map(profile => [profile.id, toTeamRef(profile)]));
-  const scores = new Map<string, number>();
-  leagueProfiles.forEach(profile => {
-    const score = finiteNumber(profile.team.results_by_tour[input.tour]?.tour_score);
-    if (score !== undefined) scores.set(profile.id, score);
+  const totalScores = new Map<string, number>();
+  const scoresByTour = new Map<number, Map<string, number>>();
+  completedTourData.forEach(item => {
+    const scores = new Map<string, number>();
+    leagueProfiles.forEach(profile => {
+      const score = finiteNumber(profile.team.results_by_tour[item.tour]?.tour_score);
+      if (score === undefined) return;
+      scores.set(profile.id, score);
+      totalScores.set(profile.id, round((totalScores.get(profile.id) || 0) + score, 1));
+      result.coverage.scoredTeams++;
+    });
+    scoresByTour.set(item.tour, scores);
   });
-  result.coverage.scoredTeams = scores.size;
 
-  const scoreValues = [...scores.values()];
+  const scoreValues = [...totalScores.values()];
   const medianScore = scoreValues.length ? Number(getTourMedian(scoreValues)) : undefined;
   result.teams.medianScore = medianScore;
-  const teamScores = [...scores.entries()].map(([profileId, score]) => ({
+  const teamScores = [...totalScores.entries()].map(([profileId, score]) => ({
     rank: 0,
     team: requireTeamRef(teamRefs, profileId),
     value: score,
@@ -88,9 +96,10 @@ export function calculateTourInsights(input: TourInsightsInput): TourInsights {
     );
   }
 
-  const calculatedMatches = leagueMatches
-    .map(match => toMatchInsight(match, scores, teamRefs))
-    .filter((match): match is RankedMatchInsight => Boolean(match));
+  const calculatedMatches = completedTourData.flatMap(item => item.matches
+    .filter(match => profileIds.has(match.home) && profileIds.has(match.away))
+    .map(match => toMatchInsight(match, item.tour, scoresByTour.get(item.tour) || new Map(), teamRefs))
+    .filter((match): match is RankedMatchInsight => Boolean(match)));
   result.context.matchesCount = calculatedMatches.length;
   result.matches.mostProductive = rank(
     [...calculatedMatches].sort(descending(
@@ -133,14 +142,14 @@ export function calculateTourInsights(input: TourInsightsInput): TourInsights {
   result.teams.lowestScoringWinner = winners
     .sort((left, right) => left.value - right.value || teamTieBreaker(left, right))[0];
 
-  if (input.forecast?.provenance === 'published') {
-    const forecastByMatch = new Map(input.forecast.forecasts.map(forecast => [
-      `${forecast.homeProfileId}:${forecast.awayProfileId}`,
-      forecast,
-    ]));
-    const upsets = calculatedMatches.flatMap(match => {
+  const forecastsByTour = new Map(completedTourData.map(item => [item.tour, item.forecast]));
+  const upsets = calculatedMatches.flatMap(match => {
+      const snapshot = forecastsByTour.get(match.tour);
+      if (snapshot?.provenance !== 'published') return [];
       if (match.difference <= input.drawGap) return [];
-      const forecast = forecastByMatch.get(`${match.match.home}:${match.match.away}`);
+      const forecast = snapshot.forecasts.find(item =>
+        item.homeProfileId === match.match.home && item.awayProfileId === match.match.away,
+      );
       if (!forecast) return [];
       const homeWon = match.homeScore > match.awayScore;
       return [{
@@ -149,7 +158,8 @@ export function calculateTourInsights(input: TourInsightsInput): TourInsights {
           ? forecast.homeWinProbability
           : forecast.awayWinProbability,
       }];
-    });
+  });
+  if (upsets.length) {
     result.matches.biggestUpsets = rank(
       upsets.sort(ascending(
         match => Number(match.winnerProbability),
@@ -159,42 +169,66 @@ export function calculateTourInsights(input: TourInsightsInput): TourInsights {
     );
   }
 
-  calculateRosterInsights(input, leagueProfiles, result);
-  result.status = scores.size || result.coverage.loadedRosters ? 'ready' : 'unavailable';
+  calculateRosterInsights(completedTourData, leagueProfiles, result);
+  result.status = totalScores.size || result.coverage.loadedRosters ? 'ready' : 'unavailable';
   return result;
 }
 
 function calculateRosterInsights(
-  input: TourInsightsInput,
+  tourData: TourInsightsTourData[],
   profiles: IProfileDetails[],
   result: TourInsights,
 ): void {
-  const sportPlayers = new Map(input.sportPlayers.map(player => [player.id, player]));
   const usage = new Map<string, PlayerUsage>();
   const selections: ParticipantSelection[] = [];
+  const allUsageByTour = new Map<number, Map<string, number>>();
+  const baseUsageByTour = new Map<number, Map<string, number>>();
+  const loadedRostersByTour = new Map<number, number>();
   let selectedPlayerSlots = 0;
   let identifiedPlayerSlots = 0;
 
-  profiles.forEach(profile => {
-    const selection = getRosterSelection(profile, input.tour);
-    if (!selection) return;
-    const changes = getRosterChanges(profile, input.tour);
-    if (changes) result.coverage.comparableRosters++;
-    result.coverage.loadedRosters++;
-    selectedPlayerSlots += selection.all.length;
-    selections.push({ profile, all: selection.all, base: selection.base, added: changes?.added });
+  tourData.forEach(item => {
+    const sportPlayers = new Map(item.sportPlayers.map(player => [player.id, player]));
+    const tourAllUsage = new Map<string, number>();
+    const tourBaseUsage = new Map<string, number>();
+    let loadedRosters = 0;
 
-    selection.all.forEach(playerId => {
-      const item = requirePlayerUsage(usage, sportPlayers, playerId);
-      item.allCount++;
-      if (sportPlayers.has(playerId)) identifiedPlayerSlots++;
+    profiles.forEach(profile => {
+      const selection = getRosterSelection(profile, item.tour);
+      if (!selection) return;
+      const changes = getRosterChanges(profile, item.tour);
+      if (changes) result.coverage.comparableRosters++;
+      result.coverage.loadedRosters++;
+      loadedRosters++;
+      selectedPlayerSlots += selection.all.length;
+      selections.push({
+        profile,
+        tour: item.tour,
+        all: selection.all,
+        base: selection.base,
+        added: changes?.added,
+      });
+
+      selection.all.forEach(playerId => {
+        const playerUsage = requirePlayerUsage(usage, sportPlayers, playerId);
+        playerUsage.allCount++;
+        increment(tourAllUsage, playerId);
+        if (sportPlayers.has(playerId)) identifiedPlayerSlots++;
+      });
+      selection.base.forEach(playerId => {
+        requirePlayerUsage(usage, sportPlayers, playerId).baseCount++;
+        increment(tourBaseUsage, playerId);
+      });
+      if (selection.captainId) {
+        requirePlayerUsage(usage, sportPlayers, selection.captainId).captainCount++;
+      }
+      changes?.added.forEach(playerId => requirePlayerUsage(usage, sportPlayers, playerId).addedCount++);
+      changes?.dropped.forEach(playerId => requirePlayerUsage(usage, sportPlayers, playerId).droppedCount++);
     });
-    selection.base.forEach(playerId => requirePlayerUsage(usage, sportPlayers, playerId).baseCount++);
-    if (selection.captainId) {
-      requirePlayerUsage(usage, sportPlayers, selection.captainId).captainCount++;
-    }
-    changes?.added.forEach(playerId => requirePlayerUsage(usage, sportPlayers, playerId).addedCount++);
-    changes?.dropped.forEach(playerId => requirePlayerUsage(usage, sportPlayers, playerId).droppedCount++);
+
+    allUsageByTour.set(item.tour, tourAllUsage);
+    baseUsageByTour.set(item.tour, tourBaseUsage);
+    loadedRostersByTour.set(item.tour, loadedRosters);
   });
 
   result.coverage.selectedPlayerSlots = selectedPlayerSlots;
@@ -209,14 +243,46 @@ function calculateRosterInsights(
   result.players.popularClubs = calculatePopularClubs(playerEntries, selectedPlayerSlots);
 
   if (!denominator) return;
-  const allPopularity = new Map(playerEntries.map(item => [item.player.id, item.allCount / denominator * 100]));
-  const basePopularity = new Map(playerEntries.map(item => [item.player.id, item.baseCount / denominator * 100]));
-  const participantEntries = selections.map(selection => ({
-    profile: selection.profile,
-    active: selection.added?.length,
-    original: average(selection.all.map(playerId => allPopularity.get(playerId) || 0)),
-    originalBase: average(selection.base.map(playerId => basePopularity.get(playerId) || 0)),
-    uniquePicks: selection.all.filter(playerId => usage.get(playerId)?.allCount === 1).length,
+  const participantTotals = new Map<string, {
+    profile: IProfileDetails;
+    active: number;
+    comparableRosters: number;
+    originalTotal: number;
+    originalBaseTotal: number;
+    selections: number;
+    uniquePicks: number;
+  }>();
+  selections.forEach(selection => {
+    const rosterCount = loadedRostersByTour.get(selection.tour) || 0;
+    const tourAllUsage = allUsageByTour.get(selection.tour) || new Map();
+    const tourBaseUsage = baseUsageByTour.get(selection.tour) || new Map();
+    const total = participantTotals.get(selection.profile.id) || {
+      profile: selection.profile,
+      active: 0,
+      comparableRosters: 0,
+      originalTotal: 0,
+      originalBaseTotal: 0,
+      selections: 0,
+      uniquePicks: 0,
+    };
+    total.active += selection.added?.length || 0;
+    total.comparableRosters += Number(selection.added !== undefined);
+    total.originalTotal += average(selection.all.map(playerId =>
+      rosterCount ? (tourAllUsage.get(playerId) || 0) / rosterCount * 100 : 0,
+    ));
+    total.originalBaseTotal += average(selection.base.map(playerId =>
+      rosterCount ? (tourBaseUsage.get(playerId) || 0) / rosterCount * 100 : 0,
+    ));
+    total.selections++;
+    total.uniquePicks += selection.all.filter(playerId => tourAllUsage.get(playerId) === 1).length;
+    participantTotals.set(selection.profile.id, total);
+  });
+  const participantEntries = [...participantTotals.values()].map(item => ({
+    profile: item.profile,
+    active: item.comparableRosters ? item.active : undefined,
+    original: item.selections ? item.originalTotal / item.selections : 0,
+    originalBase: item.selections ? item.originalBaseTotal / item.selections : 0,
+    uniquePicks: item.uniquePicks,
   }));
 
   const comparable = participantEntries.filter(item => item.active !== undefined);
@@ -258,15 +324,20 @@ function calculateRosterInsights(
   );
 }
 
-function emptyInsights(input: TourInsightsInput, matchesCount: number): TourInsights {
+function emptyInsights(input: TourInsightsInput, toursCount: number): TourInsights {
   return {
-    status: input.tour > input.lastTour ? 'upcoming' : 'unavailable',
+    status: (input.period || 'tour') === 'tour' && input.tour > input.lastTour
+      ? 'upcoming'
+      : 'unavailable',
     context: {
       tour: input.tour,
+      period: input.period || 'tour',
+      scope: input.scope || 'league',
+      toursCount,
       stageName: input.stageName,
       leagueName: input.leagueName,
       teamsCount: input.profileIds.length,
-      matchesCount,
+      matchesCount: 0,
     },
     coverage: {
       scoredTeams: 0,
@@ -299,6 +370,7 @@ function emptyInsights(input: TourInsightsInput, matchesCount: number): TourInsi
 
 function toMatchInsight(
   match: TourInsightsInput['matches'][number],
+  tour: number,
   scores: Map<string, number>,
   teams: Map<string, InsightTeamRef>,
 ): RankedMatchInsight | undefined {
@@ -307,6 +379,7 @@ function toMatchInsight(
   if (homeScore === undefined || awayScore === undefined) return undefined;
   return {
     rank: 0,
+    tour,
     match,
     home: requireTeamRef(teams, match.home),
     away: requireTeamRef(teams, match.away),
@@ -315,6 +388,16 @@ function toMatchInsight(
     combinedScore: round(homeScore + awayScore, 1),
     difference: round(Math.abs(homeScore - awayScore), 1),
   };
+}
+
+function getTourData(input: TourInsightsInput): TourInsightsTourData[] {
+  if (input.tourData?.length) return input.tourData;
+  return [{
+    tour: input.tour,
+    matches: input.matches,
+    sportPlayers: input.sportPlayers,
+    forecast: input.forecast,
+  }];
 }
 
 function toPlayerRanking(
@@ -381,8 +464,18 @@ function requirePlayerUsage(
   playerId: string,
 ): PlayerUsage {
   const existing = usage.get(playerId);
-  if (existing) return existing;
   const player = sportPlayers.get(playerId);
+  if (existing) {
+    if (player && existing.player.name.startsWith('Игрок #')) {
+      existing.player = {
+        id: playerId,
+        name: player.name,
+        positionId: player.amplua_id,
+        realTeamId: player.team_id,
+      };
+    }
+    return existing;
+  }
   const created: PlayerUsage = {
     player: {
       id: playerId,
@@ -398,6 +491,10 @@ function requirePlayerUsage(
   };
   usage.set(playerId, created);
   return created;
+}
+
+function increment(values: Map<string, number>, key: string): void {
+  values.set(key, (values.get(key) || 0) + 1);
 }
 
 function toTeamRef(profile: IProfileDetails): InsightTeamRef {

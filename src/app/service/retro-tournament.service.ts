@@ -22,6 +22,10 @@ export class RetroTournamentService {
   loadTournament(id: string): Observable<RetroTournament | undefined> {
     return this.tournaments$.pipe(map(tournaments => tournaments.find(tournament => tournament.id === id)));
   }
+
+  loadTournaments(): Observable<RetroTournament[]> {
+    return this.tournaments$;
+  }
 }
 
 export function validateRetroTournamentRegistry(value: unknown): RetroTournamentRegistry {

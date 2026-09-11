@@ -41,6 +41,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'participants/:participantId',
+    loadComponent: () => import('./components/participant-profile/participant-profile.component').then(m => m.ParticipantProfileComponent),
+    pathMatch: 'full'
+  },
+  {
+    path: 'draw',
+    loadComponent: () => import('./components/draw-page/draw-page.component').then(m => m.DrawPageComponent),
+    pathMatch: 'full'
+  },
+  {
     path: 'retro/:tournamentId',
     loadComponent: () => import('./components/retro-tournament-page/retro-tournament-page.component').then(m => m.RetroTournamentPageComponent),
     pathMatch: 'full'

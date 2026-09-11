@@ -27,6 +27,7 @@
     { "id": "kirill-yakovchenko", "name": "Кирилл Яковченко", "profileIds": ["151923911"] },
     { "id": "dmitriy-bulavko", "name": "Дмитрий Булавко", "profileIds": ["1095496719"] },
     { "id": "kirill-kozhukhov", "name": "Кирилл Кожухов", "profileIds": ["135066850"] },
+    { "id": "aleksandr-larin", "name": "Александр Ларин", "profileIds": ["1116314918"] },
     { "id": "georgiy-delokyan", "name": "Георгий Делокян", "profileIds": ["retro-georgiy-delokyan"] }
   ],
   "placements": [
@@ -419,14 +420,14 @@
       "titleType": "club-world-cup",
       "place": 2,
       "recipient": {
-        "id": "club-world-cup-2025-rkm",
+        "id": "club-world-cup-2025-tuz-vini",
         "type": "team",
-        "label": "Ремонтада космических мусликов",
-        "logo": "assets/logos/cwc-2025/ркм.png",
+        "label": "Туз Вини ♠️",
+        "logo": "assets/logos/cwc-2025/туз вини.png",
         "members": [
-          { "participantId": "aleksandr-skvarko", "profileId": "1103401223" },
-          { "participantId": "nikolay-nadoyan", "profileId": "1115355124" },
-          { "participantId": "denis-fedotov", "profileId": "1111685266" }
+          { "participantId": "artem-safin", "profileId": "1116086751" },
+          { "participantId": "ramiz-aliev", "profileId": "1111769718" },
+          { "participantId": "aleksandr-larin", "profileId": "1116314918" }
         ]
       }
     },

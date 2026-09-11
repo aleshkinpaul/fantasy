@@ -1,0 +1,157 @@
+<main class="draw-page">
+  <header class="page-intro">
+    <p class="eyebrow">Служебный инструмент</p>
+    <h1>Жеребьёвка турнира</h1>
+    <p>
+      Выберите турнир и сезон. Генератор назначит каждой команде восемь уникальных соперников —
+      по два из каждой корзины — и распределит пары по восьми турам.
+    </p>
+  </header>
+
+  <section class="selection-panel" aria-labelledby="selection-heading">
+    <div class="section-heading">
+      <div>
+        <p class="section-caption">Шаг 1</p>
+        <h2 id="selection-heading">Выбор турнира</h2>
+      </div>
+    </div>
+
+    <div class="selection-grid">
+      <label>
+        <span>Турнир</span>
+        <select [(ngModel)]="selectedTournamentId" (ngModelChange)="onTournamentChange()">
+          <option value="">Выберите турнир</option>
+          <option *ngFor="let tournament of tournaments" [value]="tournament.id">
+            {{ tournament.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        <span>Сезон</span>
+        <select
+          [(ngModel)]="selectedYear"
+          (ngModelChange)="onSeasonChange()"
+          [disabled]="!selectedTournamentId">
+          <option [ngValue]="null">Выберите сезон</option>
+          <option *ngFor="let season of seasons" [ngValue]="season.yearStart">
+            {{ season.label }}
+          </option>
+        </select>
+      </label>
+    </div>
+
+    <p class="loading-state" *ngIf="loading" aria-live="polite">Загружаю состав корзин…</p>
+    <p class="error-state" *ngIf="loadError" role="alert">{{ loadError }}</p>
+  </section>
+
+  <section class="pots-section" *ngIf="pots.length" aria-labelledby="pots-heading">
+    <div class="section-heading">
+      <div>
+        <p class="section-caption">Шаг 2</p>
+        <h2 id="pots-heading">Корзины</h2>
+      </div>
+      <span class="count-badge">{{ pots.length * pots[0].length }} команд</span>
+    </div>
+
+    <div class="pots-grid">
+      <article class="pot-card" *ngFor="let pot of pots; let potIndex = index; trackBy: trackPot">
+        <header>
+          <span class="pot-number">{{ potIndex + 1 }}</span>
+          <div>
+            <p>Корзина</p>
+            <strong>{{ pot.length }} команд</strong>
+          </div>
+        </header>
+
+        <ul>
+          <li *ngFor="let profile of pot; trackBy: trackProfile">
+            <img [src]="profile.logo" alt="" (error)="onImageError($event)">
+            <span>
+              <strong>{{ teamName(profile) }}</strong>
+              <small>{{ profile.name }}</small>
+            </span>
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="draw-action">
+      <button type="button" (click)="runDraw()">
+        {{ drawResult ? 'Провести заново' : 'Провести жеребьёвку' }}
+      </button>
+      <p>Каждое нажатие создаёт новый корректный вариант.</p>
+    </div>
+    <p class="error-state" *ngIf="drawError" role="alert">{{ drawError }}</p>
+  </section>
+
+  <section class="result-section" *ngIf="drawResult as result" aria-labelledby="result-heading">
+    <div class="section-heading result-heading">
+      <div>
+        <p class="section-caption">Результат</p>
+        <h2 id="result-heading">Расписание общего этапа</h2>
+      </div>
+      <div class="result-facts" aria-label="Параметры жеребьёвки">
+        <span>8 туров</span>
+        <span>24 матча в туре</span>
+        <span>8 соперников</span>
+      </div>
+    </div>
+
+    <div class="rounds-grid">
+      <article class="round-card" *ngFor="let round of result.rounds; trackBy: trackRound">
+        <header>
+          <span>Тур</span>
+          <strong>{{ round.number }}</strong>
+        </header>
+        <div class="match-row" *ngFor="let match of round.matches; trackBy: trackMatch">
+          <div class="match-team home-team">
+            <span>{{ teamName(profile(match.home)) }}</span>
+            <img [src]="profile(match.home).logo" alt="" (error)="onImageError($event)">
+            <span class="pot-label">{{ potNumber(match.home) }}</span>
+          </div>
+          <span class="versus" aria-hidden="true">—</span>
+          <div class="match-team">
+            <span class="pot-label">{{ potNumber(match.away) }}</span>
+            <img [src]="profile(match.away).logo" alt="" (error)="onImageError($event)">
+            <span>{{ teamName(profile(match.away)) }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <details class="opponents-panel">
+      <summary>Показать соперников каждой команды</summary>
+      <div class="opponents-list">
+        <article *ngFor="let entry of teamResults; trackBy: trackTeamResult">
+          <header>
+            <img [src]="entry.profile.logo" alt="" (error)="onImageError($event)">
+            <span>
+              <strong>{{ teamName(entry.profile) }}</strong>
+              <small>{{ entry.profile.name }}</small>
+            </span>
+          </header>
+          <ul>
+            <li *ngFor="let opponent of entry.opponents">
+              <span class="pot-label">{{ opponent.potNumber }}</span>
+              <img [src]="opponent.profile.logo" alt="" (error)="onImageError($event)">
+              <span>{{ teamName(opponent.profile) }}</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </details>
+
+    <details class="technical-panel">
+      <summary>Технические данные для файла турнира</summary>
+      <div class="technical-toolbar">
+        <p>Готовый объект можно вставить в поле <code>config</code> сезонного JSON.</p>
+        <div>
+          <span *ngIf="copyStatus" aria-live="polite">{{ copyStatus }}</span>
+          <button type="button" (click)="copyMatchesJson()">Копировать JSON</button>
+        </div>
+      </div>
+      <pre><code>{{ matchesJson }}</code></pre>
+    </details>
+  </section>
+</main>

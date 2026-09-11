@@ -7,7 +7,7 @@
     <header class="dialog-header">
       <div>
         <p class="dialog-caption">Матч-центр · {{ tour }} тур</p>
-        <h2 id="match-center-title">Составы и прогноз</h2>
+        <h2 id="match-center-title">Составы, события и прогноз</h2>
       </div>
       <button #closeButton type="button" class="close-button" (click)="close()" aria-label="Закрыть матч-центр">×</button>
     </header>
@@ -97,7 +97,12 @@
             <p class="section-caption">{{ teamIndex === 0 ? 'Хозяева' : 'Гости' }}</p>
             <h3>{{ team.profile.team.title }}</h3>
           </div>
-          <span *ngIf="team.teamCost !== undefined">{{ team.teamCost }} млн</span>
+          <div class="squad-summary">
+            <span class="counted-summary" *ngIf="team.hasParticipationData">
+              В зачёте {{ team.countedPlayersCount }}/11
+            </span>
+            <span *ngIf="team.teamCost !== undefined">{{ team.teamCost }} млн</span>
+          </div>
         </header>
 
         <ng-container *ngIf="team.hasRoster; else rosterUnavailable">
@@ -106,42 +111,144 @@
             <li
               *ngFor="let player of team.base"
               [class.position-group-start]="player.startsPositionGroup"
-              [class.new-player]="player.isNewToSquad">
+              [class.new-player]="player.isNewToSquad"
+              [class.counted-player]="player.isCounted"
+              [class.played-not-counted]="player.isPlayed && !player.isCounted"
+              [class.not-played]="player.participation === 'not-played'"
+              [class.expanded]="isPlayerExpanded(teamIndex, player.id)"
+              role="button"
+              tabindex="0"
+              [attr.aria-expanded]="isPlayerExpanded(teamIndex, player.id)"
+              [attr.aria-controls]="getPlayerDetailsId(teamIndex, player.id)"
+              (click)="togglePlayerDetails(teamIndex, player.id)"
+              (keydown)="handlePlayerKeydown($event, teamIndex, player.id)">
               <span [class]="'position position-' + (player.positionId || 'unknown')">{{ player.position }}</span>
               <span class="club-logo" aria-hidden="true">
                 <img
-                  *ngIf="player.realTeamId"
-                  [src]="getClubLogoPath(player.realTeamId)"
+                  *ngIf="getClubLogo(player.realTeamId) as clubLogo"
+                  [src]="clubLogo"
                   alt=""
                   (error)="hideMissingClubLogo($event)">
               </span>
               <span class="player-name-wrap">
-                <span class="player-name">{{ player.name }}</span>
-                <span class="new-player-badge" *ngIf="player.isNewToSquad">новый</span>
+                <span class="player-name-line">
+                  <span class="player-name">
+                    <span class="player-name-text">{{ player.name }}</span>
+                    <span class="new-player-badge" *ngIf="player.isNewToSquad">new</span>
+                  </span>
+                  <span
+                    class="player-events"
+                    *ngIf="player.isCaptain || player.isViceCaptain || player.events.length"
+                    aria-label="Роль и события футболиста">
+                    <span class="captain-badge" [class.inactive]="!player.isEffectiveCaptain" *ngIf="player.isCaptain">C</span>
+                    <span class="captain-badge vice" [class.effective]="player.isEffectiveCaptain" *ngIf="player.isViceCaptain">
+                      {{ player.isEffectiveCaptain ? 'VC×2' : 'VC' }}
+                    </span>
+                    <span
+                      *ngFor="let event of player.events"
+                      class="player-event"
+                      [class]="'player-event event-' + event.tone + ' event-' + event.key"
+                      [attr.title]="event.label + ': ' + event.count"
+                      [attr.aria-label]="event.label + ': ' + event.count">
+                      <img [src]="event.iconPath" alt="" aria-hidden="true">
+                      <span class="event-marker" *ngIf="event.marker">{{ event.marker }}</span>
+                      <b
+                        class="event-count"
+                        [class.missed-penalty]="event.key === 'penalty-missed'"
+                        *ngIf="event.key === 'penalty-missed' || event.count > 1">
+                        {{ event.key === 'penalty-missed' ? 'x' : 'x' + event.count }}
+                      </b>
+                    </span>
+                  </span>
+                </span>
+                <span class="player-status">{{ getPlayerStatusLabel(player) }}</span>
+                <span class="player-stat-summary" *ngIf="player.statSummary">{{ player.statSummary }}</span>
               </span>
-              <span class="captain-badge" *ngIf="player.isCaptain">C</span>
-              <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
-              <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
+              <span class="player-value">
+                <strong
+                  *ngIf="player.displayFantasyScore !== undefined"
+                  [attr.title]="player.scoreMultiplier === 2 ? player.fantasyScore + ' × 2' : null">
+                  {{ player.displayFantasyScore }} ФО
+                </strong>
+                <small>{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</small>
+              </span>
+              <!-- <span class="details-chevron" aria-hidden="true">⌄</span> -->
+
+              <ng-container *ngTemplateOutlet="playerDetails; context: { player: player, teamIndex: teamIndex }"></ng-container>
             </li>
           </ul>
 
-          <h4 class="bench-title">Запас</h4>
+          <h4 class="bench-title">
+            Запас<span *ngIf="team.autoSubstitutionsCount"> · автозамен: {{ team.autoSubstitutionsCount }}</span>
+          </h4>
           <ul class="player-list bench-list">
-            <li *ngFor="let player of team.bench" [class.new-player]="player.isNewToSquad">
+            <li
+              *ngFor="let player of team.bench"
+              [class.new-player]="player.isNewToSquad"
+              [class.counted-player]="player.isCounted"
+              [class.auto-subbed-in]="player.isAutoSubbedIn"
+              [class.played-not-counted]="player.isPlayed && !player.isCounted"
+              [class.not-played]="player.participation === 'not-played'"
+              [class.expanded]="isPlayerExpanded(teamIndex, player.id)"
+              role="button"
+              tabindex="0"
+              [attr.aria-expanded]="isPlayerExpanded(teamIndex, player.id)"
+              [attr.aria-controls]="getPlayerDetailsId(teamIndex, player.id)"
+              (click)="togglePlayerDetails(teamIndex, player.id)"
+              (keydown)="handlePlayerKeydown($event, teamIndex, player.id)">
               <span [class]="'position position-' + (player.positionId || 'unknown')">{{ player.position }}</span>
               <span class="club-logo" aria-hidden="true">
                 <img
-                  *ngIf="player.realTeamId"
-                  [src]="getClubLogoPath(player.realTeamId)"
+                  *ngIf="getClubLogo(player.realTeamId) as clubLogo"
+                  [src]="clubLogo"
                   alt=""
                   (error)="hideMissingClubLogo($event)">
               </span>
               <span class="player-name-wrap">
-                <span class="player-name">{{ player.name }}</span>
-                <span class="new-player-badge" *ngIf="player.isNewToSquad">новый</span>
+                <span class="player-name-line">
+                  <span class="player-name">
+                    <span class="player-name-text">{{ player.name }}</span>
+                    <span class="new-player-badge" *ngIf="player.isNewToSquad">new</span>
+                  </span>
+                  <span
+                    class="player-events"
+                    *ngIf="player.isCaptain || player.isViceCaptain || player.events.length"
+                    aria-label="Роль и события футболиста">
+                    <span class="captain-badge" [class.inactive]="!player.isEffectiveCaptain" *ngIf="player.isCaptain">C</span>
+                    <span class="captain-badge vice" [class.effective]="player.isEffectiveCaptain" *ngIf="player.isViceCaptain">
+                      {{ player.isEffectiveCaptain ? 'VC×2' : 'VC' }}
+                    </span>
+                    <span
+                      *ngFor="let event of player.events"
+                      class="player-event"
+                      [class]="'player-event event-' + event.tone + ' event-' + event.key"
+                      [attr.title]="event.label + ': ' + event.count"
+                      [attr.aria-label]="event.label + ': ' + event.count">
+                      <img [src]="event.iconPath" alt="" aria-hidden="true">
+                      <span class="event-marker" *ngIf="event.marker">{{ event.marker }}</span>
+                      <b
+                        class="event-count"
+                        [class.missed-penalty]="event.key === 'penalty-missed'"
+                        *ngIf="event.key === 'penalty-missed' || event.count > 1">
+                        {{ event.key === 'penalty-missed' ? 'x' : 'x' + event.count }}
+                      </b>
+                    </span>
+                  </span>
+                </span>
+                <span class="player-status">{{ getPlayerStatusLabel(player) }}</span>
+                <span class="player-stat-summary" *ngIf="player.statSummary">{{ player.statSummary }}</span>
               </span>
-              <span class="captain-badge vice" *ngIf="player.isViceCaptain">VC</span>
-              <span class="player-cost">{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</span>
+              <span class="player-value">
+                <strong
+                  *ngIf="player.displayFantasyScore !== undefined"
+                  [attr.title]="player.scoreMultiplier === 2 ? player.fantasyScore + ' × 2' : null">
+                  {{ player.displayFantasyScore }} ФО
+                </strong>
+                <small>{{ player.cost !== undefined ? player.cost + ' млн' : '—' }}</small>
+              </span>
+              <!-- <span class="details-chevron" aria-hidden="true">⌄</span> -->
+
+              <ng-container *ngTemplateOutlet="playerDetails; context: { player: player, teamIndex: teamIndex }"></ng-container>
             </li>
           </ul>
         </ng-container>
@@ -153,5 +260,51 @@
         </ng-template>
       </section>
     </div>
+
+    <ng-template #playerDetails let-player="player" let-teamIndex="teamIndex">
+      <section
+        *ngIf="isPlayerExpanded(teamIndex, player.id)"
+        class="player-details"
+        [id]="getPlayerDetailsId(teamIndex, player.id)"
+        (click)="$event.stopPropagation()">
+        <header class="player-details-header">
+          <div>
+            <strong>Статистика футболиста</strong>
+            <span>{{ player.isCounted ? 'ФО вошли в результат команды' : 'ФО не вошли в результат команды' }}</span>
+          </div>
+          <strong class="details-score" *ngIf="player.displayFantasyScore !== undefined">
+            {{ player.displayFantasyScore }} ФО
+            <small *ngIf="player.scoreMultiplier === 2">{{ player.fantasyScore }} × 2</small>
+          </strong>
+        </header>
+
+        <div class="detail-stat-grid" *ngIf="getTotalStatItems(player) as totalStats">
+          <div class="detail-stat" *ngFor="let item of totalStats">
+            <span>{{ item.label }}</span>
+            <strong>{{ item.value }}</strong>
+          </div>
+        </div>
+
+        <div class="match-records" *ngIf="player.matchStats.length; else noDetailedStats">
+          <article class="match-record" *ngFor="let stat of player.matchStats; index as matchIndex">
+            <header>
+              <strong>{{ player.matchStats.length > 1 ? 'Матч ' + (matchIndex + 1) : 'События матча' }}</strong>
+              <span>{{ getMatchAppearanceLabel(stat) }}</span>
+            </header>
+            <div class="match-stat-list">
+              <span *ngFor="let item of getMatchStatItems(player, stat)">
+                {{ item.label }}: <strong>{{ item.value }}</strong>
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <ng-template #noDetailedStats>
+          <p class="no-detailed-stats">
+            Детальная статистика матча ещё не поступила. Доступны только сводные ФО и минуты.
+          </p>
+        </ng-template>
+      </section>
+    </ng-template>
   </section>
 </div>

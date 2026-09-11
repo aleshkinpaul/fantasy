@@ -4,7 +4,7 @@ import { TourInsightsComponent } from './tour-insights.component';
 describe('TourInsightsComponent', () => {
   it('opens the selected ranking match in the existing match center', () => {
     const component = new TourInsightsComponent();
-    const item = { match: { home: 'home', away: 'away' } } as RankedMatchInsight;
+    const item = { tour: 8, match: { home: 'home', away: 'away' } } as RankedMatchInsight;
     component.insights = { context: { tour: 7 } } as TourInsights;
     let emittedTour = 0;
     let emittedHome = '';
@@ -15,7 +15,7 @@ describe('TourInsightsComponent', () => {
 
     component.openMatch(item);
 
-    expect(emittedTour).toBe(7);
+    expect(emittedTour).toBe(8);
     expect(emittedHome).toBe('home');
   });
 
@@ -35,5 +35,19 @@ describe('TourInsightsComponent', () => {
     expect(component.visiblePlayerItems(items, 'popular').length).toBe(7);
     component.togglePlayerList('popular');
     expect(component.visiblePlayerItems(items, 'popular').length).toBe(5);
+  });
+
+  it('emits statistics scope and period changes', () => {
+    const component = new TourInsightsComponent();
+    let scope = '';
+    let period = '';
+    component.scopeChange.subscribe(value => scope = value);
+    component.periodChange.subscribe(value => period = value);
+
+    component.setScope('competition');
+    component.setPeriod('season');
+
+    expect(scope).toBe('competition');
+    expect(period).toBe('season');
   });
 });

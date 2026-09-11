@@ -101,7 +101,7 @@ export class CompetitionFacade {
       data.playerStatsByTour,
       lastTour,
       rules.playerStats,
-      Boolean(rules.spainPrizes?.martinPlayerIds?.length),
+      config.type === 'spain',
     );
     let prizes = this.calculatePrizes(
       config.type,
@@ -247,6 +247,7 @@ function createInitialResults(): IProfileResults {
     prizeMaxNoLoseStrike: 0,
     prizeMaxStoppedNoLoseStrike: 0,
     prizeMaxLosedDiff: 0,
+    countedRedCards: 0,
   };
 }
 

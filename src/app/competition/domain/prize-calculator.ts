@@ -184,16 +184,27 @@ function calculateNewSpainPrize(
     case SPAIN_PRIZE_IDS.TURTLE_HUNT:
       valueByProfile = profile => profile.results.prizeMaxWinDiffAgainstTarget ?? 0;
       break;
+    case SPAIN_PRIZE_IDS.SPICY_PEPE:
+      valueByProfile = profile => profile.results.countedRedCards ?? 0;
+      break;
     case SPAIN_PRIZE_IDS.HANDY_HANDS: {
       const valuePlayers = getBestValuePlayers(sportPlayers);
-      const player = valuePlayers[0];
-      if (player) {
-        prize.calculationInfo = valuePlayers.slice(0, 5)
+      const bestRatio = valuePlayers[0]?.ratio;
+      const bestPlayers = bestRatio === undefined
+        ? []
+        : valuePlayers.filter(player => Math.abs(player.ratio - bestRatio) < 1e-9);
+      if (bestPlayers.length) {
+        const countedPlayersInfo = `В зачёт идут: ${bestPlayers.map(player => player.name).join(', ')}`;
+        const rankingInfo = valuePlayers.slice(0, 5)
           .map((item, index) =>
             `${index + 1}. ${item.name} — ${item.score} FO / ${item.cost} = ${formatRatio(item.ratio)}`)
           .join('\n');
+        prize.calculationInfo = `${countedPlayersInfo}\n${rankingInfo}`;
       }
-      valueByProfile = profile => player ? profile.results.selectedPlayerPoints?.[player.id] ?? 0 : 0;
+      valueByProfile = profile => bestPlayers.reduce(
+        (sum, player) => sum + (profile.results.selectedPlayerPoints?.[player.id] ?? 0),
+        0,
+      );
       break;
     }
     case SPAIN_PRIZE_IDS.MARTIN_POINTS: {
@@ -291,11 +302,14 @@ export function calculateChampionsLeaguePrizes(input: PrizeCalculationInput): IR
   const { prizes, profilesDetails } = input;
 
   prizes.forEach((prize, prizeIndex) => {
+    const manualNomineeIds = prize.isManual ? getConfiguredNomineeIds(prize) : [];
     const configuredNominee = prize.nomineesArr?.[0];
     profilesDetails.forEach(profile => {
       profile.prizes[prize.id] = {
         value:
-          prize.id === 1
+          prize.isManual
+            ? (manualNomineeIds.includes(profile.id) ? 1 : 0)
+            : prize.id === 1
             ? (profile.place_in_league!['ByScore'] < 7 ? 0 : profile.score)
             : prize.id === 2
               ? (profile.squadDetails!.max_medals_in_a_row! < 2 ? 0 : profile.squadDetails!.max_medals_in_a_row!)
@@ -321,6 +335,25 @@ export function calculateChampionsLeaguePrizes(input: PrizeCalculationInput): IR
 
   updatePrizeStates(prizes);
   return asRuntimePrizes(prizes);
+}
+
+function getConfiguredNomineeIds(prize: CompetitionPrizeConfig): string[] {
+  const configuredNominees = [
+    ...(prize.defaultNomineesArr ?? []),
+    ...(prize.nomineesArr ?? []),
+  ];
+
+  return configuredNominees
+    .map(nominee => typeof nominee === 'string'
+      ? nominee
+      : getNomineeId(nominee))
+    .filter((profileId): profileId is string => Boolean(profileId))
+    .filter((profileId, index, profileIds) => profileIds.indexOf(profileId) === index);
+}
+
+function getNomineeId(value: unknown): string | undefined {
+  if (!value || typeof value !== 'object' || !('id' in value)) return undefined;
+  return typeof value.id === 'string' ? value.id : undefined;
 }
 
 export function calculateWorldCupPrizes(input: PrizeCalculationInput): IRuntimePrize[] {

@@ -56,6 +56,40 @@ describe('calculateTourInsights', () => {
     expect(insights.teams.topScores).toEqual([]);
     expect(insights.players.mostPopular).toEqual([]);
   });
+
+  it('aggregates team scores, matches, rosters and captains across the season', () => {
+    const input = createInput({ period: 'season', scope: 'competition' });
+    const firstTourScores: Record<string, number> = { a: 10, b: 20, c: 30, d: 40 };
+    input.profiles.filter(profile => profile.id !== 'outsider').forEach(profile => {
+      const score = firstTourScores[profile.id];
+      profile.team.results_by_tour[1] = {
+        tour_score: score,
+        total_score: score,
+        total_place: 1,
+      };
+    });
+    input.tourData = [
+      {
+        tour: 1,
+        matches: [{ home: 'a', away: 'b' }, { home: 'c', away: 'd' }],
+        sportPlayers: input.sportPlayers,
+      },
+      {
+        tour: 2,
+        matches: input.matches,
+        sportPlayers: input.sportPlayers,
+      },
+    ];
+
+    const insights = calculateTourInsights(input);
+
+    expect(insights.context.toursCount).toBe(2);
+    expect(insights.coverage.scoredTeams).toBe(8);
+    expect(insights.coverage.loadedRosters).toBe(8);
+    expect(insights.teams.topScores[0]).toEqual(jasmine.objectContaining({ value: 110 }));
+    expect(insights.matches.mostProductive[0].tour).toBe(2);
+    expect(insights.players.mostPopularCaptains.map(item => item.count)).toEqual([4, 4]);
+  });
 });
 
 function createInput(overrides: Partial<TourInsightsInput> = {}): TourInsightsInput {

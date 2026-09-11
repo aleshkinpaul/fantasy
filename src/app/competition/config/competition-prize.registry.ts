@@ -68,7 +68,6 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
       reward: 'Жгуче острый соус',
       isFinalStage: false,
       isActivity: false,
-      isPlaceholder: true,
       excluded: [],
       nomineesArr: [],
     },
@@ -95,7 +94,7 @@ const PRIZE_TEMPLATES: Record<string, PrizeTemplate> = {
       id: SPAIN_PRIZE_IDS.HANDY_HANDS,
       name: 'Очумелые ручки',
       author: 'Павел Алешкин',
-      condition: 'Больше всего фэнтези-очков с лучшего по соотношению цена/качество полевого игрока сезона стоимостью не более 6',
+      condition: 'Больше всего фэнтези-очков с лучшего по соотношению цена/качество полевого игрока сезона стоимостью не более 6; при равенстве учитываются все лучшие игроки',
       reward: 'Реплика футболки этого игрока текущего сезона',
       isFinalStage: false,
       isActivity: false,
@@ -213,15 +212,19 @@ function resolvePrize(reference: CompetitionPrizeReference, yearStart: number): 
   if (!template) throw new Error(`Не найден шаблон приза ${reference.key}`);
 
   const { iconFile, prize, authorProfileId } = template;
+  const allowAuthorParticipation = reference.overrides?.allowAuthorParticipation
+    ?? prize.allowAuthorParticipation
+    ?? false;
   const excluded = [
     ...(prize.excluded ?? []),
     ...(reference.overrides?.excluded ?? []),
-    ...(authorProfileId ? [authorProfileId] : []),
+    ...(authorProfileId && !allowAuthorParticipation ? [authorProfileId] : []),
   ].filter((profileId, index, values) => values.indexOf(profileId) === index);
   return clonePrize({
     ...prize,
     ...(iconFile ? { icon: `assets/logos/${yearStart}/icons/${iconFile}` } : {}),
     ...reference.overrides,
+    allowAuthorParticipation,
     excluded,
   });
 }

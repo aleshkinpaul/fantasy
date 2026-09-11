@@ -54,16 +54,25 @@ export const TROPHY_ICONS: Record<AchievementTitleType, string> = {
 
 @Injectable({ providedIn: 'root' })
 export class AchievementService {
+  private readonly registry$: Observable<AchievementRegistry>;
   private readonly hall$: Observable<HallOfFame>;
 
   constructor(http: HttpClient, catalogService: TournamentCatalogService) {
-    this.hall$ = combineLatest([
+    this.registry$ = combineLatest([
       http.get<unknown>(ACHIEVEMENTS_URL),
       catalogService.loadTimeline()
     ]).pipe(
-      map(([registry, timeline]) => buildHallOfFame(registry, timeline)),
+      map(([registry, timeline]) => validateAchievementRegistry(registry, timeline.flatMap(group => group.tournaments))),
       shareReplay({ bufferSize: 1, refCount: true })
     );
+    this.hall$ = combineLatest([this.registry$, catalogService.loadTimeline()]).pipe(
+      map(([registry, timeline]) => buildHallOfFameFromRegistry(registry, timeline)),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
+  }
+
+  loadRegistry(): Observable<AchievementRegistry> {
+    return this.registry$;
   }
 
   loadHallOfFame(): Observable<HallOfFame> {
@@ -77,6 +86,13 @@ export function buildHallOfFame(
 ): HallOfFame {
   const tournaments = timeline.flatMap(group => group.tournaments);
   const registry = validateAchievementRegistry(registryValue, tournaments);
+  return buildHallOfFameFromRegistry(registry, timeline);
+}
+
+function buildHallOfFameFromRegistry(
+  registry: AchievementRegistry,
+  timeline: TournamentTimelineGroup[]
+): HallOfFame {
   const participants = new Map(registry.participants.map(participant => [participant.id, participant]));
   const placementsByTournament = groupBy(registry.placements, placement => placement.tournamentId);
 

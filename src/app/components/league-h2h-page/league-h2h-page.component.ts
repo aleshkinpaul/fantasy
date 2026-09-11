@@ -2,7 +2,7 @@ import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataService } from '../../service/data.service';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
 import {
   IActiveCompetitionTabs,
   IRuntimePrize,
@@ -37,6 +37,8 @@ import { MatchCenterSelection, MatchForecastView } from '../../match-center/matc
 import { TourInsightsComponent } from '../tour-insights/tour-insights.component';
 import { TourInsights } from '../../tour-insights/tour-insights.models';
 import { calculateTourInsights } from '../../tour-insights/tour-insights-calculator';
+import { RealClubIndex } from '../../models/real-club';
+import { RealClubCatalogService } from '../../service/real-club-catalog.service';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -56,6 +58,8 @@ export class LeagueH2HPageComponent implements OnInit {
     tourId: 1,
     cupTourId: 1,
     tourView: 'matches',
+    insightsScope: 'league',
+    insightsPeriod: 'tour',
   }
 
   public isShowUnitedTableByPoints = false;
@@ -74,6 +78,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public matchForecast: MatchForecastView | null = null;
   public forecastLoading = false;
   public tourInsights: TourInsights | null = null;
+  public realClubIndex: RealClubIndex = new Map();
   private forecastSubscription?: Subscription;
   private insightsForecastSubscription?: Subscription;
 
@@ -89,6 +94,7 @@ export class LeagueH2HPageComponent implements OnInit {
     public loader: LoaderService,
     private competitionFacade: CompetitionFacade,
     private matchForecastService: MatchForecastService,
+    private realClubCatalogService: RealClubCatalogService,
     private destroyRef: DestroyRef,
   ) {
     this.isLoading$ = this.loader.isLoading$;
@@ -100,6 +106,12 @@ export class LeagueH2HPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.setUrlName(this.route.snapshot.url[0].path);
+    this.realClubCatalogService.index$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: index => this.realClubIndex = index,
+        error: error => logger.error('Не удалось загрузить справочник реальных клубов:', error),
+      });
     this.loadCompetition();
   }
 
@@ -274,6 +286,20 @@ export class LeagueH2HPageComponent implements OnInit {
     if (view === 'insights') this.refreshTourInsights();
   }
 
+  setInsightsScope(scope: 'league' | 'competition'): void {
+    if (this.activeTabs.insightsScope === scope) return;
+    this.activeTabs.insightsScope = scope;
+    this.setQueryParam(this.activeTabs);
+    this.refreshTourInsights();
+  }
+
+  setInsightsPeriod(period: 'tour' | 'season'): void {
+    if (this.activeTabs.insightsPeriod === period) return;
+    this.activeTabs.insightsPeriod = period;
+    this.setQueryParam(this.activeTabs);
+    this.refreshTourInsights();
+  }
+
   setCupTourId(ind: number): void {
     this.activeTabs.cupTourId = ind;
     this.setQueryParam(this.activeTabs)
@@ -285,6 +311,8 @@ export class LeagueH2HPageComponent implements OnInit {
     const confTabIdParam = +this.route.snapshot.queryParams['confTabId'] || '';
     const activeTourIdParam = +this.route.snapshot.queryParams['tourId'] || '';
     const tourViewParam = this.route.snapshot.queryParams['tourView'];
+    const insightsScopeParam = this.route.snapshot.queryParams['insightsScope'];
+    const insightsPeriodParam = this.route.snapshot.queryParams['insightsPeriod'];
 
     if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
     if (!!confIdParam) this.activeTabs.confId = confIdParam;
@@ -292,6 +320,8 @@ export class LeagueH2HPageComponent implements OnInit {
 
     this.activeTabs.tourId = !!activeTourIdParam ? activeTourIdParam : this.lastTour;
     this.activeTabs.tourView = tourViewParam === 'insights' ? 'insights' : 'matches';
+    this.activeTabs.insightsScope = insightsScopeParam === 'competition' ? 'competition' : 'league';
+    this.activeTabs.insightsPeriod = insightsPeriodParam === 'season' ? 'season' : 'tour';
   }
 
   private refreshTourInsights(): void {
@@ -305,32 +335,67 @@ export class LeagueH2HPageComponent implements OnInit {
 
     const relativeTourIndex = Math.max(0, this.activeTabs.tourId - 1);
     const tour = stage.firstTour + relativeTourIndex;
+    const isCompetitionScope = this.activeTabs.insightsScope === 'competition';
+    const isSeasonPeriod = this.activeTabs.insightsPeriod === 'season';
+    const profileIds = isCompetitionScope
+      ? [...new Set((isSeasonPeriod ? this.consts.stages : [stage]).flatMap(item =>
+        item.leagues.flatMap(stageLeague => stageLeague.profiles),
+      ))]
+      : league.profiles;
+    const tourNumbers = isSeasonPeriod
+      ? this.getInsightsSeasonTours(isCompetitionScope, stage)
+      : [tour];
+    const tourData = tourNumbers.map(tourNumber => ({
+      tour: tourNumber,
+      matches: this.consts.matches[tourNumber] || [],
+      sportPlayers: this.sportPlayersByTour[tourNumber] || [],
+    }));
     const tournamentId = getTournamentCatalogId(
       this.consts.type,
       this.consts.yearStart,
       this.consts.yearEnd,
     );
-    const calculate = (forecast?: Parameters<typeof calculateTourInsights>[0]['forecast']) =>
+    const calculate = (forecasts = new Map<number, Parameters<typeof calculateTourInsights>[0]['forecast']>()) =>
       calculateTourInsights({
         tournamentId,
         tour,
         lastTour: this.lastTour,
-        stageName: stage.name,
-        leagueName: league.name,
-        profileIds: league.profiles,
-        matches: this.currentLeagueMatches[relativeTourIndex] || [],
+        period: this.activeTabs.insightsPeriod,
+        scope: this.activeTabs.insightsScope,
+        stageName: isSeasonPeriod && isCompetitionScope ? 'Все этапы' : stage.name,
+        leagueName: isCompetitionScope ? 'Вся лига' : league.name,
+        profileIds,
+        matches: this.consts.matches[tour] || [],
         profiles: this.profilesDetails,
         sportPlayers: this.sportPlayersByTour[tour] || [],
+        tourData: tourData.map(item => ({ ...item, forecast: forecasts.get(item.tour) })),
         drawGap: this.consts.drawGap || 0,
-        forecast,
         capabilities: { playerScores: false, played: false },
       });
 
     this.tourInsights = calculate();
-    if (tour > this.lastTour) return;
-    this.insightsForecastSubscription = this.matchForecastService
-      .loadTourSnapshot(tournamentId, tour)
-      .subscribe(snapshot => this.tourInsights = calculate(snapshot));
+    const completedTours = tourNumbers.filter(tourNumber => tourNumber <= this.lastTour);
+    if (!completedTours.length) return;
+    this.insightsForecastSubscription = forkJoin(completedTours.map(tourNumber =>
+      this.matchForecastService.loadTourSnapshot(tournamentId, tourNumber),
+    )).subscribe(snapshots => {
+      const forecasts = new Map<number, Parameters<typeof calculateTourInsights>[0]['forecast']>();
+      snapshots.forEach((snapshot, index) => forecasts.set(completedTours[index], snapshot));
+      this.tourInsights = calculate(forecasts);
+    });
+  }
+
+  private getInsightsSeasonTours(
+    isCompetitionScope: boolean,
+    currentStage: SeasonCompetitionConfig['stages'][number],
+  ): number[] {
+    const stages = isCompetitionScope ? this.consts.stages : [currentStage];
+    return [...new Set(stages.flatMap(stage =>
+      Array.from(
+        { length: Math.max(0, Math.min(stage.lastTour, this.lastTour) - stage.firstTour + 1) },
+        (_, index) => stage.firstTour + index,
+      ),
+    ))].sort((left, right) => left - right);
   }
 
   sortStandings(a: IProfileDetails, b: IProfileDetails): number {

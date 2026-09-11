@@ -9,6 +9,60 @@
   color: $color-text;
 }
 
+.insights-filters {
+  display: flex;
+  margin-bottom: 14px;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba($color-surface-blue, 0.55);
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  > span {
+    margin-right: 3px;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+  }
+
+  button {
+    min-height: 34px;
+    padding: 6px 11px;
+    color: $color-text-muted;
+    background: rgba($color-surface, 0.75);
+    border: 1px solid $color-border;
+    border-radius: $border-radius-full;
+    font: inherit;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: color $transition-fast, background $transition-fast, border-color $transition-fast;
+
+    &:hover {
+      color: $color-primary-hover;
+      border-color: rgba($color-primary, 0.45);
+    }
+
+    &.active {
+      color: $color-surface;
+      background: $color-primary;
+      border-color: $color-primary;
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+}
+
 .insights-header {
   display: flex;
   padding: 4px 2px 18px;
@@ -175,6 +229,20 @@
 .manager-icon {
   color: $color-warning;
   background: $color-warning-bg;
+}
+
+.captain-icon {
+  color: $color-warning;
+  background: $color-warning-bg;
+}
+
+.captain-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.captain-card {
+  width: min(100%, 720px);
 }
 
 .section-body {
@@ -392,6 +460,16 @@
   white-space: nowrap;
 }
 
+.match-tour {
+  padding: 3px 6px;
+  color: $color-primary-hover;
+  background: $color-surface-blue;
+  border-radius: $border-radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  white-space: nowrap;
+}
+
 .facts-card {
   display: grid;
   align-content: start;
@@ -417,12 +495,42 @@
 }
 
 @media (max-width: 800px) {
+  .insights-filters {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filter-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, 1fr));
+
+    > span {
+      align-self: center;
+    }
+  }
+
   .metric-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 520px) {
+  .insights-filters {
+    padding: 8px;
+  }
+
+  .filter-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    > span {
+      grid-column: 1 / -1;
+    }
+
+    button {
+      padding-inline: 7px;
+    }
+  }
+
   .insights-header {
     align-items: flex-start;
     flex-direction: column;

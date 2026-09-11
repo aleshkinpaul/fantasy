@@ -1,102 +1,152 @@
 [
   {
-      "id": "7004",
-      "name": "Реал Мадрид",
-      "logo": ""
+    "key": "alaves",
+    "ids": ["6990", "8366"],
+    "name": "Алавес",
+    "logo": "assets/logos/real-clubs/2026-27/8366.png"
   },
   {
-      "id": "7006",
-      "name": "Севилья",
-      "logo": ""
+    "key": "athletic-bilbao",
+    "ids": ["6991", "8367"],
+    "name": "Атлетик Бильбао",
+    "logo": "assets/logos/real-clubs/2026-27/8367.png"
   },
   {
-      "id": "7005",
-      "name": "Реал Сосьедад",
-      "logo": ""
+    "key": "atletico-madrid",
+    "ids": ["6992", "8368"],
+    "name": "Атлетико Мадрид",
+    "logo": "assets/logos/real-clubs/2026-27/8368.png"
   },
   {
-      "id": "7002",
-      "name": "Осасуна",
-      "logo": ""
+    "key": "barcelona",
+    "ids": ["6993", "8369"],
+    "name": "Барселона",
+    "logo": "assets/logos/real-clubs/2026-27/8369.png"
   },
   {
-      "id": "6993",
-      "name": "Барселона",
-      "logo": ""
+    "key": "real-betis",
+    "ids": ["6994", "8370"],
+    "name": "Реал Бетис",
+    "logo": "assets/logos/real-clubs/2026-27/8370.png"
   },
   {
-      "id": "7007",
-      "name": "Сельта",
-      "logo": ""
+    "key": "valencia",
+    "ids": ["6995", "8371"],
+    "name": "Валенсия",
+    "logo": "assets/logos/real-clubs/2026-27/8371.png"
   },
   {
-      "id": "6998",
-      "name": "Жирона",
-      "logo": ""
+    "key": "real-valladolid",
+    "ids": ["6996"],
+    "name": "Вальядолид",
+    "logo": ""
   },
   {
-      "id": "7009",
-      "name": "Эспаньол",
-      "logo": ""
+    "key": "villarreal",
+    "ids": ["6997", "8372"],
+    "name": "Вильярреал",
+    "logo": "assets/logos/real-clubs/2026-27/8372.png"
   },
   {
-      "id": "7001",
-      "name": "Мальорка",
-      "logo": ""
+    "key": "girona",
+    "ids": ["6998"],
+    "name": "Жирона",
+    "logo": ""
   },
   {
-      "id": "7008",
-      "name": "Хетафе",
-      "logo": ""
+    "key": "las-palmas",
+    "ids": ["6999"],
+    "name": "Лас-Пальмас",
+    "logo": ""
   },
   {
-      "id": "6991",
-      "name": "Атлетик Бильбао",
-      "logo": ""
+    "key": "leganes",
+    "ids": ["7000"],
+    "name": "Леганес",
+    "logo": ""
   },
   {
-      "id": "6997",
-      "name": "Вильярреал",
-      "logo": ""
+    "key": "mallorca",
+    "ids": ["7001"],
+    "name": "Мальорка",
+    "logo": ""
   },
   {
-      "id": "7003",
-      "name": "Райо Вальекано",
-      "logo": ""
+    "key": "osasuna",
+    "ids": ["7002", "8376"],
+    "name": "Осасуна",
+    "logo": "assets/logos/real-clubs/2026-27/8376.png"
   },
   {
-      "id": "6992",
-      "name": "Атлетико Мадрид",
-      "logo": ""
+    "key": "rayo-vallecano",
+    "ids": ["7003", "8377"],
+    "name": "Райо Вальекано",
+    "logo": "assets/logos/real-clubs/2026-27/8377.png"
   },
   {
-      "id": "6994",
-      "name": "Реал Бетис",
-      "logo": ""
+    "key": "real-madrid",
+    "ids": ["7004", "8379"],
+    "name": "Реал Мадрид",
+    "logo": "assets/logos/real-clubs/2026-27/8379.png"
   },
   {
-      "id": "6995",
-      "name": "Валенсия",
-      "logo": ""
+    "key": "real-sociedad",
+    "ids": ["7005", "8380"],
+    "name": "Реал Сосьедад",
+    "logo": "assets/logos/real-clubs/2026-27/8380.png"
   },
   {
-      "id": "6999",
-      "name": "Лас-Пальмас",
-      "logo": ""
+    "key": "sevilla",
+    "ids": ["7006", "8381"],
+    "name": "Севилья",
+    "logo": "assets/logos/real-clubs/2026-27/8381.png"
   },
   {
-      "id": "6990",
-      "name": "Алавес",
-      "logo": ""
+    "key": "celta-vigo",
+    "ids": ["7007", "8382"],
+    "name": "Сельта",
+    "logo": "assets/logos/real-clubs/2026-27/8382.png"
   },
   {
-      "id": "7000",
-      "name": "Леганес",
-      "logo": ""
+    "key": "getafe",
+    "ids": ["7008", "8383"],
+    "name": "Хетафе",
+    "logo": "assets/logos/real-clubs/2026-27/8383.png"
   },
   {
-      "id": "6996",
-      "name": "Вальядолид",
-      "logo": ""
+    "key": "espanyol",
+    "ids": ["7009", "8385"],
+    "name": "Эспаньол",
+    "logo": "assets/logos/real-clubs/2026-27/8385.png"
+  },
+  {
+    "key": "deportivo-la-coruna",
+    "ids": ["8373"],
+    "name": "Депортиво Ла-Корунья",
+    "logo": "assets/logos/real-clubs/2026-27/8373.png"
+  },
+  {
+    "key": "levante",
+    "ids": ["8374"],
+    "name": "Леванте",
+    "logo": "assets/logos/real-clubs/2026-27/8374.png"
+  },
+  {
+    "key": "malaga",
+    "ids": ["8375"],
+    "name": "Малага",
+    "logo": "assets/logos/real-clubs/2026-27/8375.png"
+  },
+  {
+    "key": "racing-santander",
+    "ids": ["8378"],
+    "name": "Расинг Сантандер",
+    "logo": "assets/logos/real-clubs/2026-27/8378.png"
+  },
+  {
+    "key": "elche",
+    "ids": ["8384"],
+    "name": "Эльче",
+    "logo": "assets/logos/real-clubs/2026-27/8384.png"
   }
 ]

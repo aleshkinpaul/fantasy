@@ -1,5 +1,11 @@
 <article class="participant-card">
   <a
+    class="profile-mark"
+    [routerLink]="['/participants', profile.id]"
+    [attr.aria-label]="'Открыть профиль участника ' + profile.name"
+    title="Профиль участника"
+  >Профиль</a>
+  <a
     class="participant-link"
     [href]="getTeamUrl()"
     target="_blank"

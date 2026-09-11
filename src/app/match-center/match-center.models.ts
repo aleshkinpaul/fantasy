@@ -1,5 +1,25 @@
+import {
+  FantasyPlayerParticipation,
+  FantasyPlayerStatTotals,
+} from '../competition/domain/fantasy-lineup-resolver';
 import { CompetitionMatch, SportPlayer } from '../competition/models/competition.models';
-import { IProfileDetails } from '../models/domain';
+import { IProfileDetails, IRosterPlayerMatchStat } from '../models/domain';
+
+export type MatchCenterEventTone = 'default' | 'assist' | 'warning' | 'danger' | 'success';
+
+export interface MatchCenterPlayerEvent {
+  key: string;
+  iconPath: string;
+  label: string;
+  count: number;
+  tone: MatchCenterEventTone;
+  marker?: string;
+}
+
+export interface MatchCenterStatItem {
+  label: string;
+  value: string | number;
+}
 
 export interface MatchCenterSelection {
   match: CompetitionMatch;
@@ -18,6 +38,21 @@ export interface MatchCenterPlayer {
   isCaptain: boolean;
   isViceCaptain: boolean;
   isBench: boolean;
+  participation: FantasyPlayerParticipation;
+  isPlayed: boolean;
+  isCounted: boolean;
+  isAutoSubbedIn: boolean;
+  isEffectiveCaptain: boolean;
+  fantasyScore?: number;
+  displayFantasyScore?: number;
+  scoreMultiplier: 1 | 2;
+  playedMinutes?: number;
+  playedMinutesLabel: string;
+  redCards: number;
+  stats: FantasyPlayerStatTotals;
+  matchStats: IRosterPlayerMatchStat[];
+  events: MatchCenterPlayerEvent[];
+  statSummary: string;
 }
 
 export interface MatchCenterTeam {
@@ -26,6 +61,10 @@ export interface MatchCenterTeam {
   base: MatchCenterPlayer[];
   bench: MatchCenterPlayer[];
   hasRoster: boolean;
+  countedPlayersCount: number;
+  autoSubstitutionsCount: number;
+  hasParticipationData: boolean;
+  isLineupFinal: boolean;
 }
 
 export type ForecastConfidence = 'low' | 'medium' | 'high';
