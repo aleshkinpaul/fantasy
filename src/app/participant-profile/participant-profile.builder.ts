@@ -11,6 +11,7 @@ import {
 } from '../models/participant-profile';
 import { TournamentTimelineGroup, TournamentTimelineItem } from '../models/tournament-catalog';
 import { TITLE_TYPE_LABELS, TROPHY_ICONS } from '../service/achievement.service';
+import { getParticipantTournamentType } from './participant-tournament-type';
 
 const KIND_ORDER = new Map([
   ['la-liga', 0],
@@ -253,14 +254,14 @@ function buildTeamVersions(tournaments: ParticipantTournamentHistory[]): Partici
           firstPeriod: tournament.period,
           lastPeriod: tournament.period,
           tournaments: 1,
-          tournamentCodes: [getTournamentCode(tournament)]
+          tournamentCodes: [getParticipantTournamentType(tournament).code]
         }
       });
       return;
     }
 
     group.version.tournaments += 1;
-    const tournamentCode = getTournamentCode(tournament);
+    const tournamentCode = getParticipantTournamentType(tournament).code;
     if (!group.version.tournamentCodes.includes(tournamentCode)) {
       group.version.tournamentCodes.push(tournamentCode);
       group.version.tournamentCodes.sort((left, right) =>
@@ -299,17 +300,7 @@ function normalizeTeamName(value: string): string {
   return value.replace(/\s+/g, ' ').trim().toLocaleLowerCase('ru-RU');
 }
 
-const TOURNAMENT_CODE_ORDER = ['ЛЛ', 'КК', 'ЛЧ', 'ЧМ', 'ЧЕ', 'КЧМ'];
-
-function getTournamentCode(tournament: ParticipantTournamentHistory): string {
-  if (tournament.kind === 'la-liga') return 'ЛЛ';
-  if (tournament.kind === 'cup') return 'КК';
-  if (tournament.kind === 'champions-league') return 'ЛЧ';
-  if (tournament.tournamentId.includes('club-world-cup')) return 'КЧМ';
-  if (tournament.tournamentId.includes('world-cup')) return 'ЧМ';
-  if (tournament.tournamentId.includes('euro')) return 'ЧЕ';
-  return tournament.kindLabel;
-}
+const TOURNAMENT_CODE_ORDER = ['ЛЛ', 'КК', 'ЛЧ', 'ЧМ', 'ЧЕ', 'КЧМ', 'ЛТ'];
 
 function pickLatestProfileId(
   participant: MutableParticipant,

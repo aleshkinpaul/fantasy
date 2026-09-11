@@ -12,6 +12,11 @@ import {
 } from '../../models/participant-profile';
 import { DataService } from '../../service/data.service';
 import { ParticipantProfileService } from '../../service/participant-profile.service';
+import {
+  buildParticipantTournamentOptions,
+  matchesParticipantTournamentFilters,
+  ParticipantTournamentTypeId,
+} from '../../participant-profile/participant-tournament-type';
 
 interface ProfileTrophy {
   id: string;
@@ -36,7 +41,7 @@ export class ParticipantProfileComponent implements OnInit {
   loadError = false;
   missing = false;
   seasonFilter: number | 'all' = 'all';
-  tournamentFilter = 'all';
+  tournamentFilter: ParticipantTournamentTypeId | 'all' = 'all';
   private readonly failedImages = new Set<string>();
 
   constructor(
@@ -78,10 +83,8 @@ export class ParticipantProfileComponent implements OnInit {
       .sort((left, right) => right.year - left.year);
   }
 
-  get tournamentOptions(): ParticipantTournamentHistory[] {
-    if (!this.profile) return [];
-    return this.profile.tournaments.filter(tournament =>
-      this.seasonFilter === 'all' || tournament.yearStart === this.seasonFilter);
+  get tournamentOptions(): Array<{ id: ParticipantTournamentTypeId; label: string; order: number }> {
+    return buildParticipantTournamentOptions(this.profile?.tournaments ?? []);
   }
 
   get seasonGroups(): Array<{ year: number; period: string; tournaments: ParticipantTournamentHistory[] }> {
@@ -136,8 +139,7 @@ export class ParticipantProfileComponent implements OnInit {
     podiums: number;
   } {
     const tournaments = (this.profile?.tournaments ?? []).filter(tournament =>
-      (this.seasonFilter === 'all' || tournament.yearStart === this.seasonFilter)
-      && (this.tournamentFilter === 'all' || tournament.tournamentId === this.tournamentFilter));
+      matchesParticipantTournamentFilters(tournament, this.seasonFilter, this.tournamentFilter));
     const covered = tournaments.filter(tournament => tournament.stats);
     const stats = covered.map(tournament => tournament.stats!);
     const matches = stats.reduce((sum, item) => sum + (item.matchesPlayed ?? 0), 0);
@@ -166,13 +168,6 @@ export class ParticipantProfileComponent implements OnInit {
       titles: achievements.filter(achievement => achievement.place === 1).length,
       podiums: achievements.length,
     };
-  }
-
-  onSeasonFilterChange(): void {
-    if (this.tournamentFilter !== 'all'
-      && !this.tournamentOptions.some(tournament => tournament.tournamentId === this.tournamentFilter)) {
-      this.tournamentFilter = 'all';
-    }
   }
 
   tournamentResultLabel(tournament: ParticipantTournamentHistory): string {

@@ -138,13 +138,13 @@
     <section class="profile-section stats-explorer" aria-labelledby="stats-heading">
       <header class="section-heading">
         <div><p class="eyebrow">Аналитика</p><h2 id="stats-heading">Статистика выступлений</h2></div>
-        <p>Выберите всё время, конкретный сезон или один турнир.</p>
+        <p>Выберите сезон и тип турнира независимо друг от друга.</p>
       </header>
 
       <div class="stats-filters">
         <label>
           <span>Сезон</span>
-          <select [(ngModel)]="seasonFilter" (ngModelChange)="onSeasonFilterChange()">
+          <select [(ngModel)]="seasonFilter">
             <option [ngValue]="'all'">Все сезоны</option>
             <option *ngFor="let season of seasonOptions" [ngValue]="season.year">{{ season.period }}</option>
           </select>
@@ -153,7 +153,7 @@
           <span>Турнир</span>
           <select [(ngModel)]="tournamentFilter">
             <option value="all">Все турниры</option>
-            <option *ngFor="let tournament of tournamentOptions" [value]="tournament.tournamentId">{{ tournament.title }}</option>
+            <option *ngFor="let tournament of tournamentOptions" [value]="tournament.id">{{ tournament.label }}</option>
           </select>
         </label>
       </div>
