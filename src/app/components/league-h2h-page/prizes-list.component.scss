@@ -222,6 +222,15 @@
   }
 }
 
+.profile-team-link {
+  color: $color-text;
+  text-decoration: none;
+  border-radius: $border-radius-sm;
+
+  &:hover .team-name { color: $color-primary-hover; }
+  &:focus-visible { @include focus-ring; outline: none; }
+}
+
 .param-container {
   min-width: 42px;
   color: $color-primary-hover;

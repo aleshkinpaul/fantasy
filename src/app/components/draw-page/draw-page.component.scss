@@ -205,6 +205,20 @@
   }
 }
 
+.profile-team-link {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  color: $color-text;
+  text-decoration: none;
+
+  > span:not(.pot-label) { display: grid; min-width: 0; }
+  &:hover strong, &:hover > span:last-child { color: $color-primary-hover; }
+  &:focus-visible { @include focus-ring; outline: none; }
+}
+
 .pot-number {
   display: grid;
   width: 34px;
@@ -326,6 +340,8 @@
   min-width: 0;
   align-items: center;
   gap: 6px;
+  color: $color-text;
+  text-decoration: none;
 
   > span:not(.pot-label) {
     overflow: hidden;

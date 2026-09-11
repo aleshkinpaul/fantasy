@@ -40,6 +40,10 @@
         *ngFor="let standing of data.standings; trackBy: trackStanding"
         [class.is-expanded]="expandedParticipantId === standing.participantId"
       >
+        <a
+          class="row-profile-link"
+          [routerLink]="['/participants', standing.participantId]"
+          [attr.aria-label]="'Открыть профиль ' + standing.participantName">Профиль</a>
         <button type="button" class="standing-main" (click)="toggleTours(standing)" [attr.aria-expanded]="expandedParticipantId === standing.participantId">
           <span class="place">{{ standing.place }}</span>
           <span class="identity">

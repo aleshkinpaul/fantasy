@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { RetroStanding, RetroTournament } from '../../models/retro-tournament';
 import { DataService } from '../../service/data.service';
@@ -10,7 +10,7 @@ import { RetroTournamentService } from '../../service/retro-tournament.service';
 @Component({
   selector: 'app-retro-tournament-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './retro-tournament-page.component.html',
   styleUrls: ['./retro-tournament-page.component.scss']
 })

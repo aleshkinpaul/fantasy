@@ -172,14 +172,14 @@
                   </td>
                   <td class="item-name-container">
                     <div class="item-team-container">
-                      <div class="team-container">
+                      <a class="team-container team-link" [routerLink]="['/participants', profile.id]">
                         <span class="team-name">
                           {{ profile.name }}
                         </span>
                         <span class="person-name">
                           {{ profile.teamName }}
                         </span>
-                      </div>
+                      </a>
                     </div>
                   </td>
                   <td class="sub-info">
@@ -870,7 +870,7 @@
             }}</span>
           </td>
           <td class="item-name-container">
-            <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+item.team_id" class="team-link" target="_blank">
+            <a [routerLink]="['/participants', item.profile.id]" class="team-link" [attr.aria-label]="'Открыть профиль ' + item.profile.name">
               <div class="item-team-container">
                 <!-- <div class="logo-container">
                   <img [src]="!!item.profile.logo ? item.profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">

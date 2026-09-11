@@ -47,7 +47,7 @@
               *ngIf="shouldDisplay(item.isShowAll, nomInd)"
             >
               <div class="nominee-main-container">
-                <div class="team-container">
+                <a class="team-container profile-team-link" [routerLink]="['/participants', nominee.id]" [attr.aria-label]="'Открыть профиль ' + nominee.name">
                   <div class="icon-container place" [ngSwitch]="true">
                     <img [src]="getMedalImage(nomInd)" *ngSwitchDefault [alt]="'logo '+nominee.team.title"
                       [ngClass]="{ 'half-hidden': nomInd > 2 && nomInd < 5 }">
@@ -60,7 +60,7 @@
                     <p class="team-name">{{ nominee.team.title }}</p>
                     <p class="player-name">{{ nominee.name }}</p>
                   </div>
-                </div>
+                </a>
                 <div class="param-container" *ngIf="!item.isSecret">
                   {{ nominee.prizes[item.id]?.value }}
                 </div>

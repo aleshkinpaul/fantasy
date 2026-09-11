@@ -6,7 +6,7 @@ import { DataService } from '../../service/data.service';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { ISquadDetails, IProfileDetails } from '../../models/domain';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { logger } from 'src/app/utils/logger';
 import { HeaderComponent } from '../header/header.component';
@@ -22,7 +22,7 @@ import { findRealClubByExternalId, RealClub } from '../../models/real-club';
   templateUrl: './league-page.component.html',
   styleUrls: ['./league-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent]
+  imports: [CommonModule, RouterModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent]
 })
 export class LeaguePageComponent implements OnInit {
   private data;

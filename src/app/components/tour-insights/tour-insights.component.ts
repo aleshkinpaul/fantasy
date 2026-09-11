@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MatchCenterSelection } from '../../match-center/match-center.models';
@@ -14,7 +15,7 @@ import { RealClubIndex } from '../../models/real-club';
 @Component({
   selector: 'app-tour-insights',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './tour-insights.component.html',
   styleUrls: ['./tour-insights.component.scss'],
 })

@@ -48,7 +48,7 @@
           }}</span>
         </td>
         <td class="item-name-container">
-          <a [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+item.team_id" class="team-link" target="_blank">
+          <a [routerLink]="['/participants', item.profile.id]" class="team-link" [attr.aria-label]="'Открыть профиль ' + item.profile.name">
             <div class="item-team-container">
               <div class="logo-container">
                 <img [src]="!!item.profile.logo ? item.profile.logo : 'assets/logos/default.png'" alt="" class="logo-img">

@@ -1,4 +1,5 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import {
   AfterViewInit,
   Component,
@@ -27,7 +28,7 @@ import { RealClubIndex } from '../../models/real-club';
 @Component({
   selector: 'app-match-center',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './match-center.component.html',
   styleUrls: ['./match-center.component.scss']
 })

@@ -103,11 +103,30 @@
 }
 
 .standing-row {
+  position: relative;
   border-bottom: 1px solid $color-border;
   &:last-child { border-bottom: 0; }
   &.place-1 { background: rgba(#d5a72d, .07); }
   &.place-2 { background: rgba(#8290a2, .06); }
   &.place-3 { background: rgba(#ad7242, .06); }
+}
+
+.row-profile-link {
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  z-index: 2;
+  padding: 3px 7px;
+  color: $color-primary-hover;
+  border-radius: $border-radius-full;
+  background: $color-surface-blue;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover { color: #fff; background: $color-primary; }
+  &:focus-visible { @include focus-ring; }
 }
 
 .standing-main {

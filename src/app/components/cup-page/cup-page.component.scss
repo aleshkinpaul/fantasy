@@ -193,6 +193,15 @@
   }
 }
 
+.team-profile-link {
+  display: contents;
+  color: $color-text;
+  text-decoration: none;
+
+  &:hover .team-copy strong { color: $color-primary-hover; }
+  &:focus-visible .team-copy { @include focus-ring; }
+}
+
 .team-logo {
   position: relative;
   @include logo-well(44px, 10px);

@@ -215,8 +215,10 @@
   <ol class="metric-list">
     <li *ngFor="let item of items">
       <span class="rank">{{ item.rank }}</span>
-      <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
-      <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
+      <a class="profile-team-link" [routerLink]="['/participants', item.team.profileId]">
+        <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
+        <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
+      </a>
       <span class="metric-value" [class.negative]="mode === 'delta' && item.delta < 0">
         <ng-container *ngIf="mode === 'score'; else deltaValue">{{ item.value }} <small>ФО</small></ng-container>
         <ng-template #deltaValue>{{ item.delta > 0 ? '+' : '' }}{{ item.delta }}</ng-template>
@@ -274,8 +276,10 @@
   <ol class="metric-list">
     <li *ngFor="let item of items">
       <span class="rank">{{ item.rank }}</span>
-      <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
-      <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
+      <a class="profile-team-link" [routerLink]="['/participants', item.team.profileId]">
+        <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
+        <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
+      </a>
       <span class="metric-value">{{ item.value }}<small *ngIf="mode === 'percent'">%</small></span>
     </li>
   </ol>

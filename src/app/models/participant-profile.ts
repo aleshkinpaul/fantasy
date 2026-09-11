@@ -4,12 +4,29 @@ import { TournamentKind, TournamentStatus } from './tournament-catalog';
 export type ParticipantHistoryCoverage = 'full' | 'identity';
 
 export interface ParticipantTournamentStats {
-  place: number;
+  place?: number;
+  fantasyPlace?: number;
   totalScore: number;
   averageScore: number;
   maxScore: number;
   minScore: number;
   toursPlayed: number;
+  matchesPlayed?: number;
+  wins?: number;
+  draws?: number;
+  losses?: number;
+  points?: number;
+  scoreFor?: number;
+  scoreAgainst?: number;
+  scoreDifference?: number;
+}
+
+export interface ParticipantAccount {
+  profileId: string;
+  name?: string;
+  nick?: string;
+  telegram?: string;
+  url?: string;
 }
 
 export interface ParticipantTournamentAchievement {
@@ -34,8 +51,11 @@ export interface ParticipantTournamentHistory {
   status: TournamentStatus;
   statusLabel: string;
   profileId: string;
+  profileUrl?: string;
+  teamUrl?: string;
   teamName?: string;
   logo?: string;
+  includeInTeamHistory: boolean;
   coverage: ParticipantHistoryCoverage;
   stats?: ParticipantTournamentStats;
   achievements: ParticipantTournamentAchievement[];
@@ -66,6 +86,7 @@ export interface ParticipantProfile {
   name: string;
   primaryProfileId: string;
   profileIds: string[];
+  accounts: ParticipantAccount[];
   currentTeam?: ParticipantTournamentHistory;
   teamVersions: ParticipantTeamVersion[];
   tournaments: ParticipantTournamentHistory[];
@@ -79,5 +100,10 @@ export interface ParticipantHistorySource {
   participantId?: string;
   teamName?: string;
   logo?: string;
+  profileUrl?: string;
+  profileNick?: string;
+  profileTelegram?: string;
+  teamUrl?: string;
+  includeInTeamHistory?: boolean;
   stats?: ParticipantTournamentStats;
 }

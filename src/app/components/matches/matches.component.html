@@ -10,14 +10,14 @@
         'down-half': match.type === 'down'
       }"
       *ngFor="let match of tourMatches">
-      <a class="home-name-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.home)" target="_blank">
+      <a class="home-name-link" [routerLink]="['/participants', match.home]">
         <div class="name-container">
           <p class="team-name">{{ getTeamTitle(match.home) }}</p>
           <p class="player-name">{{ getProfileInfo(match.home).name }}</p>
         </div>
       </a>
 
-      <a class="home-logo-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.home)" target="_blank">
+      <a class="home-logo-link" [routerLink]="['/participants', match.home]">
         <div class="logo-container">
           <span
             *ngIf="isMartinLeagueMember(match.home)"
@@ -42,7 +42,7 @@
         <span class="score away-score" [ngClass]="{ 'green-text':  getMatchResult(tourMatches, match.home) === 2 && i < lastTour, 'red-text': getMatchResult(tourMatches, match.home) === 1 && i < lastTour, 'grey-text': getMatchResult(tourMatches, match.home) === 0 && i < lastTour }">{{ match.away_score }}</span>
       </button>
 
-      <a class="away-logo-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.away)" target="_blank">
+      <a class="away-logo-link" [routerLink]="['/participants', match.away]">
         <div class="logo-container">
           <span
             *ngIf="isMartinLeagueMember(match.away)"
@@ -57,7 +57,7 @@
         </div>
       </a>
 
-      <a class="away-name-link" [href]="'https://www.sports.ru/fantasy/football/'+(service.urlName$ | async)+'/'+getTeamId(match.away)" target="_blank">
+      <a class="away-name-link" [routerLink]="['/participants', match.away]">
         <div class="name-container">
           <p class="team-name">{{ getTeamTitle(match.away) }}</p>
           <p class="player-name">{{ getProfileInfo(match.away).name }}</p>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { LoaderService } from 'src/app/service/loader.service';
 import { Observable } from 'rxjs';
@@ -17,7 +18,7 @@ import { MatchCenterSelection } from '../../match-center/match-center.models';
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule]
 })
 export class ScheduleComponent {
   @Input() profilesArr: IProfileDetails[] = [];

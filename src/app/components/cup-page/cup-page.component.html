@@ -50,34 +50,32 @@
         <div class="match-grid" [class.compact-grid]="round.matches.length > 8">
           <article class="cup-match" *ngFor="let match of round.matches; trackBy: trackById">
             <div class="team-row" [class.winner]="isWinner(match, match.first)">
-              <span class="team-logo">
-                <span
-                  *ngIf="isMartinLeagueMember(cup, match.first)"
-                  class="martin-match-badge"
-                  title="Участник Лиги Мартина"
-                  aria-label="Участник Лиги Мартина">ЛМ</span>
-                <img [src]="match.first.logo" [alt]="match.first.teamName">
-              </span>
-              <span class="team-copy">
-                <strong>{{ match.first.teamName }}</strong>
-                <small>{{ match.first.participantName }}</small>
-              </span>
+              <a class="team-profile-link" [routerLink]="['/participants', match.first.profileId]">
+                <span class="team-logo">
+                  <span
+                    *ngIf="isMartinLeagueMember(cup, match.first)"
+                    class="martin-match-badge"
+                    title="Участник Лиги Мартина"
+                    aria-label="Участник Лиги Мартина">ЛМ</span>
+                  <img [src]="match.first.logo" [alt]="match.first.teamName">
+                </span>
+                <span class="team-copy"><strong>{{ match.first.teamName }}</strong><small>{{ match.first.participantName }}</small></span>
+              </a>
               <strong class="team-score">{{ scoreFor(match, match.first) }}</strong>
             </div>
 
             <div class="team-row" [class.winner]="isWinner(match, match.second)">
-              <span class="team-logo">
-                <span
-                  *ngIf="isMartinLeagueMember(cup, match.second)"
-                  class="martin-match-badge"
-                  title="Участник Лиги Мартина"
-                  aria-label="Участник Лиги Мартина">ЛМ</span>
-                <img [src]="match.second.logo" [alt]="match.second.teamName">
-              </span>
-              <span class="team-copy">
-                <strong>{{ match.second.teamName }}</strong>
-                <small>{{ match.second.participantName }}</small>
-              </span>
+              <a class="team-profile-link" [routerLink]="['/participants', match.second.profileId]">
+                <span class="team-logo">
+                  <span
+                    *ngIf="isMartinLeagueMember(cup, match.second)"
+                    class="martin-match-badge"
+                    title="Участник Лиги Мартина"
+                    aria-label="Участник Лиги Мартина">ЛМ</span>
+                  <img [src]="match.second.logo" [alt]="match.second.teamName">
+                </span>
+                <span class="team-copy"><strong>{{ match.second.teamName }}</strong><small>{{ match.second.participantName }}</small></span>
+              </a>
               <strong class="team-score">{{ scoreFor(match, match.second) }}</strong>
             </div>
 

@@ -50,8 +50,11 @@
         <a
           class="champion-card"
           *ngFor="let champion of data.currentChampions"
-          [href]="champion.tournamentRoute"
-          (click)="openTournament($event, champion.tournamentRoute)"
+          [routerLink]="champion.placement.recipient.type === 'participant'
+            ? ['/participants', champion.placement.recipient.members[0].participantId]
+            : null"
+          [href]="champion.placement.recipient.type === 'team' ? champion.tournamentRoute : null"
+          (click)="champion.placement.recipient.type === 'team' && openTournament($event, champion.tournamentRoute)"
         >
           <span class="champion-trophy trophy-slot" [title]="champion.titleTypeLabel">
             <span aria-hidden="true"></span>

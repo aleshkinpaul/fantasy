@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { FantasyFullInfoResponse } from '../../competition/models/competition.models';
 import { IProfileDetails, ISquadDetails } from '../../models/domain';
@@ -15,7 +16,7 @@ interface StandingPlayer {
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule]
 })
 export class StandingsComponent {
   @Input() profilesArr: IProfileDetails[] = [];

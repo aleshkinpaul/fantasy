@@ -13,13 +13,13 @@
     </header>
 
     <div class="match-hero" *ngIf="teams.length === 2">
-      <div class="hero-team home-team">
+      <a class="hero-team home-team" [routerLink]="['/participants', teams[0].profile.id]" (click)="$event.stopPropagation()">
         <div class="hero-logo"><img [src]="teams[0].profile.logo || 'assets/logos/default.png'" alt=""></div>
         <div>
           <strong>{{ teams[0].profile.team.title }}</strong>
           <span>{{ teams[0].profile.name }}</span>
         </div>
-      </div>
+      </a>
 
       <div class="hero-score">
         <span class="match-status">{{ isCompleted() ? 'Матч завершён' : 'Предстоящий матч' }}</span>
@@ -31,13 +31,13 @@
         <ng-template #versus><div class="versus">VS</div></ng-template>
       </div>
 
-      <div class="hero-team away-team">
+      <a class="hero-team away-team" [routerLink]="['/participants', teams[1].profile.id]" (click)="$event.stopPropagation()">
         <div class="hero-logo"><img [src]="teams[1].profile.logo || 'assets/logos/default.png'" alt=""></div>
         <div>
           <strong>{{ teams[1].profile.team.title }}</strong>
           <span>{{ teams[1].profile.name }}</span>
         </div>
-      </div>
+      </a>
     </div>
 
     <section class="forecast-panel">

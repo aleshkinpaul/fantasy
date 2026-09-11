@@ -28,6 +28,61 @@ describe('participant profile builder', () => {
     expect(profile.tournaments.find(item => item.tournamentId === 'current')?.stats).toBeUndefined();
   });
 
+  it('keeps Sports.ru account and fantasy-team links for each tournament', () => {
+    const current = {
+      ...source('new-account', 'new', 'current'),
+      profileUrl: 'https://www.sports.ru/profile/new-account/',
+      profileNick: 'nickname',
+      profileTelegram: '@nickname',
+      teamUrl: 'https://www.sports.ru/fantasy/football/spain/team-id',
+    };
+    const [profile] = buildParticipantProfiles(registry(), timeline(), [current]);
+
+    expect(profile.accounts.find(account => account.profileId === 'new-account')).toEqual(jasmine.objectContaining({
+      nick: 'nickname',
+      telegram: '@nickname',
+      url: 'https://www.sports.ru/profile/new-account/',
+    }));
+    expect(profile.tournaments[0].teamUrl)
+      .toBe('https://www.sports.ru/fantasy/football/spain/team-id');
+  });
+
+  it('groups team history by season and logo while ignoring name casing', () => {
+    const history = timeline();
+    history[0].tournaments.push(
+      tournament('current-cup', 2025, 'completed'),
+      tournament('current-ucl', 2025, 'completed'),
+      tournament('current-world-cup', 2025, 'completed'),
+    );
+    const [profile] = buildParticipantProfiles(registry(), history, [
+      source('new-account', 'DUCKS', 'current'),
+      source('old-account', 'ducks', 'current-cup'),
+      source('old-account', 'ducks', 'current-ucl'),
+      { ...source('old-account', 'Ducks', 'current-world-cup'), logo: 'assets/germany.png' },
+      source('old-account', 'ducks', 'retro'),
+    ]);
+
+    expect(profile.teamVersions.length).toBe(3);
+    expect(profile.teamVersions[0]).toEqual(jasmine.objectContaining({
+      teamName: 'ducks',
+      tournaments: 3,
+      lastPeriod: '2025',
+      logo: 'assets/DUCKS.png',
+    }));
+    expect(profile.teamVersions[1]).toEqual(jasmine.objectContaining({
+      teamName: 'ducks',
+      tournaments: 1,
+      lastPeriod: '2025',
+      logo: 'assets/germany.png',
+    }));
+    expect(profile.teamVersions[2]).toEqual(jasmine.objectContaining({
+      teamName: 'ducks',
+      tournaments: 1,
+      lastPeriod: '2023',
+      logo: 'assets/ducks.png',
+    }));
+  });
+
   it('does not merge accounts by name without an explicit alias', () => {
     const profiles = buildParticipantProfiles({ version: 1, participants: [], placements: [] }, timeline(), [
       source('first-id', 'first', 'retro'),
@@ -37,6 +92,16 @@ describe('participant profile builder', () => {
     expect(profiles.length).toBe(2);
     expect(profiles.map(profile => profile.participantId)).toContain('profile-first-id');
     expect(profiles.map(profile => profile.participantId)).toContain('profile-second-id');
+  });
+
+  it('keeps collective tournament participation out of personal team history', () => {
+    const [profile] = buildParticipantProfiles(registry(), timeline(), [
+      source('new-account', 'ducks', 'current'),
+      { ...source('old-account', 'Collective team', 'retro'), includeInTeamHistory: false },
+    ]);
+
+    expect(profile.tournaments.map(item => item.tournamentId)).toContain('retro');
+    expect(profile.teamVersions.map(item => item.teamName)).toEqual(['ducks']);
   });
 
   it('adds individual and team achievements to the participant', () => {

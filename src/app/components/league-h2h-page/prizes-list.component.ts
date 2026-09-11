@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { IPrizeNominee, IRuntimePrize } from '../../models/domain';
 
 const MEDAL_IMAGES = [
@@ -14,7 +15,7 @@ const DEFAULT_MEDAL_IMAGE = 'assets/icons/prizes/medal.png';
   templateUrl: './prizes-list.component.html',
   styleUrls: ['./prizes-list.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule]
 })
 export class PrizesListComponent {
   @Input() prizes: IRuntimePrize[] = [];

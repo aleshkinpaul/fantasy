@@ -88,6 +88,12 @@
   min-width: 0;
   align-items: center;
   gap: 14px;
+  color: $color-text;
+  text-decoration: none;
+  border-radius: $border-radius-md;
+
+  &:hover strong { color: $color-primary-hover; }
+  &:focus-visible { @include focus-ring; outline: none; }
 
   > div:last-child {
     display: flex;

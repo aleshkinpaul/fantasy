@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { LocalProfile, SeasonCompetitionFile } from '../../competition/models/competition.models';
 import {
@@ -37,7 +38,7 @@ interface DrawTeamView {
 @Component({
   selector: 'app-draw-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './draw-page.component.html',
   styleUrls: ['./draw-page.component.scss'],
 })

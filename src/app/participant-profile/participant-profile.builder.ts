@@ -4,6 +4,7 @@ import {
 } from '../models/achievement';
 import {
   ParticipantHistorySource,
+  ParticipantAccount,
   ParticipantProfile,
   ParticipantTeamVersion,
   ParticipantTournamentHistory
@@ -20,6 +21,7 @@ const KIND_ORDER = new Map([
 
 interface MutableParticipant extends AchievementParticipant {
   primaryProfileId: string;
+  accounts: Map<string, ParticipantAccount>;
   tournaments: Map<string, ParticipantTournamentHistory>;
 }
 
@@ -39,6 +41,7 @@ export function buildParticipantProfiles(
       ...participant,
       profileIds: [...participant.profileIds],
       primaryProfileId: participant.profileIds.at(-1)!,
+      accounts: new Map(participant.profileIds.map(profileId => [profileId, createAccount(profileId)])),
       tournaments: new Map()
     };
     participants.set(mutable.id, mutable);
@@ -49,6 +52,7 @@ export function buildParticipantProfiles(
     const tournament = tournamentMap.get(source.tournamentId);
     if (!tournament) return;
     const participant = resolveParticipant(source, participants, profileOwners);
+    mergeAccount(participant, source);
     participant.primaryProfileId = pickLatestProfileId(participant, source, tournament, tournamentMap);
     mergeTournament(participant, source, tournament);
   });
@@ -61,6 +65,9 @@ export function buildParticipantProfiles(
       const participant = participants.get(member.participantId);
       if (!participant) return;
       if (!participant.profileIds.includes(member.profileId)) participant.profileIds.push(member.profileId);
+      if (!participant.accounts.has(member.profileId)) {
+        participant.accounts.set(member.profileId, createAccount(member.profileId));
+      }
       profileOwners.set(member.profileId, participant);
 
       const history = participant.tournaments.get(tournament.id) ?? createHistory(
@@ -115,6 +122,7 @@ function resolveParticipant(
     name: source.participantName,
     profileIds: [source.profileId],
     primaryProfileId: source.profileId,
+    accounts: new Map([[source.profileId, createAccount(source.profileId)]]),
     tournaments: new Map()
   };
   participants.set(id, participant);
@@ -130,8 +138,11 @@ function mergeTournament(
   const history = participant.tournaments.get(tournament.id)
     ?? createHistory(tournament, source.profileId, source.teamName, source.logo);
   history.profileId = source.profileId;
+  history.profileUrl = source.profileUrl || history.profileUrl;
+  history.teamUrl = source.teamUrl || history.teamUrl;
   history.teamName = source.teamName || history.teamName;
   history.logo = source.logo || history.logo;
+  if (source.includeInTeamHistory === false) history.includeInTeamHistory = false;
   if (source.stats) {
     history.stats = source.stats;
     history.coverage = 'full';
@@ -158,6 +169,7 @@ function createHistory(
     profileId,
     teamName,
     logo,
+    includeInTeamHistory: true,
     coverage: 'identity',
     achievements: []
   };
@@ -179,6 +191,8 @@ function toParticipantProfile(participant: MutableParticipant): ParticipantProfi
     name: participant.name,
     primaryProfileId: participant.primaryProfileId,
     profileIds: participant.profileIds,
+    accounts: participant.profileIds.map(profileId =>
+      participant.accounts.get(profileId) ?? createAccount(profileId)),
     currentTeam,
     teamVersions: buildTeamVersions(tournaments),
     tournaments,
@@ -189,33 +203,93 @@ function toParticipantProfile(participant: MutableParticipant): ParticipantProfi
       podiums: achievements.length,
       knownTotalScore: scored.reduce((sum, tournament) => sum + tournament.stats!.totalScore, 0),
       scoredTournaments: scored.length,
-      bestOverallPlace: minOrUndefined(scored.map(tournament => tournament.stats!.place))
+      bestOverallPlace: minOrUndefined(scored
+        .map(tournament => tournament.stats!.place)
+        .filter((place): place is number => place !== undefined))
     }
   };
 }
 
+function mergeAccount(participant: MutableParticipant, source: ParticipantHistorySource): void {
+  const account = participant.accounts.get(source.profileId) ?? createAccount(source.profileId);
+  account.name ||= source.participantName;
+  account.nick ||= source.profileNick;
+  account.telegram ||= source.profileTelegram;
+  account.url = source.profileUrl || account.url;
+  participant.accounts.set(source.profileId, account);
+}
+
+function createAccount(profileId: string): ParticipantAccount {
+  return {
+    profileId,
+    url: /^\d+$/.test(profileId) ? `https://www.sports.ru/profile/${profileId}/` : undefined,
+  };
+}
+
 function buildTeamVersions(tournaments: ParticipantTournamentHistory[]): ParticipantTeamVersion[] {
-  const versions = new Map<string, ParticipantTeamVersion>();
-  [...tournaments].reverse().forEach(tournament => {
+  interface TeamVersionGroup {
+    version: ParticipantTeamVersion;
+    latestIndex: number;
+  }
+
+  const preferredNames = buildPreferredTeamNames(tournaments);
+  const groups = new Map<string, TeamVersionGroup>();
+  tournaments.forEach((tournament, index) => {
+    if (!tournament.includeInTeamHistory) return;
     if (!tournament.logo && !tournament.teamName) return;
-    const key = `${tournament.profileId}|${tournament.teamName ?? ''}|${tournament.logo ?? ''}`;
-    const version = versions.get(key);
-    if (version) {
-      version.lastPeriod = tournament.period;
-      version.tournaments += 1;
-    } else {
-      versions.set(key, {
-        id: key,
-        profileId: tournament.profileId,
-        teamName: tournament.teamName,
-        logo: tournament.logo,
-        firstPeriod: tournament.period,
-        lastPeriod: tournament.period,
-        tournaments: 1
+    const teamName = tournament.teamName?.trim();
+    const normalizedLogo = (tournament.logo ?? '').trim().toLocaleLowerCase('ru-RU');
+    const key = `${tournament.yearStart}|${teamName ? normalizeTeamName(teamName) : ''}|${normalizedLogo}`;
+    const group = groups.get(key);
+
+    if (!group) {
+      groups.set(key, {
+        latestIndex: index,
+        version: {
+          id: key,
+          profileId: tournament.profileId,
+          teamName: teamName ? preferredNames.get(normalizeTeamName(teamName)) ?? teamName : undefined,
+          logo: tournament.logo,
+          firstPeriod: tournament.period,
+          lastPeriod: tournament.period,
+          tournaments: 1
+        }
       });
+      return;
     }
+
+    group.version.tournaments += 1;
   });
-  return Array.from(versions.values()).reverse();
+
+  return Array.from(groups.values())
+    .sort((left, right) => left.latestIndex - right.latestIndex)
+    .map(group => group.version);
+}
+
+function buildPreferredTeamNames(tournaments: ParticipantTournamentHistory[]): Map<string, string> {
+  const variants = new Map<string, Map<string, { count: number; latestIndex: number }>>();
+  tournaments.forEach((tournament, index) => {
+    if (!tournament.includeInTeamHistory) return;
+    const teamName = tournament.teamName?.trim();
+    if (!teamName) return;
+    const normalizedName = normalizeTeamName(teamName);
+    const nameVariants = variants.get(normalizedName) ?? new Map<string, { count: number; latestIndex: number }>();
+    const variant = nameVariants.get(teamName);
+    nameVariants.set(teamName, variant
+      ? { ...variant, count: variant.count + 1 }
+      : { count: 1, latestIndex: index });
+    variants.set(normalizedName, nameVariants);
+  });
+
+  return new Map(Array.from(variants.entries()).map(([normalizedName, nameVariants]) => [
+    normalizedName,
+    Array.from(nameVariants.entries())
+      .sort(([, left], [, right]) => right.count - left.count || left.latestIndex - right.latestIndex)[0][0],
+  ]));
+}
+
+function normalizeTeamName(value: string): string {
+  return value.replace(/\s+/g, ' ').trim().toLocaleLowerCase('ru-RU');
 }
 
 function pickLatestProfileId(

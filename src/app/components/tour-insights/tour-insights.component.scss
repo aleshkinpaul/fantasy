@@ -302,6 +302,19 @@
   }
 }
 
+.profile-team-link {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex: 1 1 auto;
+  gap: 8px;
+  color: $color-text;
+  text-decoration: none;
+
+  &:hover strong { color: $color-primary-hover; }
+  &:focus-visible { @include focus-ring; outline: none; }
+}
+
 .rank {
   width: 18px;
   flex: 0 0 18px;

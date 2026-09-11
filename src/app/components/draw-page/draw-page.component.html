@@ -66,11 +66,10 @@
 
         <ul>
           <li *ngFor="let profile of pot; trackBy: trackProfile">
-            <img [src]="profile.logo" alt="" (error)="onImageError($event)">
-            <span>
-              <strong>{{ teamName(profile) }}</strong>
-              <small>{{ profile.name }}</small>
-            </span>
+            <a class="profile-team-link" [routerLink]="['/participants', profile.id]">
+              <img [src]="profile.logo" alt="" (error)="onImageError($event)">
+              <span><strong>{{ teamName(profile) }}</strong><small>{{ profile.name }}</small></span>
+            </a>
           </li>
         </ul>
       </article>
@@ -105,17 +104,17 @@
           <strong>{{ round.number }}</strong>
         </header>
         <div class="match-row" *ngFor="let match of round.matches; trackBy: trackMatch">
-          <div class="match-team home-team">
+          <a class="match-team home-team" [routerLink]="['/participants', match.home]">
             <span>{{ teamName(profile(match.home)) }}</span>
             <img [src]="profile(match.home).logo" alt="" (error)="onImageError($event)">
             <span class="pot-label">{{ potNumber(match.home) }}</span>
-          </div>
+          </a>
           <span class="versus" aria-hidden="true">—</span>
-          <div class="match-team">
+          <a class="match-team" [routerLink]="['/participants', match.away]">
             <span class="pot-label">{{ potNumber(match.away) }}</span>
             <img [src]="profile(match.away).logo" alt="" (error)="onImageError($event)">
             <span>{{ teamName(profile(match.away)) }}</span>
-          </div>
+          </a>
         </div>
       </article>
     </div>
@@ -124,18 +123,20 @@
       <summary>Показать соперников каждой команды</summary>
       <div class="opponents-list">
         <article *ngFor="let entry of teamResults; trackBy: trackTeamResult">
-          <header>
+          <header><a class="profile-team-link" [routerLink]="['/participants', entry.profile.id]">
             <img [src]="entry.profile.logo" alt="" (error)="onImageError($event)">
             <span>
               <strong>{{ teamName(entry.profile) }}</strong>
               <small>{{ entry.profile.name }}</small>
             </span>
-          </header>
+          </a></header>
           <ul>
             <li *ngFor="let opponent of entry.opponents">
-              <span class="pot-label">{{ opponent.potNumber }}</span>
-              <img [src]="opponent.profile.logo" alt="" (error)="onImageError($event)">
-              <span>{{ teamName(opponent.profile) }}</span>
+              <a class="profile-team-link" [routerLink]="['/participants', opponent.profile.id]">
+                <span class="pot-label">{{ opponent.potNumber }}</span>
+                <img [src]="opponent.profile.logo" alt="" (error)="onImageError($event)">
+                <span>{{ teamName(opponent.profile) }}</span>
+              </a>
             </li>
           </ul>
         </article>

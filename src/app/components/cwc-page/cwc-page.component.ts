@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { IGroup, IPlayers } from '../../models/model';
 import { DataService } from '../../service/data.service';
 import { CwcDataService } from '../../service/cwc-data.service';
@@ -20,7 +21,7 @@ import { findRealClubByExternalId, RealClub } from '../../models/real-club';
   templateUrl: './cwc-page.component.html',
   styleUrls: ['./cwc-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, DefaultLoaderComponent],
+  imports: [CommonModule, RouterModule, HeaderComponent, DefaultLoaderComponent],
   providers: [CwcDataService]
 })
 export class CWCPageComponent implements OnInit {

@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map, shareReplay } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
 
 import {
   FantasyFullInfoResponse,
   LocalProfile,
-  SeasonCompetitionFile
+  SeasonCompetitionFile,
+  SeasonCompetitionConfig,
 } from '../competition/models/competition.models';
+import { mergeCompetitionStages } from '../competition/data/competition-stages.merger';
 import { ArchiveCupTournament } from '../models/archive-cup';
 import { ParticipantHistorySource, ParticipantProfile, ParticipantTournamentStats } from '../models/participant-profile';
 import { RetroTournament } from '../models/retro-tournament';
@@ -23,6 +25,11 @@ const SEASON_SOURCES: Array<{ path: string; tournamentIds: string[] }> = [
   { path: '/assets/data/seasons/2026-27/spain.json', tournamentIds: ['la-liga-2026-27'] },
   { path: '/assets/data/seasons/2026-27/champions-league.json', tournamentIds: ['champions-league-2026-27'] }
 ];
+
+interface SeasonSnapshot {
+  file: SeasonCompetitionFile;
+  squads?: FantasyFullInfoResponse;
+}
 
 interface LegacyProfilesRegistry {
   '2024': LocalProfile[];
@@ -49,7 +56,15 @@ export class ParticipantProfileService {
     retroService: RetroTournamentService,
     archiveCupService: ArchiveCupService
   ) {
-    const seasons = SEASON_SOURCES.map(source => http.get<SeasonCompetitionFile>(source.path));
+    const seasons = SEASON_SOURCES.map(source =>
+      http.get<SeasonCompetitionFile>(source.path).pipe(
+        switchMap(file => loadSeasonSnapshot(http, file).pipe(
+          catchError(error => {
+            console.warn(`Не удалось загрузить результаты сезона из ${file.config.squad_link}`, error);
+            return of({ file } as SeasonSnapshot);
+          })
+        ))
+      ));
     this.profiles$ = forkJoin({
       registry: achievementService.loadRegistry(),
       timeline: catalogService.loadTimeline(),
@@ -68,7 +83,10 @@ export class ParticipantProfileService {
           ...buildRetroSources(data.retro),
           ...buildLegacySpainSources(data.legacySpain, data.legacyProfiles['2024'] ?? []),
           ...buildArchiveCupSources(data.archiveCups),
-          ...buildCwcSources(data.legacyConsts, collectNames(data.seasons, data.legacyProfiles['2024'] ?? []))
+          ...buildCwcSources(
+            data.legacyConsts,
+            collectNames(data.seasons.map(snapshot => snapshot.file), data.legacyProfiles['2024'] ?? [])
+          )
         ]
       )),
       shareReplay({ bufferSize: 1, refCount: true })
@@ -86,21 +104,157 @@ export class ParticipantProfileService {
   }
 }
 
-function buildSeasonSources(files: SeasonCompetitionFile[]): ParticipantHistorySource[] {
-  return files.flatMap((file, index) => {
+function buildSeasonSources(snapshots: SeasonSnapshot[]): ParticipantHistorySource[] {
+  return snapshots.flatMap((snapshot, index) => {
+    const { file, squads } = snapshot;
     const allowed = new Set(file.config.profiles);
     return SEASON_SOURCES[index].tournamentIds.flatMap(tournamentId =>
       file.profiles
         .filter(profile => allowed.has(profile.id))
-        .map(profile => ({
-          tournamentId,
-          profileId: profile.id,
-          participantName: profile.name,
-          teamName: profile.teamName,
-          logo: profile.logo
-        }))
+        .map(profile => {
+          const remoteProfile = squads?.data.players[profile.id];
+          const mode = tournamentId.includes('-cup-') ? 'cup' : 'league';
+          return {
+            tournamentId,
+            profileId: profile.id,
+            participantName: profile.name,
+            profileUrl: profile.url,
+            profileNick: profile.nick,
+            teamName: remoteProfile?.team.title || profile.teamName,
+            logo: profile.logo,
+            teamUrl: remoteProfile?.team.id
+              ? buildFantasyTeamUrl(file.config.type, remoteProfile.team.id)
+              : undefined,
+            stats: squads ? buildSeasonStats(file.config, squads, profile.id, mode) : undefined,
+          };
+        })
     );
   });
+}
+
+function loadSeasonSnapshot(http: HttpClient, file: SeasonCompetitionFile): Observable<SeasonSnapshot> {
+  const requests: Record<string, Observable<FantasyFullInfoResponse>> = {
+    first: http.get<FantasyFullInfoResponse>(file.config.squad_link),
+  };
+  if (file.config.squad_link_2) {
+    requests['second'] = http.get<FantasyFullInfoResponse>(file.config.squad_link_2);
+  }
+  return forkJoin(requests).pipe(map(responses => ({
+    file,
+    squads: mergeCompetitionStages(responses['first'], responses['second']),
+  })));
+}
+
+function buildSeasonStats(
+  config: SeasonCompetitionConfig,
+  squads: FantasyFullInfoResponse,
+  profileId: string,
+  mode: 'league' | 'cup',
+): ParticipantTournamentStats | undefined {
+  const player = squads.data.players[profileId];
+  if (!player) return undefined;
+
+  const schedule = mode === 'cup'
+    ? Object.fromEntries((config.cup?.matchesTours ?? []).map((tour, index) => [tour, config.cup?.matches[index] ?? []]))
+    : config.matches;
+  const scores: number[] = [];
+  let wins = 0;
+  let draws = 0;
+  let losses = 0;
+  let scoreFor = 0;
+  let scoreAgainst = 0;
+
+  Object.entries(schedule).forEach(([tourKey, matches]) => {
+    const tour = Number(tourKey);
+    const match = matches.find(item => item.home === profileId || item.away === profileId);
+    if (!match) return;
+    const homeResult = squads.data.players[match.home]?.team.results_by_tour[tour];
+    const awayResult = squads.data.players[match.away]?.team.results_by_tour[tour];
+    if (!homeResult || !awayResult) return;
+    const homeScore = Number(homeResult.tour_score);
+    const awayScore = Number(awayResult.tour_score);
+    if (!Number.isFinite(homeScore) || !Number.isFinite(awayScore)) return;
+
+    const ownScore = match.home === profileId ? homeScore : awayScore;
+    const opponentScore = match.home === profileId ? awayScore : homeScore;
+    scores.push(ownScore);
+    scoreFor += ownScore;
+    scoreAgainst += opponentScore;
+    const drawGap = mode === 'cup' ? 0 : config.drawGap ?? 0;
+    if (Math.abs(ownScore - opponentScore) <= drawGap) draws += 1;
+    else if (ownScore > opponentScore) wins += 1;
+    else losses += 1;
+  });
+
+  const ownResults = Object.entries(player.team.results_by_tour)
+    .map(([tour, result]) => ({ tour: Number(tour), result }))
+    .filter(item => Number.isFinite(Number(item.result.tour_score)))
+    .sort((left, right) => left.tour - right.tour);
+  const fantasyScores = ownResults.map(item => Number(item.result.tour_score));
+  const relevantScores = mode === 'cup' ? scores : fantasyScores;
+  if (!relevantScores.length && !scores.length) return undefined;
+  const latest = ownResults.at(-1)?.result;
+  const matchesPlayed = wins + draws + losses;
+  const totalScore = mode === 'cup'
+    ? scores.reduce((sum, score) => sum + score, 0)
+    : Number(latest?.total_score ?? fantasyScores.reduce((sum, score) => sum + score, 0));
+  const standings = mode === 'league' ? buildSeasonStandings(config, squads) : [];
+
+  return {
+    place: standings.findIndex(item => item.profileId === profileId) + 1 || undefined,
+    fantasyPlace: numberOrUndefined(latest?.total_place),
+    totalScore,
+    averageScore: average(relevantScores),
+    maxScore: relevantScores.length ? Math.max(...relevantScores) : 0,
+    minScore: relevantScores.length ? Math.min(...relevantScores) : 0,
+    toursPlayed: relevantScores.length,
+    matchesPlayed,
+    wins,
+    draws,
+    losses,
+    points: wins * 3 + draws,
+    scoreFor,
+    scoreAgainst,
+    scoreDifference: scoreFor - scoreAgainst,
+  };
+}
+
+function buildSeasonStandings(
+  config: SeasonCompetitionConfig,
+  squads: FantasyFullInfoResponse,
+): Array<{ profileId: string; points: number; difference: number; scoreFor: number }> {
+  return config.profiles.map(profileId => {
+    let wins = 0;
+    let draws = 0;
+    let scoreFor = 0;
+    let scoreAgainst = 0;
+    Object.entries(config.matches).forEach(([tourKey, matches]) => {
+      const tour = Number(tourKey);
+      const match = matches.find(item => item.home === profileId || item.away === profileId);
+      if (!match) return;
+      const homeResult = squads.data.players[match.home]?.team.results_by_tour[tour];
+      const awayResult = squads.data.players[match.away]?.team.results_by_tour[tour];
+      if (!homeResult || !awayResult) return;
+      const own = Number(match.home === profileId ? homeResult.tour_score : awayResult.tour_score);
+      const against = Number(match.home === profileId ? awayResult.tour_score : homeResult.tour_score);
+      if (!Number.isFinite(own) || !Number.isFinite(against)) return;
+      scoreFor += own;
+      scoreAgainst += against;
+      if (Math.abs(own - against) <= (config.drawGap ?? 0)) draws += 1;
+      else if (own > against) wins += 1;
+    });
+    return { profileId, points: wins * 3 + draws, difference: scoreFor - scoreAgainst, scoreFor };
+  }).sort((left, right) =>
+    right.points - left.points || right.difference - left.difference || right.scoreFor - left.scoreFor);
+}
+
+function buildFantasyTeamUrl(type: string, teamId: string): string {
+  return `https://www.sports.ru/fantasy/football/${type}/${teamId}`;
+}
+
+function numberOrUndefined(value: unknown): number | undefined {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : undefined;
 }
 
 function buildRetroSources(tournaments: RetroTournament[]): ParticipantHistorySource[] {
@@ -109,6 +263,8 @@ function buildRetroSources(tournaments: RetroTournament[]): ParticipantHistorySo
     participantId: standing.participantId,
     profileId: standing.profileId,
     participantName: standing.participantName,
+    profileNick: standing.nickname,
+    profileTelegram: standing.telegram,
     teamName: standing.teamName,
     logo: standing.logo,
     stats: {
@@ -151,8 +307,11 @@ function buildLegacySpainSources(
       tournamentId: 'la-liga-2024-25',
       profileId: row.player.id,
       participantName: profile?.name || row.player.name,
+      profileUrl: profile?.url,
+      profileNick: profile?.nick,
       teamName: row.player.team.title,
       logo: profile?.logo || row.player.logo,
+      teamUrl: buildFantasyTeamUrl('spain', row.player.team.id),
       stats
     };
   });
@@ -181,7 +340,8 @@ function buildCwcSources(consts: LegacyConsts, names: Map<string, string>): Part
     profileId,
     participantName: names.get(profileId) || `Участник ${profileId}`,
     teamName: team.name,
-    logo: team.logo
+    logo: team.logo,
+    includeInTeamHistory: false,
   })));
 }
 

@@ -1,16 +1,16 @@
 <article class="participant-card">
   <a
     class="profile-mark"
-    [routerLink]="['/participants', profile.id]"
-    [attr.aria-label]="'Открыть профиль участника ' + profile.name"
-    title="Профиль участника"
-  >Профиль</a>
-  <a
-    class="participant-link"
     [href]="getTeamUrl()"
     target="_blank"
     rel="noopener noreferrer"
-    [attr.aria-label]="profile.team.title + ' — ' + profile.name + '. Открыть фэнтези-команду'">
+    [attr.aria-label]="'Открыть команду ' + profile.team.title + ' на Sports.ru'"
+    title="Команда на Sports.ru"
+  >Sports.ru ↗</a>
+  <a
+    class="participant-link"
+    [routerLink]="['/participants', profile.id]"
+    [attr.aria-label]="profile.team.title + ' — ' + profile.name + '. Открыть профиль участника'">
     <div class="logo-container">
       <img
         *ngIf="profile.logo && !imageFailed; else fallbackLogo"
@@ -27,6 +27,6 @@
       <span class="participant-name" [title]="profile.name">{{ profile.name }}</span>
     </div>
 
-    <span class="external-mark" aria-hidden="true">↗</span>
+    <span class="external-mark" aria-hidden="true">→</span>
   </a>
 </article>
