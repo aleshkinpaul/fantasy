@@ -13,8 +13,8 @@ describe('calculatePowerRating', () => {
     const rating = calculatePowerRating(profiles, makeTimeline(tournament), true);
 
     expect(rating.rows.map(row => row.participantId)).toEqual(['winner', 'score-leader']);
-    expect(rating.rows[0].rating).toBe(6);
-    expect(rating.rows[1].rating).toBe(4);
+    expect(rating.rows[0].rating).toBe(6.4);
+    expect(rating.rows[1].rating).toBe(4.6);
   });
 
   it('keeps live columns visible but removes their contribution when live is disabled', () => {
@@ -99,8 +99,24 @@ describe('calculatePowerRating', () => {
     expect(rating.columns.find(column => column.id === league.id)?.kindWeight).toBe(1);
     expect(rating.columns.find(column => column.id === cup.id)?.kindWeight).toBe(0.75);
     expect(rating.rows[0].participantId).toBe('league-winner');
-    expect(rating.rows[0].rating).toBe(5.71);
-    expect(rating.rows[1].rating).toBe(4.29);
+    expect(rating.rows[0].rating).toBe(6.14);
+    expect(rating.rows[1].rating).toBe(4.86);
+  });
+
+  it('normalizes the last place to 1 instead of 0', () => {
+    const tournament = makeTournament('league-2026', 2026, 'completed');
+    const profiles = [
+      makeProfile('winner', 'Победитель', [makeHistory(tournament, 100, 1)]),
+      makeProfile('last', 'Последнее место', [makeHistory(tournament, 50, 2)]),
+    ];
+
+    const rating = calculatePowerRating(profiles, makeTimeline(tournament), true);
+    const last = rating.rows.find(row => row.participantId === 'last')!;
+
+    expect(last.cells[tournament.id].fantasyIndex).toBe(0.1);
+    expect(last.cells[tournament.id].placeIndex).toBe(0.1);
+    expect(last.cells[tournament.id].tournamentPower).toBe(0.1);
+    expect(last.rating).toBe(1);
   });
 });
 

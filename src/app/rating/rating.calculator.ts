@@ -182,7 +182,9 @@ function buildParticipantRow(
     name: profile.name,
     teamName: profile.currentTeam?.teamName,
     logo: profile.currentTeam?.logo,
-    rating: round(Math.min(10, weightedPower * 10 * experienceFactor + consistencyBonus), 2),
+    rating: countedCells.length
+      ? round(Math.min(10, Math.max(1, weightedPower * 10 * experienceFactor + consistencyBonus)), 2)
+      : 0,
     experienceFactor: round(experienceFactor, 2),
     consistencyBonus,
     countedTournaments: countedCells.length,
@@ -218,7 +220,7 @@ function rankValues(items: Array<{ id: string; value: number }>): Map<string, nu
 function normalizedRank(rank: number, count: number): number {
   if (count <= 1) return 1;
   const boundedRank = Math.min(Math.max(rank, 1), count);
-  return (count - boundedRank) / (count - 1);
+  return 0.1 + 0.9 * (count - boundedRank) / (count - 1);
 }
 
 function buildSeasonGroups(columns: RatingTournamentColumn[]): RatingSeasonGroup[] {
