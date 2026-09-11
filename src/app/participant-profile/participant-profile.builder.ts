@@ -252,13 +252,20 @@ function buildTeamVersions(tournaments: ParticipantTournamentHistory[]): Partici
           logo: tournament.logo,
           firstPeriod: tournament.period,
           lastPeriod: tournament.period,
-          tournaments: 1
+          tournaments: 1,
+          tournamentCodes: [getTournamentCode(tournament)]
         }
       });
       return;
     }
 
     group.version.tournaments += 1;
+    const tournamentCode = getTournamentCode(tournament);
+    if (!group.version.tournamentCodes.includes(tournamentCode)) {
+      group.version.tournamentCodes.push(tournamentCode);
+      group.version.tournamentCodes.sort((left, right) =>
+        TOURNAMENT_CODE_ORDER.indexOf(left) - TOURNAMENT_CODE_ORDER.indexOf(right));
+    }
   });
 
   return Array.from(groups.values())
@@ -290,6 +297,18 @@ function buildPreferredTeamNames(tournaments: ParticipantTournamentHistory[]): M
 
 function normalizeTeamName(value: string): string {
   return value.replace(/\s+/g, ' ').trim().toLocaleLowerCase('ru-RU');
+}
+
+const TOURNAMENT_CODE_ORDER = ['ЛЛ', 'КК', 'ЛЧ', 'ЧМ', 'ЧЕ', 'КЧМ'];
+
+function getTournamentCode(tournament: ParticipantTournamentHistory): string {
+  if (tournament.kind === 'la-liga') return 'ЛЛ';
+  if (tournament.kind === 'cup') return 'КК';
+  if (tournament.kind === 'champions-league') return 'ЛЧ';
+  if (tournament.tournamentId.includes('club-world-cup')) return 'КЧМ';
+  if (tournament.tournamentId.includes('world-cup')) return 'ЧМ';
+  if (tournament.tournamentId.includes('euro')) return 'ЧЕ';
+  return tournament.kindLabel;
 }
 
 function pickLatestProfileId(

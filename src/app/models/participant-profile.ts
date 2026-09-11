@@ -69,6 +69,7 @@ export interface ParticipantTeamVersion {
   firstPeriod: string;
   lastPeriod: string;
   tournaments: number;
+  tournamentCodes: string[];
 }
 
 export interface ParticipantProfileSummary {

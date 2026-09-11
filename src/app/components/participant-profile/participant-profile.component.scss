@@ -318,6 +318,16 @@
   strong { width: 100%; margin-top: 10px; overflow: hidden; font-size: $font-size-sm; text-overflow: ellipsis; white-space: nowrap; }
   > article > span { margin-top: 3px; color: $color-primary; font-size: $font-size-xs; font-weight: $font-weight-semibold; }
   small { margin-top: 2px; color: $color-text-muted; }
+  .team-tournament-codes {
+    margin-top: 6px;
+    padding: 3px 8px;
+    border-radius: $border-radius-full;
+    background: $color-surface-blue;
+    color: $color-primary-hover;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: .04em;
+  }
 }
 
 .team-logo { width: 118px; height: 118px; padding: 9px; border-radius: 20px; }

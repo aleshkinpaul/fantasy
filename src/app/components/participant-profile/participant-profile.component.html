@@ -130,7 +130,7 @@
           </div>
           <strong>{{ team.teamName || 'Название команды не сохранено' }}</strong>
           <span>{{ team.firstPeriod === team.lastPeriod ? team.firstPeriod : team.firstPeriod + ' — ' + team.lastPeriod }}</span>
-          <small>{{ team.tournaments }} {{ team.tournaments === 1 ? 'турнир' : 'турнира' }}</small>
+          <small class="team-tournament-codes">{{ team.tournamentCodes.join(' · ') }}</small>
         </article>
       </div>
     </section>

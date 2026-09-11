@@ -50,15 +50,15 @@ describe('participant profile builder', () => {
   it('groups team history by season and logo while ignoring name casing', () => {
     const history = timeline();
     history[0].tournaments.push(
-      tournament('current-cup', 2025, 'completed'),
-      tournament('current-ucl', 2025, 'completed'),
-      tournament('current-world-cup', 2025, 'completed'),
+      tournament('current-cup', 2025, 'completed', 'cup'),
+      tournament('current-ucl', 2025, 'completed', 'champions-league'),
+      tournament('world-cup-2026', 2025, 'completed', 'summer'),
     );
     const [profile] = buildParticipantProfiles(registry(), history, [
       source('new-account', 'DUCKS', 'current'),
       source('old-account', 'ducks', 'current-cup'),
       source('old-account', 'ducks', 'current-ucl'),
-      { ...source('old-account', 'Ducks', 'current-world-cup'), logo: 'assets/germany.png' },
+      { ...source('old-account', 'Ducks', 'world-cup-2026'), logo: 'assets/germany.png' },
       source('old-account', 'ducks', 'retro'),
     ]);
 
@@ -66,18 +66,21 @@ describe('participant profile builder', () => {
     expect(profile.teamVersions[0]).toEqual(jasmine.objectContaining({
       teamName: 'ducks',
       tournaments: 3,
+      tournamentCodes: ['ЛЛ', 'КК', 'ЛЧ'],
       lastPeriod: '2025',
       logo: 'assets/DUCKS.png',
     }));
     expect(profile.teamVersions[1]).toEqual(jasmine.objectContaining({
       teamName: 'ducks',
       tournaments: 1,
+      tournamentCodes: ['ЧМ'],
       lastPeriod: '2025',
       logo: 'assets/germany.png',
     }));
     expect(profile.teamVersions[2]).toEqual(jasmine.objectContaining({
       teamName: 'ducks',
       tournaments: 1,
+      tournamentCodes: ['ЛЛ'],
       lastPeriod: '2023',
       logo: 'assets/ducks.png',
     }));
@@ -144,17 +147,28 @@ function timeline(): TournamentTimelineGroup[] {
   ] }];
 }
 
-function tournament(id: string, yearStart: number, status: 'active' | 'completed'): TournamentTimelineItem {
+function tournament(
+  id: string,
+  yearStart: number,
+  status: 'active' | 'completed',
+  kind: TournamentTimelineItem['kind'] = 'la-liga',
+): TournamentTimelineItem {
+  const labels = {
+    'la-liga': { long: 'Ла Лига', short: 'ЛЛ' },
+    cup: { long: 'Кубок', short: 'КК' },
+    'champions-league': { long: 'Лига чемпионов', short: 'ЛЧ' },
+    summer: { long: 'Летний турнир', short: 'ЛТ' },
+  }[kind];
   return {
     id,
     period: `${yearStart}`,
     yearStart,
-    kind: 'la-liga',
+    kind,
     title: id,
     route: `/${id}`,
     status,
-    kindLabel: 'Ла Лига',
-    shortLabel: 'ЛЛ',
+    kindLabel: labels.long,
+    shortLabel: labels.short,
     statusLabel: status,
     isArchive: status === 'completed'
   };
