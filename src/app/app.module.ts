@@ -26,7 +26,6 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
       useClass: LoaderInterceptor,
       multi: true
     }
-  ],
-  bootstrap: [AppComponent]
+  ]
 })
 export class AppModule { }

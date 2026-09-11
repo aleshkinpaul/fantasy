@@ -150,10 +150,15 @@
 
     .main-nav {
       margin-left: auto;
-      // width: 174px;
-      // flex: 0 0 174px;
+      max-width: calc(100% - 58px);
       padding: 3px;
       justify-content: flex-end;
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       a {
         padding: 5px 7px;

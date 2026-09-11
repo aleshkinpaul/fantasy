@@ -41,6 +41,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'rating',
+    loadComponent: () => import('./components/rating-page/rating-page.component').then(m => m.RatingPageComponent),
+    pathMatch: 'full'
+  },
+  {
     path: 'participants/:participantId',
     loadComponent: () => import('./components/participant-profile/participant-profile.component').then(m => m.ParticipantProfileComponent),
     pathMatch: 'full'

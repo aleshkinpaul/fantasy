@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
           name === 'spain-cup'        ? 'Кубок Испании'   : 
           name === 'club-world-cup'   ? 'Клубный ЧМ'      :
           name === 'hall-of-fame'     ? 'Зал славы'       :
+          name === 'rating'           ? 'Рейтинг'         :
           name === 'participant'      ? 'Участник'        : '';
       }
     });

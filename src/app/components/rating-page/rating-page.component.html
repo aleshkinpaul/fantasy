@@ -1,0 +1,127 @@
+<main class="rating-page">
+  <section class="rating-hero">
+    <div>
+      <p class="eyebrow">FR Fantasy · вся история</p>
+      <h1>Рейтинг участников</h1>
+      <p>Сила команды учитывает и набранные фэнтези-очки, и фактический результат в каждом турнире.</p>
+    </div>
+    <div class="scale-card" aria-label="Шкала рейтинга">
+      <span>Шкала силы</span>
+      <strong>0–10</strong>
+      <small>пересчитывается при открытии страницы</small>
+    </div>
+  </section>
+
+  <section class="formula-card" aria-labelledby="formula-heading">
+    <header>
+      <div><p class="eyebrow">Методика</p><h2 id="formula-heading">Как считается сила</h2></div>
+      <label class="live-toggle">
+        <input
+          type="checkbox"
+          [checked]="includeLive"
+          (change)="setIncludeLive($any($event.target).checked)">
+        <span class="toggle-track" aria-hidden="true"><span></span></span>
+        <span><strong>Учитывать live</strong><small>текущий сезон входит в формулу</small></span>
+      </label>
+    </header>
+    <div class="formula-steps">
+      <article><strong>40%</strong><span>место по ФО внутри конкретного турнира</span></article>
+      <article><strong>60%</strong><span>фактически занятое место в турнире</span></article>
+      <article><strong>× 1,0…0,5</strong><span>вес сезона: каждый предыдущий теряет 0,1</span></article>
+      <article><strong>+ 0,4</strong><span>за участие в двух последних учитываемых сезонах</span></article>
+    </div>
+    <p class="formula-note">
+      ФО и места переводятся в позицию относительно остальных участников того же турнира. Если отдельного H2H-места нет, используется место по ФО. Итог ограничен десятью баллами.
+    </p>
+  </section>
+
+  <div class="rating-state" *ngIf="loading" aria-live="polite">Собираем результаты всех сезонов…</div>
+  <div class="rating-state error" *ngIf="loadError">
+    <strong>Не удалось рассчитать рейтинг</strong>
+    <span>Проверьте доступность турнирных API и обновите страницу.</span>
+  </div>
+
+  <section class="rating-board" *ngIf="rating as data">
+    <header class="board-toolbar">
+      <div>
+        <p class="eyebrow">Общая таблица</p>
+        <h2>{{ data.rows.length }} участников · {{ data.countedTournaments }} турниров в расчёте</h2>
+      </div>
+      <label class="search-field">
+        <span>Поиск</span>
+        <input type="search" [(ngModel)]="search" placeholder="Участник или команда">
+      </label>
+    </header>
+
+    <div class="table-legend">
+      <span><i class="legend-live"></i> live-турнир</span>
+      <span><strong>ФО</strong> — крупное число</span>
+      <span><small>Место</small> — подпись под ФО</span>
+    </div>
+
+    <div class="rating-table-wrap">
+      <table class="rating-table">
+        <thead>
+          <tr class="season-row">
+            <th class="rank-column sticky-column" rowspan="2">#</th>
+            <th class="participant-column sticky-column" rowspan="2">Участник</th>
+            <th class="power-column sticky-column" rowspan="2">Сила</th>
+            <th *ngFor="let season of data.seasons" [attr.colspan]="season.columns.length">
+              {{ season.period }}
+            </th>
+          </tr>
+          <tr class="tournament-row">
+            <th
+              *ngFor="let column of data.columns; trackBy: trackColumn"
+              [class.live-column]="column.isLive"
+              [class.excluded-column]="!column.included">
+              <a [href]="column.route" [title]="column.title">
+                <strong>{{ column.shortLabel }}</strong>
+                <span *ngIf="column.isLive">live</span>
+                <small>{{ column.included ? '×' + formatScore(column.seasonWeight) : 'не в расчёте' }}</small>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of filteredRows; trackBy: trackRow">
+            <td class="rank-column sticky-column"><strong>{{ row.rank }}</strong></td>
+            <td class="participant-column sticky-column">
+              <a [routerLink]="['/participants', row.participantId]">
+                <span class="participant-logo">
+                  <img
+                    *ngIf="row.logo && !hasFailedImage(row.participantId); else logoFallback"
+                    [src]="row.logo"
+                    [alt]="row.teamName || row.name"
+                    (error)="failImage(row.participantId)">
+                  <ng-template #logoFallback><span>{{ initials(row.teamName || row.name) }}</span></ng-template>
+                </span>
+                <span class="participant-copy"><strong>{{ row.name }}</strong><small>{{ row.teamName || 'Команда не указана' }}</small></span>
+              </a>
+            </td>
+            <td class="power-column sticky-column">
+              <strong>{{ row.countedTournaments ? formatRating(row.rating) : '—' }}</strong>
+              <small>{{ row.countedTournaments }} турн.<ng-container *ngIf="row.consistencyBonus"> · +{{ formatRating(row.consistencyBonus) }}</ng-container></small>
+            </td>
+            <td
+              *ngFor="let column of data.columns; trackBy: trackColumn"
+              class="result-cell"
+              [class.live-cell]="column.isLive"
+              [class.excluded-cell]="!column.included">
+              <ng-container *ngIf="row.cells[column.id] as cell; else noResult">
+                <div [title]="cellTitle(cell, column)" [class.no-score]="cell.totalScore === undefined">
+                  <strong>{{ cell.totalScore !== undefined ? formatScore(cell.totalScore) : '—' }}</strong>
+                  <small *ngIf="cell.officialPlace">{{ cell.officialPlace }} место</small>
+                  <small *ngIf="!cell.officialPlace && cell.fantasyRank">{{ cell.fantasyRank }} по ФО</small>
+                </div>
+              </ng-container>
+              <ng-template #noResult><span class="empty-cell">·</span></ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="empty-search" *ngIf="!filteredRows.length">По вашему запросу участники не найдены.</p>
+  </section>
+</main>
