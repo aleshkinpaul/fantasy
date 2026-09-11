@@ -54,6 +54,26 @@ describe('calculatePowerRating', () => {
     expect(rating.columns.map(column => column.seasonWeight)).toEqual([1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.5]);
     expect(rating.rows[0].consistencyBonus).toBe(0.4);
   });
+
+  it('rewards a long track record over one isolated strong tournament', () => {
+    const tournaments = Array.from({ length: 4 }, (_, index) =>
+      makeTournament(`league-${2023 + index}`, 2023 + index, 'completed'));
+    const profiles = [
+      makeProfile('regular', 'Постоянный участник', tournaments.map((tournament, index) =>
+        makeHistory(tournament, index === 3 ? 90 : 100, index === 3 ? 2 : 1))),
+      makeProfile('newcomer', 'Участник одного турнира', [
+        makeHistory(tournaments[3], 100, 1),
+      ]),
+    ];
+
+    const rating = calculatePowerRating(profiles, makeTimeline(...tournaments), true);
+    const regular = rating.rows.find(row => row.participantId === 'regular')!;
+    const newcomer = rating.rows.find(row => row.participantId === 'newcomer')!;
+
+    expect(regular.experienceFactor).toBe(1);
+    expect(newcomer.experienceFactor).toBe(0.7);
+    expect(regular.rating).toBeGreaterThan(newcomer.rating);
+  });
 });
 
 function makeTimeline(...tournaments: TournamentTimelineItem[]): TournamentTimelineGroup[] {

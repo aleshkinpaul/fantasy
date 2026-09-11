@@ -114,7 +114,7 @@
 
 .formula-steps {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   margin-top: 20px;
 
@@ -177,7 +177,7 @@
   tbody tr:last-child td { border-bottom: 0; }
   tbody tr:nth-child(even) td { background: rgba($color-surface-muted, .34); }
   tbody tr:hover td { background: $color-surface-blue; }
-  thead th { position: sticky; z-index: 4; background: $color-surface-muted; }
+  thead th { position: sticky; background: $color-surface-muted; }
   .season-row th { top: 0; height: 34px; color: $color-primary-hover; font-size: $font-size-xs; }
   .tournament-row th { top: 34px; min-width: 106px; height: 70px; }
 }
@@ -210,7 +210,7 @@ thead .sticky-column { z-index: 7; background: $color-surface-muted !important; 
 .participant-copy small { margin-top: 2px; color: $color-text-muted; font-size: $font-size-xs; }
 
 .power-column > strong { color: $color-primary-hover; font-family: $font-family-brand; font-size: $font-size-xl; }
-.power-column > small { display: block; margin-top: 3px; color: $color-text-muted; font-size: .6rem; }
+.power-column > small { display: block; margin-top: 3px; color: $color-text-muted; font-size: .56rem; line-height: 1.25; }
 .result-cell { min-width: 106px; }
 .result-cell > div { display: flex; align-items: center; flex-direction: column; }
 .result-cell strong { font-size: $font-size-sm; }

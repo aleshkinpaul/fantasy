@@ -28,10 +28,11 @@
       <article><strong>40%</strong><span>место по ФО внутри конкретного турнира</span></article>
       <article><strong>60%</strong><span>фактически занятое место в турнире</span></article>
       <article><strong>× 1,0…0,5</strong><span>вес сезона: каждый предыдущий теряет 0,1</span></article>
+      <article><strong>× 0,6…1,0</strong><span>коэффициент опыта по количеству сыгранных турниров</span></article>
       <article><strong>+ 0,4</strong><span>за участие в двух последних учитываемых сезонах</span></article>
     </div>
     <p class="formula-note">
-      ФО и места переводятся в позицию относительно остальных участников того же турнира. Если отдельного H2H-места нет, используется место по ФО. Итог ограничен десятью баллами.
+      ФО и места переводятся в позицию относительно остальных участников того же турнира. Коэффициент опыта растёт относительно участника с наибольшим количеством турниров. Если отдельного H2H-места нет, используется место по ФО. Итог ограничен десятью баллами.
     </p>
   </section>
 
@@ -101,7 +102,7 @@
             </td>
             <td class="power-column sticky-column">
               <strong>{{ row.countedTournaments ? formatRating(row.rating) : '—' }}</strong>
-              <small>{{ row.countedTournaments }} турн.<ng-container *ngIf="row.consistencyBonus"> · +{{ formatRating(row.consistencyBonus) }}</ng-container></small>
+              <small>{{ row.countedTournaments }} турн. · опыт ×{{ formatScore(row.experienceFactor) }}<ng-container *ngIf="row.consistencyBonus"> · +{{ formatRating(row.consistencyBonus) }}</ng-container></small>
             </td>
             <td
               *ngFor="let column of data.columns; trackBy: trackColumn"

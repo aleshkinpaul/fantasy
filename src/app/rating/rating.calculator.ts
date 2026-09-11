@@ -12,6 +12,7 @@ const FANTASY_WEIGHT = 0.4;
 const PLACE_WEIGHT = 0.6;
 const CONSISTENCY_BONUS = 0.4;
 const MIN_SEASON_WEIGHT = 0.5;
+const MIN_EXPERIENCE_FACTOR = 0.6;
 
 const KIND_ORDER: Record<TournamentKind, number> = {
   'la-liga': 0,
@@ -56,11 +57,14 @@ export function calculatePowerRating(
     buildTournamentMetrics(historiesByTournament.get(column.id) ?? [], column),
   ]));
   const recentSeasonPair = latestIncludedSeasons.slice(0, 2);
+  const maxCountedTournaments = Math.max(1, ...profiles.map(profile =>
+    countIncludedTournaments(profile.participantId, columns, tournamentMetrics)));
   const rows = profiles.map(profile => buildParticipantRow(
     profile,
     columns,
     tournamentMetrics,
     recentSeasonPair,
+    maxCountedTournaments,
   )).sort((left, right) =>
     right.rating - left.rating
     || right.countedTournaments - left.countedTournaments
@@ -139,6 +143,7 @@ function buildParticipantRow(
   columns: RatingTournamentColumn[],
   metrics: Map<string, Map<string, ParticipantRatingCell>>,
   recentSeasonPair: number[],
+  maxCountedTournaments: number,
 ): ParticipantRatingRow {
   const cells = Object.fromEntries(columns.flatMap(column => {
     const cell = metrics.get(column.id)?.get(profile.participantId);
@@ -155,6 +160,10 @@ function buildParticipantRow(
   const activeYears = new Set(countedCells.map(item => item.column.yearStart));
   const consistencyBonus = recentSeasonPair.length === 2
     && recentSeasonPair.every(year => activeYears.has(year)) ? CONSISTENCY_BONUS : 0;
+  const experienceFactor = countedCells.length
+    ? MIN_EXPERIENCE_FACTOR
+      + (1 - MIN_EXPERIENCE_FACTOR) * countedCells.length / maxCountedTournaments
+    : MIN_EXPERIENCE_FACTOR;
 
   return {
     rank: 0,
@@ -163,11 +172,20 @@ function buildParticipantRow(
     name: profile.name,
     teamName: profile.currentTeam?.teamName,
     logo: profile.currentTeam?.logo,
-    rating: round(Math.min(10, weightedPower * 10 + consistencyBonus), 2),
+    rating: round(Math.min(10, weightedPower * 10 * experienceFactor + consistencyBonus), 2),
+    experienceFactor: round(experienceFactor, 2),
     consistencyBonus,
     countedTournaments: countedCells.length,
     cells,
   };
+}
+
+function countIncludedTournaments(
+  participantId: string,
+  columns: RatingTournamentColumn[],
+  metrics: Map<string, Map<string, ParticipantRatingCell>>,
+): number {
+  return columns.filter(column => metrics.get(column.id)?.get(participantId)?.included).length;
 }
 
 function getOfficialPlace(history: ParticipantTournamentHistory): number | undefined {

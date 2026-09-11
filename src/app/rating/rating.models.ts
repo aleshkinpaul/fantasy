@@ -40,6 +40,7 @@ export interface ParticipantRatingRow {
   teamName?: string;
   logo?: string;
   rating: number;
+  experienceFactor: number;
   consistencyBonus: number;
   countedTournaments: number;
   cells: Record<string, ParticipantRatingCell>;
