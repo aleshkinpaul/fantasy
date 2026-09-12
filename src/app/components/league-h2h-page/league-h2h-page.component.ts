@@ -39,6 +39,11 @@ import { TourInsights } from '../../tour-insights/tour-insights.models';
 import { calculateTourInsights } from '../../tour-insights/tour-insights-calculator';
 import { RealClubIndex } from '../../models/real-club';
 import { RealClubCatalogService } from '../../service/real-club-catalog.service';
+import {
+  MATCH_CENTER_QUERY_KEYS,
+  matchCenterQuery,
+  resolveMatchCenterQuery,
+} from '../../match-center/match-center-route';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -112,6 +117,9 @@ export class LeagueH2HPageComponent implements OnInit {
         next: index => this.realClubIndex = index,
         error: error => logger.error('Не удалось загрузить справочник реальных клубов:', error),
       });
+    this.route.queryParamMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.syncMatchCenterFromRoute());
     this.loadCompetition();
   }
 
@@ -144,6 +152,7 @@ export class LeagueH2HPageComponent implements OnInit {
               this.setConfTabId(this.activeTabs.confTabId);
 
               this.getMatchesForLeague();
+              this.syncMatchCenterFromRoute();
       },
       error: err => {
             this.loadError = true;
@@ -420,6 +429,17 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   openMatchCenter(selection: MatchCenterSelection): void {
+    this.showMatchCenter(selection);
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: matchCenterQuery(selection),
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  private showMatchCenter(selection: MatchCenterSelection): void {
+    if (this.matchSelectionKey(this.selectedMatch) === this.matchSelectionKey(selection)) return;
+
     this.selectedMatch = selection;
     this.selectedSportPlayers = this.sportPlayersByTour[selection.tour]
       || this.sportPlayersByTour[this.lastTour]
@@ -454,10 +474,42 @@ export class LeagueH2HPageComponent implements OnInit {
   }
 
   closeMatchCenter(): void {
+    this.clearMatchCenter();
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: Object.fromEntries(MATCH_CENTER_QUERY_KEYS.map(key => [key, null])),
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
+  private clearMatchCenter(): void {
     this.forecastSubscription?.unsubscribe();
     this.selectedMatch = null;
     this.matchForecast = null;
     this.forecastLoading = false;
+  }
+
+  private syncMatchCenterFromRoute(): void {
+    if (!this.consts) return;
+
+    const query = this.route.snapshot.queryParamMap;
+    const selection = resolveMatchCenterQuery(this.consts.matches, {
+      matchTour: query.get('matchTour'),
+      matchHome: query.get('matchHome'),
+      matchAway: query.get('matchAway'),
+    });
+    if (selection) {
+      this.showMatchCenter(selection);
+    } else if (this.selectedMatch) {
+      this.clearMatchCenter();
+    }
+  }
+
+  private matchSelectionKey(selection: MatchCenterSelection | null): string {
+    return selection
+      ? `${selection.tour}:${selection.match.home}:${selection.match.away}`
+      : '';
   }
 
   setQueryParam(newParam: IActiveCompetitionTabs): void {

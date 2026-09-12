@@ -34,6 +34,136 @@
   </nav>
 
   <ng-container *ngIf="dashboard$ | async as dashboard; else dashboardLoading">
+    <section
+      class="personal-dashboard"
+      *ngIf="dashboard.personalizedParticipant as participant"
+      aria-labelledby="personal-dashboard-heading">
+      <header class="section-heading personal-heading">
+        <div>
+          <p class="section-kicker">Ваши турниры</p>
+          <h2 id="personal-dashboard-heading">{{ participant.name }}, всё важное — здесь</h2>
+        </div>
+        <p>Матчи и ближайшее окружение в таблице после последнего рассчитанного тура</p>
+      </header>
+
+      <div class="personal-tournaments" *ngIf="dashboard.personalized.length; else noPersonalTournaments">
+        <article
+          class="personal-tournament"
+          *ngFor="let summary of dashboard.personalized; trackBy: trackPersonalTournament"
+          [attr.data-theme]="summary.tournament.theme">
+          <header class="personal-tournament-heading">
+            <span class="tournament-logo"><img [src]="summary.tournament.icon" alt=""></span>
+            <span>
+              <small>{{ summary.tournament.period }} · {{ summary.stageName }}</small>
+              <strong>{{ summary.tournament.title }}</strong>
+            </span>
+            <a
+              [href]="summary.tournament.route"
+              (click)="openTournament($event, summary.tournament.route)"
+              aria-label="Открыть турнир">
+              →
+            </a>
+          </header>
+
+          <div class="personal-tournament-body">
+            <section class="personal-matches" [attr.aria-label]="'Матчи команды ' + summary.profile.team.title">
+              <a
+                class="personal-match"
+                *ngIf="summary.currentMatch as match; else noCurrentMatch"
+                [href]="match.route"
+                (click)="openTournament($event, match.route)">
+                <span class="match-label">Текущий · {{ match.tour }} тур</span>
+                <span class="match-teams">
+                  <span class="match-team" [appPersonalized]="match.home.id">
+                    <span><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
+                    <span class="match-logo"><img [src]="match.home.logo" [alt]="match.home.team.title"></span>
+                  </span>
+                  <strong class="match-score" *ngIf="hasScore(match); else versus">
+                    {{ match.homeScore }} : {{ match.awayScore }}
+                  </strong>
+                  <ng-template #versus><strong class="match-score">—</strong></ng-template>
+                  <span class="match-team is-away" [appPersonalized]="match.away.id">
+                    <span class="match-logo"><img [src]="match.away.logo" [alt]="match.away.team.title"></span>
+                    <span><strong>{{ match.away.team.title }}</strong><small>{{ match.away.name }}</small></span>
+                  </span>
+                </span>
+                <span class="match-action">Открыть матч-центр <i aria-hidden="true">→</i></span>
+              </a>
+
+              <ng-template #noCurrentMatch>
+                <div class="personal-match is-empty">
+                  <span class="match-label">Текущий тур</span>
+                  <strong>Матч пока не опубликован</strong>
+                  <small>Карточка появится после обновления данных турнира</small>
+                </div>
+              </ng-template>
+
+              <a
+                class="personal-match is-next"
+                *ngIf="summary.nextMatch as match; else noNextMatch"
+                [href]="match.route"
+                (click)="openTournament($event, match.route)">
+                <span class="match-label">Следующий · {{ match.tour }} тур</span>
+                <span class="match-teams">
+                  <span class="match-team" [appPersonalized]="match.home.id">
+                    <span><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
+                    <span class="match-logo"><img [src]="match.home.logo" [alt]="match.home.team.title"></span>
+                  </span>
+                  <strong class="match-score">—</strong>
+                  <span class="match-team is-away" [appPersonalized]="match.away.id">
+                    <span class="match-logo"><img [src]="match.away.logo" [alt]="match.away.team.title"></span>
+                    <span><strong>{{ match.away.team.title }}</strong><small>{{ match.away.name }}</small></span>
+                  </span>
+                </span>
+                <span class="match-action">К матчу <i aria-hidden="true">→</i></span>
+              </a>
+
+              <ng-template #noNextMatch>
+                <div class="personal-match is-empty is-next">
+                  <span class="match-label">Следующий матч</span>
+                  <strong>Соперник пока не определён</strong>
+                  <small>Расписание продолжения ещё не опубликовано</small>
+                </div>
+              </ng-template>
+            </section>
+
+            <section class="personal-standing" [attr.aria-label]="'Положение в таблице ' + summary.leagueName">
+              <header>
+                <span><small>{{ summary.leagueName }}</small><strong>{{ summary.place }} место</strong></span>
+                <span class="standing-columns-label"><i>О</i><i>ФО</i></span>
+              </header>
+              <ol>
+                <li
+                  *ngFor="let row of summary.standings; trackBy: trackPersonalStanding"
+                  [appPersonalized]="row.profile.id">
+                  <span class="place">{{ row.place }}</span>
+                  <a [routerLink]="['/participants', row.profile.id]">
+                    <span class="team-logo"><img [src]="row.profile.logo" [alt]="row.profile.team.title"></span>
+                    <span><strong>{{ row.profile.team.title }}</strong><small>{{ row.profile.name }}</small></span>
+                  </a>
+                  <b>{{ personalPoints(row, summary) }}</b>
+                  <b>{{ personalFantasyPoints(row, summary) }}</b>
+                </li>
+              </ol>
+              <a
+                class="personal-table-link"
+                [href]="summary.tournament.route"
+                (click)="openTournament($event, summary.tournament.route)">
+                Вся таблица <span aria-hidden="true">→</span>
+              </a>
+            </section>
+          </div>
+        </article>
+      </div>
+
+      <ng-template #noPersonalTournaments>
+        <div class="no-personal-tournaments">
+          <strong>Сейчас у вас нет действующих турниров</strong>
+          <p>Общая сводка лиги остаётся доступна ниже.</p>
+        </div>
+      </ng-template>
+    </section>
+
     <section class="standings-section" *ngIf="dashboard.summaries.length" aria-labelledby="standings-heading">
       <header class="section-heading">
         <div>

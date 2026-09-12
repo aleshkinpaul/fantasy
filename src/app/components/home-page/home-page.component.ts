@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Observable, catchError, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
+import { Observable, catchError, combineLatest, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
 
 import { CompetitionFacade, CompetitionViewModel } from '../../competition/data/competition.facade';
 import { CompetitionType } from '../../competition/models/competition.models';
@@ -11,6 +11,14 @@ import { TournamentKind, TournamentTimelineItem } from '../../models/tournament-
 import { DataService } from '../../service/data.service';
 import { TournamentCatalogService } from '../../service/tournament-catalog.service';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
+import {
+  PersonalizedHomeMatch,
+  PersonalizedHomeTournament,
+  PersonalizedStandingRow,
+  buildPersonalizedHomeTournament,
+} from '../../home/personalized-home';
+import { ParticipantDirectoryEntry } from '../../models/participant-directory';
+import { PersonalizationService } from '../../service/personalization.service';
 
 interface HomeTournamentSummary {
   tournament: TournamentTimelineItem;
@@ -28,12 +36,15 @@ interface HomeStandingGroup {
 interface TournamentLoadResult {
   tournament: TournamentTimelineItem;
   summary?: HomeTournamentSummary;
+  viewModel?: CompetitionViewModel;
   failed: boolean;
 }
 
 interface HomeDashboardState {
   summaries: HomeTournamentSummary[];
   failed: TournamentTimelineItem[];
+  personalizedParticipant: ParticipantDirectoryEntry | null;
+  personalized: PersonalizedHomeTournament[];
 }
 
 @Component({
@@ -51,23 +62,25 @@ export class HomePageComponent {
     catalogService: TournamentCatalogService,
     competitionFacade: CompetitionFacade,
     dataService: DataService,
+    personalization: PersonalizationService,
   ) {
     dataService.setUrlName('');
 
-    this.dashboard$ = catalogService.loadTimeline().pipe(
+    const tournamentData$ = catalogService.loadTimeline().pipe(
       map(seasons => seasons
         .flatMap(season => season.tournaments)
         .filter(tournament => tournament.status === 'active')
         .map(tournament => ({ tournament, type: competitionTypeFor(tournament.kind) }))
         .filter((item): item is { tournament: TournamentTimelineItem; type: CompetitionType } => item.type !== null)),
       switchMap(items => {
-        if (!items.length) return of({ summaries: [], failed: [] });
+        if (!items.length) return of([] as TournamentLoadResult[]);
 
         return forkJoin(items.map(({ tournament, type }) =>
           competitionFacade.load(type, tournament.yearStart).pipe(
             map(viewModel => ({
               tournament,
               summary: buildTournamentSummary(tournament, viewModel),
+              viewModel,
               failed: false,
             } as TournamentLoadResult)),
             catchError(error => {
@@ -75,14 +88,34 @@ export class HomePageComponent {
               return of({ tournament, failed: true } as TournamentLoadResult);
             }),
           )
-        )).pipe(map(results => ({
-          summaries: results.flatMap(result => result.summary ? [result.summary] : []),
-          failed: results.filter(result => result.failed).map(result => result.tournament),
-        })));
+        ));
       }),
       catchError(error => {
         console.error('Failed to load home dashboard', error);
-        return of({ summaries: [], failed: [] });
+        return of([] as TournamentLoadResult[]);
+      }),
+      shareReplay({ bufferSize: 1, refCount: true }),
+    );
+
+    this.dashboard$ = combineLatest([tournamentData$, personalization.state$]).pipe(
+      map(([results, personalizationState]) => {
+        const selectedParticipant = personalizationState.mode === 'participant'
+          ? personalizationState.selectedParticipant
+          : null;
+        return {
+          summaries: results.flatMap(result => result.summary ? [result.summary] : []),
+          failed: results.filter(result => result.failed).map(result => result.tournament),
+          personalizedParticipant: selectedParticipant,
+          personalized: selectedParticipant
+            ? results.flatMap(result => result.viewModel
+              ? optionalItem(buildPersonalizedHomeTournament(
+                result.tournament,
+                result.viewModel,
+                selectedParticipant,
+              ))
+              : [])
+            : [],
+        };
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
@@ -101,6 +134,18 @@ export class HomePageComponent {
 
   fantasyPoints(profile: IProfileDetails): number {
     return profile.results.fo['common'] ?? profile.score ?? 0;
+  }
+
+  personalPoints(row: PersonalizedStandingRow, summary: PersonalizedHomeTournament): number {
+    return row.profile.results.points[summary.standingKey] ?? 0;
+  }
+
+  personalFantasyPoints(row: PersonalizedStandingRow, summary: PersonalizedHomeTournament): number {
+    return row.profile.results.fo[summary.standingKey] ?? row.profile.score ?? 0;
+  }
+
+  hasScore(match: PersonalizedHomeMatch): boolean {
+    return match.homeScore !== undefined && match.awayScore !== undefined;
   }
 
   prizeLeaders(prize: IRuntimePrize): IPrizeNominee[] {
@@ -129,6 +174,14 @@ export class HomePageComponent {
     return summary.tournament.id;
   }
 
+  trackPersonalTournament(_index: number, summary: PersonalizedHomeTournament): string {
+    return summary.tournament.id;
+  }
+
+  trackPersonalStanding(_index: number, row: PersonalizedStandingRow): string {
+    return row.profile.id;
+  }
+
   trackProfile(_index: number, profile: IProfileDetails): string {
     return profile.id;
   }
@@ -144,6 +197,10 @@ export class HomePageComponent {
   trackLeader(_index: number, leader: IPrizeNominee): string {
     return leader.id;
   }
+}
+
+function optionalItem<T>(item: T | null): T[] {
+  return item ? [item] : [];
 }
 
 function buildTournamentSummary(
