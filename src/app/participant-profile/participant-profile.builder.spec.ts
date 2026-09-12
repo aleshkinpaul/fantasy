@@ -97,14 +97,17 @@ describe('participant profile builder', () => {
     expect(profiles.map(profile => profile.participantId)).toContain('profile-second-id');
   });
 
-  it('keeps collective tournament participation out of personal team history', () => {
-    const [profile] = buildParticipantProfiles(registry(), timeline(), [
+  it('includes collective tournament teams as separate team-history entries', () => {
+    const history = timeline();
+    history[0].tournaments.push(tournament('club-world-cup-2025', 2024, 'completed', 'summer'));
+    const [profile] = buildParticipantProfiles(registry(), history, [
       source('new-account', 'ducks', 'current'),
-      { ...source('old-account', 'Collective team', 'retro'), includeInTeamHistory: false },
+      source('old-account', 'Collective team', 'club-world-cup-2025'),
     ]);
 
-    expect(profile.tournaments.map(item => item.tournamentId)).toContain('retro');
-    expect(profile.teamVersions.map(item => item.teamName)).toEqual(['ducks']);
+    expect(profile.tournaments.map(item => item.tournamentId)).toContain('club-world-cup-2025');
+    expect(profile.teamVersions.map(item => item.teamName)).toEqual(['ducks', 'Collective team']);
+    expect(profile.teamVersions[1].tournamentCodes).toEqual(['КЧМ']);
   });
 
   it('adds individual and team achievements to the participant', () => {

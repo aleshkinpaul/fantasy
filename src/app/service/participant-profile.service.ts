@@ -429,7 +429,6 @@ function buildCwcSources(
     participantName: names.get(profileId) || `Участник ${profileId}`,
     teamName: team.name,
     logo: team.logo,
-    includeInTeamHistory: false,
     stats: snapshot ? buildAccumulatedFantasyStats(snapshot.squads, profileId) : undefined,
   })));
 }
