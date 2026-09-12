@@ -73,7 +73,7 @@
   span {
     padding: 7px 11px;
     color: $color-primary-hover;
-    border: 1px solid rgba($color-primary, .2);
+    border: 1px solid alpha($color-primary, .2);
     border-radius: $border-radius-full;
     background: $color-surface-blue;
     font-size: $font-size-xs;
@@ -104,7 +104,7 @@
 
     &:hover {
       color: $color-primary;
-      border-color: rgba($color-primary, .35);
+      border-color: alpha($color-primary, .35);
     }
 
     &:focus-visible { @include focus-ring; }
@@ -172,7 +172,7 @@
   overflow: hidden;
   border: 1px solid $color-border;
   border-radius: $border-radius-lg;
-  background: lighten($color-canvas, 2%);
+  background: tint($color-canvas, 2%);
 }
 
 .team-row {
@@ -182,7 +182,7 @@
   min-height: 66px;
   padding: 10px 12px;
   align-items: center;
-  border-top: 1px solid rgba($color-border, .7);
+  border-top: 1px solid alpha($color-border, .7);
 
   &:first-child { border-top: 0; }
 
@@ -216,7 +216,7 @@
   min-width: 22px;
   padding: 2px 5px;
   color: $color-primary-hover;
-  border: 1px solid rgba($color-primary, .32);
+  border: 1px solid alpha($color-primary, .32);
   border-radius: $border-radius-full;
   background: $color-surface-blue;
   box-shadow: $shadow-sm;

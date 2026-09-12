@@ -17,8 +17,8 @@
   th,
   td {
     padding: 4px 6px;
-    border-right: 1px solid rgba($color-border, 0.56);
-    border-bottom: 1px solid rgba($color-border, 0.7);
+    border-right: 1px solid alpha($color-border, 0.56);
+    border-bottom: 1px solid alpha($color-border, 0.7);
     vertical-align: middle;
 
     &:last-child {
@@ -42,7 +42,7 @@
     background: $color-surface;
 
     &:nth-child(even) {
-      // background: rgba($color-surface-muted, 0.52);
+      // background: alpha($color-surface-muted, 0.52);
       background: $color-surface-muted;
     }
 
@@ -87,17 +87,17 @@
 
       &.green-bg {
         background: $color-success-bg;
-        border-color: rgba($color-success, 0.35);
+        border-color: alpha($color-success, 0.35);
       }
 
       &.red-bg {
         background: $color-danger-bg;
-        border-color: rgba($color-danger, 0.35);
+        border-color: alpha($color-danger, 0.35);
       }
 
       &.grey-bg {
         background: $color-neutral-bg;
-        border-color: rgba($color-neutral, 0.3);
+        border-color: alpha($color-neutral, 0.3);
       }
 
       a,

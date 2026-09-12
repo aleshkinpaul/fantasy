@@ -163,9 +163,9 @@ $bp-sm: 600px;
   overflow: hidden;
   color: inherit;
   text-decoration: none;
-  border: 1px solid darken($color-surface-beige, 7%);
+  border: 1px solid shade($color-surface-beige, 7%);
   border-radius: $border-radius-xl;
-  background: linear-gradient(135deg, lighten($color-surface-beige, 6%), $color-surface-beige);
+  background: linear-gradient(135deg, tint($color-surface-beige, 6%), $color-surface-beige);
   box-shadow: $shadow-sm;
   transition: transform $transition-fast, box-shadow $transition-fast;
 
@@ -186,7 +186,7 @@ $bp-sm: 600px;
   justify-self: end;
   border: 0;
   border-radius: 20px;
-  background: rgba($color-surface, .5);
+  background: alpha($color-surface, .5);
 
   img {
     inset: 8px;
@@ -206,7 +206,7 @@ $bp-sm: 600px;
   font-size: $font-size-base;
   border: 1px solid rgba(color(gold), .35);
   border-radius: 9px;
-  background: rgba($color-surface, .82);
+  background: alpha($color-surface, .82);
 
   img {
     position: absolute;
@@ -291,7 +291,7 @@ $bp-sm: 600px;
   padding: 12px;
   border: 1px solid $color-border;
   border-radius: $border-radius-lg;
-  background: rgba($color-surface, 0.9);
+  background: alpha($color-surface, 0.9);
   box-shadow: $shadow-sm;
 }
 
@@ -421,7 +421,7 @@ $bp-sm: 600px;
   padding: 16px;
   border: 1px solid $color-border;
   border-radius: $border-radius-lg;
-  background: lighten($color-canvas, 2%);
+  background: tint($color-canvas, 2%);
 }
 
 .stage-heading {

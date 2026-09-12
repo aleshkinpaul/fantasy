@@ -41,7 +41,7 @@ $place-bronze-bg: #eee0d2;
   th,
   td {
     padding: 7px 6px;
-    border-bottom: 1px solid rgba($color-border, .7);
+    border-bottom: 1px solid alpha($color-border, .7);
     font-variant-numeric: tabular-nums;
   }
 
@@ -82,18 +82,18 @@ $place-bronze-bg: #eee0d2;
     background: $color-surface;
     transition: background $transition-fast;
 
-    &:nth-child(even) { background: rgba($color-surface-muted, .33); }
+    &:nth-child(even) { background: alpha($color-surface-muted, .33); }
     &:hover { background: $color-surface-blue; }
     &:last-child td { border-bottom: 0; }
 
     &.martin-league-member {
-      background: linear-gradient(90deg, rgba($color-primary, .10), rgba($color-surface-blue, .52));
+      background: linear-gradient(90deg, alpha($color-primary, .10), alpha($color-surface-blue, .52));
 
       &:nth-child(even) {
-        background: linear-gradient(90deg, rgba($color-primary, .12), rgba($color-surface-blue, .64));
+        background: linear-gradient(90deg, alpha($color-primary, .12), alpha($color-surface-blue, .64));
       }
 
-      &:hover { background: rgba($color-primary, .14); }
+      &:hover { background: alpha($color-primary, .14); }
     }
   }
 }
@@ -152,7 +152,7 @@ $place-bronze-bg: #eee0d2;
     padding: 2px 5px;
     color: $color-primary-hover;
     background: $color-surface-blue;
-    border: 1px solid rgba($color-primary, .28);
+    border: 1px solid alpha($color-primary, .28);
     border-radius: $border-radius-full;
     font-size: 8px;
     font-weight: $font-weight-bold;

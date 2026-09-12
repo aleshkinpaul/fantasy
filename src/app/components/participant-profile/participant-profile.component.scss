@@ -43,7 +43,7 @@
 .team-logo {
   @include flex-center;
   overflow: hidden;
-  border: 1px solid rgba($color-primary, .18);
+  border: 1px solid alpha($color-primary, .18);
   background: $color-logo-surface;
 
   img { width: 100%; height: 100%; object-fit: contain; }
@@ -73,9 +73,9 @@
   padding: 16px;
   flex-direction: column;
   gap: 4px;
-  border: 1px solid rgba($color-primary, .2);
+  border: 1px solid alpha($color-primary, .2);
   border-radius: $border-radius-lg;
-  background: rgba($color-surface, .7);
+  background: alpha($color-surface, .7);
   span { color: $color-success; font-size: $font-size-xs; font-weight: $font-weight-bold; text-transform: uppercase; }
   strong { font-size: $font-size-sm; line-height: 1.35; }
 }
@@ -586,7 +586,7 @@
 
 .stats-explorer {
   padding: 24px;
-  border: 1px solid rgba($color-primary, .18);
+  border: 1px solid alpha($color-primary, .18);
   border-radius: $border-radius-xl;
   background: linear-gradient(135deg, $color-surface-blue, $color-surface 68%);
 }
@@ -625,9 +625,9 @@
     padding: 14px;
     justify-content: center;
     flex-direction: column;
-    border: 1px solid rgba($color-border, .85);
+    border: 1px solid alpha($color-border, .85);
     border-radius: $border-radius-lg;
-    background: rgba($color-surface, .86);
+    background: alpha($color-surface, .86);
   }
   span { color: $color-text-muted; font-size: $font-size-xs; }
   strong { margin-top: 5px; color: $color-primary-hover; font-family: $font-family-brand; font-size: $font-size-xl; }
@@ -641,7 +641,7 @@
   padding: 10px 12px;
   color: $color-text-muted;
   border-radius: $border-radius-md;
-  background: rgba($color-neutral-bg, .72);
+  background: alpha($color-neutral-bg, .72);
   font-size: $font-size-xs;
   line-height: 1.45;
 }
@@ -692,7 +692,7 @@
   padding: 5px;
   overflow: hidden;
   flex: 0 0 64px;
-  border: 1px solid rgba($color-primary, .16);
+  border: 1px solid alpha($color-primary, .16);
   border-radius: $border-radius-lg;
   background: $color-logo-surface;
 

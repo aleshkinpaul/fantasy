@@ -2,26 +2,26 @@
 // Design Tokens & CSS Variables
 // ============================================
 
-// Light interface palette. Color names describe roles rather than pages.
-$color-canvas: #F2F0EB;
-$color-surface: #FCFBF8;
-$color-surface-muted: #E8EBEE;
-$color-surface-blue: #E7EFF7;
-$color-surface-beige: #E9E0D2;
-$color-logo-surface: #DDE2E8;
-$color-border: #CDD3D9;
-$color-text: #182433;
-$color-text-muted: #596575;
-$color-primary: #285D8F;
-$color-primary-hover: #1F4A73;
-$color-success: #247145;
-$color-success-bg: #c1eccf;
-$color-danger: #A93636;
-$color-danger-bg: #f2cfcb;
-$color-neutral: #53606D;
-$color-neutral-bg: #E5E8EB;
-$color-warning: #8A6116;
-$color-warning-bg: #F2E6CB;
+// Runtime theme palette. The actual values live in theme.scss.
+$color-canvas: var(--color-canvas);
+$color-surface: var(--color-surface);
+$color-surface-muted: var(--color-surface-muted);
+$color-surface-blue: var(--color-surface-blue);
+$color-surface-beige: var(--color-surface-beige);
+$color-logo-surface: var(--color-logo-surface);
+$color-border: var(--color-border);
+$color-text: var(--color-text);
+$color-text-muted: var(--color-text-muted);
+$color-primary: var(--color-primary);
+$color-primary-hover: var(--color-primary-hover);
+$color-success: var(--color-success);
+$color-success-bg: var(--color-success-bg);
+$color-danger: var(--color-danger);
+$color-danger-bg: var(--color-danger-bg);
+$color-neutral: var(--color-neutral);
+$color-neutral-bg: var(--color-neutral-bg);
+$color-warning: var(--color-warning);
+$color-warning-bg: var(--color-warning-bg);
 
 // Compatibility map for existing components during incremental migration.
 $colors: (
@@ -101,10 +101,10 @@ $border-radius-xl: 16px;
 $border-radius-full: 9999px;
 
 // Shadows
-$shadow-sm: 0 1px 3px rgba(24, 36, 51, 0.08);
-$shadow-md: 0 4px 16px rgba(24, 36, 51, 0.06);
-$shadow-lg: 0 12px 28px rgba(24, 36, 51, 0.09);
-$shadow-xl: 0 20px 40px rgba(24, 36, 51, 0.12);
+$shadow-sm: var(--shadow-sm);
+$shadow-md: var(--shadow-md);
+$shadow-lg: var(--shadow-lg);
+$shadow-xl: var(--shadow-xl);
 
 // Breakpoints
 $breakpoint-xs: 320px;
@@ -137,6 +137,20 @@ $z-index: (
 
 @function z-index($name) {
   @return map-get($z-index, $name);
+}
+
+// Sass color functions cannot transform CSS variables at build time. These
+// helpers keep translucent and tinted role colors responsive to the theme.
+@function alpha($color, $opacity) {
+  @return unquote("color-mix(in srgb, #{$color} #{percentage($opacity)}, transparent)");
+}
+
+@function tint($color, $amount) {
+  @return unquote("color-mix(in srgb, #{$color} #{100% - $amount}, white)");
+}
+
+@function shade($color, $amount) {
+  @return unquote("color-mix(in srgb, #{$color} #{100% - $amount}, black)");
 }
 
 // Transition & Animation

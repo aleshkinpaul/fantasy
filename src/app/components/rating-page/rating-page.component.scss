@@ -46,9 +46,9 @@
   padding: 20px;
   align-items: center;
   flex-direction: column;
-  border: 1px solid rgba($color-primary, .2);
+  border: 1px solid alpha($color-primary, .2);
   border-radius: $border-radius-xl;
-  background: rgba($color-surface, .76);
+  background: alpha($color-surface, .76);
   text-align: center;
 
   span, small { color: $color-text-muted; font-size: $font-size-xs; }
@@ -175,7 +175,7 @@
   th, td { height: 62px; padding: 7px 9px; border-right: 1px solid $color-border; border-bottom: 1px solid $color-border; text-align: center; }
   th:last-child, td:last-child { border-right: 0; }
   tbody tr:last-child td { border-bottom: 0; }
-  tbody tr:nth-child(even) td { background: rgba($color-surface-muted, .34); }
+  tbody tr:nth-child(even) td { background: alpha($color-surface-muted, .34); }
   tbody tr:hover td { background: $color-surface-blue; }
   thead th { position: sticky; background: $color-surface-muted; }
   .season-row th { top: 0; height: 34px; color: $color-primary-hover; font-size: $font-size-xs; }
@@ -193,7 +193,7 @@
   small { margin-top: 3px; color: $color-text-muted; font-size: .62rem; }
 }
 
-.rating-table .live-column { background: lighten($color-success-bg, 7%); }
+.rating-table .live-column { background: tint($color-success-bg, 7%); }
 .rating-table .excluded-column { opacity: .63; }
 .rank-column { width: 54px; min-width: 54px; left: 0; }
 .participant-column { width: 250px; min-width: 250px; left: 54px; text-align: left !important; }
@@ -218,9 +218,9 @@ thead .sticky-column { z-index: 7; background: $color-surface-muted !important; 
 .result-cell > div { display: flex; align-items: center; flex-direction: column; }
 .result-cell strong { font-size: $font-size-sm; }
 .result-cell small { margin-top: 3px; color: $color-text-muted; font-size: .63rem; }
-.result-cell.live-cell { background-image: linear-gradient(rgba($color-success-bg, .24), rgba($color-success-bg, .24)); }
+.result-cell.live-cell { background-image: linear-gradient(alpha($color-success-bg, .24), alpha($color-success-bg, .24)); }
 .result-cell.excluded-cell { opacity: .55; }
-.result-cell .no-score strong, .empty-cell { color: lighten($color-text-muted, 22%); }
+.result-cell .no-score strong, .empty-cell { color: tint($color-text-muted, 22%); }
 .empty-search { padding: 28px 0 4px; color: $color-text-muted; text-align: center; }
 
 @media (max-width: 900px) {

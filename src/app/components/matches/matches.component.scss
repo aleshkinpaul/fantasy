@@ -22,7 +22,7 @@
     align-items: center;
     min-height: 86px;
     padding: 12px 16px;
-    background: rgba($color-surface-muted, 0.5);
+    background: alpha($color-surface-muted, 0.5);
     border: 1px solid $color-border;
     border-radius: $border-radius-lg;
     transition: background $transition-fast, border-color $transition-fast,
@@ -30,7 +30,7 @@
 
     &:hover {
       background: $color-surface-blue;
-      border-color: rgba($color-primary, 0.3);
+      border-color: alpha($color-primary, 0.3);
       box-shadow: $shadow-sm;
       transform: translateY(-1px);
     }
@@ -171,7 +171,7 @@
   min-width: 22px;
   padding: 2px 5px;
   color: $color-primary-hover;
-  border: 1px solid rgba($color-primary, .32);
+  border: 1px solid alpha($color-primary, .32);
   border-radius: $border-radius-full;
   background: $color-surface-blue;
   box-shadow: $shadow-sm;

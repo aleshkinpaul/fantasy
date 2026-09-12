@@ -5,6 +5,7 @@ import { DataService } from 'src/app/service/data.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PersonalizationState } from 'src/app/models/personalization';
 import { PersonalizationService } from 'src/app/service/personalization.service';
+import { AppTheme, ThemeService } from 'src/app/service/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
     private readonly router: Router,
     private readonly destroyRef: DestroyRef,
     readonly personalization: PersonalizationService,
+    readonly theme: ThemeService,
   ) {}
 
   ngOnInit(): void {
@@ -57,5 +59,9 @@ export class HeaderComponent implements OnInit {
     if (state.mode === 'participant') return state.selectedParticipant?.name ?? 'Выбрать участника';
     if (state.mode === 'guest') return 'Гость';
     return 'Выбрать участника';
+  }
+
+  themeActionLabel(theme: AppTheme): string {
+    return theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему';
   }
 }

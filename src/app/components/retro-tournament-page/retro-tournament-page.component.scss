@@ -140,7 +140,7 @@
   background: transparent;
   cursor: pointer;
 
-  &:hover { background: rgba($color-surface-blue, .65); }
+  &:hover { background: alpha($color-surface-blue, .65); }
   &:focus-visible { @include focus-ring; }
 }
 

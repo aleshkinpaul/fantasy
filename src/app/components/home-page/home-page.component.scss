@@ -137,7 +137,7 @@
   gap: 12px;
   color: $color-text;
   border-bottom: 1px solid $color-border;
-  background: linear-gradient(115deg, $color-surface, rgba($color-surface-blue, .76));
+  background: linear-gradient(115deg, $color-surface, alpha($color-surface-blue, .76));
 
   &::before {
     position: absolute;
@@ -160,7 +160,7 @@
     place-items: center;
     color: var(--tournament-accent);
     border-radius: 50%;
-    background: rgba($color-surface, .78);
+    background: alpha($color-surface, .78);
     font-size: $font-size-xl;
     text-decoration: none;
 
@@ -191,9 +191,9 @@
   padding: 13px;
   flex-direction: column;
   color: inherit;
-  border: 1px solid rgba($color-border, .9);
+  border: 1px solid alpha($color-border, .9);
   border-radius: $border-radius-lg;
-  background: linear-gradient(145deg, $color-surface, rgba($color-surface-blue, .48));
+  background: linear-gradient(145deg, $color-surface, alpha($color-surface-blue, .48));
   text-decoration: none;
   transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
 
@@ -277,7 +277,7 @@
   align-items: center;
   justify-content: space-between;
   color: var(--tournament-accent);
-  border-top: 1px solid rgba($color-border, .72);
+  border-top: 1px solid alpha($color-border, .72);
   font-size: $font-size-xs;
   font-weight: $font-weight-bold;
 
@@ -310,7 +310,7 @@
     grid-template-columns: 29px minmax(0, 1fr) 32px 42px;
     align-items: center;
     gap: 5px;
-    border-bottom: 1px solid rgba($color-border, .65);
+    border-bottom: 1px solid alpha($color-border, .65);
 
     > a {
       display: flex;
@@ -337,7 +337,7 @@
 .personal-player-overview {
   padding: 16px;
   border-top: 1px solid $color-border;
-  background: rgba($color-canvas, .34);
+  background: alpha($color-canvas, .34);
 }
 
 .player-overview-heading {
@@ -364,7 +364,7 @@
   grid-template-columns: auto auto;
   align-items: baseline;
   column-gap: 9px;
-  border: 1px solid rgba($color-primary, .2);
+  border: 1px solid alpha($color-primary, .2);
   border-radius: $border-radius-lg;
   background: $color-surface-blue;
 
@@ -407,7 +407,7 @@
   > section {
     min-width: 0;
     padding: 12px;
-    border: 1px solid rgba($color-border, .9);
+    border: 1px solid alpha($color-border, .9);
     border-radius: $border-radius-lg;
     background: $color-surface;
   }
@@ -429,7 +429,7 @@
     grid-template-columns: 28px minmax(0, 1fr) auto;
     align-items: center;
     gap: 8px;
-    border-bottom: 1px solid rgba($color-border, .62);
+    border-bottom: 1px solid alpha($color-border, .62);
 
     &:last-child { border-bottom: 0; }
   }
@@ -557,7 +557,7 @@
   align-items: center;
   gap: 12px;
   border-bottom: 1px solid $color-border;
-  background: linear-gradient(120deg, $color-surface, rgba($color-surface-blue, .72));
+  background: linear-gradient(120deg, $color-surface, alpha($color-surface-blue, .72));
 
   &::before { position: absolute; top: 0; bottom: 0; left: 0; width: 4px; content: ''; background: var(--tournament-accent); }
   > span:nth-child(2) { display: flex; min-width: 0; flex-direction: column; }
@@ -570,9 +570,9 @@
 .tour-badge {
   padding: 4px 8px;
   color: var(--tournament-accent);
-  border: 1px solid rgba($color-primary, .16);
+  border: 1px solid alpha($color-primary, .16);
   border-radius: $border-radius-full;
-  background: rgba($color-surface, .72);
+  background: alpha($color-surface, .72);
   font-size: $font-size-xs;
   font-weight: $font-weight-bold;
   white-space: nowrap;
@@ -625,7 +625,7 @@
     grid-template-columns: 34px minmax(0, 1fr) 42px 48px;
     align-items: center;
     gap: 6px;
-    border-bottom: 1px solid rgba($color-border, .72);
+    border-bottom: 1px solid alpha($color-border, .72);
 
     &:last-child { border-bottom: 0; }
     &:first-child .place { color: #6b5204; background: #e9ce70; }
@@ -681,7 +681,7 @@
   color: var(--tournament-accent);
   text-decoration: none;
   border-top: 1px solid $color-border;
-  background: rgba($color-canvas, .5);
+  background: alpha($color-canvas, .5);
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
 
@@ -694,7 +694,7 @@
   padding: 18px;
   border: 1px solid $color-border;
   border-radius: $border-radius-xl;
-  background: rgba($color-surface, .7);
+  background: alpha($color-surface, .7);
 
   & + & { margin-top: 24px; }
 }
@@ -723,7 +723,7 @@
 .prize-card {
   min-width: 0;
   padding: 13px;
-  border: 1px solid rgba($color-border, .88);
+  border: 1px solid alpha($color-border, .88);
   border-radius: $border-radius-lg;
   background: $color-surface;
 
@@ -757,7 +757,7 @@
   gap: 5px;
   margin-top: 10px;
   padding-top: 9px;
-  border-top: 1px solid rgba($color-border, .7);
+  border-top: 1px solid alpha($color-border, .7);
 }
 
 .prize-leader {
@@ -781,7 +781,7 @@
 
 .leader-logo { @include logo-well(28px, 7px); padding: 2px; }
 .more-leaders { color: $color-text-muted; font-size: .65rem; text-align: right; }
-.prize-pending { margin-top: 10px; padding-top: 10px; color: $color-text-muted; border-top: 1px solid rgba($color-border, .7); font-size: $font-size-xs; }
+.prize-pending { margin-top: 10px; padding-top: 10px; color: $color-text-muted; border-top: 1px solid alpha($color-border, .7); font-size: $font-size-xs; }
 .personal-prize-result {
   display: flex;
   min-height: 27px;
@@ -790,7 +790,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  border-top: 1px dashed rgba($color-primary, .24);
+  border-top: 1px dashed alpha($color-primary, .24);
   color: $color-text-muted;
   font-size: $font-size-xs;
 

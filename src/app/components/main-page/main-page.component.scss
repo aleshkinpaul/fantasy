@@ -440,7 +440,7 @@
   &.error-state {
     color: $color-danger;
     background: $color-danger-bg;
-    border-color: rgba($color-danger, 0.25);
+    border-color: alpha($color-danger, 0.25);
   }
 }
 

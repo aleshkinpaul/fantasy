@@ -22,7 +22,7 @@ $archive-bronze-bg: #eee0d2;
   width: 100%;
   padding: 10px clamp(8px, 3vw, 36px);
   overflow-x: auto;
-  background: rgba($color-surface, .94);
+  background: alpha($color-surface, .94);
   border-bottom: 1px solid $color-border;
 
   .nav-list {
@@ -118,7 +118,7 @@ h2.group-title,
     cursor: pointer;
 
     &:hover { color: $color-primary-hover; background: $color-surface-blue; }
-    &.active { color: $color-primary-hover; background: $color-surface-blue; border-color: rgba($color-primary, .25); }
+    &.active { color: $color-primary-hover; background: $color-surface-blue; border-color: alpha($color-primary, .25); }
   }
 }
 
@@ -137,7 +137,7 @@ h2.group-title,
   :is(th, td) {
     height: 45px;
     padding: 6px;
-    border-bottom: 1px solid rgba($color-border, .68);
+    border-bottom: 1px solid alpha($color-border, .68);
     font-size: $font-size-xs;
   }
 
@@ -155,7 +155,7 @@ h2.group-title,
 
   tbody tr {
     background: $color-surface;
-    &:nth-child(even) { background: rgba($color-surface-muted, .33); }
+    &:nth-child(even) { background: alpha($color-surface-muted, .33); }
     &:hover { background: $color-surface-blue; }
     &:last-child td { border-bottom: 0; }
   }
@@ -267,7 +267,7 @@ h2.group-title,
       font-size: $font-size-xs;
 
       table { width: 100%; border-collapse: collapse; }
-      tr { border-top: 1px solid rgba($color-border, .62); }
+      tr { border-top: 1px solid alpha($color-border, .62); }
       td { padding: 5px 3px; }
       td:last-child { width: 36px; text-align: center; font-weight: $font-weight-bold; }
       &.left td:first-child { text-align: right; }
@@ -287,7 +287,7 @@ h2.group-title,
       place-items: center;
       color: $color-primary-hover;
       background: $color-surface-blue;
-      border: 1px solid rgba($color-primary, .2);
+      border: 1px solid alpha($color-primary, .2);
       border-radius: $border-radius-md;
       font-family: $font-family-brand;
       font-size: $font-size-sm;

@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/app/styles/theme.scss",
               "src/app/styles/styles.scss",
               "src/app/styles/personalization.scss"
             ],
@@ -100,6 +101,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/app/styles/theme.scss",
               "src/app/styles/styles.scss",
               "src/app/styles/personalization.scss"
             ],

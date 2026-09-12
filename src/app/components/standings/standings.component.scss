@@ -18,7 +18,7 @@
   th,
   td {
     padding: 9px 8px;
-    border-bottom: 1px solid rgba($color-border, 0.74);
+    border-bottom: 1px solid alpha($color-border, 0.74);
     vertical-align: middle;
   }
 
@@ -53,7 +53,7 @@
       transition: background $transition-fast;
 
       &:nth-child(even) {
-        background: rgba($color-surface-muted, 0.52);
+        background: alpha($color-surface-muted, 0.52);
       }
 
       &:hover {
@@ -65,18 +65,18 @@
       }
 
       &.qualification-boundary td {
-        border-bottom: 2px solid rgba($color-primary, 0.48);
+        border-bottom: 2px solid alpha($color-primary, 0.48);
       }
 
       &.martin-league-member {
-        background: linear-gradient(90deg, rgba($color-primary, .10), rgba($color-surface-blue, .54));
+        background: linear-gradient(90deg, alpha($color-primary, .10), alpha($color-surface-blue, .54));
 
         &:nth-child(even) {
-          background: linear-gradient(90deg, rgba($color-primary, .12), rgba($color-surface-blue, .66));
+          background: linear-gradient(90deg, alpha($color-primary, .12), alpha($color-surface-blue, .66));
         }
 
         &:hover {
-          background: rgba($color-primary, .14);
+          background: alpha($color-primary, .14);
         }
       }
     }
@@ -102,7 +102,7 @@
     padding: 0 8px;
     color: $color-primary-hover;
     background: $color-surface-blue;
-    border: 1px solid rgba($color-primary, 0.18);
+    border: 1px solid alpha($color-primary, 0.18);
     border-radius: $border-radius-md;
     font-weight: $font-weight-semibold;
   }
@@ -218,7 +218,7 @@
         padding: 2px 5px;
         color: $color-primary-hover;
         background: $color-surface-blue;
-        border: 1px solid rgba($color-primary, .28);
+        border: 1px solid alpha($color-primary, .28);
         border-radius: $border-radius-full;
         font-size: 8px;
         font-weight: $font-weight-bold;
@@ -294,7 +294,7 @@
 .qualified > span {
   color: $color-primary-hover;
   background: $color-surface-blue;
-  box-shadow: 0 0 0 1px rgba($color-primary, 0.34);
+  box-shadow: 0 0 0 1px alpha($color-primary, 0.34);
 }
 
 .special > span {

@@ -64,7 +64,7 @@
   transition: background-color 0.2s ease;
   
   &:hover {
-    background-color: $hover-bg or darken($bg, 10%);
+    background-color: $hover-bg or shade($bg, 10%);
   }
 }
 
@@ -98,7 +98,7 @@
 }
 
 @mixin focus-ring {
-  outline: 3px solid rgba($color-primary, 0.28);
+  outline: 3px solid alpha($color-primary, 0.28);
   outline-offset: 2px;
 }
 
@@ -109,9 +109,9 @@
   padding: 4px;
   flex: 0 0 $size;
   overflow: hidden;
-  border: 1px solid darken($color-logo-surface, 8%);
+  border: 1px solid shade($color-logo-surface, 8%);
   border-radius: $radius;
-  background: linear-gradient(145deg, lighten($color-logo-surface, 7%), $color-logo-surface);
+  background: linear-gradient(145deg, tint($color-logo-surface, 7%), $color-logo-surface);
   box-sizing: border-box;
 
   img {

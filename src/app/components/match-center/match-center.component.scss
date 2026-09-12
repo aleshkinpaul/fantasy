@@ -7,7 +7,7 @@
   z-index: z-index('modal');
   padding: 28px;
   overflow-y: auto;
-  background: rgba($color-text, 0.56);
+  background: alpha($color-text, 0.56);
   backdrop-filter: blur(6px);
 }
 
@@ -306,7 +306,7 @@
     padding: 6px 8px;
     align-items: center;
     gap: 7px;
-    background: rgba($color-surface-muted, 0.58);
+    background: alpha($color-surface-muted, 0.58);
     border-radius: $border-radius-sm;
     cursor: pointer;
     transition: background $transition-fast, box-shadow $transition-fast;
@@ -339,17 +339,17 @@
     }
 
     &.new-player {
-      background: rgba($color-warning-bg, 0.72);
+      background: alpha($color-warning-bg, 0.72);
       box-shadow: inset 3px 0 0 $color-warning;
     }
 
     &.counted-player {
-      background: rgba($color-success-bg, 0.72);
+      background: alpha($color-success-bg, 0.72);
       box-shadow: inset 3px 0 0 $color-success;
     }
 
     &.auto-subbed-in {
-      background: rgba($color-success-bg, 0.92);
+      background: alpha($color-success-bg, 0.92);
     }
 
     &.played-not-counted {
@@ -402,7 +402,7 @@
   place-items: center;
   overflow: hidden;
   // background: $color-logo-surface;
-  // border: 1px solid rgba($color-border, 0.8);
+  // border: 1px solid alpha($color-border, 0.8);
   // border-radius: 50%;
 
   img {
@@ -472,7 +472,7 @@
   justify-content: center;
   color: $color-text;
   // background: $color-surface;
-  // border: 1px solid rgba($color-border, 0.9);
+  // border: 1px solid alpha($color-border, 0.9);
   // border-radius: $border-radius-full;
   font-size: 9px;
   font-weight: $font-weight-bold;
@@ -576,8 +576,8 @@
   z-index: 1;
   padding: 1px 4px;
   color: $color-warning;
-  background: rgba($color-warning-bg, 0.96);
-  border: 1px solid rgba($color-warning, 0.28);
+  background: alpha($color-warning-bg, 0.96);
+  border: 1px solid alpha($color-warning, 0.28);
   border-radius: $border-radius-full;
   box-shadow: $shadow-sm;
   font-size: 7px;
@@ -625,8 +625,8 @@
   margin-top: 3px;
   padding: 13px;
   color: $color-text;
-  background: rgba($color-surface-blue, 0.56);
-  border: 1px solid rgba($color-primary, 0.16);
+  background: alpha($color-surface-blue, 0.56);
+  border: 1px solid alpha($color-primary, 0.16);
   border-radius: $border-radius-md;
   cursor: default;
 }
@@ -683,7 +683,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 5px;
-  background: rgba($color-surface, 0.82);
+  background: alpha($color-surface, 0.82);
   border-radius: $border-radius-sm;
 
   span {
@@ -710,7 +710,7 @@
 
 .match-record {
   padding: 8px;
-  background: rgba($color-surface, 0.64);
+  background: alpha($color-surface, 0.64);
   border-radius: $border-radius-sm;
 
   header {

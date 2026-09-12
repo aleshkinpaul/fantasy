@@ -24,7 +24,7 @@
     transform $transition-fast;
 
   &:hover {
-    border-color: rgba($color-primary, 0.28);
+    border-color: alpha($color-primary, 0.28);
     box-shadow: $shadow-lg;
     transform: translateY(-2px);
   }
@@ -45,13 +45,13 @@
   min-height: 54px;
   padding: 7px;
   background: $color-surface-blue;
-  border: 1px solid rgba($color-primary, 0.12);
+  border: 1px solid alpha($color-primary, 0.12);
   border-radius: $border-radius-lg;
 
   .prize-icon {
     @include logo-well(40px, 10px);
     background: $color-surface-beige;
-    border-color: rgba($color-warning, 0.22);
+    border-color: alpha($color-warning, 0.22);
   }
 
   .card-title-container {
@@ -117,7 +117,7 @@
     padding: 7px 10px;
     color: $color-primary;
     background: $color-surface;
-    border: 1px solid rgba($color-primary, 0.32);
+    border: 1px solid alpha($color-primary, 0.32);
     border-radius: $border-radius-md;
     font: inherit;
     font-size: $font-size-xs;
@@ -143,7 +143,7 @@
     @include flex-column(5px);
     width: 100%;
     padding: 7px;
-    background: rgba($color-surface-muted, 0.58);
+    background: alpha($color-surface-muted, 0.58);
     border: 1px solid transparent;
     border-radius: $border-radius-md;
 
@@ -156,8 +156,8 @@
 
     &.unsuitable-item {
       color: $color-danger;
-      background: rgba($color-danger-bg, 0.72);
-      border-color: rgba($color-danger, 0.14);
+      background: alpha($color-danger-bg, 0.72);
+      border-color: alpha($color-danger, 0.14);
     }
   }
 }

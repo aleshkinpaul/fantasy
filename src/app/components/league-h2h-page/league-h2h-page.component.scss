@@ -26,7 +26,7 @@
   overflow-x: auto;
   border: 1px solid $color-border;
   border-radius: $border-radius-lg;
-  background: rgba($color-surface, 0.82);
+  background: alpha($color-surface, 0.82);
   box-shadow: $shadow-sm;
   scrollbar-width: thin;
 }
@@ -61,7 +61,7 @@
     color: #fff;
     background: $color-primary;
     border-color: $color-primary;
-    box-shadow: 0 2px 8px rgba($color-primary, 0.2);
+    box-shadow: 0 2px 8px alpha($color-primary, 0.2);
   }
 }
 
@@ -92,8 +92,8 @@
   align-items: center;
   gap: 24px;
   color: $color-text;
-  background: linear-gradient(135deg, $color-surface 30%, rgba($color-surface-beige, 0.72));
-  border: 1px dashed rgba($color-warning, 0.5);
+  background: linear-gradient(135deg, $color-surface 30%, alpha($color-surface-beige, 0.72));
+  border: 1px dashed alpha($color-warning, 0.5);
   border-radius: $border-radius-xl;
   box-shadow: $shadow-sm;
 
@@ -115,7 +115,7 @@
   place-items: center;
   color: $color-warning;
   background: $color-warning-bg;
-  border: 1px solid rgba($color-warning, 0.32);
+  border: 1px solid alpha($color-warning, 0.32);
   border-radius: 50%;
   font-family: $font-family-brand;
   font-size: $font-size-2xl;
@@ -132,7 +132,7 @@
 .table-container {
   width: 100%;
   overflow-x: auto;
-  scrollbar-color: rgba($color-primary, 0.42) $color-surface-muted;
+  scrollbar-color: alpha($color-primary, 0.42) $color-surface-muted;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -145,7 +145,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba($color-primary, 0.42);
+    background: alpha($color-primary, 0.42);
     border-radius: $border-radius-full;
   }
 }
@@ -264,7 +264,7 @@
   @include flex-center;
   min-height: 100vh;
   color: $color-primary;
-  background: rgba($color-canvas, 0.88);
+  background: alpha($color-canvas, 0.88);
 }
 
 .load-error {
