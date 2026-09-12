@@ -19,6 +19,7 @@ import {
 } from '../../home/personalized-home';
 import { ParticipantDirectoryEntry } from '../../models/participant-directory';
 import { PersonalizationService } from '../../service/personalization.service';
+import { PersonalizedPlayerContribution } from '../../home/personalized-player-stats';
 
 interface HomeTournamentSummary {
   tournament: TournamentTimelineItem;
@@ -148,6 +149,25 @@ export class HomePageComponent {
     return match.homeScore !== undefined && match.awayScore !== undefined;
   }
 
+  formatMetric(value: number): string {
+    return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 2 }).format(value);
+  }
+
+  appearanceLabel(value: number): string {
+    const mod100 = value % 100;
+    const mod10 = value % 10;
+    if (mod100 >= 11 && mod100 <= 14) return 'туров';
+    if (mod10 === 1) return 'тур';
+    if (mod10 >= 2 && mod10 <= 4) return 'тура';
+    return 'туров';
+  }
+
+  positionLabel(player: PersonalizedPlayerContribution): string {
+    return ({ '9': 'Вратарь', '10': 'Защитник', '11': 'Полузащитник', '12': 'Нападающий' })[
+      player.positionId ?? ''
+    ] ?? 'Футболист';
+  }
+
   prizeLeaders(prize: IRuntimePrize): IPrizeNominee[] {
     return prize.activeLeaders.slice(0, 3);
   }
@@ -180,6 +200,10 @@ export class HomePageComponent {
 
   trackPersonalStanding(_index: number, row: PersonalizedStandingRow): string {
     return row.profile.id;
+  }
+
+  trackPlayer(_index: number, player: PersonalizedPlayerContribution): string {
+    return player.id;
   }
 
   trackProfile(_index: number, profile: IProfileDetails): string {

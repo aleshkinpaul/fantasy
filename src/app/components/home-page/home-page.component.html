@@ -153,6 +153,57 @@
               </a>
             </section>
           </div>
+
+          <section class="personal-player-overview" aria-label="Статистика футболистов команды в сезоне">
+            <header class="player-overview-heading">
+              <span>
+                <small>Состав в сезоне · {{ summary.playerStats.countedTours }} {{ appearanceLabel(summary.playerStats.countedTours) }}</small>
+                <strong>Кто делает результат</strong>
+              </span>
+              <span class="season-rating" *ngIf="summary.seasonRating !== null; else noSeasonRating">
+                <small>Рейтинг формы</small>
+                <strong>{{ formatMetric(summary.seasonRating) }}<i>/10</i></strong>
+                <span *ngIf="summary.seasonRatingPlace !== null">
+                  {{ summary.seasonRatingPlace }} из {{ summary.seasonRatingParticipants }} в турнире
+                </span>
+              </span>
+              <ng-template #noSeasonRating>
+                <span class="season-rating is-empty"><small>Рейтинг формы</small><strong>—</strong></span>
+              </ng-template>
+            </header>
+
+            <div
+              class="player-rankings"
+              *ngIf="summary.playerStats.mostUsed.length || summary.playerStats.topScorers.length; else noPlayerStats">
+              <section>
+                <h4>Чаще всего в зачёте</h4>
+                <ol>
+                  <li *ngFor="let player of summary.playerStats.mostUsed; trackBy: trackPlayer; let rank = index">
+                    <span class="player-rank">{{ rank + 1 }}</span>
+                    <span class="player-copy"><strong>{{ player.name }}</strong><small>{{ positionLabel(player) }} · {{ formatMetric(player.fantasyPoints) }} ФО</small></span>
+                    <span class="player-metric"><strong>{{ player.appearances }}</strong><small>{{ appearanceLabel(player.appearances) }}</small></span>
+                  </li>
+                </ol>
+              </section>
+
+              <section>
+                <h4>Больше всего ФО для команды</h4>
+                <ol>
+                  <li *ngFor="let player of summary.playerStats.topScorers; trackBy: trackPlayer; let rank = index">
+                    <span class="player-rank">{{ rank + 1 }}</span>
+                    <span class="player-copy"><strong>{{ player.name }}</strong><small>{{ positionLabel(player) }} · {{ player.appearances }} {{ appearanceLabel(player.appearances) }}</small></span>
+                    <span class="player-metric is-score"><strong>{{ formatMetric(player.fantasyPoints) }}</strong><small>ФО</small></span>
+                  </li>
+                </ol>
+              </section>
+            </div>
+
+            <ng-template #noPlayerStats>
+              <p class="no-player-stats">Детальная статистика состава появится после публикации данных футболистов.</p>
+            </ng-template>
+
+            <p class="player-stats-note">Учитываются только футболисты, сыгравшие и попавшие в зачёт команды; капитанское удвоение включено в ФО.</p>
+          </section>
         </article>
       </div>
 

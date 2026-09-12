@@ -7,6 +7,10 @@ import { IProfileDetails } from '../models/domain';
 import { ParticipantDirectoryEntry } from '../models/participant-directory';
 import { TournamentTimelineItem } from '../models/tournament-catalog';
 import { matchCenterQuery } from '../match-center/match-center-route';
+import {
+  PersonalizedPlayerStats,
+  calculatePersonalizedPlayerStats,
+} from './personalized-player-stats';
 
 export interface PersonalizedStandingRow {
   place: number;
@@ -33,6 +37,10 @@ export interface PersonalizedHomeTournament {
   standings: PersonalizedStandingRow[];
   currentMatch: PersonalizedHomeMatch | null;
   nextMatch: PersonalizedHomeMatch | null;
+  playerStats: PersonalizedPlayerStats;
+  seasonRating: number | null;
+  seasonRatingPlace: number | null;
+  seasonRatingParticipants: number;
 }
 
 interface ParticipantStage {
@@ -70,6 +78,11 @@ export function buildPersonalizedHomeTournament(
     .sort((left, right) => left - right)
     .map(tour => ({ tour, match: findMatch(matchesByTour[tour], profile.id) }))
     .find(entry => entry.match);
+  const ratedProfiles = viewModel.profilesDetails
+    .filter(item => Number.isFinite(Number(item.team.rating)))
+    .sort((left, right) => Number(right.team.rating) - Number(left.team.rating));
+  const ratingIndex = ratedProfiles.findIndex(item => item.id === profile.id);
+  const seasonRating = Number(profile.team.rating);
 
   return {
     tournament,
@@ -89,6 +102,14 @@ export function buildPersonalizedHomeTournament(
     nextMatch: nextMatchEntry?.match
       ? toHomeMatch(tournament.route, viewModel, nextMatchEntry.tour, nextMatchEntry.match)
       : null,
+    playerStats: calculatePersonalizedPlayerStats(
+      profile,
+      viewModel.lastTour,
+      viewModel.sportPlayersByTour,
+    ),
+    seasonRating: Number.isFinite(seasonRating) ? seasonRating : null,
+    seasonRatingPlace: ratingIndex >= 0 ? ratingIndex + 1 : null,
+    seasonRatingParticipants: ratedProfiles.length,
   };
 }
 

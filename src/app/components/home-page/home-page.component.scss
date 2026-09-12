@@ -85,6 +85,13 @@
 
 .personal-dashboard { margin-top: 58px; }
 
+.home-page .is-personalized-participant:not(tr)::after {
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+  box-shadow: inset 5px 0 0 var(--personalized-accent);
+}
+
 .personal-heading h2 { color: $color-text; }
 
 .personal-tournaments {
@@ -313,6 +320,147 @@
 
   .team-logo { width: 32px; height: 32px; flex-basis: 32px; padding: 5px; }
 }
+
+.personal-player-overview {
+  padding: 16px;
+  border-top: 1px solid $color-border;
+  background: rgba($color-canvas, .34);
+}
+
+.player-overview-heading {
+  display: flex;
+  margin-bottom: 13px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  > span:first-child {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+
+    small { color: $color-text-muted; font-size: $font-size-xs; }
+    strong { margin-top: 2px; font-size: $font-size-lg; }
+  }
+}
+
+.season-rating {
+  display: grid;
+  min-width: 176px;
+  padding: 8px 12px;
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  column-gap: 9px;
+  border: 1px solid rgba($color-primary, .2);
+  border-radius: $border-radius-lg;
+  background: $color-surface-blue;
+
+  small {
+    grid-column: 1;
+    grid-row: 1;
+    color: $color-text-muted;
+    font-size: .65rem;
+    font-weight: $font-weight-bold;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  > strong {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    color: $color-primary;
+    font-family: $font-family-brand;
+    font-size: $font-size-xl;
+
+    i { color: $color-text-muted; font-family: $font-family-base; font-size: .65rem; font-style: normal; }
+  }
+
+  > span {
+    grid-column: 1;
+    grid-row: 2;
+    color: $color-text-muted;
+    font-size: .64rem;
+    white-space: nowrap;
+  }
+
+  &.is-empty { grid-template-columns: 1fr auto; }
+}
+
+.player-rankings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  > section {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid rgba($color-border, .9);
+    border-radius: $border-radius-lg;
+    background: $color-surface;
+  }
+
+  h4 {
+    margin-bottom: 7px;
+    color: var(--tournament-accent);
+    font-size: $font-size-xs;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  ol { display: grid; }
+
+  li {
+    display: grid;
+    min-height: 44px;
+    padding: 5px 2px;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba($color-border, .62);
+
+    &:last-child { border-bottom: 0; }
+  }
+}
+
+.player-rank {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  color: $color-text-muted;
+  border-radius: 50%;
+  background: $color-canvas;
+  font-size: .68rem;
+  font-weight: $font-weight-bold;
+}
+
+.player-copy,
+.player-metric {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+
+  strong, small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  strong { font-size: $font-size-xs; }
+  small { color: $color-text-muted; font-size: .64rem; }
+}
+
+.player-metric {
+  min-width: 42px;
+  align-items: flex-end;
+
+  strong { color: $color-primary; font-size: $font-size-sm; font-variant-numeric: tabular-nums; }
+  &.is-score strong { color: var(--tournament-accent); }
+}
+
+.player-stats-note,
+.no-player-stats {
+  color: $color-text-muted;
+  font-size: .68rem;
+}
+
+.player-stats-note { margin: 9px 2px 0; }
+.no-player-stats { padding: 20px; border: 1px dashed $color-border; border-radius: $border-radius-lg; background: $color-surface; text-align: center; }
 
 .standing-columns-label {
   display: grid;
@@ -666,6 +814,9 @@
   .prize-group-heading > a { grid-column: 1 / -1; padding-top: 8px; border-top: 1px solid $color-border; }
   .dashboard-loading { grid-template-columns: 1fr; }
   .dashboard-loading span { height: 400px; }
+  .player-rankings { grid-template-columns: 1fr; }
+  .player-overview-heading { align-items: stretch; flex-direction: column; gap: 10px; }
+  .season-rating { width: 100%; }
 }
 
 @media (max-width: 450px) {
@@ -674,6 +825,8 @@
   .personal-matches { padding: 10px; }
   .personal-match { min-height: 164px; padding: 11px; }
   .personal-standing { padding-right: 5px; padding-left: 5px; }
+  .personal-player-overview { padding: 12px 10px; }
+  .player-rankings > section { padding: 9px; }
   .personal-standing li { grid-template-columns: 27px minmax(0, 1fr) 30px 38px; }
   .standing-columns-label { width: 73px; grid-template-columns: 30px 38px; }
   .tournament-heading { grid-template-columns: 44px minmax(0, 1fr); }
