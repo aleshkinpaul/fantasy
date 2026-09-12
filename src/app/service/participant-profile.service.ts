@@ -9,9 +9,17 @@ import {
   SeasonCompetitionFile,
   SeasonCompetitionConfig,
 } from '../competition/models/competition.models';
+import { resolveCompetitionPrizes } from '../competition/config/competition-prize.registry';
 import { mergeCompetitionStages } from '../competition/data/competition-stages.merger';
 import { ArchiveCupTournament } from '../models/archive-cup';
-import { ParticipantHistorySource, ParticipantProfile, ParticipantTournamentStats } from '../models/participant-profile';
+import {
+  ParticipantHistorySource,
+  ParticipantProfile,
+  ParticipantSponsorPrizeVictorySource,
+  ParticipantTournamentStats,
+  SponsorPrizeWinnersRegistry,
+} from '../models/participant-profile';
+import { TournamentTimelineGroup, TournamentTimelineItem } from '../models/tournament-catalog';
 import { RetroTournament } from '../models/retro-tournament';
 import { buildParticipantProfiles } from '../participant-profile/participant-profile.builder';
 import { AchievementService } from './achievement.service';
@@ -26,6 +34,9 @@ const SEASON_SOURCES: Array<{ path: string; tournamentIds: string[] }> = [
   { path: '/assets/data/seasons/2026-27/spain.json', tournamentIds: ['la-liga-2026-27'] },
   { path: '/assets/data/seasons/2026-27/champions-league.json', tournamentIds: ['champions-league-2026-27'] }
 ];
+
+const SPONSOR_PRIZE_WINNERS_URL = '/assets/data/sponsor-prize-winners.json';
+const DEFAULT_PRIZE_ICON = 'assets/icons/prizes/medal.png';
 
 interface SeasonSnapshot {
   file: SeasonCompetitionFile;
@@ -87,6 +98,7 @@ export class ParticipantProfileService {
     this.profiles$ = forkJoin({
       registry: achievementService.loadRegistry(),
       timeline: catalogService.loadTimeline(),
+      prizeWinners: http.get<SponsorPrizeWinnersRegistry>(SPONSOR_PRIZE_WINNERS_URL),
       retro: retroService.loadTournaments(),
       archiveCups: archiveCupService.loadTournaments(),
       legacyProfiles: http.get<LegacyProfilesRegistry>('/assets/data/profiles.json'),
@@ -111,7 +123,8 @@ export class ParticipantProfileService {
             collectNames(data.seasons.map(snapshot => snapshot.file), data.legacyProfiles['2024'] ?? []),
             data.legacy.snapshots.find(snapshot => snapshot.config.type === 'club-world-cup')
           )
-        ]
+        ],
+        buildSponsorPrizeVictorySources(data.prizeWinners, data.timeline, data.seasons),
       )),
       shareReplay({ bufferSize: 1, refCount: true })
     );
@@ -126,6 +139,54 @@ export class ParticipantProfileService {
       profile.participantId === reference || profile.profileIds.includes(reference)
     )));
   }
+}
+
+export function buildSponsorPrizeVictorySources(
+  registry: SponsorPrizeWinnersRegistry,
+  timeline: TournamentTimelineGroup[],
+  snapshots: SeasonSnapshot[],
+): ParticipantSponsorPrizeVictorySource[] {
+  const tournaments = new Map(
+    timeline.flatMap(group => group.tournaments).map(tournament => [tournament.id, tournament]),
+  );
+
+  return Object.entries(registry.tournaments).flatMap(([tournamentId, prizeWinners]) => {
+    const tournament = tournaments.get(tournamentId);
+    if (!tournament || tournament.status !== 'completed') return [];
+
+    const snapshotIndex = SEASON_SOURCES.findIndex(source => source.tournamentIds.includes(tournamentId));
+    const snapshot = snapshots[snapshotIndex];
+    if (!snapshot) return [];
+    const prizes = resolveCompetitionPrizes(snapshot.file.config);
+
+    return Object.entries(prizeWinners).flatMap(([prizeIdText, profileIds]) => {
+      const prizeId = Number(prizeIdText);
+      const prize = prizes.find(item => item.id === prizeId);
+      if (!prize) return [];
+
+      return profileIds.map(profileId => ({
+        id: `${tournamentId}-sponsor-prize-${prizeId}-${profileId}`,
+        profileId,
+        prizeId,
+        name: prize.name || `Спонсорский приз №${prizeId}`,
+        icon: prize.icon || DEFAULT_PRIZE_ICON,
+        author: prize.author,
+        reward: prize.reward,
+        tournamentId,
+        tournamentTitle: tournament.title,
+        period: tournament.period,
+        yearStart: tournament.yearStart,
+        route: prizeRoute(tournament),
+      }));
+    });
+  });
+}
+
+function prizeRoute(tournament: TournamentTimelineItem): string {
+  const [path, query = ''] = tournament.route.split('?');
+  const params = new URLSearchParams(query);
+  params.set('tabId', '3');
+  return `${path}?${params.toString()}`;
 }
 
 function loadLegacyBundle(http: HttpClient): Observable<LegacyBundle> {

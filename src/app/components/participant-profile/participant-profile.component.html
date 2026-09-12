@@ -75,6 +75,48 @@
           </div>
         </ng-template>
       </section>
+
+      <section class="trophy-showcase sponsor-prize-showcase" aria-labelledby="sponsor-prize-shelf-heading">
+        <header>
+          <div>
+            <span class="shelf-kicker">Награды сообщества</span>
+            <h2 id="sponsor-prize-shelf-heading">Победы в спонсорских призах</h2>
+          </div>
+          <strong>{{ sponsorPrizeShelf.length }}</strong>
+        </header>
+
+        <div class="trophy-list" *ngIf="sponsorPrizeShelf.length; else emptySponsorPrizeShelf">
+          <div class="trophy-track">
+            <a
+              *ngFor="let prize of sponsorPrizeShelf; trackBy: trackSponsorPrize"
+              class="shelf-trophy sponsor-prize-trophy"
+              [href]="prize.route"
+              (click)="openTournament($event, prize.route)"
+              [attr.aria-label]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period"
+              [title]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period + (prize.reward ? ' · ' + prize.reward : '')">
+              <span class="shelf-trophy-image">
+                <img
+                  *ngIf="!hasFailedImage('sponsor-prize-' + prize.id); else sponsorPrizeFallback"
+                  [src]="prize.icon"
+                  [alt]="prize.name"
+                  (error)="failImage('sponsor-prize-' + prize.id)">
+                <ng-template #sponsorPrizeFallback><span aria-hidden="true">🎁</span></ng-template>
+              </span>
+              <span class="shelf-trophy-copy">
+                <strong>{{ prize.name }}</strong>
+                <small>{{ prize.period }}<ng-container *ngIf="prize.author"> · {{ prize.author }}</ng-container></small>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <ng-template #emptySponsorPrizeShelf>
+          <div class="empty-trophy-shelf">
+            <span aria-hidden="true">◇</span>
+            <p>Побед в спонсорских номинациях пока нет</p>
+          </div>
+        </ng-template>
+      </section>
     </section>
 
     <section class="identity-panel" aria-labelledby="identity-heading">

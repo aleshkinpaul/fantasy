@@ -133,6 +133,32 @@ describe('participant profile builder', () => {
     expect(profile.summary.podiums).toBe(1);
     expect(profile.tournaments[0].achievements[0].stageTitle).toBe('Финал');
   });
+
+  it('assigns historical sponsor prizes through any linked profile id', () => {
+    const [profile] = buildParticipantProfiles(
+      registry(),
+      timeline(),
+      [source('new-account', 'new', 'current')],
+      [{
+        id: 'retro-sponsor-prize-1-old-account',
+        profileId: 'old-account',
+        prizeId: 1,
+        name: 'Приз сообщества',
+        icon: 'assets/icons/prize.png',
+        author: 'Автор',
+        reward: 'Подарок',
+        tournamentId: 'retro',
+        tournamentTitle: 'Исторический турнир',
+        period: '2023–24',
+        yearStart: 2023,
+        route: '/retro?tabId=3',
+      }],
+    );
+
+    expect(profile.sponsorPrizeVictories).toEqual([
+      jasmine.objectContaining({ name: 'Приз сообщества', tournamentId: 'retro' }),
+    ]);
+  });
 });
 
 function registry(): AchievementRegistry {

@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs';
 import {
   ParticipantAccount,
   ParticipantProfile,
+  ParticipantSponsorPrizeVictory,
   ParticipantTournamentHistory,
 } from '../../models/participant-profile';
 import { DataService } from '../../service/data.service';
@@ -111,6 +112,10 @@ export class ParticipantProfileComponent implements OnInit {
           teamLabel: achievement.isTeamAchievement ? achievement.recipientLabel : undefined,
         }))
     );
+  }
+
+  get sponsorPrizeShelf(): ParticipantSponsorPrizeVictory[] {
+    return this.profile?.sponsorPrizeVictories ?? [];
   }
 
   tournamentTimelineOrder(tournament: ParticipantTournamentHistory): number {
@@ -220,6 +225,10 @@ export class ParticipantProfileComponent implements OnInit {
 
   trackTrophy(_index: number, trophy: ProfileTrophy): string {
     return trophy.id;
+  }
+
+  trackSponsorPrize(_index: number, prize: ParticipantSponsorPrizeVictory): string {
+    return prize.id;
   }
 
   formatScore(value: number): string {

@@ -6,6 +6,8 @@ import {
   ParticipantHistorySource,
   ParticipantAccount,
   ParticipantProfile,
+  ParticipantSponsorPrizeVictory,
+  ParticipantSponsorPrizeVictorySource,
   ParticipantTeamVersion,
   ParticipantTournamentHistory
 } from '../models/participant-profile';
@@ -24,12 +26,14 @@ interface MutableParticipant extends AchievementParticipant {
   primaryProfileId: string;
   accounts: Map<string, ParticipantAccount>;
   tournaments: Map<string, ParticipantTournamentHistory>;
+  sponsorPrizeVictories: ParticipantSponsorPrizeVictory[];
 }
 
 export function buildParticipantProfiles(
   registry: AchievementRegistry,
   timeline: TournamentTimelineGroup[],
-  sources: ParticipantHistorySource[]
+  sources: ParticipantHistorySource[],
+  sponsorPrizeVictories: ParticipantSponsorPrizeVictorySource[] = [],
 ): ParticipantProfile[] {
   const tournamentMap = new Map(
     timeline.flatMap(group => group.tournaments).map(tournament => [tournament.id, tournament])
@@ -43,7 +47,8 @@ export function buildParticipantProfiles(
       profileIds: [...participant.profileIds],
       primaryProfileId: participant.profileIds.at(-1)!,
       accounts: new Map(participant.profileIds.map(profileId => [profileId, createAccount(profileId)])),
-      tournaments: new Map()
+      tournaments: new Map(),
+      sponsorPrizeVictories: [],
     };
     participants.set(mutable.id, mutable);
     mutable.profileIds.forEach(profileId => profileOwners.set(profileId, mutable));
@@ -95,6 +100,11 @@ export function buildParticipantProfiles(
     });
   });
 
+  sponsorPrizeVictories.forEach(({ profileId, ...victory }) => {
+    const participant = profileOwners.get(profileId);
+    if (participant) participant.sponsorPrizeVictories.push(victory);
+  });
+
   return Array.from(participants.values())
     .filter(participant => participant.tournaments.size > 0)
     .map(toParticipantProfile)
@@ -124,7 +134,8 @@ function resolveParticipant(
     profileIds: [source.profileId],
     primaryProfileId: source.profileId,
     accounts: new Map([[source.profileId, createAccount(source.profileId)]]),
-    tournaments: new Map()
+    tournaments: new Map(),
+    sponsorPrizeVictories: [],
   };
   participants.set(id, participant);
   profileOwners.set(source.profileId, participant);
@@ -197,6 +208,8 @@ function toParticipantProfile(participant: MutableParticipant): ParticipantProfi
     currentTeam,
     teamVersions: buildTeamVersions(tournaments),
     tournaments,
+    sponsorPrizeVictories: [...participant.sponsorPrizeVictories].sort((left, right) =>
+      right.yearStart - left.yearStart || left.name.localeCompare(right.name, 'ru')),
     summary: {
       tournaments: tournaments.filter(tournament => tournament.status !== 'scheduled').length,
       completedTournaments: tournaments.filter(tournament => tournament.status === 'completed').length,

@@ -40,6 +40,24 @@ export interface ParticipantTournamentAchievement {
   trophyIcon: string;
 }
 
+export interface ParticipantSponsorPrizeVictory {
+  id: string;
+  prizeId: number;
+  name: string;
+  icon: string;
+  author?: string;
+  reward?: string;
+  tournamentId: string;
+  tournamentTitle: string;
+  period: string;
+  yearStart: number;
+  route: string;
+}
+
+export interface ParticipantSponsorPrizeVictorySource extends ParticipantSponsorPrizeVictory {
+  profileId: string;
+}
+
 export interface ParticipantTournamentHistory {
   tournamentId: string;
   title: string;
@@ -91,7 +109,13 @@ export interface ParticipantProfile {
   currentTeam?: ParticipantTournamentHistory;
   teamVersions: ParticipantTeamVersion[];
   tournaments: ParticipantTournamentHistory[];
+  sponsorPrizeVictories: ParticipantSponsorPrizeVictory[];
   summary: ParticipantProfileSummary;
+}
+
+export interface SponsorPrizeWinnersRegistry {
+  version: 1;
+  tournaments: Record<string, Record<string, string[]>>;
 }
 
 export interface ParticipantHistorySource {

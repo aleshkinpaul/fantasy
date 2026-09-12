@@ -199,6 +199,7 @@ function makeProfile(
     currentTeam: tournaments.at(-1),
     teamVersions: [],
     tournaments,
+    sponsorPrizeVictories: [],
     summary: {
       tournaments: tournaments.length,
       completedTournaments: tournaments.filter(tournament => tournament.status === 'completed').length,

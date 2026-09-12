@@ -145,6 +145,25 @@
   }
 }
 
+.sponsor-prize-showcase {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .04), transparent 18%, rgba(0, 0, 0, .14) 58%, transparent 82%),
+    repeating-linear-gradient(7deg, #332019 0, #332019 3px, #43251d 4px, #2d1b16 8px);
+
+  .shelf-kicker { color: #e2ad94; }
+
+  > header > strong {
+    color: #2b1712;
+    border-color: #d69b7e;
+    background: linear-gradient(145deg, #ffd9bd, #bd6e50 65%, #7f3f2e);
+  }
+}
+
+.sponsor-prize-trophy .shelf-trophy-image img {
+  width: 88%;
+  height: 88%;
+}
+
 .shelf-kicker {
   color: #d6b77d;
   font-size: .65rem;
