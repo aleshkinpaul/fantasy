@@ -29,6 +29,7 @@
     <tr
       *ngFor="let profile of profilesArr; index as i"
       class="table-row"
+      [appPersonalized]="profile.id"
       [class.qualification-boundary]="qualifiedPlaces > 0 && i + 1 === qualifiedPlaces"
       [class.martin-league-member]="showMartinLeague && profile.isMartin === 1"
     >

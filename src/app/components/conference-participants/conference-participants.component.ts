@@ -3,6 +3,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 import { IProfileDetails } from '../../models/domain';
 import { ParticipantCardComponent } from '../participant-card/participant-card.component';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 export interface ConferenceParticipantEntry {
   profileId: string;
@@ -12,7 +13,7 @@ export interface ConferenceParticipantEntry {
 @Component({
   selector: 'app-conference-participants',
   standalone: true,
-  imports: [CommonModule, ParticipantCardComponent],
+  imports: [CommonModule, ParticipantCardComponent, PersonalizedParticipantDirective],
   templateUrl: './conference-participants.component.html',
   styleUrls: ['./conference-participants.component.scss']
 })

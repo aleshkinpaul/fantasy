@@ -10,6 +10,7 @@ import { selectHomeStandings } from '../../home/home-standings';
 import { TournamentKind, TournamentTimelineItem } from '../../models/tournament-catalog';
 import { DataService } from '../../service/data.service';
 import { TournamentCatalogService } from '../../service/tournament-catalog.service';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 interface HomeTournamentSummary {
   tournament: TournamentTimelineItem;
@@ -38,7 +39,7 @@ interface HomeDashboardState {
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })

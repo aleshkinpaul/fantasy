@@ -6,19 +6,21 @@ import { Router, RouterModule } from '@angular/router';
 import {
   AchievementTitleType,
   HallOfFame,
+  HallPlacement,
   HallSeason,
   HallTournament
 } from '../../models/achievement';
 import { AchievementService, TITLE_TYPE_LABELS } from '../../service/achievement.service';
 import { DataService } from '../../service/data.service';
 import { tournamentTimelineTopDownOrder } from '../../service/tournament-catalog.service';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 type HallTitleFilter = AchievementTitleType | 'all';
 
 @Component({
   selector: 'app-hall-of-fame',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './hall-of-fame.component.html',
   styleUrls: ['./hall-of-fame.component.scss']
 })
@@ -98,6 +100,10 @@ export class HallOfFameComponent implements OnInit {
 
   tournamentTimelineOrder(result: HallTournament): number {
     return tournamentTimelineTopDownOrder(result.tournament.kind);
+  }
+
+  placementReferences(placement: HallPlacement): string[] {
+    return placement.recipient.members.flatMap(member => [member.participantId, member.profileId]);
   }
 
   private applyFilters(): void {

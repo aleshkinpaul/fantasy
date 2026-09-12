@@ -3,11 +3,12 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { IProfileDetails } from '../../models/domain';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-participant-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './participant-card.component.html',
   styleUrls: ['./participant-card.component.scss']
 })

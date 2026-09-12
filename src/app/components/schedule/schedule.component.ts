@@ -12,13 +12,14 @@ import {
   requireProfile,
 } from '../../competition/domain/competition-match-selectors';
 import { MatchCenterSelection } from '../../match-center/match-center.models';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective]
 })
 export class ScheduleComponent {
   @Input() profilesArr: IProfileDetails[] = [];

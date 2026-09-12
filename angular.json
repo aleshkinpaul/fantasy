@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/styles/styles.scss"
+              "src/app/styles/styles.scss",
+              "src/app/styles/personalization.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -99,7 +100,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/styles/styles.scss"
+              "src/app/styles/styles.scss",
+              "src/app/styles/personalization.scss"
             ],
             "scripts": []
           }

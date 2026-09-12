@@ -61,7 +61,7 @@
             </tr>
           </thead>
           <tbody class="table-body">
-            <tr *ngFor="let team of item.teams; index as i" class="table-row">
+            <tr *ngFor="let team of item.teams; index as i" class="table-row" [appPersonalized]="teamProfileIds(team)">
               <td [ngClass]="{
                 'special': i + 1 === 1 || i + 1 === 2,
               }">
@@ -162,7 +162,7 @@
                 </tr>
               </thead>
               <tbody class="table-body">
-                <tr *ngFor="let profile of team.profiles; index as profileInd" class="table-row">
+                <tr *ngFor="let profile of team.profiles; index as profileInd" class="table-row" [appPersonalized]="profile.id">
                   <td [ngClass]="{
                     'special': profileInd + 1 === 1 || profileInd + 1 === 2,
                   }">
@@ -248,7 +248,7 @@
             </tr>
           </thead>
           <tbody class="table-body">
-            <tr *ngFor="let team of additionalGroup.teams; index as i" class="table-row">
+            <tr *ngFor="let team of additionalGroup.teams; index as i" class="table-row" [appPersonalized]="teamProfileIds(team)">
               <td [ngClass]="{
                 'special': i + 1 === 1 || i + 1 === 2,
               }">
@@ -347,7 +347,7 @@
                       <div class="participants-container left">
                         <table>
                           <tbody>
-                            <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.first_profile.id">
                               <td>{{ meet.first_profile.name }}</td>
                               <td
                                 [ngStyle]="{
@@ -382,7 +382,7 @@
                       <div class="participants-container right">
                         <table>
                           <tbody>
-                            <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.second_profile.id">
                               <td>{{ meet.second_profile.name }}</td>
                               <td
                                 [ngStyle]="{
@@ -421,7 +421,7 @@
                     <div class="participants-container left">
                       <table>
                         <tbody>
-                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                          <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.first_profile.id">
                             <td>{{ meet.first_profile.name }}</td>
                             <td
                               [ngStyle]="{
@@ -456,7 +456,7 @@
                     <div class="participants-container right">
                       <table>
                         <tbody>
-                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                          <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.second_profile.id">
                             <td>{{ meet.second_profile.name }}</td>
                             <td
                               [ngStyle]="{
@@ -494,7 +494,7 @@
                     <div class="participants-container left">
                       <table>
                         <tbody>
-                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                          <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.first_profile.id">
                             <td>{{ meet.first_profile.name }}</td>
                             <td
                               [ngStyle]="{
@@ -529,7 +529,7 @@
                     <div class="participants-container right">
                       <table>
                         <tbody>
-                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                          <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.second_profile.id">
                             <td>{{ meet.second_profile.name }}</td>
                             <td
                               [ngStyle]="{
@@ -567,7 +567,7 @@
                     <div class="participants-container left">
                       <table>
                         <tbody>
-                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                          <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.first_profile.id">
                             <td>{{ meet.first_profile.name }}</td>
                             <td
                               [ngStyle]="{
@@ -602,7 +602,7 @@
                     <div class="participants-container right">
                       <table>
                         <tbody>
-                          <tr *ngFor="let meet of match.meets; index as pr_ind">
+                          <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.second_profile.id">
                             <td>{{ meet.second_profile.name }}</td>
                             <td
                               [ngStyle]="{
@@ -641,7 +641,7 @@
                       <div class="participants-container left">
                         <table>
                           <tbody>
-                            <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.first_profile.id">
                               <td>{{ meet.first_profile.name }}</td>
                               <td
                                 [ngStyle]="{
@@ -676,7 +676,7 @@
                       <div class="participants-container right">
                         <table>
                           <tbody>
-                            <tr *ngFor="let meet of match.meets; index as pr_ind">
+                            <tr *ngFor="let meet of match.meets; index as pr_ind" [appPersonalized]="meet.second_profile.id">
                               <td>{{ meet.second_profile.name }}</td>
                               <td
                                 [ngStyle]="{
@@ -704,7 +704,7 @@
     <div class="tours-list-container" *ngIf="activeTab === 'results'">
       <div class="matches-container" *ngIf="!!resultTeams">
         <ul class="matches-list results">
-          <li class="match-item final" *ngFor="let team of resultTeams; index as i">
+          <li class="match-item final" *ngFor="let team of resultTeams; index as i" [appPersonalized]="teamProfileIds(team)">
             <h2 class="match-title">{{i+1}} место: {{ team.name }}</h2>
             <div class="match-details results">
               <div class="item-team-container">
@@ -716,7 +716,7 @@
                 <div class="participants-container right">
                   <table>
                     <tbody>
-                      <tr *ngFor="let profile of team.profiles; index as pr_ind">
+                      <tr *ngFor="let profile of team.profiles; index as pr_ind" [appPersonalized]="profile.id">
                         <td>{{ profile.name }}</td>
                       </tr>
                     </tbody>
@@ -846,7 +846,7 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <tr *ngFor="let item of squadsDetails.value; index as i" class="table-row">
+        <tr *ngFor="let item of squadsDetails.value; index as i" class="table-row" [appPersonalized]="item.profile.id">
           <td [ngClass]="{
             'first':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 1,
             'second':   (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 2,

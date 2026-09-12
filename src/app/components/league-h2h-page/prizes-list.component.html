@@ -43,6 +43,7 @@
           <ng-container *ngFor="let nominee of (!item.isShowAll ? item.activeLeaders : item.nomineesArr); index as nomInd">
             <li
               class="nominee-item"
+              [appPersonalized]="nominee.id"
               [ngClass]="{ 'unsuitable-item': isUnusuitableItem(nominee, item.activeLeaders, item.isShowAll) }"
               *ngIf="shouldDisplay(item.isShowAll, nomInd)"
             >

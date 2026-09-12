@@ -67,7 +67,7 @@
                 <span>Команда</span><span>О</span><span>ФО</span>
               </div>
               <ol class="top-list">
-                <li *ngFor="let profile of group.topFive; trackBy: trackProfile; let place = index">
+                <li *ngFor="let profile of group.topFive; trackBy: trackProfile; let place = index" [appPersonalized]="profile.id">
                   <span class="place">{{ place + 1 }}</span>
                   <a class="standing-team" [routerLink]="['/participants', profile.id]">
                     <span class="team-logo"><img [src]="profile.logo" [alt]="profile.team.title"></span>
@@ -127,6 +127,7 @@
               <a
                 class="prize-leader"
                 *ngFor="let leader of prizeLeaders(prize); trackBy: trackLeader"
+                [appPersonalized]="leader.id"
                 [routerLink]="['/participants', leader.id]">
                 <span class="leader-logo"><img [src]="leader.logo" [alt]="leader.team.title"></span>
                 <span><strong>{{ leader.team.title }}</strong><small>{{ leader.name }}</small></span>

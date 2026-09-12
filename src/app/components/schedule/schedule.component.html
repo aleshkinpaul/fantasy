@@ -6,7 +6,7 @@
     </tr>
   </thead>
   <tbody class="table-body">
-    <tr *ngFor="let profile of profilesArr; index as i" class="table-row">
+    <tr *ngFor="let profile of profilesArr; index as i" class="table-row" [appPersonalized]="profile.id">
       <td class="item-name-container">
         <a [routerLink]="['/participants', profile.id]" class="team-link" [attr.aria-label]="'Открыть профиль ' + profile.name">
           <div class="item-team-container">

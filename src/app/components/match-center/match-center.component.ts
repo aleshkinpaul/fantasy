@@ -24,11 +24,12 @@ import {
   MatchForecastView,
 } from '../../match-center/match-center.models';
 import { RealClubIndex } from '../../models/real-club';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-match-center',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './match-center.component.html',
   styleUrls: ['./match-center.component.scss']
 })

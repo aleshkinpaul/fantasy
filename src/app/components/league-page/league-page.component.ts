@@ -16,13 +16,14 @@ import { MatchesComponent } from '../matches/matches.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { isHistoricalMartinLeagueMember } from '../../competition/config/martin-league.registry';
 import { findRealClubByExternalId, RealClub } from '../../models/real-club';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-league-page',
   templateUrl: './league-page.component.html',
   styleUrls: ['./league-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent]
+  imports: [CommonModule, RouterModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent, PersonalizedParticipantDirective]
 })
 export class LeaguePageComponent implements OnInit {
   private data;

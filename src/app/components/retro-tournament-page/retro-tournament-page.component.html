@@ -38,6 +38,7 @@
       <article
         class="standing-row place-{{ standing.place }}"
         *ngFor="let standing of data.standings; trackBy: trackStanding"
+        [appPersonalized]="[standing.participantId, standing.profileId]"
         [class.is-expanded]="expandedParticipantId === standing.participantId"
       >
         <a

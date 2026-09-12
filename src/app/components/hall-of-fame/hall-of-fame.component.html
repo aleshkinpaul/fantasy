@@ -50,6 +50,7 @@
         <a
           class="champion-card"
           *ngFor="let champion of data.currentChampions"
+          [appPersonalized]="placementReferences(champion.placement)"
           [routerLink]="champion.placement.recipient.type === 'participant'
             ? ['/participants', champion.placement.recipient.members[0].participantId]
             : null"
@@ -148,6 +149,7 @@
                   <li
                     *ngFor="let placement of stage.placements"
                     class="podium-entry place-{{ placement.place }}"
+                    [appPersonalized]="placementReferences(placement)"
                   >
                     <div class="place-mark" [attr.aria-label]="placement.place + ' место'">
                       <strong>{{ placement.place }}</strong>
@@ -201,6 +203,7 @@
           class="leader-row"
           role="row"
           *ngFor="let leader of (showAllLeaders ? data.leaders : data.leaders.slice(0, 10)); let index = index"
+          [appPersonalized]="leader.participantId"
         >
           <a class="leader-person" role="cell" [routerLink]="['/participants', leader.participantId]">
             <span class="leader-rank">{{ index + 1 }}</span>

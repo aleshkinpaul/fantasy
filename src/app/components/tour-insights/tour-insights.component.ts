@@ -11,11 +11,12 @@ import {
   TourInsights,
 } from '../../tour-insights/tour-insights.models';
 import { RealClubIndex } from '../../models/real-club';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-tour-insights',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './tour-insights.component.html',
   styleUrls: ['./tour-insights.component.scss'],
 })

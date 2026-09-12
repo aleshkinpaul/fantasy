@@ -1,0 +1,45 @@
+body.participant-picker-open {
+  overflow: hidden;
+}
+
+// Shared, non-destructive accent for the participant selected in personalization.
+// The translucent overlay preserves win/loss, medal and tournament theme colors.
+.is-personalized-participant {
+  --personalized-accent: #2f80c4;
+  --personalized-glow: rgba(47, 128, 196, 0.2);
+}
+
+tr.is-personalized-participant > * {
+  background-image: linear-gradient(var(--personalized-glow), var(--personalized-glow));
+}
+
+tr.is-personalized-participant > *:first-child {
+  box-shadow: inset 4px 0 0 var(--personalized-accent);
+}
+
+.is-personalized-participant:not(tr) {
+  position: relative;
+  isolation: isolate;
+}
+
+.is-personalized-participant:not(tr)::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: 2;
+  border: 2px solid var(--personalized-accent);
+  border-radius: inherit;
+  box-shadow: 0 0 0 3px var(--personalized-glow), inset 3px 0 0 var(--personalized-accent);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-personalized-participant:not(tr)::after {
+    animation: personalized-accent-in 220ms ease-out;
+  }
+}
+
+@keyframes personalized-accent-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -6,11 +6,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RetroStanding, RetroTournament } from '../../models/retro-tournament';
 import { DataService } from '../../service/data.service';
 import { RetroTournamentService } from '../../service/retro-tournament.service';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-retro-tournament-page',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './retro-tournament-page.component.html',
   styleUrls: ['./retro-tournament-page.component.scss']
 })

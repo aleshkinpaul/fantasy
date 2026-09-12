@@ -5,13 +5,14 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { isHistoricalMartinLeagueMember } from '../../competition/config/martin-league.registry';
 import { ArchiveCupLeg, ArchiveCupMatch, ArchiveCupRound, ArchiveCupTeam, ArchiveCupTournament } from '../../models/archive-cup';
 import { ArchiveCupService } from '../../service/archive-cup.service';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-cup-page',
   templateUrl: './cup-page.component.html',
   styleUrls: ['./cup-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PersonalizedParticipantDirective],
 })
 export class CupPageComponent implements OnInit {
   tournament?: ArchiveCupTournament;

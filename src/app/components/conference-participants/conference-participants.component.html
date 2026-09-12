@@ -16,7 +16,7 @@
       </app-participant-card>
 
       <ng-template #missingProfile>
-        <article class="missing-profile">
+        <article class="missing-profile" [appPersonalized]="participant.profileId">
           <span class="missing-icon" aria-hidden="true">?</span>
           <strong>Данные участника недоступны</strong>
           <span>ID {{ participant.profileId }}</span>

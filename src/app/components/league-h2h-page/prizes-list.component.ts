@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { IPrizeNominee, IRuntimePrize } from '../../models/domain';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 const MEDAL_IMAGES = [
   'assets/icons/prizes/gold-medal.png',
@@ -15,7 +16,7 @@ const DEFAULT_MEDAL_IMAGE = 'assets/icons/prizes/medal.png';
   templateUrl: './prizes-list.component.html',
   styleUrls: ['./prizes-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective]
 })
 export class PrizesListComponent {
   @Input() prizes: IRuntimePrize[] = [];

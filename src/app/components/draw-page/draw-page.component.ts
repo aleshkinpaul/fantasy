@@ -12,6 +12,7 @@ import {
   formatCompetitionMatches,
 } from '../../draw/champions-league-draw';
 import { DataService } from '../../service/data.service';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 interface DrawSeasonOption {
   yearStart: number;
@@ -38,7 +39,7 @@ interface DrawTeamView {
 @Component({
   selector: 'app-draw-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, PersonalizedParticipantDirective],
   templateUrl: './draw-page.component.html',
   styleUrls: ['./draw-page.component.scss'],
 })

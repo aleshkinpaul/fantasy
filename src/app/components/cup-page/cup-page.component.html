@@ -49,7 +49,7 @@
 
         <div class="match-grid" [class.compact-grid]="round.matches.length > 8">
           <article class="cup-match" *ngFor="let match of round.matches; trackBy: trackById">
-            <div class="team-row" [class.winner]="isWinner(match, match.first)">
+            <div class="team-row" [appPersonalized]="match.first.profileId" [class.winner]="isWinner(match, match.first)">
               <a class="team-profile-link" [routerLink]="['/participants', match.first.profileId]">
                 <span class="team-logo">
                   <span
@@ -64,7 +64,7 @@
               <strong class="team-score">{{ scoreFor(match, match.first) }}</strong>
             </div>
 
-            <div class="team-row" [class.winner]="isWinner(match, match.second)">
+            <div class="team-row" [appPersonalized]="match.second.profileId" [class.winner]="isWinner(match, match.second)">
               <a class="team-profile-link" [routerLink]="['/participants', match.second.profileId]">
                 <span class="team-logo">
                   <span

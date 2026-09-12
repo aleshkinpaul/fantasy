@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { FantasyFullInfoResponse } from '../../competition/models/competition.models';
 import { IProfileDetails, ISquadDetails } from '../../models/domain';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 interface StandingPlayer {
   id: string;
@@ -16,7 +17,7 @@ interface StandingPlayer {
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective]
 })
 export class StandingsComponent {
   @Input() profilesArr: IProfileDetails[] = [];

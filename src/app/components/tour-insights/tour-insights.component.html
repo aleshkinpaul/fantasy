@@ -215,7 +215,7 @@
   <ol class="metric-list">
     <li *ngFor="let item of items">
       <span class="rank">{{ item.rank }}</span>
-      <a class="profile-team-link" [routerLink]="['/participants', item.team.profileId]">
+      <a class="profile-team-link" [appPersonalized]="item.team.profileId" [routerLink]="['/participants', item.team.profileId]">
         <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
         <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
       </a>
@@ -231,7 +231,11 @@
   <ol class="metric-list match-list">
     <li *ngFor="let item of items">
       <span class="rank">{{ item.rank }}</span>
-      <button type="button" class="match-row" (click)="openMatch(item)">
+      <button
+        type="button"
+        class="match-row"
+        [appPersonalized]="[item.home.profileId, item.away.profileId]"
+        (click)="openMatch(item)">
         <span class="match-teams">
           <strong>{{ item.home.teamTitle }}</strong>
           <small>{{ item.away.teamTitle }}</small>
@@ -276,7 +280,7 @@
   <ol class="metric-list">
     <li *ngFor="let item of items">
       <span class="rank">{{ item.rank }}</span>
-      <a class="profile-team-link" [routerLink]="['/participants', item.team.profileId]">
+      <a class="profile-team-link" [appPersonalized]="item.team.profileId" [routerLink]="['/participants', item.team.profileId]">
         <span class="team-logo"><img [src]="item.team.logo || 'assets/logos/default.png'" alt=""></span>
         <span class="row-copy"><strong>{{ item.team.teamTitle }}</strong><small>{{ item.team.participantName }}</small></span>
       </a>

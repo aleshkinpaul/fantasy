@@ -23,6 +23,7 @@
       <tr
         *ngFor="let item of squadsDetails.value; index as i"
         class="table-row"
+        [appPersonalized]="item.profile.id"
         [class.martin-league-member]="isMartinLeagueMember(item.name)"
       >
         <td [ngClass]="{

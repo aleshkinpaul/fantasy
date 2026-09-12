@@ -13,7 +13,7 @@
     </header>
 
     <div class="match-hero" *ngIf="teams.length === 2">
-      <a class="hero-team home-team" [routerLink]="['/participants', teams[0].profile.id]" (click)="$event.stopPropagation()">
+      <a class="hero-team home-team" [appPersonalized]="teams[0].profile.id" [routerLink]="['/participants', teams[0].profile.id]" (click)="$event.stopPropagation()">
         <div class="hero-logo"><img [src]="teams[0].profile.logo || 'assets/logos/default.png'" alt=""></div>
         <div>
           <strong>{{ teams[0].profile.team.title }}</strong>
@@ -31,7 +31,7 @@
         <ng-template #versus><div class="versus">VS</div></ng-template>
       </div>
 
-      <a class="hero-team away-team" [routerLink]="['/participants', teams[1].profile.id]" (click)="$event.stopPropagation()">
+      <a class="hero-team away-team" [appPersonalized]="teams[1].profile.id" [routerLink]="['/participants', teams[1].profile.id]" (click)="$event.stopPropagation()">
         <div class="hero-logo"><img [src]="teams[1].profile.logo || 'assets/logos/default.png'" alt=""></div>
         <div>
           <strong>{{ teams[1].profile.team.title }}</strong>
@@ -91,7 +91,7 @@
     </section>
 
     <div class="squads-grid">
-      <section class="squad-panel" *ngFor="let team of teams; index as teamIndex">
+      <section class="squad-panel" *ngFor="let team of teams; index as teamIndex" [appPersonalized]="team.profile.id">
         <header class="squad-heading">
           <div>
             <p class="section-caption">{{ teamIndex === 0 ? 'Хозяева' : 'Гости' }}</p>

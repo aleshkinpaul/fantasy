@@ -15,13 +15,14 @@ import { logger } from 'src/app/utils/logger';
 import { HeaderComponent } from '../header/header.component';
 import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { findRealClubByExternalId, RealClub } from '../../models/real-club';
+import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
 @Component({
   selector: 'app-cwc-page',
   templateUrl: './cwc-page.component.html',
   styleUrls: ['./cwc-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, DefaultLoaderComponent],
+  imports: [CommonModule, RouterModule, HeaderComponent, DefaultLoaderComponent, PersonalizedParticipantDirective],
   providers: [CwcDataService]
 })
 export class CWCPageComponent implements OnInit {
@@ -774,6 +775,14 @@ export class CWCPageComponent implements OnInit {
   getClubName(id) {
     const clubInfo = findRealClubByExternalId(this.teams, id);
     return clubInfo?.name;
+  }
+
+  teamProfileIds(team): string[] {
+    return (team?.profiles || []).flatMap(profile => {
+      if (typeof profile === 'string' || typeof profile === 'number') return [String(profile)];
+      const id = profile?.id || profile?.profileId || profile?.profile?.id;
+      return id ? [String(id)] : [];
+    });
   }
 
   sortByScore(a,b) {
