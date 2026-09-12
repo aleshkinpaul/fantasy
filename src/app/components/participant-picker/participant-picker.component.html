@@ -1,0 +1,97 @@
+<ng-container *ngIf="state$ | async as state">
+  <div class="picker-backdrop" *ngIf="state.pickerOpen">
+    <section
+      class="picker-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="participant-picker-title"
+      aria-describedby="participant-picker-description"
+    >
+      <div class="picker-heading">
+        <span class="eyebrow">Персонализация</span>
+        <h2 id="participant-picker-title">Кто вы?</h2>
+        <p id="participant-picker-description">
+          Выберите себя, чтобы видеть свои матчи, положение в таблице и команды на всех страницах.
+        </p>
+      </div>
+
+      <div class="picker-loading" *ngIf="state.mode === 'loading'" aria-live="polite">
+        <span class="loading-mark" aria-hidden="true"></span>
+        Загружаем участников…
+      </div>
+
+      <ng-container *ngIf="state.mode !== 'loading'">
+        <label class="search-field" *ngIf="state.participants.length">
+          <span class="sr-only">Поиск участника по имени</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"></path>
+          </svg>
+          <input
+            class="participant-search"
+            type="search"
+            autocomplete="off"
+            placeholder="Найти по имени или фамилии"
+            [value]="search"
+            (input)="onSearch($event, state.participants)"
+          >
+        </label>
+
+        <p class="directory-warning" *ngIf="state.directoryError" role="status">
+          Список участников сейчас не загрузился. Можно войти гостем или пропустить выбор.
+        </p>
+
+        <div class="participant-list" role="radiogroup" aria-label="Выбор участника">
+          <button
+            type="button"
+            class="participant-option guest-option"
+            role="radio"
+            [attr.aria-checked]="selectedChoice === 'guest'"
+            [class.selected]="selectedChoice === 'guest'"
+            (click)="choose('guest')"
+          >
+            <span class="option-avatar guest-avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0m8-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path></svg>
+            </span>
+            <span class="option-copy">
+              <strong>Гость</strong>
+              <small>Смотреть сайт без персонализации</small>
+            </span>
+            <span class="radio-mark" aria-hidden="true"></span>
+          </button>
+
+          <button
+            type="button"
+            class="participant-option"
+            role="radio"
+            *ngFor="let participant of filteredParticipants; trackBy: trackParticipant"
+            [attr.aria-checked]="selectedChoice === participant.participantId"
+            [class.selected]="selectedChoice === participant.participantId"
+            (click)="choose(participant.participantId)"
+          >
+            <span class="option-avatar" aria-hidden="true">{{ initials(participant.name) }}</span>
+            <span class="option-copy"><strong>{{ participant.name }}</strong></span>
+            <span class="radio-mark" aria-hidden="true"></span>
+          </button>
+
+          <p class="empty-result" *ngIf="state.participants.length && !filteredParticipants.length">
+            Никого не нашли. Проверьте написание имени.
+          </p>
+        </div>
+
+        <div class="picker-actions">
+          <button type="button" class="secondary-button" (click)="secondaryAction(state)">
+            {{ canCancel(state) ? 'Отмена' : 'Пропустить' }}
+          </button>
+          <button
+            type="button"
+            class="confirm-button"
+            [disabled]="!selectedChoice"
+            (click)="confirm()"
+          >
+            Подтвердить
+          </button>
+        </div>
+      </ng-container>
+    </section>
+  </div>
+</ng-container>

@@ -95,6 +95,48 @@
         }
       }
     }
+
+    .viewer-button {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      max-width: 190px;
+      min-height: 36px;
+      padding: 7px 11px;
+      flex: 0 1 auto;
+      color: $color-primary-hover;
+      font: inherit;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      border: 1px solid rgba($color-primary, 0.25);
+      border-radius: $border-radius-full;
+      cursor: pointer;
+      background: $color-surface-blue;
+      transition: border-color $transition-fast, background-color $transition-fast;
+
+      svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-width: 1.7;
+      }
+
+      span {
+        @include text-truncate;
+      }
+
+      &:hover {
+        border-color: rgba($color-primary, 0.5);
+        background: lighten($color-surface-blue, 2%);
+      }
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+    }
   }
 }
 
@@ -130,6 +172,18 @@
       padding: 6px 10px;
       font-size: $font-size-xs;
     }
+
+    .viewer-button {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      flex: 0 0 38px;
+      justify-content: center;
+
+      span {
+        display: none;
+      }
+    }
   }
 }
 
@@ -150,7 +204,8 @@
 
     .main-nav {
       margin-left: auto;
-      max-width: calc(100% - 58px);
+      max-width: none;
+      flex: 1 1 auto;
       padding: 3px;
       justify-content: flex-end;
       overflow-x: auto;
@@ -171,6 +226,12 @@
       .main-title {
         display: block;
       }
+    }
+
+    .viewer-button {
+      width: 34px;
+      height: 34px;
+      flex-basis: 34px;
     }
   }
 }

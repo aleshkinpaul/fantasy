@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PersonalizationState } from 'src/app/models/personalization';
+import { PersonalizationService } from 'src/app/service/personalization.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +21,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private readonly service: DataService,
     private readonly router: Router,
-    private readonly destroyRef: DestroyRef
+    private readonly destroyRef: DestroyRef,
+    readonly personalization: PersonalizationService,
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +51,11 @@ export class HeaderComponent implements OnInit {
 
   clearContext(): void {
     this.service.setUrlName('');
+  }
+
+  personalizationLabel(state: PersonalizationState): string {
+    if (state.mode === 'participant') return state.selectedParticipant?.name ?? 'Выбрать участника';
+    if (state.mode === 'guest') return 'Гость';
+    return 'Выбрать участника';
   }
 }
