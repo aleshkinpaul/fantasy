@@ -322,6 +322,17 @@
             <ng-template #prizePending>
               <p class="prize-pending">{{ prizeStateText(prize) }}</p>
             </ng-template>
+
+            <div class="personal-prize-result" *ngIf="dashboard.personalizedParticipant as participant">
+              <span>Ваш результат</span>
+              <ng-container *ngIf="personalPrizeResult(prize, participant) as personal; else noPersonalPrizeResult">
+                <strong>
+                  <span>{{ personal.value === null ? 'Скрыто' : personal.value }}</span>
+                  <small>· {{ personal.place }} место</small>
+                </strong>
+              </ng-container>
+              <ng-template #noPersonalPrizeResult><strong>—</strong></ng-template>
+            </div>
           </article>
         </div>
 

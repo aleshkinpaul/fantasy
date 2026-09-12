@@ -17,6 +17,13 @@ $bp-sm: 600px;
   color: $color-text;
 }
 
+.hall-page .is-personalized-participant:not(tr)::after {
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+  box-shadow: inset 5px 0 0 var(--personalized-accent);
+}
+
 .hall-hero {
   max-width: 760px;
   margin-bottom: 34px;

@@ -20,6 +20,10 @@ import {
 import { ParticipantDirectoryEntry } from '../../models/participant-directory';
 import { PersonalizationService } from '../../service/personalization.service';
 import { PersonalizedPlayerContribution } from '../../home/personalized-player-stats';
+import {
+  PersonalizedPrizeResult,
+  selectPersonalizedPrizeResult,
+} from '../../home/personalized-prize-result';
 
 interface HomeTournamentSummary {
   tournament: TournamentTimelineItem;
@@ -178,6 +182,13 @@ export class HomePageComponent {
 
   prizeValue(prize: IRuntimePrize, leader: IPrizeNominee): string | number | null {
     return prize.isSecret ? null : leader.prizes[prize.id]?.value ?? null;
+  }
+
+  personalPrizeResult(
+    prize: IRuntimePrize,
+    participant: ParticipantDirectoryEntry,
+  ): PersonalizedPrizeResult | null {
+    return selectPersonalizedPrizeResult(prize, participant);
   }
 
   prizeStateText(prize: IRuntimePrize): string {

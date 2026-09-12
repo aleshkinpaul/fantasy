@@ -10,7 +10,7 @@
         'down-half': match.type === 'down'
       }"
       *ngFor="let match of tourMatches">
-      <a class="home-name-link" [appPersonalized]="match.home" [routerLink]="['/participants', match.home]">
+      <a class="home-name-link" [routerLink]="['/participants', match.home]">
         <div class="name-container">
           <p class="team-name">{{ getTeamTitle(match.home) }}</p>
           <p class="player-name">{{ getProfileInfo(match.home).name }}</p>
@@ -18,7 +18,7 @@
       </a>
 
       <a class="home-logo-link" [routerLink]="['/participants', match.home]">
-        <div class="logo-container">
+        <div class="logo-container" [appPersonalized]="match.home">
           <span
             *ngIf="isMartinLeagueMember(match.home)"
             class="martin-match-badge"
@@ -43,7 +43,7 @@
       </button>
 
       <a class="away-logo-link" [routerLink]="['/participants', match.away]">
-        <div class="logo-container">
+        <div class="logo-container" [appPersonalized]="match.away">
           <span
             *ngIf="isMartinLeagueMember(match.away)"
             class="martin-match-badge"
@@ -57,7 +57,7 @@
         </div>
       </a>
 
-      <a class="away-name-link" [appPersonalized]="match.away" [routerLink]="['/participants', match.away]">
+      <a class="away-name-link" [routerLink]="['/participants', match.away]">
         <div class="name-container">
           <p class="team-name">{{ getTeamTitle(match.away) }}</p>
           <p class="player-name">{{ getProfileInfo(match.away).name }}</p>
