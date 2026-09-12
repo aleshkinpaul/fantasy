@@ -68,6 +68,7 @@
             <th class="rank-column sticky-column" rowspan="2">#</th>
             <th class="participant-column sticky-column" rowspan="2">Участник</th>
             <th class="power-column sticky-column" rowspan="2">Сила</th>
+            <th class="all-time-score-column" rowspan="2">ФО всего</th>
             <th *ngFor="let season of data.seasons" [attr.colspan]="season.columns.length">
               {{ season.period }}
             </th>
@@ -106,6 +107,10 @@
             <td class="power-column sticky-column">
               <strong>{{ row.countedTournaments ? formatRating(row.rating) : '—' }}</strong>
               <small>{{ row.countedTournaments }} турн. · опыт ×{{ formatScore(row.experienceFactor) }}<ng-container *ngIf="row.consistencyBonus"> · +{{ formatRating(row.consistencyBonus) }}</ng-container></small>
+            </td>
+            <td class="all-time-score-column">
+              <strong>{{ row.allTimeScore !== undefined ? formatScore(row.allTimeScore) : '—' }}</strong>
+              <small>за всё время</small>
             </td>
             <td
               *ngFor="let column of data.columns; trackBy: trackColumn"

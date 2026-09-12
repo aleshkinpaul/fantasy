@@ -41,6 +41,7 @@ export interface ParticipantRatingRow {
   teamName?: string;
   logo?: string;
   rating: number;
+  allTimeScore?: number;
   experienceFactor: number;
   consistencyBonus: number;
   countedTournaments: number;

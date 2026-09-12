@@ -15,6 +15,8 @@ describe('calculatePowerRating', () => {
     expect(rating.rows.map(row => row.participantId)).toEqual(['winner', 'score-leader']);
     expect(rating.rows[0].rating).toBe(6.4);
     expect(rating.rows[1].rating).toBe(4.6);
+    expect(rating.rows[0].allTimeScore).toBe(90);
+    expect(rating.rows[1].allTimeScore).toBe(100);
   });
 
   it('keeps live columns visible but removes their contribution when live is disabled', () => {
@@ -41,6 +43,7 @@ describe('calculatePowerRating', () => {
     expect(withoutLive.columns.find(column => column.id === active.id)?.included).toBeFalse();
     expect(withoutLive.columns.find(column => column.id === active.id)?.isLive).toBeTrue();
     expect(withoutLive.rows.find(row => row.participantId === 'past-winner')?.rating).toBe(10);
+    expect(withoutLive.rows.find(row => row.participantId === 'past-winner')?.allTimeScore).toBe(110);
   });
 
   it('uses decreasing season weights with a floor of 0.5', () => {

@@ -198,6 +198,7 @@
 .rank-column { width: 54px; min-width: 54px; left: 0; }
 .participant-column { width: 250px; min-width: 250px; left: 54px; text-align: left !important; }
 .power-column { width: 92px; min-width: 92px; left: 304px; }
+.all-time-score-column { width: 112px; min-width: 112px; }
 .sticky-column { position: sticky; z-index: 3; background: $color-surface !important; }
 thead .sticky-column { z-index: 7; background: $color-surface-muted !important; }
 
@@ -211,6 +212,8 @@ thead .sticky-column { z-index: 7; background: $color-surface-muted !important; 
 
 .power-column > strong { color: $color-primary-hover; font-family: $font-family-brand; font-size: $font-size-xl; }
 .power-column > small { display: block; margin-top: 3px; color: $color-text-muted; font-size: .56rem; line-height: 1.25; }
+.all-time-score-column > strong { color: $color-text; font-family: $font-family-brand; font-size: $font-size-lg; }
+.all-time-score-column > small { display: block; margin-top: 3px; color: $color-text-muted; font-size: .6rem; }
 .result-cell { min-width: 106px; }
 .result-cell > div { display: flex; align-items: center; flex-direction: column; }
 .result-cell strong { font-size: $font-size-sm; }

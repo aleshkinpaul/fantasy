@@ -161,6 +161,9 @@ function buildParticipantRow(
     const cell = cells[column.id];
     return cell?.included ? [{ cell, column }] : [];
   });
+  const knownScores = Object.values(cells)
+    .map(cell => cell.totalScore)
+    .filter((score): score is number => score !== undefined);
   const weightTotal = countedCells.reduce((sum, item) =>
     sum + item.column.seasonWeight * item.column.kindWeight, 0);
   const weightedPower = weightTotal
@@ -185,6 +188,9 @@ function buildParticipantRow(
     rating: countedCells.length
       ? round(Math.min(10, Math.max(1, weightedPower * 10 * experienceFactor + consistencyBonus)), 2)
       : 0,
+    allTimeScore: knownScores.length
+      ? round(knownScores.reduce((sum, score) => sum + score, 0), 1)
+      : undefined,
     experienceFactor: round(experienceFactor, 2),
     consistencyBonus,
     countedTournaments: countedCells.length,
