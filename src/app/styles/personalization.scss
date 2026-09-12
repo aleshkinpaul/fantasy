@@ -9,12 +9,12 @@ body.participant-picker-open {
   --personalized-glow: rgba(47, 128, 196, 0.2);
 }
 
-tr.is-personalized-participant > * {
-  background-image: linear-gradient(var(--personalized-glow), var(--personalized-glow));
+body tr.is-personalized-participant.is-personalized-participant > * {
+  background-image: linear-gradient(var(--personalized-glow), var(--personalized-glow)) !important;
 }
 
-tr.is-personalized-participant > *:first-child {
-  box-shadow: inset 4px 0 0 var(--personalized-accent);
+body tr.is-personalized-participant.is-personalized-participant > *:first-child {
+  box-shadow: inset 4px 0 0 var(--personalized-accent) !important;
 }
 
 .is-personalized-participant:not(tr) {

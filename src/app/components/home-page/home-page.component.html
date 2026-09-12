@@ -75,7 +75,7 @@
                 <span class="match-label">Текущий · {{ match.tour }} тур</span>
                 <span class="match-teams">
                   <span class="match-team" [appPersonalized]="match.home.id">
-                    <span><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
+                    <span class="match-copy"><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
                     <span class="match-logo"><img [src]="match.home.logo" [alt]="match.home.team.title"></span>
                   </span>
                   <strong class="match-score" *ngIf="hasScore(match); else versus">
@@ -84,7 +84,7 @@
                   <ng-template #versus><strong class="match-score">—</strong></ng-template>
                   <span class="match-team is-away" [appPersonalized]="match.away.id">
                     <span class="match-logo"><img [src]="match.away.logo" [alt]="match.away.team.title"></span>
-                    <span><strong>{{ match.away.team.title }}</strong><small>{{ match.away.name }}</small></span>
+                    <span class="match-copy"><strong>{{ match.away.team.title }}</strong><small>{{ match.away.name }}</small></span>
                   </span>
                 </span>
                 <span class="match-action">Открыть матч-центр <i aria-hidden="true">→</i></span>
@@ -106,13 +106,13 @@
                 <span class="match-label">Следующий · {{ match.tour }} тур</span>
                 <span class="match-teams">
                   <span class="match-team" [appPersonalized]="match.home.id">
-                    <span><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
+                    <span class="match-copy"><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
                     <span class="match-logo"><img [src]="match.home.logo" [alt]="match.home.team.title"></span>
                   </span>
                   <strong class="match-score">—</strong>
                   <span class="match-team is-away" [appPersonalized]="match.away.id">
                     <span class="match-logo"><img [src]="match.away.logo" [alt]="match.away.team.title"></span>
-                    <span><strong>{{ match.away.team.title }}</strong><small>{{ match.away.name }}</small></span>
+                    <span class="match-copy"><strong>{{ match.away.team.title }}</strong><small>{{ match.away.name }}</small></span>
                   </span>
                 </span>
                 <span class="match-action">К матчу <i aria-hidden="true">→</i></span>
