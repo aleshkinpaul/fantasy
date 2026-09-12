@@ -1,4 +1,4 @@
-import { buildTournamentTimeline } from './tournament-catalog.service';
+import { buildTournamentTimeline, orderTimelineBottomUp } from './tournament-catalog.service';
 
 describe('TournamentCatalogService', () => {
   it('groups tournaments by season from newest to oldest', () => {
@@ -24,6 +24,25 @@ describe('TournamentCatalogService', () => {
       'champions-league',
       'summer'
     ]);
+  });
+
+  it('reverses the canonical order for the bottom-up visual timeline', () => {
+    const canonical = buildTournamentTimeline([
+      item({ id: 'summer', kind: 'summer' }),
+      item({ id: 'ucl', kind: 'champions-league' }),
+      item({ id: 'cup', kind: 'cup' }),
+      item({ id: 'league', kind: 'la-liga' })
+    ]);
+
+    const visual = orderTimelineBottomUp(canonical);
+
+    expect(visual[0].tournaments.map(tournament => tournament.kind)).toEqual([
+      'summer',
+      'champions-league',
+      'cup',
+      'la-liga'
+    ]);
+    expect(canonical[0].tournaments[0].kind).toBe('la-liga');
   });
 
   it('marks only completed tournaments as archived', () => {

@@ -82,6 +82,15 @@ export function buildTournamentTimeline(catalog: unknown): TournamentTimelineGro
     }));
 }
 
+export function orderTimelineBottomUp(
+  timeline: TournamentTimelineGroup[],
+): TournamentTimelineGroup[] {
+  return timeline.map(season => ({
+    ...season,
+    tournaments: [...season.tournaments].reverse(),
+  }));
+}
+
 function validateItem(value: unknown, index: number, ids: Set<string>): TournamentCatalogItem {
   if (!isRecord(value)) {
     throw new Error(`Tournament catalog item ${index} must be an object`);

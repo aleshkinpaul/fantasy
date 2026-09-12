@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 
 import { TournamentTimelineGroup, TournamentTimelineItem } from '../../models/tournament-catalog';
-import { TournamentCatalogService } from '../../service/tournament-catalog.service';
+import { orderTimelineBottomUp, TournamentCatalogService } from '../../service/tournament-catalog.service';
 import { DataService } from '../../service/data.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class MainPageComponent {
   ) {
     dataService.setUrlName('');
     this.timeline$ = catalogService.loadTimeline().pipe(
+      map(timeline => orderTimelineBottomUp(timeline)),
       catchError(error => {
         console.error('Failed to load tournament catalog', error);
         this.loadError = true;
