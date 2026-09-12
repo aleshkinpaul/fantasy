@@ -92,6 +92,19 @@
   box-shadow: inset 5px 0 0 var(--personalized-accent);
 }
 
+.home-page .match-team.is-personalized-participant:not(.is-away)::after {
+  box-shadow: inset -5px 0 0 var(--personalized-accent);
+}
+
+.home-page .prize-leader.is-personalized-participant {
+  border-radius: $border-radius-sm;
+  background: var(--personalized-glow);
+}
+
+.home-page .prize-leader.is-personalized-participant::after {
+  content: none;
+}
+
 .personal-heading h2 { color: $color-text; }
 
 .personal-tournaments {

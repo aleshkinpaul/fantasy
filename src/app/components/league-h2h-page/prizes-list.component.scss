@@ -147,6 +147,13 @@
     border: 1px solid transparent;
     border-radius: $border-radius-md;
 
+    &.is-personalized-participant::after {
+      inset: 0;
+      border: 0;
+      border-radius: inherit;
+      box-shadow: inset 5px 0 0 var(--personalized-accent);
+    }
+
     &.unsuitable-item {
       color: $color-danger;
       background: rgba($color-danger-bg, 0.72);
