@@ -1,4 +1,8 @@
-import { buildTournamentTimeline, orderTimelineBottomUp } from './tournament-catalog.service';
+import {
+  buildTournamentTimeline,
+  orderTimelineBottomUp,
+  tournamentTimelineTopDownOrder,
+} from './tournament-catalog.service';
 
 describe('TournamentCatalogService', () => {
   it('groups tournaments by season from newest to oldest', () => {
@@ -42,6 +46,8 @@ describe('TournamentCatalogService', () => {
       'cup',
       'la-liga'
     ]);
+    expect(visual[0].tournaments.map(tournament => tournamentTimelineTopDownOrder(tournament.kind)))
+      .toEqual([0, 1, 2, 3]);
     expect(canonical[0].tournaments[0].kind).toBe('la-liga');
   });
 
@@ -67,6 +73,8 @@ describe('TournamentCatalogService', () => {
   it('rejects unsupported kinds, statuses and external routes', () => {
     expect(() => buildTournamentTimeline([item({ kind: 'friendly' })])).toThrowError(/invalid kind/);
     expect(() => buildTournamentTimeline([item({ status: 'paused' })])).toThrowError(/invalid status/);
+    expect(() => buildTournamentTimeline([item({ theme: 'friendly' })])).toThrowError(/invalid theme/);
+    expect(() => buildTournamentTimeline([item({ icon: 'assets/other.png' })])).toThrowError(/icon must start/);
     expect(() => buildTournamentTimeline([item({ route: 'https:\/\/example.com' })])).toThrowError(/must start/);
   });
 });
@@ -77,6 +85,8 @@ function item(overrides: Record<string, unknown> = {}): Record<string, unknown> 
     period: '2025–26',
     yearStart: 2025,
     kind: 'la-liga',
+    theme: 'laliga',
+    icon: 'assets/icons/leagues/laliga.png',
     title: 'Tournament',
     route: '/tournament',
     status: 'active',

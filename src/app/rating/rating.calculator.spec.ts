@@ -143,6 +143,8 @@ function makeTournament(id: string, yearStart: number, status: TournamentStatus)
     period: `${yearStart}–${String(yearStart + 1).slice(-2)}`,
     yearStart,
     kind: 'la-liga',
+    theme: 'laliga',
+    icon: 'assets/icons/leagues/laliga.png',
     kindLabel: 'Ла Лига',
     shortLabel: 'ЛЛ',
     title: `Ла Лига ${yearStart}`,

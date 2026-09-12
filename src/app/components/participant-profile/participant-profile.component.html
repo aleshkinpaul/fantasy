@@ -45,25 +45,27 @@
         </header>
 
         <div class="trophy-list" *ngIf="trophyShelf.length; else emptyShelf">
-          <a
-            *ngFor="let trophy of trophyShelf; trackBy: trackTrophy"
-            class="shelf-trophy"
-            [href]="trophy.route"
-            (click)="openTournament($event, trophy.route)"
-            [title]="trophy.title + ' · ' + trophy.tournamentTitle + ' · ' + trophy.period">
-            <span class="shelf-trophy-image">
-              <img
-                *ngIf="!hasFailedImage('trophy-' + trophy.id); else trophyFallback"
-                [src]="trophy.icon"
-                [alt]="trophy.title"
-                (error)="failImage('trophy-' + trophy.id)">
-              <ng-template #trophyFallback><span aria-hidden="true">🏆</span></ng-template>
-            </span>
-            <span class="shelf-trophy-copy">
-              <strong>{{ trophy.title }}</strong>
-              <small>{{ trophy.period }}<ng-container *ngIf="trophy.teamLabel"> · {{ trophy.teamLabel }}</ng-container></small>
-            </span>
-          </a>
+          <div class="trophy-track">
+            <a
+              *ngFor="let trophy of trophyShelf; trackBy: trackTrophy"
+              class="shelf-trophy"
+              [href]="trophy.route"
+              (click)="openTournament($event, trophy.route)"
+              [title]="trophy.title + ' · ' + trophy.tournamentTitle + ' · ' + trophy.period">
+              <span class="shelf-trophy-image">
+                <img
+                  *ngIf="!hasFailedImage('trophy-' + trophy.id); else trophyFallback"
+                  [src]="trophy.icon"
+                  [alt]="trophy.title"
+                  (error)="failImage('trophy-' + trophy.id)">
+                <ng-template #trophyFallback><span aria-hidden="true">🏆</span></ng-template>
+              </span>
+              <span class="shelf-trophy-copy">
+                <strong>{{ trophy.title }}</strong>
+                <small>{{ trophy.period }}<ng-container *ngIf="trophy.teamLabel"> · {{ trophy.teamLabel }}</ng-container></small>
+              </span>
+            </a>
+          </div>
         </div>
 
         <ng-template #emptyShelf>
@@ -88,11 +90,11 @@
           </div>
           <small *ngIf="account.nick">Ник · {{ account.nick }}</small>
           <small *ngIf="account.name && account.name !== participant.name">Имя в источнике · {{ account.name }}</small>
-          <a
+          <!-- <a
             *ngIf="telegramUrl(account) as telegramLink"
             [href]="telegramLink"
             target="_blank"
-            rel="noopener noreferrer">Telegram · {{ account.telegram }} <span aria-hidden="true">↗</span></a>
+            rel="noopener noreferrer">Telegram · {{ account.telegram }} <span aria-hidden="true">↗</span></a> -->
           <a
             *ngIf="accountUrl(account) as sportsUrl"
             [href]="sportsUrl"
@@ -188,6 +190,7 @@
             <article
               class="tournament-entry"
               *ngFor="let tournament of season.tournaments; trackBy: trackTournament"
+              [style.order]="tournamentTimelineOrder(tournament)"
               [class.current]="tournament.status === 'active'">
               <div class="entry-line" aria-hidden="true"><span></span></div>
               <div class="entry-card">

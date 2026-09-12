@@ -459,7 +459,7 @@
         "id": "la-liga-2023-24-martin-babayan",
         "type": "participant",
         "label": "Los Viejitos de Chamartín",
-        "logo": "assets/logos/2026/scaled/dedy-s-chamartina.png",
+        "logo": "assets/logos/Los Viejitos de Chamartín.png",
         "members": [{ "participantId": "martin-babayan", "profileId": "5275903" }]
       }
     },
@@ -473,7 +473,7 @@
         "id": "la-liga-2023-24-daniil-shalkovskiy",
         "type": "participant",
         "label": "LionForce",
-        "logo": "assets/logos/2026/scaled/lion-force.png",
+        "logo": "assets/logos/LionForce.png",
         "members": [{ "participantId": "daniil-shalkovskiy", "profileId": "1096489838" }]
       }
     },
@@ -487,7 +487,7 @@
         "id": "la-liga-2023-24-dmitriy-shchetinin",
         "type": "participant",
         "label": "Andar con rodeos",
-        "logo": "assets/logos/2025/scaled/andar con rodeos.png",
+        "logo": "assets/logos/Andar con rodeos.png",
         "members": [{ "participantId": "dmitriy-shchetinin", "profileId": "1063076888" }]
       }
     },
@@ -501,7 +501,7 @@
         "id": "champions-league-2023-24-dmitriy-shchetinin",
         "type": "participant",
         "label": "Andar con rodeos",
-        "logo": "assets/logos/2025/scaled/andar con rodeos.png",
+        "logo": "assets/logos/Andar con rodeos.png",
         "members": [{ "participantId": "dmitriy-shchetinin", "profileId": "1063076888" }]
       }
     },
@@ -515,7 +515,7 @@
         "id": "champions-league-2023-24-pavel-aleshkin",
         "type": "participant",
         "label": "ducks",
-        "logo": "assets/logos/2026/scaled/ducks.png",
+        "logo": "assets/logos/ducks.png",
         "members": [{ "participantId": "pavel-aleshkin", "profileId": "73116796" }]
       }
     },
@@ -529,7 +529,7 @@
         "id": "champions-league-2023-24-kirill-kozhukhov",
         "type": "participant",
         "label": "Страхи Холанда",
-        "logo": "assets/logos/2026/scaled/пас хуанито.png",
+        "logo": "assets/logos/the pass of juanito 2.png",
         "members": [{ "participantId": "kirill-kozhukhov", "profileId": "135066850" }]
       }
     },
@@ -543,7 +543,7 @@
         "id": "euro-2024-dmitriy-shchetinin",
         "type": "participant",
         "label": "Andar con rodeos",
-        "logo": "assets/logos/2025/scaled/andar con rodeos.png",
+        "logo": "assets/logos/Andar con rodeos.png",
         "members": [{ "participantId": "dmitriy-shchetinin", "profileId": "1063076888" }]
       }
     },
@@ -557,7 +557,7 @@
         "id": "euro-2024-dmitriy-bulavko",
         "type": "participant",
         "label": "Mardid",
-        "logo": "assets/logos/2026/scaled/losblancos.png",
+        "logo": "assets/logos/losblancos.png",
         "members": [{ "participantId": "dmitriy-bulavko", "profileId": "1095496719" }]
       }
     },

@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
       if (!this.isMain) {
         this.subTitle =
           name === 'spain'            ? 'Ла Лига'         :
+          name === 'tournaments'      ? 'Турниры'         :
           name === 'champions-league' ? 'Лига Чемпионов'  :
           name === 'spain-cup'        ? 'Кубок Испании'   : 
           name === 'club-world-cup'   ? 'Клубный ЧМ'      :

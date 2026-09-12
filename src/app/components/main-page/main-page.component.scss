@@ -84,29 +84,174 @@
 }
 
 .tournament-card {
+  --theme-bg-start: #{$color-surface};
+  --theme-bg-end: #{$color-surface-blue};
+  --theme-ink: #{$color-text};
+  --theme-muted: #{$color-text-muted};
+  --theme-accent: #{$color-primary};
+  --theme-accent-soft: rgba(40, 93, 143, .14);
+  --theme-border: #{$color-border};
+  --theme-glow: rgba(40, 93, 143, .16);
+  --theme-shadow: rgba(24, 36, 51, .1);
+  --theme-marker-bg: #{$color-surface-blue};
+  --theme-marker-ink: #{$color-primary};
+  --theme-badge-bg: rgba(255, 255, 255, .58);
+  --theme-badge-border: rgba(24, 36, 51, .1);
+  --theme-active-bg: rgba(36, 113, 69, .14);
+  --theme-active-ink: #{$color-success};
+  --theme-scheduled-bg: rgba(138, 97, 22, .14);
+  --theme-scheduled-ink: #{$color-warning};
+
   position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) 126px;
   gap: $space-lg;
-  min-height: 124px;
+  min-height: 148px;
   padding: 22px 24px;
-  color: $color-text;
+  overflow: hidden;
+  color: var(--theme-ink);
   text-decoration: none;
-  background: $color-surface;
-  border: 1px solid $color-border;
+  border: 1px solid var(--theme-border);
   border-radius: $border-radius-xl;
-  box-shadow: $shadow-sm;
-  transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+  background:
+    radial-gradient(circle at 88% 25%, var(--theme-glow), transparent 34%),
+    linear-gradient(135deg, var(--theme-bg-start), var(--theme-bg-end));
+  box-shadow: 0 5px 14px var(--theme-shadow);
+  transition: border-color $transition-fast, box-shadow $transition-base, transform $transition-fast;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: '';
+    opacity: .38;
+    pointer-events: none;
+    background: repeating-linear-gradient(125deg, transparent 0 22px, var(--theme-accent-soft) 23px 24px, transparent 25px 48px);
+  }
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    top: -70px;
+    right: -65px;
+    width: 240px;
+    height: 240px;
+    content: '';
+    opacity: .55;
+    pointer-events: none;
+    border: 1px solid var(--theme-accent-soft);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 25px transparent, inset 0 0 0 26px var(--theme-accent-soft);
+  }
+
+  &[data-theme='laliga'] {
+    --theme-bg-start: #fff9f3;
+    --theme-bg-end: #f5d9d4;
+    --theme-ink: #321c31;
+    --theme-muted: #755966;
+    --theme-accent: #ff4e49;
+    --theme-accent-soft: rgba(255, 78, 73, .14);
+    --theme-border: rgba(218, 73, 72, .38);
+    --theme-glow: rgba(255, 78, 73, .2);
+    --theme-shadow: rgba(113, 44, 51, .13);
+    --theme-marker-bg: #ffebe5;
+    --theme-marker-ink: #c83037;
+  }
+
+  &[data-theme='copa'] {
+    --theme-bg-start: #fffaf0;
+    --theme-bg-end: #eee5d7;
+    --theme-ink: #241d3b;
+    --theme-muted: #655d72;
+    --theme-accent: #ff1745;
+    --theme-accent-soft: rgba(37, 29, 60, .11);
+    --theme-border: rgba(37, 29, 60, .34);
+    --theme-glow: rgba(255, 23, 69, .16);
+    --theme-shadow: rgba(37, 29, 60, .12);
+    --theme-marker-bg: #26203d;
+    --theme-marker-ink: #fff4e6;
+  }
+
+  &[data-theme='ucl'] {
+    --theme-bg-start: #06064a;
+    --theme-bg-end: #171783;
+    --theme-ink: #fff;
+    --theme-muted: #c5c9ef;
+    --theme-accent: #fff;
+    --theme-accent-soft: rgba(255, 255, 255, .11);
+    --theme-border: rgba(149, 167, 255, .46);
+    --theme-glow: rgba(103, 122, 255, .36);
+    --theme-shadow: rgba(4, 4, 54, .34);
+    --theme-marker-bg: #fff;
+    --theme-marker-ink: #080857;
+    --theme-badge-bg: rgba(255, 255, 255, .11);
+    --theme-badge-border: rgba(255, 255, 255, .18);
+    --theme-active-bg: rgba(112, 232, 167, .16);
+    --theme-active-ink: #a7f0c6;
+    --theme-scheduled-bg: rgba(255, 218, 139, .16);
+    --theme-scheduled-ink: #ffe0a2;
+  }
+
+  &[data-theme='euro'] {
+    --theme-bg-start: #fbfdff;
+    --theme-bg-end: #dcecf6;
+    --theme-ink: #113765;
+    --theme-muted: #526f8c;
+    --theme-accent: #1763a8;
+    --theme-accent-soft: rgba(23, 99, 168, .11);
+    --theme-border: rgba(63, 135, 183, .34);
+    --theme-glow: rgba(90, 172, 218, .22);
+    --theme-shadow: rgba(31, 88, 126, .12);
+    --theme-marker-bg: #fff;
+    --theme-marker-ink: #12518c;
+
+    &::before {
+      opacity: .7;
+      background:
+        radial-gradient(circle at 98% 10%, rgba(255, 67, 56, .12), transparent 16%),
+        radial-gradient(circle at 94% 88%, rgba(12, 63, 159, .15), transparent 20%),
+        repeating-linear-gradient(125deg, transparent 0 24px, rgba(70, 145, 191, .08) 25px 26px, transparent 27px 52px);
+    }
+  }
+
+  &[data-theme='cwc'],
+  &[data-theme='wc'] {
+    --theme-bg-start: #0b0b0b;
+    --theme-bg-end: #21190e;
+    --theme-ink: #f9e4b0;
+    --theme-muted: #c8b687;
+    --theme-accent: #efbd4f;
+    --theme-accent-soft: rgba(239, 189, 79, .12);
+    --theme-border: rgba(239, 189, 79, .48);
+    --theme-glow: rgba(239, 189, 79, .2);
+    --theme-shadow: rgba(0, 0, 0, .42);
+    --theme-marker-bg: #e8b94f;
+    --theme-marker-ink: #161008;
+    --theme-badge-bg: rgba(239, 189, 79, .1);
+    --theme-badge-border: rgba(239, 189, 79, .22);
+    --theme-active-bg: rgba(112, 232, 167, .14);
+    --theme-active-ink: #9ce8b9;
+    --theme-scheduled-bg: rgba(239, 189, 79, .14);
+    --theme-scheduled-ink: #f7cf76;
+
+    &::before {
+      opacity: .45;
+      background: repeating-linear-gradient(120deg, transparent 0 28px, rgba(239, 189, 79, .1) 29px 30px, transparent 31px 58px);
+    }
+  }
+
+  &[data-theme='wc'] {
+    --theme-bg-end: #17201c;
+  }
 
   &:not(.is-scheduled):hover {
-    border-color: rgba($color-primary, 0.45);
-    box-shadow: $shadow-md;
+    border-color: var(--theme-accent);
+    box-shadow: 0 12px 28px var(--theme-shadow), 0 0 0 1px var(--theme-accent-soft);
     transform: translateY(-2px);
 
-    .card-action {
-      color: $color-primary-hover;
-      transform: translateX(3px);
-    }
+    .tournament-icon { transform: scale(1.07) rotate(-1deg); }
+    .card-action { transform: translateX(3px); }
   }
 
   &:focus-visible {
@@ -114,60 +259,39 @@
   }
 
   &.is-active {
-    background: linear-gradient(135deg, $color-surface 30%, $color-surface-blue 100%);
-    border-color: rgba($color-primary, 0.55);
-    box-shadow: $shadow-md;
+    border-color: var(--theme-accent);
+    box-shadow: 0 10px 28px var(--theme-shadow), 0 0 0 2px var(--theme-accent-soft);
 
     .timeline-marker {
-      color: #fff;
-      background: $color-primary;
-      border-color: $color-primary;
+      color: var(--theme-marker-ink);
+      background: var(--theme-accent);
+      border-color: $color-canvas;
+      box-shadow: 0 0 0 3px var(--theme-accent-soft), 0 0 16px var(--theme-glow);
     }
 
     .status-badge {
-      color: $color-success;
-      background: $color-success-bg;
+      color: var(--theme-active-ink);
+      background: var(--theme-active-bg);
     }
   }
 
   &.is-scheduled {
     cursor: default;
-    background: rgba($color-surface-beige, 0.55);
     border-style: dashed;
 
-    .timeline-marker {
-      color: $color-warning;
-      background: $color-warning-bg;
-      border-color: rgba($color-warning, 0.35);
-    }
+    .tournament-icon { opacity: .58; filter: grayscale(.4); }
 
     .status-badge {
-      color: $color-warning;
-      background: $color-warning-bg;
+      color: var(--theme-scheduled-ink);
+      background: var(--theme-scheduled-bg);
     }
   }
 
   &.is-archive {
-    color: $color-text-muted;
-    background: rgba($color-surface-muted, 0.52);
-    border-color: rgba($color-border, 0.85);
     box-shadow: none;
 
-    .timeline-marker {
-      color: $color-neutral;
-      background: $color-neutral-bg;
-      border-color: $color-border;
-    }
-
-    .kind-label,
-    .tournament-description {
-      color: $color-text-muted;
-    }
-
-    .status-badge {
-      color: $color-neutral;
-      background: $color-neutral-bg;
-    }
+    &::before { opacity: .24; }
+    .tournament-icon { opacity: .82; }
   }
 }
 
@@ -180,16 +304,19 @@
   width: 52px;
   height: 52px;
   place-items: center;
-  color: $color-primary;
-  background: $color-surface-blue;
+  color: var(--theme-marker-ink);
+  background: var(--theme-marker-bg);
   border: 4px solid $color-canvas;
   border-radius: 50%;
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
+  box-shadow: 0 3px 9px var(--theme-shadow);
   transform: translateY(-50%);
 }
 
 .card-body {
+  position: relative;
+  z-index: 1;
   display: flex;
   min-width: 0;
   flex-direction: column;
@@ -205,7 +332,7 @@
 }
 
 .kind-label {
-  color: $color-primary;
+  color: var(--theme-accent);
   font-size: $font-size-xs;
   font-weight: $font-weight-bold;
   letter-spacing: 0.08em;
@@ -214,8 +341,9 @@
 
 .status-badge {
   padding: 3px 8px;
-  color: $color-neutral;
-  background: $color-neutral-bg;
+  color: var(--theme-muted);
+  border: 1px solid var(--theme-badge-border);
+  background: var(--theme-badge-bg);
   border-radius: $border-radius-full;
   font-size: $font-size-xs;
   font-weight: $font-weight-semibold;
@@ -229,20 +357,75 @@
 
 .tournament-description {
   margin-top: 6px;
-  color: $color-text-muted;
+  color: var(--theme-muted);
   font-size: $font-size-sm;
 }
 
+.card-visual {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 112px;
+  min-height: 100px;
+  place-items: center;
+
+  &::before {
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    content: '';
+    opacity: .78;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--theme-glow), transparent 68%);
+    filter: blur(2px);
+  }
+}
+
+.tournament-icon-frame {
+  position: relative;
+  display: grid;
+  width: 94px;
+  height: 94px;
+  place-items: center;
+}
+
+.tournament-icon {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 7px var(--theme-shadow));
+  transition: opacity $transition-base, filter $transition-base, transform $transition-base;
+
+  [data-theme='ucl'] & { border-radius: 20%; }
+  [data-theme='cwc'] & { border-radius: 14%; }
+  [data-theme='wc'] & {
+    padding: 3px;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, .92)) drop-shadow(0 7px 7px rgba(0, 0, 0, .7));
+  }
+}
+
 .card-action {
-  align-self: center;
-  color: $color-primary;
-  font-size: $font-size-2xl;
+  position: absolute;
+  right: -3px;
+  bottom: -4px;
+  display: grid;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 9px;
+  place-items: center;
+  color: var(--theme-ink);
+  border: 1px solid var(--theme-border);
+  border-radius: $border-radius-full;
+  background: var(--theme-badge-bg);
+  box-shadow: 0 3px 8px var(--theme-shadow);
+  font-size: $font-size-xl;
   font-weight: $font-weight-semibold;
-  transition: color $transition-fast, transform $transition-fast;
+  line-height: 1;
+  transition: transform $transition-fast;
 
   .is-scheduled & {
-    color: $color-warning;
-    font-size: $font-size-sm;
+    color: var(--theme-scheduled-ink);
+    font-size: .68rem;
   }
 }
 
@@ -299,6 +482,7 @@
   }
 
   .tournament-card {
+    grid-template-columns: minmax(0, 1fr) 74px;
     min-height: 108px;
     padding: 18px 16px 18px 20px;
     gap: 12px;
@@ -324,10 +508,20 @@
   }
 
   .card-action {
-    font-size: $font-size-xl;
+    right: -2px;
+    bottom: 1px;
+    min-width: 27px;
+    height: 27px;
+    padding: 0 7px;
+    font-size: $font-size-lg;
 
     .is-scheduled & {
       display: none;
     }
   }
+
+  .card-visual { width: 70px; min-height: 76px; }
+  .card-visual::before { width: 78px; height: 78px; }
+  .tournament-icon-frame { width: 66px; height: 66px; }
+  .tournament-icon { width: 62px; height: 62px; }
 }

@@ -1,0 +1,172 @@
+<main class="home-page">
+  <header class="home-intro">
+    <div>
+      <p class="eyebrow">FR Fantasy</p>
+      <h1>Главная</h1>
+    </div>
+    <p>Текущие расклады лиги — коротко и по делу.</p>
+  </header>
+
+  <nav class="direction-grid" aria-label="Основные разделы">
+    <a class="direction-link" routerLink="/tournaments">
+      <span class="direction-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M5 8h22M5 16h22M5 24h22"/><circle cx="10" cy="8" r="2.5"/><circle cx="22" cy="16" r="2.5"/><circle cx="14" cy="24" r="2.5"/></svg>
+      </span>
+      <span><strong>Турниры</strong><small>Текущие и архив</small></span>
+      <i aria-hidden="true">→</i>
+    </a>
+
+    <a class="direction-link" routerLink="/hall-of-fame">
+      <span class="direction-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M11 5h10v6c0 5-2 8-5 8s-5-3-5-8V5Z"/><path d="M11 8H6v2c0 4 3 6 7 6M21 8h5v2c0 4-3 6-7 6M16 19v5M10 27h12M12 24h8"/></svg>
+      </span>
+      <span><strong>Зал славы</strong><small>Победители и трофеи</small></span>
+      <i aria-hidden="true">→</i>
+    </a>
+
+    <a class="direction-link" routerLink="/rating">
+      <span class="direction-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M5 27V18h6v9M13 27V12h6v15M21 27V6h6v21M3 27h26"/></svg>
+      </span>
+      <span><strong>Рейтинг</strong><small>Сила участников</small></span>
+      <i aria-hidden="true">→</i>
+    </a>
+  </nav>
+
+  <ng-container *ngIf="dashboard$ | async as dashboard; else dashboardLoading">
+    <section class="standings-section" *ngIf="dashboard.summaries.length" aria-labelledby="standings-heading">
+      <header class="section-heading">
+        <div>
+          <p class="section-kicker">В прямом эфире</p>
+          <h2 id="standings-heading">Топ‑5 действующих турниров</h2>
+        </div>
+        <p>Положение после последнего рассчитанного тура</p>
+      </header>
+
+      <div class="standings-grid">
+        <article
+          class="tournament-standing"
+          *ngFor="let summary of dashboard.summaries; trackBy: trackTournament"
+          [attr.data-theme]="summary.tournament.theme">
+          <header class="tournament-heading">
+            <span class="tournament-logo"><img [src]="summary.tournament.icon" alt=""></span>
+            <span>
+              <small>{{ summary.stageName }} · {{ summary.tournament.period }}</small>
+              <strong>{{ summary.tournament.title }}</strong>
+            </span>
+            <span class="tour-badge">После {{ summary.lastTour }} тура</span>
+          </header>
+
+          <div class="standing-groups" [class.is-multiple]="summary.standingsGroups.length > 1">
+            <section
+              class="standing-group"
+              *ngFor="let group of summary.standingsGroups; trackBy: trackStandingGroup"
+              [attr.aria-labelledby]="summary.tournament.id + '-' + group.name">
+              <h3 [id]="summary.tournament.id + '-' + group.name">{{ group.name }}</h3>
+              <div class="standing-columns" aria-hidden="true">
+                <span>Команда</span><span>О</span><span>ФО</span>
+              </div>
+              <ol class="top-list">
+                <li *ngFor="let profile of group.topFive; trackBy: trackProfile; let place = index">
+                  <span class="place">{{ place + 1 }}</span>
+                  <a class="standing-team" [routerLink]="['/participants', profile.id]">
+                    <span class="team-logo"><img [src]="profile.logo" [alt]="profile.team.title"></span>
+                    <span><strong>{{ profile.team.title }}</strong><small>{{ profile.name }}</small></span>
+                  </a>
+                  <strong class="standing-value points-value">{{ points(profile) }}</strong>
+                  <strong class="standing-value">{{ fantasyPoints(profile) }}</strong>
+                </li>
+              </ol>
+            </section>
+          </div>
+
+          <a
+            class="tournament-link"
+            [href]="summary.tournament.route"
+            (click)="openTournament($event, summary.tournament.route)">
+            Полная таблица <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="prizes-section" *ngIf="dashboard.summaries.length" aria-labelledby="prizes-heading">
+      <header class="section-heading">
+        <div>
+          <p class="section-kicker">Призовые гонки</p>
+          <h2 id="prizes-heading">Текущие лидеры призов</h2>
+        </div>
+        <p>Показываем до трёх лидеров в каждой номинации</p>
+      </header>
+
+      <section
+        class="tournament-prizes"
+        *ngFor="let summary of dashboard.summaries; trackBy: trackTournament"
+        [attr.aria-labelledby]="'prizes-' + summary.tournament.id">
+        <header class="prize-group-heading">
+          <span class="tournament-logo"><img [src]="summary.tournament.icon" alt=""></span>
+          <div>
+            <small>Данные после {{ summary.lastTour }} тура</small>
+            <h3 [id]="'prizes-' + summary.tournament.id">{{ summary.tournament.title }}</h3>
+          </div>
+          <a
+            [href]="prizesRoute(summary.tournament.route)"
+            (click)="openTournament($event, prizesRoute(summary.tournament.route))">
+            Все подробности <span aria-hidden="true">→</span>
+          </a>
+        </header>
+
+        <div class="prize-grid" *ngIf="summary.prizes.length; else noTournamentPrizes">
+          <article class="prize-card" *ngFor="let prize of summary.prizes; trackBy: trackPrize">
+            <header>
+              <span class="prize-icon"><img [src]="prize.icon || 'assets/icons/prizes/medal.png'" alt=""></span>
+              <span><strong>{{ prize.name }}</strong><small *ngIf="prize.author">от {{ prize.author }}</small></span>
+            </header>
+
+            <div class="prize-leaders" *ngIf="prize.state === 1 && prize.activeLeaders.length; else prizePending">
+              <a
+                class="prize-leader"
+                *ngFor="let leader of prizeLeaders(prize); trackBy: trackLeader"
+                [routerLink]="['/participants', leader.id]">
+                <span class="leader-logo"><img [src]="leader.logo" [alt]="leader.team.title"></span>
+                <span><strong>{{ leader.team.title }}</strong><small>{{ leader.name }}</small></span>
+                <b *ngIf="prizeValue(prize, leader) !== null">{{ prizeValue(prize, leader) }}</b>
+              </a>
+              <span class="more-leaders" *ngIf="hiddenLeadersCount(prize)">
+                и ещё {{ hiddenLeadersCount(prize) }}
+              </span>
+            </div>
+
+            <ng-template #prizePending>
+              <p class="prize-pending">{{ prizeStateText(prize) }}</p>
+            </ng-template>
+          </article>
+        </div>
+
+        <ng-template #noTournamentPrizes>
+          <p class="no-prizes">В этом турнире дополнительные призы пока не объявлены.</p>
+        </ng-template>
+      </section>
+    </section>
+
+    <div class="dashboard-empty" *ngIf="!dashboard.summaries.length">
+      <strong>Действующих турниров пока нет</strong>
+      <p>Когда начнётся новый турнир, его таблица и призовые гонки появятся здесь автоматически.</p>
+      <a routerLink="/tournaments">Перейти в архив турниров</a>
+    </div>
+
+    <div class="dashboard-warning" *ngIf="dashboard.failed.length" role="status">
+      Не удалось обновить:
+      <span *ngFor="let tournament of dashboard.failed; let last = last">
+        {{ tournament.title }}<ng-container *ngIf="!last">,</ng-container>
+      </span>.
+      Попробуйте обновить страницу позднее.
+    </div>
+  </ng-container>
+
+  <ng-template #dashboardLoading>
+    <section class="dashboard-loading" aria-label="Загрузка сводки турниров">
+      <span></span><span></span>
+    </section>
+  </ng-template>
+</main>

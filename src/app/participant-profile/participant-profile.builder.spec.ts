@@ -167,6 +167,8 @@ function tournament(
     period: `${yearStart}`,
     yearStart,
     kind,
+    theme: 'laliga',
+    icon: 'assets/icons/leagues/laliga.png',
     title: id,
     route: `/${id}`,
     status,

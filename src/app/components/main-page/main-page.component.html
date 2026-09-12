@@ -22,6 +22,7 @@
           [class.is-active]="tournament.status === 'active'"
           [class.is-scheduled]="tournament.status === 'scheduled'"
           [class.is-archive]="tournament.isArchive"
+          [attr.data-theme]="tournament.theme"
           [attr.href]="tournament.status === 'scheduled' ? null : tournament.route"
           [attr.aria-disabled]="tournament.status === 'scheduled' ? true : null"
           [attr.tabindex]="tournament.status === 'scheduled' ? -1 : null"
@@ -39,9 +40,14 @@
             </span>
           </span>
 
-          <span class="card-action" aria-hidden="true">
-            <ng-container *ngIf="tournament.status !== 'scheduled'; else comingSoon">→</ng-container>
-            <ng-template #comingSoon>Скоро</ng-template>
+          <span class="card-visual" aria-hidden="true">
+            <span class="tournament-icon-frame">
+              <img class="tournament-icon" [src]="tournament.icon" alt="">
+            </span>
+            <!-- <span class="card-action">
+              <ng-container *ngIf="tournament.status !== 'scheduled'; else comingSoon">→</ng-container>
+              <ng-template #comingSoon>Скоро</ng-template>
+            </span> -->
           </span>
         </a>
       </div>

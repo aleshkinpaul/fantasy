@@ -144,6 +144,8 @@ function tournament(overrides: Partial<TournamentTimelineItem>): TournamentTimel
     period: '2025–26',
     yearStart: 2025,
     kind: 'la-liga',
+    theme: 'laliga',
+    icon: 'assets/icons/leagues/laliga.png',
     title: 'Tournament',
     route: '/tournament',
     status: 'completed',

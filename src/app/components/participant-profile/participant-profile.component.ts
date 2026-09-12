@@ -17,6 +17,11 @@ import {
   matchesParticipantTournamentFilters,
   ParticipantTournamentTypeId,
 } from '../../participant-profile/participant-tournament-type';
+import {
+  buildParticipantSeasonGroups,
+  participantTournamentTopDownOrder,
+  ParticipantSeasonGroup,
+} from '../../participant-profile/participant-profile-timeline';
 
 interface ProfileTrophy {
   id: string;
@@ -87,19 +92,9 @@ export class ParticipantProfileComponent implements OnInit {
     return buildParticipantTournamentOptions(this.profile?.tournaments ?? []);
   }
 
-  get seasonGroups(): Array<{ year: number; period: string; tournaments: ParticipantTournamentHistory[] }> {
+  get seasonGroups(): ParticipantSeasonGroup[] {
     if (!this.profile) return [];
-    const groups = new Map<number, { year: number; period: string; tournaments: ParticipantTournamentHistory[] }>();
-    this.profile.tournaments.forEach(tournament => {
-      const group = groups.get(tournament.yearStart) ?? {
-        year: tournament.yearStart,
-        period: tournament.period,
-        tournaments: [],
-      };
-      group.tournaments.push(tournament);
-      groups.set(tournament.yearStart, group);
-    });
-    return Array.from(groups.values()).sort((left, right) => right.year - left.year);
+    return buildParticipantSeasonGroups(this.profile.tournaments);
   }
 
   get trophyShelf(): ProfileTrophy[] {
@@ -116,6 +111,10 @@ export class ParticipantProfileComponent implements OnInit {
           teamLabel: achievement.isTeamAchievement ? achievement.recipientLabel : undefined,
         }))
     );
+  }
+
+  tournamentTimelineOrder(tournament: ParticipantTournamentHistory): number {
+    return participantTournamentTopDownOrder(tournament);
   }
 
   get filteredStats(): {

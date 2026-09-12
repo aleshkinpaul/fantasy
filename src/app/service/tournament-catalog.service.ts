@@ -6,6 +6,7 @@ import {
   TournamentCatalogItem,
   TournamentKind,
   TournamentStatus,
+  TournamentTheme,
   TournamentTimelineGroup,
   TournamentTimelineItem
 } from '../models/tournament-catalog';
@@ -31,6 +32,8 @@ const STATUS_LABELS: Record<TournamentStatus, string> = {
   active: 'Идёт сейчас',
   completed: 'Завершён'
 };
+
+const TOURNAMENT_THEMES = new Set<TournamentTheme>(['laliga', 'copa', 'ucl', 'euro', 'cwc', 'wc']);
 
 @Injectable({ providedIn: 'root' })
 export class TournamentCatalogService {
@@ -87,8 +90,21 @@ export function orderTimelineBottomUp(
 ): TournamentTimelineGroup[] {
   return timeline.map(season => ({
     ...season,
-    tournaments: [...season.tournaments].reverse(),
+    tournaments: orderTournamentsBottomUp(season.tournaments),
   }));
+}
+
+export function orderTournamentsBottomUp<
+  T extends Pick<TournamentTimelineItem, 'kind' | 'title'>
+>(tournaments: readonly T[]): T[] {
+  return [...tournaments].sort((left, right) =>
+    tournamentTimelineTopDownOrder(left.kind) - tournamentTimelineTopDownOrder(right.kind)
+    || left.title.localeCompare(right.title, 'ru')
+  );
+}
+
+export function tournamentTimelineTopDownOrder(kind: TournamentKind): number {
+  return KIND_ORDER.summer - KIND_ORDER[kind];
 }
 
 function validateItem(value: unknown, index: number, ids: Set<string>): TournamentCatalogItem {
@@ -118,6 +134,16 @@ function validateItem(value: unknown, index: number, ids: Set<string>): Tourname
     throw new Error(`Tournament catalog item ${index} has invalid status "${status}"`);
   }
 
+  const theme = requiredString(value['theme'], index, 'theme');
+  if (!isTournamentTheme(theme)) {
+    throw new Error(`Tournament catalog item ${index} has invalid theme "${theme}"`);
+  }
+
+  const icon = requiredString(value['icon'], index, 'icon');
+  if (!icon.startsWith('assets/icons/leagues/')) {
+    throw new Error(`Tournament catalog item ${index} icon must start with "assets/icons/leagues/"`);
+  }
+
   const route = requiredString(value['route'], index, 'route');
   if (!route.startsWith('/')) {
     throw new Error(`Tournament catalog item ${index} route must start with "/"`);
@@ -130,6 +156,8 @@ function validateItem(value: unknown, index: number, ids: Set<string>): Tourname
     period,
     yearStart: yearStart as number,
     kind,
+    theme,
+    icon,
     title: requiredString(value['title'], index, 'title'),
     route,
     status,
@@ -173,4 +201,8 @@ function isTournamentKind(value: string): value is TournamentKind {
 
 function isTournamentStatus(value: string): value is TournamentStatus {
   return Object.prototype.hasOwnProperty.call(STATUS_LABELS, value);
+}
+
+function isTournamentTheme(value: string): value is TournamentTheme {
+  return TOURNAMENT_THEMES.has(value as TournamentTheme);
 }

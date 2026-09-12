@@ -6,10 +6,12 @@ import { Router, RouterModule } from '@angular/router';
 import {
   AchievementTitleType,
   HallOfFame,
-  HallSeason
+  HallSeason,
+  HallTournament
 } from '../../models/achievement';
 import { AchievementService, TITLE_TYPE_LABELS } from '../../service/achievement.service';
 import { DataService } from '../../service/data.service';
+import { tournamentTimelineTopDownOrder } from '../../service/tournament-catalog.service';
 
 type HallTitleFilter = AchievementTitleType | 'all';
 
@@ -94,6 +96,10 @@ export class HallOfFameComponent implements OnInit {
     return item.id;
   }
 
+  tournamentTimelineOrder(result: HallTournament): number {
+    return tournamentTimelineTopDownOrder(result.tournament.kind);
+  }
+
   private applyFilters(): void {
     if (!this.hall) return;
 
@@ -109,6 +115,10 @@ export class HallOfFameComponent implements OnInit {
             )
           }))
           .filter(tournament => tournament.stages.length > 0)
+          .sort((left, right) =>
+            this.tournamentTimelineOrder(left) - this.tournamentTimelineOrder(right)
+            || left.tournament.title.localeCompare(right.tournament.title, 'ru')
+          )
       }))
       .filter(season => season.tournaments.length > 0);
   }

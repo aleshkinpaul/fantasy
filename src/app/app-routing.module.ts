@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent, pathMatch: 'full' },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  { path: 'tournaments', component: MainPageComponent, pathMatch: 'full' },
   { 
     path: 'spain/new', 
     loadComponent: () => import('./components/league-h2h-page/league-h2h-page.component').then(m => m.LeagueH2HPageComponent),

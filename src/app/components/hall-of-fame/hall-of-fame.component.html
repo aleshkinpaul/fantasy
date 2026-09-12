@@ -112,7 +112,10 @@
         </div>
 
         <div class="season-tournaments">
-          <article class="tournament-card" *ngFor="let result of season.tournaments">
+          <article
+            class="tournament-card"
+            *ngFor="let result of season.tournaments"
+            [style.order]="tournamentTimelineOrder(result)">
             <header class="tournament-header">
               <div>
                 <span class="kind-label">{{ result.tournament.kindLabel }}</span>

@@ -23,7 +23,7 @@ export class MainPageComponent {
     catalogService: TournamentCatalogService,
     dataService: DataService
   ) {
-    dataService.setUrlName('');
+    dataService.setUrlName('tournaments');
     this.timeline$ = catalogService.loadTimeline().pipe(
       map(timeline => orderTimelineBottomUp(timeline)),
       catchError(error => {
