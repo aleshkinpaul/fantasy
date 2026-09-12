@@ -24,6 +24,7 @@ import { RetroTournament } from '../models/retro-tournament';
 import { buildParticipantProfiles } from '../participant-profile/participant-profile.builder';
 import { AchievementService } from './achievement.service';
 import { ArchiveCupService } from './archive-cup.service';
+import { ParticipantDirectoryService } from './participant-directory.service';
 import { RetroTournamentService } from './retro-tournament.service';
 import { TournamentCatalogService } from './tournament-catalog.service';
 
@@ -82,6 +83,7 @@ export class ParticipantProfileService {
     http: HttpClient,
     achievementService: AchievementService,
     catalogService: TournamentCatalogService,
+    participantDirectoryService: ParticipantDirectoryService,
     retroService: RetroTournamentService,
     archiveCupService: ArchiveCupService
   ) {
@@ -97,6 +99,7 @@ export class ParticipantProfileService {
     const legacy = loadLegacyBundle(http);
     this.profiles$ = forkJoin({
       registry: achievementService.loadRegistry(),
+      directory: participantDirectoryService.loadParticipants(),
       timeline: catalogService.loadTimeline(),
       prizeWinners: http.get<SponsorPrizeWinnersRegistry>(SPONSOR_PRIZE_WINNERS_URL),
       retro: retroService.loadTournaments(),
@@ -107,7 +110,14 @@ export class ParticipantProfileService {
       seasons: forkJoin(seasons)
     }).pipe(
       map(data => buildParticipantProfiles(
-        data.registry,
+        {
+          ...data.registry,
+          participants: data.directory.map(participant => ({
+            id: participant.participantId,
+            name: participant.name,
+            profileIds: participant.profileIds,
+          })),
+        },
         data.timeline,
         [
           ...buildSeasonSources(data.seasons),

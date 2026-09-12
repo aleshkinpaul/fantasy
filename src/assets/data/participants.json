@@ -1,0 +1,611 @@
+{
+  "version": 1,
+  "participants": [
+    {
+      "participantId": "profile-1117067824",
+      "name": "Фарид Агаев",
+      "profileIds": [
+        "1117067824"
+      ]
+    },
+    {
+      "participantId": "aleksandr-akimenko",
+      "name": "Александр Акименко",
+      "profileIds": [
+        "1113442132"
+      ]
+    },
+    {
+      "participantId": "profile-1116851933",
+      "name": "Роман Аксиненко",
+      "profileIds": [
+        "1116851933"
+      ]
+    },
+    {
+      "participantId": "pavel-aleshkin",
+      "name": "Павел Алешкин",
+      "profileIds": [
+        "73116796"
+      ]
+    },
+    {
+      "participantId": "ramiz-aliev",
+      "name": "Рамиз Алиев",
+      "profileIds": [
+        "1111769718"
+      ]
+    },
+    {
+      "participantId": "martin-babayan",
+      "name": "Мартин Бабаян",
+      "profileIds": [
+        "5275903"
+      ]
+    },
+    {
+      "participantId": "profile-1115368794",
+      "name": "Дмитрий Багрий",
+      "profileIds": [
+        "1115368794"
+      ]
+    },
+    {
+      "participantId": "retro-баев-иван",
+      "name": "Иван Баев",
+      "profileIds": [
+        "retro-баев-иван"
+      ]
+    },
+    {
+      "participantId": "retro-балакин-евгений",
+      "name": "Евгений Балакин",
+      "profileIds": [
+        "retro-балакин-евгений"
+      ]
+    },
+    {
+      "participantId": "vladimir-bannov",
+      "name": "Владимир Баннов",
+      "profileIds": [
+        "1116144526"
+      ]
+    },
+    {
+      "participantId": "igor-belousov",
+      "name": "Игорь Белоусов",
+      "profileIds": [
+        "1116311079"
+      ]
+    },
+    {
+      "participantId": "profile-1028890564",
+      "name": "Дмитрий Блинников",
+      "profileIds": [
+        "1028890564"
+      ]
+    },
+    {
+      "participantId": "profile-1039593659",
+      "name": "Максим Богомаз",
+      "profileIds": [
+        "1039593659"
+      ]
+    },
+    {
+      "participantId": "profile-149061310",
+      "name": "Михаил Брыксин",
+      "profileIds": [
+        "149061310"
+      ]
+    },
+    {
+      "participantId": "dmitriy-bulavko",
+      "name": "Дмитрий Булавко",
+      "profileIds": [
+        "1095496719"
+      ]
+    },
+    {
+      "participantId": "profile-1117333496",
+      "name": "Артём Вартанян",
+      "profileIds": [
+        "1117333496"
+      ]
+    },
+    {
+      "participantId": "veronika-vuychenko",
+      "name": "Вероника Вуйченко",
+      "profileIds": [
+        "1024867435"
+      ]
+    },
+    {
+      "participantId": "profile-1117329215",
+      "name": "Ибрагим Ганиев",
+      "profileIds": [
+        "1117329215"
+      ]
+    },
+    {
+      "participantId": "profile-1021067842",
+      "name": "Руслан Гасангусейнов",
+      "profileIds": [
+        "1021067842"
+      ]
+    },
+    {
+      "participantId": "profile-1117361853",
+      "name": "Глеб Гульченко",
+      "profileIds": [
+        "1117361853"
+      ]
+    },
+    {
+      "participantId": "georgiy-delokyan",
+      "name": "Георгий Делокян",
+      "profileIds": [
+        "retro-georgiy-delokyan"
+      ]
+    },
+    {
+      "participantId": "profile-151671085",
+      "name": "Александр Евдокимов",
+      "profileIds": [
+        "151671085"
+      ]
+    },
+    {
+      "participantId": "profile-1071227986",
+      "name": "Вадим Евтеев",
+      "profileIds": [
+        "1071227986"
+      ]
+    },
+    {
+      "participantId": "profile-1113227695",
+      "name": "Диана Еприкян",
+      "profileIds": [
+        "1113227695"
+      ]
+    },
+    {
+      "participantId": "retro-александр-зарипов",
+      "name": "Александр Зарипов",
+      "profileIds": [
+        "retro-александр-зарипов"
+      ]
+    },
+    {
+      "participantId": "profile-1116847210",
+      "name": "Дилик Ибрагимов",
+      "profileIds": [
+        "1116847210"
+      ]
+    },
+    {
+      "participantId": "profile-1117327108",
+      "name": "Асад Исмаилов",
+      "profileIds": [
+        "1117327108"
+      ]
+    },
+    {
+      "participantId": "konstantin-kalinkov",
+      "name": "Константин Калинков",
+      "profileIds": [
+        "1116782572"
+      ]
+    },
+    {
+      "participantId": "profile-1115416060",
+      "name": "Натиа Карчава",
+      "profileIds": [
+        "1115416060"
+      ]
+    },
+    {
+      "participantId": "kirill-kozhukhov",
+      "name": "Кирилл Кожухов",
+      "profileIds": [
+        "135066850"
+      ]
+    },
+    {
+      "participantId": "profile-1116843142",
+      "name": "Кирилл Коломоец",
+      "profileIds": [
+        "1116843142"
+      ]
+    },
+    {
+      "participantId": "profile-1113104848",
+      "name": "Кирилл Корляков",
+      "profileIds": [
+        "1113104848"
+      ]
+    },
+    {
+      "participantId": "aleksandr-kornienko",
+      "name": "Александр Корниенко",
+      "profileIds": [
+        "1116778891"
+      ]
+    },
+    {
+      "participantId": "profile-154819672",
+      "name": "Марк Кубыш",
+      "profileIds": [
+        "154819672"
+      ]
+    },
+    {
+      "participantId": "profile-1068332740",
+      "name": "Дарья Кузнецкая",
+      "profileIds": [
+        "1068332740"
+      ]
+    },
+    {
+      "participantId": "profile-1071548719",
+      "name": "Андрей Курнаков",
+      "profileIds": [
+        "1071548719"
+      ]
+    },
+    {
+      "participantId": "profile-1115367480",
+      "name": "Александр Лаптев",
+      "profileIds": [
+        "1115367480",
+        "1058102914"
+      ]
+    },
+    {
+      "participantId": "aleksandr-larin",
+      "name": "Александр Ларин",
+      "profileIds": [
+        "1116314918"
+      ]
+    },
+    {
+      "participantId": "profile-1117363173",
+      "name": "Мария Лопашова",
+      "profileIds": [
+        "1117363173"
+      ]
+    },
+    {
+      "participantId": "profile-152317185",
+      "name": "Равил Магеррамов",
+      "profileIds": [
+        "152317185"
+      ]
+    },
+    {
+      "participantId": "profile-1111024349",
+      "name": "Тимур Магомедов",
+      "profileIds": [
+        "1111024349"
+      ]
+    },
+    {
+      "participantId": "profile-1117333090",
+      "name": "Бадир Маммедов",
+      "profileIds": [
+        "1117333090"
+      ]
+    },
+    {
+      "participantId": "profile-1115479394",
+      "name": "Ваграм Манасян",
+      "profileIds": [
+        "1115479394"
+      ]
+    },
+    {
+      "participantId": "retro-маренова-марта",
+      "name": "Марта Маренова",
+      "profileIds": [
+        "retro-маренова-марта"
+      ]
+    },
+    {
+      "participantId": "profile-1116139003",
+      "name": "Ани Меликян",
+      "profileIds": [
+        "1116139003"
+      ]
+    },
+    {
+      "participantId": "profile-1116314995",
+      "name": "Алексей Мельников",
+      "profileIds": [
+        "1116314995"
+      ]
+    },
+    {
+      "participantId": "retro-мирзахакимов-тохир",
+      "name": "Тохир Мирзахакимов",
+      "profileIds": [
+        "retro-мирзахакимов-тохир"
+      ]
+    },
+    {
+      "participantId": "profile-1113514956",
+      "name": "Артём Молдавский",
+      "profileIds": [
+        "1113514956"
+      ]
+    },
+    {
+      "participantId": "nikolay-nadoyan",
+      "name": "Николай Надоян",
+      "profileIds": [
+        "1115355124"
+      ]
+    },
+    {
+      "participantId": "retro-елена-никляева",
+      "name": "Елена Никляева",
+      "profileIds": [
+        "retro-елена-никляева"
+      ]
+    },
+    {
+      "participantId": "profile-26761799",
+      "name": "Жанна Нургалиева",
+      "profileIds": [
+        "26761799"
+      ]
+    },
+    {
+      "participantId": "profile-144762187",
+      "name": "Тимофей Онорин",
+      "profileIds": [
+        "144762187"
+      ]
+    },
+    {
+      "participantId": "profile-1116843193",
+      "name": "Андрей Орешин",
+      "profileIds": [
+        "1116843193"
+      ]
+    },
+    {
+      "participantId": "profile-1033596919",
+      "name": "Андрей Орлов",
+      "profileIds": [
+        "1033596919"
+      ]
+    },
+    {
+      "participantId": "profile-1116309020",
+      "name": "Эдуард Папенко",
+      "profileIds": [
+        "1116309020"
+      ]
+    },
+    {
+      "participantId": "evgeniy-prokopenko",
+      "name": "Евгений Прокопенко",
+      "profileIds": [
+        "1113412675"
+      ]
+    },
+    {
+      "participantId": "viktoriya-rocheva",
+      "name": "Виктория Рочева",
+      "profileIds": [
+        "1111051849"
+      ]
+    },
+    {
+      "participantId": "ubush-sarangov",
+      "name": "Убуш Сарангов",
+      "profileIds": [
+        "1113269933"
+      ]
+    },
+    {
+      "participantId": "artem-safin",
+      "name": "Артём Сафин",
+      "profileIds": [
+        "1116086751"
+      ]
+    },
+    {
+      "participantId": "profile-1085900357",
+      "name": "Григорий Сергеичев",
+      "profileIds": [
+        "1085900357"
+      ]
+    },
+    {
+      "participantId": "aleksandr-skvarko",
+      "name": "Александр Скварко",
+      "profileIds": [
+        "1103401223",
+        "1116532842"
+      ]
+    },
+    {
+      "participantId": "profile-1115413541",
+      "name": "Елена Соколинская",
+      "profileIds": [
+        "1115413541"
+      ]
+    },
+    {
+      "participantId": "profile-1116125876",
+      "name": "Максим Соловьёв",
+      "profileIds": [
+        "1116125876"
+      ]
+    },
+    {
+      "participantId": "profile-1116311743",
+      "name": "Евгений Старокожев",
+      "profileIds": [
+        "1116311743"
+      ]
+    },
+    {
+      "participantId": "profile-1117333943",
+      "name": "Алексей Степанов",
+      "profileIds": [
+        "1117333943"
+      ]
+    },
+    {
+      "participantId": "profile-1116864335",
+      "name": "Богдан Студеникин",
+      "profileIds": [
+        "1116864335"
+      ]
+    },
+    {
+      "participantId": "profile-1116907944",
+      "name": "Александр Торопцев",
+      "profileIds": [
+        "1116907944"
+      ]
+    },
+    {
+      "participantId": "profile-1116316056",
+      "name": "Петр Трубицын",
+      "profileIds": [
+        "1116316056"
+      ]
+    },
+    {
+      "participantId": "profile-1117327481",
+      "name": "Олеся Тюменькова",
+      "profileIds": [
+        "1117327481"
+      ]
+    },
+    {
+      "participantId": "denis-fedotov",
+      "name": "Денис Федотов",
+      "profileIds": [
+        "1111685266"
+      ]
+    },
+    {
+      "participantId": "saryal-fedotov",
+      "name": "Сарыал Федотов",
+      "profileIds": [
+        "1115308799"
+      ]
+    },
+    {
+      "participantId": "profile-1097941691",
+      "name": "Вениамин Филатов",
+      "profileIds": [
+        "1097941691"
+      ]
+    },
+    {
+      "participantId": "profile-1117333428",
+      "name": "Денис Францевич",
+      "profileIds": [
+        "1117333428"
+      ]
+    },
+    {
+      "participantId": "aleksandr-tsurkov",
+      "name": "Александр Цурков",
+      "profileIds": [
+        "1061493572",
+        "1116309099"
+      ]
+    },
+    {
+      "participantId": "artem-chanyshev",
+      "name": "Артём Чанышев",
+      "profileIds": [
+        "1116848321"
+      ]
+    },
+    {
+      "participantId": "profile-1116138036",
+      "name": "Антон Чернышев",
+      "profileIds": [
+        "1116138036"
+      ]
+    },
+    {
+      "participantId": "profile-1023923623",
+      "name": "Никита Чистяков",
+      "profileIds": [
+        "1023923623"
+      ]
+    },
+    {
+      "participantId": "profile-1056354922",
+      "name": "Наталья Шакирова",
+      "profileIds": [
+        "1056354922"
+      ]
+    },
+    {
+      "participantId": "profile-1117331183",
+      "name": "Ангелина Шалковская",
+      "profileIds": [
+        "1117331183"
+      ]
+    },
+    {
+      "participantId": "daniil-shalkovskiy",
+      "name": "Даниил Шалковский",
+      "profileIds": [
+        "1096489838"
+      ]
+    },
+    {
+      "participantId": "profile-1117333432",
+      "name": "Арсений Шураев",
+      "profileIds": [
+        "1117333432"
+      ]
+    },
+    {
+      "participantId": "ivan-shuraev",
+      "name": "Иван Шураев",
+      "profileIds": [
+        "1116146089",
+        "1116848369"
+      ]
+    },
+    {
+      "participantId": "dmitriy-shchetinin",
+      "name": "Дмитрий Щетинин",
+      "profileIds": [
+        "1063076888"
+      ]
+    },
+    {
+      "participantId": "danir-erendzhenov",
+      "name": "Данир Эрендженов",
+      "profileIds": [
+        "1076901343"
+      ]
+    },
+    {
+      "participantId": "profile-1116314982",
+      "name": "Арсен Эристаев",
+      "profileIds": [
+        "1116314982"
+      ]
+    },
+    {
+      "participantId": "kirill-yakovchenko",
+      "name": "Кирилл Яковченко",
+      "profileIds": [
+        "151923911"
+      ]
+    }
+  ]
+}

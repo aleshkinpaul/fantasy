@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "npm run participants:check",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -14,6 +15,9 @@
     "verify:season-2025": "node scripts/season-regression.mjs verify",
     "forecast:snapshot": "node scripts/generate-forecast-snapshot.mjs",
     "forecast:calibrate": "node scripts/calibrate-forecast.mjs",
+    "participants:generate": "node scripts/generate-participant-directory.mjs",
+    "participants:check": "node scripts/generate-participant-directory.mjs --check",
+    "premypage": "npm run participants:check",
     "mypage": "ng build --base-href=https://fr-fantasy.ru/"
   },
   "private": true,
