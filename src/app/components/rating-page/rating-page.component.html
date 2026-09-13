@@ -78,7 +78,7 @@
               *ngFor="let column of data.columns; trackBy: trackColumn"
               [class.live-column]="column.isLive"
               [class.excluded-column]="!column.included">
-              <a [href]="column.route" [title]="column.title">
+              <a [href]="column.route | internalRouteHref" [title]="column.title">
                 <strong>{{ column.shortLabel }}</strong>
                 <span *ngIf="column.isLive">live</span>
                 <small *ngIf="column.included">сезон ×{{ formatScore(column.seasonWeight) }}</small>

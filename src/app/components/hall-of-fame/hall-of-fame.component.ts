@@ -14,13 +14,14 @@ import { AchievementService, TITLE_TYPE_LABELS } from '../../service/achievement
 import { DataService } from '../../service/data.service';
 import { tournamentTimelineTopDownOrder } from '../../service/tournament-catalog.service';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
+import { InternalRouteHrefPipe } from '../../pipes/internal-route-href.pipe';
 
 type HallTitleFilter = AchievementTitleType | 'all';
 
 @Component({
   selector: 'app-hall-of-fame',
   standalone: true,
-  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective, InternalRouteHrefPipe],
   templateUrl: './hall-of-fame.component.html',
   styleUrls: ['./hall-of-fame.component.scss']
 })

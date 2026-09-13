@@ -1,5 +1,4 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 
@@ -10,7 +9,6 @@ import { LoaderInterceptor } from './app/interceptors/loader.interceptor';
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(AppRoutingModule, HttpClientModule),
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
   ],
 })

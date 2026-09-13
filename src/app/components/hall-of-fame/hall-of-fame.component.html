@@ -54,7 +54,7 @@
           [routerLink]="champion.placement.recipient.type === 'participant'
             ? ['/participants', champion.placement.recipient.members[0].participantId]
             : null"
-          [href]="champion.placement.recipient.type === 'team' ? champion.tournamentRoute : null"
+          [href]="(champion.placement.recipient.type === 'team' ? champion.tournamentRoute : null) | internalRouteHref"
           (click)="champion.placement.recipient.type === 'team' && openTournament($event, champion.tournamentRoute)"
         >
           <span class="champion-trophy trophy-slot" [title]="champion.titleTypeLabel">
@@ -123,7 +123,7 @@
                 <h4>{{ result.tournament.title }}</h4>
               </div>
               <a
-                [href]="result.tournament.route"
+                [href]="result.tournament.route | internalRouteHref"
                 (click)="openTournament($event, result.tournament.route)"
                 aria-label="Открыть турнир"
               >Открыть <span aria-hidden="true">↗</span></a>

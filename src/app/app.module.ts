@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [],
@@ -20,7 +19,6 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     AppComponent
   ],
   providers: [
-    {provide: LocationStrategy, useClass: PathLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

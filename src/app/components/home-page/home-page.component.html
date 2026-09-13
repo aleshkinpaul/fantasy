@@ -58,7 +58,7 @@
               <strong>{{ summary.tournament.title }}</strong>
             </span>
             <a
-              [href]="summary.tournament.route"
+              [href]="summary.tournament.route | internalRouteHref"
               (click)="openTournament($event, summary.tournament.route)"
               aria-label="Открыть турнир">
               →
@@ -70,7 +70,7 @@
               <a
                 class="personal-match"
                 *ngIf="summary.currentMatch as match; else noCurrentMatch"
-                [href]="match.route"
+                [href]="match.route | internalRouteHref"
                 (click)="openTournament($event, match.route)">
                 <span class="match-label">Текущий · {{ match.tour }} тур</span>
                 <span class="match-teams">
@@ -101,7 +101,7 @@
               <a
                 class="personal-match is-next"
                 *ngIf="summary.nextMatch as match; else noNextMatch"
-                [href]="match.route"
+                [href]="match.route | internalRouteHref"
                 (click)="openTournament($event, match.route)">
                 <span class="match-label">Следующий · {{ match.tour }} тур</span>
                 <span class="match-teams">
@@ -147,7 +147,7 @@
               </ol>
               <a
                 class="personal-table-link"
-                [href]="summary.tournament.route"
+                [href]="summary.tournament.route | internalRouteHref"
                 (click)="openTournament($event, summary.tournament.route)">
                 Вся таблица <span aria-hidden="true">→</span>
               </a>
@@ -263,7 +263,7 @@
 
           <a
             class="tournament-link"
-            [href]="summary.tournament.route"
+            [href]="summary.tournament.route | internalRouteHref"
             (click)="openTournament($event, summary.tournament.route)">
             Полная таблица <span aria-hidden="true">→</span>
           </a>
@@ -291,7 +291,7 @@
             <h3 [id]="'prizes-' + summary.tournament.id">{{ summary.tournament.title }}</h3>
           </div>
           <a
-            [href]="prizesRoute(summary.tournament.route)"
+            [href]="prizesRoute(summary.tournament.route) | internalRouteHref"
             (click)="openTournament($event, prizesRoute(summary.tournament.route))">
             Все подробности <span aria-hidden="true">→</span>
           </a>

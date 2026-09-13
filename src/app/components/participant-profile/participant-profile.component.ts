@@ -23,6 +23,7 @@ import {
   participantTournamentTopDownOrder,
   ParticipantSeasonGroup,
 } from '../../participant-profile/participant-profile-timeline';
+import { InternalRouteHrefPipe } from '../../pipes/internal-route-href.pipe';
 
 interface ProfileTrophy {
   id: string;
@@ -37,7 +38,7 @@ interface ProfileTrophy {
 @Component({
   selector: 'app-participant-profile',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, InternalRouteHrefPipe],
   templateUrl: './participant-profile.component.html',
   styleUrls: ['./participant-profile.component.scss']
 })

@@ -6,13 +6,14 @@ import { Observable, catchError, map, of } from 'rxjs';
 import { TournamentTimelineGroup, TournamentTimelineItem } from '../../models/tournament-catalog';
 import { orderTimelineBottomUp, TournamentCatalogService } from '../../service/tournament-catalog.service';
 import { DataService } from '../../service/data.service';
+import { InternalRouteHrefPipe } from '../../pipes/internal-route-href.pipe';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, InternalRouteHrefPipe]
 })
 export class MainPageComponent {
   readonly timeline$: Observable<TournamentTimelineGroup[]>;

@@ -8,11 +8,12 @@ import { ParticipantRatingCell, ParticipantRatingRow, PowerRating, RatingTournam
 import { RatingService } from '../../rating/rating.service';
 import { DataService } from '../../service/data.service';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
+import { InternalRouteHrefPipe } from '../../pipes/internal-route-href.pipe';
 
 @Component({
   selector: 'app-rating-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PersonalizedParticipantDirective],
+  imports: [CommonModule, FormsModule, RouterModule, PersonalizedParticipantDirective, InternalRouteHrefPipe],
   templateUrl: './rating-page.component.html',
   styleUrls: ['./rating-page.component.scss'],
 })

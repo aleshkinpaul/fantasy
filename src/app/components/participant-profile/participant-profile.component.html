@@ -49,7 +49,7 @@
             <a
               *ngFor="let trophy of trophyShelf; trackBy: trackTrophy"
               class="shelf-trophy"
-              [href]="trophy.route"
+              [href]="trophy.route | internalRouteHref"
               (click)="openTournament($event, trophy.route)"
               [title]="trophy.title + ' · ' + trophy.tournamentTitle + ' · ' + trophy.period">
               <span class="shelf-trophy-image">
@@ -90,7 +90,7 @@
             <a
               *ngFor="let prize of sponsorPrizeShelf; trackBy: trackSponsorPrize"
               class="shelf-trophy sponsor-prize-trophy"
-              [href]="prize.route"
+              [href]="prize.route | internalRouteHref"
               (click)="openTournament($event, prize.route)"
               [attr.aria-label]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period"
               [title]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period + (prize.reward ? ' · ' + prize.reward : '')">
@@ -254,7 +254,7 @@
                   </div>
                   <div class="entry-actions">
                     <strong class="result-label">{{ tournamentResultLabel(tournament) }}</strong>
-                    <a [href]="tournament.route" (click)="openTournament($event, tournament.route)">Открыть турнир</a>
+                    <a [href]="tournament.route | internalRouteHref" (click)="openTournament($event, tournament.route)">Открыть турнир</a>
                     <a
                       *ngIf="tournament.teamUrl"
                       [href]="tournament.teamUrl"

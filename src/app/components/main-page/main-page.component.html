@@ -23,7 +23,7 @@
           [class.is-scheduled]="tournament.status === 'scheduled'"
           [class.is-archive]="tournament.isArchive"
           [attr.data-theme]="tournament.theme"
-          [attr.href]="tournament.status === 'scheduled' ? null : tournament.route"
+          [attr.href]="tournament.status === 'scheduled' ? null : (tournament.route | internalRouteHref)"
           [attr.aria-disabled]="tournament.status === 'scheduled' ? true : null"
           [attr.tabindex]="tournament.status === 'scheduled' ? -1 : null"
           (click)="openTournament($event, tournament)">

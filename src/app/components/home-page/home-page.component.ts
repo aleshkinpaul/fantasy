@@ -24,6 +24,7 @@ import {
   PersonalizedPrizeResult,
   selectPersonalizedPrizeResult,
 } from '../../home/personalized-prize-result';
+import { InternalRouteHrefPipe } from '../../pipes/internal-route-href.pipe';
 
 interface HomeTournamentSummary {
   tournament: TournamentTimelineItem;
@@ -55,7 +56,7 @@ interface HomeDashboardState {
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective],
+  imports: [CommonModule, RouterModule, PersonalizedParticipantDirective, InternalRouteHrefPipe],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
