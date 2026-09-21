@@ -69,13 +69,16 @@ jobs:
           connection_host="${connection_endpoint%%:*}"
 
           credentials_file="$HOME/.netrc"
-          trap 'rm -f "$credentials_file"' EXIT
           printf 'machine %s\nlogin %s\npassword %s\n' \
             "$connection_host" "$BEGET_FTP_USER" "$BEGET_FTP_PASSWORD" \
             > "$credentials_file"
           chmod 600 "$credentials_file"
 
-          lftp -f /dev/stdin <<LFTP
+          deploy_log="$(mktemp)"
+          trap 'rm -f "$credentials_file" "$deploy_log"' EXIT
+
+          set +e
+          lftp -f /dev/stdin > "$deploy_log" 2>&1 <<LFTP
           set net:max-retries 3
           set net:timeout 30
           set ftp:ssl-force true
@@ -98,6 +101,23 @@ jobs:
           put -O "$remote_path" "dist/fr-fantasy/index.html"
           bye
           LFTP
+          lftp_status=$?
+          set -e
+          cat "$deploy_log"
+
+          if [ "$lftp_status" -ne 0 ]; then
+            if grep -Eqi 'authentication failed|login failed|incorrect password|permission denied.*password' "$deploy_log"; then
+              diagnosis='SFTP authentication failed. Check SSH access and the Beget account credentials.'
+            elif grep -Eqi 'could not resolve|name or service not known|connection refused|connection timed out|host key verification failed|no route to host' "$deploy_log"; then
+              diagnosis='SFTP connection failed. Check the server hostname, port 22, and SSH availability.'
+            elif grep -Eqi 'no such file|not found|access failed|permission denied' "$deploy_log"; then
+              diagnosis='The deployment directory is unavailable. Check BEGET_FTP_PATH and write permissions.'
+            else
+              diagnosis='The SFTP client returned an unclassified error. Open the private workflow log for details.'
+            fi
+            echo "::error title=Beget deployment failed::$diagnosis"
+            exit "$lftp_status"
+          fi
 
       - name: Check production website
         run: |
