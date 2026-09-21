@@ -44,6 +44,7 @@ import {
   matchCenterQuery,
   resolveMatchCenterQuery,
 } from '../../match-center/match-center-route';
+import { resolveMatchCenterStatus } from '../../match-center/match-center-status';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -447,6 +448,15 @@ export class LeagueH2HPageComponent implements OnInit {
     this.matchForecast = null;
     this.forecastLoading = true;
     this.forecastSubscription?.unsubscribe();
+    const tourInfo = this.squads.data.tours[selection.tour];
+    const matchStatus = resolveMatchCenterStatus({
+      tour: selection.tour,
+      lastTour: this.lastTour,
+      tourStartsAt: tourInfo?.start,
+      tourEndsAt: tourInfo?.end,
+      homeScore: selection.match.home_score,
+      awayScore: selection.match.away_score,
+    });
     this.forecastSubscription = this.matchForecastService.resolve({
       tournamentId: getTournamentCatalogId(
         this.consts.type,
@@ -456,7 +466,7 @@ export class LeagueH2HPageComponent implements OnInit {
       selection,
       profiles: this.profilesDetails,
       drawGap: this.consts.drawGap || 0,
-      lastTour: this.lastTour,
+      matchStatus,
     }).subscribe({
       next: forecast => {
         this.matchForecast = forecast;

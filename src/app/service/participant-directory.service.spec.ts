@@ -1,5 +1,6 @@
 import { ParticipantDirectoryEntry } from '../models/participant-directory';
 import {
+  formatParticipantNameSurnameFirst,
   participantSurname,
   sortParticipantsBySurname,
   validateParticipantDirectory,
@@ -16,6 +17,11 @@ describe('participant directory', () => {
     expect(sortParticipantsBySurname(participants).map(item => item.participantId))
       .toEqual(['pavel', 'ramiz', 'veronika']);
     expect(participantSurname('Павел Алешкин')).toBe('Алешкин');
+  });
+
+  it('formats a participant name with the surname first', () => {
+    expect(formatParticipantNameSurnameFirst('Павел Алешкин')).toBe('Алешкин Павел');
+    expect(formatParticipantNameSurnameFirst('Мадонна')).toBe('Мадонна');
   });
 
   it('rejects a profile id assigned to several participants', () => {

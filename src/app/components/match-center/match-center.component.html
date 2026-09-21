@@ -22,8 +22,8 @@
       </a>
 
       <div class="hero-score">
-        <span class="match-status">{{ isCompleted() ? 'Матч завершён' : 'Предстоящий матч' }}</span>
-        <div class="score-value" *ngIf="isCompleted(); else versus">
+        <span class="match-status" [class.live-status]="isLive()">{{ getMatchStatusLabel() }}</span>
+        <div class="score-value" [class.live-score]="isLive()" *ngIf="hasScore(); else versus">
           <span [ngClass]="getScoreClass(0)">{{ match.home_score }}</span>
           <small>:</small>
           <span [ngClass]="getScoreClass(1)">{{ match.away_score }}</span>

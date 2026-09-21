@@ -23,6 +23,10 @@ import {
   MatchCenterTeam,
   MatchForecastView,
 } from '../../match-center/match-center.models';
+import {
+  MatchCenterStatus,
+  resolveMatchCenterStatus,
+} from '../../match-center/match-center-status';
 import { RealClubIndex } from '../../models/real-club';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 
@@ -36,6 +40,7 @@ import { PersonalizedParticipantDirective } from '../../directives/personalized-
 export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() match!: CompetitionMatch;
   @Input() tour = 1;
+  @Input() tourStartsAt?: string;
   @Input() tourEndsAt?: string;
   @Input() lastTour = 1;
   @Input() realClubIndex: RealClubIndex = new Map();
@@ -169,13 +174,22 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
   }
 
   isCompleted(): boolean {
-    if (this.tour > this.lastTour
-      || this.match.home_score === undefined
-      || this.match.away_score === undefined) return false;
-    if (!this.tourEndsAt) return true;
+    return this.getMatchStatus() === 'completed';
+  }
 
-    const endTimestamp = Date.parse(this.tourEndsAt.replace(' ', 'T'));
-    return !Number.isFinite(endTimestamp) || Date.now() >= endTimestamp;
+  isLive(): boolean {
+    return this.getMatchStatus() === 'live';
+  }
+
+  hasScore(): boolean {
+    return this.getMatchStatus() !== 'upcoming';
+  }
+
+  getMatchStatusLabel(): string {
+    const status = this.getMatchStatus();
+    if (status === 'completed') return 'Матч завершён';
+    if (status === 'live') return 'Матч идёт · live-ФО';
+    return 'Предстоящий матч';
   }
 
   getConfidenceLabel(): string {
@@ -212,6 +226,17 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
 
   private getPlayerKey(teamIndex: number, playerId: string): string {
     return `${teamIndex}:${playerId}`;
+  }
+
+  private getMatchStatus(): MatchCenterStatus {
+    return resolveMatchCenterStatus({
+      tour: this.tour,
+      lastTour: this.lastTour,
+      tourStartsAt: this.tourStartsAt,
+      tourEndsAt: this.tourEndsAt,
+      homeScore: this.match.home_score,
+      awayScore: this.match.away_score,
+    });
   }
 
   private nonZeroStats(items: MatchCenterStatItem[]): MatchCenterStatItem[] {

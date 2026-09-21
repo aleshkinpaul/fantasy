@@ -24,6 +24,21 @@ npm test           # unit-тесты Karma/Jasmine
 npm run mypage     # build с base-href https://fr-fantasy.ru/
 ```
 
+## Автоматический деплой на Beget
+
+Workflow `.github/workflows/deploy-beget.yml` собирает production-версию и отправляет содержимое `dist/fr-fantasy` на Beget через FTP с обязательным TLS после каждого push в ветку `master`. Его также можно запустить вручную на вкладке **Actions → Deploy production to Beget → Run workflow**.
+
+Однократная настройка:
+
+1. В панели Beget создайте отдельный FTP-аккаунт для каталога сайта `fr-fantasy.ru/public_html`. Ограничение аккаунта этим каталогом защищает остальные сайты на хостинге.
+2. В GitHub откройте **Settings → Secrets and variables → Actions** и добавьте Repository secrets:
+   - `BEGET_FTP_HOST` — имя сервера из панели Beget;
+   - `BEGET_FTP_USER` — логин созданного FTP-аккаунта;
+   - `BEGET_FTP_PASSWORD` — его пароль.
+3. Если FTP-аккаунт открывается не сразу в `public_html`, добавьте Repository variable `BEGET_FTP_PATH` с путём назначения. Для аккаунта, привязанного к каталогу сайта, переменную можно не создавать: используется `/`.
+
+Workflow загружает `index.html` последним, чтобы во время обновления он не ссылался на ещё не переданные bundle-файлы. Старые хешированные файлы автоматически не удаляются, поэтому деплой не затрагивает вручную созданные файлы на сервере.
+
 ## Документация
 
 - [Обзор проекта](docs/PROJECT_OVERVIEW.md) — назначение, страницы, соревнования и структура репозитория.

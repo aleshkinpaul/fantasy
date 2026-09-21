@@ -68,8 +68,8 @@
             [class.selected]="selectedChoice === participant.participantId"
             (click)="choose(participant.participantId)"
           >
-            <span class="option-avatar" aria-hidden="true">{{ initials(participant.name) }}</span>
-            <span class="option-copy"><strong>{{ participant.name }}</strong></span>
+            <span class="option-avatar" aria-hidden="true">{{ initials(displayName(participant.name)) }}</span>
+            <span class="option-copy"><strong>{{ displayName(participant.name) }}</strong></span>
             <span class="radio-mark" aria-hidden="true"></span>
           </button>
 

@@ -11,6 +11,7 @@ import {
   MatchForecast,
   MatchForecastView,
 } from './match-center.models';
+import { MatchCenterStatus } from './match-center-status';
 
 const FORECAST_MANIFEST_URL = '/assets/data/forecasts/manifest.json';
 
@@ -30,7 +31,7 @@ export class MatchForecastService {
     selection: MatchCenterSelection;
     profiles: IProfileDetails[];
     drawGap: number;
-    lastTour: number;
+    matchStatus: MatchCenterStatus;
   }): Observable<MatchForecastView> {
     return this.loadTourSnapshot(input.tournamentId, input.selection.tour).pipe(
       map(snapshot => snapshot
@@ -84,9 +85,9 @@ export class MatchForecastService {
     selection: MatchCenterSelection;
     profiles: IProfileDetails[];
     drawGap: number;
-    lastTour: number;
+    matchStatus: MatchCenterStatus;
   }): MatchForecastView {
-    if (input.selection.tour <= input.lastTour) {
+    if (input.matchStatus === 'completed') {
       return {
         state: 'unavailable',
         message: 'Предматчевый прогноз не был зафиксирован до начала этого матча.',
@@ -104,7 +105,9 @@ export class MatchForecastService {
       }),
       generatedAt: new Date().toISOString(),
       algorithmVersion: FORECAST_ALGORITHM_VERSION,
-      message: 'Предварительный расчёт изменяется вместе с новыми результатами до фиксации snapshot.',
+      message: input.matchStatus === 'live'
+        ? 'Предматчевый прогноз рассчитан по предыдущим турам. Live-данные текущего матча в расчёт не входят.'
+        : 'Предварительный расчёт изменяется вместе с новыми результатами до фиксации snapshot.',
     };
   }
 }

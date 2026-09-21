@@ -1,0 +1,79 @@
+name: Deploy production to Beget
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-beget
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run mypage
+
+      - name: Verify build output
+        run: test -f dist/fr-fantasy/index.html
+
+      - name: Install FTPS client
+        run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      - name: Upload production bundle
+        env:
+          BEGET_FTP_HOST: ${{ secrets.BEGET_FTP_HOST }}
+          BEGET_FTP_USER: ${{ secrets.BEGET_FTP_USER }}
+          BEGET_FTP_PASSWORD: ${{ secrets.BEGET_FTP_PASSWORD }}
+          BEGET_FTP_PATH: ${{ vars.BEGET_FTP_PATH }}
+        run: |
+          set -euo pipefail
+
+          : "${BEGET_FTP_HOST:?GitHub secret BEGET_FTP_HOST is not configured}"
+          : "${BEGET_FTP_USER:?GitHub secret BEGET_FTP_USER is not configured}"
+          : "${BEGET_FTP_PASSWORD:?GitHub secret BEGET_FTP_PASSWORD is not configured}"
+
+          remote_path="${BEGET_FTP_PATH:-/}"
+          credentials_file="$HOME/.netrc"
+          trap 'rm -f "$credentials_file"' EXIT
+          printf 'machine %s\nlogin %s\npassword %s\n' \
+            "$BEGET_FTP_HOST" "$BEGET_FTP_USER" "$BEGET_FTP_PASSWORD" \
+            > "$credentials_file"
+          chmod 600 "$credentials_file"
+
+          lftp -f /dev/stdin <<LFTP
+          set net:max-retries 3
+          set net:timeout 30
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate true
+          open "ftp://$BEGET_FTP_HOST"
+          mirror --reverse --verbose --parallel=4 --exclude-glob=index.html \
+            "dist/fr-fantasy/" "$remote_path"
+          put -O "$remote_path" "dist/fr-fantasy/index.html"
+          bye
+          LFTP
+
+      - name: Check production website
+        run: curl --fail --location --retry 3 --retry-delay 5 https://fr-fantasy.ru/ > /dev/null

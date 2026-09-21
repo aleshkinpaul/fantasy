@@ -190,6 +190,7 @@
   *ngIf="selectedMatch as selection"
   [match]="selection.match"
   [tour]="selection.tour"
+  [tourStartsAt]="squads.data.tours[selection.tour]?.start"
   [tourEndsAt]="squads.data.tours[selection.tour]?.end"
   [lastTour]="lastTour"
   [realClubIndex]="realClubIndex"

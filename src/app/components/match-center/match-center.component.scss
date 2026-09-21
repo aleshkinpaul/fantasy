@@ -131,6 +131,11 @@
 .match-status {
   color: $color-text-muted;
   font-size: $font-size-xs;
+
+  &.live-status {
+    color: $color-success;
+    font-weight: $font-weight-semibold;
+  }
 }
 
 .score-value,
@@ -155,6 +160,10 @@
   .winner-score { color: $color-success; }
   .loser-score { color: $color-danger; }
   .draw-score { color: $color-warning; }
+
+  &.live-score {
+    color: $color-success;
+  }
 }
 
 .forecast-panel {

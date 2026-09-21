@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ParticipantDirectoryEntry } from '../../models/participant-directory';
 import { PersonalizationState } from '../../models/personalization';
+import { formatParticipantNameSurnameFirst } from '../../service/participant-directory.service';
 import { PersonalizationService } from '../../service/personalization.service';
 
 const GUEST_CHOICE = 'guest';
@@ -93,6 +94,10 @@ export class ParticipantPickerComponent implements OnInit, OnDestroy {
 
   initials(name: string): string {
     return name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
+  }
+
+  displayName(name: string): string {
+    return formatParticipantNameSurnameFirst(name);
   }
 
   trackParticipant(_index: number, participant: ParticipantDirectoryEntry): string {

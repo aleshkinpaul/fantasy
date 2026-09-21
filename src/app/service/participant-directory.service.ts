@@ -70,6 +70,12 @@ export function participantSurname(name: string): string {
   return name.trim().split(/\s+/).filter(Boolean).at(-1) ?? name;
 }
 
+export function formatParticipantNameSurnameFirst(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length < 2) return parts[0] ?? '';
+  return [parts.at(-1), ...parts.slice(0, -1)].join(' ');
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
