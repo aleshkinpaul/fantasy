@@ -64,6 +64,12 @@ jobs:
             *) connection_url="ftp://$connection_url" ;;
           esac
 
+          # Beget opens SFTP sessions in the account home directory. Treat a
+          # configured leading slash as home-relative instead of filesystem-root.
+          if [[ "$connection_url" == sftp://* ]]; then
+            remote_path="${remote_path#/}"
+          fi
+
           deploy_log="$(mktemp)"
           trap 'rm -f "$deploy_log"' EXIT
 
