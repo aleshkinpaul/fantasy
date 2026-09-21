@@ -44,6 +44,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install --yes lftp
 
       - name: Upload production bundle
+        timeout-minutes: 10
         env:
           BEGET_FTP_HOST: ${{ secrets.BEGET_FTP_HOST }}
           BEGET_FTP_USER: ${{ secrets.BEGET_FTP_USER }}
