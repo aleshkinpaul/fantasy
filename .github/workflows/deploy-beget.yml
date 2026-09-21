@@ -17,7 +17,7 @@ jobs:
   deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
 
     steps:
       - name: Checkout repository
@@ -36,7 +36,9 @@ jobs:
         run: npm run mypage
 
       - name: Verify build output
-        run: test -f dist/fr-fantasy/index.html
+        run: |
+          test -f dist/fr-fantasy/index.html
+          printf '%s\n' "$GITHUB_SHA" > dist/fr-fantasy/deploy-version.txt
 
       - name: Install FTPS client
         run: sudo apt-get update && sudo apt-get install --yes lftp
@@ -76,4 +78,7 @@ jobs:
           LFTP
 
       - name: Check production website
-        run: curl --fail --location --retry 3 --retry-delay 5 https://fr-fantasy.ru/ > /dev/null
+        run: |
+          deployed_sha="$(curl --fail --location --retry 3 --retry-delay 5 \
+            "https://fr-fantasy.ru/deploy-version.txt?sha=$GITHUB_SHA")"
+          test "$deployed_sha" = "$GITHUB_SHA"
