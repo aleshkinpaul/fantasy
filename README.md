@@ -32,7 +32,7 @@ Workflow `.github/workflows/deploy-beget.yml` собирает production-вер
 
 1. В панели Beget создайте отдельный FTP-аккаунт для каталога сайта `fr-fantasy.ru/public_html`. Ограничение аккаунта этим каталогом защищает остальные сайты на хостинге.
 2. В GitHub откройте **Settings → Secrets and variables → Actions** и добавьте Repository secrets:
-   - `BEGET_FTP_HOST` — имя сервера из панели Beget;
+   - `BEGET_FTP_HOST` — адрес сервера из панели Beget. Для SFTP используйте полный URL вида `sftp://example.beget.com:22`; адрес без схемы подключается по FTPS;
    - `BEGET_FTP_USER` — логин созданного FTP-аккаунта;
    - `BEGET_FTP_PASSWORD` — его пароль.
 3. Если FTP-аккаунт открывается не сразу в `public_html`, добавьте Repository variable `BEGET_FTP_PATH` с путём назначения. Для аккаунта, привязанного к каталогу сайта, переменную можно не создавать: используется `/`.

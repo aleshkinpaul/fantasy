@@ -57,10 +57,20 @@ jobs:
           : "${BEGET_FTP_PASSWORD:?GitHub secret BEGET_FTP_PASSWORD is not configured}"
 
           remote_path="${BEGET_FTP_PATH:-/}"
+          connection_url="$BEGET_FTP_HOST"
+          case "$connection_url" in
+            ftp://*|ftps://*|sftp://*) ;;
+            *) connection_url="ftp://$connection_url" ;;
+          esac
+
+          connection_endpoint="${connection_url#*://}"
+          connection_endpoint="${connection_endpoint%%/*}"
+          connection_host="${connection_endpoint%%:*}"
+
           credentials_file="$HOME/.netrc"
           trap 'rm -f "$credentials_file"' EXIT
           printf 'machine %s\nlogin %s\npassword %s\n' \
-            "$BEGET_FTP_HOST" "$BEGET_FTP_USER" "$BEGET_FTP_PASSWORD" \
+            "$connection_host" "$BEGET_FTP_USER" "$BEGET_FTP_PASSWORD" \
             > "$credentials_file"
           chmod 600 "$credentials_file"
 
@@ -70,7 +80,9 @@ jobs:
           set ftp:ssl-force true
           set ftp:ssl-protect-data true
           set ssl:verify-certificate true
-          open "ftp://$BEGET_FTP_HOST"
+          set sftp:auto-confirm true
+          set sftp:max-packets-in-flight 64
+          open "$connection_url"
           # Beget does not preserve source mtimes consistently. Comparing
           # timestamps would resend the entire ~250 MB build on every run.
           mirror --reverse --verbose --parallel=4 --ignore-time \
