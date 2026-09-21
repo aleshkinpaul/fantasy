@@ -71,8 +71,17 @@ jobs:
           set ftp:ssl-protect-data true
           set ssl:verify-certificate true
           open "ftp://$BEGET_FTP_HOST"
-          mirror --reverse --verbose --parallel=4 --exclude-glob=index.html \
+          # Beget does not preserve source mtimes consistently. Comparing
+          # timestamps would resend the entire ~250 MB build on every run.
+          mirror --reverse --verbose --parallel=4 --ignore-time \
+            --exclude-glob=index.html \
             "dist/fr-fantasy/" "$remote_path"
+
+          # Tournament JSON uses stable filenames, so refresh it even when an
+          # edit happens to leave the file size unchanged.
+          mirror --reverse --verbose --parallel=4 --transfer-all \
+            "dist/fr-fantasy/assets/data/" "${remote_path%/}/assets/data/"
+
           put -O "$remote_path" "dist/fr-fantasy/index.html"
           bye
           LFTP
