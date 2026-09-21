@@ -64,21 +64,12 @@ jobs:
             *) connection_url="ftp://$connection_url" ;;
           esac
 
-          connection_endpoint="${connection_url#*://}"
-          connection_endpoint="${connection_endpoint%%/*}"
-          connection_host="${connection_endpoint%%:*}"
-
-          credentials_file="$HOME/.netrc"
-          printf 'machine %s\nlogin %s\npassword %s\n' \
-            "$connection_host" "$BEGET_FTP_USER" "$BEGET_FTP_PASSWORD" \
-            > "$credentials_file"
-          chmod 600 "$credentials_file"
-
           deploy_log="$(mktemp)"
-          trap 'rm -f "$credentials_file" "$deploy_log"' EXIT
+          trap 'rm -f "$deploy_log"' EXIT
 
           set +e
-          lftp -f /dev/stdin > "$deploy_log" 2>&1 <<LFTP
+          lftp -u "$BEGET_FTP_USER,$BEGET_FTP_PASSWORD" "$connection_url" \
+            > "$deploy_log" 2>&1 <<LFTP
           set net:max-retries 3
           set net:timeout 30
           set ftp:ssl-force true
@@ -86,7 +77,6 @@ jobs:
           set ssl:verify-certificate true
           set sftp:auto-confirm true
           set sftp:max-packets-in-flight 64
-          open "$connection_url"
           # Beget does not preserve source mtimes consistently. Comparing
           # timestamps would resend the entire ~250 MB build on every run.
           mirror --reverse --verbose --parallel=4 --ignore-time \
