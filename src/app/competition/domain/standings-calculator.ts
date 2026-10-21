@@ -144,6 +144,7 @@ export function getSeasonMedals(
   squads: FantasyFullInfoResponse,
   profileId: string,
   lastTour: number,
+  excludedTours: ReadonlySet<number> = new Set(),
 ): SeasonMedals {
   const medals: SeasonMedals = {
     gold: 0,
@@ -155,6 +156,11 @@ export function getSeasonMedals(
   };
 
   for (let tour = 1; tour <= lastTour; tour++) {
+    if (excludedTours.has(tour)) {
+      medals.medalsArr.push(0);
+      medals.curMedalsInARow = 0;
+      continue;
+    }
     const place = getPlaceInTour(squads, profileId, tour);
     medals.gold += +(place === 1);
     medals.silver += +(place === 2);

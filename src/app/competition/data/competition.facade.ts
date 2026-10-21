@@ -92,7 +92,12 @@ export class CompetitionFacade {
     if (config.cup) calculateCup({ cup: config.cup, profiles: profilesDetails, squads, lastTour });
     const leaguesRatings = buildLeagueRatings(profilesDetails, config.stages) as Record<string, IProfileDetails[]>;
 
-    const squadsDetails = this.buildSquadDetails(profiles, squads, lastTour);
+    const squadsDetails = this.buildSquadDetails(
+      profiles,
+      squads,
+      lastTour,
+      config.cancelledTours,
+    );
     this.assignScorePlaces(profilesDetails);
     applySquadEligibility(profilesDetails, data.latestPlayerStats, lastTour, rules.playerStats);
 
@@ -155,6 +160,7 @@ export class CompetitionFacade {
     profiles: RuntimeProfile[],
     squads: FantasyFullInfoResponse,
     lastTour: number,
+    cancelledTours: number[] = [],
   ): ISquadDetails[] {
     const details: ISquadDetails[] = [];
 
@@ -162,7 +168,12 @@ export class CompetitionFacade {
       const profile = profiles.find(item => item.id === player.id) as IProfileDetails | undefined;
       if (!profile) return;
 
-      const medals = getSeasonMedals(squads, profile.id, lastTour);
+      const medals = getSeasonMedals(
+        squads,
+        profile.id,
+        lastTour,
+        new Set(cancelledTours),
+      );
       profile.squadDetails = {
         id: player.id,
         name: player.team.title,

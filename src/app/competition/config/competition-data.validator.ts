@@ -28,8 +28,20 @@ export function validateCompetitionConfig(config: SeasonCompetitionConfig): void
   }
 
   const calendarTours = validateCalendar(config, uniqueProfiles);
+  validateCancelledTours(config, calendarTours);
   validateStages(config, uniqueProfiles, calendarTours.at(-1)!);
   validateCup(config, uniqueProfiles);
+}
+
+function validateCancelledTours(config: SeasonCompetitionConfig, calendarTours: number[]): void {
+  const cancelledTours = config.cancelledTours ?? [];
+  const uniqueCancelledTours = new Set(cancelledTours);
+  if (uniqueCancelledTours.size !== cancelledTours.length) {
+    throw new Error(`В конфигурации ${config.type} повторяются отменённые туры`);
+  }
+  if (cancelledTours.some(tour => !Number.isInteger(tour) || !calendarTours.includes(tour))) {
+    throw new Error(`В конфигурации ${config.type} указан отменённый тур вне календаря`);
+  }
 }
 
 function validateCalendar(config: SeasonCompetitionConfig, profileIds: Set<string>): number[] {

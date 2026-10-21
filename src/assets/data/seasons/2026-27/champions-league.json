@@ -6,6 +6,7 @@
     "typeId": "50",
     "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2026_fr",
     "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2026/",
+    "cancelledTours": [2],
     "special_pos": null,
     "yearStart": 2026,
     "yearEnd": 2027,

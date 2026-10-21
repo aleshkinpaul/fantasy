@@ -11,6 +11,12 @@ import {
 import { validateCompetitionData } from '../config/competition-data.validator';
 import { resolveCompetitionPrizes } from '../config/competition-prize.registry';
 import { mergeCompetitionStages } from './competition-stages.merger';
+import {
+  applyCancelledToursToFullInfo,
+  competitionTourToSourceTour,
+  createZeroTourStatsResponse,
+  remapTourStatsResponse,
+} from './competition-tour-adjustments';
 
 @Injectable({ providedIn: 'root' })
 export class CompetitionDataLoaderService {
@@ -43,7 +49,10 @@ export class CompetitionDataLoaderService {
             validateCompetitionData(data);
             return {
               ...data,
-              squads: mergeCompetitionStages(data.squads, data.squads2),
+              squads: applyCancelledToursToFullInfo(
+                mergeCompetitionStages(data.squads, data.squads2),
+                data.config.cancelledTours,
+              ),
             };
           })
         );
@@ -58,8 +67,12 @@ export class CompetitionDataLoaderService {
           ? lastTour - firstStageTours
           : 0;
 
+        const firstStageSourceLastTour = competitionTourToSourceTour(
+          firstStageLastTour,
+          data.config.cancelledTours,
+        ) ?? firstStageLastTour;
         const latestRequests = [
-          this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link}${firstStageLastTour}`),
+          this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link}${firstStageSourceLastTour}`),
         ];
         if (secondStageLastTour && data.config.tour_link_2) {
           latestRequests.push(
@@ -67,14 +80,39 @@ export class CompetitionDataLoaderService {
           );
         }
 
-        const tourRequests = Array.from({ length: lastTour }, (_, index) =>
-          this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link}${index + 1}`));
+        const competitionTours = Array.from({ length: lastTour }, (_, index) => index + 1);
+        const sourceTours = competitionTours
+          .map(tour => competitionTourToSourceTour(tour, data.config.cancelledTours))
+          .filter((tour): tour is number => tour !== undefined);
+        const tourRequests = sourceTours.map(tour =>
+          this.http.get<FantasyTourStatsResponse>(`${data.config.tour_link}${tour}`));
 
         return forkJoin({
           latestPlayerStats: forkJoin(latestRequests),
           playerStatsByTour: forkJoin(tourRequests),
         }).pipe(
-          map(stats => ({ ...data, ...stats }) as LoadedCompetitionData)
+          map(stats => {
+            const statsBySourceTour = new Map(
+              sourceTours.map((tour, index) => [tour, stats.playerStatsByTour[index]]),
+            );
+            const statsTemplate = stats.playerStatsByTour[0];
+            const playerStatsByTour = competitionTours.map(competitionTour => {
+              const sourceTour = competitionTourToSourceTour(
+                competitionTour,
+                data.config.cancelledTours,
+              );
+              if (sourceTour === undefined) {
+                return createZeroTourStatsResponse(statsTemplate, competitionTour);
+              }
+              return remapTourStatsResponse(
+                statsBySourceTour.get(sourceTour)!,
+                sourceTour,
+                competitionTour,
+              );
+            });
+
+            return { ...data, ...stats, playerStatsByTour } as LoadedCompetitionData;
+          })
         );
       })
     );

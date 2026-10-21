@@ -230,6 +230,8 @@ export interface SeasonCompetitionConfig {
   squad_link_2?: string;
   tour_link: string;
   tour_link_2?: string;
+  /** Competition tour numbers kept in the calendar but absent from the source API. */
+  cancelledTours?: number[];
   special_pos?: number | null;
   drawGap?: number;
   rulesId?: string;
