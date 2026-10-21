@@ -95,6 +95,10 @@ jobs:
             "dist/fr-fantasy/assets/data/" "${remote_path%/}/assets/data/"
 
           put -O "$remote_path" "dist/fr-fantasy/index.html"
+          # The SHA file is always 41 bytes, so the size-only mirror above can
+          # incorrectly treat an old version as current. Upload it explicitly
+          # and last, after the rest of the deployment has completed.
+          put -O "$remote_path" "dist/fr-fantasy/deploy-version.txt"
           bye
           LFTP
           lftp_status=$?
@@ -117,6 +121,11 @@ jobs:
 
       - name: Check production website
         run: |
-          deployed_sha="$(curl --fail --location --retry 3 --retry-delay 5 \
-            "https://fr-fantasy.ru/deploy-version.txt?sha=$GITHUB_SHA")"
-          test "$deployed_sha" = "$GITHUB_SHA"
+          deployed_sha="$(curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 \
+            --header 'Cache-Control: no-cache' \
+            "https://fr-fantasy.ru/deploy-version.txt?sha=$GITHUB_SHA&attempt=$GITHUB_RUN_ATTEMPT")"
+          if [ "$deployed_sha" != "$GITHUB_SHA" ]; then
+            echo "::error title=Production version mismatch::Expected $GITHUB_SHA, received ${deployed_sha:-<empty>}"
+            exit 1
+          fi
