@@ -46,7 +46,7 @@
         <p>Матчи и ближайшее окружение в таблице после последнего рассчитанного тура</p>
       </header>
 
-      <div class="personal-tournaments" *ngIf="dashboard.personalized.length; else noPersonalTournaments">
+      <div class="personal-tournaments" *ngIf="dashboard.personalized.length || dashboard.personalizedCups.length; else noPersonalTournaments">
         <article
           class="personal-tournament"
           *ngFor="let summary of dashboard.personalized; trackBy: trackPersonalTournament"
@@ -203,6 +203,92 @@
             </ng-template>
 
             <p class="player-stats-note">Учитываются только футболисты, сыгравшие и попавшие в зачёт команды; капитанское удвоение включено в ФО.</p>
+          </section>
+        </article>
+
+        <article
+          class="personal-tournament personal-cup-tournament"
+          *ngFor="let summary of dashboard.personalizedCups; trackBy: trackPersonalCup"
+          [attr.data-theme]="summary.tournament.theme">
+          <header class="personal-tournament-heading">
+            <span class="tournament-logo"><img [src]="summary.tournament.icon" alt=""></span>
+            <span>
+              <small>{{ summary.tournament.period }} · double elimination</small>
+              <strong>{{ summary.tournament.title }}</strong>
+            </span>
+            <a
+              [href]="summary.tournament.route | internalRouteHref"
+              (click)="openTournament($event, summary.tournament.route)"
+              aria-label="Открыть Кубок Короля">
+              →
+            </a>
+          </header>
+
+          <section class="personal-matches personal-cup-matches" [attr.aria-label]="'Матчи Кубка Короля команды ' + summary.profile.team.title">
+            <a
+              class="personal-match"
+              *ngIf="summary.currentMatch as match; else noCurrentCupMatch"
+              [href]="match.route | internalRouteHref"
+              (click)="openTournament($event, match.route)">
+              <span class="match-label">Последний · {{ match.roundName }} · {{ match.tour }} тур</span>
+              <span class="match-teams">
+                <span class="match-team" [appPersonalized]="match.home.id">
+                  <span class="match-copy"><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
+                  <span class="match-logo"><img [src]="match.home.logo" [alt]="match.home.team.title"></span>
+                </span>
+                <strong class="match-score" *ngIf="hasScore(match); else cupVersus">
+                  {{ match.homeScore }} : {{ match.awayScore }}
+                </strong>
+                <ng-template #cupVersus><strong class="match-score">—</strong></ng-template>
+                <span class="match-team is-away" *ngIf="match.away as away" [appPersonalized]="away.id">
+                  <span class="match-logo"><img [src]="away.logo" [alt]="away.team.title"></span>
+                  <span class="match-copy"><strong>{{ away.team.title }}</strong><small>{{ away.name }}</small></span>
+                </span>
+              </span>
+              <span class="match-action">Открыть матч-центр <i aria-hidden="true">→</i></span>
+            </a>
+
+            <ng-template #noCurrentCupMatch>
+              <div class="personal-match is-empty">
+                <span class="match-label">Кубок Короля</span>
+                <strong>Турнир стартует в 10-м туре</strong>
+                <small>Первый кубковый матч показан рядом</small>
+              </div>
+            </ng-template>
+
+            <a
+              class="personal-match is-next"
+              *ngIf="summary.nextMatch as match; else noNextCupMatch"
+              [href]="match.route | internalRouteHref"
+              (click)="openTournament($event, match.route)">
+              <span class="match-label">Следующий · {{ match.roundName }} · {{ match.tour }} тур</span>
+              <span class="match-teams">
+                <span class="match-team" [appPersonalized]="match.home.id">
+                  <span class="match-copy"><strong>{{ match.home.team.title }}</strong><small>{{ match.home.name }}</small></span>
+                  <span class="match-logo"><img [src]="match.home.logo" [alt]="match.home.team.title"></span>
+                </span>
+                <strong class="match-score">—</strong>
+                <span class="match-team is-away" *ngIf="match.away as away; else pendingCupOpponent" [appPersonalized]="away.id">
+                  <span class="match-logo"><img [src]="away.logo" [alt]="away.team.title"></span>
+                  <span class="match-copy"><strong>{{ away.team.title }}</strong><small>{{ away.name }}</small></span>
+                </span>
+                <ng-template #pendingCupOpponent>
+                  <span class="match-team is-away is-pending">
+                    <span class="match-logo match-logo-placeholder" aria-hidden="true">?</span>
+                    <span class="match-copy"><strong>{{ match.awayLabel }}</strong><small>{{ match.awayDetail }}</small></span>
+                  </span>
+                </ng-template>
+              </span>
+              <span class="match-action">К сетке Кубка <i aria-hidden="true">→</i></span>
+            </a>
+
+            <ng-template #noNextCupMatch>
+              <div class="personal-match is-empty is-next">
+                <span class="match-label">Следующий матч Кубка</span>
+                <strong>Соперник пока не определён</strong>
+                <small>Пара появится после завершения предыдущего этапа</small>
+              </div>
+            </ng-template>
           </section>
         </article>
       </div>

@@ -12,9 +12,12 @@ import { DataService } from '../../service/data.service';
 import { TournamentCatalogService } from '../../service/tournament-catalog.service';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
 import {
+  PersonalizedHomeCupMatch,
+  PersonalizedHomeCupTournament,
   PersonalizedHomeMatch,
   PersonalizedHomeTournament,
   PersonalizedStandingRow,
+  buildPersonalizedHomeCupTournament,
   buildPersonalizedHomeTournament,
 } from '../../home/personalized-home';
 import { ParticipantDirectoryEntry } from '../../models/participant-directory';
@@ -51,6 +54,7 @@ interface HomeDashboardState {
   failed: TournamentTimelineItem[];
   personalizedParticipant: ParticipantDirectoryEntry | null;
   personalized: PersonalizedHomeTournament[];
+  personalizedCups: PersonalizedHomeCupTournament[];
 }
 
 @Component({
@@ -75,10 +79,11 @@ export class HomePageComponent {
     const tournamentData$ = catalogService.loadTimeline().pipe(
       map(seasons => seasons
         .flatMap(season => season.tournaments)
-        .filter(tournament => tournament.status === 'active')
-        .map(tournament => ({ tournament, type: competitionTypeFor(tournament.kind) }))
-        .filter((item): item is { tournament: TournamentTimelineItem; type: CompetitionType } => item.type !== null)),
-      switchMap(items => {
+        .filter(tournament => tournament.status === 'active')),
+      switchMap(tournaments => {
+        const items = tournaments
+          .map(tournament => ({ tournament, type: competitionTypeFor(tournament.kind) }))
+          .filter((item): item is { tournament: TournamentTimelineItem; type: CompetitionType } => item.type !== null);
         if (!items.length) return of([] as TournamentLoadResult[]);
 
         return forkJoin(items.map(({ tournament, type }) =>
@@ -94,7 +99,22 @@ export class HomePageComponent {
               return of({ tournament, failed: true } as TournamentLoadResult);
             }),
           )
-        ));
+        )).pipe(
+          map(results => [
+            ...results,
+            ...tournaments
+              .filter(tournament => tournament.kind === 'cup')
+              .map(tournament => {
+                const leagueResult = results.find(result =>
+                  result.tournament.kind === 'la-liga'
+                  && result.tournament.yearStart === tournament.yearStart
+                );
+                return leagueResult?.viewModel
+                  ? { tournament, viewModel: leagueResult.viewModel, failed: false }
+                  : { tournament, failed: true };
+              }),
+          ] as TournamentLoadResult[]),
+        );
       }),
       catchError(error => {
         console.error('Failed to load home dashboard', error);
@@ -109,12 +129,23 @@ export class HomePageComponent {
           ? personalizationState.selectedParticipant
           : null;
         return {
-          summaries: results.flatMap(result => result.summary ? [result.summary] : []),
+          summaries: results.flatMap(result => result.summary && result.tournament.kind !== 'cup'
+            ? [result.summary]
+            : []),
           failed: results.filter(result => result.failed).map(result => result.tournament),
           personalizedParticipant: selectedParticipant,
           personalized: selectedParticipant
-            ? results.flatMap(result => result.viewModel
+            ? results.flatMap(result => result.viewModel && result.tournament.kind !== 'cup'
               ? optionalItem(buildPersonalizedHomeTournament(
+                result.tournament,
+                result.viewModel,
+                selectedParticipant,
+              ))
+              : [])
+            : [],
+          personalizedCups: selectedParticipant
+            ? results.flatMap(result => result.viewModel && result.tournament.kind === 'cup'
+              ? optionalItem(buildPersonalizedHomeCupTournament(
                 result.tournament,
                 result.viewModel,
                 selectedParticipant,
@@ -150,7 +181,7 @@ export class HomePageComponent {
     return row.profile.results.fo[summary.standingKey] ?? row.profile.score ?? 0;
   }
 
-  hasScore(match: PersonalizedHomeMatch): boolean {
+  hasScore(match: PersonalizedHomeMatch | PersonalizedHomeCupMatch): boolean {
     return match.homeScore !== undefined && match.awayScore !== undefined;
   }
 
@@ -207,6 +238,10 @@ export class HomePageComponent {
   }
 
   trackPersonalTournament(_index: number, summary: PersonalizedHomeTournament): string {
+    return summary.tournament.id;
+  }
+
+  trackPersonalCup(_index: number, summary: PersonalizedHomeCupTournament): string {
     return summary.tournament.id;
   }
 

@@ -20,8 +20,8 @@
     "icon": "assets/icons/leagues/copa.png",
     "title": "Кубок Короля 2026/27",
     "route": "/spain/new?year=2026&tabId=5",
-    "status": "scheduled",
-    "description": "плей-офф · h2h · Старт после публикации расписания кубковых матчей"
+    "status": "active",
+    "description": "double elimination · 48 команд · отборочный раунд в 10-м туре"
   },
   {
     "id": "champions-league-2026-27",

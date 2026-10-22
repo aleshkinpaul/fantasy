@@ -265,9 +265,15 @@ export class LeagueH2HPageComponent implements OnInit {
             ...cup.matchesTours.filter(val => val <= this.lastTour)
           ) : cup.matchesTours[0];
       const indOfActualCupTour = cup.matchesTours.indexOf(actualCupTour) + 1;
+      const requestedCupTour = !resetTour
+        ? Number(this.route.snapshot.queryParams['tourId'])
+        : 0;
+      const cupTourId = requestedCupTour >= 1 && requestedCupTour <= cup.matches.length
+        ? requestedCupTour
+        : indOfActualCupTour;
 
-      this.activeTabs.tourId = indOfActualCupTour;
-      this.activeTabs.cupTourId = indOfActualCupTour;
+      this.activeTabs.tourId = cupTourId;
+      this.activeTabs.cupTourId = cupTourId;
     }
 
     this.setQueryParam(this.activeTabs);
@@ -512,7 +518,14 @@ export class LeagueH2HPageComponent implements OnInit {
     if (!this.consts) return;
 
     const query = this.route.snapshot.queryParamMap;
-    const selection = resolveMatchCenterQuery(this.consts.matches, {
+    const cupMatches = this.consts.cup
+      ? Object.fromEntries(this.consts.cup.matches.map((matches, index) => [
+        this.consts.cup!.matchesTours[index],
+        matches,
+      ]))
+      : {};
+    const matches = this.activeTabs.tabId === 5 ? cupMatches : this.consts.matches;
+    const selection = resolveMatchCenterQuery(matches, {
       matchTour: query.get('matchTour'),
       matchHome: query.get('matchHome'),
       matchAway: query.get('matchAway'),

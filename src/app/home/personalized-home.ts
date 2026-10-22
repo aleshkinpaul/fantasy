@@ -27,6 +27,25 @@ export interface PersonalizedHomeMatch {
   route: string;
 }
 
+export interface PersonalizedHomeCupMatch {
+  tour: number;
+  roundName: string;
+  home: IProfileDetails;
+  away: IProfileDetails | null;
+  awayLabel?: string;
+  awayDetail?: string;
+  homeScore?: number;
+  awayScore?: number;
+  route: string;
+}
+
+export interface PersonalizedHomeCupTournament {
+  tournament: TournamentTimelineItem;
+  profile: IProfileDetails;
+  currentMatch: PersonalizedHomeCupMatch | null;
+  nextMatch: PersonalizedHomeCupMatch | null;
+}
+
 export interface PersonalizedHomeTournament {
   tournament: TournamentTimelineItem;
   profile: IProfileDetails;
@@ -111,6 +130,39 @@ export function buildPersonalizedHomeTournament(
     seasonRatingPlace: ratingIndex >= 0 ? ratingIndex + 1 : null,
     seasonRatingParticipants: ratedProfiles.length,
   };
+}
+
+export function buildPersonalizedHomeCupTournament(
+  tournament: TournamentTimelineItem,
+  viewModel: CompetitionViewModel,
+  participant: ParticipantDirectoryEntry,
+): PersonalizedHomeCupTournament | null {
+  const cup = viewModel.config.cup;
+  if (!cup) return null;
+
+  const profileIds = new Set(participant.profileIds);
+  const profile = viewModel.profilesDetails.find(item => profileIds.has(item.id));
+  if (!profile) return null;
+
+  const matches = cup.matches.flatMap((roundMatches, roundIndex) => roundMatches
+    .filter(match => match.home === profile.id || match.away === profile.id)
+    .map(match => ({ roundIndex, tour: cup.matchesTours[roundIndex], match }))
+  );
+  const currentEntry = [...matches]
+    .filter(entry => entry.tour <= viewModel.lastTour)
+    .sort((left, right) => right.tour - left.tour)[0];
+  const nextEntry = matches
+    .filter(entry => entry.tour > viewModel.lastTour)
+    .sort((left, right) => left.tour - right.tour)[0];
+
+  const currentMatch = currentEntry
+    ? toHomeCupMatch(tournament.route, viewModel, currentEntry.roundIndex, currentEntry.match)
+    : null;
+  const nextMatch = nextEntry
+    ? toHomeCupMatch(tournament.route, viewModel, nextEntry.roundIndex, nextEntry.match)
+    : buildPendingSeededCupMatch(tournament.route, viewModel, profile.id);
+
+  return { tournament, profile, currentMatch, nextMatch };
 }
 
 function findParticipantStages(
@@ -208,5 +260,79 @@ function buildMatchRoute(
   Object.entries(matchCenterQuery({ match, tour })).forEach(([key, value]) => {
     params.set(key, String(value));
   });
+  return `${path}?${params.toString()}`;
+}
+
+function toHomeCupMatch(
+  tournamentRoute: string,
+  viewModel: CompetitionViewModel,
+  roundIndex: number,
+  match: CompetitionMatch,
+): PersonalizedHomeCupMatch | null {
+  const cup = viewModel.config.cup;
+  if (!cup) return null;
+
+  const home = viewModel.profilesDetails.find(profile => profile.id === match.home);
+  const away = viewModel.profilesDetails.find(profile => profile.id === match.away);
+  if (!home || !away) return null;
+
+  const tour = cup.matchesTours[roundIndex];
+  return {
+    tour,
+    roundName: cup.matchesToursNames?.[roundIndex] ?? `Этап ${roundIndex + 1}`,
+    home,
+    away,
+    homeScore: match.home_score,
+    awayScore: match.away_score,
+    route: buildCupMatchRoute(tournamentRoute, roundIndex, tour, match),
+  };
+}
+
+function buildPendingSeededCupMatch(
+  tournamentRoute: string,
+  viewModel: CompetitionViewModel,
+  profileId: string,
+): PersonalizedHomeCupMatch | null {
+  const cup = viewModel.config.cup;
+  const seededAssignment = cup?.draw?.seededAssignments.find(item => item.seededProfileId === profileId);
+  if (!cup || !seededAssignment || cup.matchesTours.length < 2 || viewModel.lastTour >= cup.matchesTours[1]) {
+    return null;
+  }
+
+  const home = viewModel.profilesDetails.find(profile => profile.id === profileId);
+  const qualifyingMatch = cup.draw?.qualificationPairs[seededAssignment.qualificationMatch - 1];
+  if (!home || !qualifyingMatch) return null;
+
+  const qualifierNames = [qualifyingMatch.home, qualifyingMatch.away]
+    .map(id => viewModel.profilesDetails.find(profile => profile.id === id)?.team.title)
+    .filter((name): name is string => Boolean(name));
+  const roundIndex = 1;
+
+  return {
+    tour: cup.matchesTours[roundIndex],
+    roundName: cup.matchesToursNames?.[roundIndex] ?? `Этап ${roundIndex + 1}`,
+    home,
+    away: null,
+    awayLabel: `Победитель пары №${seededAssignment.qualificationMatch}`,
+    awayDetail: qualifierNames.join(' / '),
+    route: buildCupMatchRoute(tournamentRoute, roundIndex),
+  };
+}
+
+function buildCupMatchRoute(
+  tournamentRoute: string,
+  roundIndex: number,
+  tour?: number,
+  match?: CompetitionMatch,
+): string {
+  const [path, query = ''] = tournamentRoute.split('?');
+  const params = new URLSearchParams(query);
+  params.set('tabId', '5');
+  params.set('tourId', String(roundIndex + 1));
+  if (tour && match) {
+    Object.entries(matchCenterQuery({ match, tour })).forEach(([key, value]) => {
+      params.set(key, String(value));
+    });
+  }
   return `${path}?${params.toString()}`;
 }

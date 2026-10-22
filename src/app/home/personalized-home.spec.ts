@@ -1,12 +1,19 @@
 import { CompetitionViewModel } from '../competition/data/competition.facade';
 import { IProfileDetails } from '../models/domain';
 import { TournamentTimelineItem } from '../models/tournament-catalog';
-import { buildPersonalizedHomeTournament } from './personalized-home';
+import {
+  buildPersonalizedHomeCupTournament,
+  buildPersonalizedHomeTournament,
+} from './personalized-home';
 
 describe('personalized home', () => {
   const tournament = {
     id: 'la-liga-2026-27',
     route: '/spain/new?year=2026',
+  } as TournamentTimelineItem;
+  const cupTournament = {
+    id: 'la-liga-cup-2026-27',
+    route: '/spain/new?year=2026&tabId=5',
   } as TournamentTimelineItem;
 
   it('finds a seasonal profile by any historical profile id', () => {
@@ -61,6 +68,35 @@ describe('personalized home', () => {
     expect(summary?.nextMatch).toBeNull();
   });
 
+  it('returns the published qualification match for a cup participant', () => {
+    const summary = buildPersonalizedHomeCupTournament(cupTournament, viewModel(), {
+      participantId: 'participant-a',
+      name: 'Participant A',
+      profileIds: ['a'],
+    });
+
+    expect(summary?.currentMatch).toBeNull();
+    expect(summary?.nextMatch?.tour).toBe(10);
+    expect(summary?.nextMatch?.roundName).toBe('Отборочный раунд');
+    expect(summary?.nextMatch?.away?.id).toBe('p1');
+    expect(summary?.nextMatch?.route).toContain('tabId=5');
+    expect(summary?.nextMatch?.route).toContain('matchHome=a');
+  });
+
+  it('shows the assigned qualification pair while a seeded cup opponent is pending', () => {
+    const summary = buildPersonalizedHomeCupTournament(cupTournament, viewModel(), {
+      participantId: 'participant-p8',
+      name: 'Participant P8',
+      profileIds: ['p8'],
+    });
+
+    expect(summary?.nextMatch?.tour).toBe(12);
+    expect(summary?.nextMatch?.away).toBeNull();
+    expect(summary?.nextMatch?.awayLabel).toBe('Победитель пары №1');
+    expect(summary?.nextMatch?.awayDetail).toBe('Team 5 / Team 1');
+    expect(summary?.nextMatch?.route).toContain('tourId=2');
+  });
+
   function viewModel(): CompetitionViewModel {
     const profiles = Array.from({ length: 9 }, (_, index) => profile(
       index === 4 ? 'a' : `p${index + 1}`,
@@ -89,6 +125,22 @@ describe('personalized home', () => {
           2: [{ home: 'a', away: 'p1', home_score: 71, away_score: 68 }],
           3: [{ home: 'p2', away: 'p3' }],
           4: [{ home: 'a', away: 'p2' }],
+        },
+        cup: {
+          name: 'Кубок Короля',
+          matchesTours: [10, 12],
+          matchesToursNames: ['Отборочный раунд', '1/16 верхней сетки'],
+          matches: [[{ home: 'a', away: 'p1', type: 'up' }], []],
+          bracketFormat: 'double-elimination-48-v1',
+          draw: {
+            capturedAt: '2026-10-22',
+            standingsThroughTour: 9,
+            ranking: [],
+            seededProfileIds: ['p8'],
+            qualificationProfileIds: ['a', 'p1'],
+            qualificationPairs: [{ home: 'a', away: 'p1' }],
+            seededAssignments: [{ seededProfileId: 'p8', qualificationMatch: 1 }],
+          },
         },
       },
       profilesDetails: profiles,
