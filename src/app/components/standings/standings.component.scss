@@ -68,17 +68,6 @@
         border-bottom: 2px solid alpha($color-primary, 0.48);
       }
 
-      &.martin-league-member {
-        background: linear-gradient(90deg, alpha($color-primary, .10), alpha($color-surface-blue, .54));
-
-        &:nth-child(even) {
-          background: linear-gradient(90deg, alpha($color-primary, .12), alpha($color-surface-blue, .66));
-        }
-
-        &:hover {
-          background: alpha($color-primary, .14);
-        }
-      }
     }
   }
 

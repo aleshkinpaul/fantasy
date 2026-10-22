@@ -1,4 +1,4 @@
-import {
+import type {
   CompetitionStage,
   FantasyFullInfoResponse,
 } from '../models/competition.models';
@@ -50,19 +50,22 @@ export function buildLeagueRatings(
   const ratings: Record<string, StandingsProfile[]> = {};
 
   profiles.forEach(profile => {
+    // Stage membership used to be stored as named properties on an Array.
+    // JSON drops those properties, so archived snapshots were restored with
+    // `leagues: []`. Rebuild a serializable map from the season config every
+    // time ratings are prepared.
+    profile.leagues = {};
     stages.forEach((stage, stageIndex) => {
       stage.leagues.forEach(league => {
-        // Legacy output serializes this map as [], so keep the array-backed shape.
-        if (!profile.leagues) profile.leagues = [] as unknown as Record<string, string>;
         if (league.profiles.includes(profile.id)) {
-          profile.leagues[stageIndex === 0 ? 'apertura' : 'clausura'] = league.name;
+          profile.leagues![getStageKey(stage, stageIndex)] = league.name;
         }
       });
     });
   });
 
-  stages.forEach(stage => {
-    const stageName = stage.name.toLowerCase();
+  stages.forEach((stage, stageIndex) => {
+    const stageName = getStageKey(stage, stageIndex);
     stage.leagues.forEach(league => {
       ratings[league.name] = profiles
         .filter(profile => profile.leagues?.[stageName] === league.name)
@@ -88,6 +91,12 @@ export function buildLeagueRatings(
   assignPlacesToSourceProfiles(profiles, ratings['CommonFO'], 'CommonFO');
 
   return ratings;
+}
+
+function getStageKey(stage: CompetitionStage, stageIndex: number): string {
+  const normalizedName = stage.name.trim().toLowerCase();
+  if (normalizedName === 'apertura' || normalizedName === 'clausura') return normalizedName;
+  return stageIndex === 0 ? 'apertura' : 'clausura';
 }
 
 export function getPlaceInTour(

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "champions-league-2025-26",
+  "catalogTournamentIds": [
+    "champions-league-2025-26"
+  ],
+  "generatedAt": "2026-10-01T18:31:16.677Z",
+  "calculatorVersion": "f8098093dc84759e2162ef08d6273f73cb843c0e",
+  "source": {
+    "fullInfo": [
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2025_league_fondo_ruso",
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2025_po_league_fondo_ruso"
+    ],
+    "tourStats": [
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/1",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/10",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/11",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/12",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/13",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/14",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/15",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/16",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/17",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/2",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/3",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/4",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/5",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/6",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/7",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/8",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/9",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025_po/9"
+    ]
+  },
+  "files": {
+    "view.json": "sha256:99a486061ff78b9aa5afb47ba8c7a2d657e8e0dcc6abef6faacc6709121c129a",
+    "raw/responses.json.gz": "sha256:f4e5852729250c2817b71cf2a2b88d48e791c8b89c97222f4ed166d85067695c"
+  },
+  "counts": {
+    "profiles": 48,
+    "tours": 17,
+    "matches": 253
+  }
+}

@@ -234,17 +234,28 @@
       <button
         type="button"
         class="match-row"
-        [appPersonalized]="[item.home.profileId, item.away.profileId]"
         (click)="openMatch(item)">
-        <span class="match-teams">
-          <strong>{{ item.home.teamTitle }}</strong>
-          <small>{{ item.away.teamTitle }}</small>
+        <span class="insight-match-fixture">
+          <span class="insight-match-team home-team">
+            <strong>{{ item.home.teamTitle }}</strong>
+            <span class="insight-match-logo personalized-accent-right" [appPersonalized]="item.home.profileId"><img [src]="item.home.logo || 'assets/logos/default.png'" alt=""></span>
+          </span>
+          <span class="match-score">
+            <strong [class]="getMatchScoreClass(item, 'home')">{{ item.homeScore }}</strong>
+            <span>:</span>
+            <strong [class]="getMatchScoreClass(item, 'away')">{{ item.awayScore }}</strong>
+          </span>
+          <span class="insight-match-team away-team">
+            <span class="insight-match-logo" [appPersonalized]="item.away.profileId"><img [src]="item.away.logo || 'assets/logos/default.png'" alt=""></span>
+            <strong>{{ item.away.teamTitle }}</strong>
+          </span>
         </span>
-        <span class="match-tour" *ngIf="isSeason">{{ item.tour }} тур</span>
-        <span class="match-score">{{ item.homeScore }}:{{ item.awayScore }}</span>
-        <span class="metric-value" *ngIf="mode === 'sum'">Σ {{ item.combinedScore }}</span>
-        <span class="metric-value" *ngIf="mode === 'difference'">Δ {{ item.difference }}</span>
-        <span class="metric-value" *ngIf="mode === 'probability'">{{ item.winnerProbability }}%</span>
+        <span class="match-meta">
+          <span class="match-tour" *ngIf="isSeason">{{ item.tour }} тур</span>
+          <span class="metric-value" *ngIf="mode === 'sum'">Σ {{ item.combinedScore }}</span>
+          <span class="metric-value" *ngIf="mode === 'difference'">Δ {{ item.difference }}</span>
+          <span class="metric-value" *ngIf="mode === 'probability'">{{ item.winnerProbability }}%</span>
+        </span>
       </button>
     </li>
   </ol>

@@ -29,6 +29,7 @@ export class ParticipantPickerComponent implements OnInit, OnDestroy {
   search = '';
   selectedChoice = '';
   filteredParticipants: ParticipantDirectoryEntry[] = [];
+  readonly failedLogos = new Set<string>();
 
   private wasOpen = false;
 
@@ -94,6 +95,10 @@ export class ParticipantPickerComponent implements OnInit, OnDestroy {
 
   initials(name: string): string {
     return name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
+  }
+
+  failLogo(participantId: string): void {
+    this.failedLogos.add(participantId);
   }
 
   displayName(name: string): string {

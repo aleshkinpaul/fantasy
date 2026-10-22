@@ -1,4 +1,4 @@
-import {
+import type {
   FantasyFullInfoResponse,
   LoadedCompetitionData,
   SeasonCompetitionConfig,
@@ -165,6 +165,68 @@ function validateCup(config: SeasonCompetitionConfig, profileIds: Set<string>): 
       participants.add(match.home);
       participants.add(match.away);
     }
+  });
+
+  if (!cup.draw) return;
+  const draw = cup.draw;
+  if (draw.ranking.length !== profileIds.size) {
+    throw new Error(`В рейтинговом срезе кубка ${config.type} должно быть ${profileIds.size} участников`);
+  }
+  draw.ranking.forEach((entry, index) => {
+    if (entry.place !== index + 1) {
+      throw new Error(`В рейтинговом срезе кубка ${config.type} нарушена нумерация мест`);
+    }
+    if (!profileIds.has(entry.profileId)) {
+      throw new Error(`В рейтинговом срезе кубка ${config.type} неизвестный участник ${entry.profileId}`);
+    }
+  });
+
+  const rankedIds = draw.ranking.map(entry => entry.profileId);
+  if (new Set(rankedIds).size !== rankedIds.length) {
+    throw new Error(`В рейтинговом срезе кубка ${config.type} повторяются участники`);
+  }
+  if (draw.seededProfileIds.length !== 16 || draw.qualificationProfileIds.length !== 32) {
+    throw new Error(`Заготовка кубка ${config.type} должна содержать 16 сеяных и 32 участников отбора`);
+  }
+  if (draw.seededProfileIds.some((id, index) => id !== rankedIds[index])) {
+    throw new Error(`Сеяные кубка ${config.type} не совпадают с местами 1–16 рейтингового среза`);
+  }
+  if (draw.qualificationProfileIds.some((id, index) => id !== rankedIds[index + 16])) {
+    throw new Error(`Участники отбора кубка ${config.type} не совпадают с местами 17–48 рейтингового среза`);
+  }
+
+  if (![0, 16].includes(draw.qualificationPairs.length)) {
+    throw new Error(`В жеребьёвке отбора кубка ${config.type} должно быть 0 или 16 пар`);
+  }
+  const qualificationIds = new Set(draw.qualificationProfileIds);
+  const pairedIds = new Set<string>();
+  draw.qualificationPairs.forEach(match => {
+    validateMatchProfiles(match.home, match.away, qualificationIds, 'жеребьёвке отбора кубка');
+    if (pairedIds.has(match.home) || pairedIds.has(match.away)) {
+      throw new Error(`Участник жеребьёвки отбора кубка ${config.type} указан дважды`);
+    }
+    pairedIds.add(match.home);
+    pairedIds.add(match.away);
+  });
+
+  if (![0, 16].includes(draw.seededAssignments.length)) {
+    throw new Error(`В жеребьёвке 1/16 кубка ${config.type} должно быть 0 или 16 назначений`);
+  }
+  const seededIds = new Set(draw.seededProfileIds);
+  const assignedSeeds = new Set<string>();
+  const assignedMatches = new Set<number>();
+  draw.seededAssignments.forEach(assignment => {
+    if (!seededIds.has(assignment.seededProfileId)) {
+      throw new Error(`В жеребьёвке 1/16 кубка ${config.type} неизвестный сеяный ${assignment.seededProfileId}`);
+    }
+    if (assignment.qualificationMatch < 1 || assignment.qualificationMatch > 16) {
+      throw new Error(`В жеребьёвке 1/16 кубка ${config.type} некорректный номер пары отбора`);
+    }
+    if (assignedSeeds.has(assignment.seededProfileId) || assignedMatches.has(assignment.qualificationMatch)) {
+      throw new Error(`В жеребьёвке 1/16 кубка ${config.type} повторяется сеяный или пара отбора`);
+    }
+    assignedSeeds.add(assignment.seededProfileId);
+    assignedMatches.add(assignment.qualificationMatch);
   });
 }
 

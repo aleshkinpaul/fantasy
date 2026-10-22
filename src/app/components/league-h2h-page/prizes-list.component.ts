@@ -20,6 +20,7 @@ const DEFAULT_MEDAL_IMAGE = 'assets/icons/prizes/medal.png';
 })
 export class PrizesListComponent {
   @Input() prizes: IRuntimePrize[] = [];
+  @Input() archived = false;
 
   toggleShowAllNominees(prize: IRuntimePrize): void {
     prize.isShowAll = !prize.isShowAll;

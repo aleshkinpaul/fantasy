@@ -104,7 +104,7 @@
           <strong>{{ round.number }}</strong>
         </header>
         <div class="match-row" *ngFor="let match of round.matches; trackBy: trackMatch">
-          <a class="match-team home-team" [appPersonalized]="match.home" [routerLink]="['/participants', match.home]">
+          <a class="match-team home-team personalized-accent-right" [appPersonalized]="match.home" [routerLink]="['/participants', match.home]">
             <span>{{ teamName(profile(match.home)) }}</span>
             <img [src]="profile(match.home).logo" alt="" (error)="onImageError($event)">
             <span class="pot-label">{{ potNumber(match.home) }}</span>

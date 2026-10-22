@@ -26,6 +26,36 @@ $place-bronze-bg: #eee0d2;
   &::-webkit-scrollbar-thumb { background: $color-border; border-radius: $border-radius-full; }
 }
 
+.legacy-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 18px;
+  min-width: max-content;
+
+  button {
+    padding: 9px 16px;
+    color: $color-text-muted;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-full;
+    background: $color-surface;
+    font: inherit;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary;
+      border-color: alpha($color-primary, .35);
+    }
+
+    &.active {
+      color: #fff;
+      border-color: $color-primary;
+      background: $color-primary;
+    }
+  }
+}
+
 .table {
   width: 100%;
   min-width: 920px;
@@ -86,15 +116,6 @@ $place-bronze-bg: #eee0d2;
     &:hover { background: $color-surface-blue; }
     &:last-child td { border-bottom: 0; }
 
-    &.martin-league-member {
-      background: linear-gradient(90deg, alpha($color-primary, .10), alpha($color-surface-blue, .52));
-
-      &:nth-child(even) {
-        background: linear-gradient(90deg, alpha($color-primary, .12), alpha($color-surface-blue, .64));
-      }
-
-      &:hover { background: alpha($color-primary, .14); }
-    }
   }
 }
 

@@ -35,7 +35,20 @@
         (click)="selectRound(round.id)">
         {{ round.title }}
       </button>
+      <button
+        type="button"
+        role="tab"
+        [class.active]="activeRoundId === 'prizes'"
+        [attr.aria-selected]="activeRoundId === 'prizes'"
+        (click)="selectRound('prizes')">
+        Призы
+      </button>
     </nav>
+
+    <app-archive-prizes
+      *ngIf="activeRoundId === 'prizes'"
+      [tournamentId]="cup.id">
+    </app-archive-prizes>
 
     <section class="rounds" aria-label="Результаты Кубка Короля" *ngIf="activeRound(cup) as round">
       <article class="round-section">

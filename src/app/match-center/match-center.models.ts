@@ -2,8 +2,8 @@ import {
   FantasyPlayerParticipation,
   FantasyPlayerStatTotals,
 } from '../competition/domain/fantasy-lineup-resolver';
-import { CompetitionMatch, SportPlayer } from '../competition/models/competition.models';
-import { IProfileDetails, IRosterPlayerMatchStat } from '../models/domain';
+import type { CompetitionMatch, SportPlayer } from '../competition/models/competition.models';
+import type { IProfileDetails, IRosterPlayerMatchStat } from '../models/domain';
 
 export type MatchCenterEventTone = 'default' | 'assist' | 'warning' | 'danger' | 'success';
 
@@ -68,7 +68,7 @@ export interface MatchCenterTeam {
 }
 
 export type ForecastConfidence = 'low' | 'medium' | 'high';
-export type ForecastState = 'fixed' | 'reconstructed' | 'preview' | 'unavailable';
+export type ForecastState = 'fixed' | 'calculated' | 'preview' | 'unavailable';
 
 export interface MatchForecast {
   homeProfileId: string;
@@ -116,4 +116,116 @@ export interface MatchCenterOpenContext {
   selection: MatchCenterSelection;
   profiles: IProfileDetails[];
   sportPlayers: SportPlayer[];
+}
+
+export type MatchCenterOutcome = 'win' | 'draw' | 'loss';
+export type MatchCenterStability = 'high' | 'medium' | 'low' | 'unavailable';
+
+export interface MatchCenterFormResult {
+  tour: number;
+  opponentId: string;
+  scored: number;
+  conceded: number;
+  outcome: MatchCenterOutcome;
+}
+
+export interface MatchCenterTeamForm {
+  profileId: string;
+  recentResults: MatchCenterFormResult[];
+  matchesCount: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  averageScored: number;
+  averageConceded: number;
+  winStreak: number;
+  unbeatenStreak: number;
+  rating: number;
+  ratingChange?: number;
+  stability: MatchCenterStability;
+  normalizedVariationPercent?: number;
+}
+
+export interface MatchCenterHeadToHeadMeeting {
+  id: string;
+  tour: number;
+  stage: string;
+  tournamentId: string;
+  tournamentTitle: string;
+  tournamentIcon: string;
+  season: string;
+  startsAt: string;
+  homeProfileId: string;
+  awayProfileId: string;
+  homeTeamTitle: string;
+  awayTeamTitle: string;
+  homeTeamLogo: string;
+  awayTeamLogo: string;
+  firstTeamTitle: string;
+  secondTeamTitle: string;
+  homeScore: number;
+  awayScore: number;
+  firstScore: number;
+  secondScore: number;
+  firstOutcome: MatchCenterOutcome;
+  result: 0 | 1 | 2;
+}
+
+export interface MatchCenterHeadToHeadStage {
+  stage: string;
+  matches: number;
+  firstWins: number;
+  draws: number;
+  secondWins: number;
+}
+
+export interface MatchCenterHeadToHead {
+  firstProfileId: string;
+  secondProfileId: string;
+  matches: number;
+  firstWins: number;
+  draws: number;
+  secondWins: number;
+  firstTotalScore: number;
+  secondTotalScore: number;
+  firstAverageScore: number;
+  secondAverageScore: number;
+  biggestWin?: MatchCenterHeadToHeadMeeting;
+  recentMeetings: MatchCenterHeadToHeadMeeting[];
+  stages: MatchCenterHeadToHeadStage[];
+}
+
+export interface MatchCenterHistory {
+  forms: [MatchCenterTeamForm, MatchCenterTeamForm];
+  headToHead: MatchCenterHeadToHead;
+}
+
+export interface HistoricalMatchTeam {
+  participantId: string;
+  profileId: string;
+  teamTitle: string;
+  logo: string;
+}
+
+export interface HistoricalMatchRecord {
+  id: string;
+  tournamentId: string;
+  tournamentTitle: string;
+  tournamentIcon: string;
+  season: string;
+  stage: string;
+  tour: number;
+  startsAt: string;
+  startsAtTimestamp: number;
+  home: HistoricalMatchTeam;
+  away: HistoricalMatchTeam;
+  homeScore: number;
+  awayScore: number;
+  result: 0 | 1 | 2;
+}
+
+export interface MatchHistoryIndex {
+  records: HistoricalMatchRecord[];
+  participantIdByProfileId: Record<string, string>;
+  seasons: string[];
 }

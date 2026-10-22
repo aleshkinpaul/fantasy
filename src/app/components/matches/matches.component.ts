@@ -68,7 +68,7 @@ export class MatchesComponent {
     const tour = this.matchesTours.length
       ? this.matchesTours[tourIndex]
       : this.firstTour + tourIndex;
-    this.matchOpen.emit({ match, tour });
+    this.matchOpen.emit({ match, tour: match.decidingTour ?? tour });
   }
 
   private requireProfile(profileId: string): IProfileDetails {

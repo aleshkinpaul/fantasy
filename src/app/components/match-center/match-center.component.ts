@@ -14,15 +14,26 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { CompetitionMatch, SportPlayer } from '../../competition/models/competition.models';
+import {
+  CompetitionMatch,
+  CompetitionStage,
+  SportPlayer,
+} from '../../competition/models/competition.models';
 import { IProfileDetails, IRosterPlayerMatchStat } from '../../models/domain';
 import { buildMatchCenterTeam } from '../../match-center/match-center.builder';
 import {
+  MatchCenterFormResult,
+  MatchCenterHistory,
+  MatchCenterHeadToHeadMeeting,
+  MatchHistoryIndex,
   MatchCenterPlayer,
   MatchCenterStatItem,
   MatchCenterTeam,
+  MatchCenterTeamForm,
   MatchForecastView,
 } from '../../match-center/match-center.models';
+import { calculateTeamForm } from '../../match-center/form-calculator';
+import { HeadToHeadHistoryService } from '../../match-center/head-to-head-history.service';
 import {
   MatchCenterStatus,
   resolveMatchCenterStatus,
@@ -46,6 +57,10 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
   @Input() realClubIndex: RealClubIndex = new Map();
   @Input() profiles: IProfileDetails[] = [];
   @Input() sportPlayers: SportPlayer[] = [];
+  @Input() matchesByTour: Record<string | number, CompetitionMatch[]> = {};
+  @Input() stages: CompetitionStage[] = [];
+  @Input() historyIndex: MatchHistoryIndex | null = null;
+  @Input() historyLoading = false;
   @Input() forecast: MatchForecastView | null = null;
   @Input() forecastLoading = false;
 
@@ -54,7 +69,9 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
   @ViewChild('closeButton') closeButton?: ElementRef<HTMLButtonElement>;
 
   teams: MatchCenterTeam[] = [];
+  history: MatchCenterHistory | null = null;
   expandedPlayerKey: string | null = null;
+  private readonly headToHeadHistory = new HeadToHeadHistoryService();
   private readonly previousActiveElement: HTMLElement | null;
   private readonly previousBodyOverflow: string;
 
@@ -70,12 +87,32 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
     const away = this.profiles.find(profile => profile.id === this.match.away);
     if (!home || !away) {
       this.teams = [];
+      this.history = null;
       return;
     }
     this.teams = [
       buildMatchCenterTeam(home, this.tour, this.sportPlayers, this.isCompleted()),
       buildMatchCenterTeam(away, this.tour, this.sportPlayers, this.isCompleted()),
     ];
+    this.history = {
+      forms: [home, away].map(profile => calculateTeamForm({
+        profileId: profile.id,
+        targetTour: this.tour,
+        matchesByTour: this.matchesByTour,
+        profiles: this.profiles,
+      })) as MatchCenterHistory['forms'],
+      headToHead: this.headToHeadHistory.calculate({
+        firstProfileId: home.id,
+        secondProfileId: away.id,
+        targetTour: this.tour,
+        matchesByTour: this.matchesByTour,
+        stages: this.stages,
+        historyIndex: this.historyIndex,
+        targetStartsAt: this.tourStartsAt,
+        profileTitleById: Object.fromEntries(this.profiles.map(profile => [profile.id, profile.team.title])),
+        profileLogoById: Object.fromEntries(this.profiles.map(profile => [profile.id, profile.logo || 'assets/logos/default.png'])),
+      }),
+    };
   }
 
   ngAfterViewInit(): void {
@@ -197,6 +234,74 @@ export class MatchCenterComponent implements OnChanges, AfterViewInit, OnDestroy
     if (confidence === 'high') return 'высокая';
     if (confidence === 'medium') return 'средняя';
     return 'низкая';
+  }
+
+  getOutcomeLabel(result: MatchCenterFormResult): string {
+    if (result.outcome === 'win') return 'Победа';
+    if (result.outcome === 'draw') return 'Ничья';
+    return 'Поражение';
+  }
+
+  getOutcomeShortLabel(result: MatchCenterFormResult): string {
+    if (result.outcome === 'win') return 'В';
+    if (result.outcome === 'draw') return 'Н';
+    return 'П';
+  }
+
+  getStabilityLabel(form: MatchCenterTeamForm): string {
+    if (form.stability === 'high') return 'высокая';
+    if (form.stability === 'medium') return 'средняя';
+    if (form.stability === 'unavailable') return 'нет данных';
+    return 'низкая';
+  }
+
+  getStabilityValue(form: MatchCenterTeamForm): string {
+    const label = this.getStabilityLabel(form);
+    return form.normalizedVariationPercent === undefined
+      ? label
+      : `${label} · разброс ${form.normalizedVariationPercent}%`;
+  }
+
+  getRatingChangeLabel(form: MatchCenterTeamForm): string {
+    if (form.ratingChange === undefined) return '';
+    if (form.ratingChange > 0) return `+${form.ratingChange}`;
+    return String(form.ratingChange);
+  }
+
+  getProfileTitle(profileId: string): string {
+    return this.profiles.find(profile => profile.id === profileId)?.team.title || profileId;
+  }
+
+  getBiggestWinLabel(): string {
+    const meeting = this.history?.headToHead.biggestWin;
+    if (!meeting) return '—';
+    const winnerTitle = meeting.firstOutcome === 'win'
+      ? meeting.firstTeamTitle
+      : meeting.secondTeamTitle;
+    return `${winnerTitle} · ${meeting.firstScore}:${meeting.secondScore}`;
+  }
+
+  getHistoryScopeLabel(): string {
+    if (this.historyLoading) return 'Собираем историю…';
+    if (!this.historyIndex) return `Текущий турнир · до ${this.tour} тура`;
+    return `Все турниры · ${this.historyIndex.seasons.join(', ')}`;
+  }
+
+  getMeetingDateLabel(meeting: MatchCenterHeadToHeadMeeting): string {
+    if (!meeting.startsAt) return `${meeting.tour} тур`;
+    return new Intl.DateTimeFormat('ru-RU', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Europe/Moscow',
+    }).format(new Date(meeting.startsAt));
+  }
+
+  getMeetingScoreClass(meeting: MatchCenterHeadToHeadMeeting, side: 'home' | 'away'): string {
+    if (meeting.result === 0) return 'draw-score';
+    return (side === 'home') === (meeting.result === 1) ? 'winner-score' : 'loser-score';
   }
 
   getScoreClass(teamIndex: 0 | 1): string {

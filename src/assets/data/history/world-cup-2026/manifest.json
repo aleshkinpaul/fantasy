@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "world-cup-2026",
+  "catalogTournamentIds": [
+    "world-cup-2026"
+  ],
+  "generatedAt": "2026-10-01T18:31:17.850Z",
+  "calculatorVersion": "f8098093dc84759e2162ef08d6273f73cb843c0e",
+  "source": {
+    "fullInfo": [
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/wc_2026_fondo_ruso"
+    ],
+    "tourStats": [
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/1",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/2",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/3",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/4",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/5",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/6",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/7",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/wc_2026/8"
+    ]
+  },
+  "files": {
+    "view.json": "sha256:fd8d8922565de91a0f8939ad174e28c58fbef859250aea5399c0423d47fcd1a9",
+    "raw/responses.json.gz": "sha256:4e95738213bc38599e24c3d55093c05d698e9cde734e927d833e4973fdb4378d"
+  },
+  "counts": {
+    "profiles": 32,
+    "tours": 8,
+    "matches": 80
+  }
+}

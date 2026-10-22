@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, map, Observable, switchMap, throwError } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap, throwError } from 'rxjs';
 import {
   CompetitionType,
+  CompetitionLoadResult,
+  CompetitionSnapshotView,
   FantasyFullInfoResponse,
   FantasyTourStatsResponse,
   LoadedCompetitionData,
@@ -22,7 +24,7 @@ import {
 export class CompetitionDataLoaderService {
   constructor(private readonly http: HttpClient) {}
 
-  load(type: CompetitionType, yearStart: number): Observable<LoadedCompetitionData> {
+  load(type: CompetitionType, yearStart: number): Observable<CompetitionLoadResult> {
     if (!yearStart) {
       return throwError(() => new Error(`Не указан год начала сезона для турнира ${type}`));
     }
@@ -31,6 +33,25 @@ export class CompetitionDataLoaderService {
     return this.http.get<SeasonCompetitionFile>(seasonFileUrl).pipe(
       map(file => this.validateSeasonFile(file, type, yearStart)),
       switchMap(({ profiles, config }) => {
+        if (config.dataSource?.lifecycle === 'archived') {
+          const snapshot = config.dataSource.snapshot;
+          if (!snapshot?.viewUrl) {
+            return throwError(() => new Error(
+              `Архивный турнир ${type} ${yearStart} не содержит ссылки на снэпшот`,
+            ));
+          }
+          return this.http.get<CompetitionSnapshotView>(snapshot.viewUrl).pipe(
+            map(view => {
+              if (view.schemaVersion !== snapshot.schemaVersion) {
+                throw new Error(
+                  `Версия снэпшота ${view.schemaVersion} не соответствует ожидаемой ${snapshot.schemaVersion}`,
+                );
+              }
+              return { kind: 'snapshot', snapshot: view } as CompetitionLoadResult;
+            }),
+          );
+        }
+
         const requests: Record<string, Observable<FantasyFullInfoResponse>> = {
           squads: this.http.get<FantasyFullInfoResponse>(config.squad_link),
         };
@@ -57,7 +78,10 @@ export class CompetitionDataLoaderService {
           })
         );
       }),
-      switchMap(data => {
+      switchMap(result => {
+        if ('kind' in result) return of(result);
+
+        const data = result;
         const lastTour = Object.keys(data.squads.data.tours).length;
         const firstStageTours = Math.max(...Object.keys(data.squads.data.matches).map(Number));
         const firstStageLastTour = data.config.tour_link_2 && lastTour > firstStageTours
@@ -111,7 +135,10 @@ export class CompetitionDataLoaderService {
               );
             });
 
-            return { ...data, ...stats, playerStatsByTour } as LoadedCompetitionData;
+            return {
+              kind: 'live',
+              data: { ...data, ...stats, playerStatsByTour } as LoadedCompetitionData,
+            } as CompetitionLoadResult;
           })
         );
       })

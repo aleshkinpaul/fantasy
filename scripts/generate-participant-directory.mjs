@@ -19,6 +19,8 @@ const achievements = readJson('achievements.json');
 const retro = readJson('retro-tournaments.json');
 const archiveCups = readJson('archive-cups.json');
 const legacyProfiles = readJson('profiles.json')['2024'] ?? [];
+const tournamentCatalog = readJson('tournaments.json');
+const catalogById = new Map(tournamentCatalog.map(tournament => [tournament.id, tournament]));
 const seasons = seasonPaths
   .map(relativePath => readJson(relativePath))
   .sort((left, right) => left.config.yearStart - right.config.yearStart || left.config.type.localeCompare(right.config.type));
@@ -37,18 +39,32 @@ const observations = [
     participantId: standing.participantId,
     profileId: standing.profileId,
     name: standing.participantName,
+    logo: standing.logo,
+    tournament: catalogById.get(tournament.id),
   }))),
   ...archiveCups.tournaments.flatMap(tournament => tournament.rounds.flatMap(round =>
     round.matches.flatMap(match => [match.first, match.second]).map(team => ({
       profileId: team.profileId,
       name: team.participantName,
+      logo: team.logo,
+      tournament: catalogById.get(tournament.id),
     })),
   )),
-  ...legacyProfiles.map(profile => ({ profileId: profile.id, name: profile.name })),
-  ...seasons.flatMap(season => season.profiles.map(profile => ({
+  ...legacyProfiles.map(profile => ({
     profileId: profile.id,
     name: profile.name,
-  }))),
+    logo: profile.logo,
+    tournament: catalogById.get('la-liga-2024-25'),
+  })),
+  ...seasons.flatMap(season => {
+    const tournament = primarySeasonTournament(season.config);
+    return season.profiles.map(profile => ({
+      profileId: profile.id,
+      name: profile.name,
+      logo: profile.logo,
+      tournament,
+    }));
+  }),
 ];
 
 for (const observation of observations) mergeObservation(observation);
@@ -58,6 +74,8 @@ const participants = Array.from(groups.values())
     participantId: group.participantId,
     name: group.name,
     profileIds: Array.from(group.profileIds),
+    logo: preferredLogo(group.logoCandidates),
+    isActive: group.logoCandidates.some(candidate => candidate.status === 'active'),
   }))
   .filter(participant => participant.name && participant.profileIds.length)
   .sort(compareParticipants);
@@ -91,13 +109,14 @@ function createGroup(participantId, name, lockedName = false) {
     name: normalizeWhitespace(name),
     lockedName,
     profileIds: new Set(),
+    logoCandidates: [],
   };
   groups.set(uniqueId, group);
   attachName(group, name);
   return group;
 }
 
-function mergeObservation({ participantId, profileId, name }) {
+function mergeObservation({ participantId, profileId, name, logo, tournament }) {
   const normalizedProfileId = normalizeWhitespace(profileId);
   const normalizedName = normalizeWhitespace(name);
   if (!normalizedProfileId || !normalizedName) return;
@@ -112,6 +131,12 @@ function mergeObservation({ participantId, profileId, name }) {
 
   attachProfile(group, normalizedProfileId);
   attachName(group, normalizedName);
+  if (tournament) group.logoCandidates.push({
+    logo,
+    yearStart: tournament.yearStart,
+    kind: tournament.kind,
+    status: tournament.status,
+  });
   if (!group.lockedName) group.name = normalizedName;
 }
 
@@ -134,9 +159,35 @@ function attachName(group, name) {
 }
 
 function compareParticipants(left, right) {
-  return collator.compare(surname(left.name), surname(right.name))
+  return Number(right.isActive) - Number(left.isActive)
+    || collator.compare(surname(left.name), surname(right.name))
     || collator.compare(left.name, right.name)
     || left.participantId.localeCompare(right.participantId);
+}
+
+function primarySeasonTournament(config) {
+  const kindByType = {
+    spain: 'la-liga',
+    'champions-league': 'champions-league',
+    'world-cup': 'summer',
+  };
+  const kind = kindByType[config.type];
+  return (config.catalogTournamentIds ?? [])
+    .map(id => catalogById.get(id))
+    .find(tournament => tournament?.kind === kind);
+}
+
+function preferredLogo(candidates) {
+  return candidates
+    .filter(candidate => candidate.logo)
+    .sort((left, right) =>
+      right.yearStart - left.yearStart
+      || logoKindPriority(left.kind) - logoKindPriority(right.kind))
+    .at(0)?.logo;
+}
+
+function logoKindPriority(kind) {
+  return ({ 'la-liga': 0, 'champions-league': 1, summer: 2, cup: 3 })[kind] ?? 99;
 }
 
 function surname(name) {

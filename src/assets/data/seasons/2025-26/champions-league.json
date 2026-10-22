@@ -3,10 +3,19 @@
     "id": "25389",
     "type": "champions-league",
     "typeId": "50",
+    "catalogTournamentIds": ["champions-league-2025-26"],
     "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2025_league_fondo_ruso",
     "squad_link_2": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2025_po_league_fondo_ruso",
     "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025/",
     "tour_link_2": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2025_po/",
+    "dataSource": {
+      "lifecycle": "archived",
+      "snapshot": {
+        "manifestUrl": "/assets/data/history/champions-league-2025-26/manifest.json",
+        "viewUrl": "/assets/data/history/champions-league-2025-26/view.json",
+        "schemaVersion": 1
+      }
+    },
     "special_pos": null,
     "yearStart": 2025,
     "yearEnd": 2026,

@@ -8,6 +8,8 @@ import {
   ParticipantProfile,
   ParticipantSponsorPrizeVictory,
   ParticipantSponsorPrizeVictorySource,
+  ParticipantBestStageResult,
+  ParticipantStageResult,
   ParticipantTeamVersion,
   ParticipantTournamentHistory
 } from '../models/participant-profile';
@@ -159,6 +161,9 @@ function mergeTournament(
     history.stats = source.stats;
     history.coverage = 'full';
   }
+  if (source.stageResult && (!history.stageResult || source.stageResult.rank >= history.stageResult.rank)) {
+    history.stageResult = source.stageResult;
+  }
   participant.tournaments.set(tournament.id, history);
 }
 
@@ -217,9 +222,13 @@ function toParticipantProfile(participant: MutableParticipant): ParticipantProfi
       podiums: achievements.length,
       knownTotalScore: scored.reduce((sum, tournament) => sum + tournament.stats!.totalScore, 0),
       scoredTournaments: scored.length,
-      bestOverallPlace: minOrUndefined(scored
-        .map(tournament => tournament.stats!.place)
-        .filter((place): place is number => place !== undefined))
+      bestLaLigaFantasyPlace: minOrUndefined(tournaments
+        .filter(tournament => tournament.kind === 'la-liga' && tournament.stats)
+        .map(tournament => tournament.stats!.fantasyPlace ?? tournament.stats!.place)
+        .filter((place): place is number => place !== undefined)),
+      bestChampionsLeagueResult: bestStageResult(tournaments, tournament =>
+        tournament.kind === 'champions-league' && tournament.yearStart >= 2025),
+      bestCupResult: bestStageResult(tournaments, tournament => tournament.kind === 'cup'),
     }
   };
 }
@@ -329,4 +338,38 @@ function pickLatestProfileId(
 
 function minOrUndefined(values: number[]): number | undefined {
   return values.length ? Math.min(...values) : undefined;
+}
+
+function bestStageResult(
+  tournaments: ParticipantTournamentHistory[],
+  predicate: (tournament: ParticipantTournamentHistory) => boolean,
+): ParticipantBestStageResult | undefined {
+  return tournaments
+    .filter(predicate)
+    .map(tournament => {
+      const stageResult = bestTournamentStageResult(tournament);
+      return stageResult ? {
+        ...stageResult,
+        tournamentId: tournament.tournamentId,
+        period: tournament.period,
+      } : undefined;
+    })
+    .filter((result): result is ParticipantBestStageResult => Boolean(result))
+    .sort((left, right) => right.rank - left.rank)[0];
+}
+
+function bestTournamentStageResult(
+  tournament: ParticipantTournamentHistory,
+): ParticipantStageResult | undefined {
+  const achievementResult = tournament.achievements.reduce<ParticipantStageResult | undefined>((best, achievement) => {
+    const result = achievement.place === 1
+      ? { label: 'Победитель', rank: 80 }
+      : achievement.place === 2
+        ? { label: 'Финал', rank: 70 }
+        : { label: 'Полуфинал', rank: 50 };
+    return !best || result.rank > best.rank ? result : best;
+  }, undefined);
+  if (!achievementResult) return tournament.stageResult;
+  if (!tournament.stageResult || achievementResult.rank >= tournament.stageResult.rank) return achievementResult;
+  return tournament.stageResult;
 }

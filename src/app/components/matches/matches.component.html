@@ -18,7 +18,7 @@
       </a>
 
       <a class="home-logo-link" [routerLink]="['/participants', match.home]">
-        <div class="logo-container" [appPersonalized]="match.home">
+        <div class="logo-container personalized-accent-right" [appPersonalized]="match.home">
           <span
             *ngIf="isMartinLeagueMember(match.home)"
             class="martin-match-badge"

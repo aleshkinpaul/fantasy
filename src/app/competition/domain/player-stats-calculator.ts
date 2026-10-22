@@ -1,9 +1,9 @@
-import {
+import type {
   FantasyTourStatsResponse,
   SpecialPlayerRules,
   SportPlayer,
 } from '../models/competition.models';
-import { IRoster } from '../../models/domain';
+import type { IRoster } from '../../models/domain';
 import { resolveFantasyLineup } from './fantasy-lineup-resolver';
 
 interface PlayerStatsProfile {

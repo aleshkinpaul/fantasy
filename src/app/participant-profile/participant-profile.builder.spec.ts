@@ -159,6 +159,35 @@ describe('participant profile builder', () => {
       jasmine.objectContaining({ name: 'Приз сообщества', tournamentId: 'retro' }),
     ]);
   });
+
+  it('calculates separate best results for La Liga, Champions League and Copa del Rey', () => {
+    const history = timeline();
+    history[0].tournaments.push(
+      tournament('ucl', 2025, 'completed', 'champions-league'),
+      tournament('cup', 2024, 'completed', 'cup'),
+    );
+    const [profile] = buildParticipantProfiles(registry(), history, [
+      {
+        ...source('new-account', 'new', 'current', 9, 100),
+        stats: {
+          place: 9,
+          fantasyPlace: 4,
+          totalScore: 100,
+          averageScore: 50,
+          maxScore: 60,
+          minScore: 40,
+          toursPlayed: 2,
+        },
+      },
+      source('old-account', 'old', 'retro', 6, 90),
+      { ...source('old-account', 'old', 'ucl'), stageResult: { label: '1/4', rank: 40 } },
+      { ...source('old-account', 'old', 'cup'), stageResult: { label: 'Финал', rank: 70 } },
+    ]);
+
+    expect(profile.summary.bestLaLigaFantasyPlace).toBe(4);
+    expect(profile.summary.bestChampionsLeagueResult).toEqual(jasmine.objectContaining({ label: '1/4' }));
+    expect(profile.summary.bestCupResult).toEqual(jasmine.objectContaining({ label: 'Финал' }));
+  });
 });
 
 function registry(): AchievementRegistry {

@@ -40,6 +40,16 @@ export interface ParticipantTournamentAchievement {
   trophyIcon: string;
 }
 
+export interface ParticipantStageResult {
+  label: string;
+  rank: number;
+}
+
+export interface ParticipantBestStageResult extends ParticipantStageResult {
+  tournamentId: string;
+  period: string;
+}
+
 export interface ParticipantSponsorPrizeVictory {
   id: string;
   prizeId: number;
@@ -47,6 +57,9 @@ export interface ParticipantSponsorPrizeVictory {
   icon: string;
   author?: string;
   reward?: string;
+  condition?: string;
+  result?: number;
+  winnerTeamName?: string;
   tournamentId: string;
   tournamentTitle: string;
   period: string;
@@ -76,6 +89,7 @@ export interface ParticipantTournamentHistory {
   includeInTeamHistory: boolean;
   coverage: ParticipantHistoryCoverage;
   stats?: ParticipantTournamentStats;
+  stageResult?: ParticipantStageResult;
   achievements: ParticipantTournamentAchievement[];
 }
 
@@ -97,7 +111,9 @@ export interface ParticipantProfileSummary {
   podiums: number;
   knownTotalScore: number;
   scoredTournaments: number;
-  bestOverallPlace?: number;
+  bestLaLigaFantasyPlace?: number;
+  bestChampionsLeagueResult?: ParticipantBestStageResult;
+  bestCupResult?: ParticipantBestStageResult;
 }
 
 export interface ParticipantProfile {
@@ -114,8 +130,23 @@ export interface ParticipantProfile {
 }
 
 export interface SponsorPrizeWinnersRegistry {
-  version: 1;
+  version: 1 | 2;
   tournaments: Record<string, Record<string, string[]>>;
+  archiveVictories?: ArchiveSponsorPrizeVictory[];
+}
+
+export interface ArchiveSponsorPrizeVictory {
+  id: string;
+  prizeId: number;
+  tournamentId: string;
+  profileId: string;
+  name: string;
+  icon?: string;
+  author?: string;
+  reward?: string;
+  condition?: string;
+  result?: number;
+  winnerTeamName?: string;
 }
 
 export interface ParticipantHistorySource {
@@ -131,4 +162,5 @@ export interface ParticipantHistorySource {
   teamUrl?: string;
   includeInTeamHistory?: boolean;
   stats?: ParticipantTournamentStats;
+  stageResult?: ParticipantStageResult;
 }

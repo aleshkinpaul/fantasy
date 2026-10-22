@@ -4,9 +4,13 @@
     "id": "4553",
     "type": "champions-league",
     "typeId": "50",
+    "catalogTournamentIds": ["champions-league-2026-27"],
     "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2026_fr",
     "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2026/",
     "cancelledTours": [2],
+    "dataSource": {
+      "lifecycle": "live"
+    },
     "special_pos": null,
     "yearStart": 2026,
     "yearEnd": 2027,

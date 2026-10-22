@@ -124,6 +124,14 @@
         stroke-width: 1.7;
       }
 
+      .viewer-logo {
+        display: block;
+        width: 24px;
+        height: 24px;
+        flex: 0 0 24px;
+        object-fit: contain;
+      }
+
       span {
         @include text-truncate;
       }

@@ -24,20 +24,27 @@ describe('MatchForecastService', () => {
     });
   });
 
-  it('does not reconstruct a missing forecast after a match is completed', done => {
+  it('reconstructs a missing forecast from no more than five preceding tours', done => {
     const http = jasmine.createSpyObj<HttpClient>('HttpClient', ['get']);
     http.get.and.returnValue(of({ snapshots: [] }));
     const service = new MatchForecastService(http);
 
     service.resolve({
       tournamentId: 'la-liga-2026-27',
-      selection: { match: { home: 'home', away: 'away' }, tour: 5 },
-      profiles: [profile('home', [50, 60, 70, 80]), profile('away', [40, 45, 50, 55])],
+      selection: { match: { home: 'home', away: 'away' }, tour: 7 },
+      profiles: [
+        profile('home', [40, 50, 60, 70, 80, 90, 1_000]),
+        profile('away', [90, 80, 70, 60, 50, 40, 0]),
+      ],
       drawGap: 3,
       matchStatus: 'completed',
     }).subscribe(result => {
-      expect(result.state).toBe('unavailable');
-      expect(result.forecast).toBeUndefined();
+      expect(result.state).toBe('calculated');
+      expect(result.forecast?.basedOnTours).toEqual([2, 3, 4, 5, 6]);
+      expect(result.forecast?.homeWinProbability).toBeGreaterThan(
+        result.forecast?.awayWinProbability || 0,
+      );
+      expect(result.message).toContain('пяти туров до этого матча');
       done();
     });
   });

@@ -1,5 +1,10 @@
 <div class="main-container">
-  <table class="table" *ngIf="!(isLoading$ | async)">
+  <nav class="legacy-tabs" *ngIf="archivePrizeTournamentId" aria-label="Разделы турнира">
+    <button type="button" [class.active]="activeView === 'table'" (click)="setActiveView('table')">Таблица</button>
+    <button type="button" [class.active]="activeView === 'prizes'" (click)="setActiveView('prizes')">Призы</button>
+  </nav>
+
+  <table class="table" *ngIf="activeView === 'table' && !(isLoading$ | async)">
     <thead class="table-header">
       <tr>
         <th>#</th>
@@ -24,7 +29,6 @@
         *ngFor="let item of squadsDetails.value; index as i"
         class="table-row"
         [appPersonalized]="item.profile.id"
-        [class.martin-league-member]="isMartinLeagueMember(item.name)"
       >
         <td [ngClass]="{
           'first':    (i === 0 ? i + 1 : squadsDetails.value[i - 1].score === item.score ? i : i + 1) === 1,
@@ -168,7 +172,11 @@
       </tr>
     </tbody>
   </table>
-  <app-default-loader *ngIf="(isLoading$ | async)" class="loading-spinner-container"></app-default-loader>
+  <app-archive-prizes
+    *ngIf="activeView === 'prizes' && archivePrizeTournamentId"
+    [tournamentId]="archivePrizeTournamentId">
+  </app-archive-prizes>
+  <app-default-loader *ngIf="activeView === 'table' && (isLoading$ | async)" class="loading-spinner-container"></app-default-loader>
   <!-- <app-default-loader class="loading-spinner-container" [@inOutAnimation]></app-default-loader> -->
 </div>
 

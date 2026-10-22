@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "champions-league-2024-25",
+  "catalogTournamentIds": [
+    "champions-league-2024-25"
+  ],
+  "generatedAt": "2026-10-01T17:40:43.396Z",
+  "source": {
+    "fullInfo": [
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2024_po_league_friendly_2/stage/1/group/1",
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/ucl_2024_league_friendly_2/stage/1/group/1"
+    ],
+    "tourStats": [
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/ucl_2024_po/17"
+    ]
+  },
+  "files": {
+    "raw/full-info-1.json": "sha256:0972adf276535a3739c3250e2ffab0dbb5c9be036dc7bd66c4e9c07fb6d7ffcb",
+    "raw/full-info-2.json": "sha256:e1a6a086b1c216e246574e1008ee9354518f7608e1ac46c5a3aa4ffcf08b76ac",
+    "raw/latest-tour.json": "sha256:bc9a625deaac6fc562954c0dd9922601afa3f6367e4387a2b231a186033d860f"
+  },
+  "counts": {
+    "profiles": 34,
+    "tours": 9,
+    "matches": 9
+  }
+}

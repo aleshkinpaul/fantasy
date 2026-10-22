@@ -78,6 +78,24 @@
   background: alpha($color-surface, .7);
   span { color: $color-success; font-size: $font-size-xs; font-weight: $font-weight-bold; text-transform: uppercase; }
   strong { font-size: $font-size-sm; line-height: 1.35; }
+
+  a {
+    display: flex;
+    min-width: 0;
+    margin-top: 3px;
+    padding: 8px 10px;
+    flex-direction: column;
+    gap: 2px;
+    color: $color-text;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+    background: alpha($color-surface-muted, .7);
+
+    &:hover { background: $color-surface-blue; }
+    &:focus-visible { @include focus-ring; }
+    strong, small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    small { color: $color-text-muted; font-size: 10px; }
+  }
 }
 
 .trophy-showcase {
@@ -519,7 +537,7 @@
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
   margin-top: 18px;
 
@@ -536,6 +554,8 @@
   }
   strong { color: $color-primary-hover; font-family: $font-family-brand; font-size: $font-size-2xl; }
   span { color: $color-text-muted; font-size: $font-size-xs; line-height: 1.3; }
+  small { color: $color-text-muted; font-size: 10px; }
+  .stage-result { font-size: $font-size-lg; line-height: 1.05; }
 }
 
 .profile-section { margin-top: 64px; }
@@ -769,7 +789,6 @@
   .trophy-track { padding-right: 10px; padding-left: 10px; }
   .shelf-trophy { width: 124px; min-width: 124px; }
   .summary-grid { grid-template-columns: repeat(2, 1fr); }
-  .summary-grid article:last-child { grid-column: 1 / -1; }
   .identity-panel > header { align-items: flex-start; flex-direction: column; gap: 6px; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
   .section-heading > p { text-align: left; }

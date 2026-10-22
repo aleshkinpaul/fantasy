@@ -6,13 +6,14 @@ import { isHistoricalMartinLeagueMember } from '../../competition/config/martin-
 import { ArchiveCupLeg, ArchiveCupMatch, ArchiveCupRound, ArchiveCupTeam, ArchiveCupTournament } from '../../models/archive-cup';
 import { ArchiveCupService } from '../../service/archive-cup.service';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
+import { ArchivePrizesComponent } from '../archive-prizes/archive-prizes.component';
 
 @Component({
   selector: 'app-cup-page',
   templateUrl: './cup-page.component.html',
   styleUrls: ['./cup-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterLink, PersonalizedParticipantDirective],
+  imports: [CommonModule, RouterLink, PersonalizedParticipantDirective, ArchivePrizesComponent],
 })
 export class CupPageComponent implements OnInit {
   tournament?: ArchiveCupTournament;
@@ -30,7 +31,9 @@ export class CupPageComponent implements OnInit {
     this.archiveCupService.loadByYear(yearStart).subscribe({
       next: tournament => {
         this.tournament = tournament;
-        this.activeRoundId = tournament?.rounds.at(-1)?.id ?? '';
+        this.activeRoundId = Number(this.route.snapshot.queryParamMap.get('tabId')) === 3
+          ? 'prizes'
+          : tournament?.rounds.at(-1)?.id ?? '';
         this.loading = false;
         this.loadError = !tournament;
       },
@@ -42,6 +45,7 @@ export class CupPageComponent implements OnInit {
   }
 
   activeRound(tournament: ArchiveCupTournament): ArchiveCupRound | undefined {
+    if (this.activeRoundId === 'prizes') return undefined;
     return tournament.rounds.find(round => round.id === this.activeRoundId)
       ?? tournament.rounds.at(-1);
   }

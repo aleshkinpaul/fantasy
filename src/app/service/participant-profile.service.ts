@@ -6,6 +6,7 @@ import {
   FantasyFullInfoResponse,
   FantasyParticipant,
   LocalProfile,
+  CompetitionSnapshotView,
   SeasonCompetitionFile,
   SeasonCompetitionConfig,
 } from '../competition/models/competition.models';
@@ -15,6 +16,7 @@ import { ArchiveCupTournament } from '../models/archive-cup';
 import {
   ParticipantHistorySource,
   ParticipantProfile,
+  ParticipantStageResult,
   ParticipantSponsorPrizeVictorySource,
   ParticipantTournamentStats,
   SponsorPrizeWinnersRegistry,
@@ -160,11 +162,12 @@ export function buildSponsorPrizeVictorySources(
     timeline.flatMap(group => group.tournaments).map(tournament => [tournament.id, tournament]),
   );
 
-  return Object.entries(registry.tournaments).flatMap(([tournamentId, prizeWinners]) => {
+  const configuredVictories = Object.entries(registry.tournaments).flatMap(([tournamentId, prizeWinners]) => {
     const tournament = tournaments.get(tournamentId);
     if (!tournament || tournament.status !== 'completed') return [];
 
-    const snapshotIndex = SEASON_SOURCES.findIndex(source => source.tournamentIds.includes(tournamentId));
+    const snapshotIndex = snapshots.findIndex((snapshot, index) =>
+      getSnapshotTournamentIds(snapshot, index).includes(tournamentId));
     const snapshot = snapshots[snapshotIndex];
     if (!snapshot) return [];
     const prizes = resolveCompetitionPrizes(snapshot.file.config);
@@ -190,6 +193,21 @@ export function buildSponsorPrizeVictorySources(
       }));
     });
   });
+
+  const archiveVictories = (registry.archiveVictories ?? []).flatMap(victory => {
+    const tournament = tournaments.get(victory.tournamentId);
+    if (!tournament || tournament.status !== 'completed') return [];
+    return [{
+      ...victory,
+      icon: victory.icon || DEFAULT_PRIZE_ICON,
+      tournamentTitle: tournament.title,
+      period: tournament.period,
+      yearStart: tournament.yearStart,
+      route: prizeRoute(tournament),
+    }];
+  });
+
+  return [...configuredVictories, ...archiveVictories];
 }
 
 function prizeRoute(tournament: TournamentTimelineItem): string {
@@ -223,7 +241,7 @@ function buildSeasonSources(snapshots: SeasonSnapshot[]): ParticipantHistorySour
   return snapshots.flatMap((snapshot, index) => {
     const { file, squads } = snapshot;
     const allowed = new Set(file.config.profiles);
-    return SEASON_SOURCES[index].tournamentIds.flatMap(tournamentId =>
+    return getSnapshotTournamentIds(snapshot, index).flatMap(tournamentId =>
       file.profiles
         .filter(profile => allowed.has(profile.id))
         .map(profile => {
@@ -241,13 +259,84 @@ function buildSeasonSources(snapshots: SeasonSnapshot[]): ParticipantHistorySour
               ? buildFantasyTeamUrl(file.config.type, remoteProfile.team.id)
               : undefined,
             stats: squads ? buildSeasonStats(file.config, squads, profile.id, mode) : undefined,
+            stageResult: resolveSeasonStageResult(file.config, tournamentId, profile.id),
           };
         })
     );
   });
 }
 
+export function resolveSeasonStageResult(
+  config: SeasonCompetitionConfig,
+  tournamentId: string,
+  profileId: string,
+): ParticipantStageResult | undefined {
+  const cupStage = furthestConfiguredCupStage(config, profileId);
+  if (tournamentId.includes('-cup-')) return cupStage;
+  if (!tournamentId.startsWith('champions-league-')) return undefined;
+  return cupStage ?? { label: 'Общий этап', rank: 10 };
+}
+
+function furthestConfiguredCupStage(
+  config: SeasonCompetitionConfig,
+  profileId: string,
+): ParticipantStageResult | undefined {
+  const cup = config.cup;
+  if (!cup) return undefined;
+  let best: ParticipantStageResult | undefined;
+  cup.matches.forEach((matches, index) => {
+    if (!matches.some(match => match.home === profileId || match.away === profileId)) return;
+    const label = normalizeKnockoutStage(cup.matchesToursNames?.[index] || `Этап ${index + 1}`);
+    const candidate = { label, rank: knockoutStageRank(label) };
+    if (!best || candidate.rank >= best.rank) best = candidate;
+  });
+  return best;
+}
+
+function normalizeKnockoutStage(value: string): string {
+  const normalized = value.trim().replace(/\.\d+$/, '');
+  const lowerBracket = /\sНС$/.test(normalized);
+  const upperBracket = /\sВС$/.test(normalized);
+  const base = normalized.replace(/\s[НВ]С$/, '');
+  if (/^Отб/i.test(base)) return 'Отборочный раунд';
+  if (/^1\/2(?: финала)?$/i.test(base)) return lowerBracket ? 'Полуфинал нижней сетки' : 'Полуфинал';
+  if (/^Финал$/i.test(base)) {
+    if (lowerBracket) return 'Финал нижней сетки';
+    if (upperBracket) return 'Финал верхней сетки';
+    return 'Финал';
+  }
+  if (/^Гранд-финал$/i.test(base)) return 'Гранд-финал';
+  return lowerBracket ? `${base} нижней сетки` : base;
+}
+
+function knockoutStageRank(label: string): number {
+  const normalized = label.toLocaleLowerCase('ru-RU');
+  if (normalized.includes('1/16')) return 20;
+  if (normalized.includes('1/32')) return 15;
+  if (normalized.includes('1/8')) return 30;
+  if (normalized.includes('1/4')) return 40;
+  if (normalized.includes('полуфинал') || normalized.includes('1/2')) return 50;
+  if (normalized.includes('гранд-финал') || normalized === 'финал') return 70;
+  if (normalized.includes('финал')) return 60;
+  if (normalized.includes('отбор')) return 10;
+  return 10;
+}
+
+function getSnapshotTournamentIds(snapshot: SeasonSnapshot, index: number): string[] {
+  return snapshot.file.config.catalogTournamentIds ?? SEASON_SOURCES[index].tournamentIds;
+}
+
 function loadSeasonSnapshot(http: HttpClient, file: SeasonCompetitionFile): Observable<SeasonSnapshot> {
+  const snapshotUrl = file.config.dataSource?.lifecycle === 'archived'
+    ? file.config.dataSource.snapshot?.viewUrl
+    : undefined;
+  if (snapshotUrl) {
+    return http.get<CompetitionSnapshotView>(snapshotUrl).pipe(map(snapshot => ({
+      file,
+      squads: snapshot.squads,
+    })));
+  }
+
   const requests: Record<string, Observable<FantasyFullInfoResponse>> = {
     first: http.get<FantasyFullInfoResponse>(file.config.squad_link),
   };
@@ -463,7 +552,7 @@ function buildLegacyChampionsLeagueSources(
 function buildArchiveCupSources(tournaments: ArchiveCupTournament[]): ParticipantHistorySource[] {
   return tournaments.flatMap(tournament => {
     const teams = new Map<string, ParticipantHistorySource & { scores: number[] }>();
-    tournament.rounds.flatMap(round => round.matches).forEach(match => {
+    tournament.rounds.forEach(round => round.matches.forEach(match => {
       [match.first, match.second].forEach(team => {
         if (!teams.has(team.profileId)) {
           teams.set(team.profileId, {
@@ -475,12 +564,20 @@ function buildArchiveCupSources(tournaments: ArchiveCupTournament[]): Participan
             scores: [],
           });
         }
+        const source = teams.get(team.profileId)!;
+        const stageResult = {
+          label: normalizeKnockoutStage(round.title),
+          rank: knockoutStageRank(round.title),
+        };
+        if (!source.stageResult || stageResult.rank >= source.stageResult.rank) {
+          source.stageResult = stageResult;
+        }
       });
       match.legs.forEach(leg => {
         teams.get(leg.homeProfileId)?.scores.push(leg.homeScore);
         teams.get(leg.awayProfileId)?.scores.push(leg.awayScore);
       });
-    });
+    }));
     return Array.from(teams.values()).map(({ scores, ...source }) => ({
       ...source,
       stats: scores.length ? statsFromScores(scores) : undefined,

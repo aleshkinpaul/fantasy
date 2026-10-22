@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "club-world-cup-2025",
+  "catalogTournamentIds": [
+    "club-world-cup-2025"
+  ],
+  "generatedAt": "2026-10-01T17:40:43.952Z",
+  "source": {
+    "fullInfo": [
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/club_wc_2025_league_friendly_2/stage/1/group/1"
+    ],
+    "tourStats": [
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/club_wc_2025_league_friendly_2/7"
+    ]
+  },
+  "files": {
+    "raw/full-info-1.json": "sha256:a1d250ee65e90cd815f6ed124ef93fb2520037c426b1e3f93ef897efc224f13c",
+    "raw/latest-tour.json": "sha256:fc49fa7407db3a4176d322bdb54efa9d119cd7e8860076a990fa8121200e20ec"
+  },
+  "counts": {
+    "profiles": 36,
+    "tours": 7,
+    "matches": 7
+  }
+}

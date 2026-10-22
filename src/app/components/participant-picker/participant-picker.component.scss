@@ -182,6 +182,17 @@
   color: $color-text-muted;
 }
 
+.team-emblem {
+  border-radius: 10px;
+
+  img {
+    display: block;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+}
+
 .option-copy {
   display: flex;
   flex: 1 1 auto;

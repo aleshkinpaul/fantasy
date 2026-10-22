@@ -34,6 +34,13 @@ export class TourInsightsComponent {
     this.matchOpen.emit({ match: item.match, tour: item.tour });
   }
 
+  getMatchScoreClass(item: RankedMatchInsight, side: 'home' | 'away'): string {
+    const result = item.match.result;
+    if (result === 0 || (result === undefined && item.homeScore === item.awayScore)) return 'draw-score';
+    const homeWon = result === 1 || (result === undefined && item.homeScore > item.awayScore);
+    return (side === 'home') === homeWon ? 'winner-score' : 'loser-score';
+  }
+
   setScope(scope: InsightsScope): void {
     if (this.scope === scope) return;
     this.expandedPlayerLists.clear();

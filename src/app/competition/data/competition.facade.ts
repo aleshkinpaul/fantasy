@@ -26,6 +26,7 @@ import {
 } from '../domain/standings-calculator';
 import {
   CompetitionPrizeConfig,
+  CompetitionSnapshotView,
   CompetitionType,
   FantasyFullInfoResponse,
   LoadedCompetitionData,
@@ -60,8 +61,55 @@ export class CompetitionFacade {
 
   load(type: CompetitionType, yearStart: number): Observable<CompetitionViewModel> {
     return this.loader.load(type, yearStart).pipe(
-      map(data => this.buildViewModel(data))
+      map(result => result.kind === 'snapshot'
+        ? this.hydrateSnapshot(result.snapshot)
+        : this.buildViewModel(result.data))
     );
+  }
+
+  private hydrateSnapshot(snapshot: CompetitionSnapshotView): CompetitionViewModel {
+    const profilesDetails = snapshot.profiles as unknown as IProfileDetails[];
+    const profilesById = new Map(profilesDetails.map(profile => [profile.id, profile]));
+    const squadsDetails = snapshot.squadDetails.map(serialized => {
+      const profile = profilesById.get(serialized.profileId);
+      if (!profile) throw new Error(`Снэпшот ${snapshot.datasetId}: не найден профиль ${serialized.profileId}`);
+      const squad = {
+        ...serialized,
+        profile,
+        info: snapshot.squads.data.players[serialized.profileId],
+      } as unknown as ISquadDetails;
+      profile.squadDetails = squad;
+      return squad;
+    });
+    // Reconstruct stage membership from config instead of trusting the
+    // serialized `profile.leagues`. Older snapshots contain an empty array
+    // here because named Array properties are not preserved by JSON.
+    const leaguesRatings = buildLeagueRatings(
+      profilesDetails,
+      snapshot.config.stages,
+    ) as Record<string, IProfileDetails[]>;
+    const prizes = snapshot.prizes.map(serialized => {
+      const { nomineeIds, activeLeaderIds, ...prize } = serialized;
+      return {
+        ...prize,
+        nomineesArr: nomineeIds.map(id => profilesById.get(id)).filter(Boolean),
+        activeLeaders: activeLeaderIds.map(id => profilesById.get(id)).filter(Boolean),
+      } as unknown as IRuntimePrize;
+    });
+
+    return {
+      config: snapshot.config,
+      squads: snapshot.squads,
+      profilesDetails,
+      leaguesRatings,
+      squadsDetails,
+      playersRating: snapshot.playersRating,
+      prizes,
+      lastTour: snapshot.lastTour,
+      sportPlayersByTour: Object.fromEntries(
+        Object.entries(snapshot.sportPlayersByTour).map(([tour, players]) => [Number(tour), players]),
+      ),
+    };
   }
 
   private buildViewModel(data: LoadedCompetitionData): CompetitionViewModel {
@@ -89,7 +137,6 @@ export class CompetitionFacade {
       profilesDetails.sort((left, right) => compareStandings(left, right, 'common'));
     }
 
-    if (config.cup) calculateCup({ cup: config.cup, profiles: profilesDetails, squads, lastTour });
     const leaguesRatings = buildLeagueRatings(profilesDetails, config.stages) as Record<string, IProfileDetails[]>;
 
     const squadsDetails = this.buildSquadDetails(
@@ -108,6 +155,9 @@ export class CompetitionFacade {
       rules.playerStats,
       config.type === 'spain',
     );
+    if (config.cup) {
+      calculateCup({ cup: config.cup, profiles: profilesDetails, squads, lastTour, sportPlayers });
+    }
     let prizes = this.calculatePrizes(
       config.type,
       config.prizes,

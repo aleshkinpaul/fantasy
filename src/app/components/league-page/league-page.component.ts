@@ -17,13 +17,14 @@ import { DefaultLoaderComponent } from '../loader/default-loader.component';
 import { isHistoricalMartinLeagueMember } from '../../competition/config/martin-league.registry';
 import { findRealClubByExternalId, RealClub } from '../../models/real-club';
 import { PersonalizedParticipantDirective } from '../../directives/personalized-participant.directive';
+import { ArchivePrizesComponent } from '../archive-prizes/archive-prizes.component';
 
 @Component({
   selector: 'app-league-page',
   templateUrl: './league-page.component.html',
   styleUrls: ['./league-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent, PersonalizedParticipantDirective]
+  imports: [CommonModule, RouterModule, HeaderComponent, StandingsComponent, ScheduleComponent, MatchesComponent, DefaultLoaderComponent, PersonalizedParticipantDirective, ArchivePrizesComponent]
 })
 export class LeaguePageComponent implements OnInit {
   private data;
@@ -42,6 +43,8 @@ export class LeaguePageComponent implements OnInit {
   public allSquads = [];
   public lastTour: number = 1;
   public yearStart = 0;
+  public activeView: 'table' | 'prizes' = 'table';
+  public archivePrizeTournamentId = '';
 
   private playersArr = [];
   private ratingMax: number = 0;
@@ -63,6 +66,17 @@ export class LeaguePageComponent implements OnInit {
   ngOnInit() {
     const yearParam = +this.route.snapshot.queryParams?.year || '';
     this.yearStart = +yearParam;
+    const routePath = this.route.snapshot.url[0]?.path;
+    if (this.yearStart === 2024) {
+      this.archivePrizeTournamentId = routePath === 'spain'
+        ? 'la-liga-2024-25'
+        : routePath === 'champions-league'
+          ? 'champions-league-2024-25'
+          : '';
+      this.activeView = this.archivePrizeTournamentId && Number(this.route.snapshot.queryParams?.tabId) === 3
+        ? 'prizes'
+        : 'table';
+    }
     // console.log('snapshot: ', this.route.snapshot);
     this.service.setUrlName(this.route.snapshot.url[0].path);
     this.isLoading$ = this.loader.isLoading$;
@@ -281,7 +295,7 @@ export class LeaguePageComponent implements OnInit {
                 }
             });
 
-            this.service.getData(`${this.consts.tour_link + this.lastTour}`)
+            this.service.getData(resolveLegacyTourUrl(this.consts.tour_link, this.lastTour))
               .subscribe(
                 objPlayers => {
                   logger.debug('Игроки: ', objPlayers);
@@ -309,6 +323,10 @@ export class LeaguePageComponent implements OnInit {
           }
         });
     }});
+  }
+
+  setActiveView(view: 'table' | 'prizes'): void {
+    this.activeView = view;
   }
 
   isMartinLeagueMember(teamName: string): boolean {
@@ -521,5 +539,9 @@ export class LeaguePageComponent implements OnInit {
     // Если длина массива четная, возвращаем среднее значение двух центральных элементов
     return (+sortedArr[mid - 1] + +sortedArr[mid]) / 2;
   }
+}
+
+function resolveLegacyTourUrl(template: string, tour: number): string {
+  return template.includes('{tour}') ? template.replace('{tour}', String(tour)) : `${template}${tour}`;
 }
 

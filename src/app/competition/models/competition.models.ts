@@ -121,6 +121,26 @@ export interface CompetitionMatch {
   home_score?: number;
   away_score?: number;
   result?: 0 | 1 | 2;
+  decidingTour?: number;
+  replayTour?: number;
+  decidedBy?: CupMatchDecision;
+  homeTieBreak?: CupTieBreakValues;
+  awayTieBreak?: CupTieBreakValues;
+}
+
+export type CupMatchDecision =
+  | 'fo'
+  | 'captain'
+  | 'top-non-captain'
+  | 'starting-players'
+  | 'bench'
+  | 'replay-required';
+
+export interface CupTieBreakValues {
+  captain: number;
+  topNonCaptain: number;
+  startingPlayers: number;
+  bench: number;
 }
 
 export interface CompetitionLeague {
@@ -142,7 +162,40 @@ export interface CompetitionCup {
   matchesTours: number[];
   matchesToursNames?: string[];
   matches: CompetitionMatch[][];
+  bracketFormat?: 'double-elimination-48-v1';
+  draw?: CompetitionCupDraw;
+  tieBreak?: CompetitionCupTieBreak;
   prizes?: unknown[];
+}
+
+export interface CompetitionCupDrawRankingEntry {
+  place: number;
+  profileId: string;
+  teamName: string;
+  participantName: string;
+  points: number;
+  diffFo: number;
+  fo: number;
+}
+
+export interface CompetitionCupSeedAssignment {
+  seededProfileId: string;
+  qualificationMatch: number;
+}
+
+export interface CompetitionCupDraw {
+  capturedAt: string;
+  standingsThroughTour: number;
+  ranking: CompetitionCupDrawRankingEntry[];
+  seededProfileIds: string[];
+  qualificationProfileIds: string[];
+  qualificationPairs: CompetitionMatch[];
+  seededAssignments: CompetitionCupSeedAssignment[];
+}
+
+export interface CompetitionCupTieBreak {
+  criteria: Array<'captain' | 'top-non-captain' | 'starting-players' | 'bench'>;
+  replay: 'next-tour';
 }
 
 export interface CompetitionPrizeConfig {
@@ -224,6 +277,7 @@ export interface SeasonCompetitionConfig {
   id: string;
   type: CompetitionType;
   typeId: string;
+  catalogTournamentIds?: string[];
   yearStart: number;
   yearEnd: number;
   squad_link: string;
@@ -232,6 +286,12 @@ export interface SeasonCompetitionConfig {
   tour_link_2?: string;
   /** Competition tour numbers kept in the calendar but absent from the source API. */
   cancelledTours?: number[];
+  /**
+   * Describes where runtime data comes from. Archived competitions are read
+   * exclusively from the immutable local snapshot; the API links above stay
+   * in the file as recovery provenance.
+   */
+  dataSource?: CompetitionDataSource;
   special_pos?: number | null;
   drawGap?: number;
   rulesId?: string;
@@ -243,6 +303,64 @@ export interface SeasonCompetitionConfig {
   prizes: CompetitionPrizeConfig[];
   prizeRefs?: CompetitionPrizeReference[];
   cup?: CompetitionCup;
+}
+
+export interface CompetitionDataSource {
+  lifecycle: 'live' | 'archived';
+  snapshot?: {
+    manifestUrl: string;
+    viewUrl: string;
+    schemaVersion: number;
+  };
+}
+
+export interface CompetitionSnapshotManifest {
+  schemaVersion: number;
+  datasetId: string;
+  catalogTournamentIds: string[];
+  generatedAt: string;
+  calculatorVersion: string;
+  source: {
+    fullInfo: string[];
+    tourStats: string[];
+  };
+  files: Record<string, string>;
+  counts: {
+    profiles: number;
+    tours: number;
+    matches: number;
+  };
+}
+
+export interface CompetitionSnapshotProfile extends LocalProfile {
+  [key: string]: unknown;
+}
+
+export interface CompetitionSnapshotSquad {
+  id: string;
+  profileId: string;
+  [key: string]: unknown;
+}
+
+export interface CompetitionSnapshotPrize {
+  nomineeIds: string[];
+  activeLeaderIds: string[];
+  [key: string]: unknown;
+}
+
+/** Serializable, reference-free representation of CompetitionViewModel. */
+export interface CompetitionSnapshotView {
+  schemaVersion: number;
+  datasetId: string;
+  config: SeasonCompetitionConfig;
+  squads: FantasyFullInfoResponse;
+  profiles: CompetitionSnapshotProfile[];
+  leagueProfileIds: Record<string, string[]>;
+  squadDetails: CompetitionSnapshotSquad[];
+  playersRating: number[];
+  prizes: CompetitionSnapshotPrize[];
+  lastTour: number;
+  sportPlayersByTour: Record<string, SportPlayer[]>;
 }
 
 export interface SeasonCompetitionFile {
@@ -259,3 +377,7 @@ export interface LoadedCompetitionData {
   latestPlayerStats: FantasyTourStatsResponse[];
   playerStatsByTour: FantasyTourStatsResponse[];
 }
+
+export type CompetitionLoadResult =
+  | { kind: 'live'; data: LoadedCompetitionData }
+  | { kind: 'snapshot'; snapshot: CompetitionSnapshotView };

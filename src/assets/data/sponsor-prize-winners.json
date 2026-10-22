@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "tournaments": {
     "la-liga-2025-26": {
       "1": ["1116848369"],
@@ -43,5 +43,150 @@
       "8": ["1058102914"],
       "9": ["1111051849"]
     }
-  }
+  },
+  "archiveVictories": [
+    {
+      "id": "la-liga-cup-2024-25-biggest-upset",
+      "prizeId": 24001,
+      "tournamentId": "la-liga-cup-2024-25",
+      "profileId": "1097941691",
+      "name": "Самая большая сенсация",
+      "icon": "assets/logos/2025/icons/luck.png",
+      "author": "Организаторы",
+      "result": 33,
+      "winnerTeamName": "Мыши-байкеры с марса"
+    },
+    {
+      "id": "la-liga-cup-2024-25-predictions",
+      "prizeId": 24002,
+      "tournamentId": "la-liga-cup-2024-25",
+      "profileId": "73116796",
+      "name": "Конкурс прогнозов",
+      "icon": "assets/logos/2025/icons/prestige.png",
+      "author": "Организаторы",
+      "result": 29.5,
+      "winnerTeamName": "ducks"
+    },
+    {
+      "id": "champions-league-2024-25-place-7",
+      "prizeId": 24101,
+      "tournamentId": "champions-league-2024-25",
+      "profileId": "151923911",
+      "name": "7 место",
+      "icon": "assets/logos/2025/icons/ronaldo.png",
+      "author": "Ани Меликян",
+      "result": 954,
+      "winnerTeamName": "Sevastopol"
+    },
+    {
+      "id": "champions-league-2024-25-girl-power",
+      "prizeId": 24102,
+      "tournamentId": "champions-league-2024-25",
+      "profileId": "1111051849",
+      "name": "Girl Power",
+      "icon": "assets/logos/2025/icons/girl.png",
+      "author": "Aprellshop",
+      "result": 1046,
+      "winnerTeamName": "Испанский эчпочмак"
+    },
+    {
+      "id": "champions-league-2024-25-place-15",
+      "prizeId": 24103,
+      "tournamentId": "champions-league-2024-25",
+      "profileId": "1024867435",
+      "name": "15 место",
+      "icon": "assets/logos/2025/icons/medal.png",
+      "author": "Организаторы",
+      "result": 871,
+      "winnerTeamName": "unodostrescl"
+    },
+    {
+      "id": "champions-league-2024-25-max-tour",
+      "prizeId": 24104,
+      "tournamentId": "champions-league-2024-25",
+      "profileId": "152317185",
+      "name": "Макс. за тур",
+      "icon": "assets/logos/2025/icons/gold-medal.png",
+      "author": "Организаторы",
+      "result": 93,
+      "winnerTeamName": "RavilRealMadrid"
+    },
+    {
+      "id": "la-liga-2024-25-place-13",
+      "prizeId": 24201,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "135066850",
+      "name": "13 место",
+      "icon": "assets/logos/2025/icons/medal.png",
+      "author": "Организаторы",
+      "result": 1868,
+      "winnerTeamName": "Пас Хуанито"
+    },
+    {
+      "id": "la-liga-2024-25-max-tour",
+      "prizeId": 24202,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "1021067842",
+      "name": "Макс. за тур",
+      "icon": "assets/logos/2025/icons/gold-medal.png",
+      "author": "Организаторы",
+      "result": 101,
+      "winnerTeamName": "Эмоции Гарета Бэйла"
+    },
+    {
+      "id": "la-liga-2024-25-first-round-champion",
+      "prizeId": 24203,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "1063076888",
+      "name": "Чемпион 1 круга",
+      "icon": "assets/logos/2025/icons/gold-medal.png",
+      "author": "Руслан Гасангусейнов",
+      "result": 1113,
+      "winnerTeamName": "Andar con rodeos"
+    },
+    {
+      "id": "la-liga-2024-25-second-round-champion",
+      "prizeId": 24204,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "1103401223",
+      "name": "Чемпион 2 круга",
+      "icon": "assets/logos/2025/icons/gold-medal.png",
+      "author": "Руслан Гасангусейнов",
+      "result": 1044,
+      "winnerTeamName": "ремонтада"
+    },
+    {
+      "id": "la-liga-2024-25-girl-power",
+      "prizeId": 24205,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "1111051849",
+      "name": "Girl Power",
+      "icon": "assets/logos/2025/icons/girl.png",
+      "author": "Дарья Кузнецкая",
+      "result": 2049,
+      "winnerTeamName": "Испанский эчпочмак"
+    },
+    {
+      "id": "la-liga-2024-25-from-cream",
+      "prizeId": 24206,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "1116086751",
+      "name": "От Сливок",
+      "icon": "assets/logos/2025/icons/crowd.png",
+      "author": "Подкаст «Дегустация сливок» (Андрей Орлов, Вениамин Филатов)",
+      "condition": "Наибольшее количество очков среди топ-5 по минимальному количеству замен. Участвуют только команды, сделавшие больше 55 замен в сезоне (50% от максимального количества)",
+      "winnerTeamName": "Дирдам Лаер"
+    },
+    {
+      "id": "la-liga-2024-25-martin-league",
+      "prizeId": 24207,
+      "tournamentId": "la-liga-2024-25",
+      "profileId": "73116796",
+      "name": "Лига Мартина",
+      "icon": "assets/logos/2025/icons/real-madrid.png",
+      "author": "Мартин Бабаян",
+      "result": 1959,
+      "winnerTeamName": "ducks"
+    }
+  ]
 }

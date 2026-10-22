@@ -1,9 +1,9 @@
-import {
+import type {
   IProfileDetails,
   IPrizeNominee,
   IRuntimePrize,
 } from '../../models/domain';
-import {
+import type {
   CompetitionPrizeConfig,
   LocalProfile,
   SportPlayer,

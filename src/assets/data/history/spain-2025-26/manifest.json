@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "spain-2025-26",
+  "catalogTournamentIds": [
+    "la-liga-2025-26",
+    "la-liga-cup-2025-26"
+  ],
+  "generatedAt": "2026-10-01T18:31:16.185Z",
+  "calculatorVersion": "f8098093dc84759e2162ef08d6273f73cb843c0e",
+  "source": {
+    "fullInfo": [
+      "https://fantasy-h2h.ru/api/h2h_tournament/full_info/la_liga_2025_league_friendly_2"
+    ],
+    "tourStats": [
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/1",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/10",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/11",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/12",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/13",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/14",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/15",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/16",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/17",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/18",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/19",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/2",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/20",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/21",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/22",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/23",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/24",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/25",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/26",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/27",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/28",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/29",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/3",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/30",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/31",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/32",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/33",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/34",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/35",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/36",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/37",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/38",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/4",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/5",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/6",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/7",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/8",
+      "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/9"
+    ]
+  },
+  "files": {
+    "view.json": "sha256:f198184fc68c27bea311407aaadbb9f47ed7af2c8d31e7454d756d10870f3278",
+    "raw/responses.json.gz": "sha256:6feccf095e43db3909e34ea6bb25b989673e651ba634e616cd52bfe29838cc1e"
+  },
+  "counts": {
+    "profiles": 49,
+    "tours": 38,
+    "matches": 912
+  }
+}

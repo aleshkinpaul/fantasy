@@ -1,5 +1,5 @@
-import { IRoster, IRosterPlayerMatchStat } from '../../models/domain';
-import { SportPlayer } from '../models/competition.models';
+import type { IRoster, IRosterPlayerMatchStat } from '../../models/domain';
+import type { SportPlayer } from '../models/competition.models';
 
 export type FantasyPlayerParticipation = 'played' | 'not-played' | 'pending' | 'unknown';
 
@@ -208,7 +208,7 @@ function getParticipation(
   }
 
   const tourStat = player?.stat_by_tours[tour];
-  if (tourStat && (Number(tourStat.match_time) > 0 || Number(tourStat.score) !== 0)) return 'played';
+  if (tourStat && Number(tourStat.match_time) > 0) return 'played';
   if (hasDetailedStatsContainer(roster)) return isLineupFinal ? 'not-played' : 'pending';
   if (tourStat) return isLineupFinal ? 'not-played' : 'pending';
   return 'unknown';

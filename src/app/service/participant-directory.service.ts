@@ -51,7 +51,19 @@ export function validateParticipantDirectory(value: unknown): ParticipantDirecto
       profileIds.add(profileId);
     });
 
-    return { participantId, name, profileIds: entryProfileIds };
+    const logo = optionalString(entry['logo'], `participant ${participantId} logo`);
+    const isActive = entry['isActive'];
+    if (isActive !== undefined && typeof isActive !== 'boolean') {
+      throw new Error(`participant ${participantId} isActive is invalid`);
+    }
+
+    return {
+      participantId,
+      name,
+      profileIds: entryProfileIds,
+      ...(logo ? { logo } : {}),
+      ...(typeof isActive === 'boolean' ? { isActive } : {}),
+    };
   });
 
   return { version: 1, participants };
@@ -61,7 +73,8 @@ export function sortParticipantsBySurname(
   participants: readonly ParticipantDirectoryEntry[],
 ): ParticipantDirectoryEntry[] {
   return [...participants].sort((left, right) =>
-    participantCollator.compare(participantSurname(left.name), participantSurname(right.name))
+    Number(Boolean(right.isActive)) - Number(Boolean(left.isActive))
+    || participantCollator.compare(participantSurname(left.name), participantSurname(right.name))
     || participantCollator.compare(left.name, right.name)
     || left.participantId.localeCompare(right.participantId));
 }
@@ -83,4 +96,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function requiredString(value: unknown, field: string): string {
   if (typeof value !== 'string' || !value.trim()) throw new Error(`${field} is invalid`);
   return value.trim();
+}
+
+function optionalString(value: unknown, field: string): string | undefined {
+  if (value === undefined) return undefined;
+  return requiredString(value, field);
 }

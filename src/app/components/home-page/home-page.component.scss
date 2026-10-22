@@ -86,14 +86,20 @@
 .personal-dashboard { margin-top: 58px; }
 
 .home-page .is-personalized-participant:not(tr)::after {
-  inset: 0;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  width: 5px;
   border: 0;
   border-radius: inherit;
-  box-shadow: inset 5px 0 0 var(--personalized-accent);
+  background: var(--personalized-accent);
+  box-shadow: none;
 }
 
 .home-page .match-team.is-personalized-participant:not(.is-away)::after {
-  box-shadow: inset -5px 0 0 var(--personalized-accent);
+  right: 0;
+  left: auto;
 }
 
 .home-page .prize-leader.is-personalized-participant {

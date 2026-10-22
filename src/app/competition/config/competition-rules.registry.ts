@@ -1,4 +1,4 @@
-import { CompetitionRuntimeRules } from '../models/competition.models';
+import type { CompetitionRuntimeRules } from '../models/competition.models';
 
 const RULES: Record<string, CompetitionRuntimeRules> = {
   'season-2025': {

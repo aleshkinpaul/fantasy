@@ -118,9 +118,20 @@
             *ngFor="let result of season.tournaments"
             [style.order]="tournamentTimelineOrder(result)">
             <header class="tournament-header">
-              <div>
-                <span class="kind-label">{{ result.tournament.kindLabel }}</span>
-                <h4>{{ result.tournament.title }}</h4>
+              <div class="tournament-heading">
+                <span
+                  class="trophy-slot tournament-trophy"
+                  [title]="result.stages[0].titleTypeLabel">
+                  <span aria-hidden="true"></span>
+                  <img
+                    [src]="result.stages[0].trophyIcon"
+                    alt=""
+                    (error)="hideBrokenIcon($event)">
+                </span>
+                <div class="tournament-heading-copy">
+                  <span class="kind-label">{{ result.tournament.kindLabel }}</span>
+                  <h4>{{ result.tournament.title }}</h4>
+                </div>
               </div>
               <a
                 [href]="result.tournament.route | internalRouteHref"

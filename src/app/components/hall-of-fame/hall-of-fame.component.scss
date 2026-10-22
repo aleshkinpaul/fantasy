@@ -409,6 +409,31 @@ $bp-sm: 600px;
   }
 }
 
+.tournament-heading {
+  @include flex-row(12px, flex-start);
+  min-width: 0;
+}
+
+.tournament-heading-copy {
+  min-width: 0;
+
+  h4 { @include text-truncate; }
+}
+
+.tournament-trophy {
+  width: 52px;
+  height: 52px;
+  flex-basis: 52px;
+  border-radius: 13px;
+  background: alpha($color-surface, .92);
+
+  img {
+    inset: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+}
+
 .stage-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -674,9 +699,16 @@ $bp-sm: 600px;
     padding: 10px;
   }
 
-  .tournament-header { padding: 16px; }
+  .tournament-header { padding: 14px 16px; }
   .tournament-header a { font-size: 0; }
   .tournament-header a span { font-size: $font-size-lg; }
+
+  .tournament-trophy {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    border-radius: 11px;
+  }
 
   .stage-card { padding: 10px; }
 

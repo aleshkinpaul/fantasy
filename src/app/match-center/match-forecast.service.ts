@@ -34,10 +34,12 @@ export class MatchForecastService {
     matchStatus: MatchCenterStatus;
   }): Observable<MatchForecastView> {
     return this.loadTourSnapshot(input.tournamentId, input.selection.tour).pipe(
-      map(snapshot => snapshot
-        ? this.getFixedForecast(snapshot, input.selection)
-        : this.getFallback(input),
-      ),
+      map(snapshot => {
+        const fixedForecast = snapshot
+          ? this.getFixedForecast(snapshot, input.selection)
+          : undefined;
+        return fixedForecast || this.getFallback(input);
+      }),
     );
   }
 
@@ -61,22 +63,17 @@ export class MatchForecastService {
   private getFixedForecast(
     snapshot: ForecastSnapshotFile,
     selection: MatchCenterSelection,
-  ): MatchForecastView {
+  ): MatchForecastView | undefined {
     const forecast = findForecast(snapshot.forecasts, selection);
-    if (!forecast) {
-      return {
-        state: 'unavailable',
-        message: 'Для этого матча в snapshot нет сохранённого прогноза.',
-      };
-    }
+    if (!forecast) return undefined;
 
     return {
-      state: snapshot.provenance === 'reconstructed' ? 'reconstructed' : 'fixed',
+      state: snapshot.provenance === 'reconstructed' ? 'calculated' : 'fixed',
       forecast,
       generatedAt: snapshot.generatedAt,
       algorithmVersion: snapshot.algorithmVersion,
       message: snapshot.provenance === 'reconstructed'
-        ? 'Расчёт восстановлен по данным, которые были доступны до начала матча.'
+        ? 'Вероятности рассчитаны по данным, которые были доступны до начала матча.'
         : undefined,
     };
   }
@@ -87,15 +84,10 @@ export class MatchForecastService {
     drawGap: number;
     matchStatus: MatchCenterStatus;
   }): MatchForecastView {
-    if (input.matchStatus === 'completed') {
-      return {
-        state: 'unavailable',
-        message: 'Предматчевый прогноз не был зафиксирован до начала этого матча.',
-      };
-    }
+    const isCompleted = input.matchStatus === 'completed';
 
     return {
-      state: 'preview',
+      state: isCompleted ? 'calculated' : 'preview',
       forecast: calculateMatchForecast({
         homeProfileId: input.selection.match.home,
         awayProfileId: input.selection.match.away,
@@ -105,9 +97,11 @@ export class MatchForecastService {
       }),
       generatedAt: new Date().toISOString(),
       algorithmVersion: FORECAST_ALGORITHM_VERSION,
-      message: input.matchStatus === 'live'
-        ? 'Предматчевый прогноз рассчитан по предыдущим турам. Live-данные текущего матча в расчёт не входят.'
-        : 'Предварительный расчёт изменяется вместе с новыми результатами до фиксации snapshot.',
+      message: isCompleted
+        ? 'Вероятности рассчитаны по результатам не более пяти туров до этого матча. Результат самого матча и последующие туры в расчёт не входят.'
+        : input.matchStatus === 'live'
+          ? 'Предматчевый прогноз рассчитан по предыдущим турам. Live-данные текущего матча в расчёт не входят.'
+          : 'Предварительный расчёт изменяется вместе с новыми результатами до фиксации snapshot.',
     };
   }
 }

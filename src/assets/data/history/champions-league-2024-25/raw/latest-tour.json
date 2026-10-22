@@ -1,0 +1,6164 @@
+{
+  "result": 1,
+  "data": {
+    "tournament": {
+      "id": "300",
+      "title": "Лига Чемпионов (ПО) 2024/25",
+      "season": "24"
+    },
+    "players": {
+      "203222": {
+        "id": "203222",
+        "name": "Монлуис",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203223": {
+        "id": "203223",
+        "name": "Николс",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203224": {
+        "id": "203224",
+        "name": "Портер",
+        "amplua_id": "9",
+        "team_id": "7327",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203225": {
+        "id": "203225",
+        "name": "Сетфорд",
+        "amplua_id": "9",
+        "team_id": "7327",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203226": {
+        "id": "203226",
+        "name": "Кабиа",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203227": {
+        "id": "203227",
+        "name": "Удад-Мханд",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203228": {
+        "id": "203228",
+        "name": "Батлер-Ойедеджи",
+        "amplua_id": "12",
+        "team_id": "7327",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203229": {
+        "id": "203229",
+        "name": "Зинченко",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203230": {
+        "id": "203230",
+        "name": "Кивер",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203231": {
+        "id": "203231",
+        "name": "Тирни",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203232": {
+        "id": "203232",
+        "name": "Томиясу",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203233": {
+        "id": "203233",
+        "name": "Калафьори",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203234": {
+        "id": "203234",
+        "name": "Льюис-Скелли",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203235": {
+        "id": "203235",
+        "name": "Нето",
+        "amplua_id": "9",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203236": {
+        "id": "203236",
+        "name": "Парти",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203237": {
+        "id": "203237",
+        "name": "Райя",
+        "amplua_id": "9",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203238": {
+        "id": "203238",
+        "name": "Юрриен Тимбер",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203239": {
+        "id": "203239",
+        "name": "Уайт",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203240": {
+        "id": "203240",
+        "name": "Габриэл",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203241": {
+        "id": "203241",
+        "name": "Жоржиньо",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203242": {
+        "id": "203242",
+        "name": "Мерино",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203243": {
+        "id": "203243",
+        "name": "Нванери",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203244": {
+        "id": "203244",
+        "name": "Райс",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203245": {
+        "id": "203245",
+        "name": "Салиба",
+        "amplua_id": "10",
+        "team_id": "7327",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203246": {
+        "id": "203246",
+        "name": "Габриэл Жезус",
+        "amplua_id": "12",
+        "team_id": "7327",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203247": {
+        "id": "203247",
+        "name": "Стерлинг",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203248": {
+        "id": "203248",
+        "name": "Троссард",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203249": {
+        "id": "203249",
+        "name": "Мартинелли",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203250": {
+        "id": "203250",
+        "name": "Сака",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203251": {
+        "id": "203251",
+        "name": "Хавертц",
+        "amplua_id": "12",
+        "team_id": "7327",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203252": {
+        "id": "203252",
+        "name": "Эдегор",
+        "amplua_id": "11",
+        "team_id": "7327",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203253": {
+        "id": "203253",
+        "name": "Зых",
+        "amplua_id": "9",
+        "team_id": "7328",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203254": {
+        "id": "203254",
+        "name": "Богарде",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203255": {
+        "id": "203255",
+        "name": "Броджио",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203256": {
+        "id": "203256",
+        "name": "Джимо-Алоба",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203257": {
+        "id": "203257",
+        "name": "Хоз",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203258": {
+        "id": "203258",
+        "name": "Янг",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203259": {
+        "id": "203259",
+        "name": "Конса",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203260": {
+        "id": "203260",
+        "name": "Кэш",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203261": {
+        "id": "203261",
+        "name": "Эмилиано Мартинес",
+        "amplua_id": "9",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203262": {
+        "id": "203262",
+        "name": "Матсен",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203263": {
+        "id": "203263",
+        "name": "Мингз",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203264": {
+        "id": "203264",
+        "name": "Ольсен",
+        "amplua_id": "9",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203265": {
+        "id": "203265",
+        "name": "Пау Торрес",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203266": {
+        "id": "203266",
+        "name": "Гарсия",
+        "amplua_id": "12",
+        "team_id": "7328",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203267": {
+        "id": "203267",
+        "name": "Динь",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203268": {
+        "id": "203268",
+        "name": "Бубакар Камара",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203269": {
+        "id": "203269",
+        "name": "Баркли",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203270": {
+        "id": "203270",
+        "name": "Макгинн",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203271": {
+        "id": "203271",
+        "name": "Онана",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203272": {
+        "id": "203272",
+        "name": "Рэмзи",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203273": {
+        "id": "203273",
+        "name": "Тилеманс",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203274": {
+        "id": "203274",
+        "name": "Марко Асенсио",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203275": {
+        "id": "203275",
+        "name": "Бэйли",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203276": {
+        "id": "203276",
+        "name": "Мален",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203277": {
+        "id": "203277",
+        "name": "Роджерс",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203278": {
+        "id": "203278",
+        "name": "Рэшфорд",
+        "amplua_id": "11",
+        "team_id": "7328",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203279": {
+        "id": "203279",
+        "name": "Уоткинс",
+        "amplua_id": "12",
+        "team_id": "7328",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203280": {
+        "id": "203280",
+        "name": "Дель Лунго",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203281": {
+        "id": "203281",
+        "name": "Росси",
+        "amplua_id": "9",
+        "team_id": "7329",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203282": {
+        "id": "203282",
+        "name": "Джимшити",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203283": {
+        "id": "203283",
+        "name": "Касса",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203284": {
+        "id": "203284",
+        "name": "Коссуну",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203285": {
+        "id": "203285",
+        "name": "Манцони",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203286": {
+        "id": "203286",
+        "name": "Палестра",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203287": {
+        "id": "203287",
+        "name": "Руй Патрисиу",
+        "amplua_id": "9",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203288": {
+        "id": "203288",
+        "name": "Скальвини",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203289": {
+        "id": "203289",
+        "name": "Сулемана",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203290": {
+        "id": "203290",
+        "name": "Толои",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203291": {
+        "id": "203291",
+        "name": "Хин",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203292": {
+        "id": "203292",
+        "name": "Белланова",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203293": {
+        "id": "203293",
+        "name": "Ваня Влахович",
+        "amplua_id": "12",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203294": {
+        "id": "203294",
+        "name": "де Рон",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203295": {
+        "id": "203295",
+        "name": "Карнезекки",
+        "amplua_id": "9",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203296": {
+        "id": "203296",
+        "name": "Колашинац",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203297": {
+        "id": "203297",
+        "name": "Куадрадо",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203298": {
+        "id": "203298",
+        "name": "Брешианини",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203299": {
+        "id": "203299",
+        "name": "Дзаппакоста",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203300": {
+        "id": "203300",
+        "name": "Мальдини",
+        "amplua_id": "12",
+        "team_id": "7329",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203301": {
+        "id": "203301",
+        "name": "Руджери",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203302": {
+        "id": "203302",
+        "name": "Самарджич",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203303": {
+        "id": "203303",
+        "name": "Пашалич",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203304": {
+        "id": "203304",
+        "name": "Эдерсон Лоуренсо",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203305": {
+        "id": "203305",
+        "name": "де Кетеларе",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203306": {
+        "id": "203306",
+        "name": "Скамакка",
+        "amplua_id": "12",
+        "team_id": "7329",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203307": {
+        "id": "203307",
+        "name": "Лукман",
+        "amplua_id": "11",
+        "team_id": "7329",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203308": {
+        "id": "203308",
+        "name": "Ретеги",
+        "amplua_id": "12",
+        "team_id": "7329",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203309": {
+        "id": "203309",
+        "name": "Гомис",
+        "amplua_id": "9",
+        "team_id": "7330",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203310": {
+        "id": "203310",
+        "name": "Итурбе",
+        "amplua_id": "9",
+        "team_id": "7330",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203311": {
+        "id": "203311",
+        "name": "Костис",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203312": {
+        "id": "203312",
+        "name": "Спина",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203313": {
+        "id": "203313",
+        "name": "Карлос Хименес",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203314": {
+        "id": "203314",
+        "name": "Аспиликуэта",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203315": {
+        "id": "203315",
+        "name": "Муссо",
+        "amplua_id": "9",
+        "team_id": "7330",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203316": {
+        "id": "203316",
+        "name": "Серрано",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203317": {
+        "id": "203317",
+        "name": "Хисмера",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203318": {
+        "id": "203318",
+        "name": "Барриос",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203319": {
+        "id": "203319",
+        "name": "Белаид",
+        "amplua_id": "12",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203320": {
+        "id": "203320",
+        "name": "Витцель",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203321": {
+        "id": "203321",
+        "name": "Галан",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203322": {
+        "id": "203322",
+        "name": "Лангле",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203323": {
+        "id": "203323",
+        "name": "Ле Норман",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203324": {
+        "id": "203324",
+        "name": "Ниньо",
+        "amplua_id": "12",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203325": {
+        "id": "203325",
+        "name": "Облак",
+        "amplua_id": "9",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203326": {
+        "id": "203326",
+        "name": "Рейнилду",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203327": {
+        "id": "203327",
+        "name": "Хосе Хименес",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203328": {
+        "id": "203328",
+        "name": "Коке",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203329": {
+        "id": "203329",
+        "name": "Лемар",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203330": {
+        "id": "203330",
+        "name": "Молина",
+        "amplua_id": "10",
+        "team_id": "7330",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203331": {
+        "id": "203331",
+        "name": "Рикельме",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203332": {
+        "id": "203332",
+        "name": "Галлахер",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203333": {
+        "id": "203333",
+        "name": "Де Поль",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203334": {
+        "id": "203334",
+        "name": "Лино",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203335": {
+        "id": "203335",
+        "name": "Льоренте",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203336": {
+        "id": "203336",
+        "name": "Симеоне",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203337": {
+        "id": "203337",
+        "name": "Анхель Корреа",
+        "amplua_id": "11",
+        "team_id": "7330",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203338": {
+        "id": "203338",
+        "name": "Альварес",
+        "amplua_id": "12",
+        "team_id": "7330",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203339": {
+        "id": "203339",
+        "name": "Серлот",
+        "amplua_id": "12",
+        "team_id": "7330",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203340": {
+        "id": "203340",
+        "name": "Гризманн",
+        "amplua_id": "12",
+        "team_id": "7330",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203341": {
+        "id": "203341",
+        "name": "Кланац",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203342": {
+        "id": "203342",
+        "name": "Павлешич",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203343": {
+        "id": "203343",
+        "name": "Шмитт",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203344": {
+        "id": "203344",
+        "name": "Бухманн",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203345": {
+        "id": "203345",
+        "name": "Урбиг",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203346": {
+        "id": "203346",
+        "name": "Азеко Нкили",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203347": {
+        "id": "203347",
+        "name": "Асп Йенсен",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203348": {
+        "id": "203348",
+        "name": "Боэ",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203349": {
+        "id": "203349",
+        "name": "Ито",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203350": {
+        "id": "203350",
+        "name": "Куси-Асаре",
+        "amplua_id": "12",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203351": {
+        "id": "203351",
+        "name": "Перец",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203352": {
+        "id": "203352",
+        "name": "Станишич",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203353": {
+        "id": "203353",
+        "name": "Дайер",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203354": {
+        "id": "203354",
+        "name": "Ким Мин Чжэ",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203355": {
+        "id": "203355",
+        "name": "Лаймер",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203356": {
+        "id": "203356",
+        "name": "Нойер",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203357": {
+        "id": "203357",
+        "name": "Александар Павлович",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203358": {
+        "id": "203358",
+        "name": "Пальинья",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203359": {
+        "id": "203359",
+        "name": "Ульрайх",
+        "amplua_id": "9",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203360": {
+        "id": "203360",
+        "name": "Упамекано",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203361": {
+        "id": "203361",
+        "name": "Геррейру",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203362": {
+        "id": "203362",
+        "name": "Горетцка",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203363": {
+        "id": "203363",
+        "name": "Альфонсо Дэвис",
+        "amplua_id": "10",
+        "team_id": "7331",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203364": {
+        "id": "203364",
+        "name": "Киммих",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203365": {
+        "id": "203365",
+        "name": "Гнабри",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203366": {
+        "id": "203366",
+        "name": "Коман",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203367": {
+        "id": "203367",
+        "name": "Мюллер",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203368": {
+        "id": "203368",
+        "name": "Олисе",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203369": {
+        "id": "203369",
+        "name": "Сане",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203370": {
+        "id": "203370",
+        "name": "Мусиала",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203371": {
+        "id": "203371",
+        "name": "Кейн",
+        "amplua_id": "12",
+        "team_id": "7331",
+        "cost": 9,
+        "stat_by_tours": []
+      },
+      "203372": {
+        "id": "203372",
+        "name": "Натали",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203373": {
+        "id": "203373",
+        "name": "Хавигхорст",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203374": {
+        "id": "203374",
+        "name": "Ломб",
+        "amplua_id": "9",
+        "team_id": "7332",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203375": {
+        "id": "203375",
+        "name": "Алайбегович",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203376": {
+        "id": "203376",
+        "name": "Артур",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203377": {
+        "id": "203377",
+        "name": "Белосьян",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203378": {
+        "id": "203378",
+        "name": "Коварж",
+        "amplua_id": "9",
+        "team_id": "7332",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203379": {
+        "id": "203379",
+        "name": "Эрмосо",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203380": {
+        "id": "203380",
+        "name": "Андрих",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203381": {
+        "id": "203381",
+        "name": "Градецки",
+        "amplua_id": "9",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203382": {
+        "id": "203382",
+        "name": "Инкапиэ",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203383": {
+        "id": "203383",
+        "name": "Мукиеле",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203384": {
+        "id": "203384",
+        "name": "Оньека",
+        "amplua_id": "12",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203385": {
+        "id": "203385",
+        "name": "Сарко",
+        "amplua_id": "12",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203386": {
+        "id": "203386",
+        "name": "Степанов",
+        "amplua_id": "12",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203387": {
+        "id": "203387",
+        "name": "Та",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203388": {
+        "id": "203388",
+        "name": "Тапсоба",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203389": {
+        "id": "203389",
+        "name": "Адли",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203390": {
+        "id": "203390",
+        "name": "Алеиш Гарсия",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203391": {
+        "id": "203391",
+        "name": "Буэндиа",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203392": {
+        "id": "203392",
+        "name": "Гримальдо",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203393": {
+        "id": "203393",
+        "name": "Джака",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203394": {
+        "id": "203394",
+        "name": "Эксекиэль Паласиос",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203395": {
+        "id": "203395",
+        "name": "Фримпонг",
+        "amplua_id": "10",
+        "team_id": "7332",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203396": {
+        "id": "203396",
+        "name": "Телла",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203397": {
+        "id": "203397",
+        "name": "Терье",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203398": {
+        "id": "203398",
+        "name": "Хофманн",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203399": {
+        "id": "203399",
+        "name": "Бонифасе",
+        "amplua_id": "12",
+        "team_id": "7332",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203400": {
+        "id": "203400",
+        "name": "Шик",
+        "amplua_id": "12",
+        "team_id": "7332",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203401": {
+        "id": "203401",
+        "name": "Виртц",
+        "amplua_id": "11",
+        "team_id": "7332",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203402": {
+        "id": "203402",
+        "name": "Астралага",
+        "amplua_id": "9",
+        "team_id": "7333",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203403": {
+        "id": "203403",
+        "name": "Домингес",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203404": {
+        "id": "203404",
+        "name": "Кортес",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203405": {
+        "id": "203405",
+        "name": "Кочен",
+        "amplua_id": "9",
+        "team_id": "7333",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203406": {
+        "id": "203406",
+        "name": "Куэнка",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203407": {
+        "id": "203407",
+        "name": "Якобишвили",
+        "amplua_id": "9",
+        "team_id": "7333",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203408": {
+        "id": "203408",
+        "name": "Дарвиш",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203409": {
+        "id": "203409",
+        "name": "Мартин",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203410": {
+        "id": "203410",
+        "name": "Гилье Фернандес",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203411": {
+        "id": "203411",
+        "name": "Тони Фернандес",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203412": {
+        "id": "203412",
+        "name": "Форт",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203413": {
+        "id": "203413",
+        "name": "Эрик Гарсия",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203414": {
+        "id": "203414",
+        "name": "Рональд Араухо",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203415": {
+        "id": "203415",
+        "name": "Бальде",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203416": {
+        "id": "203416",
+        "name": "Берналь",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203417": {
+        "id": "203417",
+        "name": "Касадо",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203418": {
+        "id": "203418",
+        "name": "Кристенсен",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203419": {
+        "id": "203419",
+        "name": "Кубарси",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203420": {
+        "id": "203420",
+        "name": "Иньиго Мартинес",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203421": {
+        "id": "203421",
+        "name": "Пенья",
+        "amplua_id": "9",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203422": {
+        "id": "203422",
+        "name": "тер Стеген",
+        "amplua_id": "9",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203423": {
+        "id": "203423",
+        "name": "Шченсны",
+        "amplua_id": "9",
+        "team_id": "7333",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203424": {
+        "id": "203424",
+        "name": "Виктор",
+        "amplua_id": "12",
+        "team_id": "7333",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203425": {
+        "id": "203425",
+        "name": "Френки де Йонг",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203426": {
+        "id": "203426",
+        "name": "Кунде",
+        "amplua_id": "10",
+        "team_id": "7333",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203427": {
+        "id": "203427",
+        "name": "Лопес",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203428": {
+        "id": "203428",
+        "name": "Торре",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203429": {
+        "id": "203429",
+        "name": "Гави",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203430": {
+        "id": "203430",
+        "name": "Педри",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203431": {
+        "id": "203431",
+        "name": "Фати",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203432": {
+        "id": "203432",
+        "name": "Ферран Торрес",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203433": {
+        "id": "203433",
+        "name": "Ольмо",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203434": {
+        "id": "203434",
+        "name": "Левандовски",
+        "amplua_id": "12",
+        "team_id": "7333",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203435": {
+        "id": "203435",
+        "name": "Рафинья",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203436": {
+        "id": "203436",
+        "name": "Ямаль",
+        "amplua_id": "11",
+        "team_id": "7333",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203437": {
+        "id": "203437",
+        "name": "Паренте",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203438": {
+        "id": "203438",
+        "name": "Самуэл Соареш",
+        "amplua_id": "9",
+        "team_id": "7334",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203439": {
+        "id": "203439",
+        "name": "Леандру Сантуш",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203440": {
+        "id": "203440",
+        "name": "Фонсека",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203441": {
+        "id": "203441",
+        "name": "Альваро Фернандес",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203442": {
+        "id": "203442",
+        "name": "Антониу Силва",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203443": {
+        "id": "203443",
+        "name": "Байрами",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203444": {
+        "id": "203444",
+        "name": "Нуну Феликс",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203445": {
+        "id": "203445",
+        "name": "Отаменди",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203446": {
+        "id": "203446",
+        "name": "Приоште",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203447": {
+        "id": "203447",
+        "name": "Рего",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203448": {
+        "id": "203448",
+        "name": "Томаш Араужу",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203449": {
+        "id": "203449",
+        "name": "Трубин",
+        "amplua_id": "9",
+        "team_id": "7334",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203450": {
+        "id": "203450",
+        "name": "Ба",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203451": {
+        "id": "203451",
+        "name": "Гоувейя",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203452": {
+        "id": "203452",
+        "name": "Гуштаву Варела",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203453": {
+        "id": "203453",
+        "name": "Рольхейсер",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203454": {
+        "id": "203454",
+        "name": "Саншеш",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203455": {
+        "id": "203455",
+        "name": "Ману Силва",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203456": {
+        "id": "203456",
+        "name": "Флорентину",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203457": {
+        "id": "203457",
+        "name": "Артур Кабрал",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203458": {
+        "id": "203458",
+        "name": "Баррейро",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203459": {
+        "id": "203459",
+        "name": "Кекчю",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203460": {
+        "id": "203460",
+        "name": "Престианни",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203461": {
+        "id": "203461",
+        "name": "Скьеллеруп",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203462": {
+        "id": "203462",
+        "name": "Эурснес",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203463": {
+        "id": "203463",
+        "name": "Амдуни",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203464": {
+        "id": "203464",
+        "name": "Ди Мария",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203465": {
+        "id": "203465",
+        "name": "Павлидис",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203466": {
+        "id": "203466",
+        "name": "Актюркоглу",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203467": {
+        "id": "203467",
+        "name": "Бенкара",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203468": {
+        "id": "203468",
+        "name": "Йессен",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203469": {
+        "id": "203469",
+        "name": "Кабар",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203470": {
+        "id": "203470",
+        "name": "Майзер",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203471": {
+        "id": "203471",
+        "name": "Остшиньски",
+        "amplua_id": "9",
+        "team_id": "7335",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203472": {
+        "id": "203472",
+        "name": "Лелле",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203473": {
+        "id": "203473",
+        "name": "Лотка",
+        "amplua_id": "9",
+        "team_id": "7335",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203474": {
+        "id": "203474",
+        "name": "Люрс",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203475": {
+        "id": "203475",
+        "name": "Мане",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203476": {
+        "id": "203476",
+        "name": "Азхиль",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203477": {
+        "id": "203477",
+        "name": "Антон",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203478": {
+        "id": "203478",
+        "name": "Ветьен",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203479": {
+        "id": "203479",
+        "name": "Зюле",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203480": {
+        "id": "203480",
+        "name": "Майер",
+        "amplua_id": "9",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203481": {
+        "id": "203481",
+        "name": "Паулина",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203482": {
+        "id": "203482",
+        "name": "Элонго-Йомбо",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203483": {
+        "id": "203483",
+        "name": "Бенсебайни",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203484": {
+        "id": "203484",
+        "name": "Дюранвиль",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203485": {
+        "id": "203485",
+        "name": "Кобель",
+        "amplua_id": "9",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203486": {
+        "id": "203486",
+        "name": "Кэмпбелл",
+        "amplua_id": "12",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203487": {
+        "id": "203487",
+        "name": "Рюэрсон",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203488": {
+        "id": "203488",
+        "name": "Шлоттербек",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203489": {
+        "id": "203489",
+        "name": "Ян Коуто",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203490": {
+        "id": "203490",
+        "name": "Джан",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203491": {
+        "id": "203491",
+        "name": "Нмеча",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203492": {
+        "id": "203492",
+        "name": "Рейна",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203493": {
+        "id": "203493",
+        "name": "Адейеми",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203494": {
+        "id": "203494",
+        "name": "Байер",
+        "amplua_id": "12",
+        "team_id": "7335",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203495": {
+        "id": "203495",
+        "name": "Гросс",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203496": {
+        "id": "203496",
+        "name": "Забитцер",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203497": {
+        "id": "203497",
+        "name": "Брандт",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203498": {
+        "id": "203498",
+        "name": "Гиттенс",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203499": {
+        "id": "203499",
+        "name": "Гирасси",
+        "amplua_id": "12",
+        "team_id": "7335",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203500": {
+        "id": "203500",
+        "name": "Жони",
+        "amplua_id": "9",
+        "team_id": "7336",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203501": {
+        "id": "203501",
+        "name": "Ири",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203502": {
+        "id": "203502",
+        "name": "Ле Гуэн",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203503": {
+        "id": "203503",
+        "name": "Амави",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203504": {
+        "id": "203504",
+        "name": "Зогбе",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203505": {
+        "id": "203505",
+        "name": "Кудер",
+        "amplua_id": "9",
+        "team_id": "7336",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203506": {
+        "id": "203506",
+        "name": "Ле Кардиналь",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203507": {
+        "id": "203507",
+        "name": "Айдара",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203508": {
+        "id": "203508",
+        "name": "Бизот",
+        "amplua_id": "9",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203509": {
+        "id": "203509",
+        "name": "Ботз",
+        "amplua_id": "12",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203510": {
+        "id": "203510",
+        "name": "Канте",
+        "amplua_id": "12",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203511": {
+        "id": "203511",
+        "name": "Сумаила Кулибали",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203512": {
+        "id": "203512",
+        "name": "Лала",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203513": {
+        "id": "203513",
+        "name": "Локо",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203514": {
+        "id": "203514",
+        "name": "Мартен",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203515": {
+        "id": "203515",
+        "name": "Ндиайе",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203516": {
+        "id": "203516",
+        "name": "Фернандеш",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203517": {
+        "id": "203517",
+        "name": "Шардонне",
+        "amplua_id": "10",
+        "team_id": "7336",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203518": {
+        "id": "203518",
+        "name": "Балде",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203519": {
+        "id": "203519",
+        "name": "Бурго",
+        "amplua_id": "12",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203520": {
+        "id": "203520",
+        "name": "Серин Диоп",
+        "amplua_id": "12",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203521": {
+        "id": "203521",
+        "name": "Думбия",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203522": {
+        "id": "203522",
+        "name": "Ле-Мелу",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203523": {
+        "id": "203523",
+        "name": "Перейра Лаже",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203524": {
+        "id": "203524",
+        "name": "Сала",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203525": {
+        "id": "203525",
+        "name": "Ажорк",
+        "amplua_id": "12",
+        "team_id": "7336",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203526": {
+        "id": "203526",
+        "name": "Махди Камара",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203527": {
+        "id": "203527",
+        "name": "Маньетти",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203528": {
+        "id": "203528",
+        "name": "Сима",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203529": {
+        "id": "203529",
+        "name": "Февр",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203530": {
+        "id": "203530",
+        "name": "Дель Кастийо",
+        "amplua_id": "11",
+        "team_id": "7336",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203531": {
+        "id": "203531",
+        "name": "ван ден Хевел",
+        "amplua_id": "9",
+        "team_id": "7337",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203532": {
+        "id": "203532",
+        "name": "де Руве",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203533": {
+        "id": "203533",
+        "name": "Мейер",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203534": {
+        "id": "203534",
+        "name": "Мехеле",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203535": {
+        "id": "203535",
+        "name": "Ордоньес",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203536": {
+        "id": "203536",
+        "name": "Ромеро",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203537": {
+        "id": "203537",
+        "name": "Саббе",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203538": {
+        "id": "203538",
+        "name": "Сейс",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203539": {
+        "id": "203539",
+        "name": "Сике",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203540": {
+        "id": "203540",
+        "name": "Спилерс",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203541": {
+        "id": "203541",
+        "name": "Эт-Таиби",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203542": {
+        "id": "203542",
+        "name": "Яккерс",
+        "amplua_id": "9",
+        "team_id": "7337",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203543": {
+        "id": "203543",
+        "name": "Аудор",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203544": {
+        "id": "203544",
+        "name": "Ветлесен",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203545": {
+        "id": "203545",
+        "name": "де Кейпер",
+        "amplua_id": "10",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203546": {
+        "id": "203546",
+        "name": "Миньоле",
+        "amplua_id": "9",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203547": {
+        "id": "203547",
+        "name": "Нильсен",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203548": {
+        "id": "203548",
+        "name": "Скурась",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203549": {
+        "id": "203549",
+        "name": "Тальби",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203550": {
+        "id": "203550",
+        "name": "Ванакен",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203551": {
+        "id": "203551",
+        "name": "Вермант",
+        "amplua_id": "12",
+        "team_id": "7337",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203552": {
+        "id": "203552",
+        "name": "Нвадике",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203553": {
+        "id": "203553",
+        "name": "Нильссон",
+        "amplua_id": "12",
+        "team_id": "7337",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203554": {
+        "id": "203554",
+        "name": "Цолис",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203555": {
+        "id": "203555",
+        "name": "Яшари",
+        "amplua_id": "11",
+        "team_id": "7337",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203556": {
+        "id": "203556",
+        "name": "Жуджла",
+        "amplua_id": "12",
+        "team_id": "7337",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203557": {
+        "id": "203557",
+        "name": "Айду",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203558": {
+        "id": "203558",
+        "name": "Алексиу",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203559": {
+        "id": "203559",
+        "name": "Беренбрух",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203560": {
+        "id": "203560",
+        "name": "Ди Дженнаро",
+        "amplua_id": "9",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203561": {
+        "id": "203561",
+        "name": "Каллигарис",
+        "amplua_id": "9",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203562": {
+        "id": "203562",
+        "name": "Мотта",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203563": {
+        "id": "203563",
+        "name": "Ре Чеккони",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203564": {
+        "id": "203564",
+        "name": "Биссек",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203565": {
+        "id": "203565",
+        "name": "Де Пьери",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203566": {
+        "id": "203566",
+        "name": "Дзанкетта",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203567": {
+        "id": "203567",
+        "name": "Жозеп Мартинес",
+        "amplua_id": "9",
+        "team_id": "7338",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203568": {
+        "id": "203568",
+        "name": "Топалович",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203569": {
+        "id": "203569",
+        "name": "Аслани",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203570": {
+        "id": "203570",
+        "name": "Ачерби",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203571": {
+        "id": "203571",
+        "name": "Бастони",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203572": {
+        "id": "203572",
+        "name": "Бьюкенен",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203573": {
+        "id": "203573",
+        "name": "Дармиан",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203574": {
+        "id": "203574",
+        "name": "де Врей",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203575": {
+        "id": "203575",
+        "name": "Залевски",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203576": {
+        "id": "203576",
+        "name": "Зоммер",
+        "amplua_id": "9",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203577": {
+        "id": "203577",
+        "name": "Карлос Аугусто",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203578": {
+        "id": "203578",
+        "name": "Павар",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203579": {
+        "id": "203579",
+        "name": "Димарко",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203580": {
+        "id": "203580",
+        "name": "Думфрис",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203581": {
+        "id": "203581",
+        "name": "Зелиньски",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203582": {
+        "id": "203582",
+        "name": "Хоакин Корреа",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203583": {
+        "id": "203583",
+        "name": "Арнаутович",
+        "amplua_id": "12",
+        "team_id": "7338",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203584": {
+        "id": "203584",
+        "name": "Барелла",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203585": {
+        "id": "203585",
+        "name": "Мхитарян",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203586": {
+        "id": "203586",
+        "name": "Фраттези",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203587": {
+        "id": "203587",
+        "name": "Тареми",
+        "amplua_id": "12",
+        "team_id": "7338",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203588": {
+        "id": "203588",
+        "name": "Чалханоглу",
+        "amplua_id": "11",
+        "team_id": "7338",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203589": {
+        "id": "203589",
+        "name": "Маркус Тюрам",
+        "amplua_id": "12",
+        "team_id": "7338",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203590": {
+        "id": "203590",
+        "name": "Лаутаро Мартинес",
+        "amplua_id": "12",
+        "team_id": "7338",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203591": {
+        "id": "203591",
+        "name": "Харви Дэвис",
+        "amplua_id": "9",
+        "team_id": "7339",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203592": {
+        "id": "203592",
+        "name": "Мабайя",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203593": {
+        "id": "203593",
+        "name": "Налло",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203594": {
+        "id": "203594",
+        "name": "Норрис",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203595": {
+        "id": "203595",
+        "name": "Ярош",
+        "amplua_id": "9",
+        "team_id": "7339",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203596": {
+        "id": "203596",
+        "name": "Брэдли",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203597": {
+        "id": "203597",
+        "name": "Джо Гомес",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203598": {
+        "id": "203598",
+        "name": "Куанса",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203599": {
+        "id": "203599",
+        "name": "Макконнелл",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203600": {
+        "id": "203600",
+        "name": "Моррисон",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203601": {
+        "id": "203601",
+        "name": "Мортон",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203602": {
+        "id": "203602",
+        "name": "Нгумоа",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203603": {
+        "id": "203603",
+        "name": "Ньони",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203604": {
+        "id": "203604",
+        "name": "Алиссон",
+        "amplua_id": "9",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203605": {
+        "id": "203605",
+        "name": "ван Дейк",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203606": {
+        "id": "203606",
+        "name": "Гордон",
+        "amplua_id": "12",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203607": {
+        "id": "203607",
+        "name": "Дэннс",
+        "amplua_id": "12",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203608": {
+        "id": "203608",
+        "name": "Келлехер",
+        "amplua_id": "9",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203609": {
+        "id": "203609",
+        "name": "Конате",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203610": {
+        "id": "203610",
+        "name": "Коне-Доэрти",
+        "amplua_id": "12",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203611": {
+        "id": "203611",
+        "name": "Цимикас",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203612": {
+        "id": "203612",
+        "name": "Эндо",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203613": {
+        "id": "203613",
+        "name": "Александер-Арнолд",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203614": {
+        "id": "203614",
+        "name": "Гравенберх",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203615": {
+        "id": "203615",
+        "name": "Джонс",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203616": {
+        "id": "203616",
+        "name": "Мак Аллистер",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203617": {
+        "id": "203617",
+        "name": "Робертсон",
+        "amplua_id": "10",
+        "team_id": "7339",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203618": {
+        "id": "203618",
+        "name": "Эллиот",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203619": {
+        "id": "203619",
+        "name": "Кьеза",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203620": {
+        "id": "203620",
+        "name": "Собослаи",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203621": {
+        "id": "203621",
+        "name": "Гакпо",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203622": {
+        "id": "203622",
+        "name": "Диас",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203623": {
+        "id": "203623",
+        "name": "Диогу Жота",
+        "amplua_id": "12",
+        "team_id": "7339",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203624": {
+        "id": "203624",
+        "name": "Нуньес",
+        "amplua_id": "12",
+        "team_id": "7339",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203625": {
+        "id": "203625",
+        "name": "Салах",
+        "amplua_id": "11",
+        "team_id": "7339",
+        "cost": 9,
+        "stat_by_tours": []
+      },
+      "203626": {
+        "id": "203626",
+        "name": "Коссье",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203627": {
+        "id": "203627",
+        "name": "Алессандро",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203628": {
+        "id": "203628",
+        "name": "Гудмундссон",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203629": {
+        "id": "203629",
+        "name": "Исмаили",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203630": {
+        "id": "203630",
+        "name": "Кейяр",
+        "amplua_id": "9",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203631": {
+        "id": "203631",
+        "name": "Лашааб",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203632": {
+        "id": "203632",
+        "name": "Манди",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203633": {
+        "id": "203633",
+        "name": "Манноне",
+        "amplua_id": "9",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203634": {
+        "id": "203634",
+        "name": "Тиагу Сантуш",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203635": {
+        "id": "203635",
+        "name": "Умтити",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203636": {
+        "id": "203636",
+        "name": "Буадди",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203637": {
+        "id": "203637",
+        "name": "Диаките",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203638": {
+        "id": "203638",
+        "name": "Малуда",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203639": {
+        "id": "203639",
+        "name": "Этан Мбаппе",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203640": {
+        "id": "203640",
+        "name": "Менье",
+        "amplua_id": "10",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203641": {
+        "id": "203641",
+        "name": "Мукау",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203642": {
+        "id": "203642",
+        "name": "Шевалье",
+        "amplua_id": "9",
+        "team_id": "7340",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203643": {
+        "id": "203643",
+        "name": "Андре Гомеш",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203644": {
+        "id": "203644",
+        "name": "Баккер",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203645": {
+        "id": "203645",
+        "name": "Бенталеб",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203646": {
+        "id": "203646",
+        "name": "Эйнджел Гомес",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203647": {
+        "id": "203647",
+        "name": "Харальдссон",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203648": {
+        "id": "203648",
+        "name": "Акпом",
+        "amplua_id": "12",
+        "team_id": "7340",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203649": {
+        "id": "203649",
+        "name": "Андре",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203650": {
+        "id": "203650",
+        "name": "Кабелла",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203651": {
+        "id": "203651",
+        "name": "Сахрауи",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203652": {
+        "id": "203652",
+        "name": "Фернандес Пардо",
+        "amplua_id": "12",
+        "team_id": "7340",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203653": {
+        "id": "203653",
+        "name": "Жегрова",
+        "amplua_id": "11",
+        "team_id": "7340",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203654": {
+        "id": "203654",
+        "name": "Дэвид",
+        "amplua_id": "12",
+        "team_id": "7340",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203655": {
+        "id": "203655",
+        "name": "Аллейн",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203656": {
+        "id": "203656",
+        "name": "Бритс",
+        "amplua_id": "9",
+        "team_id": "7341",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203657": {
+        "id": "203657",
+        "name": "Карсон",
+        "amplua_id": "9",
+        "team_id": "7341",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203658": {
+        "id": "203658",
+        "name": "Симпсон-Пьюзи",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203659": {
+        "id": "203659",
+        "name": "Брекин",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203660": {
+        "id": "203660",
+        "name": "Райт",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203661": {
+        "id": "203661",
+        "name": "Рейс",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203662": {
+        "id": "203662",
+        "name": "Хусанов",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203663": {
+        "id": "203663",
+        "name": "Аканджи",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203664": {
+        "id": "203664",
+        "name": "Аке",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203665": {
+        "id": "203665",
+        "name": "Льюис",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203666": {
+        "id": "203666",
+        "name": "О`Райли",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203667": {
+        "id": "203667",
+        "name": "Ортега",
+        "amplua_id": "9",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203668": {
+        "id": "203668",
+        "name": "Рубен Диаш",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203669": {
+        "id": "203669",
+        "name": "Стоунз",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203670": {
+        "id": "203670",
+        "name": "Эдерсон",
+        "amplua_id": "9",
+        "team_id": "7341",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203671": {
+        "id": "203671",
+        "name": "Бобб",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203672": {
+        "id": "203672",
+        "name": "Гвардиол",
+        "amplua_id": "10",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203673": {
+        "id": "203673",
+        "name": "Ковачич",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203674": {
+        "id": "203674",
+        "name": "Макати",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203675": {
+        "id": "203675",
+        "name": "Матеуш Нунеш",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203676": {
+        "id": "203676",
+        "name": "Мубама",
+        "amplua_id": "12",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203677": {
+        "id": "203677",
+        "name": "Родри Эрнандес",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203678": {
+        "id": "203678",
+        "name": "Эчеверри",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203679": {
+        "id": "203679",
+        "name": "Гюндоган",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203680": {
+        "id": "203680",
+        "name": "Бернарду Силва",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203681": {
+        "id": "203681",
+        "name": "Грилиш",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203682": {
+        "id": "203682",
+        "name": "Доку",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203683": {
+        "id": "203683",
+        "name": "Савио",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203684": {
+        "id": "203684",
+        "name": "Мармуш",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203685": {
+        "id": "203685",
+        "name": "де Брюйне",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203686": {
+        "id": "203686",
+        "name": "Фоден",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203687": {
+        "id": "203687",
+        "name": "Холанд",
+        "amplua_id": "12",
+        "team_id": "7341",
+        "cost": 9,
+        "stat_by_tours": []
+      },
+      "203688": {
+        "id": "203688",
+        "name": "Равер",
+        "amplua_id": "9",
+        "team_id": "7342",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203689": {
+        "id": "203689",
+        "name": "Торрьяни",
+        "amplua_id": "9",
+        "team_id": "7342",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203690": {
+        "id": "203690",
+        "name": "Бартезаги",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203691": {
+        "id": "203691",
+        "name": "Нава",
+        "amplua_id": "9",
+        "team_id": "7342",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203692": {
+        "id": "203692",
+        "name": "Вос",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203693": {
+        "id": "203693",
+        "name": "Габбия",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203694": {
+        "id": "203694",
+        "name": "Либерали",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203695": {
+        "id": "203695",
+        "name": "Оморегбе",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203696": {
+        "id": "203696",
+        "name": "Страхиня Павлович",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203697": {
+        "id": "203697",
+        "name": "Спортьелло",
+        "amplua_id": "9",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203698": {
+        "id": "203698",
+        "name": "Терраччано",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203699": {
+        "id": "203699",
+        "name": "Тиав",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203700": {
+        "id": "203700",
+        "name": "Флоренци",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203701": {
+        "id": "203701",
+        "name": "Алехандро Хименес",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203702": {
+        "id": "203702",
+        "name": "Беннасер",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203703": {
+        "id": "203703",
+        "name": "Меньян",
+        "amplua_id": "9",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203704": {
+        "id": "203704",
+        "name": "Томори",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203705": {
+        "id": "203705",
+        "name": "Траоре",
+        "amplua_id": "12",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203706": {
+        "id": "203706",
+        "name": "Уокер",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203707": {
+        "id": "203707",
+        "name": "Эмерсон",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203708": {
+        "id": "203708",
+        "name": "Камарда",
+        "amplua_id": "12",
+        "team_id": "7342",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203709": {
+        "id": "203709",
+        "name": "Муса",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203710": {
+        "id": "203710",
+        "name": "Тео",
+        "amplua_id": "10",
+        "team_id": "7342",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203711": {
+        "id": "203711",
+        "name": "Фофана",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203712": {
+        "id": "203712",
+        "name": "Абрахам",
+        "amplua_id": "12",
+        "team_id": "7342",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203713": {
+        "id": "203713",
+        "name": "Йович",
+        "amplua_id": "12",
+        "team_id": "7342",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203714": {
+        "id": "203714",
+        "name": "Лофтус-Чик",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203715": {
+        "id": "203715",
+        "name": "Сантьяго Хименес",
+        "amplua_id": "12",
+        "team_id": "7342",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203716": {
+        "id": "203716",
+        "name": "Чуквуэзе",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203717": {
+        "id": "203717",
+        "name": "Рейндерс",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203718": {
+        "id": "203718",
+        "name": "Пулишич",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203719": {
+        "id": "203719",
+        "name": "Рафаэл Леау",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203720": {
+        "id": "203720",
+        "name": "Кива",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203721": {
+        "id": "203721",
+        "name": "Нибомбе",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203722": {
+        "id": "203722",
+        "name": "Ставецки",
+        "amplua_id": "9",
+        "team_id": "7343",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203723": {
+        "id": "203723",
+        "name": "Бамба",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203724": {
+        "id": "203724",
+        "name": "Бенама",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203725": {
+        "id": "203725",
+        "name": "Льенар",
+        "amplua_id": "9",
+        "team_id": "7343",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203726": {
+        "id": "203726",
+        "name": "Буабре",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203727": {
+        "id": "203727",
+        "name": "Эдан Диоп",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203728": {
+        "id": "203728",
+        "name": "Кайо Энрике",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203729": {
+        "id": "203729",
+        "name": "Кен",
+        "amplua_id": "9",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203730": {
+        "id": "203730",
+        "name": "Мамаду Кулибали",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203731": {
+        "id": "203731",
+        "name": "Мависса Элеби",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203732": {
+        "id": "203732",
+        "name": "Маецки",
+        "amplua_id": "9",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203733": {
+        "id": "203733",
+        "name": "Салису",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203734": {
+        "id": "203734",
+        "name": "Тезе",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203735": {
+        "id": "203735",
+        "name": "Тинкрес",
+        "amplua_id": "12",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203736": {
+        "id": "203736",
+        "name": "Уаттара",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203737": {
+        "id": "203737",
+        "name": "Вандерсон",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203738": {
+        "id": "203738",
+        "name": "Диатта",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203739": {
+        "id": "203739",
+        "name": "Закария",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203740": {
+        "id": "203740",
+        "name": "Ламин Камара",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203741": {
+        "id": "203741",
+        "name": "Керер",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203742": {
+        "id": "203742",
+        "name": "Магасса",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203743": {
+        "id": "203743",
+        "name": "Мишаль",
+        "amplua_id": "12",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203744": {
+        "id": "203744",
+        "name": "Синго",
+        "amplua_id": "10",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203745": {
+        "id": "203745",
+        "name": "Аклиуш",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203746": {
+        "id": "203746",
+        "name": "Балогун",
+        "amplua_id": "12",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203747": {
+        "id": "203747",
+        "name": "Бен-Сегир",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203748": {
+        "id": "203748",
+        "name": "Бирет",
+        "amplua_id": "12",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203749": {
+        "id": "203749",
+        "name": "Головин",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203750": {
+        "id": "203750",
+        "name": "Иленикена",
+        "amplua_id": "12",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203751": {
+        "id": "203751",
+        "name": "Минамино",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203752": {
+        "id": "203752",
+        "name": "Эмболо",
+        "amplua_id": "12",
+        "team_id": "7343",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203753": {
+        "id": "203753",
+        "name": "Брессер",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203754": {
+        "id": "203754",
+        "name": "Кун",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203755": {
+        "id": "203755",
+        "name": "Нагало",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203756": {
+        "id": "203756",
+        "name": "Смоленарс",
+        "amplua_id": "9",
+        "team_id": "7344",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203757": {
+        "id": "203757",
+        "name": "Схикс",
+        "amplua_id": "9",
+        "team_id": "7344",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203758": {
+        "id": "203758",
+        "name": "ван де Блак",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203759": {
+        "id": "203759",
+        "name": "Дроммел",
+        "amplua_id": "9",
+        "team_id": "7344",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203760": {
+        "id": "203760",
+        "name": "Лэнд",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203761": {
+        "id": "203761",
+        "name": "Обиспо",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203762": {
+        "id": "203762",
+        "name": "Абед",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203763": {
+        "id": "203763",
+        "name": "Бабади",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203764": {
+        "id": "203764",
+        "name": "Байрактаревич",
+        "amplua_id": "12",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203765": {
+        "id": "203765",
+        "name": "Бенитес",
+        "amplua_id": "9",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203766": {
+        "id": "203766",
+        "name": "Боскальи",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203767": {
+        "id": "203767",
+        "name": "Дест",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203768": {
+        "id": "203768",
+        "name": "Дриауех",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203769": {
+        "id": "203769",
+        "name": "Карсдорп",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203770": {
+        "id": "203770",
+        "name": "Ледесма",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203771": {
+        "id": "203771",
+        "name": "Унекен",
+        "amplua_id": "12",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203772": {
+        "id": "203772",
+        "name": "Фламинго",
+        "amplua_id": "10",
+        "team_id": "7344",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203773": {
+        "id": "203773",
+        "name": "Мауро Жуниор",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203774": {
+        "id": "203774",
+        "name": "Схаутен",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203775": {
+        "id": "203775",
+        "name": "Сайбари",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203776": {
+        "id": "203776",
+        "name": "Тилльман",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203777": {
+        "id": "203777",
+        "name": "Бакайоко",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203778": {
+        "id": "203778",
+        "name": "Верман",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203779": {
+        "id": "203779",
+        "name": "Люк де Йонг",
+        "amplua_id": "12",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203780": {
+        "id": "203780",
+        "name": "Ланг",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203781": {
+        "id": "203781",
+        "name": "Пепи",
+        "amplua_id": "12",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203782": {
+        "id": "203782",
+        "name": "Перишич",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203783": {
+        "id": "203783",
+        "name": "Тил",
+        "amplua_id": "11",
+        "team_id": "7344",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203784": {
+        "id": "203784",
+        "name": "Загe",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203785": {
+        "id": "203785",
+        "name": "Муке",
+        "amplua_id": "9",
+        "team_id": "7345",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203786": {
+        "id": "203786",
+        "name": "Тап",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203787": {
+        "id": "203787",
+        "name": "Эль-Ханнаш",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203788": {
+        "id": "203788",
+        "name": "Кимпембе",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203789": {
+        "id": "203789",
+        "name": "Тенас",
+        "amplua_id": "9",
+        "team_id": "7345",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203790": {
+        "id": "203790",
+        "name": "Бералдо",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203791": {
+        "id": "203791",
+        "name": "Доннарумма",
+        "amplua_id": "9",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203792": {
+        "id": "203792",
+        "name": "Люка Эрнандес",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203793": {
+        "id": "203793",
+        "name": "Маркиньос",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203794": {
+        "id": "203794",
+        "name": "Мбайе",
+        "amplua_id": "12",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203795": {
+        "id": "203795",
+        "name": "Мендеш",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203796": {
+        "id": "203796",
+        "name": "Меюлю",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203797": {
+        "id": "203797",
+        "name": "Пачо",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203798": {
+        "id": "203798",
+        "name": "Сафонов",
+        "amplua_id": "9",
+        "team_id": "7345",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203799": {
+        "id": "203799",
+        "name": "Дуэ",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203800": {
+        "id": "203800",
+        "name": "Жоау Невеш",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203801": {
+        "id": "203801",
+        "name": "Хакими",
+        "amplua_id": "10",
+        "team_id": "7345",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203802": {
+        "id": "203802",
+        "name": "Витинья",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203803": {
+        "id": "203803",
+        "name": "Заир-Эмери",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203804": {
+        "id": "203804",
+        "name": "Ли Кан Ин",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203805": {
+        "id": "203805",
+        "name": "Фабиан Руис",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203806": {
+        "id": "203806",
+        "name": "Барколя",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203807": {
+        "id": "203807",
+        "name": "Гонсалу Рамуш",
+        "amplua_id": "12",
+        "team_id": "7345",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203808": {
+        "id": "203808",
+        "name": "Дембеле",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203809": {
+        "id": "203809",
+        "name": "Кварацхелия",
+        "amplua_id": "11",
+        "team_id": "7345",
+        "cost": 8.5,
+        "stat_by_tours": []
+      },
+      "203810": {
+        "id": "203810",
+        "name": "Диего Агуадо",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203811": {
+        "id": "203811",
+        "name": "Лоренсо Агуадо",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203812": {
+        "id": "203812",
+        "name": "Фран Гонсалес",
+        "amplua_id": "9",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203813": {
+        "id": "203813",
+        "name": "Давид Хименес",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203814": {
+        "id": "203814",
+        "name": "Местре",
+        "amplua_id": "9",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203815": {
+        "id": "203815",
+        "name": "Рамон",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203816": {
+        "id": "203816",
+        "name": "Энрикес",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203817": {
+        "id": "203817",
+        "name": "Андрес",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203818": {
+        "id": "203818",
+        "name": "Рауль Асенсио",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203819": {
+        "id": "203819",
+        "name": "Вальехо",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203820": {
+        "id": "203820",
+        "name": "Гонсало Гарсия",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203821": {
+        "id": "203821",
+        "name": "де Льянос",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203822": {
+        "id": "203822",
+        "name": "Муньос",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203823": {
+        "id": "203823",
+        "name": "Яньес",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203824": {
+        "id": "203824",
+        "name": "Алаба",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203825": {
+        "id": "203825",
+        "name": "Васкес",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203826": {
+        "id": "203826",
+        "name": "Куртуа",
+        "amplua_id": "9",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203827": {
+        "id": "203827",
+        "name": "Лунин",
+        "amplua_id": "9",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203828": {
+        "id": "203828",
+        "name": "Менди",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203829": {
+        "id": "203829",
+        "name": "Милитао",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203830": {
+        "id": "203830",
+        "name": "Рюдигер",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203831": {
+        "id": "203831",
+        "name": "Фортуни",
+        "amplua_id": "12",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203832": {
+        "id": "203832",
+        "name": "Фран Гарсия",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203833": {
+        "id": "203833",
+        "name": "Камавинга",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203834": {
+        "id": "203834",
+        "name": "Карвахаль",
+        "amplua_id": "10",
+        "team_id": "7346",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203835": {
+        "id": "203835",
+        "name": "Модрич",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203836": {
+        "id": "203836",
+        "name": "Себальос",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203837": {
+        "id": "203837",
+        "name": "Тчуамени",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203838": {
+        "id": "203838",
+        "name": "Браим Диас",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203839": {
+        "id": "203839",
+        "name": "Вальверде",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203840": {
+        "id": "203840",
+        "name": "Гюлер",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203841": {
+        "id": "203841",
+        "name": "Эндрик",
+        "amplua_id": "12",
+        "team_id": "7346",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203842": {
+        "id": "203842",
+        "name": "Беллингем",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203843": {
+        "id": "203843",
+        "name": "Родриго",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "203844": {
+        "id": "203844",
+        "name": "Винисиус Жуниор",
+        "amplua_id": "11",
+        "team_id": "7346",
+        "cost": 9,
+        "stat_by_tours": []
+      },
+      "203845": {
+        "id": "203845",
+        "name": "Килиан Мбаппе",
+        "amplua_id": "12",
+        "team_id": "7346",
+        "cost": 9,
+        "stat_by_tours": []
+      },
+      "203846": {
+        "id": "203846",
+        "name": "Синисало",
+        "amplua_id": "9",
+        "team_id": "7347",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203847": {
+        "id": "203847",
+        "name": "Бэйн",
+        "amplua_id": "9",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203848": {
+        "id": "203848",
+        "name": "Картер-Викерс",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203849": {
+        "id": "203849",
+        "name": "Монтгомери",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203850": {
+        "id": "203850",
+        "name": "Мюррей",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203851": {
+        "id": "203851",
+        "name": "Навроцки",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203852": {
+        "id": "203852",
+        "name": "Ралстон",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203853": {
+        "id": "203853",
+        "name": "Скейлз",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203854": {
+        "id": "203854",
+        "name": "Трасти",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203855": {
+        "id": "203855",
+        "name": "Тэйлор",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203856": {
+        "id": "203856",
+        "name": "Джонстон",
+        "amplua_id": "10",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203857": {
+        "id": "203857",
+        "name": "Кенни",
+        "amplua_id": "12",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203858": {
+        "id": "203858",
+        "name": "Маккоуэн",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203859": {
+        "id": "203859",
+        "name": "Паулу Бернарду",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203860": {
+        "id": "203860",
+        "name": "Форрест",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203861": {
+        "id": "203861",
+        "name": "Шмейхель",
+        "amplua_id": "9",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203862": {
+        "id": "203862",
+        "name": "Ян Хен Чжун",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203863": {
+        "id": "203863",
+        "name": "Ида",
+        "amplua_id": "12",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203864": {
+        "id": "203864",
+        "name": "Каммингс",
+        "amplua_id": "12",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203865": {
+        "id": "203865",
+        "name": "Кюн",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203866": {
+        "id": "203866",
+        "name": "Макгрегор",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203867": {
+        "id": "203867",
+        "name": "Хатате",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203868": {
+        "id": "203868",
+        "name": "Энгельс",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203869": {
+        "id": "203869",
+        "name": "Жота",
+        "amplua_id": "12",
+        "team_id": "7347",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203870": {
+        "id": "203870",
+        "name": "Маэда",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203871": {
+        "id": "203871",
+        "name": "Алвеш",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203872": {
+        "id": "203872",
+        "name": "Рамос",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203873": {
+        "id": "203873",
+        "name": "Тайбо",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203874": {
+        "id": "203874",
+        "name": "Аррейол",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203875": {
+        "id": "203875",
+        "name": "Бриту",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203876": {
+        "id": "203876",
+        "name": "Диогу Пинту",
+        "amplua_id": "9",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203877": {
+        "id": "203877",
+        "name": "Калаи",
+        "amplua_id": "9",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203878": {
+        "id": "203878",
+        "name": "Ковачевич",
+        "amplua_id": "9",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203879": {
+        "id": "203879",
+        "name": "Денилсон Сантуш",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203880": {
+        "id": "203880",
+        "name": "Сен-Жюст",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203881": {
+        "id": "203881",
+        "name": "Франсишку Силва",
+        "amplua_id": "9",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203882": {
+        "id": "203882",
+        "name": "Фелисиссиму",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203883": {
+        "id": "203883",
+        "name": "Фреснеда",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203884": {
+        "id": "203884",
+        "name": "Гомеш",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203885": {
+        "id": "203885",
+        "name": "Дебаст",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203886": {
+        "id": "203886",
+        "name": "Диоманде",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203887": {
+        "id": "203887",
+        "name": "Инасиу",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203888": {
+        "id": "203888",
+        "name": "Исраэль",
+        "amplua_id": "9",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203889": {
+        "id": "203889",
+        "name": "Коуту",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203890": {
+        "id": "203890",
+        "name": "Куарежма",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203891": {
+        "id": "203891",
+        "name": "Матеус Рейс",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203892": {
+        "id": "203892",
+        "name": "Нел",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203893": {
+        "id": "203893",
+        "name": "Руй Силва",
+        "amplua_id": "9",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203894": {
+        "id": "203894",
+        "name": "Симойнш",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203895": {
+        "id": "203895",
+        "name": "Эшгайю",
+        "amplua_id": "10",
+        "team_id": "7348",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203896": {
+        "id": "203896",
+        "name": "Максимилиано Араухо",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203897": {
+        "id": "203897",
+        "name": "Даниэл Браганса",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203898": {
+        "id": "203898",
+        "name": "Катаму",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203899": {
+        "id": "203899",
+        "name": "Кенда",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203900": {
+        "id": "203900",
+        "name": "Морейра",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203901": {
+        "id": "203901",
+        "name": "Морита",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203902": {
+        "id": "203902",
+        "name": "Нуну Сантуш",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203903": {
+        "id": "203903",
+        "name": "Юлманд",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203904": {
+        "id": "203904",
+        "name": "Хардер",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203905": {
+        "id": "203905",
+        "name": "Педру Гонсалвеш",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203906": {
+        "id": "203906",
+        "name": "Тринкау",
+        "amplua_id": "11",
+        "team_id": "7348",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203907": {
+        "id": "203907",
+        "name": "Дьокереш",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203908": {
+        "id": "203908",
+        "name": "Бергер",
+        "amplua_id": "9",
+        "team_id": "7349",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203909": {
+        "id": "203909",
+        "name": "Гонсалес",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203910": {
+        "id": "203910",
+        "name": "Ка",
+        "amplua_id": "9",
+        "team_id": "7349",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203911": {
+        "id": "203911",
+        "name": "Плюг",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "203912": {
+        "id": "203912",
+        "name": "Андреев",
+        "amplua_id": "9",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203913": {
+        "id": "203913",
+        "name": "Боссен",
+        "amplua_id": "9",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203914": {
+        "id": "203914",
+        "name": "Буэно",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203915": {
+        "id": "203915",
+        "name": "Лотомба",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203916": {
+        "id": "203916",
+        "name": "Митчелл",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203917": {
+        "id": "203917",
+        "name": "Рид",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203918": {
+        "id": "203918",
+        "name": "Слити",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203919": {
+        "id": "203919",
+        "name": "Хартман",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203920": {
+        "id": "203920",
+        "name": "Бейло",
+        "amplua_id": "9",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203921": {
+        "id": "203921",
+        "name": "Белен",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203922": {
+        "id": "203922",
+        "name": "Велленройтер",
+        "amplua_id": "9",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203923": {
+        "id": "203923",
+        "name": "Ганцко",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203924": {
+        "id": "203924",
+        "name": "Зехиел",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203925": {
+        "id": "203925",
+        "name": "Модер",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203926": {
+        "id": "203926",
+        "name": "Надже",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203927": {
+        "id": "203927",
+        "name": "Ниукоп",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203928": {
+        "id": "203928",
+        "name": "Осман",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203929": {
+        "id": "203929",
+        "name": "Смал",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203930": {
+        "id": "203930",
+        "name": "Траунер",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203931": {
+        "id": "203931",
+        "name": "Зерруки",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203932": {
+        "id": "203932",
+        "name": "Иванушец",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203933": {
+        "id": "203933",
+        "name": "Карранса",
+        "amplua_id": "12",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203934": {
+        "id": "203934",
+        "name": "Миламбо",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203935": {
+        "id": "203935",
+        "name": "Редмонд",
+        "amplua_id": "12",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203936": {
+        "id": "203936",
+        "name": "Хадж-Мусса",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203937": {
+        "id": "203937",
+        "name": "Хван Ин Бом",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203938": {
+        "id": "203938",
+        "name": "Стенгс",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203939": {
+        "id": "203939",
+        "name": "Тимбер",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203940": {
+        "id": "203940",
+        "name": "Уэда",
+        "amplua_id": "12",
+        "team_id": "7349",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203941": {
+        "id": "203941",
+        "name": "Пайшао",
+        "amplua_id": "11",
+        "team_id": "7349",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203942": {
+        "id": "203942",
+        "name": "Пинсольо",
+        "amplua_id": "9",
+        "team_id": "7350",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203943": {
+        "id": "203943",
+        "name": "Рухи",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "203944": {
+        "id": "203944",
+        "name": "Аджич",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203945": {
+        "id": "203945",
+        "name": "Бремер",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203946": {
+        "id": "203946",
+        "name": "Кабаль",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203947": {
+        "id": "203947",
+        "name": "Кошта",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203948": {
+        "id": "203948",
+        "name": "Перин",
+        "amplua_id": "9",
+        "team_id": "7350",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "203949": {
+        "id": "203949",
+        "name": "Вейга",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203950": {
+        "id": "203950",
+        "name": "Гатти",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203951": {
+        "id": "203951",
+        "name": "Ди Грегорио",
+        "amplua_id": "9",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203952": {
+        "id": "203952",
+        "name": "Калулу",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203953": {
+        "id": "203953",
+        "name": "Камбьязо",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203954": {
+        "id": "203954",
+        "name": "Локателли",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203955": {
+        "id": "203955",
+        "name": "Маккенни",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203956": {
+        "id": "203956",
+        "name": "Пуньо",
+        "amplua_id": "12",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203957": {
+        "id": "203957",
+        "name": "Савона",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "203958": {
+        "id": "203958",
+        "name": "Веа",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203959": {
+        "id": "203959",
+        "name": "Дуглас Луис",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203960": {
+        "id": "203960",
+        "name": "Мбангула",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203961": {
+        "id": "203961",
+        "name": "Кефрен Тюрам",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "203962": {
+        "id": "203962",
+        "name": "Николас Гонсалес",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203963": {
+        "id": "203963",
+        "name": "Йылдыз",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203964": {
+        "id": "203964",
+        "name": "Копмейнерс",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203965": {
+        "id": "203965",
+        "name": "Милик",
+        "amplua_id": "12",
+        "team_id": "7350",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203966": {
+        "id": "203966",
+        "name": "Франсишку Консейсау",
+        "amplua_id": "11",
+        "team_id": "7350",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "203967": {
+        "id": "203967",
+        "name": "Душан Влахович",
+        "amplua_id": "12",
+        "team_id": "7350",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "203968": {
+        "id": "203968",
+        "name": "Коло-Муани",
+        "amplua_id": "12",
+        "team_id": "7350",
+        "cost": 8,
+        "stat_by_tours": []
+      },
+      "204176": {
+        "id": "204176",
+        "name": "Томас Паласиос",
+        "amplua_id": "10",
+        "team_id": "7338",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "205780": {
+        "id": "205780",
+        "name": "Гирстхов",
+        "amplua_id": "10",
+        "team_id": "7349",
+        "cost": 4.5,
+        "stat_by_tours": []
+      },
+      "205797": {
+        "id": "205797",
+        "name": "Дисаси",
+        "amplua_id": "10",
+        "team_id": "7328",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "205798": {
+        "id": "205798",
+        "name": "Обрич",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "205799": {
+        "id": "205799",
+        "name": "Пош",
+        "amplua_id": "10",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "205800": {
+        "id": "205800",
+        "name": "Видович",
+        "amplua_id": "11",
+        "team_id": "7331",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "205801": {
+        "id": "205801",
+        "name": "Маркес",
+        "amplua_id": "10",
+        "team_id": "7334",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "205802": {
+        "id": "205802",
+        "name": "Белотти",
+        "amplua_id": "12",
+        "team_id": "7334",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "205803": {
+        "id": "205803",
+        "name": "Брума",
+        "amplua_id": "11",
+        "team_id": "7334",
+        "cost": 7,
+        "stat_by_tours": []
+      },
+      "205804": {
+        "id": "205804",
+        "name": "Свенссон",
+        "amplua_id": "10",
+        "team_id": "7335",
+        "cost": 5,
+        "stat_by_tours": []
+      },
+      "205805": {
+        "id": "205805",
+        "name": "Озджан",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "205806": {
+        "id": "205806",
+        "name": "Чуквуэмека",
+        "amplua_id": "11",
+        "team_id": "7335",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "205807": {
+        "id": "205807",
+        "name": "Нико Гонсалес",
+        "amplua_id": "11",
+        "team_id": "7341",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "205808": {
+        "id": "205808",
+        "name": "Бондо",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "205809": {
+        "id": "205809",
+        "name": "Соттиль",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "205810": {
+        "id": "205810",
+        "name": "Жоау Феликс",
+        "amplua_id": "11",
+        "team_id": "7342",
+        "cost": 7.5,
+        "stat_by_tours": []
+      },
+      "205811": {
+        "id": "205811",
+        "name": "Эль-Мусрати",
+        "amplua_id": "11",
+        "team_id": "7343",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "205812": {
+        "id": "205812",
+        "name": "Шлупп",
+        "amplua_id": "11",
+        "team_id": "7347",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "205813": {
+        "id": "205813",
+        "name": "Биэл",
+        "amplua_id": "12",
+        "team_id": "7348",
+        "cost": 6.5,
+        "stat_by_tours": []
+      },
+      "205814": {
+        "id": "205814",
+        "name": "Келли",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 5.5,
+        "stat_by_tours": []
+      },
+      "206397": {
+        "id": "206397",
+        "name": "Вавассори",
+        "amplua_id": "12",
+        "team_id": "7329",
+        "cost": 6,
+        "stat_by_tours": []
+      },
+      "206398": {
+        "id": "206398",
+        "name": "Хиль",
+        "amplua_id": "10",
+        "team_id": "7350",
+        "cost": 5,
+        "stat_by_tours": []
+      }
+    }
+  }
+}

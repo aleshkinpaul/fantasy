@@ -30,10 +30,22 @@
             : participant.profileIds.length + ' игровых профиля объединены в одну историю' }}
         </p>
       </div>
-      <div class="hero-status" *ngIf="participant.currentTeam">
-        <span>{{ participant.currentTeam.statusLabel }}</span>
-        <strong>{{ participant.currentTeam.title }}</strong>
+      <div class="hero-status" *ngIf="activeTournaments.length; else latestTournamentStatus">
+        <span>Идёт сейчас</span>
+        <a
+          *ngFor="let tournament of activeTournaments; trackBy: trackTournament"
+          [href]="tournament.route | internalRouteHref"
+          (click)="openTournament($event, tournament.route)">
+          <strong>{{ tournament.title }}</strong>
+          <small *ngIf="tournament.teamName">{{ tournament.teamName }}</small>
+        </a>
       </div>
+      <ng-template #latestTournamentStatus>
+        <div class="hero-status" *ngIf="participant.currentTeam">
+          <span>{{ participant.currentTeam.statusLabel }}</span>
+          <strong>{{ participant.currentTeam.title }}</strong>
+        </div>
+      </ng-template>
 
       <section class="trophy-showcase" aria-labelledby="trophy-shelf-heading">
         <header>
@@ -93,7 +105,7 @@
               [href]="prize.route | internalRouteHref"
               (click)="openTournament($event, prize.route)"
               [attr.aria-label]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period"
-              [title]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period + (prize.reward ? ' · ' + prize.reward : '')">
+              [title]="prize.name + ' · ' + prize.tournamentTitle + ' · ' + prize.period + (prize.winnerTeamName ? ' · ' + prize.winnerTeamName : '') + (prize.result !== undefined ? ' · результат: ' + prize.result : '') + (prize.condition ? ' · ' + prize.condition : '') + (prize.reward ? ' · ' + prize.reward : '')">
               <span class="shelf-trophy-image">
                 <img
                   *ngIf="!hasFailedImage('sponsor-prize-' + prize.id); else sponsorPrizeFallback"
@@ -104,7 +116,9 @@
               </span>
               <span class="shelf-trophy-copy">
                 <strong>{{ prize.name }}</strong>
-                <small>{{ prize.period }}<ng-container *ngIf="prize.author"> · {{ prize.author }}</ng-container></small>
+                <small>
+                  {{ prize.period }}<ng-container *ngIf="prize.winnerTeamName"> · {{ prize.winnerTeamName }}</ng-container><ng-container *ngIf="prize.result !== undefined"> · {{ prize.result }}</ng-container><ng-container *ngIf="prize.author"> · {{ prize.author }}</ng-container>
+                </small>
               </span>
             </a>
           </div>
@@ -150,7 +164,20 @@
       <article><strong>{{ participant.summary.tournaments }}</strong><span>турниров</span></article>
       <article><strong>{{ participant.summary.championships }}</strong><span>титулов</span></article>
       <article><strong>{{ participant.summary.podiums }}</strong><span>пьедесталов</span></article>
-      <article><strong>{{ participant.summary.bestOverallPlace || '—' }}</strong><span>лучшее место</span></article>
+      <article title="Лучшее место в рейтинге по фэнтези-очкам среди всех сезонов Ла Лиги">
+        <strong>{{ participant.summary.bestLaLigaFantasyPlace || '—' }}</strong>
+        <span>лучшее место по ФО в ЛЛ</span>
+      </article>
+      <article title="Самая дальняя стадия Лиги чемпионов начиная с сезона 2025/26">
+        <strong class="stage-result">{{ participant.summary.bestChampionsLeagueResult?.label || '—' }}</strong>
+        <span>лучший результат в ЛЧ</span>
+        <small *ngIf="participant.summary.bestChampionsLeagueResult as result">{{ result.period }}</small>
+      </article>
+      <article title="Самая дальняя стадия Кубка Короля за всю историю">
+        <strong class="stage-result">{{ participant.summary.bestCupResult?.label || '—' }}</strong>
+        <span>лучший результат в КК</span>
+        <small *ngIf="participant.summary.bestCupResult as result">{{ result.period }}</small>
+      </article>
       <article>
         <strong>{{ participant.summary.scoredTournaments ? formatScore(participant.summary.knownTotalScore) : '—' }}</strong>
         <span>ФО в турнирах с полной статистикой</span>

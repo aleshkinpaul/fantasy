@@ -45,6 +45,8 @@ import {
   resolveMatchCenterQuery,
 } from '../../match-center/match-center-route';
 import { resolveMatchCenterStatus } from '../../match-center/match-center-status';
+import { MatchHistoryDataService } from '../../match-center/match-history-data.service';
+import { MatchHistoryIndex } from '../../match-center/match-center.models';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -84,9 +86,12 @@ export class LeagueH2HPageComponent implements OnInit {
   public matchForecast: MatchForecastView | null = null;
   public forecastLoading = false;
   public tourInsights: TourInsights | null = null;
+  public matchHistoryIndex: MatchHistoryIndex | null = null;
+  public matchHistoryLoading = false;
   public realClubIndex: RealClubIndex = new Map();
   private forecastSubscription?: Subscription;
   private insightsForecastSubscription?: Subscription;
+  private matchHistorySubscription?: Subscription;
 
   public lastTour = 1;
 
@@ -101,12 +106,14 @@ export class LeagueH2HPageComponent implements OnInit {
     private competitionFacade: CompetitionFacade,
     private matchForecastService: MatchForecastService,
     private realClubCatalogService: RealClubCatalogService,
+    private matchHistoryDataService: MatchHistoryDataService,
     private destroyRef: DestroyRef,
   ) {
     this.isLoading$ = this.loader.isLoading$;
     this.destroyRef.onDestroy(() => {
       this.forecastSubscription?.unsubscribe();
       this.insightsForecastSubscription?.unsubscribe();
+      this.matchHistorySubscription?.unsubscribe();
     });
   }
 
@@ -144,6 +151,7 @@ export class LeagueH2HPageComponent implements OnInit {
               this.squadsDetails.next(viewModel.squadsDetails);
               this.sportPlayersByTour = viewModel.sportPlayersByTour;
               this.unitedProfiles = this.profilesDetails;
+              this.loadMatchHistory(viewModel);
 
               this.updateTabs();
               const initialConfId = this.activeTabs.confId;
@@ -520,6 +528,22 @@ export class LeagueH2HPageComponent implements OnInit {
     return selection
       ? `${selection.tour}:${selection.match.home}:${selection.match.away}`
       : '';
+  }
+
+  private loadMatchHistory(viewModel: Parameters<MatchHistoryDataService['load']>[0]): void {
+    this.matchHistorySubscription?.unsubscribe();
+    this.matchHistoryIndex = null;
+    this.matchHistoryLoading = true;
+    this.matchHistorySubscription = this.matchHistoryDataService.load(viewModel).subscribe({
+      next: index => {
+        this.matchHistoryIndex = index;
+        this.matchHistoryLoading = false;
+      },
+      error: error => {
+        logger.error('Не удалось собрать межтурнирную историю личных встреч:', error);
+        this.matchHistoryLoading = false;
+      },
+    });
   }
 
   setQueryParam(newParam: IActiveCompetitionTabs): void {

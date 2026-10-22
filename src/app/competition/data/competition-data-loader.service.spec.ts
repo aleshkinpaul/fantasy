@@ -1,6 +1,10 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { SeasonCompetitionConfig, SeasonCompetitionFile } from '../models/competition.models';
+import {
+  CompetitionSnapshotView,
+  SeasonCompetitionConfig,
+  SeasonCompetitionFile,
+} from '../models/competition.models';
 import {
   CompetitionDataLoaderService,
   getSeasonCompetitionFileUrl,
@@ -42,5 +46,68 @@ describe('CompetitionDataLoaderService', () => {
       config: { type: 'spain', yearStart: 2026 } as SeasonCompetitionConfig,
       profiles: [],
     } as SeasonCompetitionFile);
+  });
+
+  it('loads an archived competition only from its local snapshot', done => {
+    const viewUrl = '/assets/data/history/spain-2025-26/view.json';
+    const snapshot = {
+      schemaVersion: 1,
+      datasetId: 'spain-2025-26',
+    } as CompetitionSnapshotView;
+
+    service.load('spain', 2025).subscribe(result => {
+      expect(result).toEqual({ kind: 'snapshot', snapshot });
+      expect(http.match(request => request.url.includes('fantasy-h2h.ru')).length).toBe(0);
+      done();
+    });
+
+    http.expectOne('/assets/data/seasons/2025-26/spain.json').flush({
+      status: 'published',
+      config: {
+        type: 'spain',
+        yearStart: 2025,
+        prizes: [],
+        dataSource: {
+          lifecycle: 'archived',
+          snapshot: {
+            manifestUrl: '/assets/data/history/spain-2025-26/manifest.json',
+            viewUrl,
+            schemaVersion: 1,
+          },
+        },
+      } as unknown as SeasonCompetitionConfig,
+      profiles: [],
+    } as SeasonCompetitionFile);
+    http.expectOne(viewUrl).flush(snapshot);
+  });
+
+  it('does not fall back to the API when an archive snapshot is unavailable', done => {
+    const viewUrl = '/assets/data/history/missing/view.json';
+    service.load('spain', 2025).subscribe({
+      next: () => done.fail('Missing snapshot must fail'),
+      error: () => {
+        expect(http.match(request => request.url.includes('fantasy-h2h.ru')).length).toBe(0);
+        done();
+      },
+    });
+
+    http.expectOne('/assets/data/seasons/2025-26/spain.json').flush({
+      status: 'published',
+      config: {
+        type: 'spain',
+        yearStart: 2025,
+        prizes: [],
+        dataSource: {
+          lifecycle: 'archived',
+          snapshot: {
+            manifestUrl: '/assets/data/history/missing/manifest.json',
+            viewUrl,
+            schemaVersion: 1,
+          },
+        },
+      } as unknown as SeasonCompetitionConfig,
+      profiles: [],
+    } as SeasonCompetitionFile);
+    http.expectOne(viewUrl).flush('missing', { status: 404, statusText: 'Not Found' });
   });
 });

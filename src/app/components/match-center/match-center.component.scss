@@ -179,6 +179,366 @@
   }
 }
 
+.history-panel {
+  margin-top: 16px;
+  padding: 20px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xl;
+
+  h3 {
+    margin-top: 2px;
+    font-size: $font-size-xl;
+  }
+}
+
+.history-scope {
+  padding: 5px 10px;
+  color: $color-text-muted;
+  background: $color-surface-muted;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+
+  &.loading {
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.form-card,
+.head-to-head-card {
+  padding: 14px;
+  background: alpha($color-surface-muted, 0.62);
+  border: 1px solid alpha($color-border, 0.8);
+  border-radius: $border-radius-lg;
+
+  > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    > div:first-child {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    span {
+      color: $color-text-muted;
+      font-size: $font-size-xs;
+    }
+
+    strong {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.form-rating {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  column-gap: 5px;
+  text-align: right;
+
+  small {
+    grid-column: 1 / -1;
+    color: $color-text-muted;
+    font-size: 9px;
+    text-transform: uppercase;
+  }
+
+  strong {
+    color: $color-primary-hover;
+    font-size: $font-size-lg;
+  }
+
+  span {
+    font-size: 10px;
+
+    &.positive { color: $color-success; }
+    &.negative { color: $color-danger; }
+  }
+}
+
+.form-sequence {
+  display: flex;
+  margin-top: 13px;
+  align-items: center;
+  gap: 5px;
+
+  small {
+    margin-left: 3px;
+    color: $color-text-muted;
+    font-size: 9px;
+  }
+}
+
+.form-result {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: $font-weight-bold;
+
+  &.result-win { background: $color-success; }
+  &.result-draw { background: $color-neutral; }
+  &.result-loss { background: $color-danger; }
+}
+
+.form-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+  gap: 6px;
+
+  div {
+    min-width: 0;
+    padding: 7px;
+    background: alpha($color-surface, 0.75);
+    border-radius: $border-radius-sm;
+  }
+
+  dt {
+    overflow: hidden;
+    color: $color-text-muted;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  dd {
+    margin-top: 2px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.stability-note {
+  margin: 8px 2px 0;
+  color: $color-text-muted;
+  font-size: 9px;
+}
+
+.head-to-head-card {
+  margin-top: 10px;
+}
+
+.head-to-head-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+
+  strong {
+    color: $color-primary-hover;
+    font-size: $font-size-lg;
+  }
+
+  span {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    color: $color-text;
+    background: $color-neutral-bg;
+    border-radius: 50%;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.head-to-head-summary {
+  display: flex;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+
+  span {
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+  }
+
+  strong { color: $color-text; }
+}
+
+.recent-meetings {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.meeting-card {
+  min-width: 0;
+  padding: 10px;
+  background: alpha($color-surface, 0.78);
+  border: 1px solid alpha($color-border, 0.7);
+  border-radius: $border-radius-md;
+
+  > header {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 7px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid alpha($color-border, 0.7);
+  }
+
+  time {
+    color: $color-text-muted;
+    font-size: 9px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  > footer {
+    margin-top: 5px;
+    color: $color-text-muted;
+    font-size: 8px;
+    text-align: right;
+  }
+}
+
+.meeting-tournament-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  place-items: center;
+  background: $color-logo-surface;
+  border-radius: 50%;
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.meeting-tournament {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1px;
+
+  strong,
+  small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  strong {
+    font-size: 10px;
+  }
+
+  small {
+    color: $color-text-muted;
+    font-size: 8px;
+  }
+}
+
+.meeting-fixture {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  margin-top: 10px;
+  align-items: center;
+  gap: 10px;
+}
+
+.meeting-side {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+
+  &.home-side {
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+.meeting-team-name {
+    overflow: hidden;
+    color: $color-text;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.meeting-team-logo {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.meeting-score {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+
+  strong {
+    min-width: 28px;
+    padding: 5px 6px;
+    color: $color-text;
+    background: $color-neutral-bg;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-base;
+    text-align: center;
+  }
+
+  .winner-score { color: $color-success; background: $color-success-bg; }
+  .loser-score { color: $color-danger; background: $color-danger-bg; }
+  .draw-score { color: $color-neutral; background: $color-neutral-bg; }
+}
+
+.stage-breakdown {
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  span {
+    padding: 4px 8px;
+    color: $color-primary-hover;
+    background: $color-surface-blue;
+    border-radius: $border-radius-full;
+    font-size: 9px;
+  }
+}
+
+.empty-history {
+  margin-top: 12px;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
+}
+
 .forecast-state {
   padding: 5px 10px;
   color: $color-primary-hover;
@@ -847,6 +1207,10 @@
   .squads-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 500px) {
@@ -865,6 +1229,7 @@
   }
 
   .forecast-panel,
+  .history-panel,
   .squad-panel {
     padding: 14px;
   }
@@ -890,5 +1255,41 @@
 
   .detail-stat-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .history-panel .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .form-metrics,
+  .form-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recent-meetings {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .meeting-card > header {
+    grid-template-columns: 28px minmax(0, 1fr);
+
+    time {
+      grid-column: 2;
+    }
+  }
+
+  .meeting-fixture {
+    gap: 5px;
+  }
+
+  .meeting-team-logo {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+  }
+
+  .meeting-team-name {
+    font-size: 9px;
   }
 }

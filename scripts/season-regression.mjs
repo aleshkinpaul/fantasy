@@ -14,9 +14,9 @@ let debugPort = process.env.FANTASY_DEBUG_PORT ? Number(process.env.FANTASY_DEBU
 const MODE = process.argv[2] ?? 'verify';
 
 const COMPETITIONS = [
-  { key: 'spain', route: '/spain/new?year=2025', profiles: 49, tours: 38, prizes: 21 },
-  { key: 'champions-league', route: '/champions-league/new?year=2025', profiles: 48, tours: 17, prizes: 4 },
-  { key: 'world-cup', route: '/world-cup/new?year=2025', profiles: 32, tours: 8, prizes: 9 },
+  { key: 'spain', route: '/#/spain/new?year=2025', profiles: 49, tours: 38, prizes: 21 },
+  { key: 'champions-league', route: '/#/champions-league/new?year=2025', profiles: 48, tours: 17, prizes: 4 },
+  { key: 'world-cup', route: '/#/world-cup/new?year=2025', profiles: 32, tours: 8, prizes: 9 },
 ];
 
 class CdpClient {
@@ -169,6 +169,8 @@ async function startInfrastructure() {
     const edge = spawn(edgePath, [
       '--headless',
       '--disable-gpu',
+      '--disable-software-rasterizer',
+      '--disable-gpu-compositing',
       '--disable-extensions',
       '--disable-background-networking',
       '--no-first-run',
@@ -190,12 +192,14 @@ async function startInfrastructure() {
       stopProcessTree(server);
       const resolvedTemp = path.resolve(temporaryDirectory);
       if (resolvedTemp.startsWith(path.resolve(os.tmpdir()))) {
-        await rm(resolvedTemp, { recursive: true, force: true, maxRetries: 3, retryDelay: 250 });
+        await rm(resolvedTemp, { recursive: true, force: true, maxRetries: 8, retryDelay: 500 })
+          .catch(() => undefined);
       }
     };
   } catch (error) {
     stopProcessTree(server);
-    await rm(temporaryDirectory, { recursive: true, force: true, maxRetries: 3, retryDelay: 250 });
+    await rm(temporaryDirectory, { recursive: true, force: true, maxRetries: 8, retryDelay: 500 })
+      .catch(() => undefined);
     throw error;
   }
 }
@@ -230,22 +234,31 @@ async function installDeterministicRuntime(client) {
   // Prize 14 ("Отскок года") intentionally chooses a random eligible profile.
   // A fixed value keeps regression output reproducible without changing production code.
   await client.send('Page.addScriptToEvaluateOnNewDocument', {
-    source: 'Math.random = () => 0.3141592653589793;',
+    source: `
+      Math.random = () => 0.3141592653589793;
+      localStorage.setItem('fr-fantasy.personalization.v1', JSON.stringify({ version: 1, choice: 'guest' }));
+    `,
   });
 }
 
 async function waitUntilReady(client, competition, networkState) {
-  const deadline = Date.now() + 300_000;
+  const deadline = Date.now() + Number(process.env.FANTASY_READY_TIMEOUT_MS ?? 300_000);
   let lastState;
 
   while (Date.now() < deadline) {
     lastState = await evaluate(client, `(() => {
       const element = document.querySelector('app-league-h2h-page');
       if (!element || !globalThis.ng?.getComponent) {
-        return { ready: false, reason: 'component is not available' };
+        return {
+          ready: false,
+          reason: 'component is not available',
+          url: location.href,
+          text: document.body?.innerText?.slice(0, 500),
+          hasAngularDebugApi: Boolean(globalThis.ng?.getComponent),
+        };
       }
       const component = ng.getComponent(element);
-      const prizes = component.consts?.prizes ?? [];
+      const prizes = component.prizesToShow ?? [];
       return {
         ready: component.profilesDetails?.length === ${competition.profiles}
           && component.lastTour === ${competition.tours}
@@ -525,8 +538,8 @@ function findDifference(expected, actual, currentPath = '$') {
     return null;
   }
 
-  const expectedKeys = Object.keys(expected);
-  const actualKeys = Object.keys(actual);
+  const expectedKeys = Object.keys(expected).sort();
+  const actualKeys = Object.keys(actual).sort();
   if (expectedKeys.join('|') !== actualKeys.join('|')) {
     return { path: `${currentPath}.__keys`, expected: expectedKeys, actual: actualKeys };
   }
@@ -608,9 +621,120 @@ async function verifyCompetition(competition) {
   }
 }
 
+async function smokeArchiveCompetition(competition) {
+  const { client, target } = await createPage();
+  const networkState = { pending: new Set(), lastActivity: Date.now() };
+  const externalRequests = [];
+
+  client.on('Network.requestWillBeSent', event => {
+    const url = new URL(event.request.url);
+    if (url.hostname === 'fantasy-h2h.ru') externalRequests.push(event.request.url);
+    if (!relevantResponse(event.request.url)) return;
+    networkState.pending.add(event.requestId);
+    networkState.lastActivity = Date.now();
+  });
+  const finish = event => {
+    networkState.pending.delete(event.requestId);
+    networkState.lastActivity = Date.now();
+  };
+  client.on('Network.loadingFinished', finish);
+  client.on('Network.loadingFailed', finish);
+
+  try {
+    await client.send('Page.enable');
+    await client.send('Runtime.enable');
+    await client.send('Network.enable');
+    await installDeterministicRuntime(client);
+    await client.send('Page.navigate', { url: `${baseUrl}${competition.route}` });
+    await waitUntilReady(client, competition, networkState);
+    if (externalRequests.length) {
+      throw new Error(`${competition.key} requested archived API data: ${externalRequests.join(', ')}`);
+    }
+    return { competition: competition.key, externalRequests: 0 };
+  } finally {
+    client.close();
+    await closePage(target.id);
+  }
+}
+
+async function smokeArchiveConsumers() {
+  const routes = [
+    {
+      key: 'archive-match-history',
+      route: '/#/spain/new?year=2025&tabId=1&confId=0&matchTour=31&matchHome=1116086751&matchAway=1068332740',
+      selector: 'app-match-center .meeting-card',
+      allowActiveApi: false,
+    },
+    { key: 'legacy-spain', route: '/#/spain?year=2024', selector: 'app-league-page', allowActiveApi: false },
+    { key: 'legacy-champions-league', route: '/#/champions-league?year=2024', selector: 'app-league-page', allowActiveApi: false },
+    { key: 'legacy-club-world-cup', route: '/#/club-world-cup?year=2024', selector: 'app-cwc-page', allowActiveApi: false },
+    { key: 'rating', route: '/#/rating', selector: 'app-rating-page', allowActiveApi: true },
+    { key: 'participant-profile', route: '/#/participants/73116796', selector: 'app-participant-profile', allowActiveApi: true },
+  ];
+  const results = [];
+  for (const route of routes) results.push(await smokeArchiveConsumer(route));
+  return results;
+}
+
+async function smokeArchiveConsumer(route) {
+  const { client, target } = await createPage();
+  const externalRequests = [];
+  let lastActivity = Date.now();
+  const pending = new Set();
+  client.on('Network.requestWillBeSent', event => {
+    const url = new URL(event.request.url);
+    if (url.hostname === 'fantasy-h2h.ru') externalRequests.push(event.request.url);
+    if (url.hostname === 'fantasy-h2h.ru' || url.pathname.startsWith('/assets/data/')) {
+      pending.add(event.requestId);
+      lastActivity = Date.now();
+    }
+  });
+  const finish = event => {
+    pending.delete(event.requestId);
+    lastActivity = Date.now();
+  };
+  client.on('Network.loadingFinished', finish);
+  client.on('Network.loadingFailed', finish);
+
+  try {
+    await client.send('Page.enable');
+    await client.send('Runtime.enable');
+    await client.send('Network.enable');
+    await installDeterministicRuntime(client);
+    await client.send('Page.navigate', { url: `${baseUrl}${route.route}` });
+    const deadline = Date.now() + Number(process.env.FANTASY_READY_TIMEOUT_MS ?? 300_000);
+    let state;
+    while (Date.now() < deadline) {
+      state = await evaluate(client, `({
+        found: Boolean(document.querySelector(${JSON.stringify(route.selector)})),
+        text: document.body?.innerText?.slice(0, 300),
+      })`);
+      if (state.found && pending.size === 0 && Date.now() - lastActivity >= 1_000) break;
+      await delay(250);
+    }
+    if (!state?.found) throw new Error(`${route.key} did not render: ${JSON.stringify(state)}`);
+
+    const forbidden = externalRequests.filter(url => !route.allowActiveApi || !isActiveApiUrl(url));
+    if (forbidden.length) {
+      throw new Error(`${route.key} requested archived API data: ${forbidden.join(', ')}`);
+    }
+    return { route: route.key, archivedExternalRequests: 0, activeExternalRequests: externalRequests.length };
+  } finally {
+    client.close();
+    await closePage(target.id);
+  }
+}
+
+function isActiveApiUrl(url) {
+  return url.includes('/la_liga_2026_fr_primera')
+    || url.includes('/sport_players_tour_stat/la_liga_2026/')
+    || url.includes('/ucl_2026_fr')
+    || url.includes('/sport_players_tour_stat/ucl_2026/');
+}
+
 async function main() {
-  if (!['capture', 'verify'].includes(MODE)) {
-    throw new Error('Usage: node scripts/season-regression.mjs <capture|verify>');
+  if (!['capture', 'verify', 'archive-smoke'].includes(MODE)) {
+    throw new Error('Usage: node scripts/season-regression.mjs <capture|verify|archive-smoke>');
   }
 
   const managesInfrastructure = !baseUrl && !debugPort;
@@ -621,12 +745,23 @@ async function main() {
 
   try {
     const results = [];
-    for (const competition of COMPETITIONS) {
+    const competitions = process.env.FANTASY_COMPETITION
+      ? COMPETITIONS.filter(competition => competition.key === process.env.FANTASY_COMPETITION)
+      : COMPETITIONS;
+    if (!competitions.length) throw new Error(`Unknown competition: ${process.env.FANTASY_COMPETITION}`);
+    for (const competition of competitions) {
       process.stdout.write(`${MODE} ${competition.key}... `);
       const result = MODE === 'capture'
         ? await captureCompetition(competition)
-        : await verifyCompetition(competition);
+        : MODE === 'archive-smoke'
+          ? await smokeArchiveCompetition(competition)
+          : await verifyCompetition(competition);
       results.push(result);
+      process.stdout.write('ok\n');
+    }
+    if (MODE === 'archive-smoke' && !process.env.FANTASY_COMPETITION) {
+      process.stdout.write('archive-smoke consumers... ');
+      results.push(...await smokeArchiveConsumers());
       process.stdout.write('ok\n');
     }
 

@@ -2,8 +2,8 @@ body.participant-picker-open {
   overflow: hidden;
 }
 
-// Shared, non-destructive accent for the participant selected in personalization.
-// The translucent overlay preserves win/loss, medal and tournament theme colors.
+// Shared accent for the participant selected in personalization.
+// Cards get one line beside the team logo instead of a rectangular outline.
 .is-personalized-participant {
   --personalized-accent: #2f80c4;
   --personalized-glow: rgba(47, 128, 196, 0.2);
@@ -25,12 +25,22 @@ body tr.is-personalized-participant.is-personalized-participant > *:first-child 
 .is-personalized-participant:not(tr)::after {
   content: '';
   position: absolute;
-  inset: 1px;
+  top: 1px;
+  bottom: 1px;
+  left: 1px;
+  width: 5px;
   z-index: 2;
-  border: 2px solid var(--personalized-accent);
-  border-radius: inherit;
-  box-shadow: 0 0 0 3px var(--personalized-glow), inset 3px 0 0 var(--personalized-accent);
+  border: 0;
+  border-radius: 5px 0 0 5px;
+  background: var(--personalized-accent);
+  box-shadow: none;
   pointer-events: none;
+}
+
+.is-personalized-participant.personalized-accent-right:not(tr)::after {
+  right: 1px;
+  left: auto;
+  border-radius: 0 5px 5px 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

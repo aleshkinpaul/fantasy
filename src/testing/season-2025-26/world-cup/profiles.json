@@ -131,7 +131,8 @@
           23
         ],
         "lowest_winning_pos_diff": 30
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -259,7 +260,8 @@
           25
         ],
         "lowest_winning_pos_diff": 16
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -390,7 +392,8 @@
           8
         ],
         "lowest_winning_pos_diff": -14
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -519,7 +522,8 @@
           11
         ],
         "lowest_winning_pos_diff": -19
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -632,7 +636,8 @@
           8
         ],
         "lowest_winning_pos_diff": -11
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -766,7 +771,8 @@
           5
         ],
         "lowest_winning_pos_diff": 17
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -908,7 +914,8 @@
           21
         ],
         "lowest_winning_pos_diff": 6
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1043,7 +1050,8 @@
           20
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1177,7 +1185,8 @@
           1
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1314,7 +1323,8 @@
           9
         ],
         "lowest_winning_pos_diff": -16
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1444,7 +1454,8 @@
           11
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1563,7 +1574,8 @@
           19
         ],
         "lowest_winning_pos_diff": 7
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1679,7 +1691,8 @@
           1
         ],
         "lowest_winning_pos_diff": -1
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1813,7 +1826,8 @@
           16
         ],
         "lowest_winning_pos_diff": -23
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -1929,7 +1943,8 @@
           4
         ],
         "lowest_winning_pos_diff": -27
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2058,7 +2073,8 @@
           5
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2192,7 +2208,8 @@
           25
         ],
         "lowest_winning_pos_diff": 23
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2323,7 +2340,8 @@
           2
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2454,7 +2472,8 @@
           18
         ],
         "lowest_winning_pos_diff": 7
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2583,7 +2602,8 @@
           12
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2708,7 +2728,8 @@
           24
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2838,7 +2859,8 @@
           14
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -2965,7 +2987,8 @@
           2
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3088,7 +3111,8 @@
           22
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3208,7 +3232,8 @@
           25
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3324,7 +3349,8 @@
           17
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3457,7 +3483,8 @@
           20
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3587,7 +3614,8 @@
           30
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3703,7 +3731,8 @@
           29
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3815,7 +3844,8 @@
           31
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -3945,7 +3975,8 @@
           22
         ],
         "lowest_winning_pos_diff": null
-      }
+      },
+      "countedRedCards": 0
     }
   },
   {
@@ -4071,7 +4102,8 @@
           29
         ],
         "lowest_winning_pos_diff": 16
-      }
+      },
+      "countedRedCards": 0
     }
   }
 ]

@@ -119,6 +119,10 @@ export class ParticipantProfileComponent implements OnInit {
     return this.profile?.sponsorPrizeVictories ?? [];
   }
 
+  get activeTournaments(): ParticipantTournamentHistory[] {
+    return (this.profile?.tournaments ?? []).filter(tournament => tournament.status === 'active');
+  }
+
   tournamentTimelineOrder(tournament: ParticipantTournamentHistory): number {
     return participantTournamentTopDownOrder(tournament);
   }

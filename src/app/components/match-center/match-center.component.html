@@ -31,7 +31,7 @@
         <ng-template #versus><div class="versus">VS</div></ng-template>
       </div>
 
-      <a class="hero-team away-team" [appPersonalized]="teams[1].profile.id" [routerLink]="['/participants', teams[1].profile.id]" (click)="$event.stopPropagation()">
+      <a class="hero-team away-team personalized-accent-right" [appPersonalized]="teams[1].profile.id" [routerLink]="['/participants', teams[1].profile.id]" (click)="$event.stopPropagation()">
         <div class="hero-logo"><img [src]="teams[1].profile.logo || 'assets/logos/default.png'" alt=""></div>
         <div>
           <strong>{{ teams[1].profile.team.title }}</strong>
@@ -47,7 +47,7 @@
           <h3>Вероятность исхода</h3>
         </div>
         <span class="forecast-state" *ngIf="forecast">
-          {{ forecast.state === 'fixed' ? 'Зафиксировано' : forecast.state === 'reconstructed' ? 'Восстановлено' : forecast.state === 'preview' ? 'Предварительно' : 'Нет данных' }}
+          {{ forecast.state === 'fixed' ? 'Зафиксировано' : forecast.state === 'calculated' ? 'Расчёт по форме' : forecast.state === 'preview' ? 'Предварительно' : 'Нет данных' }}
         </span>
       </div>
 
@@ -88,6 +88,127 @@
           <p class="forecast-note" *ngIf="currentForecast.message">{{ currentForecast.message }}</p>
         </div>
       </ng-container>
+    </section>
+
+    <section class="history-panel" *ngIf="history as matchHistory">
+      <div class="section-heading">
+        <div>
+          <p class="section-caption">Перед матчем</p>
+          <h3>Форма и личные встречи</h3>
+        </div>
+        <span class="history-scope" [class.loading]="historyLoading">{{ getHistoryScopeLabel() }}</span>
+      </div>
+
+      <div class="form-grid">
+        <article class="form-card" *ngFor="let form of matchHistory.forms; index as teamIndex">
+          <header>
+            <div>
+              <span>{{ teamIndex === 0 ? 'Хозяева' : 'Гости' }}</span>
+              <strong>{{ teams[teamIndex].profile.team.title }}</strong>
+            </div>
+            <div class="form-rating" title="Рейтинг формы перед матчем">
+              <small>форма</small>
+              <strong>{{ form.rating }}</strong>
+              <span
+                *ngIf="form.ratingChange !== undefined"
+                [class.positive]="form.ratingChange > 0"
+                [class.negative]="form.ratingChange < 0">
+                {{ getRatingChangeLabel(form) }}
+              </span>
+            </div>
+          </header>
+
+          <div class="form-sequence" *ngIf="form.recentResults.length; else noFormResults">
+            <span
+              *ngFor="let result of form.recentResults"
+              [class]="'form-result result-' + result.outcome"
+              [attr.title]="getOutcomeLabel(result) + ' · ' + result.scored + ':' + result.conceded + ' · ' + result.tour + ' тур'">
+              {{ getOutcomeShortLabel(result) }}
+            </span>
+            <small>последние матчи</small>
+          </div>
+          <ng-template #noFormResults><p class="empty-history">Матчей пока нет</p></ng-template>
+
+          <dl class="form-metrics">
+            <div><dt>Баланс</dt><dd>{{ form.wins }}–{{ form.draws }}–{{ form.losses }}</dd></div>
+            <div><dt>Средние ФО</dt><dd>{{ form.averageScored }} : {{ form.averageConceded }}</dd></div>
+            <div
+              title="Стабильность показывает разброс результатов, нормированных относительно максимума ФО в каждом туре. Чем меньше разброс, тем выше стабильность.">
+              <dt>Стабильность ФО</dt>
+              <dd>{{ getStabilityValue(form) }}</dd>
+            </div>
+            <div><dt>Серия побед</dt><dd>{{ form.winStreak }}</dd></div>
+            <div><dt>Без поражений</dt><dd>{{ form.unbeatenStreak }}</dd></div>
+          </dl>
+        </article>
+      </div>
+
+      <p class="stability-note">
+        Стабильность ФО — разброс результатов относительно максимума лиги в каждом туре: чем меньше процент, тем ровнее форма.
+      </p>
+
+      <article class="head-to-head-card">
+        <header>
+          <div>
+            <span>Личные встречи</span>
+            <strong>{{ teams[0].profile.team.title }} — {{ teams[1].profile.team.title }}</strong>
+          </div>
+          <div class="head-to-head-score" *ngIf="matchHistory.headToHead.matches">
+            <strong>{{ matchHistory.headToHead.firstWins }}</strong>
+            <span>{{ matchHistory.headToHead.draws }}</span>
+            <strong>{{ matchHistory.headToHead.secondWins }}</strong>
+          </div>
+        </header>
+
+        <ng-container *ngIf="matchHistory.headToHead.matches; else noHeadToHead">
+          <div class="head-to-head-summary">
+            <span>Матчей: <strong>{{ matchHistory.headToHead.matches }}</strong></span>
+            <span>Средние ФО: <strong>{{ matchHistory.headToHead.firstAverageScore }} : {{ matchHistory.headToHead.secondAverageScore }}</strong></span>
+            <span>Суммарные ФО: <strong>{{ matchHistory.headToHead.firstTotalScore }} : {{ matchHistory.headToHead.secondTotalScore }}</strong></span>
+            <span>Крупнейшая победа: <strong>{{ getBiggestWinLabel() }}</strong></span>
+          </div>
+
+          <div class="recent-meetings">
+            <article class="meeting-card" *ngFor="let meeting of matchHistory.headToHead.recentMeetings">
+              <header>
+                <span class="meeting-tournament-icon">
+                  <img *ngIf="meeting.tournamentIcon" [src]="meeting.tournamentIcon" alt="">
+                </span>
+                <span class="meeting-tournament">
+                  <strong>{{ meeting.tournamentTitle }}</strong>
+                  <small>{{ meeting.season }} · {{ meeting.stage }}</small>
+                </span>
+                <time [attr.datetime]="meeting.startsAt">{{ getMeetingDateLabel(meeting) }}</time>
+              </header>
+              <div class="meeting-fixture">
+                <span class="meeting-side home-side">
+                  <span class="meeting-team-name">{{ meeting.homeTeamTitle }}</span>
+                  <span class="meeting-team-logo"><img [src]="meeting.homeTeamLogo" alt=""></span>
+                </span>
+                <span class="meeting-score">
+                  <strong [class]="getMeetingScoreClass(meeting, 'home')">{{ meeting.homeScore }}</strong>
+                  <span>:</span>
+                  <strong [class]="getMeetingScoreClass(meeting, 'away')">{{ meeting.awayScore }}</strong>
+                </span>
+                <span class="meeting-side away-side">
+                  <span class="meeting-team-logo"><img [src]="meeting.awayTeamLogo" alt=""></span>
+                  <span class="meeting-team-name">{{ meeting.awayTeamTitle }}</span>
+                </span>
+              </div>
+              <footer>{{ meeting.tour }} тур</footer>
+            </article>
+          </div>
+
+          <div class="stage-breakdown" *ngIf="matchHistory.headToHead.stages.length > 1">
+            <span *ngFor="let stage of matchHistory.headToHead.stages">
+              {{ stage.stage }} · {{ stage.firstWins }}–{{ stage.draws }}–{{ stage.secondWins }}
+            </span>
+          </div>
+        </ng-container>
+        <ng-template #noHeadToHead>
+          <p class="empty-history">В этом турнире команды раньше не встречались.</p>
+        </ng-template>
+      </article>
     </section>
 
     <div class="squads-grid">

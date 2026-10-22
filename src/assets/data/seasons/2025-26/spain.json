@@ -3,8 +3,17 @@
     "id": "25389",
     "type": "spain",
     "typeId": "50",
+    "catalogTournamentIds": ["la-liga-2025-26", "la-liga-cup-2025-26"],
     "squad_link": "https://fantasy-h2h.ru/api/h2h_tournament/full_info/la_liga_2025_league_friendly_2",
     "tour_link": "https://fantasy-h2h.ru/api/fnts_tournament/sport_players_tour_stat/la_liga_2025/",
+    "dataSource": {
+      "lifecycle": "archived",
+      "snapshot": {
+        "manifestUrl": "/assets/data/history/spain-2025-26/manifest.json",
+        "viewUrl": "/assets/data/history/spain-2025-26/view.json",
+        "schemaVersion": 1
+      }
+    },
     "special_pos": null,
     "yearStart": 2025,
     "yearEnd": 2026,
