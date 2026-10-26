@@ -351,6 +351,14 @@
 .club-logo {
   width: 28px;
   height: 28px;
+  padding: 3px;
+  border: 1px solid alpha($color-border, .8);
+  border-radius: 50%;
+  background: $color-logo-surface;
+
+  img {
+    border-radius: 50%;
+  }
 }
 
 .row-copy {

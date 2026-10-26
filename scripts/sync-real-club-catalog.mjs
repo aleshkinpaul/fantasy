@@ -1,4 +1,4 @@
-import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const projectRoot = process.cwd();
@@ -21,6 +21,7 @@ const nameAliases = new Map([
 
 const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
 if (!Array.isArray(catalog)) throw new Error('Real club catalog must be an array');
+const downloadedLogos = new Map();
 
 await mkdir(logosDirectory, { recursive: true });
 
@@ -62,7 +63,7 @@ for (const source of sources) {
     addUnique(club.ids, internalId);
     club.sourceIds ??= [];
     addUnique(club.sourceIds, remote.id);
-    if (!club.logo) club.logo = await downloadLogo(remote);
+    club.logo = await downloadLogo(remote);
     if (!catalog.includes(club)) catalog.push(club);
   }
 }
@@ -124,17 +125,19 @@ function addUnique(items, value) {
 }
 
 async function downloadLogo(remote) {
+  const cachedPath = downloadedLogos.get(remote.id);
+  if (cachedPath) return cachedPath;
+
   const extension = getLogoExtension(remote.logoUrl);
   const fileName = `${remote.id}${extension}`;
   const filePath = path.join(logosDirectory, fileName);
-  try {
-    await access(filePath);
-  } catch {
-    const response = await fetch(remote.logoUrl);
-    if (!response.ok) throw new Error(`${remote.logoUrl}: HTTP ${response.status}`);
-    await writeFile(filePath, Buffer.from(await response.arrayBuffer()));
-  }
-  return `${logoPublicDirectory}/${fileName}`;
+  const response = await fetch(remote.logoUrl);
+  if (!response.ok) throw new Error(`${remote.logoUrl}: HTTP ${response.status}`);
+  await writeFile(filePath, Buffer.from(await response.arrayBuffer()));
+
+  const publicPath = `${logoPublicDirectory}/${fileName}`;
+  downloadedLogos.set(remote.id, publicPath);
+  return publicPath;
 }
 
 function getLogoExtension(url) {

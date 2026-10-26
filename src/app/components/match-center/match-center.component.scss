@@ -770,15 +770,16 @@
   padding: 3px;
   place-items: center;
   overflow: hidden;
-  // background: $color-logo-surface;
-  // border: 1px solid alpha($color-border, 0.8);
-  // border-radius: 50%;
+  border: 1px solid alpha($color-border, 0.8);
+  border-radius: 50%;
+  background: $color-logo-surface;
 
   img {
     display: block;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    border-radius: 50%;
   }
 }
 
