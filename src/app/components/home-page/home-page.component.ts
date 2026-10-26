@@ -28,6 +28,8 @@ import {
   selectPersonalizedPrizeResult,
 } from '../../home/personalized-prize-result';
 import { InternalRouteHrefPipe } from '../../pipes/internal-route-href.pipe';
+import { RealClubIndex } from '../../models/real-club';
+import { RealClubCatalogService } from '../../service/real-club-catalog.service';
 
 interface HomeTournamentSummary {
   tournament: TournamentTimelineItem;
@@ -55,6 +57,7 @@ interface HomeDashboardState {
   personalizedParticipant: ParticipantDirectoryEntry | null;
   personalized: PersonalizedHomeTournament[];
   personalizedCups: PersonalizedHomeCupTournament[];
+  realClubIndex: RealClubIndex;
 }
 
 @Component({
@@ -73,6 +76,7 @@ export class HomePageComponent {
     competitionFacade: CompetitionFacade,
     dataService: DataService,
     personalization: PersonalizationService,
+    realClubCatalog: RealClubCatalogService,
   ) {
     dataService.setUrlName('');
 
@@ -123,8 +127,8 @@ export class HomePageComponent {
       shareReplay({ bufferSize: 1, refCount: true }),
     );
 
-    this.dashboard$ = combineLatest([tournamentData$, personalization.state$]).pipe(
-      map(([results, personalizationState]) => {
+    this.dashboard$ = combineLatest([tournamentData$, personalization.state$, realClubCatalog.index$]).pipe(
+      map(([results, personalizationState, realClubIndex]) => {
         const selectedParticipant = personalizationState.mode === 'participant'
           ? personalizationState.selectedParticipant
           : null;
@@ -152,10 +156,17 @@ export class HomePageComponent {
               ))
               : [])
             : [],
+          realClubIndex,
         };
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
+  }
+
+  playerClubLogo(index: RealClubIndex, player: PersonalizedPlayerContribution): string {
+    return player.realTeamId
+      ? index.get(player.realTeamId)?.logo || 'assets/logos/default.png'
+      : 'assets/logos/default.png';
   }
 
   openTournament(event: MouseEvent, route: string): void {

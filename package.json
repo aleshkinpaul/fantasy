@@ -21,6 +21,7 @@
     "forecast:calibrate": "node scripts/calibrate-forecast.mjs",
     "participants:generate": "node scripts/generate-participant-directory.mjs",
     "participants:check": "node scripts/generate-participant-directory.mjs --check",
+    "clubs:sync": "node scripts/sync-real-club-catalog.mjs",
     "premypage": "npm run participants:check",
     "mypage": "ng build --base-href=https://fr-fantasy.ru/"
   },

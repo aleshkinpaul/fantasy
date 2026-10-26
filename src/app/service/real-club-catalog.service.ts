@@ -23,12 +23,14 @@ export function validateRealClubCatalog(value: unknown): readonly RealClub[] {
 
   const keys = new Set<string>();
   const externalIds = new Set<string>();
+  const sourceIdsIndex = new Set<string>();
 
   return value.map((item, index) => {
     if (!isRecord(item)) throw new Error(`Real club at index ${index} must be an object`);
     const key = requireString(item, 'key', index);
     const name = requireString(item, 'name', index);
     const logo = optionalString(item, 'logo', index);
+    const sourceIds = optionalStringArray(item, 'sourceIds', key);
     if (!Array.isArray(item['ids']) || item['ids'].length === 0) {
       throw new Error(`Real club "${key}" must contain at least one external id`);
     }
@@ -45,8 +47,12 @@ export function validateRealClubCatalog(value: unknown): readonly RealClub[] {
       if (externalIds.has(id)) throw new Error(`Duplicate real club external id "${id}"`);
       externalIds.add(id);
     });
+    sourceIds?.forEach(id => {
+      if (sourceIdsIndex.has(id)) throw new Error(`Duplicate real club source id "${id}"`);
+      sourceIdsIndex.add(id);
+    });
 
-    return { key, ids, name, logo };
+    return { key, ids, sourceIds, name, logo };
   });
 }
 
@@ -68,4 +74,16 @@ function optionalString(item: Record<string, unknown>, field: string, index: num
     throw new Error(`Real club at index ${index} has invalid ${field}`);
   }
   return value.trim();
+}
+
+function optionalStringArray(item: Record<string, unknown>, field: string, key: string): string[] | undefined {
+  const value = item[field];
+  if (value === undefined) return undefined;
+  if (!Array.isArray(value)) throw new Error(`Real club "${key}" has invalid ${field}`);
+  return value.map((id, idIndex) => {
+    if (typeof id !== 'string' || !id.trim()) {
+      throw new Error(`Real club "${key}" has invalid ${field} at index ${idIndex}`);
+    }
+    return id.trim();
+  });
 }

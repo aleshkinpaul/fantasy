@@ -22,6 +22,7 @@ describe('personalized player stats', () => {
       ['Captain', 18],
       ['Regular', 10],
     ]);
+    expect(stats.mostUsed.every(item => item.realTeamId === 'club')).toBeTrue();
   });
 
   function createProfile(rosters: Record<number, IRoster>): IProfileDetails {

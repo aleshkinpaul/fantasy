@@ -180,6 +180,7 @@
                 <ol>
                   <li *ngFor="let player of summary.playerStats.mostUsed; trackBy: trackPlayer; let rank = index">
                     <span class="player-rank">{{ rank + 1 }}</span>
+                    <span class="player-club-logo"><img [src]="playerClubLogo(dashboard.realClubIndex, player)" alt=""></span>
                     <span class="player-copy"><strong>{{ player.name }}</strong><small>{{ positionLabel(player) }} · {{ formatMetric(player.fantasyPoints) }} ФО</small></span>
                     <span class="player-metric"><strong>{{ player.appearances }}</strong><small>{{ appearanceLabel(player.appearances) }}</small></span>
                   </li>
@@ -191,6 +192,7 @@
                 <ol>
                   <li *ngFor="let player of summary.playerStats.topScorers; trackBy: trackPlayer; let rank = index">
                     <span class="player-rank">{{ rank + 1 }}</span>
+                    <span class="player-club-logo"><img [src]="playerClubLogo(dashboard.realClubIndex, player)" alt=""></span>
                     <span class="player-copy"><strong>{{ player.name }}</strong><small>{{ positionLabel(player) }} · {{ player.appearances }} {{ appearanceLabel(player.appearances) }}</small></span>
                     <span class="player-metric is-score"><strong>{{ formatMetric(player.fantasyPoints) }}</strong><small>ФО</small></span>
                   </li>

@@ -1,8 +1,10 @@
 export interface RealClub {
-  /** Stable internal key. External API identifiers belong in ids instead. */
+  /** Stable application key, independent from identifiers returned by APIs. */
   key: string;
-  /** IDs used by fantasy-h2h API across seasons and competitions. */
+  /** Fantasy team IDs referenced by sport_players_tour_stat across tournaments. */
   ids: string[];
+  /** Stable club IDs returned by /api/fnts_tournament/teams/{tournament}. */
+  sourceIds?: string[];
   name: string;
   /** App-relative asset path. May be empty until an emblem is provided. */
   logo: string;

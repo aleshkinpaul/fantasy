@@ -6,6 +6,7 @@ export interface PersonalizedPlayerContribution {
   id: string;
   name: string;
   positionId?: string;
+  realTeamId?: string;
   appearances: number;
   fantasyPoints: number;
 }
@@ -48,11 +49,13 @@ export function calculatePersonalizedPlayerStats(
         id: player.id,
         name: sportPlayer?.name ?? `Игрок #${player.id}`,
         positionId: sportPlayer?.amplua_id,
+        realTeamId: sportPlayer?.team_id,
         appearances: 0,
         fantasyPoints: 0,
       };
       if (sportPlayer?.name) contribution.name = sportPlayer.name;
       if (sportPlayer?.amplua_id) contribution.positionId = sportPlayer.amplua_id;
+      if (sportPlayer?.team_id) contribution.realTeamId = sportPlayer.team_id;
       contribution.appearances++;
       contribution.fantasyPoints += player.displayFantasyScore ?? 0;
       contributions.set(player.id, contribution);

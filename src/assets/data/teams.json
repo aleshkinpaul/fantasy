@@ -1,152 +1,623 @@
 [
   {
+    "key": "sports-1241",
+    "ids": [
+      "8484"
+    ],
+    "sourceIds": [
+      "1241"
+    ],
+    "name": "АЕК",
+    "logo": "assets/logos/real-clubs/api/1241.png"
+  },
+  {
     "key": "alaves",
-    "ids": ["6990", "8366"],
+    "ids": [
+      "6990",
+      "8366"
+    ],
     "name": "Алавес",
-    "logo": "assets/logos/real-clubs/2026-27/8366.png"
+    "logo": "assets/logos/real-clubs/2026-27/8366.png",
+    "sourceIds": [
+      "1111"
+    ]
+  },
+  {
+    "key": "sports-34",
+    "ids": [
+      "8485"
+    ],
+    "sourceIds": [
+      "34"
+    ],
+    "name": "Арсенал",
+    "logo": "assets/logos/real-clubs/api/34.jpeg"
+  },
+  {
+    "key": "sports-20",
+    "ids": [
+      "8486"
+    ],
+    "sourceIds": [
+      "20"
+    ],
+    "name": "Астон Вилла",
+    "logo": "assets/logos/real-clubs/api/20.png"
   },
   {
     "key": "athletic-bilbao",
-    "ids": ["6991", "8367"],
+    "ids": [
+      "6991",
+      "8367"
+    ],
     "name": "Атлетик Бильбао",
-    "logo": "assets/logos/real-clubs/2026-27/8367.png"
+    "logo": "assets/logos/real-clubs/2026-27/8367.png",
+    "sourceIds": [
+      "782"
+    ]
   },
   {
     "key": "atletico-madrid",
-    "ids": ["6992", "8368"],
+    "ids": [
+      "6992",
+      "8368",
+      "8487"
+    ],
     "name": "Атлетико Мадрид",
-    "logo": "assets/logos/real-clubs/2026-27/8368.png"
+    "logo": "assets/logos/real-clubs/2026-27/8368.png",
+    "sourceIds": [
+      "783"
+    ]
+  },
+  {
+    "key": "sports-617",
+    "ids": [
+      "8488"
+    ],
+    "sourceIds": [
+      "617"
+    ],
+    "name": "Бавария",
+    "logo": "assets/logos/real-clubs/api/617.png"
   },
   {
     "key": "barcelona",
-    "ids": ["6993", "8369"],
+    "ids": [
+      "6993",
+      "8369",
+      "8489"
+    ],
     "name": "Барселона",
-    "logo": "assets/logos/real-clubs/2026-27/8369.png"
+    "logo": "assets/logos/real-clubs/2026-27/8369.png",
+    "sourceIds": [
+      "774"
+    ]
   },
   {
-    "key": "real-betis",
-    "ids": ["6994", "8370"],
-    "name": "Реал Бетис",
-    "logo": "assets/logos/real-clubs/2026-27/8370.png"
+    "key": "sports-630",
+    "ids": [
+      "8491"
+    ],
+    "sourceIds": [
+      "630"
+    ],
+    "name": "Боруссия Д",
+    "logo": "assets/logos/real-clubs/api/630.png"
+  },
+  {
+    "key": "sports-795",
+    "ids": [
+      "8492"
+    ],
+    "sourceIds": [
+      "795"
+    ],
+    "name": "Брюгге",
+    "logo": "assets/logos/real-clubs/api/795.jpeg"
+  },
+  {
+    "key": "sports-483",
+    "ids": [
+      "8493"
+    ],
+    "sourceIds": [
+      "483"
+    ],
+    "name": "Буде-Глимт",
+    "logo": "assets/logos/real-clubs/api/483.jpeg"
   },
   {
     "key": "valencia",
-    "ids": ["6995", "8371"],
+    "ids": [
+      "6995",
+      "8371"
+    ],
     "name": "Валенсия",
-    "logo": "assets/logos/real-clubs/2026-27/8371.png"
+    "logo": "assets/logos/real-clubs/2026-27/8371.png",
+    "sourceIds": [
+      "778"
+    ]
   },
   {
     "key": "real-valladolid",
-    "ids": ["6996"],
+    "ids": [
+      "6996"
+    ],
     "name": "Вальядолид",
     "logo": ""
   },
   {
+    "key": "sports-494",
+    "ids": [
+      "8494"
+    ],
+    "sourceIds": [
+      "494"
+    ],
+    "name": "Викинг",
+    "logo": "assets/logos/real-clubs/api/494.png"
+  },
+  {
     "key": "villarreal",
-    "ids": ["6997", "8372"],
+    "ids": [
+      "6997",
+      "8372",
+      "8495"
+    ],
     "name": "Вильярреал",
-    "logo": "assets/logos/real-clubs/2026-27/8372.png"
+    "logo": "assets/logos/real-clubs/2026-27/8372.png",
+    "sourceIds": [
+      "771"
+    ]
+  },
+  {
+    "key": "sports-721",
+    "ids": [
+      "8496"
+    ],
+    "sourceIds": [
+      "721"
+    ],
+    "name": "Галатасарай",
+    "logo": "assets/logos/real-clubs/api/721.png"
+  },
+  {
+    "key": "deportivo-la-coruna",
+    "ids": [
+      "8373"
+    ],
+    "name": "Депортиво Ла-Корунья",
+    "logo": "assets/logos/real-clubs/2026-27/8373.png",
+    "sourceIds": [
+      "2459"
+    ]
   },
   {
     "key": "girona",
-    "ids": ["6998"],
+    "ids": [
+      "6998"
+    ],
     "name": "Жирона",
     "logo": ""
   },
   {
+    "key": "sports-751",
+    "ids": [
+      "8497"
+    ],
+    "sourceIds": [
+      "751"
+    ],
+    "name": "Интер",
+    "logo": "assets/logos/real-clubs/api/751.png"
+  },
+  {
+    "key": "sports-1695",
+    "ids": [
+      "8498"
+    ],
+    "sourceIds": [
+      "1695"
+    ],
+    "name": "Комо",
+    "logo": "assets/logos/real-clubs/api/1695.png"
+  },
+  {
+    "key": "sports-670",
+    "ids": [
+      "8499"
+    ],
+    "sourceIds": [
+      "670"
+    ],
+    "name": "Ланс",
+    "logo": "assets/logos/real-clubs/api/670.png"
+  },
+  {
     "key": "las-palmas",
-    "ids": ["6999"],
+    "ids": [
+      "6999"
+    ],
     "name": "Лас-Пальмас",
     "logo": ""
   },
   {
+    "key": "sports-1239",
+    "ids": [
+      "8500"
+    ],
+    "sourceIds": [
+      "1239"
+    ],
+    "name": "ЛАСК",
+    "logo": "assets/logos/real-clubs/api/1239.png"
+  },
+  {
+    "key": "levante",
+    "ids": [
+      "8374"
+    ],
+    "name": "Леванте",
+    "logo": "assets/logos/real-clubs/2026-27/8374.png",
+    "sourceIds": [
+      "2093"
+    ]
+  },
+  {
     "key": "leganes",
-    "ids": ["7000"],
+    "ids": [
+      "7000"
+    ],
     "name": "Леганес",
     "logo": ""
   },
   {
+    "key": "sports-18",
+    "ids": [
+      "8501"
+    ],
+    "sourceIds": [
+      "18"
+    ],
+    "name": "Ливерпуль",
+    "logo": "assets/logos/real-clubs/api/18.png"
+  },
+  {
+    "key": "sports-664",
+    "ids": [
+      "8502"
+    ],
+    "sourceIds": [
+      "664"
+    ],
+    "name": "Лилль",
+    "logo": "assets/logos/real-clubs/api/664.png"
+  },
+  {
+    "key": "malaga",
+    "ids": [
+      "8375"
+    ],
+    "name": "Малага",
+    "logo": "assets/logos/real-clubs/2026-27/8375.png",
+    "sourceIds": [
+      "2460"
+    ]
+  },
+  {
     "key": "mallorca",
-    "ids": ["7001"],
+    "ids": [
+      "7001"
+    ],
     "name": "Мальорка",
     "logo": ""
   },
   {
+    "key": "sports-26",
+    "ids": [
+      "8503"
+    ],
+    "sourceIds": [
+      "26"
+    ],
+    "name": "Манчестер Сити",
+    "logo": "assets/logos/real-clubs/api/26.jpeg"
+  },
+  {
+    "key": "sports-29",
+    "ids": [
+      "8504"
+    ],
+    "sourceIds": [
+      "29"
+    ],
+    "name": "Манчестер Юнайтед",
+    "logo": "assets/logos/real-clubs/api/29.png"
+  },
+  {
+    "key": "sports-763",
+    "ids": [
+      "8505"
+    ],
+    "sourceIds": [
+      "763"
+    ],
+    "name": "Наполи",
+    "logo": "assets/logos/real-clubs/api/763.png"
+  },
+  {
     "key": "osasuna",
-    "ids": ["7002", "8376"],
+    "ids": [
+      "7002",
+      "8376"
+    ],
     "name": "Осасуна",
-    "logo": "assets/logos/real-clubs/2026-27/8376.png"
+    "logo": "assets/logos/real-clubs/2026-27/8376.png",
+    "sourceIds": [
+      "768"
+    ]
+  },
+  {
+    "key": "sports-700",
+    "ids": [
+      "8506"
+    ],
+    "sourceIds": [
+      "700"
+    ],
+    "name": "Порту",
+    "logo": "assets/logos/real-clubs/api/700.png"
+  },
+  {
+    "key": "sports-682",
+    "ids": [
+      "8507"
+    ],
+    "sourceIds": [
+      "682"
+    ],
+    "name": "ПСВ",
+    "logo": "assets/logos/real-clubs/api/682.png"
+  },
+  {
+    "key": "sports-659",
+    "ids": [
+      "8508"
+    ],
+    "sourceIds": [
+      "659"
+    ],
+    "name": "ПСЖ",
+    "logo": "assets/logos/real-clubs/api/659.png"
   },
   {
     "key": "rayo-vallecano",
-    "ids": ["7003", "8377"],
+    "ids": [
+      "7003",
+      "8377"
+    ],
     "name": "Райо Вальекано",
-    "logo": "assets/logos/real-clubs/2026-27/8377.png"
-  },
-  {
-    "key": "real-madrid",
-    "ids": ["7004", "8379"],
-    "name": "Реал Мадрид",
-    "logo": "assets/logos/real-clubs/2026-27/8379.png"
-  },
-  {
-    "key": "real-sociedad",
-    "ids": ["7005", "8380"],
-    "name": "Реал Сосьедад",
-    "logo": "assets/logos/real-clubs/2026-27/8380.png"
-  },
-  {
-    "key": "sevilla",
-    "ids": ["7006", "8381"],
-    "name": "Севилья",
-    "logo": "assets/logos/real-clubs/2026-27/8381.png"
-  },
-  {
-    "key": "celta-vigo",
-    "ids": ["7007", "8382"],
-    "name": "Сельта",
-    "logo": "assets/logos/real-clubs/2026-27/8382.png"
-  },
-  {
-    "key": "getafe",
-    "ids": ["7008", "8383"],
-    "name": "Хетафе",
-    "logo": "assets/logos/real-clubs/2026-27/8383.png"
-  },
-  {
-    "key": "espanyol",
-    "ids": ["7009", "8385"],
-    "name": "Эспаньол",
-    "logo": "assets/logos/real-clubs/2026-27/8385.png"
-  },
-  {
-    "key": "deportivo-la-coruna",
-    "ids": ["8373"],
-    "name": "Депортиво Ла-Корунья",
-    "logo": "assets/logos/real-clubs/2026-27/8373.png"
-  },
-  {
-    "key": "levante",
-    "ids": ["8374"],
-    "name": "Леванте",
-    "logo": "assets/logos/real-clubs/2026-27/8374.png"
-  },
-  {
-    "key": "malaga",
-    "ids": ["8375"],
-    "name": "Малага",
-    "logo": "assets/logos/real-clubs/2026-27/8375.png"
+    "logo": "assets/logos/real-clubs/2026-27/8377.png",
+    "sourceIds": [
+      "773"
+    ]
   },
   {
     "key": "racing-santander",
-    "ids": ["8378"],
+    "ids": [
+      "8378"
+    ],
     "name": "Расинг Сантандер",
-    "logo": "assets/logos/real-clubs/2026-27/8378.png"
+    "logo": "assets/logos/real-clubs/2026-27/8378.png",
+    "sourceIds": [
+      "2458"
+    ]
+  },
+  {
+    "key": "sports-631",
+    "ids": [
+      "8509"
+    ],
+    "sourceIds": [
+      "631"
+    ],
+    "name": "РБ Лейпциг",
+    "logo": "assets/logos/real-clubs/api/631.png"
+  },
+  {
+    "key": "real-betis",
+    "ids": [
+      "6994",
+      "8370",
+      "8490"
+    ],
+    "name": "Реал Бетис",
+    "logo": "assets/logos/real-clubs/2026-27/8370.png",
+    "sourceIds": [
+      "786"
+    ]
+  },
+  {
+    "key": "real-madrid",
+    "ids": [
+      "7004",
+      "8379",
+      "8510"
+    ],
+    "name": "Реал Мадрид",
+    "logo": "assets/logos/real-clubs/2026-27/8379.png",
+    "sourceIds": [
+      "779"
+    ]
+  },
+  {
+    "key": "real-sociedad",
+    "ids": [
+      "7005",
+      "8380"
+    ],
+    "name": "Реал Сосьедад",
+    "logo": "assets/logos/real-clubs/2026-27/8380.png",
+    "sourceIds": [
+      "775"
+    ]
+  },
+  {
+    "key": "sports-759",
+    "ids": [
+      "8511"
+    ],
+    "sourceIds": [
+      "759"
+    ],
+    "name": "Рома",
+    "logo": "assets/logos/real-clubs/api/759.jpeg"
+  },
+  {
+    "key": "sports-2612",
+    "ids": [
+      "8512"
+    ],
+    "sourceIds": [
+      "2612"
+    ],
+    "name": "Сабах",
+    "logo": "assets/logos/real-clubs/api/2612.png"
+  },
+  {
+    "key": "sevilla",
+    "ids": [
+      "7006",
+      "8381"
+    ],
+    "name": "Севилья",
+    "logo": "assets/logos/real-clubs/2026-27/8381.png",
+    "sourceIds": [
+      "767"
+    ]
+  },
+  {
+    "key": "celta-vigo",
+    "ids": [
+      "7007",
+      "8382"
+    ],
+    "name": "Сельта",
+    "logo": "assets/logos/real-clubs/2026-27/8382.png",
+    "sourceIds": [
+      "770"
+    ]
+  },
+  {
+    "key": "sports-1237",
+    "ids": [
+      "8513"
+    ],
+    "sourceIds": [
+      "1237"
+    ],
+    "name": "Славия",
+    "logo": "assets/logos/real-clubs/api/1237.png"
+  },
+  {
+    "key": "sports-1785",
+    "ids": [
+      "8514"
+    ],
+    "sourceIds": [
+      "1785"
+    ],
+    "name": "Слован Б",
+    "logo": "assets/logos/real-clubs/api/1785.png"
+  },
+  {
+    "key": "sports-703",
+    "ids": [
+      "8515"
+    ],
+    "sourceIds": [
+      "703"
+    ],
+    "name": "Спортинг",
+    "logo": "assets/logos/real-clubs/api/703.png"
+  },
+  {
+    "key": "sports-687",
+    "ids": [
+      "8516"
+    ],
+    "sourceIds": [
+      "687"
+    ],
+    "name": "Фейеноорд",
+    "logo": "assets/logos/real-clubs/api/687.png"
+  },
+  {
+    "key": "sports-728",
+    "ids": [
+      "8517"
+    ],
+    "sourceIds": [
+      "728"
+    ],
+    "name": "Фенербахче",
+    "logo": "assets/logos/real-clubs/api/728.png"
+  },
+  {
+    "key": "getafe",
+    "ids": [
+      "7008",
+      "8383"
+    ],
+    "name": "Хетафе",
+    "logo": "assets/logos/real-clubs/2026-27/8383.png",
+    "sourceIds": [
+      "784"
+    ]
+  },
+  {
+    "key": "sports-792",
+    "ids": [
+      "8518"
+    ],
+    "sourceIds": [
+      "792"
+    ],
+    "name": "Шахтер",
+    "logo": "assets/logos/real-clubs/api/792.jpeg"
+  },
+  {
+    "key": "sports-632",
+    "ids": [
+      "8519"
+    ],
+    "sourceIds": [
+      "632"
+    ],
+    "name": "Штутгарт",
+    "logo": "assets/logos/real-clubs/api/632.png"
   },
   {
     "key": "elche",
-    "ids": ["8384"],
+    "ids": [
+      "8384"
+    ],
     "name": "Эльче",
-    "logo": "assets/logos/real-clubs/2026-27/8384.png"
+    "logo": "assets/logos/real-clubs/2026-27/8384.png",
+    "sourceIds": [
+      "785"
+    ]
+  },
+  {
+    "key": "espanyol",
+    "ids": [
+      "7009",
+      "8385"
+    ],
+    "name": "Эспаньол",
+    "logo": "assets/logos/real-clubs/2026-27/8385.png",
+    "sourceIds": [
+      "769"
+    ]
   }
 ]
