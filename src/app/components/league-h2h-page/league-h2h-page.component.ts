@@ -48,7 +48,10 @@ import { resolveMatchCenterStatus } from '../../match-center/match-center-status
 import { MatchHistoryDataService } from '../../match-center/match-history-data.service';
 import { MatchHistoryIndex } from '../../match-center/match-center.models';
 import { CupBracketComponent } from '../cup-bracket/cup-bracket.component';
-import { buildCupBracketViewModel } from '../../competition/domain/cup-bracket';
+import {
+  buildCupBracketViewModel,
+  resolveActualCupRoundIndex,
+} from '../../competition/domain/cup-bracket';
 
 @Component({
   selector: 'app-league-h2h-page',
@@ -262,12 +265,8 @@ export class LeagueH2HPageComponent implements OnInit {
 
     if (ind === 5 && this.consts.cup) {
       const cup = this.consts.cup;
-      const actualCupTour =
-        cup.matchesTours[0] <= this.lastTour ?
-          Math.max(
-            ...cup.matchesTours.filter(val => val <= this.lastTour)
-          ) : cup.matchesTours[0];
-      const indOfActualCupTour = cup.matchesTours.indexOf(actualCupTour) + 1;
+      const actualCupRoundIndex = resolveActualCupRoundIndex(cup.matchesTours, this.lastTour);
+      const indOfActualCupTour = actualCupRoundIndex + 1;
       const requestedCupTour = !resetTour
         ? Number(this.route.snapshot.queryParams['tourId'])
         : 0;

@@ -228,6 +228,12 @@
 
   strong { font-size: $font-size-sm; }
   span { color: $color-text-muted; font-size: $font-size-xs; }
+
+  &.actual-round {
+    border-color: alpha($color-primary, .55);
+    background: $color-surface-blue;
+    box-shadow: 0 3px 10px alpha($color-primary, .18);
+  }
 }
 
 .bracket-connectors {

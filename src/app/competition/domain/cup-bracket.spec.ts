@@ -1,5 +1,9 @@
 import { CompetitionCup } from '../models/competition.models';
-import { bracketNodeId, buildCupBracketViewModel } from './cup-bracket';
+import {
+  bracketNodeId,
+  buildCupBracketViewModel,
+  resolveActualCupRoundIndex,
+} from './cup-bracket';
 
 describe('buildCupBracketViewModel', () => {
   function createCup(): CompetitionCup {
@@ -71,5 +75,17 @@ describe('buildCupBracketViewModel', () => {
       away: 'seed-0',
       type: 'down',
     });
+  });
+
+  it('selects the current cup round or the nearest upcoming round', () => {
+    const tours = createCup().matchesTours;
+
+    expect(resolveActualCupRoundIndex(tours, 8)).toBe(0);
+    expect(resolveActualCupRoundIndex(tours, 10)).toBe(0);
+    expect(resolveActualCupRoundIndex(tours, 11)).toBe(1);
+    expect(resolveActualCupRoundIndex(tours, 28)).toBe(9);
+    expect(resolveActualCupRoundIndex(tours, 29)).toBe(10);
+    expect(resolveActualCupRoundIndex(tours, 40)).toBe(11);
+    expect(resolveActualCupRoundIndex([], 10)).toBe(-1);
   });
 });

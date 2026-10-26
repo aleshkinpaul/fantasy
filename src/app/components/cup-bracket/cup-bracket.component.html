@@ -55,6 +55,7 @@
         <div
           *ngFor="let round of viewModel.rounds; trackBy: trackRound"
           class="round-heading"
+          [class.actual-round]="isActualRound(round)"
           [style.left.px]="roundX(round)">
           <strong>{{ round.title }}</strong>
           <span>{{ round.tour }} тур</span>

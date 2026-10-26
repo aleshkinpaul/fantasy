@@ -263,6 +263,15 @@ export function bracketNodeId(round: number, match: number): string {
   return `r${round}-m${match}`;
 }
 
+export function resolveActualCupRoundIndex(
+  matchesTours: readonly number[],
+  currentTour: number,
+): number {
+  if (!matchesTours.length) return -1;
+  const currentOrNextRound = matchesTours.findIndex(tour => tour >= currentTour);
+  return currentOrNextRound === -1 ? matchesTours.length - 1 : currentOrNextRound;
+}
+
 function buildDoubleElimination48Templates(cup: CompetitionCup): CupBracketNodeTemplate[] {
   const qualification = (cup.draw?.qualificationPairs || []).map((match, matchIndex) => ({
     roundIndex: 0,

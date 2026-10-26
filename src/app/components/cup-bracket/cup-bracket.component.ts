@@ -1,8 +1,10 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   OnChanges,
   Output,
   SimpleChanges,
@@ -17,6 +19,7 @@ import {
   CupBracketRoundView,
   CupBracketSlotView,
   CupBracketViewModel,
+  resolveActualCupRoundIndex,
 } from '../../competition/domain/cup-bracket';
 import { IProfileDetails } from '../../models/domain';
 import { MatchCenterSelection } from '../../match-center/match-center.models';
@@ -29,7 +32,7 @@ import { PersonalizedParticipantDirective } from '../../directives/personalized-
   templateUrl: './cup-bracket.component.html',
   styleUrls: ['./cup-bracket.component.scss'],
 })
-export class CupBracketComponent implements OnChanges {
+export class CupBracketComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input({ required: true }) cup!: CompetitionCup;
   @Input() profiles: IProfileDetails[] = [];
   @Input() lastTour = 1;
@@ -45,6 +48,8 @@ export class CupBracketComponent implements OnChanges {
   selectedNodeId = '';
 
   private profileById = new Map<string, IProfileDetails>();
+  private viewInitialized = false;
+  private scrollTimeout?: ReturnType<typeof setTimeout>;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['profiles']) {
@@ -56,6 +61,18 @@ export class CupBracketComponent implements OnChanges {
         this.selectedNodeId = '';
       }
     }
+    if (changes['cup'] || changes['lastTour']) {
+      this.scheduleActualRoundScroll();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.viewInitialized = true;
+    this.scheduleActualRoundScroll();
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
   }
 
   get selectedNode(): CupBracketNodeView | undefined {
@@ -64,6 +81,10 @@ export class CupBracketComponent implements OnChanges {
 
   get selectedTransitions(): CupBracketEdgeView[] {
     return this.outgoingEdges(this.selectedNodeId);
+  }
+
+  get actualRoundIndex(): number {
+    return resolveActualCupRoundIndex(this.cup?.matchesTours || [], this.lastTour);
   }
 
   outgoingEdges(node: CupBracketNodeView | string): CupBracketEdgeView[] {
@@ -108,6 +129,10 @@ export class CupBracketComponent implements OnChanges {
 
   roundX(round: CupBracketRoundView): number {
     return round.nodes[0]?.x ?? 0;
+  }
+
+  isActualRound(round: CupBracketRoundView): boolean {
+    return round.index === this.actualRoundIndex;
   }
 
   isSelected(node: CupBracketNodeView): boolean {
@@ -186,5 +211,22 @@ export class CupBracketComponent implements OnChanges {
 
   trackRound(_: number, round: CupBracketRoundView): number {
     return round.index;
+  }
+
+  private scheduleActualRoundScroll(): void {
+    if (!this.viewInitialized) return;
+    if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => this.scrollToActualRound());
+  }
+
+  private scrollToActualRound(): void {
+    const viewport = this.bracketViewport?.nativeElement;
+    const round = this.viewModel.rounds[this.actualRoundIndex];
+    if (!viewport || !round) return;
+
+    const roundCenter = this.roundX(round) + this.viewModel.cardWidth / 2;
+    const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+    const left = Math.max(0, Math.min(roundCenter - viewport.clientWidth / 2, maxScrollLeft));
+    viewport.scrollTo({ left, top: viewport.scrollTop, behavior: 'smooth' });
   }
 }
