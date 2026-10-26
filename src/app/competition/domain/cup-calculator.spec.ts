@@ -86,18 +86,18 @@ describe('double-elimination-48-v1', () => {
       .toEqual([16, 16, 8, 8, 4, 4, 2, 2, 1, 1]);
 
     expect(getDoubleElimination48RoundTemplate(2)?.[0]).toEqual({
-      home: { round: 0, match: 15, outcome: 'loser' },
-      away: { round: 1, match: 0, outcome: 'loser' },
+      home: { kind: 'match', round: 0, match: 15, outcome: 'loser' },
+      away: { kind: 'match', round: 1, match: 0, outcome: 'loser' },
       type: 'down',
     });
     expect(getDoubleElimination48RoundTemplate(4)?.[0]).toEqual({
-      home: { round: 3, match: 1, outcome: 'loser' },
-      away: { round: 3, match: 8, outcome: 'winner' },
+      home: { kind: 'match', round: 3, match: 1, outcome: 'loser' },
+      away: { kind: 'match', round: 3, match: 8, outcome: 'winner' },
       type: 'down',
     });
     expect(getDoubleElimination48RoundTemplate(11)?.[0]).toEqual({
-      home: { round: 9, match: 0, outcome: 'winner' },
-      away: { round: 10, match: 0, outcome: 'winner' },
+      home: { kind: 'match', round: 9, match: 0, outcome: 'winner' },
+      away: { kind: 'match', round: 10, match: 0, outcome: 'winner' },
       type: 'up',
     });
   });

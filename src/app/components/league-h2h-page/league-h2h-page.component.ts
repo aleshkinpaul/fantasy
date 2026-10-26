@@ -47,13 +47,15 @@ import {
 import { resolveMatchCenterStatus } from '../../match-center/match-center-status';
 import { MatchHistoryDataService } from '../../match-center/match-history-data.service';
 import { MatchHistoryIndex } from '../../match-center/match-center.models';
+import { CupBracketComponent } from '../cup-bracket/cup-bracket.component';
+import { buildCupBracketViewModel } from '../../competition/domain/cup-bracket';
 
 @Component({
   selector: 'app-league-h2h-page',
   templateUrl: './league-h2h-page.component.html',
   styleUrls: ['./league-h2h-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent, ConferenceParticipantsComponent, MatchCenterComponent, TourInsightsComponent],
+  imports: [CommonModule, StandingsComponent, ScheduleComponent, MatchesComponent, HeaderComponent, DefaultLoaderComponent, PrizesListComponent, ConferenceParticipantsComponent, MatchCenterComponent, TourInsightsComponent, CupBracketComponent],
 })
 export class LeagueH2HPageComponent implements OnInit {
   public consts!: SeasonCompetitionConfig;
@@ -89,6 +91,7 @@ export class LeagueH2HPageComponent implements OnInit {
   public matchHistoryIndex: MatchHistoryIndex | null = null;
   public matchHistoryLoading = false;
   public realClubIndex: RealClubIndex = new Map();
+  public cupView: 'bracket' | 'rounds' = 'bracket';
   private forecastSubscription?: Subscription;
   private insightsForecastSubscription?: Subscription;
   private matchHistorySubscription?: Subscription;
@@ -329,6 +332,16 @@ export class LeagueH2HPageComponent implements OnInit {
     this.setQueryParam(this.activeTabs)
   }
 
+  setCupView(view: 'bracket' | 'rounds'): void {
+    this.cupView = view;
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { cupView: view },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
   updateTabs(): void {
     const tabIdParam = +this.route.snapshot.queryParams['tabId'] || '';
     const confIdParam = +this.route.snapshot.queryParams['confId'] || '';
@@ -337,6 +350,7 @@ export class LeagueH2HPageComponent implements OnInit {
     const tourViewParam = this.route.snapshot.queryParams['tourView'];
     const insightsScopeParam = this.route.snapshot.queryParams['insightsScope'];
     const insightsPeriodParam = this.route.snapshot.queryParams['insightsPeriod'];
+    const cupViewParam = this.route.snapshot.queryParams['cupView'];
 
     if (!!tabIdParam) this.activeTabs.tabId = tabIdParam;
     if (!!confIdParam) this.activeTabs.confId = confIdParam;
@@ -346,6 +360,7 @@ export class LeagueH2HPageComponent implements OnInit {
     this.activeTabs.tourView = tourViewParam === 'insights' ? 'insights' : 'matches';
     this.activeTabs.insightsScope = insightsScopeParam === 'competition' ? 'competition' : 'league';
     this.activeTabs.insightsPeriod = insightsPeriodParam === 'season' ? 'season' : 'tour';
+    this.cupView = cupViewParam === 'rounds' ? 'rounds' : 'bracket';
   }
 
   private refreshTourInsights(): void {
@@ -519,10 +534,7 @@ export class LeagueH2HPageComponent implements OnInit {
 
     const query = this.route.snapshot.queryParamMap;
     const cupMatches = this.consts.cup
-      ? Object.fromEntries(this.consts.cup.matches.map((matches, index) => [
-        this.consts.cup!.matchesTours[index],
-        matches,
-      ]))
+      ? this.getCupMatchesByTour(this.consts.cup)
       : {};
     const matches = this.activeTabs.tabId === 5 ? cupMatches : this.consts.matches;
     const selection = resolveMatchCenterQuery(matches, {
@@ -535,6 +547,14 @@ export class LeagueH2HPageComponent implements OnInit {
     } else if (this.selectedMatch) {
       this.clearMatchCenter();
     }
+  }
+
+  private getCupMatchesByTour(cup: NonNullable<SeasonCompetitionConfig['cup']>): Record<number, CompetitionMatch[]> {
+    const bracket = buildCupBracketViewModel(cup);
+    return Object.fromEntries(cup.matchesTours.map((tour, index) => {
+      const bracketMatches = bracket.rounds[index]?.nodes.flatMap(node => node.match ? [node.match] : []) || [];
+      return [tour, bracketMatches.length ? bracketMatches : cup.matches[index]];
+    }));
   }
 
   private matchSelectionKey(selection: MatchCenterSelection | null): string {

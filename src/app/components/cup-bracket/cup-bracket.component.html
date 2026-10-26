@@ -1,0 +1,192 @@
+<section class="cup-bracket" aria-labelledby="cup-bracket-title">
+  <header class="bracket-intro">
+    <div>
+      <p class="eyebrow">Double elimination</p>
+      <h2 id="cup-bracket-title">Сетка Кубка Короля</h2>
+      <p>Выберите пару, чтобы увидеть путь победителя и переход проигравшего в нижнюю сетку.</p>
+    </div>
+    <div class="bracket-legend" aria-label="Обозначения сетки">
+      <span class="upper-key">Верхняя сетка</span>
+      <span class="lower-key">Нижняя сетка</span>
+      <span class="winner-key">Победитель</span>
+      <span class="loser-key">Проигравший</span>
+    </div>
+  </header>
+
+  <aside class="selection-panel desktop-only" *ngIf="selectedNode as selected" aria-live="polite">
+    <div class="selection-copy">
+      <span>{{ selected.laneLabel }}</span>
+      <strong>{{ selected.roundTitle }} · пара {{ selected.pairNumber }}</strong>
+    </div>
+    <div class="selection-routes" *ngIf="selectedTransitions.length; else championRoute">
+      <button
+        *ngFor="let edge of selectedTransitions; trackBy: trackEdge"
+        type="button"
+        [class.loser-route]="edge.outcome === 'loser'"
+        (click)="focusTarget(edge)">
+        {{ transitionLabel(edge) }}
+      </button>
+    </div>
+    <ng-template #championRoute>
+      <strong class="champion-route">Победитель становится обладателем Кубка</strong>
+    </ng-template>
+  </aside>
+
+  <div class="bracket-viewport desktop-only" #desktopViewport tabindex="0" aria-label="Турнирная сетка. Область прокручивается по горизонтали и вертикали">
+    <div
+      class="bracket-canvas"
+      [style.width.px]="viewModel.width"
+      [style.height.px]="viewModel.height">
+      <div
+        *ngFor="let group of viewModel.laneGroups"
+        class="lane-group"
+        [class.qualification-group]="group.lane === 'qualification'"
+        [class.upper-group]="group.lane === 'upper'"
+        [class.lower-group]="group.lane === 'lower'"
+        [class.final-group]="group.lane === 'grand-final'"
+        [style.left.px]="group.x"
+        [style.top.px]="group.y"
+        [style.width.px]="group.width"
+        [style.height.px]="group.height">
+        <span>{{ group.label }}</span>
+      </div>
+
+      <div class="round-heading-layer" aria-hidden="true">
+        <div
+          *ngFor="let round of viewModel.rounds; trackBy: trackRound"
+          class="round-heading"
+          [style.left.px]="roundX(round)">
+          <strong>{{ round.title }}</strong>
+          <span>{{ round.tour }} тур</span>
+        </div>
+      </div>
+
+      <svg
+        class="bracket-connectors"
+        [attr.viewBox]="'0 0 ' + viewModel.width + ' ' + viewModel.height"
+        [attr.width]="viewModel.width"
+        [attr.height]="viewModel.height"
+        aria-hidden="true">
+        <path
+          *ngFor="let edge of viewModel.edges; trackBy: trackEdge"
+          [attr.d]="edge.path"
+          [class.winner-edge]="edge.outcome === 'winner'"
+          [class.loser-edge]="edge.outcome === 'loser'"
+          [class.highlighted]="isHighlightedEdge(edge)"
+          [class.dimmed]="isDimmedEdge(edge)">
+        </path>
+      </svg>
+
+      <article
+        *ngFor="let node of viewModel.nodes; trackBy: trackNode"
+        class="bracket-node"
+        tabindex="0"
+        [attr.data-node-id]="node.id"
+        [attr.aria-label]="nodeAriaLabel(node)"
+        [class.qualification-node]="node.lane === 'qualification'"
+        [class.upper-node]="node.lane === 'upper'"
+        [class.lower-node]="node.lane === 'lower'"
+        [class.final-node]="node.lane === 'grand-final'"
+        [class.selected]="isSelected(node)"
+        [class.selected-target]="isSelectedTarget(node)"
+        [style.left.px]="node.x"
+        [style.top.px]="node.y"
+        [style.width.px]="viewModel.cardWidth"
+        [style.height.px]="viewModel.cardHeight"
+        (click)="selectNode(node)"
+        (keydown)="handleNodeKeydown($event, node)">
+        <header>
+          <span>{{ node.lane === 'upper' ? 'ВС' : node.lane === 'lower' ? 'НС' : node.lane === 'grand-final' ? 'Ф' : 'ОТБ' }}</span>
+          <strong>Пара {{ node.pairNumber }}</strong>
+          <button
+            *ngIf="node.match && node.home.profileId && node.away.profileId"
+            type="button"
+            class="match-center-link"
+            (click)="openMatch($event, node)"
+            [attr.aria-label]="'Открыть матч-центр: ' + nodeAriaLabel(node)">↗</button>
+        </header>
+
+        <div class="team-line" [class.winner]="isWinner(node, node.home)">
+          <span class="mini-logo" [appPersonalized]="node.home.profileId || ''">
+            <span *ngIf="isMartinMember(node.home)" class="martin-badge">ЛМ</span>
+            <img *ngIf="node.home.profileId" [src]="teamLogo(node.home)" [alt]="teamTitle(node.home)">
+            <span *ngIf="!node.home.profileId" aria-hidden="true">?</span>
+          </span>
+          <span class="team-title" [title]="participantName(node.home)">{{ teamTitle(node.home) }}</span>
+          <strong>{{ scoreFor(node, node.home) }}</strong>
+        </div>
+        <div class="team-line" [class.winner]="isWinner(node, node.away)">
+          <span class="mini-logo" [appPersonalized]="node.away.profileId || ''">
+            <span *ngIf="isMartinMember(node.away)" class="martin-badge">ЛМ</span>
+            <img *ngIf="node.away.profileId" [src]="teamLogo(node.away)" [alt]="teamTitle(node.away)">
+            <span *ngIf="!node.away.profileId" aria-hidden="true">?</span>
+          </span>
+          <span class="team-title" [title]="participantName(node.away)">{{ teamTitle(node.away) }}</span>
+          <strong>{{ scoreFor(node, node.away) }}</strong>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="mobile-bracket">
+    <nav class="mobile-rounds" aria-label="Этапы Кубка">
+      <button
+        *ngFor="let round of viewModel.rounds; trackBy: trackRound"
+        type="button"
+        [class.active]="activeMobileRoundIndex === round.index"
+        [attr.aria-pressed]="activeMobileRoundIndex === round.index"
+        (click)="selectMobileRound(round.index)">
+        {{ round.title }}
+      </button>
+    </nav>
+
+    <section class="mobile-round" *ngIf="activeMobileRound as round">
+      <header>
+        <div><span>Этап</span><h3>{{ round.title }}</h3></div>
+        <strong>{{ round.tour }} тур</strong>
+      </header>
+
+      <article
+        *ngFor="let node of round.nodes; trackBy: trackNode"
+        class="mobile-node"
+        [class.upper-node]="node.lane === 'upper'"
+        [class.lower-node]="node.lane === 'lower'"
+        [class.final-node]="node.lane === 'grand-final'">
+        <div class="mobile-node-heading">
+          <span>{{ node.laneLabel }}</span>
+          <strong>Пара {{ node.pairNumber }}</strong>
+        </div>
+
+        <div class="mobile-team-line" [class.winner]="isWinner(node, node.home)">
+          <img *ngIf="node.home.profileId" [src]="teamLogo(node.home)" [alt]="teamTitle(node.home)">
+          <span class="placeholder-logo" *ngIf="!node.home.profileId">?</span>
+          <span><strong>{{ teamTitle(node.home) }}</strong><small>{{ participantName(node.home) }}</small></span>
+          <b>{{ scoreFor(node, node.home) }}</b>
+        </div>
+        <div class="mobile-team-line" [class.winner]="isWinner(node, node.away)">
+          <img *ngIf="node.away.profileId" [src]="teamLogo(node.away)" [alt]="teamTitle(node.away)">
+          <span class="placeholder-logo" *ngIf="!node.away.profileId">?</span>
+          <span><strong>{{ teamTitle(node.away) }}</strong><small>{{ participantName(node.away) }}</small></span>
+          <b>{{ scoreFor(node, node.away) }}</b>
+        </div>
+
+        <div class="mobile-actions">
+          <button
+            *ngIf="node.match && node.home.profileId && node.away.profileId"
+            type="button"
+            class="open-match"
+            (click)="openMatch($event, node)">Матч-центр</button>
+          <button
+            *ngFor="let edge of outgoingEdges(node); trackBy: trackEdge"
+            type="button"
+            class="route-link"
+            [class.loser-route]="edge.outcome === 'loser'"
+            (click)="focusTarget(edge, true)">
+            {{ transitionLabel(edge) }}
+          </button>
+          <strong *ngIf="node.lane === 'grand-final'" class="champion-route">Победитель — обладатель Кубка</strong>
+        </div>
+      </article>
+    </section>
+  </div>
+</section>

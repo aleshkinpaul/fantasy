@@ -162,28 +162,61 @@
       </div>
     </section>
 
-    <div class="matches-container" *ngIf="hasCupSchedule()">
-      <ul class="tours-list">
-        <li
-          *ngFor="let tourMatches of cup.matches; index as i"
-          class="tour-item"
-          role="button"
-          tabindex="0"
-          [ngClass]="{'active': activeTabs.cupTourId === i + 1}"
-          (click)="setCupTourId(i+1); setTourId(i+1)"
-          (keydown.enter)="setCupTourId(i+1); setTourId(i+1)"
-        >{{ cup.matchesToursNames?.[i] }}</li>
-      </ul>
-      <app-matches
-        [profilesArr]="this.profilesDetails"
-        [currentLeagueMatches]="cup.matches"
-        [matchesTours]="cup.matchesTours"
-        [lastTour]="lastTour"
-        [activeTabs]="activeTabs"
-        [showMartinLeague]="competitionType === 'spain'"
-        (matchOpen)="openMatchCenter($event)"
-      ></app-matches>
-    </div>
+    <ng-container *ngIf="hasCupSchedule()">
+      <div
+        class="cup-view-toggle"
+        role="group"
+        aria-label="Режим просмотра Кубка"
+        *ngIf="cup.bracketFormat === 'double-elimination-48-v1'">
+        <button
+          type="button"
+          [class.active]="cupView === 'bracket'"
+          [attr.aria-pressed]="cupView === 'bracket'"
+          (click)="setCupView('bracket')">Сетка</button>
+        <button
+          type="button"
+          [class.active]="cupView === 'rounds'"
+          [attr.aria-pressed]="cupView === 'rounds'"
+          (click)="setCupView('rounds')">По этапам</button>
+      </div>
+
+      <div
+        class="cup-bracket-container"
+        *ngIf="cupView === 'bracket' && cup.bracketFormat === 'double-elimination-48-v1'">
+        <app-cup-bracket
+          [cup]="cup"
+          [profiles]="profilesDetails"
+          [lastTour]="lastTour"
+          [showMartinLeague]="competitionType === 'spain'"
+          (matchOpen)="openMatchCenter($event)">
+        </app-cup-bracket>
+      </div>
+
+      <div
+        class="matches-container"
+        *ngIf="cupView === 'rounds' || cup.bracketFormat !== 'double-elimination-48-v1'">
+        <ul class="tours-list">
+          <li
+            *ngFor="let tourMatches of cup.matches; index as i"
+            class="tour-item"
+            role="button"
+            tabindex="0"
+            [ngClass]="{'active': activeTabs.cupTourId === i + 1}"
+            (click)="setCupTourId(i+1); setTourId(i+1)"
+            (keydown.enter)="setCupTourId(i+1); setTourId(i+1)"
+          >{{ cup.matchesToursNames?.[i] }}</li>
+        </ul>
+        <app-matches
+          [profilesArr]="this.profilesDetails"
+          [currentLeagueMatches]="cup.matches"
+          [matchesTours]="cup.matchesTours"
+          [lastTour]="lastTour"
+          [activeTabs]="activeTabs"
+          [showMartinLeague]="competitionType === 'spain'"
+          (matchOpen)="openMatchCenter($event)"
+        ></app-matches>
+      </div>
+    </ng-container>
   </ng-container>
 </div>
 <app-match-center

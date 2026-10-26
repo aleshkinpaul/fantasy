@@ -9,6 +9,12 @@ import type {
 } from '../models/competition.models';
 import { resolveFantasyLineup } from './fantasy-lineup-resolver';
 import { getPlaceAfterTour } from './standings-calculator';
+import {
+  CupBracketMatchSource,
+  getDoubleElimination48RoundTemplate,
+} from './cup-bracket';
+
+export { getDoubleElimination48RoundTemplate } from './cup-bracket';
 
 interface CupProfile {
   id: string;
@@ -32,18 +38,6 @@ export interface CupCalculationInput {
   squads: FantasyFullInfoResponse;
   lastTour: number;
   sportPlayers?: SportPlayer[];
-}
-
-interface BracketSource {
-  round: number;
-  match: number;
-  outcome: 'winner' | 'loser';
-}
-
-interface BracketTemplateMatch {
-  home: BracketSource;
-  away: BracketSource;
-  type: 'up' | 'down';
 }
 
 interface MatchAttempt {
@@ -248,7 +242,7 @@ function materializeRound(cup: CompetitionCup, roundIndex: number): void {
   if (matches.every(Boolean)) cup.matches[roundIndex] = matches as CompetitionMatch[];
 }
 
-function resolveSource(cup: CompetitionCup, ref: BracketSource): string | undefined {
+function resolveSource(cup: CompetitionCup, ref: CupBracketMatchSource): string | undefined {
   const match = cup.matches[ref.round]?.[ref.match];
   if (!match || match.result === undefined || match.result === 0) return undefined;
   const winner = match.result === 1 ? match.home : match.away;
@@ -256,91 +250,8 @@ function resolveSource(cup: CompetitionCup, ref: BracketSource): string | undefi
   return ref.outcome === 'winner' ? winner : loser;
 }
 
-export function getDoubleElimination48RoundTemplate(
-  roundIndex: number,
-): BracketTemplateMatch[] | undefined {
-  switch (roundIndex) {
-    case 2:
-      return Array.from({ length: 16 }, (_, index) => template(
-        source(0, 15 - index, 'loser'),
-        source(1, index, 'loser'),
-        'down',
-      ));
-    case 3:
-      return [
-        ...pairWinners(1, 0, 8, 'up'),
-        ...pairWinners(2, 0, 8, 'down'),
-      ];
-    case 4:
-      return Array.from({ length: 8 }, (_, index) => template(
-        source(3, index ^ 1, 'loser'),
-        source(3, 8 + index, 'winner'),
-        'down',
-      ));
-    case 5:
-      return [
-        ...pairWinners(3, 0, 4, 'up'),
-        ...Array.from({ length: 4 }, (_, index) => template(
-          source(4, index * 2 + 1, 'winner'),
-          source(4, index * 2, 'winner'),
-          'down',
-        )),
-      ];
-    case 6: {
-      const upperLosers = [2, 3, 0, 1];
-      return upperLosers.map((upperMatch, index) => template(
-        source(5, 4 + index, 'winner'),
-        source(5, upperMatch, 'loser'),
-        'down',
-      ));
-    }
-    case 7:
-      return [
-        ...pairWinners(5, 0, 2, 'up'),
-        ...pairWinners(6, 0, 2, 'down'),
-      ];
-    case 8:
-      return [
-        template(source(7, 3, 'winner'), source(7, 1, 'loser'), 'down'),
-        template(source(7, 2, 'winner'), source(7, 0, 'loser'), 'down'),
-      ];
-    case 9:
-      return [
-        template(source(7, 0, 'winner'), source(7, 1, 'winner'), 'up'),
-        template(source(8, 0, 'winner'), source(8, 1, 'winner'), 'down'),
-      ];
-    case 10:
-      return [template(source(9, 0, 'loser'), source(9, 1, 'winner'), 'down')];
-    case 11:
-      return [template(source(9, 0, 'winner'), source(10, 0, 'winner'), 'up')];
-    default:
-      return undefined;
-  }
-}
-
-function pairWinners(
-  round: number,
-  offset: number,
-  count: number,
-  type: 'up' | 'down',
-): BracketTemplateMatch[] {
-  return Array.from({ length: count }, (_, index) => template(
-    source(round, offset + index * 2, 'winner'),
-    source(round, offset + index * 2 + 1, 'winner'),
-    type,
-  ));
-}
-
-function source(round: number, match: number, outcome: 'winner' | 'loser'): BracketSource {
-  return { round, match, outcome };
-}
-
-function template(
-  home: BracketSource,
-  away: BracketSource,
-  type: 'up' | 'down',
-): BracketTemplateMatch {
-  return { home, away, type };
+function source(round: number, match: number, outcome: 'winner' | 'loser'): CupBracketMatchSource {
+  return { kind: 'match', round, match, outcome };
 }
 
 function updateCupProfile(profile: CupProfile, ownFo: number, opponentFo: number, standing: number): void {
