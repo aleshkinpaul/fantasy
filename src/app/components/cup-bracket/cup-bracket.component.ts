@@ -36,14 +36,13 @@ export class CupBracketComponent implements OnChanges {
   @Input() showMartinLeague = false;
   @Output() matchOpen = new EventEmitter<MatchCenterSelection>();
 
-  @ViewChild('desktopViewport') private desktopViewport?: ElementRef<HTMLElement>;
+  @ViewChild('bracketViewport') private bracketViewport?: ElementRef<HTMLElement>;
 
   viewModel: CupBracketViewModel = buildCupBracketViewModel({
     matchesTours: [],
     matches: [],
   });
   selectedNodeId = '';
-  activeMobileRoundIndex = 0;
 
   private profileById = new Map<string, IProfileDetails>();
 
@@ -57,20 +56,10 @@ export class CupBracketComponent implements OnChanges {
         this.selectedNodeId = '';
       }
     }
-    if (changes['cup'] || changes['lastTour']) {
-      const currentRound = this.viewModel.rounds
-        .filter(round => round.tour <= this.lastTour)
-        .at(-1);
-      this.activeMobileRoundIndex = currentRound?.index ?? 0;
-    }
   }
 
   get selectedNode(): CupBracketNodeView | undefined {
     return this.viewModel.nodes.find(node => node.id === this.selectedNodeId);
-  }
-
-  get activeMobileRound(): CupBracketRoundView | undefined {
-    return this.viewModel.rounds[this.activeMobileRoundIndex];
   }
 
   get selectedTransitions(): CupBracketEdgeView[] {
@@ -92,10 +81,6 @@ export class CupBracketComponent implements OnChanges {
     this.selectNode(node);
   }
 
-  selectMobileRound(index: number): void {
-    this.activeMobileRoundIndex = index;
-  }
-
   openMatch(event: Event, node: CupBracketNodeView): void {
     event.stopPropagation();
     if (!node.match || !node.home.profileId || !node.away.profileId) return;
@@ -105,16 +90,12 @@ export class CupBracketComponent implements OnChanges {
     });
   }
 
-  focusTarget(edge: CupBracketEdgeView, mobile = false): void {
+  focusTarget(edge: CupBracketEdgeView): void {
     const target = this.nodeFor(edge.to);
     if (!target) return;
     this.selectedNodeId = target.id;
-    if (mobile) {
-      this.activeMobileRoundIndex = target.roundIndex;
-      return;
-    }
     setTimeout(() => {
-      const element = this.desktopViewport?.nativeElement
+      const element = this.bracketViewport?.nativeElement
         .querySelector<HTMLElement>(`[data-node-id="${target.id}"]`);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       element?.focus({ preventScroll: true });
